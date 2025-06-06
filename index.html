@@ -167,7 +167,8 @@
           <li class="nav-item"><a class="nav-link" href="#cas-test">Mon périmètre de test</a></li>
           <li class="nav-item"><a class="nav-link" href="#anomalie">Anomalies détectées</a></li>
           <li class="nav-item"><a class="nav-link" href="#test-auto">Tests automatisés</a></li>
-          <li class="nav-item"><a class="nav-link" href="#rapport-test">Rapport de test</a></li>
+          <li class="nav-item"><a class="nav-link" href="#rapport-test">Synthèse du Rapport de test</a></li>
+		  <li class="nav-item"><a class="nav-link" href="#livrables">Livrables produits</a></li>
           <li class="nav-item"><a class="nav-link" href="#environnement-technique">Environnement Technique</a></li>
           <li class="nav-item"><a class="nav-link" href="#liens">CV & LinkedIn</a></li>
         </ul>
@@ -247,32 +248,35 @@ root((Projet de fin de formation - Test Academy))
         <div class="mermaid">
 mindmap
 root((Faire une demande de réservation))
-  Voyageur_connecté
+  CritèreAcceptation_1 : Voyageur_connecté
     TC1("TC1 : Réservation avec dates valides, 1 voyageur")
-    TC2("TC2 : Nombre de voyageurs nul")
-    TC3("TC3 : Date de début dans le passé")
-    TC4("TC4 : Date de fin antérieure à la date de début")
-    TC5("TC5 : Nombre de voyageurs négatif")
-    TC6("TC6 : Dates valides, 10 voyageurs, message pro à l'hôte")
-    TC8("TC8 : Sans renseigner le nombre de voyageurs")
-  Voyageur_non_connecté
-    TC9("TC9 : Réservation avec utilisateur non connecté")
-    TC10("TC10 : Ancien lien direct vers formulaire de réservation")
+    TC2("TC2 : Réservation avec un nombre de voyageurs nul")
+    TC3("TC3 : Réservation avec une date de début dans le passé")
+    TC4("TC4 : Réservation avec une date de fin antérieure à la date de début")
+    TC5("TC5 : Réservation avec un nombre de voyageurs négatif")
+    TC6("TC6 : Réservation avec des dates valides, 10 voyageurs, et un message pro envoyé à l'hôte")
+    TC7("TC7 : Réservation sans envoyer de message à l'hôte ")
+	TC8("TC8 : Réservation sans renseigner le nombre de voyageurs ")
+  CritèreAcceptation_2 : Voyageur_non_connecté
+    TC8("TC8 : Réservation avec un utilisateur non connecté")
+    TC9("TC9 : Réservation en passant par un ancien lien direct vers un formulaire de réservation ")
         </div>
       </article>
       <article class="card-custom" tabindex="0" aria-label="Carte mentale User Story 2">
         <h3 class="project-title">User Story 2 : Traiter une demande de réservation</h3>
         <div class="mermaid">
 mindmap
-root((Traiter une demande de réservation))
-  TC1("TC1 : Confirmer une demande avec statut NOUVEAU")
-  TC2("TC2 : Refuser une demande avec statut NOUVEAU")
-  TC3("TC3 : Valider une demande avec message au voyageur")
-  TC4("TC4 : Valider une demande sans message au voyageur")
-  TC5("TC5 : Valider une demande avec remise")
-  TC6("TC6 : Valider une demande avec modification des dates")
-  TC7("TC7 : Valider une demande avec modification du nombre de voyageurs")
-  TC8("TC8 : Annuler une demande")
+  root((Traiter une demande de réservation))
+    CritèreAcceptation_1 : L’hôte confirme une demande de réservation
+      TC1("TC1 : Affichage correct de toutes les informations concernant la demande de réservation")
+      TC2("TC2 : Confirmation d'une demande de réservation par un hôte connecté")
+    CritèreAcceptation_2 : Le voyageur annule une demande de réservation
+      TC3("TC3 : Annulation d'une demande de réservation par le voyageur")
+    CritèreAcceptation_3 : L'hôte refuse une demande de réservation
+      TC4("TC4 : Refuser une demande en envoyant un message pour justifier le refus")
+      TC5("TC5 : Refuser une demande sans envoyer de message pour justifier le refus")
+    CritèreAcceptation_4 : Le voyageur paie une demande de réservation
+      TC6("TC6 : Paiement d'une demande avec le statut DISPONIBLE avec des informations de paiement exactes")
         </div>
       </article>
     </section>
@@ -321,20 +325,33 @@ root((Bugs et anomalies))
 
     <!-- Rapport de test -->
     <section id="rapport-test" aria-label="Rapport de test" tabindex="-1">
-      <h2>Rapport de test</h2>
+      <h2>Synthèse du Rapport de test</h2>
       <article class="card-custom" tabindex="0" aria-label="Rapport de test synthétique">
         <!-- Carte mentale Mermaid -->
     <div class="mermaid" aria-label="Carte mentale synthèse des tests">
 mindmap
 root((Synthèse des tests))
-  TotalTests((Nombre total de cas de tests : 17))
-  TestsReussis((Cas de tests réussis : 17))
+  TotalTests((Nombre total de cas de tests : 15))
+  TestsReussis((Cas de tests réussis : 15))
   Defauts((Défauts identifiés))
     Majeur((1 défaut majeur))
     Mineurs((2 défauts mineurs))
   TestsEchec((Cas de tests en échec : 0))
     </div>
       </article>
+    </section>
+	
+	<!-- Livrables -->
+    <section id="livrables" aria-label="Livrables" tabindex="-1">
+      <h2>Livrables produits</h2>
+      <ul class="tools-list" aria-label="Liste des livrables">
+        <li>Schéma du périmètre fonctionnel </li>
+		<li>Cas de tests rédigés </li>
+        <li>Résultats ou preuves d'éxécution</li>
+		<li>Scripts automatisés</li>
+        <li>Rapport de défauts</li>
+        <li>Rapport de test </li>
+      </ul>
     </section>
 
     <!-- Environnement Technique -->
