@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CV - Maxime Joannis</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
+    <style>
+        body {
+            background-color: #f4f4f9;
+            color: #333;
+            font-family: 'Arial', sans-serif;
+        }
+        header {
+            background: linear-gradient(90deg, #00aaff, #005f99);
+            color: white;
+            padding: 30px 0;
+            text-align: center;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            border-bottom: 5px solid #007BFF;
+        }
+        header h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+        }
+        header p {
+            font-size: 1.2em;
+            margin: 0;
+        }
+        .card {
+            margin-bottom: 20px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            border: 1px solid #ddd;
+            border-radius: 15px;
+            transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+        }
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+        }
+        .card-header {
+            background-color: #005f99;
+            color: white;
+            font-weight: bold;
+            border-radius: 15px 15px 0 0;
+            padding: 15px;
+            font-size: 1.2em;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .card-header i {
+            margin-right: 10px;
+            font-size: 1.5em;
+        }
+        .card-body {
+            padding: 20px;
+        }
+        footer {
+            text-align: center;
+            margin-top: 40px;
+            font-size: 0.9em;
+            color: #777;
+            padding: 20px;
+            background-color: #f4f4f9;
+            border-top: 1px solid #ddd;
+        }
+        .contact-item {
+            display: flex;
+            align-items: flex-start;
+            margin-bottom: 10px;
+            flex-wrap: wrap;
+        }
+        .contact-item i {
+            color: #00aaff;
+            font-size: 1.5em;
+            margin-right: 15px;
+            flex-shrink: 0;
+        }
+        .contact-item span {
+            word-wrap: break-word;
+            word-break: break-word;
+            max-width: calc(100% - 40px);
+        }
+        .contact-item a {
+            text-decoration: none;
+            color: #00aaff;
+            transition: color 0.3s ease-in-out;
+        }
+        .contact-item a:hover {
+            text-decoration: underline;
+            color: #005f99;
+        }
+        .list-style {
+            list-style: none;
+            padding: 0;
+        }
+        .list-style > li {
+            margin-bottom: 15px;
+            padding: 15px;
+            background: #e9f5ff;
+            border-radius: 10px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+            border-left: 5px solid #00aaff;
+        }
+        .list-style > li:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+        .list-style strong {
+            display: block;
+            font-size: 1.1em;
+            color: #00aaff;
+            margin-bottom: 5px;
+        }
+        .list-style i {
+            color: #00aaff;
+            margin-right: 10px;
+        }
+        @media (max-width: 768px) {
+            header h1 {
+                font-size: 2em;
+            }
+            header p {
+                font-size: 1em;
+            }
+            .card-header {
+                font-size: 1em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Maxime Joannis</h1>
+        <p>Ingénieur Testeur Logiciel | QA Analyst | Certifié ISTQB Fondation V4.0</p>
+    </header>
+    <div class="container mt-5">
+        <div class="row">
+            <!-- Colonne gauche -->
+            <div class="col-md-3">
+                <div class="card">
+                    <div class="card-header"><i class="fas fa-user-circle"></i> Profil</div>
+                    <div class="card-body">
+                        <p>
+                            Ancien développeur logiciel avec plus de 5 ans d'expérience, je me réoriente vers
+                            le métier de testeur QA junior. Formé et certifié ISTQB, je suis prêt à contribuer à
+                            la qualité des logiciels grâce à ma rigueur, mon sérieux et mes compétences en
+                            tests manuels et automatisés.
+                        </p>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card-header"><i class="fas fa-id-badge"></i> Contact</div>
+                    <div class="card-body">
+                        <div class="contact-item">
+                            <i class="fas fa-map-marker-alt"></i>
+                            <span><strong>Adresse :</strong> 5 av. du Président Wilson, BP 57, 94340, Joinville-le-Pont</span>
+                        </div>
+                        <div class="contact-item">
+                            <i class="fas fa-phone-alt"></i>
+                            <span><strong>Téléphone :</strong> 06 26 98 92 96</a></span>
+                        </div>
+                        <div class="contact-item">
+                            <i class="fas fa-envelope"></i>
+                            <span><strong>Email :</strong> maxime.joannis6@gmail.com</a></span>
+                        </div>
+                        <div class="contact-item">
+                            <i class="fab fa-linkedin"></i>
+                            <span><strong>LinkedIn :</strong> <a href="https://www.linkedin.com/in/maxime-joannis-37ab528" target="_blank">Profil LinkedIn</a></span>
+                        </div>
+                        <div class="contact-item">
+                            <i class="fas fa-globe"></i>
+                            <span><strong>Portfolio :</strong> <a href=" https://maximejoannis.github.io" target="_blank">portfolio-maximejoannis.com</a></span>
+                        </div>
+                        <div class="contact-item">
+                            <i class="fas fa-calendar-alt"></i>
+                            <span><strong>Date de naissance :</strong> 15 mars 1990</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card-header"><i class="fas fa-certificate"></i> Certifications</div>
+                    <div class="card-body">
+                        <ul class="list-style">
+                            <li><i class="fas fa-check-circle"></i> Certification ISTQB Niveau Fondation V4.0</li>
+                            <li><i class="fas fa-check-circle"></i> Certification expert étudiant Postman API Fundamentals</li>
+                            <li><i class="fas fa-check-circle"></i> Certification professionnelle – Testeur Logiciel (TestAcademy)</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <!-- Colonne centrale -->
+            <div class="col-md-6">
+                <div class="card">
+                    <div class="card-header"><i class="fas fa-briefcase"></i> Expériences Professionnelles</div>
+                    <div class="card-body">
+                        <ul class="list-style">
+                            <li>
+                                <strong>Mai 2025 - Juin 2025 :</strong> Testeur QA – Projet en situation professionnelle (Micro stage) - TestAcademy, Paris
+                                <ul>
+                                    <li>Participation à des daily meetings avec le Product Owner et l’équipe QA</li>
+									<li>Affectation et gestion des tâches via Jira, exécution de tests manuels, reporting des résultats dans Xray</li>
+									<li>Analyse des exigences fonctionnelles, conception, implémentation et exécution des cas de tests, détection et documentation des anomalies</li>
+                                    <li>Production de livrables professionnels : cas de tests manuels, cas de tests automatisés, rapport de test, rapport de défauts et préconisations</li>
+                                </ul>
+                            </li>
+                            <li>
+                                <strong>Févr. 2021 - Janv. 2024 (CDI) :</strong> Ingénieur d'études - Développeur FullStack Java/AngularJS - INFOTEL CONSEIL, Paris - Client : Banque de France
+                                <ul>
+                                    <li>Analyse des spécifications fonctionnelles et techniques</li>
+                                    <li>Développement des fonctionnalités front-end et back-end sous Eclipse et Visual Studio Code</li>
+									<li>Gestion, analyse et résolution des incidents via JIRA</li>
+									<li>Réalisation de merge requests avec GitExtensions et GitLab</li>
+									<li>Analyse des données en base avec DbHeaver et PostgreSQL</li>
+									<li>Suivi quotidien des traitements batch en environnement de production, avec rédaction de comptes rendus</li>
+									<li>Rédaction et exécution des cas de tests, reporting des résultats sous Excel</li>
+                                </ul>
+                            </li>
+							<li>
+                                <strong>Mars 2019 - Juin 2020 (CDI) :</strong> Ingénieur d'études - Développeur Backend Java - INFOTEL CONSEIL, Paris
+								<ul>
+                                    <li>Analyse des spécifications fonctionnelles et techniques</li>
+									<li>Étude des rapports d’audit de code SonarQube transmis par la MOE</li>
+									<li>Analyse des logs applicatifs via Putty</li>
+                                    <li>Mise à jour de la documentation Swagger des API avec Swagger Editor</li>
+									<li>Amélioration de  la qualité et la maintenabilité du code</li>
+									<li>Test des API avec Postman</li>
+									<li>Gestion des releases applicatives avec Jenkins</li>
+									<li>Livraison du code en environnement de recette via l’outil C3PO</li>
+                                </ul>
+                            </li>
+							<li>
+                                <strong>Septembre 2018 - Mars 2019 (CDI) :</strong> Ingénieur d'études - Analyste Développeur Java - INFOTEL CONSEIL, Paris
+								<ul>
+                                    <li>Développer de nouvelles fonctionnalités en Java avec IntelliJ et Maven</li>
+								    <li>Améliorer la qualité du code via SonarQube</li>
+								    <li>Analyser les données pour affiner les rapports générés</li>
+								    <li>Gérer les tickets et le suivi de projet avec JIRA</li>
+								    <li>Rédiger les spécifications fonctionnelles pour la définition d’un nouveau modèle de données</li>
+								    <li>Concevoir un diagramme de classes avec Lucidchart pour l’implémentation d’une fonctionnalité métier</li>
+                                </ul>
+                            </li>
+							<li>
+                                <strong>Juillet 2018 - Septembre 2018 (CDI) :</strong> Ingénieur études et développement nouvelles technologies - INFOTEL CONSEIL, Paris
+								<ul>
+									<li>Développement autour des technologies Java JEE, Android, HTML5 et JavaScript (AngularJS, Bootstrap)</li>
+									<li>Réalisation des maquettes IHM de l'application avec HTML5, Bootstrap5 et CSS</li>
+									<li>Mise en œuvre d'ElasticSearch et Hadoop</li>
+									<li>Tests unitaires</li>
+									<li>Rédaction des documentations</li>
+									<li>Développement mobile avec Android Studio</li>
+                                </ul>
+                            </li>
+							<li>
+                                <strong>Décembre 2017 - Janvier 2018 (CDD) :</strong> Assistant Concepteur Web Coordination des projets - BANQUE POSTALE, Paris
+								<ul>
+									<li>Conception d’un outil de pilotage et de reporting basé sur les données projet</li>
+									<li>Gestion des accès et des habilitations des écrans de l'outil en fonction du profil utilisateur</li>
+									<li>Mise à jour des spécifications fonctionnelles & techniques</li>
+									<li>Support et formation utilisateurs</li>
+                                </ul>
+                            </li>
+							<li>
+                                <strong>Juin 2017 - Décembre 2017 (Stage) :</strong> Assistant Coordination des projets - BANQUE POSTALE, Paris
+								<ul>
+									<li>Recensement des besoins auprès des utilisateurs</li>
+									<li>Rédaction d'un benchmarking entre PHP et QlikView</li>
+									<li>Rédaction de l'expression des besoins</li>
+									<li>Rédaction des spécifications fonctionnelles & techniques</li>
+									<li>Maquettage des écrans de saisie</li>
+									<li>Conception de la base de données</li>
+									<li>Conception de l'outil de gestion de portefeuille de projets en PHP</li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card-header"><i class="fas fa-graduation-cap"></i> Formations</div>
+                    <div class="card-body">
+                        <ul class="list-style">
+                            <li>
+                                <strong>2024 - 2025 :</strong> Formation Testeur Logiciel chez Test Academy
+                            </li>
+                            <li>
+                                <strong>2016 - 2017 :</strong> Master 2 ISIES, Université MIAGE ESIAG, Créteil
+                            </li>
+                            <li>
+                                <strong>2014 - 2016 :</strong> Master 1 Sciences de Gestion, Université MIAGE ESIAG, Créteil
+                            </li>
+							<li>
+                                <strong>2012 - 2014 :</strong> Licence 3 Economie-Gestion, Université MIAGE ESIAG, Créteil
+                            </li>
+							<li>
+                                <strong>2010 - 2012 :</strong> BTS IG, Lycée Voillaume, Aulnay-sous-bois
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <!-- Colonne droite -->
+            <div class="col-md-3">
+                <div class="card">
+                    <div class="card-header"><i class="fas fa-tools"></i> Compétences</div>
+                    <div class="card-body">
+                        <ul class="list-style">
+                            <li><i class="fas fa-check-circle"></i> Tests manuels : rédaction de cas de test, exécution, gestion des anomalies, utilisation d’outils Jira, XRay</li>
+                            <li><i class="fas fa-check-circle"></i> Tests automatisés web/API & intégration continue : conception de scripts automatisés avec Robot Framework</li>
+                            <li><i class="fas fa-check-circle"></i> Méthodologie Agile : participation à des projets en mode Scrum avec des outils comme Jira</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card-header"><i class="fas fa-language"></i> Langues</div>
+                    <div class="card-body">
+                        <ul class="list-style">
+                            <li><i class="fas fa-globe"></i> Français : Langue maternelle</li>
+                            <li><i class="fas fa-globe"></i> Anglais : Notions</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <footer>
+        <p>© 2025 Maxime Joannis - Tous droits réservés</p>
+    </footer>
+</body>
+</html>
