@@ -306,7 +306,7 @@
     /* Back to top button */
     .back-to-top {
       position: fixed;
-      bottom: 25px;
+      bottom: 70px;
       right: 25px;
       background-color: #3a6df0;
       color: white;
@@ -667,6 +667,7 @@
 
   <footer role="contentinfo">
     &copy; 2025 Maxime JOANNIS - Tous droits réservés.
+	<a href="privacy.html">Politique de confidentialité</a>
   </footer>
 
   <!-- Bouton retour en haut -->
@@ -717,5 +718,41 @@
       }
     });
   </script>
+  
+  <!-- Bandeau de consentement cookies -->
+<div id="cookie-consent-banner" style="display:none; position: fixed; bottom: 0; width: 100%; background: #004080; color: white; padding: 1rem; text-align: center; z-index: 9999; font-weight: 600;">
+  Ce site utilise des cookies pour améliorer votre expérience. 
+  <button id="accept-cookies" style="background: #3a6df0; color: white; border: none; padding: 0.5rem 1rem; margin-left: 1rem; cursor: pointer; border-radius: 6px; font-weight: 600;">Accepter</button>
+</div>
+
+<script>
+  // Afficher le bandeau si pas de consentement
+  if(localStorage.getItem('cookieConsent') !== 'true') {
+    document.getElementById('cookie-consent-banner').style.display = 'block';
+  } else {
+    loadGoogleAnalytics();
+  }
+
+  // Charger Google Analytics après consentement
+  function loadGoogleAnalytics() {
+    if(window.gtag) return; // éviter double chargement
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    window.gtag = gtag;
+    gtag('js', new Date());
+    gtag('config', 'G-TS8XPDN9YB', { 'anonymize_ip': true });
+
+    var gaScript = document.createElement('script');
+    gaScript.src = "https://www.googletagmanager.com/gtag/js?id=G-TS8XPDN9YB";
+    gaScript.async = true;
+    document.head.appendChild(gaScript);
+  }
+
+  document.getElementById('accept-cookies').addEventListener('click', function() {
+    localStorage.setItem('cookieConsent', 'true');
+    loadGoogleAnalytics();
+    document.getElementById('cookie-consent-banner').style.display = 'none';
+  });
+</script>
 </body>
 </html>
