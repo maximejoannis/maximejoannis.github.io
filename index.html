@@ -348,13 +348,14 @@
       <div class="collapse navbar-collapse" id="navbarNav">
         <ul class="navbar-nav ms-auto">
           <li class="nav-item"><a class="nav-link active" href="#presentation">Présentation</a></li>
-          <li class="nav-item"><a class="nav-link" href="#projets">Projets réalisés</a></li>
+          <li class="nav-item"><a class="nav-link" href="#projets">Projet Fin de Formation</a></li>
           <li class="nav-item"><a class="nav-link" href="#cas-test">Mon périmètre de test</a></li>
           <li class="nav-item"><a class="nav-link" href="#anomalie">Anomalies détectées</a></li>
           <li class="nav-item"><a class="nav-link" href="#test-auto">Tests automatisés</a></li>
           <li class="nav-item"><a class="nav-link" href="#rapport-test">Synthèse du Rapport de test</a></li>
           <li class="nav-item"><a class="nav-link" href="#livrables">Livrables produits</a></li>
           <li class="nav-item"><a class="nav-link" href="#environnement-technique">Environnement Technique</a></li>
+		  <li class="nav-item"><a class="nav-link" href="#micro-stage">Micro stage QA</a></li>
           <li class="nav-item"><a class="nav-link" href="#liens">CV interactif</a></li>
         </ul>
       </div>
@@ -386,8 +387,8 @@
     </section>
 
     <!-- Projets réalisés avec carte mentale complète -->
-    <section id="projets" aria-label="Projets réalisés" tabindex="-1">
-      <h2><svg class="section-icon" xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10h-6a2 2 0 0 0-4 0H3"/></svg> Projets réalisés</h2>
+    <section id="projets" aria-label="Projet Fin de Formation" tabindex="-1">
+      <h2><svg class="section-icon" xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10h-6a2 2 0 0 0-4 0H3"/></svg> Présentation générale du PFF</h2>
       <article class="card-custom" tabindex="0" aria-label="Carte mentale complète des projets réalisés">
         <h3 class="project-title">Projet Fin de Formation - Test de l'application Homey : Application web de gestion de locations saisonnières</h3>
         <div class="mermaid" aria-label="Carte mentale des projets">
@@ -570,6 +571,78 @@
         <li>RobotFramework</li>
       </ul>
     </section>
+	
+
+	<!-- Micro stage QA -->
+<section id="micro-stage" aria-label="Micro stage QA" tabindex="-1">
+  <h2 class="d-flex align-items-center gap-2">
+    <svg class="section-icon" xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="32" height="32" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+      <path d="M12 20h9M12 4h9M4 9h16v6H4z"/>
+    </svg>
+    Micro stage - Projet QA
+  </h2>
+  <article class="card-custom" tabindex="0" aria-label="Description complète du micro stage QA" style="line-height:1.6;">
+    <h3 class="project-title">Micro stage QA chez AMN BRAINS sur AMN AUDITOR</h3>
+    <p>
+      Dans le cadre de ma formation <strong>"Testeur Logiciel"</strong> chez TestAcademy, j'ai participé à un projet en situation réelle (appelé micro stage) en tant que Testeur QA,
+      sur un logiciel d'audit et de gestion de conformité MultiRéférentiel nommé <em>AMN AUDITOR</em> créé par l'entreprise AMN BRAINS :
+    </p>
+    <ul class="mb-4" style="list-style-type: disc; padding-left: 1.4rem; color:#003366; font-weight:600;">
+      <li>Participation à des daily meetings avec le Product Owner et l'équipe QA</li>
+      <li>Affectation et gestion des tâches via Jira, exécution de tests manuels, reporting des résultats dans Xray</li>
+      <li>Analyse des exigences fonctionnelles, conception, implémentation et exécution des cas de tests, détection et documentation des anomalies</li>
+      <li>Production de livrables professionnels : cas de tests manuels, cas de tests automatisés, rapport de test, rapport de défauts et préconisations</li>
+    </ul>
+
+    <h4 class="mb-3" style="color:#003366; font-weight:700;">Critères d'acceptation et cas de tests associés</h4>
+    <p><strong>User Story (EXIG-3) – Génération des constats d’audit</strong></p>
+    <p style="font-style: italic; color:#3a6df0; margin-bottom: 1rem;">
+      En tant qu’auditeur en mission, je veux m’appuyer sur un utilitaire d’audit intelligent pour dérouler les principales étapes de ma mission (questionnement, constats, conformité, écarts, actions), afin de réaliser un audit structuré, réactif et piloté par les exigences du système audité, tout en bénéficiant d’une assistance contextuelle de l’IA.
+    </p>
+    <p><strong>Fonctionnalités couvertes :</strong></p>
+    <ul class="mb-4" style="list-style-type: circle; padding-left: 1.8rem; color:#004080; font-weight:600;">
+      <li>Génération automatique d’un constat de conformité / non-conformité</li>
+      <li>Génération automatique d’une action de remédiation</li>
+      <li>Adaptation des suggestions générées via des mots-clés</li>
+    </ul>
+
+    <div class="mermaid" aria-label="Carte mentale des critères d'acceptation et cas de test du micro stage" style="font-size:0.95rem; background:#e6f0ff; padding:1.5rem; border-radius:16px; box-shadow: 0 6px 20px rgba(58, 109, 240, 0.15);">
+      mindmap
+      root((Micro stage - EXIG-3))
+        Génération_des_constats_d’audit
+          Sous-tâche_EXIG-3.1
+            Critère_d’acceptation("Quand un point de contrôle est marqué comme Conforme / Non conforme, un texte est généré automatiquement et proposé à l’utilisateur, modifiable, orientable via des mots-clés, et ajoutable via 'Ajouter' ou 'Entrée'.")
+            Cas_de_test
+              TC3.1.1("Génération d’un constat en cliquant sur 'Conforme'")
+              TC3.1.2("Génération d’un constat en cliquant sur 'Non conforme'")
+              TC3.1.3("Vérification de la cohérence entre point de contrôle et constat généré")
+              TC3.1.4("Vérification de la zone de modification du constat généré")
+              TC3.1.5("Orientation de la suggestion par mot-clé saisi")
+              TC3.1.6("Suggestion générée sans mot-clé")
+              TC3.1.7("Ajout du constat avec le bouton 'Ajouter'")
+              TC3.1.8("Ajout du constat avec la touche 'Entrée'")
+              TC3.1.9("Génération de plusieurs constats via plusieurs points de contrôle")
+              TC3.1.10("Modification d’un constat après ajout")
+          Sous-tâche_EXIG-3.2
+            Critère_d’acceptation("Quand l’utilisateur saisit un mot-clé dans le champ de constat de conformité ou d’écart, un texte est généré automatiquement, orientable et modifiable, et ajoutable via 'Ajouter' ou 'Entrée'.")
+            Cas_de_test
+              TC3.2.1("Saisie d’un mot-clé déclenche la génération d’un constat")
+              TC3.2.2("Modification du constat généré")
+              TC3.2.3("Ajout du constat via bouton 'Ajouter'")
+              TC3.2.4("Ajout du constat via touche 'Entrée'")
+          Sous-tâche_EXIG-3.3
+            Critère_d’acceptation("L’utilisateur peut supprimer un constat ajouté et modifier les constats existants.")
+            Cas_de_test
+              TC3.3.1("Suppression d’un constat ajouté")
+              TC3.3.2("Modification d’un constat existant")
+              TC3.3.3("Suppression d’un constat existant")
+              TC3.3.4("Vérification de la mise à jour de la liste des constats après suppression")
+              TC3.3.5("Annulation de la suppression avant confirmation")
+    </div>
+  </article>
+</section>
+
+
 
     <!-- Lien CV -->
     <section id="liens" aria-label="CV interactif" tabindex="-1" class="links-section">
