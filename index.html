@@ -6,47 +6,133 @@
   <meta name="description" content="Portfolio de Maxime JOANNIS, ingénieur testeur logiciel certifié ISTQB. Découvrez mes projets, compétences et réalisations." />
   <meta name="keywords" content="Maxime Joannis, QA, Testeur Logiciel, ISTQB, Portfolio, Automatisation, Test Academy" />
   <meta name="author" content="Maxime JOANNIS" />
-  <title>Portfolio Maxime JOANNIS</title>
+  <title>Portfolio Maxime JOANNIS - Qualité Logicielle</title>
+
+  <!-- Google Fonts : Inter -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet" />
+
+  <!-- Bootstrap CSS -->
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
+
+  <!-- Lucide Icons -->
+  <script src="https://unpkg.com/lucide@0.263.0/dist/lucide.min.js"></script>
+
+  <!-- Mermaid for mindmaps -->
   <script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
-  <script>
-    mermaid.initialize({ startOnLoad: true });
-  </script>
+  <script>mermaid.initialize({ startOnLoad: true });</script>
+
+  <!-- Plausible Analytics -->
+  <script async defer data-domain="ton-domaine.github.io" src="https://plausible.io/js/plausible.js"></script>
+
   <style>
-    /* Styles généraux */
-    body {
-      background-color: #f0f6ff;
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      color: #002244;
-      padding-top: 70px;
+    /* Reset & base */
+    *, *::before, *::after {
+      box-sizing: border-box;
     }
+    body {
+      margin: 0;
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
+        Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+      background: linear-gradient(135deg, #e0ebff 0%, #f9fbff 100%);
+      color: #1a2e4a;
+      scroll-behavior: smooth;
+      padding-top: 80px;
+    }
+    a {
+      color: #1a2e4a;
+      text-decoration: none;
+      font-weight: 600;
+      transition: color 0.3s ease;
+    }
+    a:hover, a:focus {
+      color: #3a6df0;
+      text-decoration: underline;
+    }
+
+    /* Navbar - glassmorphism style */
+    .navbar-custom {
+      background: rgba(0, 64, 128, 0.75);
+      backdrop-filter: saturate(180%) blur(10px);
+      box-shadow: 0 2px 15px rgba(0, 64, 128, 0.35);
+      transition: background-color 0.3s ease;
+    }
+    .navbar-custom.scrolled {
+      background: rgba(0, 64, 128, 0.95);
+    }
+    .navbar-custom .nav-link {
+      color: #e0e9ff;
+      font-weight: 600;
+      position: relative;
+      padding: 0.5rem 1rem;
+    }
+    /* Underline animation on nav links */
+    .navbar-custom .nav-link::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      bottom: 3px;
+      width: 0;
+      height: 2px;
+      background: #a8c1ff;
+      transition: width 0.3s ease;
+      border-radius: 2px;
+    }
+    .navbar-custom .nav-link:hover::after,
+    .navbar-custom .nav-link:focus::after,
+    .navbar-custom .nav-link.active::after {
+      width: 100%;
+    }
+    .navbar-toggler {
+      border-color: transparent;
+      transition: transform 0.3s ease;
+    }
+    .navbar-toggler:focus,
+    .navbar-toggler:hover {
+      transform: rotate(90deg);
+    }
+    .navbar-toggler-icon {
+      filter: invert(1);
+    }
+
+    /* Header */
     header {
-      background-color: #004080;
-      color: white;
-      padding: 2rem 1rem;
+      background: linear-gradient(135deg, #004080, #1a2e4a);
+      color: #e0e9ff;
+      padding: 3rem 1.5rem;
       text-align: center;
-      border-radius: 0 0 15px 15px;
-      margin-bottom: 2rem;
+      border-radius: 0 0 25px 25px;
+      box-shadow: 0 6px 20px rgba(0, 64, 128, 0.3);
     }
     header h1 {
       font-weight: 700;
-      font-size: 2.5rem;
-      margin-bottom: 0.3rem;
+      font-size: 3rem;
+      margin-bottom: 0.2rem;
+      letter-spacing: 1.2px;
+      text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.2);
     }
     header p {
-      font-size: 1.2rem;
+      font-size: 1.3rem;
       font-style: italic;
-      margin-bottom: 0;
+      color: #a8c1ff;
+      text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.15);
     }
+
+    /* Main container */
+    main.container {
+      max-width: 960px;
+      margin: 2rem auto 4rem;
+    }
+
+    /* Section styling */
     section {
-      background-color: #e6f0ff;
-      border-radius: 12px;
-      padding: 2rem;
-      margin-bottom: 2rem;
-      box-shadow: 0 4px 15px rgba(0,64,128,0.2);
+      background: #ffffffdd;
+      border-radius: 16px;
+      padding: 2.5rem 2rem;
+      margin-bottom: 2.5rem;
+      box-shadow: 0 8px 20px rgba(0, 64, 128, 0.1);
       opacity: 0;
-      transform: translateY(20px);
-      transition: all 0.6s ease;
+      transform: translateY(30px);
+      transition: all 0.7s cubic-bezier(0.22, 1, 0.36, 1);
     }
     section.visible {
       opacity: 1;
@@ -54,156 +140,210 @@
     }
     section h2 {
       color: #003366;
-      border-bottom: 4px solid #003366;
+      border-bottom: 4px solid #3a6df0;
       padding-bottom: 0.5rem;
-      margin-bottom: 1.5rem;
+      margin-bottom: 1.8rem;
       font-weight: 700;
-    }
-    .card-custom {
-      background: white;
-      border-radius: 12px;
-      box-shadow: 0 3px 12px rgba(0,64,128,0.15);
-      padding: 1.8rem 2rem;
-      margin-bottom: 2rem;
-      border-left: 6px solid #004080;
-      transition: box-shadow 0.3s ease, transform 0.3s ease;
-    }
-    .card-custom:hover {
-      box-shadow: 0 6px 20px rgba(0,64,128,0.25);
-      transform: translateY(-5px);
-    }
-    .project-title {
-      font-weight: 700;
-      font-size: 1.6rem;
-      color: #002244;
-      margin-bottom: 0.6rem;
-    }
-    .certifications-list {
-      list-style: none;
-      padding-left: 0;
-      margin-bottom: 1rem;
-    }
-    .certifications-list li {
-      background: white;
-      border-left: 5px solid #004080;
-      padding: 0.7rem 1rem;
-      border-radius: 8px;
-      box-shadow: 0 2px 8px rgba(0,64,128,0.1);
-      margin-bottom: 0.8rem;
-      font-weight: 600;
-      color: #004080;
+      font-size: 2rem;
       display: flex;
       align-items: center;
       gap: 0.6rem;
     }
-    .certifications-list li::before {
-      content: "✅";
-      font-size: 1.2rem;
+
+    /* Icons in section titles */
+    .section-icon {
+      stroke: #3a6df0;
+      width: 32px;
+      height: 32px;
+      flex-shrink: 0;
     }
-    .mermaid {
+
+    /* Cards */
+    .card-custom {
       background: white;
-      border-radius: 12px;
-      box-shadow: 0 3px 12px rgba(0,64,128,0.15);
-      padding: 1rem;
-      overflow-x: auto;
+      border-radius: 16px;
+      box-shadow: 0 5px 15px rgba(58, 109, 240, 0.15);
+      padding: 2rem 2.5rem;
+      margin-bottom: 2rem;
+      border-left: 8px solid #3a6df0;
+      transition: box-shadow 0.3s ease, transform 0.3s ease;
+      cursor: default;
     }
+    .card-custom:hover, .card-custom:focus-within {
+      box-shadow: 0 12px 30px rgba(58, 109, 240, 0.3);
+      transform: translateY(-8px);
+    }
+    .project-title {
+      font-weight: 700;
+      font-size: 1.8rem;
+      color: #1a2e4a;
+      margin-bottom: 1rem;
+    }
+
+    /* Certifications list */
+    .certifications-list {
+      list-style: none;
+      padding-left: 0;
+      margin-bottom: 1.5rem;
+    }
+    .certifications-list li {
+      background: #f0f6ff;
+      border-left: 6px solid #3a6df0;
+      padding: 0.8rem 1.2rem;
+      border-radius: 12px;
+      box-shadow: 0 3px 10px rgba(58, 109, 240, 0.1);
+      margin-bottom: 1rem;
+      font-weight: 600;
+      color: #004080;
+      display: flex;
+      align-items: center;
+      gap: 0.8rem;
+    }
+    .certifications-list li::before {
+      content: "✔️";
+      font-size: 1.3rem;
+    }
+
+    /* Mermaid diagrams */
+    .mermaid {
+      background: #f9fbff;
+      border-radius: 16px;
+      box-shadow: 0 6px 20px rgba(58, 109, 240, 0.1);
+      padding: 1.2rem;
+      overflow-x: auto;
+      font-size: 0.9rem;
+    }
+
+    /* Tools list */
     ul.tools-list {
       list-style: none;
       padding-left: 0;
       display: flex;
       flex-wrap: wrap;
-      gap: 0.8rem 1.2rem;
-      font-weight: 600;
+      gap: 1rem 1.5rem;
+      font-weight: 700;
       color: #004080;
     }
     ul.tools-list li {
-      background: white;
-      border: 5px solid #004080;
-      border-radius: 8px;
-      padding: 0.5rem 1rem;
-      box-shadow: 0 2px 8px rgba(0,64,128,0.1);
+      background: #e6f0ff;
+      border: 5px solid #3a6df0;
+      border-radius: 12px;
+      padding: 0.7rem 1.2rem;
+      box-shadow: 0 4px 15px rgba(58, 109, 240, 0.15);
       flex: 1 0 140px;
       text-align: center;
+      transition: background-color 0.3s ease, color 0.3s ease;
+      cursor: default;
     }
+    ul.tools-list li:hover {
+      background-color: #3a6df0;
+      color: white;
+    }
+
+    /* Livrables - liens style boutons */
+    #livrables ul.tools-list li p {
+      margin: 0.4rem 0;
+    }
+    #livrables ul.tools-list li a {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      background-color: #3a6df0;
+      color: white !important;
+      padding: 0.45rem 0.9rem;
+      border-radius: 8px;
+      font-weight: 600;
+      box-shadow: 0 4px 12px rgba(58, 109, 240, 0.4);
+      transition: background-color 0.3s ease, box-shadow 0.3s ease;
+      text-decoration: none;
+    }
+    #livrables ul.tools-list li a:hover,
+    #livrables ul.tools-list li a:focus {
+      background-color: #294bcf;
+      box-shadow: 0 6px 18px rgba(41, 75, 207, 0.6);
+      text-decoration: none;
+    }
+    /* Icon download before links */
+    #livrables ul.tools-list li a::before {
+      content: url('data:image/svg+xml;utf8,<svg fill="white" xmlns="http://www.w3.org/2000/svg" height="16" width="16" viewBox="0 0 24 24"><path d="M5 20h14v-2H5v2zm7-18l-5 5h3v6h4v-6h3l-5-5z"/></svg>');
+      display: inline-block;
+      margin-right: 6px;
+    }
+
+    /* Responsive */
     @media (max-width: 576px) {
       header h1 {
-        font-size: 2rem;
+        font-size: 2.4rem;
       }
       section {
-        padding: 1.5rem 1rem;
+        padding: 2rem 1.2rem;
       }
       ul.tools-list {
         flex-direction: column;
-        gap: 0.5rem;
+        gap: 0.8rem;
       }
       ul.tools-list li {
         flex: 1 0 auto;
       }
     }
-    /* Navbar custom */
-    .navbar-custom {
-      background-color: #004080;
-    }
-    .navbar-custom .nav-link {
-      color: white;
-      font-weight: 600;
-    }
-    .navbar-custom .nav-link:hover,
-    .navbar-custom .nav-link:focus,
-    .navbar-custom .nav-link.active {
-      color: #cce7ff;
-    }
+
+    /* Footer */
     footer {
-      background-color: #004080;
-      color: white;
+      background: linear-gradient(90deg, #004080 0%, #1a2e4a 100%);
+      color: #a8c1ff;
       text-align: center;
-      padding: 1rem 1rem;
-      font-size: 0.9rem;
-      border-radius: 15px 15px 0 0;
-      margin-top: 2rem;
+      padding: 1.2rem 1rem;
+      font-size: 0.95rem;
+      border-radius: 25px 25px 0 0;
+      box-shadow: 0 -4px 15px rgba(0, 64, 128, 0.3);
     }
     footer a {
-      color: #cce7ff;
-      text-decoration: none;
+      color: #c0d4ff;
+      font-weight: 600;
     }
-    footer a:hover {
+    footer a:hover, footer a:focus {
       text-decoration: underline;
+      color: #e0e9ff;
     }
-    /* Bouton retour en haut */
+
+    /* Back to top button */
     .back-to-top {
       position: fixed;
-      bottom: 20px;
-      right: 20px;
-      background-color: #004080;
+      bottom: 25px;
+      right: 25px;
+      background-color: #3a6df0;
       color: white;
       border: none;
       border-radius: 50%;
-      width: 50px;
-      height: 50px;
+      width: 52px;
+      height: 52px;
       display: flex;
       align-items: center;
       justify-content: center;
-      box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+      box-shadow: 0 6px 18px rgba(58, 109, 240, 0.4);
       cursor: pointer;
       opacity: 0;
       visibility: hidden;
       transition: all 0.3s ease;
+      font-size: 1.6rem;
+      font-weight: 700;
+      user-select: none;
     }
     .back-to-top.visible {
       opacity: 1;
       visibility: visible;
     }
-    .back-to-top:hover {
-      background-color: #003366;
+    .back-to-top:hover, .back-to-top:focus {
+      background-color: #294bcf;
     }
   </style>
 </head>
 <body>
-  <nav class="navbar navbar-expand-md navbar-custom fixed-top shadow">
+  <nav class="navbar navbar-expand-md navbar-custom fixed-top shadow" role="navigation" aria-label="Navigation principale">
     <div class="container">
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
-        aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon" style="filter: invert(1);"></span>
+        aria-controls="navbarNav" aria-expanded="false" aria-label="Basculer la navigation">
+        <span class="navbar-toggler-icon"></span>
       </button>
       <div class="collapse navbar-collapse" id="navbarNav">
         <ul class="navbar-nav ms-auto">
@@ -221,7 +361,7 @@
     </div>
   </nav>
 
-  <header>
+  <header role="banner">
     <h1>Maxime JOANNIS</h1>
     <p>Ingénieur Testeur Logiciel | QA Analyst | Certifié ISTQB Fondation v4.0</p>
   </header>
@@ -229,7 +369,7 @@
   <main class="container" tabindex="-1">
     <!-- Présentation rapide -->
     <section id="presentation" aria-label="Présentation rapide" tabindex="-1">
-      <h2>👤💼 Présentation rapide</h2>
+      <h2><svg class="section-icon" xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" ><circle cx="12" cy="12" r="10"/><path d="M12 16v-4m0-4h.01"/></svg> Présentation rapide</h2>
       <p>
         Ancien développeur logiciel avec plus de 5 ans d'expérience, je me réoriente vers le métier de testeur QA junior.
         Formé et certifié ISTQB, je suis prêt à contribuer à la qualité des logiciels grâce à ma rigueur, mon sérieux et mes compétences en tests manuels et automatisés.
@@ -247,10 +387,10 @@
 
     <!-- Projets réalisés avec carte mentale complète -->
     <section id="projets" aria-label="Projets réalisés" tabindex="-1">
-      <h2>📂 Projets réalisés</h2>
+      <h2><svg class="section-icon" xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10h-6a2 2 0 0 0-4 0H3"/></svg> Projets réalisés</h2>
       <article class="card-custom" tabindex="0" aria-label="Carte mentale complète des projets réalisés">
         <h3 class="project-title">Projet Fin de Formation - Test de l'application Homey : Application web de gestion de locations saisonnières</h3>
-        <div class="mermaid">
+        <div class="mermaid" aria-label="Carte mentale des projets">
           mindmap
           root((Projet de fin de formation - Test Academy))
             Livrables
@@ -286,10 +426,10 @@
 
     <!-- Exemples / Cas de Tests avec User Story 2 -->
     <section id="cas-test" aria-label="Exemples de cas de test" tabindex="-1">
-      <h2>Mon périmètre de test</h2>
+      <h2><svg class="section-icon" xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M8 12h8"/></svg> Mon périmètre de test</h2>
       <article class="card-custom" tabindex="0" aria-label="Carte mentale User Story 1">
         <h3 class="project-title">User Story 1 : Faire une demande de réservation</h3>
-        <div class="mermaid">
+        <div class="mermaid" aria-label="Carte mentale User Story 1">
           mindmap
           root((Faire une demande de réservation))
             CritèreAcceptation_1 : Voyageur_connecté
@@ -308,7 +448,7 @@
       </article>
       <article class="card-custom" tabindex="0" aria-label="Carte mentale User Story 2">
         <h3 class="project-title">User Story 2 : Traiter une demande de réservation</h3>
-        <div class="mermaid">
+        <div class="mermaid" aria-label="Carte mentale User Story 2">
           mindmap
           root((Traiter une demande de réservation))
             CritèreAcceptation_1 : L’hôte confirme une demande de réservation
@@ -327,10 +467,10 @@
 
     <!-- Exemple de bug / anomalie avec carte mentale mise à jour -->
     <section id="anomalie" aria-label="Exemple de bug ou anomalie" tabindex="-1">
-      <h2>Anomalies détectées</h2>
+      <h2><svg class="section-icon" xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/></svg> Anomalies détectées</h2>
       <article class="card-custom" tabindex="0" aria-label="Anomalies">
         <h3 class="project-title">Anomalies</h3>
-        <div class="mermaid">
+        <div class="mermaid" aria-label="Carte mentale des anomalies">
           mindmap
           root((Bugs et anomalies))
             Story_1("User Story 1")
@@ -356,7 +496,7 @@
 
     <!-- Test automatisé -->
     <section id="test-auto" aria-label="Test automatisé" tabindex="-1">
-      <h2>Tests automatisés</h2>
+      <h2><svg class="section-icon" xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20h9"/><path d="M12 4h9"/><path d="M4 9h16v6H4z"/></svg> Tests automatisés</h2>
       <article class="card-custom" tabindex="0" aria-label="Test automatisé avec Postman">
         <h3 class="project-title">Automatisation des tests avec RobotFramework</h3>
         <ul>
@@ -369,9 +509,8 @@
 
     <!-- Rapport de test -->
     <section id="rapport-test" aria-label="Rapport de test" tabindex="-1">
-      <h2>Synthèse du Rapport de test</h2>
+      <h2><svg class="section-icon" xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M8 12h8"/></svg> Synthèse du Rapport de test</h2>
       <article class="card-custom" tabindex="0" aria-label="Rapport de test synthétique">
-        <!-- Carte mentale Mermaid -->
         <div class="mermaid" aria-label="Carte mentale synthèse des tests">
           mindmap
           root((Synthèse des tests))
@@ -384,43 +523,45 @@
         </div>
       </article>
     </section>
-    
+
     <!-- Livrables -->
     <section id="livrables" aria-label="Livrables" tabindex="-1">
-      <h2>Livrables produits</h2>
+      <h2><svg class="section-icon" xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><folder /></svg> Livrables produits</h2>
       <ul class="tools-list" aria-label="Liste des livrables">
-        <li>Cas de tests rédigés<p>
-        <a href="Cas_de_test_faire_une_reservation_v2.xlsx" target="_blank">Cas de test pour la user story 1 </a>
-        <p>
-        <a href="Cas_de_test_Traiter_Demande_Reservation.xlsx" target="_blank">Cas de test pour la user story 2 </a>
+        <li>
+          Cas de tests rédigés
+          <p><a href="Cas_de_test_faire_une_reservation_v2.xlsx" target="_blank" rel="noopener noreferrer" download>Cas de test pour la user story 1</a></p>
+          <p><a href="Cas_de_test_Traiter_Demande_Reservation.xlsx" target="_blank" rel="noopener noreferrer" download>Cas de test pour la user story 2</a></p>
         </li>
-        <li>Résultats ou preuves d'éxécution
-        <a href="RapportExecution1.html" target="_blank">Rapport_Page1</a>
-        <a href="RapportExecution2.html" target="_blank">Rapport_Page2</a>
+        <li>
+          Résultats ou preuves d'éxécution
+          <p><a href="RapportExecution1.html" target="_blank" rel="noopener noreferrer">Rapport_Page1</a></p>
+          <p><a href="RapportExecution2.html" target="_blank" rel="noopener noreferrer">Rapport_Page2</a></p>
         </li>
-        <li>Scripts automatisés 
-        <p>
-        <a href="Faire_Demande_Reservation_Connecte.robot" target="_blank">Script Scénario automatisé 1</a>
-        <p>
-        <a href="Faire_Demande_Reservation_Non_Connecte.robot" target="_blank">Script Scénario automatisé 2</a>
-        <p>
-        <a href="Faire_Confirmation_Reservation.robot" target="_blank">Script Scénario automatisé 3</a>
+        <li>
+          Scripts automatisés
+          <p><a href="Faire_Demande_Reservation_Connecte.robot" target="_blank" rel="noopener noreferrer" download>Script Scénario automatisé 1</a></p>
+          <p><a href="Faire_Demande_Reservation_Non_Connecte.robot" target="_blank" rel="noopener noreferrer" download>Script Scénario automatisé 2</a></p>
+          <p><a href="Faire_Confirmation_Reservation.robot" target="_blank" rel="noopener noreferrer" download>Script Scénario automatisé 3</a></p>
         </li>
-        <li>Rapport de défauts <p>
-        <a href="RapportDefaut_Page1.png" target="_blank">Rapport défaut</a>
+        <li>
+          Rapport de défauts
+          <p><a href="RapportDefaut_Page1.png" target="_blank" rel="noopener noreferrer" download>Rapport défaut</a></p>
         </li>
-        <li>Rapport de test <p>
-        <a href="RapportTestFinal.ods" target="_blank">Rapport Final </a>
+        <li>
+          Rapport de test
+          <p><a href="RapportTestFinal.ods" target="_blank" rel="noopener noreferrer" download>Rapport Final</a></p>
         </li>
-        <li>Présentation orale des résultats devant le grand jury
-        <a href="SupportPresentation_PFFHomey.pptx" target="_blank">SupportPresentation</a>
+        <li>
+          Présentation orale des résultats devant le grand jury
+          <p><a href="SupportPresentation_PFFHomey.pptx" target="_blank" rel="noopener noreferrer" download>SupportPresentation</a></p>
         </li>
       </ul>
     </section>
 
     <!-- Environnement Technique -->
     <section id="environnement-technique" aria-label="Environnement Technique" tabindex="-1">
-      <h2>Environnement Technique</h2>
+      <h2><svg class="section-icon" xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><cpu /></svg> Environnement Technique</h2>
       <ul class="tools-list" aria-label="Liste de l'environnement technique">
         <li>Jira</li>
         <li>Xray</li>
@@ -432,22 +573,24 @@
 
     <!-- Lien CV -->
     <section id="liens" aria-label="CV interactif" tabindex="-1" class="links-section">
-      <h2>CV interactif</h2>
-      <p>Voici mon CV interactif à jour:</p>
+      <h2><svg class="section-icon" xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><file-text /></svg> CV interactif</h2>
+      <p>Voici mon CV interactif à jour :</p>
       <ul>
-        <li><a href="CVInteractif.html" target="_blank">Voir mon CV interactif</a></li>
+        <li><a href="CVInteractif.html" target="_blank" rel="noopener noreferrer">Voir mon CV interactif</a></li>
       </ul>
     </section>
   </main>
 
-  <footer>
+  <footer role="contentinfo">
     &copy; 2025 Maxime JOANNIS - Tous droits réservés.
   </footer>
 
   <!-- Bouton retour en haut -->
-  <button class="back-to-top" aria-label="Retour en haut">↑</button>
+  <button class="back-to-top" aria-label="Retour en haut" title="Retour en haut">↑</button>
 
+  <!-- Bootstrap Bundle JS -->
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
   <script>
     // Apparition des sections au défilement
     const sections = document.querySelectorAll('section');
@@ -457,7 +600,7 @@
           entry.target.classList.add('visible');
         }
       });
-    }, { threshold: 0.1 });
+    }, { threshold: 0.15 });
     sections.forEach(section => observer.observe(section));
 
     // Bouton retour en haut
@@ -471,6 +614,23 @@
     });
     backToTop.addEventListener('click', () => {
       window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+
+    // Navbar background change on scroll
+    window.addEventListener('scroll', () => {
+      const navbar = document.querySelector('.navbar-custom');
+      if (window.scrollY > 20) {
+        navbar.classList.add('scrolled');
+      } else {
+        navbar.classList.remove('scrolled');
+      }
+    });
+
+    // Initialiser Lucide icons
+    document.addEventListener('DOMContentLoaded', () => {
+      if (window.lucide) {
+        window.lucide.replace();
+      }
     });
   </script>
 </body>
