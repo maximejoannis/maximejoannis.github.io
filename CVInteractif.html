@@ -131,6 +131,16 @@
             }
         }
     </style>
+	
+	<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-TS8XPDN9YB"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-TS8XPDN9YB');
+</script>
 </head>
 <body>
     <header>
@@ -325,8 +335,46 @@
             </div>
         </div>
     </div>
-    <footer>
-        <p>© 2025 Maxime Joannis - Tous droits réservés</p>
-    </footer>
+    <footer role="contentinfo" style="text-align: center; padding: 1rem 0; background-color: #004080; color: white; font-weight: 600; margin-top: 2rem;">
+  &copy; 2025 Maxime JOANNIS - Tous droits réservés.
+  <a href="privacy.html" style="color: #a8c1ff; margin-left: 1rem; text-decoration: underline;">Politique de confidentialité</a>
+</footer>
+	
+	<!-- Bandeau de consentement cookies -->
+<div id="cookie-consent-banner" style="display:none; position: fixed; bottom: 0; width: 100%; background: #004080; color: white; padding: 1rem; text-align: center; z-index: 9999; font-weight: 600;">
+  Ce site utilise des cookies pour améliorer votre expérience. 
+  <button id="accept-cookies" style="background: #3a6df0; color: white; border: none; padding: 0.5rem 1rem; margin-left: 1rem; cursor: pointer; border-radius: 6px; font-weight: 600;">Accepter</button>
+</div>
+
+<script>
+  // Afficher le bandeau si pas de consentement
+  if(localStorage.getItem('cookieConsent') !== 'true') {
+    document.getElementById('cookie-consent-banner').style.display = 'block';
+  } else {
+    loadGoogleAnalytics();
+  }
+
+  // Charger Google Analytics après consentement
+  function loadGoogleAnalytics() {
+    if(window.gtag) return; // éviter double chargement
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    window.gtag = gtag;
+    gtag('js', new Date());
+    gtag('config', 'G-TS8XPDN9YB', { 'anonymize_ip': true });
+
+    var gaScript = document.createElement('script');
+    gaScript.src = "https://www.googletagmanager.com/gtag/js?id=G-TS8XPDN9YB";
+    gaScript.async = true;
+    document.head.appendChild(gaScript);
+  }
+
+  document.getElementById('accept-cookies').addEventListener('click', function() {
+    localStorage.setItem('cookieConsent', 'true');
+    loadGoogleAnalytics();
+    document.getElementById('cookie-consent-banner').style.display = 'none';
+  });
+</script>
+
 </body>
 </html>
