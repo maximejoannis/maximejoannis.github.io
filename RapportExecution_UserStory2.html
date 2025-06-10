@@ -1,0 +1,259 @@
+<style>
+  body {
+    font-family: 'Inter', sans-serif;
+    background-color: #f9fafb;
+    color: #1a2e4a;
+    margin: 2rem;
+  }
+  h1 {
+    color: #1e3a8a;
+    margin-bottom: 0.5rem;
+  }
+  .summary {
+    background: #3a6df0;
+    color: white;
+    padding: 1rem 1.5rem;
+    border-radius: 12px;
+    max-width: 400px;
+    font-weight: 700;
+    box-shadow: 0 4px 15px rgba(58, 109, 240, 0.3);
+    margin-bottom: 2rem;
+  }
+  .summary span {
+    font-size: 1.4rem;
+    margin-left: 0.5rem;
+  }
+  table {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0;
+    box-shadow: 0 8px 20px rgba(58, 109, 240, 0.15);
+    border-radius: 12px;
+    overflow: hidden;
+    background-color: white;
+    font-size: 14px;
+  }
+  thead {
+    background: linear-gradient(90deg, #1e3a8a, #3a6df0);
+    color: #e0e9ff;
+    font-weight: 700;
+    text-align: left;
+  }
+  thead th {
+    padding: 14px 18px;
+    border-right: 1px solid rgba(255,255,255,0.3);
+    user-select: none;
+  }
+  thead th:last-child {
+    border-right: none;
+  }
+  tbody tr {
+    background-color: #f5f9ff;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    cursor: default;
+  }
+  tbody tr:nth-child(even) {
+    background-color: #e9f0ff;
+  }
+  tbody tr:hover {
+    background-color: #d0dfff;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 15px rgba(58, 109, 240, 0.25);
+  }
+  tbody td {
+    padding: 14px 18px;
+    vertical-align: top;
+    white-space: pre-wrap;
+    line-height: 1.4;
+    border-right: 1px solid #cbd5e1;
+  }
+  tbody td:last-child {
+    border-right: none;
+  }
+  .status-success {
+    color: #2e7d32;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+  .status-success::before {
+    content: "✔️";
+    font-size: 1.1em;
+  }
+  .status-warning {
+    color: #f57c00;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+  .status-warning::before {
+    content: "⚠️";
+    font-size: 1.1em;
+  }
+  /* Responsive */
+  @media (max-width: 768px) {
+    table, thead, tbody, th, td, tr {
+      display: block;
+    }
+    thead tr {
+      position: absolute;
+      top: -9999px;
+      left: -9999px;
+    }
+    tbody tr {
+      margin-bottom: 1.5rem;
+      box-shadow: 0 6px 15px rgba(58, 109, 240, 0.15);
+      border-radius: 12px;
+      background-color: #f5f9ff;
+      transform: none !important;
+    }
+    tbody tr:hover {
+      background-color: #f5f9ff !important;
+      box-shadow: 0 6px 15px rgba(58, 109, 240, 0.15) !important;
+      transform: none !important;
+    }
+    tbody td {
+      border: none;
+      border-bottom: 1px solid #cbd5e1;
+      position: relative;
+      padding-left: 50%;
+      text-align: left;
+      white-space: normal;
+    }
+    tbody td::before {
+      position: absolute;
+      top: 14px;
+      left: 18px;
+      width: 45%;
+      padding-right: 10px;
+      white-space: nowrap;
+      font-weight: 700;
+      color: #1e40af;
+      content: attr(data-label);
+    }
+    tbody td:last-child {
+      border-bottom: none;
+    }
+    .status-success::before,
+    .status-warning::before {
+      content: none;
+    }
+  }
+</style>
+
+<h1>Rapport d'exécution des cas de test</h1>
+
+<section class="summary" aria-label="Résumé de l'exécution">
+  <div>Total des cas de test : <span>9</span></div>
+  <div>Cas de test réussis : <span>9</span></div>
+  <div>Cas de test avec bug mineur : <span>1</span></div>
+</section>
+
+<section aria-label="Détails des cas de test">
+  <table role="table" aria-describedby="test-cases-description">
+    <caption id="test-cases-description" style="text-align:left; margin-bottom: 1rem; font-weight: 700; color: #1e3a8a;">
+      Détails des cas de test pour la fonctionnalité "Traiter une demande de réservation"
+    </caption>
+    <thead>
+      <tr>
+        <th scope="col">ID</th>
+        <th scope="col">Cas de test</th>
+        <th scope="col">Préconditions</th>
+        <th scope="col">Étapes</th>
+        <th scope="col">Résultats attendus</th>
+        <th scope="col">Postcondition</th>
+        <th scope="col">Statut</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td data-label="ID">CT1</td>
+        <td data-label="Cas de test">Réception d'une nouvelle demande de réservation</td>
+        <td data-label="Préconditions">Une annonce est active et un voyageur a fait une demande</td>
+        <td data-label="Étapes">1. Un voyageur envoie une demande de réservation<br>2. L'hôte accède à son tableau de bord</td>
+        <td data-label="Résultats attendus">Une nouvelle demande de réservation apparaît avec le statut 'NOUVEAU'</td>
+        <td data-label="Postcondition">La demande est visible par l'hôte et le voyageur</td>
+        <td data-label="Statut"><span class="status-success">Réussi</span></td>
+      </tr>
+      <tr>
+        <td data-label="ID">CT2</td>
+        <td data-label="Cas de test">L'hôte confirme une demande de réservation</td>
+        <td data-label="Préconditions">Une demande de réservation est au statut 'NOUVEAU'</td>
+        <td data-label="Étapes">1. L'hôte clique sur 'Confirmer'<br>2. Le système affiche les détails de paiement</td>
+        <td data-label="Résultats attendus">Le statut devient 'ATTENTE DE PAIEMENT' pour l'hôte et 'DISPONIBLE' pour le voyageur</td>
+        <td data-label="Postcondition">La réservation est en attente de paiement</td>
+        <td data-label="Statut"><span class="status-success">Réussi</span></td>
+      </tr>
+      <tr>
+        <td data-label="ID">CT3</td>
+        <td data-label="Cas de test">L'hôte refuse une demande de réservation</td>
+        <td data-label="Préconditions">Une demande de réservation est au statut 'NOUVEAU'</td>
+        <td data-label="Étapes">1. L'hôte clique sur 'Refuser'<br>2. Il peut ajouter un message de justification<br>3. Il confirme le refus</td>
+        <td data-label="Résultats attendus">Le statut devient 'REFUSE' pour l'hôte et le voyageur</td>
+        <td data-label="Postcondition">La réservation est annulée et ne peut plus être modifiée</td>
+        <td data-label="Statut"><span class="status-success">Réussi</span></td>
+      </tr>
+      <tr>
+        <td data-label="ID">CT4</td>
+        <td data-label="Cas de test">L'hôte ajoute des frais supplémentaires</td>
+        <td data-label="Préconditions">Une demande de réservation est au statut 'NOUVEAU'</td>
+        <td data-label="Étapes">1. L'hôte clique sur 'Ajouter des frais'<br>2. Il ajoute un ou plusieurs frais avec nom et valeur<br>3. Il valide</td>
+        <td data-label="Résultats attendus">Les frais sont ajoutés au total de la réservation</td>
+        <td data-label="Postcondition">Les frais sont affichés dans la réservation</td>
+        <td data-label="Statut"><span class="status-success">Réussi</span></td>
+      </tr>
+      <tr>
+        <td data-label="ID">CT5</td>
+        <td data-label="Cas de test">L'hôte applique une remise</td>
+        <td data-label="Préconditions">Une demande de réservation est au statut 'NOUVEAU'</td>
+        <td data-label="Étapes">1. L'hôte clique sur 'Faire une remise'<br>2. Il ajoute un ou plusieurs remises avec nom et valeur<br>3. Il valide</td>
+        <td data-label="Résultats attendus">Les remises sont appliquées au total de la réservation</td>
+        <td data-label="Postcondition">La remise est affichée dans la réservation</td>
+        <td data-label="Statut"><span class="status-warning">Bug majeur</span></td>
+      </tr>
+      <tr>
+        <td data-label="ID">CT6</td>
+        <td data-label="Cas de test">Le voyageur annule une demande de réservation</td>
+        <td data-label="Préconditions">Une réservation est au statut 'NOUVEAU'</td>
+        <td data-label="Étapes">1. Le voyageur clique sur 'Annuler'<br>2. Il confirme l'annulation</td>
+        <td data-label="Résultats attendus">Le statut devient 'ANNULE' pour l'hôte et le voyageur</td>
+        <td data-label="Postcondition">La réservation est annulée et ne peut plus être modifiée</td>
+        <td data-label="Statut"><span class="status-success">Réussi</span></td>
+      </tr>
+      <tr>
+        <td data-label="ID">CT7</td>
+        <td data-label="Cas de test">Le voyageur procède au paiement</td>
+        <td data-label="Préconditions">Une réservation est au statut 'ATTENTE DE PAIEMENT'</td>
+        <td data-label="Étapes">1. Le voyageur clique sur 'Payer maintenant'<br>2. Il voit la page de paiement détaillée<br>3. Il clique sur 'Payer'</td>
+        <td data-label="Résultats attendus">Si les infos de paiement de l'hôte sont renseignées, le statut devient 'RESERVE' pour l'hôte et le voyageur</td>
+        <td data-label="Postcondition">La réservation est confirmée et marquée comme 'RESERVE'</td>
+        <td data-label="Statut"><span class="status-success">Réussi</span></td>
+      </tr>
+      <tr>
+        <td data-label="ID">CT8</td>
+        <td data-label="Cas de test">Le paiement est impossible si l'hôte n'a pas renseigné ses informations bancaires</td>
+        <td data-label="Préconditions">Une réservation est au statut 'ATTENTE DE PAIEMENT' et l'hôte n'a pas renseigné ses informations bancaires</td>
+        <td data-label="Étapes">1. Le voyageur clique sur 'Payer maintenant'<br>2. Le système affiche un message d'erreur</td>
+        <td data-label="Résultats attendus">Un message indique que le paiement n'est pas possible tant que l'hôte n'a pas renseigné ses informations</td>
+        <td data-label="Postcondition">Le voyageur ne peut pas payer</td>
+        <td data-label="Statut"><span class="status-success">Réussi</span></td>
+      </tr>
+      <tr>
+        <td data-label="ID">CT9</td>
+        <td data-label="Cas de test">L'hôte marque une réservation comme payée</td>
+        <td data-label="Préconditions">Une réservation est au statut 'ATTENTE DE PAIEMENT'</td>
+        <td data-label="Étapes">1. L'hôte ouvre la réservation<br>2. Il clique sur 'Marquer comme payé'</td>
+        <td data-label="Résultats attendus">Le statut devient 'RESERVE' pour l'hôte et le voyageur</td>
+        <td data-label="Postcondition">La réservation est confirmée et marquée comme 'RESERVE'</td>
+        <td data-label="Statut"><span class="status-success">Réussi</span></td>
+      </tr>
+    </tbody>
+  </table>
+</section>
+
+<section aria-label="Notes sur les bugs connus" style="margin-top: 2rem;">
+  <h2>Bugs connus</h2>
+  <p>Un bug majeur a été détecté : le bouton "Appliquer une remise" n'est pas visible lors du traitement de la demande de réservation. On ne voit qu'une petite portion du bouton. Ce problème impacte la validation du cas de test : CT-5.</p>
+</section>

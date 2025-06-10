@@ -1,0 +1,164 @@
+<style>
+  /* Style moderne et épuré pour la matrice de traçabilité */
+  .traceability-table {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0;
+    font-family: 'Inter', sans-serif;
+    font-size: 15px;
+    color: #1a2e4a;
+    box-shadow: 0 8px 20px rgba(58, 109, 240, 0.15);
+    border-radius: 12px;
+    overflow: hidden;
+    margin-top: 1.5rem;
+  }
+  .traceability-table thead {
+    background: linear-gradient(90deg, #1e3a8a, #3a6df0);
+    color: #e0e9ff;
+    font-weight: 700;
+    text-align: left;
+  }
+  .traceability-table thead th {
+    padding: 16px 20px;
+    border-right: 1px solid rgba(255,255,255,0.3);
+    user-select: none;
+  }
+  .traceability-table thead th:last-child {
+    border-right: none;
+  }
+  .traceability-table tbody tr {
+    background-color: #f5f9ff;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    cursor: default;
+  }
+  .traceability-table tbody tr:nth-child(even) {
+    background-color: #e9f0ff;
+  }
+  .traceability-table tbody tr:hover {
+    background-color: #d0dfff;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 15px rgba(58, 109, 240, 0.25);
+  }
+  .traceability-table tbody td {
+    padding: 14px 20px;
+    vertical-align: top;
+    white-space: pre-wrap;
+    line-height: 1.4;
+    border-right: 1px solid #cbd5e1;
+  }
+  .traceability-table tbody td:last-child {
+    border-right: none;
+  }
+  .us-cell {
+    font-weight: 700;
+    background-color: #3a6df0;
+    color: white;
+    width: 20%;
+    vertical-align: middle;
+  }
+  .criteria-cell {
+    font-weight: 600;
+    width: 35%;
+  }
+  .cases-cell {
+    width: 45%;
+  }
+  /* Responsive */
+  @media (max-width: 768px) {
+    .traceability-table,
+    .traceability-table thead,
+    .traceability-table tbody,
+    .traceability-table th,
+    .traceability-table td,
+    .traceability-table tr {
+      display: block;
+    }
+    .traceability-table thead tr {
+      position: absolute;
+      top: -9999px;
+      left: -9999px;
+    }
+    .traceability-table tbody tr {
+      margin-bottom: 1.5rem;
+      box-shadow: 0 6px 15px rgba(58, 109, 240, 0.15);
+      border-radius: 12px;
+      background-color: #f5f9ff;
+      transform: none !important;
+    }
+    .traceability-table tbody tr:hover {
+      background-color: #f5f9ff !important;
+      box-shadow: 0 6px 15px rgba(58, 109, 240, 0.15) !important;
+      transform: none !important;
+    }
+    .traceability-table tbody td {
+      border: none;
+      border-bottom: 1px solid #cbd5e1;
+      position: relative;
+      padding-left: 50%;
+      text-align: left;
+      white-space: normal;
+    }
+    .traceability-table tbody td::before {
+      position: absolute;
+      top: 14px;
+      left: 20px;
+      width: 45%;
+      padding-right: 10px;
+      white-space: nowrap;
+      font-weight: 700;
+      color: #1e40af;
+      content: attr(data-label);
+    }
+    .us-cell, .criteria-cell, .cases-cell {
+      width: 100%;
+    }
+  }
+</style>
+
+<article aria-label="Matrice de traçabilité User Story, Critères d'acceptation et Cas de test">
+  <h2 style="color:#1e3a8a; font-family: 'Inter', sans-serif;">Matrice de traçabilité</h2>
+  <table class="traceability-table" role="table">
+    <thead>
+      <tr>
+        <th scope="col">User Story</th>
+        <th scope="col">Critères d'acceptation</th>
+        <th scope="col">Cas de test liés</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="us-cell" rowspan="2" data-label="User Story">Faire une demande de réservation</td>
+        <td class="criteria-cell" data-label="Critères d'acceptation">
+          1. Scénario : Un Voyageur connecté fait une demande de réservation
+        </td>
+        <td class="cases-cell" data-label="Cas de test liés">
+          <ul style="margin:0; padding-left: 18px;">
+            <li><strong>CT-001</strong> : Demande de réservation par un Voyageur connecté</li>
+            <li><strong>CT-003</strong> : Sélection de dates valides</li>
+            <li><strong>CT-004</strong> : Date de début dans le passé</li>
+            <li><strong>CT-005</strong> : Date de fin avant la date de début</li>
+            <li><strong>CT-006</strong> : Sélection d'une période déjà réservée</li>
+            <li><strong>CT-007</strong> : Saisie d'un nombre valide de voyageurs</li>
+            <li><strong>CT-008</strong> : Nombre de voyageurs nul</li>
+            <li><strong>CT-009</strong> : Nombre de voyageurs négatif</li>
+            <li><strong>CT-010</strong> : Demande de réservation avec message</li>
+            <li><strong>CT-011</strong> : Demande de réservation sans message</li>
+            <li><strong>CT-012</strong> : Réception d'une notification de réservation par l’hôte</li>
+            <li><strong>CT-013</strong> : Accès aux réservations via le menu latéral</li>
+            <li><strong>CT-014</strong> : Accès aux messages via le menu utilisateur</li>
+          </ul>
+        </td>
+      </tr>
+      <tr>
+        <td class="criteria-cell" data-label="Critères d'acceptation">
+          2. Scénario : Un Visiteur non connecté fait une demande de réservation
+        </td>
+        <td class="cases-cell" data-label="Cas de test liés">
+          <ul style="margin:0; padding-left: 18px;">
+            <li><strong>CT-002</strong> : Tentative de réservation par un utilisateur non connecté</li>
+          </ul>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</article>

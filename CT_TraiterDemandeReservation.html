@@ -1,0 +1,184 @@
+<style>
+  /* Style moderne pour le tableau cas de test */
+  .test-table-container {
+    overflow-x: auto;
+    margin-top: 1.5rem;
+  }
+  .test-table {
+    border-collapse: separate;
+    border-spacing: 0;
+    width: 100%;
+    min-width: 900px;
+    font-family: 'Inter', sans-serif;
+    font-size: 14px;
+    color: #1a2e4a;
+    box-shadow: 0 6px 15px rgba(58, 109, 240, 0.15);
+    border-radius: 12px;
+    overflow: hidden;
+  }
+  .test-table thead {
+    background: linear-gradient(90deg, #1e3a8a, #3a6df0);
+    color: #e0e9ff;
+    font-weight: 700;
+    text-align: left;
+    box-shadow: inset 0 -3px 5px rgba(0,0,0,0.2);
+  }
+  .test-table thead th {
+    padding: 14px 18px;
+    border-right: 1px solid rgba(255,255,255,0.3);
+    user-select: none;
+  }
+  .test-table thead th:last-child {
+    border-right: none;
+  }
+  .test-table tbody tr {
+    background-color: #f5f9ff;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    cursor: default;
+  }
+  .test-table tbody tr:nth-child(even) {
+    background-color: #e9f0ff;
+  }
+  .test-table tbody tr:hover {
+    background-color: #d0dfff;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(58, 109, 240, 0.25);
+  }
+  .test-table tbody td {
+    padding: 14px 18px;
+    vertical-align: top;
+    white-space: pre-wrap;
+    line-height: 1.4;
+  }
+  /* Responsive */
+  @media (max-width: 768px) {
+    .test-table {
+      min-width: unset;
+      font-size: 13px;
+    }
+    .test-table thead {
+      display: none;
+    }
+    .test-table tbody tr {
+      display: block;
+      margin-bottom: 1.5rem;
+      box-shadow: 0 6px 15px rgba(58, 109, 240, 0.15);
+      border-radius: 12px;
+      background-color: #f5f9ff;
+      transform: none !important;
+    }
+    .test-table tbody tr:hover {
+      background-color: #f5f9ff !important;
+      box-shadow: 0 6px 15px rgba(58, 109, 240, 0.15) !important;
+      transform: none !important;
+    }
+    .test-table tbody td {
+      display: flex;
+      justify-content: space-between;
+      padding: 10px 14px;
+      border-bottom: 1px solid #cbd5e1;
+    }
+    .test-table tbody td:last-child {
+      border-bottom: none;
+    }
+    .test-table tbody td::before {
+      content: attr(data-label);
+      font-weight: 700;
+      color: #1e40af;
+      flex-basis: 40%;
+      white-space: nowrap;
+    }
+  }
+</style>
+
+<article class="card-custom" tabindex="0" aria-label="Tableau des cas de test pour traiter une demande de réservation">
+  <h3 class="project-title">Tableau des cas de test - Traiter une demande de réservation</h3>
+  <div class="test-table-container" role="region" aria-label="Tableau des cas de test">
+    <table class="test-table" role="table">
+      <thead>
+        <tr>
+          <th scope="col">ID</th>
+          <th scope="col">Cas de test</th>
+          <th scope="col">Préconditions</th>
+          <th scope="col">Étapes</th>
+          <th scope="col">Résultats attendus</th>
+          <th scope="col">Postcondition</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td data-label="ID">CT1</td>
+          <td data-label="Cas de test">Réception d'une nouvelle demande de réservation</td>
+          <td data-label="Préconditions">Une annonce est active et un voyageur a fait une demande</td>
+          <td data-label="Étapes">1. Un voyageur envoie une demande de réservation<br>2. L'hôte accède à son tableau de bord</td>
+          <td data-label="Résultats attendus">Une nouvelle demande de réservation apparaît avec le statut 'NOUVEAU'</td>
+          <td data-label="Postcondition">La demande est visible par l'hôte et le voyageur</td>
+        </tr>
+        <tr>
+          <td data-label="ID">CT2</td>
+          <td data-label="Cas de test">L'hôte confirme une demande de réservation</td>
+          <td data-label="Préconditions">Une demande de réservation est au statut 'NOUVEAU'</td>
+          <td data-label="Étapes">1. L'hôte clique sur 'Confirmer'<br>2. Le système affiche les détails de paiement</td>
+          <td data-label="Résultats attendus">Le statut devient 'ATTENTE DE PAIEMENT' pour l'hôte et 'DISPONIBLE' pour le voyageur</td>
+          <td data-label="Postcondition">La réservation est en attente de paiement</td>
+        </tr>
+        <tr>
+          <td data-label="ID">CT3</td>
+          <td data-label="Cas de test">L'hôte refuse une demande de réservation</td>
+          <td data-label="Préconditions">Une demande de réservation est au statut 'NOUVEAU'</td>
+          <td data-label="Étapes">1. L'hôte clique sur 'Refuser'<br>2. Il peut ajouter un message de justification<br>3. Il confirme le refus</td>
+          <td data-label="Résultats attendus">Le statut devient 'REFUSE' pour l'hôte et le voyageur</td>
+          <td data-label="Postcondition">La réservation est annulée et ne peut plus être modifiée</td>
+        </tr>
+        <tr>
+          <td data-label="ID">CT4</td>
+          <td data-label="Cas de test">L'hôte ajoute des frais supplémentaires</td>
+          <td data-label="Préconditions">Une demande de réservation est au statut 'NOUVEAU'</td>
+          <td data-label="Étapes">1. L'hôte clique sur 'Ajouter des frais'<br>2. Il ajoute un ou plusieurs frais avec nom et valeur<br>3. Il valide</td>
+          <td data-label="Résultats attendus">Les frais sont ajoutés au total de la réservation</td>
+          <td data-label="Postcondition">Les frais sont affichés dans la réservation</td>
+        </tr>
+        <tr>
+          <td data-label="ID">CT5</td>
+          <td data-label="Cas de test">L'hôte applique une remise</td>
+          <td data-label="Préconditions">Une demande de réservation est au statut 'NOUVEAU'</td>
+          <td data-label="Étapes">1. L'hôte clique sur 'Faire une remise'<br>2. Il ajoute un ou plusieurs remises avec nom et valeur<br>3. Il valide</td>
+          <td data-label="Résultats attendus">Les remises sont appliquées au total de la réservation</td>
+          <td data-label="Postcondition">La remise est affichée dans la réservation</td>
+        </tr>
+        <tr>
+          <td data-label="ID">CT6</td>
+          <td data-label="Cas de test">Le voyageur annule une demande de réservation</td>
+          <td data-label="Préconditions">Une réservation est au statut 'NOUVEAU'</td>
+          <td data-label="Étapes">1. Le voyageur clique sur 'Annuler'<br>2. Il confirme l'annulation</td>
+          <td data-label="Résultats attendus">Le statut devient 'ANNULE' pour l'hôte et le voyageur</td>
+          <td data-label="Postcondition">La réservation est annulée et ne peut plus être modifiée</td>
+        </tr>
+        <tr>
+          <td data-label="ID">CT7</td>
+          <td data-label="Cas de test">Le voyageur procède au paiement</td>
+          <td data-label="Préconditions">Une réservation est au statut 'ATTENTE DE PAIEMENT'</td>
+          <td data-label="Étapes">1. Le voyageur clique sur 'Payer maintenant'<br>2. Il voit la page de paiement détaillée<br>3. Il clique sur 'Payer'</td>
+          <td data-label="Résultats attendus">Si les infos de paiement de l'hôte sont renseignées, le statut devient 'RESERVE' pour l'hôte et le voyageur</td>
+          <td data-label="Postcondition">La réservation est confirmée et marquée comme 'RESERVE'</td>
+        </tr>
+        <tr>
+          <td data-label="ID">CT8</td>
+          <td data-label="Cas de test">Le paiement est impossible si l'hôte n'a pas renseigné ses informations bancaires</td>
+          <td data-label="Préconditions">Une réservation est au statut 'ATTENTE DE PAIEMENT' et l'hôte n'a pas renseigné ses informations bancaires</td>
+          <td data-label="Étapes">1. Le voyageur clique sur 'Payer maintenant'<br>2. Le système affiche un message d'erreur</td>
+          <td data-label="Résultats attendus">Un message indique que le paiement n'est pas possible tant que l'hôte n'a pas renseigné ses informations</td>
+          <td data-label="Postcondition">Le voyageur ne peut pas payer</td>
+        </tr>
+        <tr>
+          <td data-label="ID">CT9</td>
+          <td data-label="Cas de test">L'hôte marque une réservation comme payée</td>
+          <td data-label="Préconditions">Une réservation est au statut 'ATTENTE DE PAIEMENT'</td>
+          <td data-label="Étapes">1. L'hôte ouvre la réservation<br>2. Il clique sur 'Marquer comme payé'</td>
+          <td data-label="Résultats attendus">Le statut devient 'RESERVE' pour l'hôte et le voyageur</td>
+          <td data-label="Postcondition">La réservation est confirmée et marquée comme 'RESERVE'</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</article>

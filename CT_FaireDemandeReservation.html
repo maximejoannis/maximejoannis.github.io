@@ -1,0 +1,267 @@
+<style>
+  /* Style moderne pour le tableau cas de test */
+  .test-table-container {
+    overflow-x: auto;
+    margin-top: 1.5rem;
+  }
+  .test-table {
+    border-collapse: separate;
+    border-spacing: 0;
+    width: 100%;
+    min-width: 900px;
+    font-family: 'Inter', sans-serif;
+    font-size: 14px;
+    color: #1a2e4a;
+    box-shadow: 0 6px 15px rgba(58, 109, 240, 0.15);
+    border-radius: 12px;
+    overflow: hidden;
+  }
+  .test-table thead {
+    background: linear-gradient(90deg, #1e3a8a, #3a6df0);
+    color: #e0e9ff;
+    font-weight: 700;
+    text-align: left;
+    box-shadow: inset 0 -3px 5px rgba(0,0,0,0.2);
+  }
+  .test-table thead th {
+    padding: 14px 18px;
+    border-right: 1px solid rgba(255,255,255,0.3);
+    user-select: none;
+  }
+  .test-table thead th:last-child {
+    border-right: none;
+  }
+  .test-table tbody tr {
+    background-color: #f5f9ff;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    cursor: default;
+  }
+  .test-table tbody tr:nth-child(even) {
+    background-color: #e9f0ff;
+  }
+  .test-table tbody tr:hover {
+    background-color: #d0dfff;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(58, 109, 240, 0.25);
+  }
+  .test-table tbody td {
+    padding: 14px 18px;
+    vertical-align: top;
+    white-space: pre-wrap;
+    line-height: 1.4;
+  }
+  /* Statut success */
+  .status-success {
+    color: #2e7d32;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+  .status-success::before {
+    content: "✔️";
+    font-size: 1.1em;
+  }
+  /* Statut failure */
+  .status-failure {
+    color: #c62828;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+  .status-failure::before {
+    content: "❌";
+    font-size: 1.1em;
+  }
+  /* Responsive */
+  @media (max-width: 768px) {
+    .test-table {
+      min-width: unset;
+      font-size: 13px;
+    }
+    .test-table thead {
+      display: none;
+    }
+    .test-table tbody tr {
+      display: block;
+      margin-bottom: 1.5rem;
+      box-shadow: 0 6px 15px rgba(58, 109, 240, 0.15);
+      border-radius: 12px;
+      background-color: #f5f9ff;
+      transform: none !important;
+    }
+    .test-table tbody tr:hover {
+      background-color: #f5f9ff !important;
+      box-shadow: 0 6px 15px rgba(58, 109, 240, 0.15) !important;
+      transform: none !important;
+    }
+    .test-table tbody td {
+      display: flex;
+      justify-content: space-between;
+      padding: 10px 14px;
+      border-bottom: 1px solid #cbd5e1;
+    }
+    .test-table tbody td:last-child {
+      border-bottom: none;
+    }
+    .test-table tbody td::before {
+      content: attr(data-label);
+      font-weight: 700;
+      color: #1e40af;
+      flex-basis: 40%;
+      white-space: nowrap;
+    }
+    .status-success::before,
+    .status-failure::before {
+      content: none;
+    }
+  }
+</style>
+
+<article class="card-custom" tabindex="0" aria-label="Tableau des cas de test pour la réservation">
+  <h3 class="project-title">Tableau des cas de test - Faire une réservation</h3>
+  <div class="test-table-container" role="region" aria-label="Tableau des cas de test">
+    <table class="test-table" role="table">
+      <thead>
+        <tr>
+          <th scope="col">ID</th>
+          <th scope="col">Titre du test</th>
+          <th scope="col">Préconditions</th>
+          <th scope="col">Étapes</th>
+          <th scope="col">Résultat attendu</th>
+          <th scope="col">Statut</th>
+          <th scope="col">Postcondition</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td data-label="ID">CT-001</td>
+          <td data-label="Titre du test">Demande de réservation par un Voyageur connecté</td>
+          <td data-label="Préconditions">L'utilisateur est connecté en tant que Voyageur</td>
+          <td data-label="Étapes">1. Consulter une annonce<br>2. Renseigner les informations requises<br>3. Soumettre la demande</td>
+          <td data-label="Résultat attendu"><span class="status-success">La réservation est créée et un message est envoyé à l’hôte</span></td>
+          <td data-label="Statut">À tester</td>
+          <td data-label="Postcondition">La réservation apparaît dans le tableau de bord de l'hôte</td>
+        </tr>
+        <tr>
+          <td data-label="ID">CT-002</td>
+          <td data-label="Titre du test">Tentative de réservation par un utilisateur non connecté</td>
+          <td data-label="Préconditions">L'utilisateur est déconnecté</td>
+          <td data-label="Étapes">1. Consulter une annonce<br>2. Renseigner les informations requises<br>3. Soumettre la demande</td>
+          <td data-label="Résultat attendu"><span class="status-failure">Le système empêche la soumission et demande à l’utilisateur de se connecter</span></td>
+          <td data-label="Statut">À tester</td>
+          <td data-label="Postcondition">L'utilisateur doit se connecter pour continuer</td>
+        </tr>
+        <tr>
+          <td data-label="ID">CT-003</td>
+          <td data-label="Titre du test">Sélection de dates valides</td>
+          <td data-label="Préconditions">Voyageur connecté, logement disponible</td>
+          <td data-label="Étapes">1. Sélectionner une date de début valide<br>2. Sélectionner une date de fin valide postérieure<br>3. Soumettre la demande</td>
+          <td data-label="Résultat attendu"><span class="status-success">Réservation confirmée</span></td>
+          <td data-label="Statut">À tester</td>
+          <td data-label="Postcondition">La réservation est créée et bloquée pour d'autres utilisateurs</td>
+        </tr>
+        <tr>
+          <td data-label="ID">CT-004</td>
+          <td data-label="Titre du test">Date de début dans le passé</td>
+          <td data-label="Préconditions">Voyageur connecté</td>
+          <td data-label="Étapes">1. Sélectionner une date de début dans le passé<br>2. Soumettre la demande</td>
+          <td data-label="Résultat attendu"><span class="status-failure">Message d’erreur, la date de début doit être future</span></td>
+          <td data-label="Statut">À tester</td>
+          <td data-label="Postcondition">L'utilisateur doit sélectionner une nouvelle date</td>
+        </tr>
+        <tr>
+          <td data-label="ID">CT-005</td>
+          <td data-label="Titre du test">Date de fin avant la date de début</td>
+          <td data-label="Préconditions">Voyageur connecté</td>
+          <td data-label="Étapes">1. Sélectionner une date de début valide<br>2. Sélectionner une date de fin antérieure<br>3. Soumettre la demande</td>
+          <td data-label="Résultat attendu"><span class="status-failure">Message d’erreur, la date de fin doit être postérieure</span></td>
+          <td data-label="Statut">À tester</td>
+          <td data-label="Postcondition">L'utilisateur doit corriger la date de fin</td>
+        </tr>
+        <tr>
+          <td data-label="ID">CT-006</td>
+          <td data-label="Titre du test">Sélection d'une période déjà réservée</td>
+          <td data-label="Préconditions">Voyageur connecté</td>
+          <td data-label="Étapes">1. Sélectionner une période déjà réservée<br>2. Soumettre la demande</td>
+          <td data-label="Résultat attendu"><span class="status-failure">Message d’erreur, la période est indisponible</span></td>
+          <td data-label="Statut">À tester</td>
+          <td data-label="Postcondition">L'utilisateur doit choisir une autre période</td>
+        </tr>
+        <tr>
+          <td data-label="ID">CT-007</td>
+          <td data-label="Titre du test">Saisie d'un nombre valide de voyageurs</td>
+          <td data-label="Préconditions">Voyageur connecté</td>
+          <td data-label="Étapes">1. Sélectionner des dates valides<br>2. Entrer un nombre de voyageurs > 0<br>3. Soumettre la demande</td>
+          <td data-label="Résultat attendu"><span class="status-success">Réservation confirmée</span></td>
+          <td data-label="Statut">À tester</td>
+          <td data-label="Postcondition">La réservation inclut le nombre de voyageurs spécifié</td>
+        </tr>
+        <tr>
+          <td data-label="ID">CT-008</td>
+          <td data-label="Titre du test">Nombre de voyageurs nul</td>
+          <td data-label="Préconditions">Voyageur connecté</td>
+          <td data-label="Étapes">1. Sélectionner des dates valides<br>2. Saisir '0' voyageurs<br>3. Soumettre la demande</td>
+          <td data-label="Résultat attendu"><span class="status-failure">Message d’erreur, le nombre doit être > 0</span></td>
+          <td data-label="Statut">À tester</td>
+          <td data-label="Postcondition">L'utilisateur doit corriger l'entrée</td>
+        </tr>
+        <tr>
+          <td data-label="ID">CT-009</td>
+          <td data-label="Titre du test">Nombre de voyageurs négatif</td>
+          <td data-label="Préconditions">Voyageur connecté</td>
+          <td data-label="Étapes">1. Sélectionner des dates valides<br>2. Saisir un nombre négatif<br>3. Soumettre la demande</td>
+          <td data-label="Résultat attendu"><span class="status-failure">Message d’erreur, le nombre doit être positif</span></td>
+          <td data-label="Statut">À tester</td>
+          <td data-label="Postcondition">L'utilisateur doit corriger l'entrée</td>
+        </tr>
+        <tr>
+          <td data-label="ID">CT-010</td>
+          <td data-label="Titre du test">Demande de réservation avec message</td>
+          <td data-label="Préconditions">Voyageur connecté</td>
+          <td data-label="Étapes">1. Sélectionner des dates valides<br>2. Saisir un nombre de voyageurs valide<br>3. Rédiger un message pour l’hôte<br>4. Soumettre la demande</td>
+          <td data-label="Résultat attendu"><span class="status-success">Réservation créée avec message</span></td>
+          <td data-label="Statut">À tester</td>
+          <td data-label="Postcondition">L'hôte reçoit le message avec la réservation</td>
+        </tr>
+        <tr>
+          <td data-label="ID">CT-011</td>
+          <td data-label="Titre du test">Demande de réservation sans message</td>
+          <td data-label="Préconditions">Voyageur connecté</td>
+          <td data-label="Étapes">1. Sélectionner des dates valides<br>2. Saisir un nombre de voyageurs valide<br>3. Ne pas renseigner de message<br>4. Soumettre la demande</td>
+          <td data-label="Résultat attendu"><span class="status-success">Réservation créée sans message obligatoire</span></td>
+          <td data-label="Statut">À tester</td>
+          <td data-label="Postcondition">La réservation est créée sans message</td>
+        </tr>
+        <tr>
+          <td data-label="ID">CT-012</td>
+          <td data-label="Titre du test">Réception d'une notification de réservation par l’hôte</td>
+          <td data-label="Préconditions">Voyageur connecté, soumission réussie</td>
+          <td data-label="Étapes">1. L’hôte consulte sa boîte de réception 'Messages'<br>2. L’hôte consulte sa boîte 'Réservations'</td>
+          <td data-label="Résultat attendu"><span class="status-success">Un nouveau message et une nouvelle réservation apparaissent</span></td>
+          <td data-label="Statut">À tester</td>
+          <td data-label="Postcondition">L'hôte voit la réservation et peut y répondre</td>
+        </tr>
+        <tr>
+          <td data-label="ID">CT-013</td>
+          <td data-label="Titre du test">Accès aux réservations via le menu latéral</td>
+          <td data-label="Préconditions">Hôte connecté</td>
+          <td data-label="Étapes">1. Ouvrir le menu latéral<br>2. Accéder à la section 'Réservations'</td>
+          <td data-label="Résultat attendu"><span class="status-success">L’hôte voit la réservation récente</span></td>
+          <td data-label="Statut">À tester</td>
+          <td data-label="Postcondition">L'hôte peut gérer ses réservations</td>
+        </tr>
+        <tr>
+          <td data-label="ID">CT-014</td>
+          <td data-label="Titre du test">Accès aux messages via le menu utilisateur</td>
+          <td data-label="Préconditions">Hôte connecté</td>
+          <td data-label="Étapes">1. Survoler le nom d’utilisateur<br>2. Sélectionner 'Messages'</td>
+          <td data-label="Résultat attendu"><span class="status-success">L’hôte voit le message de réservation</span></td>
+          <td data-label="Statut">À tester</td>
+          <td data-label="Postcondition">L'hôte peut répondre au message</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</article>
