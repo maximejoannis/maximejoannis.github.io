@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Micro Stage QA – Maxime JOANNIS</title>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat:400,700&display=swap">
+  <style>
+    :root {
+      --main-bg: #f4f7fa;
+      --accent: #17c3b2;
+      --text-dark: #222;
+      --text-light: #fff;
+      --sidebar-bg: #212d40;
+      --sidebar-hover: #36405a;
+      --card-bg: #fff;
+      --shadow: 0 8px 24px rgba(33,45,64,0.08);
+      --transition: 0.3s cubic-bezier(.77,0,.18,1);
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: 'Montserrat', Arial, sans-serif;
+      background: linear-gradient(120deg, #e0eafc 0%, #cfdef3 100%);
+      color: var(--text-dark);
+      min-height: 100vh;
+      transition: background 0.5s, color 0.5s;
+    }
+    .container {
+      display: flex;
+      min-height: 100vh;
+    }
+    .sidebar {
+      width: 220px;
+      background: var(--sidebar-bg);
+      color: var(--text-light);
+      padding: 2rem 1rem;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      box-shadow: 2px 0 8px rgba(33,45,64,0.08);
+      position: fixed;
+      height: 100vh;
+      z-index: 10;
+      transition: background var(--transition), color var(--transition);
+    }
+    .sidebar img {
+      border-radius: 50%;
+      width: 90px;
+      height: 90px;
+      object-fit: cover;
+      border: 4px solid var(--accent);
+      margin-bottom: 1rem;
+    }
+    .sidebar h2 {
+      font-size: 1.25rem;
+      margin-bottom: 0.2rem;
+    }
+    .sidebar p {
+      font-size: 0.95rem;
+      color: #b0c4e6;
+      margin-bottom: 1.5rem;
+    }
+    .nav-links {
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+    .nav-links a {
+      color: var(--text-light);
+      text-decoration: none;
+      padding: 0.7rem 1rem;
+      border-radius: 8px;
+      transition: background 0.2s;
+      font-weight: 500;
+      letter-spacing: 0.03em;
+      display: flex;
+      align-items: center;
+      gap: 0.6em;
+      outline: none;
+    }
+    .nav-links a:hover, .nav-links a.active, .nav-links a:focus {
+      background: var(--sidebar-hover);
+    }
+    .main-content {
+      margin-left: 220px;
+      width: 100%;
+      padding: 3rem 2rem 5rem 2rem;
+      min-height: 100vh;
+      background: var(--main-bg);
+      transition: background var(--transition), color var(--transition);
+    }
+    section {
+      margin-bottom: 4rem;
+      background: var(--card-bg);
+      box-shadow: var(--shadow);
+      border-radius: 16px;
+      padding: 2.5rem 2rem;
+      max-width: 900px;
+      margin-left: auto;
+      margin-right: auto;
+      opacity: 1;
+      transform: none;
+      transition: opacity 0.8s, transform 0.8s;
+    }
+    section h1, section h2 {
+      color: var(--accent);
+      margin-bottom: 1rem;
+    }
+    .card-custom {
+      background: #f8fafc;
+      border-radius: 12px;
+      box-shadow: 0 2px 8px rgba(23,195,178,0.06);
+      padding: 1.3rem 1.5rem 1.2rem 1.5rem;
+      margin-bottom: 2rem;
+    }
+    .project-title {
+      font-size: 1.12rem;
+      color: #222;
+      margin-bottom: 0.7em;
+      font-weight: 600;
+    }
+    .modern-list {
+      list-style: none;
+      padding-left: 0;
+      margin: 0;
+      display: flex;
+      flex-direction: column;
+      gap: 0.6em;
+    }
+    .modern-list li {
+      background: #fff;
+      border-radius: 8px;
+      padding: 0.7em 1.1em;
+      box-shadow: 0 2px 8px rgba(23,195,178,0.06);
+      border-left: 4px solid var(--accent);
+      font-size: 1.01rem;
+      transition: background 0.2s, box-shadow 0.2s;
+    }
+    .modern-list li:hover {
+      background: #e0eafc;
+      box-shadow: 0 4px 16px rgba(23,195,178,0.12);
+    }
+    footer {
+      position: fixed;
+      bottom: 0;
+      left: 220px;
+      width: calc(100% - 220px);
+      background: var(--sidebar-bg);
+      color: var(--text-light);
+      text-align: center;
+      padding: 1rem 0 0.7rem 0;
+      font-size: 1rem;
+      z-index: 20;
+      transition: background var(--transition), color var(--transition);
+    }
+    footer a {
+      color: var(--accent);
+      text-decoration: underline;
+      margin-left: 1rem;
+    }
+    footer a:hover, footer a:focus {
+      color: #fff;
+    }
+    @media (max-width: 900px) {
+      .main-content, footer {
+        margin-left: 0;
+        width: 100%;
+      }
+      .sidebar {
+        position: static;
+        width: 100%;
+        flex-direction: row;
+        height: auto;
+        padding: 1rem 0.5rem;
+      }
+      .sidebar img {
+        margin-bottom: 0;
+        margin-right: 1rem;
+      }
+      .nav-links {
+        flex-direction: row;
+        gap: 0.5rem;
+      }
+      footer {
+        left: 0;
+      }
+    }
+    @media (max-width: 600px) {
+      .main-content {
+        padding: 1.2rem 0.3rem 4rem 0.3rem;
+      }
+      section {
+        padding: 1.5rem 0.7rem;
+      }
+      .sidebar {
+        flex-direction: column;
+        align-items: flex-start;
+        padding: 1rem 0.5rem;
+      }
+      footer {
+        font-size: 0.93rem;
+      }
+    }
+  </style>
+  <!-- Mermaid.js CDN -->
+  <script type="module">
+    import mermaid from "https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs";
+    mermaid.initialize({ startOnLoad: true });
+  </script>
+</head>
+<body>
+  <div class="container">
+    <!-- Sidebar -->
+    <aside class="sidebar">
+      <img src="Photo_Identite.jpg" alt="Maxime Joannis">
+      <h2>Maxime JOANNIS</h2>
+      <p>Ingénieur Testeur Logiciel | QA Analyst | Certifié ISTQB Fondation v4.0</p>
+      <nav class="nav-links">
+        <a href="index.html">← Retour à l'accueil</a>
+		<a href="#présentation">Présentation générale</a>
+        <a href="#perimetre">Mon périmètre de test</a>
+        <a href="#anomalies">Anomalies détectées</a>
+        <a href="#tests-auto">Tests automatisés</a>
+        <a href="#livrables">Livrables produits</a>
+      </nav>
+    </aside>
+
+    <main class="main-content">
+	
+	<section id="présentation">
+        <h1>Micro stage </h1>
+         <article class="card-custom" tabindex="0" aria-label="Automatisation des tests avec RobotFramework">
+          <h3 class="project-title">Dans le cadre de ma formation "Testeur Logiciel" chez TestAcademy, j'ai participé à un projet en situation réelle (appelé micro stage) en tant que Testeur QA, sur un logiciel d'audit et de gestion de conformité MultiRéférentiel nommé AMN AUDITOR créé par l'entreprise AMN BRAINS :</h3>
+          <ul class="modern-list">
+		    <li>Réunion de démarrage avec l'entreprise AMN BRAINS</li>
+            <li>Participation à des daily meetings avec le Product Owner et l'équipe QA</li>
+			<li>Affectation et gestion des tâches via Jira, exécution de tests manuels, reporting des résultats dans Xray</li>
+			<li>Analyse des exigences fonctionnelles, conception, implémentation et exécution des cas de tests, détection et documentation des anomalies</li>
+			<li>Production de livrables professionnels : cas de tests manuels, cas de tests automatisés, rapport de test, rapport de défauts et préconisations</li>
+          </ul>
+        </article>
+      </section>
+	  
+      <!-- Mon périmètre de test -->
+      <section id="perimetre" aria-label="Mon périmètre de test">
+        <h2>
+          <svg class="section-icon" xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="24" height="24"><circle cx="12" cy="12" r="10"/><path d="M8 12h8"/></svg>
+          Mon périmètre de test
+        </h2>
+        <article class="card-custom" tabindex="0" aria-label="Automatisation des tests avec RobotFramework">
+          <h3 class="project-title">Exigences à tester</h3>
+          <ul class="modern-list">
+            <li>Génération automatique d’un constat de conformité / non-conformité</li>
+			<li>Génération automatique d’une action de remédiation</li>
+        	<li>Adaptation des suggestions générées via des mots-clés</li>
+          </ul>
+        </article>
+       
+      </section>
+
+      <!-- Anomalies détectées -->
+      <section id="anomalies" aria-label="Anomalies détectées">
+        <h2>
+          <svg class="section-icon" xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="24" height="24"><circle cx="12" cy="12" r="10"/><path d="M8 12h8"/></svg>
+          Anomalies détectées (Ces sections seront complétées prochainement)
+        </h2>
+        <article class="card-custom" tabindex="0" aria-label="Automatisation des tests avec RobotFramework">
+        </article>
+        <!-- Ajoute ici un tableau ou une liste de tes anomalies si besoin -->
+      </section>
+
+      <!-- Tests automatisés -->
+      <section id="tests-auto" aria-label="Tests automatisés">
+        <h2>
+          <svg class="section-icon" xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="24" height="24"><circle cx="12" cy="12" r="10"/><path d="M8 12h8"/></svg>
+          Tests automatisés (Ces sections seront complétées prochainement)
+        </h2>
+        
+      </section>
+
+      <!-- Livrables produits -->
+      <section id="livrables" aria-label="Livrables produits">
+        <h2>
+          <svg class="section-icon" xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="24" height="24"><circle cx="12" cy="12" r="10"/><path d="M8 12h8"/></svg>
+          Livrables produits (Ces sections seront complétées prochainement)
+        </h2>
+        <ul class="modern-list">
+          <li>Cas de tests rédigés</li>
+          <li>Scripts automatisés</li>
+          <li>Rapport de défauts</li>
+          <li>Rapport de test</li>
+        </ul>
+      </section>
+    </main>
+  </div>
+  <footer>
+      © 2025 Maxime JOANNIS - Tous droits réservés.
+      <a href="#">Politique de confidentialité</a>
+    </footer>
+</body>
+</html>
