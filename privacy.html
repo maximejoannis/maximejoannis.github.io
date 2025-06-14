@@ -73,7 +73,7 @@
 
   <h2>1. Statistiques de visites</h2>
   <p>
-    Ce site utilise <strong>GoatCounter</strong> (ou Plausible Analytics), un outil d’analyse web respectueux de la vie privée. Cet outil permet de connaître le nombre de visites sur les pages, les navigateurs utilisés et le pays approximatif des visiteurs.
+    Ce site utilise <strong>GoatCounter</strong> un outil d’analyse web respectueux de la vie privée. Cet outil permet de connaître le nombre de visites sur les pages, les navigateurs utilisés et le pays approximatif des visiteurs.
     <br>
     Aucune information personnelle identifiable (comme l’adresse IP complète ou les cookies) n’est collectée.
   </p>
@@ -83,7 +83,7 @@
 
   <h2>3. Hébergement</h2>
   <p>
-    Ce site est hébergé sur <strong>Netlify</strong> et/ou <strong>GitHub Pages</strong>. Ces plateformes peuvent stocker des données techniques anonymes pour assurer le bon fonctionnement du service (ex. : journalisation d’erreurs, adresse IP partielle).
+    Ce site est hébergé sur <strong>Netlify</strong> et <strong>GitHub</strong>.
   </p>
 
   <h2>4. Contact</h2>
@@ -91,5 +91,20 @@
   <footer>
     Dernière mise à jour : 14 juin 2025
   </footer>
+  
+   <!-- Stats-->
+  <script>
+    var t = setInterval(function() {
+        if (window.goatcounter && window.goatcounter.visit_count) {
+            clearInterval(t)
+            window.goatcounter.visit_count({append: 'body'})
+        }
+    }, 100)
+</script>
+  
+  <script data-goatcounter="https://maximejoannis.goatcounter.com/count"
+        async src="//gc.zgo.at/count.js">
+  </script>
+  
 </body>
 </html>
