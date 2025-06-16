@@ -202,6 +202,64 @@
         font-size: 0.93rem;
       }
     }
+	.modal {
+  display: none;
+  position: fixed;
+  z-index: 1000;
+  padding-top: 80px;
+  left: 0; top: 0;
+  width: 100%; height: 100%;
+  overflow: auto;
+  background-color: rgba(0,0,0,0.6);
+}
+
+.modal-content {
+  background-color: #fff;
+  margin: auto;
+  padding: 2rem;
+  border-radius: 12px;
+  width: 90%;
+  max-width: 700px;
+  box-shadow: var(--shadow);
+  position: relative;
+}
+
+.close-btn {
+  position: absolute;
+  top: 1rem;
+  right: 1.2rem;
+  font-size: 1.5rem;
+  color: #aaa;
+  cursor: pointer;
+}
+
+.close-btn:hover {
+  color: #000;
+}
+
+.open-modal-btn {
+  background-color: var(--accent);
+  color: white;
+  border: none;
+  padding: 0.7em 1.2em;
+  border-radius: 8px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  box-shadow: 0 4px 12px rgba(23, 195, 178, 0.3);
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.open-modal-btn:hover,
+.open-modal-btn:focus {
+  background-color: #13a89f;
+  transform: translateY(-2px);
+  outline: none;
+}
+
+.open-modal-btn:active {
+  transform: scale(0.98);
+}
   </style>
   <!-- Mermaid.js CDN -->
   <script type="module">
@@ -245,16 +303,19 @@
       <!-- Mon périmètre de test -->
       <section id="perimetre" aria-label="Mon périmètre de test">
         <h2>
-          <svg class="section-icon" xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="24" height="24"><circle cx="12" cy="12" r="10"/><path d="M8 12h8"/></svg>
           Mon périmètre de test
         </h2>
         <article class="card-custom" tabindex="0" aria-label="Automatisation des tests avec RobotFramework">
-          <h3 class="project-title">Exigences à tester</h3>
+          <h3 class="project-title">Exigence à tester</h3> 
           <ul class="modern-list">
-            <li>Génération automatique d’un constat de conformité / non-conformité</li>
-			<li>Génération automatique d’une action de remédiation</li>
-        	<li>Adaptation des suggestions générées via des mots-clés</li>
+            <li><button class="open-modal-btn" data-modal="modal0">Détail de l'exigence</button></li>
           </ul>
+		  <h3 class="project-title">Critères d'acceptations</h3>
+		   <ul class="modern-list">
+			<li><button class="open-modal-btn" data-modal="modal1">Génération depuis un point de contrôle</button></li>
+			<li><button class="open-modal-btn" data-modal="modal2">Génération directe depuis une exigence (champ de saisie)</button></li>
+			<li><button class="open-modal-btn" data-modal="modal3">Génération d’actions de remédiation à partir d’une non-conformité</button></li>
+		   </ul>
         </article>
        
       </section>
@@ -312,6 +373,93 @@
   <script data-goatcounter="https://maximejoannis.goatcounter.com/count"
         async src="//gc.zgo.at/count.js">
   </script>
+  
+  <!-- Modals -->
+  <div id="modal0" class="modal">
+  <div class="modal-content">
+    <span class="close-btn">&times;</span>
+    <h2>Génération des constats d’audit</h2>
+    <p>
+      <strong>En tant qu’auditeur en mission</strong>, je veux m’appuyer sur un <strong>utilitaire d’audit intelligent</strong> pour dérouler les principales étapes de ma mission (<em>questionnement, constats, conformité, écarts, actions</em>), afin de réaliser un audit structuré, réactif et piloté par les exigences du système audité, tout en bénéficiant d’une <strong>assistance contextuelle de l’IA</strong>.
+    </p>
+  </div>
+</div>
+
+<div id="modal1" class="modal">
+<div class="modal-content">
+  <span class="close-btn">&times;</span>
+  <h2>Détail - Génération depuis un point de contrôle</h2>
+  <p>
+    Lorsqu’un point de contrôle est marqué comme <strong>Conforme</strong> ou <strong>Non conforme</strong>, un texte est automatiquement généré et proposé à l’utilisateur. Ce texte :
+  </p>
+  <ul class="modern-list">
+    <li>Est généré dynamiquement en fonction du statut choisi (Conforme ou Non conforme)</li>
+    <li>Peut être <strong>modifié manuellement</strong> par l’utilisateur dans la zone de texte dédiée</li>
+    <li>Peut être orienté à l’aide de <strong>mots-clés spécifiques</strong> (exemple : “sécurité”, “documentation”, “performance”...)</li>
+    <li>Peut être validé par l’utilisateur en appuyant sur <strong>Entrée</strong> ou en cliquant sur le bouton <strong>"Ajouter"</strong></li>
+  </ul>
+  <p>
+    Cette fonctionnalité permet de générer rapidement des constats d’audit pertinents et personnalisables selon le contexte de chaque point de contrôle.
+  </p>
+</div>
+</div>
+
+<div id="modal2" class="modal">
+  <div class="modal-content">
+    <span class="close-btn">&times;</span>
+    <h2>Détail - Génération du constat (Conformité ou Écart)</h2>
+    <p>
+      Lorsqu’un utilisateur saisit un mot-clé dans le champ de constat de conformité ou d’écart, un texte est <strong>automatiquement généré</strong>. 
+      Ce texte peut être orienté selon les mots-clés saisis, et reste entièrement <strong>modifiable</strong>.
+    </p>
+    <p>
+      L’utilisateur peut <strong>ajouter</strong> ce texte au constat en cliquant sur le bouton <strong>"Ajouter"</strong> ou en appuyant sur la touche <strong>Entrée</strong>.
+    </p>
+    <p>
+      Ce système permet de <strong>gagner du temps</strong> tout en conservant une <strong>souplesse complète</strong> pour la rédaction des constats.
+    </p>
+  </div>
+</div>
+
+<div id="modal3" class="modal">
+  <div class="modal-content">
+    <span class="close-btn">&times;</span>
+    <h2>Détail - Génération des actions de remédiation</h2>
+    <p>
+      Lorsqu’une <strong>non-conformité</strong> est ajoutée, des actions de remédiation sont <strong>générées automatiquement</strong> dans la zone dédiée.
+      Ces actions sont <strong>orientées via les mots-clés</strong> saisis, et peuvent être ajustées ou complétées librement par l’utilisateur.
+    </p>
+    <p>
+      L’ajout des actions générées peut se faire en cliquant sur <strong>"Ajouter"</strong> ou en appuyant sur la touche <strong>Entrée</strong>.
+    </p>
+    <p>
+      L’objectif est de proposer une base de travail <strong>cohérente, rapide et personnalisable</strong> pour traiter efficacement les non-conformités.
+    </p>
+  </div>
+</div>
+
+
+<script>
+  document.querySelectorAll('.open-modal-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const modal = document.getElementById(btn.dataset.modal);
+      if (modal) modal.style.display = 'block';
+    });
+  });
+
+  document.querySelectorAll('.close-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      btn.closest('.modal').style.display = 'none';
+    });
+  });
+
+  window.addEventListener('click', e => {
+    document.querySelectorAll('.modal').forEach(modal => {
+      if (e.target === modal) modal.style.display = 'none';
+    });
+  });
+</script>
+
   
 </body>
 </html>
