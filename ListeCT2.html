@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Liste des tests</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat:400,700&display=swap">
+    <style>
+        :root {
+            --main-bg: #f4f7fa;
+            --accent: #17c3b2;
+            --text-dark: #222;
+            --text-light: #fff;
+            --card-bg: #fff;
+            --shadow: 0 8px 24px rgba(33,45,64,0.08);
+            --transition: 0.3s cubic-bezier(.77,0,.18,1);
+        }
+        body {
+            font-family: 'Montserrat', Arial, sans-serif;
+            background: linear-gradient(120deg, #e0eafc 0%, #cfdef3 100%);
+            color: var(--text-dark);
+            min-height: 100vh;
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            margin: 20px auto;
+            padding: 20px;
+            max-width: 1200px;
+            background: var(--card-bg);
+            border-radius: 16px;
+            box-shadow: var(--shadow);
+        }
+        h1 {
+            text-align: center;
+            color: var(--accent);
+            margin-bottom: 20px;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+        th, td {
+            padding: 10px;
+            text-align: left;
+            border: 1px solid #ddd;
+        }
+        th {
+            background-color: var(--accent);
+            color: var(--text-light);
+        }
+        tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+        tr:hover {
+            background-color: #e0eafc;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Liste des tests</h1>
+        <table>
+            <thead>
+                <tr>
+                    <th>Clé</th>
+                    <th>Résumé</th>
+                    <th>Type de Test</th>
+                    <th>État</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>AA-117</td>
+                    <td>TC3.2.10 – Suppression ou édition d’un constat généré</td>
+                    <td>Manuel</td>
+                    <td>Backlog</td>
+                </tr>
+                <tr>
+                    <td>AA-116</td>
+                    <td>TC3.2.9 – Enchaînement de plusieurs constats générés</td>
+                    <td>Manuel</td>
+                    <td>Backlog</td>
+                </tr>
+                <tr>
+                    <td>AA-115</td>
+                    <td>TC3.2.8 – Réinitialisation du champ de saisie</td>
+                    <td>Manuel</td>
+                    <td>Backlog</td>
+                </tr>
+                <tr>
+                    <td>AA-114</td>
+                    <td>TC3.2.7 – Modification manuelle de la suggestion générée</td>
+                    <td>Manuel</td>
+                    <td>Backlog</td>
+                </tr>
+                <tr>
+                    <td>AA-113</td>
+                    <td>TC3.2.5 – Ajout du constat avec "Ajouter"</td>
+                    <td>Manuel</td>
+                    <td>Backlog</td>
+                </tr>
+                <tr>
+                    <td>AA-112</td>
+                    <td>TC3.2.4 – Mot-clé inconnu → suggestion générique</td>
+                    <td>Manuel</td>
+                    <td>Backlog</td>
+                </tr>
+                <tr>
+                    <td>AA-111</td>
+                    <td>TC3.2.3 – Aucun mot-clé saisi → aucun texte généré</td>
+                    <td>Manuel</td>
+                    <td>Backlog</td>
+                </tr>
+                <tr>
+                    <td>AA-110</td>
+                    <td>TC3.2.2 – Vérification de la pertinence de la suggestion générée</td>
+                    <td>Manuel</td>
+                    <td>Backlog</td>
+                </tr>
+                <tr>
+                    <td>AA-109</td>
+                    <td>TC3.2.1 – Génération d’un constat à partir d’un mot-clé saisi</td>
+                    <td>Manuel</td>
+                    <td>Backlog</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+	<!-- Stats-->
+  <script>
+    var t = setInterval(function() {
+        if (window.goatcounter && window.goatcounter.visit_count) {
+            clearInterval(t)
+            window.goatcounter.visit_count({append: 'body'})
+        }
+    }, 100)
+</script>
+  
+  <script data-goatcounter="https://maximejoannis.goatcounter.com/count"
+        async src="//gc.zgo.at/count.js">
+  </script>
+</body>
+</html>
