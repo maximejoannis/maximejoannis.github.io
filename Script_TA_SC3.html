@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Script Robot Framework - Confirmation Réservation</title>
+  <style>
+    /* Global Styles */
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: #f4f5f7;
+      color: #333;
+      line-height: 1.6;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 40px auto;
+      padding: 20px;
+      background: #fff;
+      border-radius: 10px;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    }
+
+    h1, h2, h3 {
+      color: #1d3557;
+    }
+
+    h1 {
+      text-align: center;
+      font-size: 28px;
+      margin-bottom: 20px;
+    }
+
+    h2 {
+      margin-top: 30px;
+      font-size: 22px;
+      border-bottom: 2px solid #17c3b2;
+      padding-bottom: 5px;
+    }
+
+    h3 {
+      margin-top: 20px;
+      font-size: 18px;
+      color: #227c9d;
+    }
+
+    pre {
+      background-color: #f4f5f7;
+      padding: 15px;
+      border-left: 4px solid #17c3b2;
+      border-radius: 5px;
+      overflow-x: auto;
+      font-family: 'Courier New', Courier, monospace;
+      color: #333;
+      margin-bottom: 20px;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 20px 0;
+      font-size: 14px;
+    }
+
+    table thead {
+      background-color: #17c3b2;
+      color: #fff;
+    }
+
+    table th, table td {
+      text-align: left;
+      padding: 12px;
+      border: 1px solid #ddd;
+    }
+
+    table tbody tr:nth-child(even) {
+      background-color: #f9f9f9;
+    }
+
+    table tbody tr:hover {
+      background-color: #e6f7f5;
+    }
+
+    .section {
+      margin-bottom: 30px;
+    }
+
+    .highlight {
+      background-color: #e8f9f5;
+      padding: 15px;
+      border-left: 4px solid #17c3b2;
+      border-radius: 5px;
+      margin: 15px 0;
+    }
+	/* Pour les écrans de taille normale (tablettes et ordinateurs) */
+        .box {
+            background-color: lightblue;
+            padding: 20px;
+            margin: 10px;
+            flex: 1;
+            box-sizing: border-box;
+        }
+
+        /* Media query pour les petits écrans (téléphones) */
+        @media (max-width: 600px) {
+            .content {
+                flex-direction: column;
+            }
+            .box {
+                margin: 5px;
+                padding: 10px;
+            }
+        }
+
+        /* Media query pour les tablettes (écrans entre 601px et 1024px) */
+        @media (min-width: 601px) and (max-width: 1024px) {
+            .content {
+                flex-direction: row;
+                justify-content: space-around;
+            }
+        }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Script Robot Framework - Confirmation Réservation</h1>
+
+    <!-- Settings Section -->
+    <div class="section">
+      <h2>Paramètres</h2>
+      <pre>
+*** Settings ***
+Library    SeleniumLibrary
+      </pre>
+    </div>
+
+    <!-- Variables Section -->
+    <div class="section">
+      <h2>Variables</h2>
+      <table>
+        <thead>
+          <tr>
+            <th>Nom</th>
+            <th>Valeur</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><code>${URL}</code></td>
+            <td>http://livraison3.testacademy.fr</td>
+          </tr>
+          <tr>
+            <td><code>${USERNAME}</code></td>
+            <td>name=username</td>
+          </tr>
+          <tr>
+            <td><code>${PASSWORD}</code></td>
+            <td>name=password</td>
+          </tr>
+          <tr>
+            <td><code>${VALID_USERNAME}</code></td>
+            <td>Hotetest</td>
+          </tr>
+          <tr>
+            <td><code>${VALID_PASSWORD}</code></td>
+            <td>test</td>
+          </tr>
+          <tr>
+            <td><code>${CONNEXION_BUTTON}</code></td>
+            <td>css=.homey_login_button</td>
+          </tr>
+          <tr>
+            <td><code>${RESERVATION_LINK}</code></td>
+            <td>xpath=(//a[contains(text(),'Réservations')])[3]</td>
+          </tr>
+          <tr>
+            <td><code>${ROWS_XPATH}</code></td>
+            <td>xpath=//table[@id='reservations']/tr</td>
+          </tr>
+          <tr>
+            <td><code>${STATUS_XPATH}</code></td>
+            <td>xpath=td[1]/span[contains(@class, 'label-secondary')]</td>
+          </tr>
+          <tr>
+            <td><code>${RESERVATION_7375}</code></td>
+            <td>xpath=//a[@href='http://livraison3.testacademy.fr/index.php/reservations/?reservation_detail=7375']</td>
+          </tr>
+          <tr>
+            <td><code>${CONFIRMATION_BTN}</code></td>
+            <td>xpath=//section[@id='body-area']/div[3]/aside/button</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- Keywords Section -->
+    <div class="section">
+      <h2>Mots-Clés</h2>
+      <pre>
+*** Keywords ***
+Ouvrir Le Navigateur
+  Open Browser    ${URL}    Chrome
+  Maximize Browser Window
+
+Se Connecter
+  Click Element    xpath=//a[contains(text(),'Se connecter')]
+  Wait Until Element Is Visible    ${USERNAME}    10s
+  Input Text    ${USERNAME}    ${VALID_USERNAME}
+  Input Text    ${PASSWORD}    ${VALID_PASSWORD}
+  Click Element    ${CONNEXION_BUTTON}
+
+Aller Sur Reservation
+  Wait Until Element Is Visible    ${RESERVATION_LINK}    10s
+  Click Element    ${RESERVATION_LINK}
+
+Confirmer La Réservation
+  Wait Until Element Is Visible    ${RESERVATION_7375}    10s
+  Click Element    ${RESERVATION_7375}
+  Wait Until Element Is Visible    ${CONFIRMATION_BTN}    10s
+  Click Element    ${CONFIRMATION_BTN}
+      </pre>
+    </div>
+
+    <!-- Test Cases Section -->
+    <div class="section">
+      <h2>Cas de Test</h2>
+      <pre>
+*** Test Cases ***
+Test Réservation
+  Ouvrir Le Navigateur
+  Se Connecter
+  Aller Sur Reservation
+  Confirmer La Réservation
+      </pre>
+    </div>
+
+    <!-- Additional Information Section -->
+    <div class="section">
+      <h2>Informations Supplémentaires</h2>
+      <p>Ce script Robot Framework exécute les étapes suivantes :</p>
+      <ul>
+        <li>Ouvre le navigateur et maximise la fenêtre.</li>
+        <li>Se connecte à l'application avec des identifiants valides.</li>
+        <li>Accède à la page des réservations.</li>
+        <li>Confirme une réservation spécifique en interagissant avec les éléments de l'interface.</li>
+      </ul>
+    </div>
+  </div>
+</body>
+</html>

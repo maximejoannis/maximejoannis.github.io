@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Rapport de Défaut</title>
+  <style>
+    /* Global Styles */
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: #f4f5f7;
+      color: #333;
+      line-height: 1.6;
+    }
+
+    .container {
+      max-width: 1100px;
+      margin: 40px auto;
+      padding: 20px;
+      background: #fff;
+      border-radius: 10px;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    }
+
+    h1, h2, h3 {
+      color: #1d3557;
+    }
+
+    h1 {
+      text-align: center;
+      font-size: 28px;
+      margin-bottom: 20px;
+    }
+
+    h2 {
+      margin-top: 30px;
+      font-size: 22px;
+      border-bottom: 2px solid #17c3b2;
+      padding-bottom: 5px;
+    }
+
+    p, ul {
+      margin: 10px 0;
+    }
+
+    ul {
+      padding-left: 20px;
+    }
+
+    ul li {
+      margin-bottom: 8px;
+    }
+
+    .highlight {
+      background-color: #e8f9f5;
+      padding: 15px;
+      border-left: 4px solid #17c3b2;
+      border-radius: 5px;
+      margin: 15px 0;
+    }
+
+    /* Table Styles */
+    .table-container {
+      margin-top: 20px;
+      overflow-x: auto;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 20px 0;
+      font-size: 14px;
+    }
+
+    table thead {
+      background-color: #17c3b2;
+      color: #fff;
+    }
+
+    table th, table td {
+      text-align: left;
+      padding: 12px;
+      border: 1px solid #ddd;
+    }
+
+    table tbody tr:nth-child(even) {
+      background-color: #f9f9f9;
+    }
+
+    table tbody tr:hover {
+      background-color: #e6f7f5;
+    }
+
+    /* Comment Section */
+    .comment-section {
+      margin-top: 30px;
+      padding: 15px;
+      background: #f9f9f9;
+      border-radius: 5px;
+      border: 1px solid #ddd;
+    }
+
+    .comment {
+      margin-bottom: 15px;
+      padding: 15px;
+      border: 1px solid #ddd;
+      border-radius: 5px;
+      background: #fff;
+    }
+
+    .comment-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 10px;
+    }
+
+    .comment-header strong {
+      font-size: 16px;
+      color: #1d3557;
+    }
+
+    .comment-header span {
+      font-size: 14px;
+      color: #666;
+    }
+
+    .comment-body {
+      font-size: 14px;
+      color: #333;
+    }
+
+    /* Button Styles */
+    .btn {
+      display: inline-block;
+      padding: 10px 15px;
+      background-color: #227c9d;
+      color: #fff;
+      text-decoration: none;
+      border-radius: 5px;
+      font-size: 14px;
+      transition: background-color 0.3s ease;
+    }
+
+    .btn:hover {
+      background-color: #17c3b2;
+    }
+
+    /* Header Section */
+    .header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 20px;
+    }
+
+    .header .status {
+      padding: 5px 10px;
+      background-color: #17c3b2;
+      color: #fff;
+      border-radius: 5px;
+      font-size: 14px;
+    }
+
+    /* Icon Styles */
+    .icon {
+      margin-right: 8px;
+      color: #17c3b2;
+    }
+	/* ===========================
+       8. Responsive Design
+    ============================ */
+    /* Pour les écrans de taille normale (tablettes et ordinateurs) */
+        .box {
+            background-color: lightblue;
+            padding: 20px;
+            margin: 10px;
+            flex: 1;
+            box-sizing: border-box;
+        }
+
+        /* Media query pour les petits écrans (téléphones) */
+        @media (max-width: 600px) {
+            .content {
+                flex-direction: column;
+            }
+            .box {
+                margin: 5px;
+                padding: 10px;
+            }
+        }
+
+        /* Media query pour les tablettes (écrans entre 601px et 1024px) */
+        @media (min-width: 601px) and (max-width: 1024px) {
+            .content {
+                flex-direction: row;
+                justify-content: space-around;
+            }
+        }
+
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="header">
+      <h1><span class="icon">🔘</span> Le bouton "Appliquer une remise" n'est pas visible</h1>
+      <span class="status">Ouvert</span>
+    </div>
+
+    <div class="section">
+      <h2>Description</h2>
+      <p><strong>Résumé :</strong> Le bouton "Appliquer une remise" n'est pas entièrement visible lors du traitement de la demande de réservation. Seule une petite portion du bouton est visible, rendant son utilisation impossible.</p>
+    </div>
+
+    <div class="section">
+      <h2>Scénario</h2>
+      <p>Étant donné que l'utilisateur est en train de traiter une demande de réservation,</p>
+      <p>Quand il souhaite appliquer une remise en cliquant sur le bouton correspondant,</p>
+      <p>Alors le bouton devrait être entièrement visible et utilisable.</p>
+    </div>
+
+    <div class="section">
+      <h2>Comportement observé</h2>
+      <ul>
+        <li><span class="icon">❌</span> Le bouton "Appliquer une remise" n'est pas entièrement visible.</li>
+        <li><span class="icon">⚠️</span> Une petite portion du bouton est visible, mais il est inutilisable.</li>
+        <li><span class="icon">📉</span> Cela empêche l'utilisateur d'appliquer une remise correctement.</li>
+      </ul>
+    </div>
+
+    <div class="section">
+      <h2>Impact</h2>
+      <ul>
+        <li><span class="icon">⚠️</span> Les remises ne peuvent pas être appliquées, ce qui affecte directement les transactions.</li>
+        <li><span class="icon">📉</span> Dégradation de l'expérience utilisateur pour les hôtes et les voyageurs.</li>
+      </ul>
+    </div>
+
+    <div class="section">
+      <h2>Cas de test impactés</h2>
+      <div class="table-container">
+        <table>
+          <thead>
+            <tr>
+              <th>#</th>
+              <th>Description</th>
+              <th>État</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>PFF-22</td>
+              <td>L'hôte applique une remise</td>
+              <td>Échoué</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="section comment-section">
+      <h2>Commentaires</h2>
+      <div class="comment">
+        <div class="comment-header">
+          <strong>Maxime JOANNIS</strong>
+          <span>il y a 3 heures</span>
+        </div>
+        <div class="comment-body">
+          Ce problème empêche les hôtes d'appliquer des remises sur les demandes de réservation. Cela peut entraîner des erreurs de facturation et des frustrations pour les utilisateurs. Une correction rapide est nécessaire pour garantir la fonctionnalité.
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

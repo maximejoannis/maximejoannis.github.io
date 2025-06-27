@@ -81,15 +81,15 @@
     content: "✔️";
     font-size: 1.1em;
   }
-  .status-warning {
-    color: #f57c00;
+   .status-failure {
+    color: #c62828;
     font-weight: 700;
     display: flex;
     align-items: center;
     gap: 6px;
   }
-  .status-warning::before {
-    content: "⚠️";
+  .status-failure::before {
+    content: "❌";
     font-size: 1.1em;
   }
   /* Responsive */
@@ -137,18 +137,50 @@
       border-bottom: none;
     }
     .status-success::before,
+	.status-failure::before,
     .status-warning::before {
       content: none;
     }
   }
+  /* ===========================
+       8. Responsive Design
+    ============================ */
+    /* Pour les écrans de taille normale (tablettes et ordinateurs) */
+        .box {
+            background-color: lightblue;
+            padding: 20px;
+            margin: 10px;
+            flex: 1;
+            box-sizing: border-box;
+        }
+
+        /* Media query pour les petits écrans (téléphones) */
+        @media (max-width: 600px) {
+            .content {
+                flex-direction: column;
+            }
+            .box {
+                margin: 5px;
+                padding: 10px;
+            }
+        }
+
+        /* Media query pour les tablettes (écrans entre 601px et 1024px) */
+        @media (min-width: 601px) and (max-width: 1024px) {
+            .content {
+                flex-direction: row;
+                justify-content: space-around;
+            }
+        }
+
 </style>
 
 <h1>Rapport d'exécution des cas de test</h1>
 
 <section class="summary" aria-label="Résumé de l'exécution">
   <div>Total des cas de test : <span>9</span></div>
-  <div>Cas de test réussis : <span>9</span></div>
-  <div>Cas de test avec bug mineur : <span>1</span></div>
+  <div>Cas de test réussis : <span>8</span></div>
+  <div>Cas de test échoués : <span>1</span></div>
 </section>
 
 <section aria-label="Détails des cas de test">
@@ -211,7 +243,7 @@
         <td data-label="Étapes">1. L'hôte clique sur 'Faire une remise'<br>2. Il ajoute un ou plusieurs remises avec nom et valeur<br>3. Il valide</td>
         <td data-label="Résultats attendus">Les remises sont appliquées au total de la réservation</td>
         <td data-label="Postcondition">La remise est affichée dans la réservation</td>
-        <td data-label="Statut"><span class="status-warning">Bug mineur</span></td>
+        <td data-label="Statut"><span class="status-failure">Bug majeur</span></td>
       </tr>
       <tr>
         <td data-label="ID">CT6</td>
@@ -255,5 +287,5 @@
 
 <section aria-label="Notes sur les bugs connus" style="margin-top: 2rem;">
   <h2>Bugs connus</h2>
-  <p>Un bug mineur a été détecté : le bouton "Appliquer une remise" n'est pas visible lors du traitement de la demande de réservation. On ne voit qu'une petite portion du bouton. Il faut agrandir la page pour voir le bouton.</p>
+  <p>Un bug majeur a été détecté : le bouton "Appliquer une remise" n'est pas visible lors du traitement de la demande de réservation. On ne voit qu'une petite portion du bouton.</p>
 </section>

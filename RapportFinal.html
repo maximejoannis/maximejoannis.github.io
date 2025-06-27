@@ -1,372 +1,247 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Rapport de test complet - 23 cas - Style Jira/Xray Moderne</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Rapport de Test</title>
   <style>
-    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap');
+    /* Global Styles */
     body {
-      font-family: 'Inter', sans-serif;
-      margin: 2rem;
-      background-color: #f9fafb;
-      color: #1a2e4a;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: #f4f5f7;
+      color: #333;
+      line-height: 1.6;
     }
+
+    .container {
+      max-width: 1200px;
+      margin: 40px auto;
+      padding: 20px;
+      background: #fff;
+      border-radius: 10px;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    }
+
     h1, h2 {
-      color: #1e3a8a;
+      color: #1d3557;
     }
-    .summary {
-      display: flex;
-      gap: 2rem;
-      margin-bottom: 2rem;
-      flex-wrap: wrap;
-    }
-    .summary-item {
-      background: #3a6df0;
-      color: white;
-      padding: 1.2rem 2rem;
-      border-radius: 12px;
-      box-shadow: 0 4px 15px rgba(58, 109, 240, 0.3);
-      flex: 1 1 150px;
+
+    h1 {
       text-align: center;
+      font-size: 28px;
+      margin-bottom: 20px;
     }
-    .summary-item h3 {
-      margin: 0;
-      font-size: 1.8rem;
-      font-weight: 700;
+
+    h2 {
+      margin-top: 30px;
+      font-size: 22px;
+      border-bottom: 2px solid #17c3b2;
+      padding-bottom: 5px;
     }
-    .summary-item p {
-      margin: 0;
-      font-size: 1rem;
-      opacity: 0.85;
-    }
+
     .charts {
       display: flex;
-      gap: 3rem;
       flex-wrap: wrap;
-      margin-bottom: 3rem;
+      justify-content: space-between;
+      margin-top: 20px;
     }
-    .chart-container {
-      background: white;
-      padding: 1rem;
-      border-radius: 12px;
-      box-shadow: 0 8px 20px rgba(58, 109, 240, 0.15);
-      flex: 1 1 350px;
+
+    .chart {
+      flex: 1 1 calc(50% - 20px);
+      margin: 10px;
+      padding: 20px;
+      background: #f9f9f9;
+      border-radius: 10px;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+      text-align: center;
     }
+
+    canvas {
+      max-width: 90%; /* Reduced size */
+      height: auto;
+    }
+
+    /* Table Styles */
     table {
       width: 100%;
-      border-collapse: separate;
-      border-spacing: 0;
-      box-shadow: 0 8px 20px rgba(58, 109, 240, 0.15);
-      border-radius: 12px;
-      overflow: hidden;
-      background-color: white;
+      border-collapse: collapse;
+      margin: 20px 0;
       font-size: 14px;
     }
-    thead {
-      background: linear-gradient(90deg, #1e3a8a, #3a6df0);
-      color: #e0e9ff;
-      font-weight: 700;
+
+    table th, table td {
       text-align: left;
+      padding: 12px;
+      border: 1px solid #ddd;
     }
-    thead th {
-      padding: 14px 18px;
-      border-right: 1px solid rgba(255,255,255,0.3);
-      user-select: none;
+
+    table thead {
+      background-color: #17c3b2;
+      color: #fff;
     }
-    thead th:last-child {
-      border-right: none;
+
+    table tbody tr:nth-child(even) {
+      background-color: #f9f9f9;
     }
-    tbody tr {
-      background-color: #f5f9ff;
-      transition: background-color 0.3s ease, transform 0.2s ease;
-      cursor: default;
+
+    table tbody tr:hover {
+      background-color: #e6f7f5;
     }
-    tbody tr:nth-child(even) {
-      background-color: #e9f0ff;
-    }
-    tbody tr:hover {
-      background-color: #d0dfff;
-      transform: translateY(-2px);
-      box-shadow: 0 6px 15px rgba(58, 109, 240, 0.25);
-    }
-    tbody td {
-      padding: 14px 18px;
-      vertical-align: top;
-      white-space: pre-wrap;
-      line-height: 1.4;
-      border-right: 1px solid #cbd5e1;
-    }
-    tbody td:last-child {
-      border-right: none;
-    }
-    .status-success {
-      color: #2e7d32;
-      font-weight: 700;
-      display: flex;
-      align-items: center;
-      gap: 6px;
-    }
-    .status-success::before {
-      content: "✔️";
-      font-size: 1.1em;
-    }
-    .status-failure {
-      color: #c62828;
-      font-weight: 700;
-      display: flex;
-      align-items: center;
-      gap: 6px;
-    }
-    .status-failure::before {
-      content: "❌";
-      font-size: 1.1em;
-    }
-    /* Responsive */
-    @media (max-width: 768px) {
-      .summary {
-        flex-direction: column;
-        gap: 1rem;
-      }
-      .charts {
-        flex-direction: column;
-      }
-      table, thead, tbody, th, td, tr {
-        display: block;
-      }
-      thead tr {
-        position: absolute;
-        top: -9999px;
-        left: -9999px;
-      }
-      tbody tr {
-        margin-bottom: 1rem;
-        box-shadow: 0 6px 15px rgba(58, 109, 240, 0.15);
-        border-radius: 12px;
-        background-color: #f5f9ff;
-        transform: none !important;
-      }
-      tbody tr:hover {
-        background-color: #f5f9ff !important;
-        box-shadow: 0 6px 15px rgba(58, 109, 240, 0.15) !important;
-        transform: none !important;
-      }
-      tbody td {
-        border: none;
-        border-bottom: 1px solid #cbd5e1;
-        position: relative;
-        padding-left: 50%;
-        text-align: left;
-        white-space: normal;
-      }
-      tbody td::before {
-        position: absolute;
-        top: 14px;
-        left: 18px;
-        width: 45%;
-        padding-right: 10px;
-        white-space: nowrap;
-        font-weight: 700;
-        color: #1e40af;
-        content: attr(data-label);
-      }
-      tbody td:last-child {
-        border-bottom: none;
-      }
-    }
+	/* ===========================
+       8. Responsive Design
+    ============================ */
+    /* Pour les écrans de taille normale (tablettes et ordinateurs) */
+        .box {
+            background-color: lightblue;
+            padding: 20px;
+            margin: 10px;
+            flex: 1;
+            box-sizing: border-box;
+        }
+
+        /* Media query pour les petits écrans (téléphones) */
+        @media (max-width: 600px) {
+            .content {
+                flex-direction: column;
+            }
+            .box {
+                margin: 5px;
+                padding: 10px;
+            }
+        }
+
+        /* Media query pour les tablettes (écrans entre 601px et 1024px) */
+        @media (min-width: 601px) and (max-width: 1024px) {
+            .content {
+                flex-direction: row;
+                justify-content: space-around;
+            }
+        }
+
   </style>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 <body>
-  <h1>Rapport de test - Fonctionnalités & User Stories</h1>
+  <div class="container">
+    <h1>Rapport de Test</h1>
 
-  <!-- Résumé global -->
-  <section aria-label="Résumé global des tests" class="summary" role="region">
-    <div class="summary-item" role="article" aria-label="Nombre total de cas de test">
-      <h3 id="total-tests">23</h3>
-      <p>Total des cas de test</p>
-    </div>
-    <div class="summary-item" role="article" aria-label="Nombre de cas réussis">
-      <h3 id="passed-tests">19</h3>
-      <p>Cas réussis</p>
-    </div>
-    <div class="summary-item" role="article" aria-label="Nombre de cas échoués">
-      <h3 id="failed-tests">4</h3>
-      <p>Cas échoués</p>
-    </div>
-    <div class="summary-item" role="article" aria-label="Pourcentage de réussite">
-      <h3 id="pass-rate">82.6%</h3>
-      <p>Taux de réussite</p>
-    </div>
-  </section>
-
-  <!-- Graphiques -->
-  <section aria-label="Graphiques de synthèse" class="charts" role="region">
-    <div class="chart-container" aria-label="Diagramme en camembert des statuts">
-      <canvas id="pieChart" role="img" aria-describedby="pieChartDesc"></canvas>
-      <p id="pieChartDesc" class="sr-only">Diagramme circulaire montrant la répartition des cas réussis et échoués</p>
-    </div>
-    <div class="chart-container" aria-label="Histogramme des cas par statut">
-      <canvas id="barChart" role="img" aria-describedby="barChartDesc"></canvas>
-      <p id="barChartDesc" class="sr-only">Histogramme montrant le nombre de cas par statut</p>
-    </div>
-  </section>
-
-  <!-- Tableau global -->
-  <section aria-label="Tableau détaillé des cas de test" role="region">
+    <h2>Résumé des Tests</h2>
     <table>
       <thead>
         <tr>
-          <th scope="col">ID</th>
-          <th scope="col">User Story</th>
-          <th scope="col">Titre du test</th>
-          <th scope="col">Statut</th>
-          <th scope="col">Commentaires</th>
+          <th>Story</th>
+          <th>Total Tests</th>
+          <th>Tests Réussis</th>
+          <th>Tests Échoués</th>
+          <th>Taux de Réussite</th>
         </tr>
       </thead>
-      <tbody id="testCasesBody">
-        <!-- Les lignes seront injectées par JS -->
+      <tbody>
+        <tr>
+          <td>Story 1</td>
+          <td>14</td>
+          <td>11</td>
+          <td>3</td>
+          <td>78.57%</td>
+        </tr>
+        <tr>
+          <td>Story 2</td>
+          <td>9</td>
+          <td>8</td>
+          <td>1</td>
+          <td>88.89%</td>
+        </tr>
       </tbody>
     </table>
-  </section>
 
-  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <h2>Diagrammes</h2>
+    <div class="charts">
+      <!-- Pie Chart -->
+      <div class="chart">
+        <h3>Story 1 - Répartition des Tests</h3>
+        <canvas id="pieChartStory1"></canvas>
+      </div>
+      <div class="chart">
+        <h3>Story 2 - Répartition des Tests</h3>
+        <canvas id="pieChartStory2"></canvas>
+      </div>
+      <!-- Bar Chart -->
+      <div class="chart">
+        <h3>Comparaison des Tests</h3>
+        <canvas id="barChart"></canvas>
+      </div>
+    </div>
+  </div>
+
   <script>
-    // Données extraites des fichiers fournis (14 CT UserStory1 + 9 CT UserStory2)
-    const testCases = [
-      // User Story 1 - 14 cas
-      { id: "CT-001", userStory: "User Story 1", title: "Demande de réservation par un Voyageur connecté", status: "Réussi", comments: "" },
-      { id: "CT-002", userStory: "User Story 1", title: "Tentative de réservation par un utilisateur non connecté", status: "Réussi", comments: "" },
-      { id: "CT-003", userStory: "User Story 1", title: "Sélection de dates valides", status: "Réussi", comments: "Bug : calendrier figé dans ce formulaire, réservation possible via un autre formulaire." },
-      { id: "CT-004", userStory: "User Story 1", title: "Date de début dans le passé", status: "Réussi", comments: "Bug : calendrier figé dans ce formulaire, réservation possible via un autre formulaire." },
-      { id: "CT-005", userStory: "User Story 1", title: "Date de fin avant la date de début", status: "Réussi", comments: "Bug : calendrier figé dans ce formulaire, réservation possible via un autre formulaire." },
-      { id: "CT-006", userStory: "User Story 1", title: "Sélection d'une période déjà réservée", status: "Réussi", comments: "" },
-      { id: "CT-007", userStory: "User Story 1", title: "Saisie d'un nombre valide de voyageurs", status: "Réussi", comments: "" },
-      { id: "CT-008", userStory: "User Story 1", title: "Validation des champs obligatoires", status: "Réussi", comments: "" },
-      { id: "CT-009", userStory: "User Story 1", title: "Annulation d'une demande", status: "Réussi", comments: "" },
-      { id: "CT-010", userStory: "User Story 1", title: "Notification à l’hôte lors d’une nouvelle demande", status: "Réussi", comments: "" },
-      { id: "CT-011", userStory: "User Story 1", title: "Modification d'une demande en attente", status: "Réussi", comments: "" },
-      { id: "CT-012", userStory: "User Story 1", title: "Refus d'une demande par l’hôte", status: "Échoué", comments: "" },
-      { id: "CT-013", userStory: "User Story 1", title: "Acceptation d'une demande par l’hôte", status: "Réussi", comments: "" },
-      { id: "CT-014", userStory: "User Story 1", title: "Consultation de l’historique des demandes", status: "Échoué", comments: "" },
-
-      // User Story 2 - 9 cas
-      { id: "CT-201", userStory: "User Story 2", title: "Réception d'une nouvelle demande de réservation", status: "Réussi", comments: "" },
-      { id: "CT-202", userStory: "User Story 2", title: "L'hôte confirme une demande de réservation", status: "Réussi", comments: "" },
-      { id: "CT-203", userStory: "User Story 2", title: "L'hôte refuse une demande de réservation", status: "Réussi", comments: "" },
-      { id: "CT-204", userStory: "User Story 2", title: "L'hôte ajoute des frais supplémentaires", status: "Réussi", comments: "" },
-      { id: "CT-205", userStory: "User Story 2", title: "L'hôte modifie une demande en attente", status: "Réussi", comments: "" },
-      { id: "CT-206", userStory: "User Story 2", title: "L'hôte annule une demande", status: "Réussi", comments: "" },
-      { id: "CT-207", userStory: "User Story 2", title: "Notification au voyageur lors de la confirmation", status: "Réussi", comments: "" },
-      { id: "CT-208", userStory: "User Story 2", title: "Gestion des erreurs lors de la validation", status: "Échoué", comments: "Message d'erreur attendu non affiché" },
-      { id: "CT-209", userStory: "User Story 2", title: "Consultation de l'historique des demandes", status: "Réussi", comments: "" }
-    ];
-
-    // Calculs
-    const totalTests = testCases.length;
-    const passedTests = testCases.filter(t => t.status === "Réussi").length;
-    const failedTests = testCases.filter(t => t.status === "Échoué").length;
-    const passRate = ((passedTests / totalTests) * 100).toFixed(1);
-
-    // Mise à jour résumé
-    document.getElementById('total-tests').textContent = totalTests;
-    document.getElementById('passed-tests').textContent = passedTests;
-    document.getElementById('failed-tests').textContent = failedTests;
-    document.getElementById('pass-rate').textContent = passRate + '%';
-
-    // Injection des lignes dans le tableau
-    const tbody = document.getElementById('testCasesBody');
-    testCases.forEach(tc => {
-      const tr = document.createElement('tr');
-
-      const tdId = document.createElement('td');
-      tdId.setAttribute('data-label', 'ID');
-      tdId.textContent = tc.id;
-      tr.appendChild(tdId);
-
-      const tdUS = document.createElement('td');
-      tdUS.setAttribute('data-label', 'User Story');
-      tdUS.textContent = tc.userStory;
-      tr.appendChild(tdUS);
-
-      const tdTitle = document.createElement('td');
-      tdTitle.setAttribute('data-label', 'Titre du test');
-      tdTitle.textContent = tc.title;
-      tr.appendChild(tdTitle);
-
-      const tdStatus = document.createElement('td');
-      tdStatus.setAttribute('data-label', 'Statut');
-      tdStatus.textContent = tc.status;
-      tdStatus.className = tc.status === "Réussi" ? "status-success" : "status-failure";
-      tr.appendChild(tdStatus);
-
-      const tdComments = document.createElement('td');
-      tdComments.setAttribute('data-label', 'Commentaires');
-      tdComments.textContent = tc.comments;
-      tr.appendChild(tdComments);
-
-      tbody.appendChild(tr);
+    // Pie Chart for Story 1
+    const pieChartStory1 = new Chart(document.getElementById('pieChartStory1'), {
+      type: 'pie',
+      data: {
+        labels: ['Réussis', 'Échoués'],
+        datasets: [{
+          data: [11, 3],
+          backgroundColor: ['#4caf50', '#f44336'],
+          borderWidth: 1
+        }]
+      },
+      options: {
+        responsive: true,
+        plugins: {
+          legend: { position: 'bottom' }
+        }
+      }
     });
 
-    // Données pour graphiques
-    const pieData = {
-      labels: ['Réussi', 'Échoué'],
-      datasets: [{
-        data: [passedTests, failedTests],
-        backgroundColor: ['#2e7d32', '#c62828'],
-        hoverOffset: 30
-      }]
-    };
-
-    const barData = {
-      labels: ['Réussi', 'Échoué'],
-      datasets: [{
-        label: 'Nombre de cas',
-        data: [passedTests, failedTests],
-        backgroundColor: ['#3a6df0', '#f44336']
-      }]
-    };
-
-    // Options graphiques
-    const pieOptions = {
-      responsive: true,
-      plugins: {
-        legend: {
-          position: 'bottom',
-          labels: { font: { size: 14 } }
-        },
-        tooltip: { enabled: true }
-      }
-    };
-
-    const barOptions = {
-      responsive: true,
-      scales: {
-        y: {
-          beginAtZero: true,
-          ticks: { stepSize: 1 }
-        }
+    // Pie Chart for Story 2
+    const pieChartStory2 = new Chart(document.getElementById('pieChartStory2'), {
+      type: 'pie',
+      data: {
+        labels: ['Réussis', 'Échoués'],
+        datasets: [{
+          data: [8, 1],
+          backgroundColor: ['#4caf50', '#f44336'],
+          borderWidth: 1
+        }]
       },
-      plugins: {
-        legend: { display: false },
-        tooltip: { enabled: true }
+      options: {
+        responsive: true,
+        plugins: {
+          legend: { position: 'bottom' }
+        }
       }
-    };
+    });
 
-    // Création des graphiques
-    window.addEventListener('DOMContentLoaded', () => {
-      const pieCtx = document.getElementById('pieChart').getContext('2d');
-      new Chart(pieCtx, {
-        type: 'pie',
-        data: pieData,
-        options: pieOptions
-      });
-
-      const barCtx = document.getElementById('barChart').getContext('2d');
-      new Chart(barCtx, {
-        type: 'bar',
-        data: barData,
-        options: barOptions
-      });
+    // Bar Chart for Comparison
+    const barChart = new Chart(document.getElementById('barChart'), {
+      type: 'bar',
+      data: {
+        labels: ['Story 1', 'Story 2'],
+        datasets: [
+          {
+            label: 'Réussis',
+            data: [11, 8],
+            backgroundColor: '#4caf50'
+          },
+          {
+            label: 'Échoués',
+            data: [3, 1],
+            backgroundColor: '#f44336'
+          }
+        ]
+      },
+      options: {
+        responsive: true,
+        plugins: {
+          legend: { position: 'top' }
+        },
+        scales: {
+          x: { stacked: true },
+          y: { stacked: true }
+        }
+      }
     });
   </script>
 </body>

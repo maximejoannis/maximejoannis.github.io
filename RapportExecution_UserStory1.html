@@ -141,6 +141,37 @@
       content: none;
     }
   }
+  /* ===========================
+       8. Responsive Design
+    ============================ */
+   /* Pour les écrans de taille normale (tablettes et ordinateurs) */
+        .box {
+            background-color: lightblue;
+            padding: 20px;
+            margin: 10px;
+            flex: 1;
+            box-sizing: border-box;
+        }
+
+        /* Media query pour les petits écrans (téléphones) */
+        @media (max-width: 600px) {
+            .content {
+                flex-direction: column;
+            }
+            .box {
+                margin: 5px;
+                padding: 10px;
+            }
+        }
+
+        /* Media query pour les tablettes (écrans entre 601px et 1024px) */
+        @media (min-width: 601px) and (max-width: 1024px) {
+            .content {
+                flex-direction: row;
+                justify-content: space-around;
+            }
+        }
+
 </style>
 
 <h1>Rapport d'exécution des cas de test</h1>
@@ -300,6 +331,6 @@
 
 <section aria-label="Notes sur les bugs connus" style="margin-top: 2rem;">
   <h2>Bugs connus</h2>
-  <p>Un bug a été détecté sur un des formulaires de réservation du site : le calendrier se fige une fois ouvert et ne se referme pas, obligeant à recharger la page. Ce problème impacte la validation des cas de test liés à la sélection des dates (CT-003, CT-004, CT-005).</p>
-   <p>Un bug a été détecté: L'hôte ne reçoit aucun message suite à une demande de réservation éffectuée. Ce problème impacte la validation des cas de test suivants : CT-010, CT-012, CT-014.</p>
+  <p>Un bug mineur a été détecté sur un des formulaires de réservation du site : le calendrier se fige une fois ouvert et ne se referme pas, obligeant à recharger la page.</p>
+   <p>Un bug majeur a été détecté: L'hôte ne reçoit aucun message suite à une demande de réservation éffectuée. Ce problème impacte la validation des cas de test suivants : CT-010, CT-012, CT-014.</p>
 </section>

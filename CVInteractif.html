@@ -331,32 +331,33 @@
       font-size: 1.05em;
       color: #222;
     }
-    @media (max-width: 1000px) {
-      .cv-container {
-        padding: 1.2rem 0.4rem;
-      }
-      .cv-row {
-        flex-direction: column;
-        gap: 1.5rem;
-      }
-      .cv-col, .cv-col.center, .cv-col.right {
-        max-width: 100%;
-      }
-    }
-    @media (max-width: 700px) {
-      .cv-header h1 {
-        font-size: 1.4rem;
-      }
-      .cv-header p {
-        font-size: 1rem;
-      }
-      .cv-card {
-        padding: 1rem 0.5rem;
-      }
-      .modal-content {
-        padding: 1.1rem 0.4rem 1.1rem 0.9rem;
-      }
-    }
+    /* Pour les écrans de taille normale (tablettes et ordinateurs) */
+        .box {
+            background-color: lightblue;
+            padding: 20px;
+            margin: 10px;
+            flex: 1;
+            box-sizing: border-box;
+        }
+
+        /* Media query pour les petits écrans (téléphones) */
+        @media (max-width: 600px) {
+            .content {
+                flex-direction: column;
+            }
+            .box {
+                margin: 5px;
+                padding: 10px;
+            }
+        }
+
+        /* Media query pour les tablettes (écrans entre 601px et 1024px) */
+        @media (min-width: 601px) and (max-width: 1024px) {
+            .content {
+                flex-direction: row;
+                justify-content: space-around;
+            }
+        }
     a:focus, button:focus {
       outline: var(--focus-outline) !important;
       outline-offset: 1px;
@@ -397,11 +398,6 @@
 <body>
   <div class="cv-container">
     <a href="index.html#cv" class="back-to-portfolio"><i class="fas fa-arrow-left"></i> Retour au portfolio</a>
-	<div class="cv-download">
-  <a href="Maxime_JOANNIS_CV_Testeur_QA.pdf" class="download-cv-btn" download>
-    <i class="fas fa-download"></i> Télécharger le CV en PDF
-  </a>
-</div>
 	
     <div class="cv-header">
       <h1>Maxime Joannis</h1>

@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Script Robot Framework</title>
+  <style>
+    /* Global Styles */
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: #f4f5f7;
+      color: #333;
+      line-height: 1.6;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 40px auto;
+      padding: 20px;
+      background: #fff;
+      border-radius: 10px;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    }
+
+    h1, h2, h3 {
+      color: #1d3557;
+    }
+
+    h1 {
+      text-align: center;
+      font-size: 28px;
+      margin-bottom: 20px;
+    }
+
+    h2 {
+      margin-top: 30px;
+      font-size: 22px;
+      border-bottom: 2px solid #17c3b2;
+      padding-bottom: 5px;
+    }
+
+    h3 {
+      margin-top: 20px;
+      font-size: 18px;
+      color: #227c9d;
+    }
+
+    p, ul {
+      margin: 10px 0;
+    }
+
+    ul {
+      padding-left: 20px;
+    }
+
+    ul li {
+      margin-bottom: 8px;
+    }
+
+    code {
+      background-color: #e8f9f5;
+      padding: 2px 5px;
+      border-radius: 4px;
+      font-family: 'Courier New', Courier, monospace;
+      color: #1d3557;
+    }
+
+    pre {
+      background-color: #f4f5f7;
+      padding: 15px;
+      border-left: 4px solid #17c3b2;
+      border-radius: 5px;
+      overflow-x: auto;
+      font-family: 'Courier New', Courier, monospace;
+      color: #333;
+      margin-bottom: 20px;
+    }
+
+    /* Table Styles */
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 20px 0;
+      font-size: 14px;
+    }
+
+    table thead {
+      background-color: #17c3b2;
+      color: #fff;
+    }
+
+    table th, table td {
+      text-align: left;
+      padding: 12px;
+      border: 1px solid #ddd;
+    }
+
+    table tbody tr:nth-child(even) {
+      background-color: #f9f9f9;
+    }
+
+    table tbody tr:hover {
+      background-color: #e6f7f5;
+    }
+
+    .section {
+      margin-bottom: 30px;
+    }
+
+    .highlight {
+      background-color: #e8f9f5;
+      padding: 15px;
+      border-left: 4px solid #17c3b2;
+      border-radius: 5px;
+      margin: 15px 0;
+    }
+	/* Pour les écrans de taille normale (tablettes et ordinateurs) */
+        .box {
+            background-color: lightblue;
+            padding: 20px;
+            margin: 10px;
+            flex: 1;
+            box-sizing: border-box;
+        }
+
+        /* Media query pour les petits écrans (téléphones) */
+        @media (max-width: 600px) {
+            .content {
+                flex-direction: column;
+            }
+            .box {
+                margin: 5px;
+                padding: 10px;
+            }
+        }
+
+        /* Media query pour les tablettes (écrans entre 601px et 1024px) */
+        @media (min-width: 601px) and (max-width: 1024px) {
+            .content {
+                flex-direction: row;
+                justify-content: space-around;
+            }
+        }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Script Robot Framework</h1>
+
+    <!-- Settings Section -->
+    <div class="section">
+      <h2>Paramètres</h2>
+      <pre>
+*** Settings ***
+Library    SeleniumLibrary
+      </pre>
+    </div>
+
+    <!-- Variables Section -->
+    <div class="section">
+      <h2>Variables</h2>
+      <table>
+        <thead>
+          <tr>
+            <th>Nom</th>
+            <th>Valeur</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><code>${URL}</code></td>
+            <td>http://livraison3.testacademy.fr</td>
+          </tr>
+          <tr>
+            <td><code>${BROWSER}</code></td>
+            <td>chrome</td>
+          </tr>
+          <tr>
+            <td><code>${USER_EMAIL}</code></td>
+            <td>mjoan</td>
+          </tr>
+          <tr>
+            <td><code>${USER_PASSWORD}</code></td>
+            <td>rt</td>
+          </tr>
+          <tr>
+            <td><code>${LOCATOR_BTN_ACCUEIL}</code></td>
+            <td>xpath=//header[@id='homey_nav_sticky']/div/div/div/a/img</td>
+          </tr>
+          <tr>
+            <td><code>${LOCATOR_BTN_CHERCHER}</code></td>
+            <td>xpath=//button[@type='submit']</td>
+          </tr>
+          <tr>
+            <td><code>${LOCATOR_INPUT_RECHERCHE}</code></td>
+            <td>xpath=//input[@type='text']</td>
+          </tr>
+          <tr>
+            <td><code>${LOCATOR_LIEN_STUDIO}</code></td>
+            <td>css=.table-block > .title-head-left a</td>
+          </tr>
+          <tr>
+            <td><code>${LOCATOR_BTN_RESERVATION}</code></td>
+            <td>xpath=//button[@id='request_for_reservation']</td>
+          </tr>
+          <!-- Add more variables as needed -->
+        </tbody>
+      </table>
+    </div>
+
+    <!-- Test Cases Section -->
+    <div class="section">
+      <h2>Cas de Test</h2>
+      <pre>
+*** Test Cases ***
+Faire Une Demande De Réservation En Tant Qu'Utilisateur Connecté
+  Ouvrir Navigateur Et Accéder Au Site
+  Se Connecter Avec Identifiants    ${USER_EMAIL}    ${USER_PASSWORD}
+  Cliquer sur le menu Accueil
+  Chercher une offre de réservation
+  Effectuer la demande de réservation
+      </pre>
+    </div>
+
+    <!-- Keywords Section -->
+    <div class="section">
+      <h2>Mots-Clés</h2>
+      <h3>Ouvrir Navigateur Et Accéder Au Site</h3>
+      <pre>
+Ouvrir Navigateur Et Accéder Au Site
+  Open Browser    ${URL}    ${BROWSER}
+  Maximize Browser Window
+  Set Selenium Implicit Wait    10s
+      </pre>
+
+      <h3>Se Connecter Avec Identifiants</h3>
+      <pre>
+Se Connecter Avec Identifiants
+  [Arguments]    ${username}    ${password}
+  Click Element    xpath=//a[contains(text(),'Se connecter')]
+  Input Text       name=username    ${username}
+  Input Text       name=password    ${password}
+  Click Element    css=.homey_login_button
+      </pre>
+
+      <h3>Chercher une offre de réservation</h3>
+      <pre>
+Chercher une offre de réservation
+  Wait Until Element Is Visible  ${LOCATOR_BTN_CHERCHER}  timeout=10s
+  Click Element  ${LOCATOR_BTN_CHERCHER}
+  Wait Until Element Is Visible  ${LOCATOR_BTN_SECTION}  timeout=10s
+  Click Element  ${LOCATOR_BTN_SECTION}
+  Wait Until Element Is Visible  ${LOCATOR_INPUT_RECHERCHE}  timeout=10s
+  Input Text  ${LOCATOR_INPUT_RECHERCHE}   text=San Francisco
+  Input Text  ${LOCATOR_INPUT_ARRIVEE}     text=2025-05-20
+  Input Text  ${LOCATOR_INPUT_DEPART}      text=2025-05-25
+  Press Key  ${LOCATOR_INPUT_RECHERCHE}    \\13
+  Click Element  ${LOCATOR_BTN_RECHERCHE_FINAL}
+      </pre>
+
+      <h3>Effectuer la demande de réservation</h3>
+      <pre>
+Effectuer la demande de réservation
+  Wait Until Element Is Visible  ${LOCATOR_LIEN_STUDIO}  timeout=10s
+  Scroll Element Into View  ${LOCATOR_LIEN_STUDIO}
+  Click Element  ${LOCATOR_LIEN_STUDIO}
+  Wait Until Element Is Visible  ${LOCATOR_BTN_RESERVATION}  timeout=10s
+  Click Element  ${LOCATOR_BTN_RESERVATION}
+      </pre>
+    </div>
+  </div>
+</body>
+</html>
