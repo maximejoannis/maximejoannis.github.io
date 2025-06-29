@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Présentation du Projet Homey</title>
+	
 	<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat:400,700&display=swap">
     <style>
@@ -30,13 +31,13 @@
         ============================ */
         .sidebar {
             width: 250px;
-            background-color: #1d3557; /* Bleu foncé */
+            background-color: #1d3557;
             color: #ecf0f1;
             padding: 20px;
             display: flex;
             flex-direction: column;
             align-items: flex-start;
-            gap: 20px;
+            gap: 15px;
             position: fixed;
             top: 0;
             bottom: 0;
@@ -463,7 +464,7 @@
 		<a href="#synthese">Vue d'ensemble du projet jira Homey</a>
         <a href="#livrables">Livrables produits</a>
         <a href="#note-finale">Note finale du jury</a>
-        <a href="#retours">Sprint Retrospective</a>
+        <a href="#sprintretro">Sprint Retrospective</a>
     </div>
 
     <!-- Main Content -->
@@ -965,7 +966,7 @@
     </section>
 	</section>
 	
-	<section id="retours">
+	<section id="sprintretro">
 	<h1>Sprint Retrospective</h1>
 	<p>Des sprints retrospective auraient dû être realisés à la fin de chaque sprint. Finalement, il y en a eu un seul qui a été réalisé à la fin du projet.</p>
 	<h2>Points Forts : </h2>
@@ -1144,20 +1145,6 @@
             barConfig
         );
     </script>
-	
-	<!-- Stats sur le nombre de visites -->
-  <script>
-    var t = setInterval(function() {
-        if (window.goatcounter && window.goatcounter.visit_count) {
-            clearInterval(t)
-            window.goatcounter.visit_count({append: 'body'})
-        }
-    }, 100)
-  </script>
-
-  <script data-goatcounter="https://maximejoannis.goatcounter.com/count"
-          async src="//gc.zgo.at/count.js">
-  </script>
 	
 </body>
 </html>
