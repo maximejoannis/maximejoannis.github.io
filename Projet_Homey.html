@@ -80,6 +80,7 @@
             display: flex;
             flex-direction: column;
             gap: 20px;
+			padding-bottom: 80px; 
         }
 
         .main-content h1 {
@@ -340,11 +341,14 @@
            4. Footer
         ============================ */
         footer {
-            background-color: #1d3557;
-            color: #ecf0f1;
-            text-align: center;
-            padding: 20px;
-            margin-top: auto;
+			position: fixed; /* Fixe le footer */
+			bottom: 0;       /* Colle le footer en bas de la fenêtre */
+			left: 0;         /* Colle le footer à gauche */
+			width: 100%;     /* Le footer prend toute la largeur de la fenêtre */
+			background-color: #1d3557; /* Couleur de fond */
+			color: #ecf0f1;  /* Couleur du texte */
+			text-align: center; /* Centrage du texte */
+			padding: 20px;   /
         }
 
         footer p {
@@ -408,77 +412,33 @@
         }
 		
         /* ===========================
-           6. Responsive Design
+           5. Responsive Design
         ============================ */
-        @media (max-width: 1024px) {
-            .sidebar {
-                width: 200px;
-            }
-
-            .main-content {
-                margin-left: 220px;
-                padding: 20px;
-            }
-
-            .sidebar h2 {
-                font-size: 1.3rem;
-            }
-
-            .sidebar p {
-                font-size: 0.9rem;
-            }
-
-            .nav-links a {
-                font-size: 0.9rem;
-            }
-			footer .citation {
-				 max-width: calc(75% - 20px); /* Réduit la largeur sur des écrans moyens */
-				 font-size: 0.85rem; /* Ajuste la taille de la police */
-			}		
+        /* Pour les écrans de taille normale (tablettes et ordinateurs) */
+        .box {
+            background-color: lightblue;
+            padding: 20px;
+            margin: 10px;
+            flex: 1;
+            box-sizing: border-box;
         }
 
-        @media (max-width: 768px) {
-            .sidebar {
-                position: relative;
-                width: 100%;
-                height: auto;
+        /* Media query pour les petits écrans (téléphones) */
+        @media (max-width: 600px) {
+            .content {
+                flex-direction: column;
+            }
+            .box {
+                margin: 5px;
                 padding: 10px;
             }
-
-            .sidebar img {
-                width: 70px;
-                height: 70px;
-            }
-
-            .main-content {
-                margin-left: 0;
-                padding: 20px;
-            }
-
-            footer .citation {
-                max-width: 90%; /* Prend presque toute la largeur sur des écrans plus petits */
-				font-size: 0.8rem; /* Réduit encore la taille de la police */
-
-            }
         }
 
-        @media (max-width: 480px) {
-            .sidebar h2 {
-                font-size: 1rem;
-            }
-
-            .sidebar p {
-                font-size: 0.8rem;
-            }
-
-            .nav-links a {
-                font-size: 0.8rem;
-                padding: 8px;
-            }
-
-            footer .citation {
-                max-width: calc(75% - 20px); /* Réduit la largeur sur des écrans moyens */
-				font-size: 0.85rem; /* Ajuste la taille de la police */
+        /* Media query pour les tablettes (écrans entre 601px et 1024px) */
+        @media (min-width: 601px) and (max-width: 1024px) {
+            .content {
+                flex-direction: row;
+                justify-content: space-around;
             }
         }
     </style>
