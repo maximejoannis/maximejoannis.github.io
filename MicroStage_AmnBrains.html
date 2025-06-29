@@ -1,0 +1,858 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Micro Stage AMN BRAINS</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat:400,700&display=swap">
+	<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        /* ===========================
+           1. Reset CSS
+        ============================ */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Montserrat', Arial, sans-serif;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+            background-color: #f4f5f7; /* Fond général gris clair */
+            color: #333;
+        }
+
+        /* ===========================
+           2. Sidebar
+        ============================ */
+        .sidebar {
+            width: 250px;
+            background-color: #1d3557; /* Bleu foncé */
+            color: #ecf0f1;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            gap: 20px;
+            position: fixed;
+            top: 0;
+            bottom: 0;
+            box-shadow: 2px 0 8px rgba(33, 45, 64, 0.1);
+        }
+
+        .sidebar h2 {
+            font-size: 1.5rem;
+            margin-bottom: 10px;
+        }
+
+        .sidebar a {
+            text-decoration: none;
+            color: #ecf0f1;
+            font-size: 1rem;
+            padding: 10px 15px;
+            border-radius: 5px;
+            transition: background 0.3s ease, transform 0.2s ease;
+        }
+
+        .sidebar a:hover {
+            background-color: #34495e;
+            transform: translateX(5px);
+        }
+		.intro {
+            background-color: #a8dadc; /* Bleu clair */
+            color: #1d3557;
+            padding: 20px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        /* ===========================
+           3. Main Content
+        ============================ */
+        .main-content {
+            margin-left: 270px;
+            flex: 1;
+            padding: 40px;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .main-content h1 {
+            font-size: 2rem;
+            margin-bottom: 20px;
+            color: #1d3557; /* Bleu foncé */
+			border-bottom: 2px solid #1d3557;
+        }
+
+        section {
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            margin-bottom: 20px;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        section:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 6px 10px rgba(0, 0, 0, 0.15);
+        }
+
+        section h2 {
+            font-size: 1.5rem;
+            margin-bottom: 10px;
+            color: #007BFF; /* Bleu vif */
+            border-bottom: 2px solid #007BFF;
+            padding-bottom: 5px;
+        }
+		section h3 {
+            font-size: 1.25rem;
+            color: #007BFF;
+            margin-bottom: 15px;
+            border-left: 4px solid #007BFF;
+            padding-left: 10px;
+            font-weight: 600;
+        }
+
+        section p {
+            font-size: 1rem;
+            line-height: 1.6;
+            margin-bottom: 15px;
+            color: #444;
+        }
+		
+		/* ===========================
+           4. Modern Table with Pagination
+        ============================ */
+        .modern-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        .modern-table th, .modern-table td {
+            text-align: left;
+            padding: 12px;
+            border-bottom: 1px solid #ddd;
+        }
+
+        .modern-table th {
+            background-color: #1d3557;
+            color: #ecf0f1;
+            font-weight: bold;
+        }
+
+        .modern-table tr:hover {
+            background-color: #f4f5f7;
+        }
+
+        .pagination {
+            display: flex;
+            justify-content: center;
+            margin-top: 20px;
+            gap: 10px;
+        }
+		
+		 /* ===========================
+           4. Modern Lists
+        ============================ */
+        .modern-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .modern-list li {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            background-color: #f9f9f9;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            padding: 15px;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .modern-list li:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 6px 10px rgba(0, 0, 0, 0.15);
+        }
+
+        .modern-list li i {
+            font-size: 1.5rem;
+            color: #007BFF; /* Bleu vif */
+        }
+
+        .modern-list li span {
+            font-size: 1rem;
+            color: #333;
+        }
+		
+		table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 20px;
+        }
+
+        table th, table td {
+            padding: 12px 15px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+
+        table th {
+            background-color: #1d3557;
+            color: #fff;
+            font-weight: 600;
+        }
+
+        table tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+
+        table tr:hover {
+            background-color: #f1f1f1;
+        }
+
+        .progress-bar-container {
+            background-color: #e0e0e0;
+            border-radius: 5px;
+            overflow: hidden;
+            width: 100%;
+            height: 16px;
+            margin-top: 5px;
+        }
+
+        .progress-bar {
+            height: 100%;
+            border-radius: 5px;
+            text-align: center;
+            line-height: 16px;
+            color: #fff;
+            font-size: 0.8rem;
+        }
+
+        .progress-bar.green {
+            background-color: #4caf50;
+        }
+
+        .progress-bar.orange {
+            background-color: #ff9800;
+        }
+
+        .progress-bar.red {
+            background-color: #f44336;
+        }
+
+        /* ===========================
+           4. Footer
+        ============================ */
+        footer {
+            background-color: #1d3557;
+            color: #ecf0f1;
+            text-align: center;
+            padding: 20px;
+            margin-top: auto;
+        }
+
+        footer p {
+            font-size: 1rem;
+        }
+
+        footer a {
+            color: #007BFF;
+            text-decoration: underline;
+        }
+
+        footer a:hover {
+            color: #ecf0f1;
+        }
+		footer .citation {
+            font-style: italic;
+			font-size: 0.9rem;
+			margin-bottom: 15px;
+			text-align: center; /* Centrage horizontal du texte */
+			margin: 0 auto; /* Centrage de l'élément */
+			max-width: calc(50% - 20px); /* Alignement avec la largeur des cards */
+        }
+		.charts-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 40px;
+        }
+
+        .chart {
+            width: 48%;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+		 /* ===========================
+           6. Responsive Design
+        ============================ */
+        @media (max-width: 1024px) {
+            .sidebar {
+                width: 200px;
+            }
+
+            .main-content {
+                margin-left: 220px;
+                padding: 20px;
+            }
+
+            .sidebar h2 {
+                font-size: 1.3rem;
+            }
+
+            .sidebar p {
+                font-size: 0.9rem;
+            }
+
+            .nav-links a {
+                font-size: 0.9rem;
+            }
+			footer .citation {
+				 max-width: calc(75% - 20px); /* Réduit la largeur sur des écrans moyens */
+				 font-size: 0.85rem; /* Ajuste la taille de la police */
+			}		
+        }
+
+        @media (max-width: 768px) {
+            .sidebar {
+                position: relative;
+                width: 100%;
+                height: auto;
+                padding: 10px;
+            }
+
+            .sidebar img {
+                width: 70px;
+                height: 70px;
+            }
+
+            .main-content {
+                margin-left: 0;
+                padding: 20px;
+            }
+
+            footer .citation {
+                max-width: 90%; /* Prend presque toute la largeur sur des écrans plus petits */
+				font-size: 0.8rem; /* Réduit encore la taille de la police */
+
+            }
+        }
+
+        @media (max-width: 480px) {
+            .sidebar h2 {
+                font-size: 1rem;
+            }
+
+            .sidebar p {
+                font-size: 0.8rem;
+            }
+
+            .nav-links a {
+                font-size: 0.8rem;
+                padding: 8px;
+            }
+
+            footer .citation {
+                max-width: calc(75% - 20px); /* Réduit la largeur sur des écrans moyens */
+				font-size: 0.85rem; /* Ajuste la taille de la police */
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Sidebar -->
+    <div class="sidebar">
+        <h2>Micro Stage AMN BRAINS</h2>
+		<a href="index.html">Retour à l'accueil</a>
+        <a href="#context">Présentation générale</a>
+        <a href="#perimetre">Mon périmètre de test</a>
+        <a href="#conception">Conception</a>
+        <a href="#execution">Exécution</a>
+        <a href="#livrables">Livrables produits</a>
+    </div>
+
+    <!-- Main Content -->
+    <div class="main-content">
+         <h1>Présentation du micro stage chez l'entreprise AMN BRAINS</h1>
+		
+		<!-- Introduction Section -->
+        <div class="intro">
+            <h2>Introduction</h2>
+            <p>Bienvenue sur mon micro stage chez AMN BRAINS ! Ce projet vise à mettre en pratique les connaissances acquises durant cette formation dans des situations réelles, permettant de combler encore plus l'écart entre la théorie et la réalité.</p>
+        </div>
+
+        <section id="context">
+            <h1>Présentation générale</h1>
+            <p>Le micro stage est un projet de test réel pour de véritables clients, m'offrant la possibilité d'aiguiser mes compétences dans des conditions authentiques et de renforcer ma confiance en mes capacités.
+               En retour, nos partenaires peuvent bénéficier de la découverte gratuite de défauts potentiellement non détectés jusqu'à présent ou renforcer leur confiance dans leurs logiciels. </p>
+			<h2>L'entreprise : Amn Brains</h2> 
+			<p>Amn Brains développe des solutions logicielles dans la Gouvernance de la Cybersécurité.</p>
+			<p>La complexité des systèmes d’information et la multiplication des techniques d’attaques conduisent généralement à des angles morts exploitables par les cyber attaquants. Leurs solutions sont conçues pour aider les professionnels de la cybersécurité (RSSI, Consultants, Auditeurs, Opérationnels) à combler ces difficultés en utilisant au maximum la puissance de la machine afin de leur permettre de se concentrer sur les aspects sur lesquels ils ont le plus de valeur ajoutée.</p>
+			<h2>Le logiciel à tester : Amn Auditor</h2> 
+			<p>AMN Auditor : Application Desktop de conduite d'Audit Multi-référentiel pour les auditeurs cybersécurité.</p>
+			<h2>Informations importantes </h2>
+			<p>Il n'y a pas de sprint sur ce projet. Il est géré par flux continu inspiré par la méthodologie KANBAN.</p>
+		</section>
+		
+		<section id="perimetre">
+		<h1>Mon périmètre de test</h1>
+		<h2>Exigence à tester </h2>
+	<table class="modern-table">
+        <tr>
+            <th>User story</th>
+            <th>Description</th>
+        </tr>
+        <tr>
+            <td>Génération des constats d’audit</td>
+            <td>En tant qu’auditeur en mission, je veux m’appuyer sur un utilitaire d’audit intelligent pour dérouler les principales étapes de ma mission (questionnement, constats, conformité, écarts, actions), afin de réaliser un audit structuré, réactif et piloté par les exigences du système audité, tout en bénéficiant d’une assistance contextuelle de l’IA.</td>
+        </tr>
+    </table>
+	<h2>Critères d'acceptations</h2>
+	<table class="modern-table">
+        <tr>
+            <th>Critères d'acceptations</th>
+            <th>Description</th>
+        </tr>
+        <tr>
+            <td>Génération depuis un point de contrôle</td>
+            <td>Lorsqu’un point de contrôle est marqué comme Conforme ou Non conforme, un texte est automatiquement généré et proposé à l’utilisateur. Ce texte :
+			<ul class="modern-list">
+                <li>
+                    <i>✔️</i>
+                    <span>Est généré dynamiquement en fonction du statut choisi (Conforme ou Non conforme)</span>
+                </li>
+                <li>
+                    <i>✔️</i>
+                    <span>Peut être modifié manuellement par l’utilisateur dans la zone de texte dédiée</span>
+                </li>
+				<li>
+                    <i>✔️</i>
+                    <span>Peut être orienté à l’aide de mots-clés spécifiques (exemple : “sécurité”, “documentation”, “performance”...)</span>
+                </li>
+                <li>
+                    <i>✔️</i>
+                    <span>Peut être validé par l’utilisateur en appuyant sur Entrée ou en cliquant sur le bouton "Ajouter"</span>
+                </li>
+			</ul> 
+			<p>Cette fonctionnalité permet de générer rapidement des constats d’audit pertinents et personnalisables selon le contexte de chaque point de contrôle.</p>
+			</td>
+        </tr>
+		 <tr>
+            <td>Génération du constat (Conformité ou Écart)</td>
+            <td>Lorsqu’un utilisateur saisit un mot-clé dans le champ de constat de conformité ou d’écart, un texte est automatiquement généré. Ce texte peut être orienté selon les mots-clés saisis, et reste entièrement modifiable.
+                L’utilisateur peut ajouter ce texte au constat en cliquant sur le bouton "Ajouter" ou en appuyant sur la touche Entrée. Ce système permet de gagner du temps tout en conservant une souplesse complète pour la rédaction des constats.
+			</td>
+        </tr>
+		<tr>
+            <td>Détail - Génération des actions de remédiation</td>
+            <td>Lorsqu’une non-conformité est ajoutée, des actions de remédiation sont générées automatiquement dans la zone dédiée. Ces actions sont orientées via les mots-clés saisis, et peuvent être ajustées ou complétées librement par l’utilisateur.
+                L’ajout des actions générées peut se faire en cliquant sur "Ajouter" ou en appuyant sur la touche Entrée.
+                L’objectif est de proposer une base de travail cohérente, rapide et personnalisable pour traiter efficacement les non-conformités.
+			</td>
+        </tr>
+    </table>
+		</section>
+		
+		<section id="conception">
+		<h1>Conception</h1>
+		<p>
+		<h2>Liste des cas de tests pour le critère d'acceptation : Génération depuis un point de contrôle</h2>
+		<table class="modern-table">
+        <tr>
+            <th>Clé</th>
+            <th>Résumé</th>
+			<th>Type de test</th>
+        </tr>
+         <tr>
+                    <td>AA-98</td>
+                    <td>TC3.1.1 – Génération d’un constat en cliquant sur "Conforme"</td>
+                    <td>Manuel</td>
+                   
+                </tr>
+                <tr>
+                    <td>AA-99</td>
+                    <td>TC3.1.2 – Génération d’un constat en cliquant sur "Non conforme"</td>
+                    <td>Manuel</td>
+                   
+                </tr>
+                <tr>
+                    <td>AA-100</td>
+                    <td>TC3.1.3 – Vérification de la cohérence entre point de contrôle et constat généré</td>
+                    <td>Manuel</td>
+                   
+                </tr>
+                <tr>
+                    <td>AA-101</td>
+                    <td>TC3.1.4 – Vérification de la zone de modification du constat généré</td>
+                    <td>Manuel</td>
+                   
+                </tr>
+                <tr>
+                    <td>AA-102</td>
+                    <td>TC3.1.5 – Orientation de la suggestion par mot-clé saisi</td>
+                    <td>Manuel</td>
+                   
+                </tr>
+                <tr>
+                    <td>AA-103</td>
+                    <td>TC3.1.6 – Suggestion générée sans mot-clé</td>
+                    <td>Manuel</td>
+                   
+                </tr>
+                <tr>
+                    <td>AA-104</td>
+                    <td>TC3.1.7 – Ajout du constat avec le bouton "Ajouter"</td>
+                    <td>Manuel</td>
+                   
+                </tr>
+                <tr>
+                    <td>AA-105</td>
+                    <td>TC3.1.8 – Ajout du constat avec la touche "Entrée"</td>
+                    <td>Manuel</td>
+                   
+                </tr>
+                <tr>
+                    <td>AA-106</td>
+                    <td>TC3.1.9 – Génération de plusieurs constats via plusieurs points de contrôle</td>
+                    <td>Manuel</td>
+                   
+                </tr>
+                <tr>
+                    <td>AA-107</td>
+                    <td>TC3.1.10 – Modification d’un constat après ajout</td>
+                    <td>Manuel</td>
+       
+                </tr>
+    </table>
+	<p>
+	<h2>Liste des cas de tests pour le critère d'acceptation : Génération du constat (Conformité ou Écart)</h2>
+	<table class="modern-table">
+        <tr>
+            <th>Clé</th>
+            <th>Résumé</th>
+			<th>Type de test</th>
+        </tr>
+         <tr>
+                    <td>AA-108</td>
+                    <td>TC3.2.1 – Génération d’un constat à partir d’un mot-clé saisi</td>
+                    <td>Manuel</td>
+                   
+                </tr>
+                <tr>
+                    <td>AA-109</td>
+                    <td>TC3.2.2 – Vérification de la pertinence de la suggestion générée</td>
+                    <td>Manuel</td>
+                   
+                </tr>
+                <tr>
+                    <td>AA-110</td>
+                    <td>TC3.2.3 – Aucun mot-clé saisi → aucun texte généré</td>
+                    <td>Manuel</td>
+                   
+                </tr>
+                <tr>
+                    <td>AA-111</td>
+                    <td>TC3.2.4 – Mot-clé inconnu → suggestion générique</td>
+                    <td>Manuel</td>
+                   
+                </tr>
+                <tr>
+                    <td>AA-112</td>
+                    <td>TC3.2.5 – Ajout du constat avec "Ajouter"</td>
+                    <td>Manuel</td>
+                   
+                </tr>
+                <tr>
+                    <td>AA-113</td>
+                    <td>TC3.2.6 – Ajout du constat avec "Entrée"</td>
+                    <td>Manuel</td>
+                   
+                </tr>
+                <tr>
+                    <td>AA-114</td>
+                    <td>TC3.2.7 – Modification manuelle de la suggestion générée</td>
+                    <td>Manuel</td>
+                   
+                </tr>
+                <tr>
+                    <td>AA-115</td>
+                    <td>TC3.2.8 – Réinitialisation du champ de saisie</td>
+                    <td>Manuel</td>
+                   
+                </tr>
+                <tr>
+                    <td>AA-116</td>
+                    <td>TC3.2.9 – Enchaînement de plusieurs constats générés</td>
+                    <td>Manuel</td>
+                   
+                </tr>
+                <tr>
+                    <td>AA-117</td>
+                    <td>TC3.2.10 – Suppression ou édition d’un constat généré</td>
+                    <td>Manuel</td>
+       
+                </tr>
+    </table>
+	<p>
+	<h2>Liste des cas de tests pour le critère d'acceptation : Génération des actions de remédiation</h2>
+	<table class="modern-table">
+        <tr>
+            <th>Clé</th>
+            <th>Résumé</th>
+			<th>Type de test</th>
+        </tr>
+         <tr>
+                    <td>AA-118</td>
+                    <td>TC3.3.1 – Activation de la zone d’action après ajout d’une non-conformité</td>
+                    <td>Manuel</td>
+                   
+                </tr>
+                <tr>
+                    <td>AA-119</td>
+                    <td>TC3.3.2 – Suggestion automatique d’action en cliquant dans le champ de saisie</td>
+                    <td>Manuel</td>
+                   
+                </tr>
+                <tr>
+                    <td>AA-120</td>
+                    <td>TC3.3.3 – Orientation de la suggestion via mot-clé</td>
+                    <td>Manuel</td>
+                   
+                </tr>
+                <tr>
+                    <td>AA-121</td>
+                    <td>TC3.3.4 – Génération d’une action sans mot-clé</td>
+                    <td>Manuel</td>
+                   
+                </tr>
+                <tr>
+                    <td>AA-122</td>
+                    <td>TC3.3.5 – Modification du texte généré avant ajout</td>
+                    <td>Manuel</td>
+                   
+                </tr>
+                <tr>
+                    <td>AA-123</td>
+                    <td>TC3.3.6 – Ajout de l’action via bouton "Ajouter"</td>
+                    <td>Manuel</td>
+                   
+                </tr>
+                <tr>
+                    <td>AA-124</td>
+                    <td>TC3.3.7 – Ajout de l’action via touche "Entrée"</td>
+                    <td>Manuel</td>
+                   
+                </tr>
+                <tr>
+                    <td>AA-125</td>
+                    <td>TC3.3.8 – Ajout de plusieurs actions à une non-conformité</td>
+                    <td>Manuel</td>
+                   
+                </tr>
+                <tr>
+                    <td>AA-126</td>
+                    <td>TC3.3.9 – Suppression ou édition d’une action générée</td>
+                    <td>Manuel</td>
+                   
+                </tr>
+                <tr>
+                    <td>AA-127</td>
+                    <td>TC3.3.10 – Relancer une suggestion après suppression d’une action</td>
+                    <td>Manuel</td>
+       
+                </tr>
+    </table>
+</section>
+
+	<section id="execution">
+	<h1>Exécution</h1>
+	<h2>Rapport de Couverture des Tests</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>Clé</th>
+                    <th>Résumé</th>
+                    <th>Nombre Total de Tests</th>
+                    <th>Réussi</th>
+                    <th>Échoué</th>
+                    <th>Autre</th>
+                    <th>Complétude</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>AA-64</td>
+                    <td>Générer les constats d'audit</td>
+                    <td>30</td>
+                    <td>23</td>
+                    <td>7</td>
+                    <td>0</td>
+                    <td>
+                        76.6%
+                        <div class="progress-bar-container">
+                            <div class="progress-bar orange" style="width: 76.6%;">76.6%</div>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td>AA-78</td>
+                    <td>EXIG-3.1 - Génération d'un constat depuis un point de contrôle</td>
+                    <td>10</td>
+                    <td>10</td>
+                    <td>0</td>
+                    <td>0</td>
+                    <td>
+                        100%
+                        <div class="progress-bar-container">
+                            <div class="progress-bar green" style="width: 100%;">100%</div>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td>AA-79</td>
+                    <td>EXIG-3.2 - Génération d'un constat depuis une exigence</td>
+                    <td>10</td>
+                    <td>6</td>
+                    <td>4</td>
+                    <td>0</td>
+                    <td>
+                        60%
+                        <div class="progress-bar-container">
+                            <div class="progress-bar red" style="width: 60%;">60%</div>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td>AA-80</td>
+                    <td>EXIG-3.3 - Génération d’une action corrective</td>
+                    <td>10</td>
+                    <td>7</td>
+                    <td>3</td>
+                    <td>0</td>
+                    <td>
+                        70%
+                        <div class="progress-bar-container">
+                            <div class="progress-bar orange" style="width: 70%;">70%</div>
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+		<h2>Vue d'ensemble du tableau Kanban AmnAuditor concernant mon périmètre de test</h2>
+		<div class="charts-container">
+            <div class="chart">
+                <canvas id="pieChart"></canvas>
+            </div>
+            <div class="chart">
+                <canvas id="barChart"></canvas>
+            </div>
+        </div>
+	</section>
+	
+	<section id="livrables">
+	<h1>Livrables produits (cette section sera complétée prochainement)</h1>
+	</section>
+	
+
+       
+    </div>
+
+    <!-- Footer -->
+    <footer>
+	<span class="citation">"N'abandonne jamais, car c'est souvent juste après le dernier effort que le succès se dévoile."</span>
+        <p>© 2025 Maxime Joannis - Tous droits réservés. <a href="privacy.html">Politique de confidentialité</a></p>
+    </footer>
+	
+<script>
+        // Données pour le camembert
+        const pieData = {
+            labels: ['Test', 'Test Exécution', 'Test Plan', 'Sous-tâche', 'Story'],
+            datasets: [{
+                label: 'Répartition des Tickets',
+                data: [30, 1, 1, 3, 1],
+                backgroundColor: ['#4caf50', '#ff9800', '#2196f3', '#f44336', '#9c27b0'],
+                hoverOffset: 4
+            }]
+        };
+
+        // Options pour le camembert
+        const pieOptions = {
+            responsive: true,
+            plugins: {
+                legend: {
+                    position: 'bottom'
+                }
+            }
+        };
+
+        // Création du camembert
+        const pieCtx = document.getElementById('pieChart').getContext('2d');
+        new Chart(pieCtx, {
+            type: 'pie',
+            data: pieData,
+            options: pieOptions
+        });
+
+        // Données pour l'histogramme
+        const barData = {
+            labels: ['Test', 'Test Exécution', 'Test Plan', 'Sous-tâche', 'Story'],
+            datasets: [{
+                label: 'Nombre de Tickets',
+                data: [30, 1, 1, 3, 1],
+                backgroundColor: ['#4caf50', '#ff9800', '#2196f3', '#f44336', '#9c27b0']
+            }]
+        };
+
+        // Options pour l'histogramme
+        const barOptions = {
+            responsive: true,
+            plugins: {
+                legend: {
+                    display: false
+                }
+            },
+            scales: {
+                y: {
+                    beginAtZero: true
+                }
+            }
+        };
+
+        // Création de l'histogramme
+        const barCtx = document.getElementById('barChart').getContext('2d');
+        new Chart(barCtx, {
+            type: 'bar',
+            data: barData,
+            options: barOptions
+        });
+    </script>
+	
+	<!-- Stats sur le nombre de visites -->
+  <script>
+    var t = setInterval(function() {
+        if (window.goatcounter && window.goatcounter.visit_count) {
+            clearInterval(t)
+            window.goatcounter.visit_count({append: 'body'})
+        }
+    }, 100)
+  </script>
+
+  <script data-goatcounter="https://maximejoannis.goatcounter.com/count"
+          async src="//gc.zgo.at/count.js">
+  </script>
+</body>
+</html>

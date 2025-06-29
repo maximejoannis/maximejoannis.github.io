@@ -1,0 +1,1203 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Présentation du Projet Homey</title>
+	<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat:400,700&display=swap">
+    <style>
+        /* ===========================
+           1. Reset CSS
+        ============================ */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Montserrat', Arial, sans-serif;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+            background-color: #f4f5f7; /* Fond général gris clair */
+            color: #333;
+        }
+
+        /* ===========================
+           2. Sidebar
+        ============================ */
+        .sidebar {
+            width: 250px;
+            background-color: #1d3557; /* Bleu foncé */
+            color: #ecf0f1;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            gap: 20px;
+            position: fixed;
+            top: 0;
+            bottom: 0;
+            box-shadow: 2px 0 8px rgba(33, 45, 64, 0.1);
+        }
+
+        .sidebar h2 {
+            font-size: 1.5rem;
+            margin-bottom: 10px;
+        }
+
+        .sidebar a {
+            text-decoration: none;
+            color: #ecf0f1;
+            font-size: 1rem;
+            padding: 10px 15px;
+            border-radius: 5px;
+            transition: background 0.3s ease, transform 0.2s ease;
+        }
+
+        .sidebar a:hover {
+            background-color: #34495e;
+            transform: translateX(5px);
+        }
+		.intro {
+            background-color: #a8dadc; /* Bleu clair */
+            color: #1d3557;
+            padding: 20px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        /* ===========================
+           3. Main Content
+        ============================ */
+        .main-content {
+            margin-left: 270px;
+            flex: 1;
+            padding: 40px;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .main-content h1 {
+            font-size: 2rem;
+            margin-bottom: 20px;
+            color: #1d3557; /* Bleu foncé */
+			border-bottom: 2px solid #1d3557;
+        }
+
+        section {
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            margin-bottom: 20px;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        section:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 6px 10px rgba(0, 0, 0, 0.15);
+        }
+
+        section h2 {
+            font-size: 1.5rem;
+            margin-bottom: 10px;
+            color: #007BFF; /* Bleu vif */
+            border-bottom: 2px solid #007BFF;
+            padding-bottom: 5px;
+        }
+		
+		section h3 {
+            font-size: 1.25rem;
+            color: #007BFF;
+            margin-bottom: 15px;
+            border-left: 4px solid #007BFF;
+            padding-left: 10px;
+            font-weight: 600;
+        }
+
+        section p {
+            font-size: 1rem;
+            line-height: 1.6;
+            margin-bottom: 15px;
+            color: #444;
+        }
+		
+		 /* ===========================
+           4. Modern Lists
+        ============================ */
+        .modern-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .modern-list li {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            background-color: #f9f9f9;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            padding: 15px;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .modern-list li:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 6px 10px rgba(0, 0, 0, 0.15);
+        }
+
+        .modern-list li i {
+            font-size: 1.5rem;
+            color: #007BFF; /* Bleu vif */
+        }
+
+        .modern-list li span {
+            font-size: 1rem;
+            color: #333;
+        }
+		
+		.btn {
+            display: inline-block;
+            margin-top: 1rem;
+            padding: 0.7rem 1.5rem;
+            font-size: 1rem;
+            color: #fff;
+            background-color: #007BFF;
+            border: none;
+            border-radius: 5px;
+            text-decoration: none;
+            transition: background-color 0.3s ease, transform 0.2s ease;
+        }
+
+        .btn:hover {
+            background-color: #0056b3;
+            transform: translateY(-3px);
+        }
+		
+		/* ===========================
+           4. Modern Table with Pagination
+        ============================ */
+        .modern-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        .modern-table th, .modern-table td {
+            text-align: left;
+            padding: 12px;
+            border-bottom: 1px solid #ddd;
+        }
+
+        .modern-table th {
+            background-color: #1d3557;
+            color: #ecf0f1;
+            font-weight: bold;
+        }
+
+        .modern-table tr:hover {
+            background-color: #f4f5f7;
+        }
+
+        .pagination {
+            display: flex;
+            justify-content: center;
+            margin-top: 20px;
+            gap: 10px;
+        }
+
+        .pagination button {
+            padding: 8px 12px;
+            border: none;
+            border-radius: 4px;
+            background-color: #007BFF;
+            color: #fff;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .pagination button:hover {
+            background-color: #0056b3;
+        }
+
+        .pagination button:disabled {
+            background-color: #ccc;
+            cursor: not-allowed;
+        }
+		
+		.calendar-container {
+            width: 100%;
+            max-width: 900px;
+            background: #ffffff;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            margin-top: 20px;
+        }
+        .calendar-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+        .calendar-header h2 {
+            font-size: 1.5rem;
+            color: #1d3557;
+        }
+        .calendar {
+            display: grid;
+            grid-template-columns: repeat(7, 1fr);
+            gap: 10px;
+        }
+        .day {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 10px;
+            border-radius: 4px;
+            text-align: center;
+            font-weight: bold;
+            background-color: #f4f5f7;
+            color: #333;
+        }
+        .day.sprint1 {
+            background-color: #2a9d8f;
+            color: #ffffff;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        .day.sprint2 {
+            background-color: #e76f51;
+            color: #ffffff;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        .day.sprint3 {
+            background-color: #457b9d;
+            color: #ffffff;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        .day.sprint4 {
+            background-color: #f4a261;
+            color: #ffffff;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        .day.weekend {
+            background-color: #e9ecef;
+            color: #6c757d;
+        }
+        .calendar-footer {
+            margin-top: 20px;
+            font-size: 1rem;
+            color: #555;
+            text-align: center;
+        }
+		
+		 .progress-bar {
+            width: 100%;
+            height: 20px;
+            background-color: #ddd;
+            border-radius: 10px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .progress-bar-inner {
+            height: 100%;
+            transition: width 0.3s ease;
+        }
+
+        .progress-success {
+            background-color: #2e7d32; /* Vert pour réussite */
+        }
+
+        .progress-failure {
+            background-color: #c62828; /* Rouge pour échec */
+        }
+		 .charts-container {
+            display: flex;
+            justify-content: space-around;
+            width: 100%;
+            margin: 30px 0;
+        }
+
+        .chart {
+            width: 45%;
+            background-color: #fff;
+            padding: 20px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+        }
+
+        /* ===========================
+           4. Footer
+        ============================ */
+        footer {
+            background-color: #1d3557;
+            color: #ecf0f1;
+            text-align: center;
+            padding: 20px;
+            margin-top: auto;
+        }
+
+        footer p {
+            font-size: 1rem;
+        }
+
+        footer a {
+            color: #007BFF;
+            text-decoration: underline;
+        }
+
+        footer a:hover {
+            color: #ecf0f1;
+        }
+		footer .citation {
+            font-style: italic;
+			font-size: 0.9rem;
+			margin-bottom: 15px;
+			text-align: center; /* Centrage horizontal du texte */
+			margin: 0 auto; /* Centrage de l'élément */
+			max-width: calc(50% - 20px); /* Alignement avec la largeur des cards */
+        }
+		 /* Style pour la section Note finale */
+        .final-note {
+            margin-top: 40px;
+            padding: 20px;
+            background-color: #fff;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+            font-family: "Dancing Script", cursive;
+            font-size: 1.5em;
+            color: #2a2a2a;
+            text-align: center;
+            font-style: italic;
+        }
+
+        @import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;700&display=swap');
+		
+		/* Style pour la section Sprint Retrospective */
+        .sprint-retrospective {
+            margin-top: 40px;
+            padding: 20px;
+            background-color: #fff;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+            color: #333;
+            line-height: 1.6;
+        }
+
+        .sprint-retrospective h3 {
+            color: #1d3557;
+            margin-bottom: 15px;
+        }
+
+        .sprint-retrospective ul {
+            margin: 10px 0 20px 20px;
+        }
+
+        .sprint-retrospective ul li {
+            margin-bottom: 10px;
+        }
+		
+        /* ===========================
+           6. Responsive Design
+        ============================ */
+        @media (max-width: 1024px) {
+            .sidebar {
+                width: 200px;
+            }
+
+            .main-content {
+                margin-left: 220px;
+                padding: 20px;
+            }
+
+            .sidebar h2 {
+                font-size: 1.3rem;
+            }
+
+            .sidebar p {
+                font-size: 0.9rem;
+            }
+
+            .nav-links a {
+                font-size: 0.9rem;
+            }
+			footer .citation {
+				 max-width: calc(75% - 20px); /* Réduit la largeur sur des écrans moyens */
+				 font-size: 0.85rem; /* Ajuste la taille de la police */
+			}		
+        }
+
+        @media (max-width: 768px) {
+            .sidebar {
+                position: relative;
+                width: 100%;
+                height: auto;
+                padding: 10px;
+            }
+
+            .sidebar img {
+                width: 70px;
+                height: 70px;
+            }
+
+            .main-content {
+                margin-left: 0;
+                padding: 20px;
+            }
+
+            footer .citation {
+                max-width: 90%; /* Prend presque toute la largeur sur des écrans plus petits */
+				font-size: 0.8rem; /* Réduit encore la taille de la police */
+
+            }
+        }
+
+        @media (max-width: 480px) {
+            .sidebar h2 {
+                font-size: 1rem;
+            }
+
+            .sidebar p {
+                font-size: 0.8rem;
+            }
+
+            .nav-links a {
+                font-size: 0.8rem;
+                padding: 8px;
+            }
+
+            footer .citation {
+                max-width: calc(75% - 20px); /* Réduit la largeur sur des écrans moyens */
+				font-size: 0.85rem; /* Ajuste la taille de la police */
+            }
+        }
+    </style>
+	<!-- Précharge le fichier pour réduire la latence -->
+<link rel="preload" href="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs" as="script">
+
+   <!-- Script chargé de manière différée -->
+<script type="module" defer>
+  import mermaid from "https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs";
+  mermaid.initialize({ startOnLoad: true });
+</script>
+</head>
+<body>
+    <!-- Sidebar -->
+    <div class="sidebar">
+        <h2>Projet Homey</h2>
+		<a href="index.html">Retour à l'accueil</a>
+        <a href="#context">Présentation générale</a>
+        <a href="#analyse">Analyse</a>
+        <a href="#conception">Conception & Implémentation</a>
+        <a href="#execution">Exécution</a>
+		<a href="#synthese">Vue d'ensemble du projet jira Homey</a>
+        <a href="#livrables">Livrables produits</a>
+        <a href="#note-finale">Note finale du jury</a>
+        <a href="#retours">Sprint Retrospective</a>
+    </div>
+
+    <!-- Main Content -->
+    <div class="main-content">
+         <h1>Présentation du Projet Homey</h1>
+		
+		<!-- Introduction Section -->
+        <div class="intro">
+            <h2>Introduction</h2>
+            <p>Bienvenue dans ce projet de fin de formation où j'ai eu l'opportunité de mettre en pratique mes connaissances en test logiciel au sein d'une équipe agile. J'ai intégré une nouvelle équipe passionnante chargée de développer l'application Homey, une plateforme de gestion des locations saisonnières.</p>
+        </div>
+
+        <section id="context">
+		<h1>Présentation générale</h1>
+		 <h2>Contexte</h2>
+            <p>J'ai fait partie d'une équipe multidisciplinaire composée de : </p>
+            <ul class="modern-list">
+                <li>
+                    <i>✔️</i>
+                    <span>1 Product Owner</span>
+                </li>
+                <li>
+                    <i>✔️</i>
+                    <span>9 développeurs</span>
+                </li>
+				<li>
+                    <i>✔️</i>
+                    <span>2 testeurs et 1 Test Manager</span>
+                </li>
+				<li>
+                    <i>✔️</i>
+                    <span>1 Scrum Master</span>
+                </li>	
+			</ul>
+			 <p>On a travaillé selon le modèle Scrum, une méthodologie agile qui favorise la collaboration, la flexibilité et la livraison continue de valeur aux clients. Scrum est particulièrement bien adapté aux projets où les exigences peuvent évoluer rapidement, ce qui en a fait un choix idéal pour le développement d'applications telles que Homey. </p>
+
+      
+            <h2>Informations importantes</h2>
+            <p>Le Product Backlog de Homey contient 30 exigences sous la forme d'histoires utilisateurs (User Stories). Ces User Stories décrivent les fonctionnalités attendues du produit du point de vue de l'utilisateur.</p>
+            <p>L'équipe a convenu que la durée d'un Sprint, c'est-à-dire la période pendant laquelle le travail est réalisé, serait de 2 semaines. Cette période relativement courte permet à l'équipe de se concentrer sur des objectifs clairs et atteignables, tout en offrant la flexibilité nécessaire pour s'adapter aux changements et aux retours d'expérience.</p>
+			
+			<p>Ce projet de fin de formation a eu les avantages suivants : </p>
+            <ul class="modern-list">
+                <li>
+                    <i>✔️</i>
+                    <span>Appliquer des techniques de test statique, des tests dynamiques manuels et des tests automatisés pour garantir la qualité du logiciel</span>
+                </li>
+                <li>
+                    <i>✔️</i>
+                    <span>Développer ma capacité à travailler en autonomie ou en binôme, en fonction des exigences du projet.</span>
+                </li>
+				<li>
+                    <i>✔️</i>
+                    <span>Préparer une soutenance de fin de formation où j'ai pu présenter mes travaux, justifier mes choix de test, et démontrer mes compétences en matière de conception et d'exécution de cas de test manuels et automatisés.</span>
+                </li>
+				<li>
+                    <i>✔️</i>
+                    <span>Recevoir des retours d'expérience et des conseils personnalisés de la part des formateurs Test Academy pour continuer à progresser dans ma carrière de testeur.</span>
+                </li>	
+			</ul>
+			
+			<h2>Product Backlog</h2>
+			<p>Le Product Backlog est une liste dynamique et priorisée des exigences, des fonctionnalités et des améliorations attendues pour le produit. C'est le Product Owner qui est responsable de sa gestion et de sa mise à jour. </p>
+			<p>Sans plus attendre, plongeons dans le contenu du Product Backlog de Homey, tel que préparé par le Product Owner.</p>
+			
+			 <table class="modern-table" id="features-table">
+                <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>Fonctionnalité</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- Les données seront générées par JavaScript -->
+                </tbody>
+            </table>
+            <div class="pagination" id="pagination">
+                <!-- Les boutons de pagination seront générés par JavaScript -->
+            </div>
+			
+			<h2>Périmètre de test</h2>
+			<p>Le périmètre de test qui m'a été affecté à la suite du sprint planning est le suivant : </p>
+            <ul class="modern-list">
+                <li>
+                    <i>✔️</i>
+                    <span>Faire une demande de réservation</span>
+                </li>
+                <li>
+                    <i>✔️</i>
+                    <span>Traiter une demande de réservation</span>
+                </li>
+			</ul>
+			<h2>Résumé des users stories</h2>
+			 <ul class="modern-list">
+                <li>
+                    <i>✔️</i>
+                    <span>Faire une demande de réservation : En tant que Voyageur Je souhaite envoyer une demande de réservation Afin de bénéficier d’un séjour dans un logement saisonnier </span>
+                </li>
+                <li>
+                    <i>✔️</i>
+                    <span>Traiter une demande de réservation : En tant que Hôte Je souhaite accepter ou refuser une demande de réservation Afin de planifier les séjours dans mon logement</span>
+                </li>
+			</ul> 
+			
+	<table class="modern-table">
+        <thead>
+            <tr>
+                <th>Scénario</th>
+                <th>Critères d'acceptation</th>
+				<h2>Faire une demande de réservation - Critères d'acceptation</h2>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>Un Voyageur (connecté) fait une demande de réservation</td>
+                <td>
+                    <ul>
+                        <li><strong>ETANT DONNE</strong> un Voyageur connecté</li>
+                        <li><strong>QUAND</strong> l’utilisateur fait une demande de réservation</li>
+                        <li><strong>ALORS</strong> le système crée une nouvelle réservation dans le tableau de bord de l’hôte correspondant à l’annonce</li>
+                        <li><strong>ET</strong> le système crée un nouveau message dans le tableau de bord de l’hôte correspondant à l’annonce</li>
+                    </ul>
+                </td>
+            </tr>
+            <tr>
+                <td>Un Visiteur (non connecté) fait une demande de réservation</td>
+                <td>
+                    <ul>
+                        <li><strong>ETANT DONNE</strong> un Visiteur non connecté</li>
+                        <li><strong>QUAND</strong> l’utilisateur fait une demande de réservation</li>
+                        <li><strong>ALORS</strong> le système ne donne pas suite à la demande de réservation</li>
+                    </ul>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+	
+	<h2>Traiter une demande de réservation - Critères d'acceptation</h2>		
+	<table class="modern-table">
+        <thead>
+		 <tr>
+            <th>Scénario</th>
+            <th>Critères d'acceptation</th>
+        </tr>
+            <tr>
+                <td>L’hôte confirme une demande de réservation</td>
+                <td>
+                    <ul>
+                        <li><strong>ETANT DONNE</strong> un hôte connecté à l’application</li>
+                        <li><strong>ET</strong> une réservation avec un statut « NOUVEAU »</li>
+                        <li><strong>QUAND</strong> l’hôte confirme une demande de réservation</li>
+                        <li><strong>ALORS</strong> le statut de la réservation devient « ATTENTE DE PAIEMENT » pour l’hôte</li>
+                        <li><strong>ET</strong> le statut de la réservation devient « DISPONIBLE » pour le voyageur</li>
+                    </ul>
+                </td>
+            </tr>
+            <tr>
+                <td>Le voyageur annule une demande de réservation</td>
+                <td>
+                    <ul>
+                        <li><strong>ETANT DONNE</strong> un voyageur connecté à l’application</li>
+                        <li><strong>ET</strong> une réservation avec un statut « NOUVEAU »</li>
+                        <li><strong>QUAND</strong> le voyageur annule une demande de réservation</li>
+                        <li><strong>ALORS</strong> le statut de la réservation devient « ANNULE » pour l’hôte</li>
+                        <li><strong>ET</strong> le statut de la réservation devient « ANNULE » pour le voyageur</li>
+                    </ul>
+                </td>
+            </tr>
+            <tr>
+                <td>L’hôte refuse une demande de réservation</td>
+                <td>
+                    <ul>
+                        <li><strong>ETANT DONNE</strong> un hôte connecté à l’application</li>
+                        <li><strong>ET</strong> une réservation avec un statut « NOUVEAU »</li>
+                        <li><strong>QUAND</strong> l’hôte refuse une demande de réservation</li>
+                        <li><strong>ALORS</strong> le statut de la réservation devient « REFUSE » pour l’hôte</li>
+                        <li><strong>ET</strong> le statut de la réservation devient « REFUSE » pour le voyageur</li>
+                    </ul>
+                </td>
+            </tr>
+            <tr>
+                <td>Le voyageur paye une réservation</td>
+                <td>
+                    <ul>
+                        <li><strong>ETANT DONNE</strong> un voyageur connecté à l’application</li>
+                        <li><strong>ET</strong> une réservation avec un statut « ATTENTE DE PAIEMENT »</li>
+                        <li><strong>QUAND</strong> le voyageur paye une demande de réservation</li>
+                        <li><strong>ALORS</strong> le statut de la réservation devient « RESERVE » pour l’hôte</li>
+                        <li><strong>ET</strong> le statut de la réservation devient « RESERVE » pour le voyageur</li>
+                    </ul>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+		</section>
+		
+		 <section id="analyse">
+		  <h1>Analyse</h1>
+		   <h2>Structure du périmètre fonctionnel et du projet jira Homey</h2>
+		  <div class="mermaid">
+        graph TD
+        A[EPIC 1 : Gestion des réservations] --> B[US1 - Faire une demande de réservation]
+        A --> C[US2 - Traiter une demande de réservation]
+        B --> D[Sous-tâche 1]
+        B --> E[Sous-tâche 2]
+        C --> F[Sous-tâche US1]
+        C --> G[Sous-tâche US2]
+        C --> H[Sous-tâche US3]
+        C --> I[Sous-tâche US4]
+    </div>
+	
+	<h2>Planification des différents sprints</h2>
+	<div class="calendar-container">
+        <div class="calendar-header">
+            <h2>Calendrier des sprints</h2>
+        </div>
+        <div class="calendar">
+            <!-- Jours de la semaine -->
+            <div class="day">Lun</div>
+            <div class="day">Mar</div>
+            <div class="day">Mer</div>
+            <div class="day">Jeu</div>
+            <div class="day">Ven</div>
+            <div class="day weekend">Sam</div>
+            <div class="day weekend">Dim</div>
+
+            <!-- Première semaine de mars -->
+            <div class="day"></div>
+            <div class="day"></div>
+            <div class="day"></div>
+            <div class="day"></div>
+            <div class="day"></div>
+            <div class="day weekend">1</div>
+            <div class="day weekend">2</div>
+
+            <!-- Deuxième semaine de mars -->
+            <div class="day">3</div>
+            <div class="day">4</div>
+            <div class="day">5</div>
+            <div class="day">6</div>
+            <div class="day">7</div>
+            <div class="day weekend">8</div>
+            <div class="day weekend sprint1">9</div>
+
+            <!-- Troisième semaine de mars -->
+            <div class="day sprint1">10</div>
+            <div class="day sprint1">11</div>
+            <div class="day sprint1">12</div>
+            <div class="day sprint1">13</div>
+            <div class="day sprint1">14</div>
+            <div class="day weekend sprint1">15</div>
+            <div class="day weekend sprint1">16</div>
+
+            <!-- Quatrième semaine de mars -->
+            <div class="day sprint1">17</div>
+            <div class="day sprint1">18</div>
+            <div class="day sprint1">19</div>
+            <div class="day sprint1">20</div>
+            <div class="day sprint1">21</div>
+            <div class="day weekend sprint1">22</div>
+            <div class="day weekend sprint2">23</div>
+
+            <!-- Cinquième semaine de mars -->
+            <div class="day sprint2">24</div>
+            <div class="day sprint2">25</div>
+            <div class="day sprint2">26</div>
+            <div class="day sprint2">27</div>
+            <div class="day sprint2">28</div>
+            <div class="day weekend sprint2">29</div>
+            <div class="day weekend sprint2">30</div>
+
+            <!-- Première semaine d'avril -->
+            <div class="day sprint2">31</div>
+            <div class="day sprint2">1</div>
+            <div class="day sprint2">2</div>
+            <div class="day sprint2">3</div>
+            <div class="day sprint2">4</div>
+            <div class="day weekend sprint2">5</div>
+            <div class="day weekend sprint3">6</div>
+
+            <!-- Deuxième semaine d'avril -->
+            <div class="day sprint3">7</div>
+            <div class="day sprint3">8</div>
+            <div class="day sprint3">9</div>
+            <div class="day sprint3">10</div>
+            <div class="day sprint3">11</div>
+            <div class="day weekend sprint3">12</div>
+            <div class="day weekend sprint3">13</div>
+
+            <!-- Troisième semaine d'avril -->
+            <div class="day sprint3">14</div>
+            <div class="day sprint3">15</div>
+            <div class="day sprint3">16</div>
+            <div class="day sprint3">17</div>
+            <div class="day sprint3">18</div>
+            <div class="day weekend sprint3">19</div>
+            <div class="day weekend sprint3">20</div>
+
+            <!-- Dernière semaine d'avril -->
+            <div class="day"></div>
+            <div class="day"></div>
+            <div class="day"></div>
+            <div class="day sprint4">27</div>
+            <div class="day sprint4">28</div>
+            <div class="day weekend sprint4">29</div>
+            <div class="day weekend sprint4">30</div>
+
+            <!-- Première semaine de mai -->
+            <div class="day sprint4">1</div>
+            <div class="day sprint4">2</div>
+            <div class="day sprint4">3</div>
+            <div class="day sprint4">4</div>
+            <div class="day"></div>
+            <div class="day weekend"></div>
+            <div class="day weekend"></div>
+        </div>
+        <div class="calendar-footer">
+            <p><strong>Sprint 1</strong> : Phase conception (9 mars - 22 mars)</p>
+            <p><strong>Sprint 2</strong> : Phase implémentation (23 mars - 5 avril)</p>
+            <p><strong>Sprint 3</strong> : Phase éxécution (7 avril - 20 avril)</p>
+            <p><strong>Sprint 4</strong> : Phase de préparation de la soutenance devant le grand jury (27 avril - 4 mai)</p>
+        </div>
+    </div>
+		 </section>
+		 
+		  <section id="conception">
+		  <h1>Conception & Implémentation</h1>
+	<table class="modern-table">
+        <tr>
+            <th>Cas de Test</th>
+            <th>Action</th>
+        </tr>
+        <tr>
+            <td>Story 1 - Faire une réservation</td>
+            <td><a href="CT_FaireDemandeReservation.html" class="btn">Voir les détails</a></td>
+        </tr>
+        <tr>
+            <td>Story 2 - Traiter une demande de réservation</td>
+            <td><a href="CT_TraiterDemandeReservation.html" class="btn">Voir les détails</a></td>
+        </tr>
+    </table>
+		  </section>
+		  
+		  <section id="execution">
+		  <h1>Exécution</h1>
+		  <h2>Rapport des plans de Test - Projet Homey</h2>
+    <table class="modern-table">
+        <thead>
+            <tr>
+                <th>Clé</th>
+                <th>Résumé</th>
+                <th>Nombre de Tests</th>
+                <th>Parent</th>
+                <th>Sprint</th>
+                <th>Type de Ticket</th>
+                <th>État</th>
+                <th>Statut</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>PFF-22</td>
+                <td>Plan de test V1 de la story : Faire une demande de réservation</td>
+                <td>14</td>
+                <td>PFF-1</td>
+                <td>Sprint 3</td>
+                <td>Test Plan</td>
+                <td class="status-success">TERMINÉ(E)</td>
+                <td>
+                    <div class="progress-bar">
+                        <div class="progress-bar-inner progress-success" style="width: 78.6%;"></div>
+                    </div>
+                </td>
+            </tr>
+			<tr>
+                <td>PFF-23</td>
+                <td>Plan de test V1 de la story : Traiter une demande de réservation</td>
+                <td>9</td>
+                <td>PFF-1</td>
+                <td>Sprint 3</td>
+                <td>Test Plan</td>
+                <td class="status-success">TERMINÉ(E)</td>
+                <td>
+                    <div class="progress-bar">
+                        <div class="progress-bar-inner progress-success" style="width: 88.9%;"></div>
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+	
+	<h2>Rapport d'éxécution des tests - Projet Homey</h2>
+    <table class="modern-table">
+        <thead>
+            <tr>
+                <th>Clé</th>
+                <th>Résumé</th>
+                <th>Plan de test</th>
+                <th>Nombre de tests</th>
+                <th>Défaut</th>
+                <th>Statut</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>PFF-24</td>
+                <td>Exécution des tests V1 de la story : Faire une demande de réservation</td>
+                <td>PFF-22</td>
+                <td>14</td>
+                <td>3</td>
+                <td>
+				<div class="progress-bar">
+                        <div class="progress-bar-inner progress-success" style="width: 80%;"></div>
+                    </div>
+				</td>
+            </tr>
+			<tr>
+                <td>PFF-25</td>
+                <td>PExécution des tests V1 de la story : Traiter une demande de réservation</td>
+                <td>PFF-23</td>
+                <td>9</td>
+                <td>1</td>
+                <td>
+				<div class="progress-bar">
+                        <div class="progress-bar-inner progress-success" style="width: 80%;"></div>
+                </div>
+				</td>
+            </tr>
+        </tbody>
+    </table>
+</section>
+
+	<section id="synthese">
+        <h1>Vue d'ensemble du projet Jira Homey</h1>
+        <section class="charts-container">
+            <!-- Camembert -->
+            <div class="chart">
+                <canvas id="pieChart"></canvas>
+            </div>
+            <!-- Histogramme -->
+            <div class="chart">
+                <canvas id="barChart"></canvas>
+            </div>
+        </section>
+    </section>
+	
+	<section id="livrables">
+	<h1>Livrables produits</h1>
+	<table class="modern-table">
+        <tr>
+            <th>Nom du livrable</th>
+            <th>Livrables</th>
+        </tr>
+        <tr>
+            <td>Cas de tests</td>
+            <td><a href="CT_FaireDemandeReservation.html" class="btn">Story 1 : Faire une demande de réservation </a>  <a href="CT_TraiterDemandeReservation.html" class="btn">Story 2 : Traiter une demande de réservation</a>
+        </tr>
+        <tr>
+            <td>Résultats d’exécution des tests manuels</td>
+            <td><a href="RapportExecution_UserStory1.html" class="btn">Story 1</a> <a href="RapportExecution_UserStory2.html" class="btn">Story 2</a></td>
+        </tr>
+		<tr>
+            <td>Scripts automatisés</td>
+           <td><a href="Script_TA_SC1.html" class="btn">Scénario automatisé de la story 1 en étant connecté</a> <a href="Script_TA_SC2.html" class="btn">Scénario automatisé de la story 1 en étant non connecté</a> <a href="Script_TA_SC3.html" class="btn">Scénario automatisé de la story 2</a></td>
+        </tr>
+		<tr>
+            <td>Résultats d’exécution des tests automatisés</td>
+           <td><a href="RapportExecution_TAStory1.html" class="btn">Story 1</a> <a href="RapportExecution_TAStory2.html" class="btn">Story 2 </a></a></td>
+        </tr>
+		<tr>
+            <td>Rapports de défauts</td>  
+		 <td>
+		  <a href="RapportDefaut.html" class="btn">Anomalie1</a>
+		  <a href="RapportDefaut2.html" class="btn">Anomalie2</a>
+		  <a href="RapportDefaut3.html" class="btn">Anomalie3</a>
+		 </td>
+        </tr>
+		<tr>
+            <td>Rapport Final de test</td>
+            <td><a href="RapportFinal.html" class="btn">Rapport Final</a></td>
+        </tr>
+		<tr>
+            <td>Support de soutenance</td>
+            <td><a href="SupportPresentation_PFFHomey.pptx" class="btn">Téléchargez mon support de présentation</a></td>
+        </tr>
+    </table>
+	</section>
+	
+	<section id="note-finale">
+	<h1>Note finale du grand jury</h1>
+	<p>La soutenance a duré 20 minutes et après il y a eu 10 minutes de questions réponses.</p>
+	<section class="final-note">
+        <p>
+            "Le travail effectué sur le projet jira Homey a été de grande qualité. Parmi nos apprenants, ta présentation a été l'une des meilleures avec des schémas très clairs.
+			La présentation de ton travail a été de grande qualité. Mais on s'attendait à voir aussi une démonstration d'un script automatisé sur un scénario critique pendant
+			la soutenance. Tu n'as pas eu le temps de le faire car tu as un perdu un peu de temps sur la présentation un peu trop détaillé du contexte du projet.
+			Pour le reste, ça reste du très bon travail."
+        </p>
+    </section>
+	</section>
+	
+	<section id="retours">
+	<h1>Sprint Retrospective</h1>
+	<p>Des sprints retrospective auraient dû être realisés à la fin de chaque sprint. Finalement, il y en a eu un seul qui a été réalisé à la fin du projet.</p>
+	<h2>Points Forts : </h2>
+	<ul class="modern-list">
+                <li>
+                    <i>✔️</i>
+                    <span>Utilisation efficace des outils de gestion des tests pour un suivi précis.</span>
+                </li>
+                <li>
+                    <i>✔️</i>
+                    <span>User Stories bien définies, facilitant la rédaction de cas de test pertinents.</span>
+                </li>
+				 <li>
+                    <i>✔️</i>
+                    <span>Adaptabilité de l'équipe face aux imprévus et amélioration continue grâce aux rétrospectives.</span>
+                </li>
+			</ul>
+	 <h2>Points Faibles :</h2>
+	 <ul class="modern-list">
+				<li>
+                    <i>✔️</i>
+                    <span>Impossibilité de travailler en équipe sur ce projet (je n'ai pas trouvé d'apprenant disponible à la même période où j'ai commencé le projet)</span>
+                </li>
+				<li>
+                    <i>✔️</i>
+                    <span>Difficultés rencontrées sur le développement des tests automatisés</span>
+                </li>
+    </ul>
+	</section>	
+</div>
+
+    <!-- Footer -->
+    <footer>
+	 <span class="citation">"N'abandonne jamais, car c'est souvent juste après le dernier effort que le succès se dévoile."</span>
+        <p>© 2025 Maxime Joannis - Tous droits réservés. <a href="privacy.html">Politique de confidentialité</a></p>
+    </footer>
+	
+	<script>
+        // Données des fonctionnalités
+        const features = [
+            "Réaliser une recherche simple",
+            "Consulter une annonce",
+            "S'inscrire",
+            "Se connecter",
+            "Devenir Hôte",
+            "Créer une annonce",
+            "Faire une demande de réservation",
+            "Traiter une demande de réservation",
+            "Régénérer un mot de passe",
+            "Réaliser une recherche avancée",
+            "Mettre une annonce en favoris",
+            "Ajouter des photos à une annonce",
+            "Modifier une annonce existante",
+            "Supprimer une annonce",
+            "Afficher les informations sur l'hôte",
+            "Afficher les évaluations et les commentaires des utilisateurs",
+            "Répondre aux commentaires en tant qu'hôte",
+            "Ajouter des filtres de recherche supplémentaires (ex: prix, type de logement, équipements)",
+            "Afficher les disponibilités du logement dans le calendrier",
+            "Recevoir des notifications pour les nouvelles demandes de réservation",
+            "Gérer les notifications (lire, marquer comme lues, supprimer)",
+            "Afficher les réservations confirmées",
+            "Annuler une réservation en tant qu'hôte",
+            "Payer pour une réservation en tant qu'utilisateur",
+            "Afficher les informations sur le quartier/la localisation du logement",
+            "Contacter le service clientèle",
+            "Vérifier l'identité des utilisateurs (ex: vérification par e-mail, numéro de téléphone)",
+            "Ajouter une assurance voyage facultative",
+            "Ajouter des options de paiement supplémentaires (ex: PayPal, virement bancaire)",
+            "Afficher les événements et les activités à proximité du logement"
+        ];
+
+        const rowsPerPage = 5;
+        let currentPage = 1;
+
+        function renderTable() {
+            const tableBody = document.querySelector("#features-table tbody");
+            tableBody.innerHTML = "";
+
+            const startIndex = (currentPage - 1) * rowsPerPage;
+            const endIndex = startIndex + rowsPerPage;
+
+            features.slice(startIndex, endIndex).forEach((feature, index) => {
+                const row = document.createElement("tr");
+                row.innerHTML = `<td>${startIndex + index + 1}</td><td>${feature}</td>`;
+                tableBody.appendChild(row);
+            });
+
+            renderPagination();
+        }
+
+        function renderPagination() {
+            const pagination = document.getElementById("pagination");
+            pagination.innerHTML = "";
+
+            const totalPages = Math.ceil(features.length / rowsPerPage);
+
+            for (let i = 1; i <= totalPages; i++) {
+                const button = document.createElement("button");
+                button.textContent = i;
+                button.disabled = i === currentPage;
+                button.addEventListener("click", () => {
+                    currentPage = i;
+                    renderTable();
+                });
+                pagination.appendChild(button);
+            }
+        }
+
+        // Initialisation
+        renderTable();
+    </script>
+	
+	 <script>
+        // Données pour le camembert
+        const pieData = {
+            labels: ['Epic Link', 'Tâches', 'Sous-tâches', 'Tests', 'Exécutions de Tests', 'Plans de Tests', 'Bugs'],
+            datasets: [{
+                data: [1, 2, 6, 23, 2, 2, 3],
+                backgroundColor: ['#1d3557', '#457b9d', '#a8dadc', '#2a9d8f', '#e63946', '#f4a261', '#e76f51'],
+                hoverOffset: 4
+            }]
+        };
+
+        // Configuration du camembert
+        const pieConfig = {
+            type: 'pie',
+            data: pieData,
+            options: {
+                plugins: {
+                    legend: {
+                        position: 'bottom'
+                    }
+                }
+            }
+        };
+
+        // Données pour l'histogramme
+        const barData = {
+            labels: ['Epic Link', 'Tâches', 'Sous-tâches', 'Tests', 'Exécutions de Tests', 'Plans de Tests', 'Bugs'],
+            datasets: [{
+                label: 'Nombre de tickets',
+                data: [1, 2, 6, 23, 2, 2, 3],
+                backgroundColor: ['#1d3557', '#457b9d', '#a8dadc', '#2a9d8f', '#e63946', '#f4a261', '#e76f51'],
+                borderColor: '#333',
+                borderWidth: 1
+            }]
+        };
+
+        // Configuration de l'histogramme
+        const barConfig = {
+            type: 'bar',
+            data: barData,
+            options: {
+                scales: {
+                    y: {
+                        beginAtZero: true
+                    }
+                },
+                plugins: {
+                    legend: {
+                        display: false
+                    }
+                }
+            }
+        };
+
+        // Initialisation des graphiques
+        const pieChart = new Chart(
+            document.getElementById('pieChart'),
+            pieConfig
+        );
+
+        const barChart = new Chart(
+            document.getElementById('barChart'),
+            barConfig
+        );
+    </script>
+	
+	<!-- Stats sur le nombre de visites -->
+  <script>
+    var t = setInterval(function() {
+        if (window.goatcounter && window.goatcounter.visit_count) {
+            clearInterval(t)
+            window.goatcounter.visit_count({append: 'body'})
+        }
+    }, 100)
+  </script>
+
+  <script data-goatcounter="https://maximejoannis.goatcounter.com/count"
+          async src="//gc.zgo.at/count.js">
+  </script>
+	
+</body>
+</html>
