@@ -20,7 +20,7 @@
         display: flex;
         flex-direction: column;
         min-height: 100vh;
-        background-color: #f4f5f7; /* Fond général gris clair */
+        background-color: #F2F4F7; /* Fond général gris clair */
         color: #333;
     }
 
@@ -29,8 +29,8 @@
     ============================ */
     .sidebar {
         width: 250px;
-        background-color: #1d3557; /* Bleu foncé */
-        color: #ecf0f1;
+        background-color: #1E2A38; /* Bleu foncé */
+        color: #FFFFFF; /* Texte blanc */
         padding: 20px;
         display: flex;
         flex-direction: column;
@@ -47,7 +47,7 @@
         width: 90px;
         height: 90px;
         object-fit: cover;
-        border: 4px solid #007BFF; /* Bleu vif */
+        border: 4px solid #3A8DFF; /* Bleu clair */
         margin-bottom: 15px;
     }
 
@@ -58,7 +58,7 @@
 
     .sidebar p {
         font-size: 0.95rem;
-        color: #b0c4e6;
+        color: #B0C4E6; /* Gris clair pour le texte secondaire */
         text-align: center;
         margin-bottom: 1.5rem;
     }
@@ -72,17 +72,20 @@
 
     .nav-links a {
         text-decoration: none;
-        color: #ecf0f1;
+        color: #FFFFFF; /* Texte blanc */
         font-size: 1rem;
-        padding: 10px 15px;
+        padding: 15px 20px;
         text-align: center;
-        border-radius: 5px;
-        transition: background 0.3s ease, transform 0.2s ease;
+        border-radius: 8px;
+        background-color: #34495E; /* Fond des mini-cards */
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        transition: background 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease;
     }
 
     .nav-links a:hover {
-        background-color: #34495e;
-        transform: translateX(5px);
+        background-color: #3A8DFF; /* Couleur au survol */
+        transform: translateY(-5px);
+        box-shadow: 0 6px 10px rgba(0, 0, 0, 0.15);
     }
 
     /* ===========================
@@ -95,19 +98,20 @@
         display: flex;
         flex-direction: column;
         gap: 20px;
-		padding-bottom: 80px; 
+        padding-bottom: 80px;
     }
 
     .main-content h1 {
         font-size: 2rem;
         margin-bottom: 20px;
-        color: #1d3557; /* Bleu foncé */
-		border-bottom: 2px solid #1d3557;
+        color: #1E2A38; /* Bleu foncé */
+        border-bottom: 2px solid #1E2A38;
     }
 
     section {
-        background-color: #fff;
+        background-color: #FFFFFF; /* Blanc pur */
         border-radius: 8px;
+        border-top: 5px solid #3A8DFF; /* Bleu clair */
         box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
         padding: 20px;
         margin-bottom: 20px;
@@ -122,8 +126,8 @@
     section h2 {
         font-size: 1.5rem;
         margin-bottom: 10px;
-        color: #007BFF; /* Bleu vif */
-        border-bottom: 2px solid #007BFF;
+        color: #3A8DFF; /* Bleu clair */
+        border-bottom: 2px solid #3A8DFF;
         padding-bottom: 5px;
     }
 
@@ -147,24 +151,29 @@
     .card {
         flex: 1 1 calc(50% - 20px);
         max-width: 500px;
-        background-color: #fff;
-        border-radius: 8px;
+        background: linear-gradient(135deg, #FFFFFF, #F2F4F7); /* Dégradé moderne */
+        border: 1px solid #E0E0E0;
+        border-radius: 12px;
         box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
         overflow: hidden;
-        transition: transform 0.3s ease, box-shadow 0.3s ease;
+        transition: transform 0.3s ease, box-shadow 0.3s ease, background 0.3s ease;
     }
 
     .card:hover {
-        transform: translateY(-5px);
-        box-shadow: 0 6px 10px rgba(0, 0, 0, 0.15);
+        transform: translateY(-8px);
+        box-shadow: 0 8px 12px rgba(0, 0, 0, 0.2);
+        background: linear-gradient(135deg, #3A8DFF, #0056B3); /* Dégradé bleu au survol */
     }
 
     .card-header {
-        background-color: #007BFF; /* Bleu vif */
-        color: #ecf0f1;
+        background-color: #3A8DFF; /* Bleu clair */
+        color: #FFFFFF;
         padding: 15px;
-        font-size: 1.25rem;
+        font-size: 1.1rem;
         text-align: center;
+        font-weight: bold;
+        border-bottom: 2px solid #0056B3;
+        transition: background 0.3s ease;
     }
 
     .card-body {
@@ -176,21 +185,22 @@
         font-size: 1rem;
         line-height: 1.6;
         margin-bottom: 15px;
+        color: #444;
     }
 
     .card-body a {
         display: inline-block;
         text-decoration: none;
-        background-color: #007BFF;
-        color: #fff;
+        background-color: #3A8DFF;
+        color: #FFFFFF;
         padding: 10px 15px;
-        border-radius: 5px;
+        border-radius: 8px;
         font-size: 1rem;
         transition: background 0.3s ease, transform 0.2s ease;
     }
 
     .card-body a:hover {
-        background-color: #0056b3;
+        background-color: #0056B3;
         transform: translateY(-3px);
     }
 
@@ -211,27 +221,27 @@
     }
 
     .status.terminated {
-        background-color: #28a745; /* Vert */
-        color: #fff;
+        background-color: #28A745; /* Vert */
+        color: #FFFFFF;
     }
 
     .status.in-progress {
-        background-color: #ffc107; /* Jaune */
-        color: #fff;
+        background-color: #FFC107; /* Jaune */
+        color: #FFFFFF;
     }
 
     /* ===========================
        5. Footer
     ============================ */
     footer {
-		position: fixed; /* Fixe le footer */
-		bottom: 0;       /* Colle le footer en bas de la fenêtre */
-		left: 0;         /* Colle le footer à gauche */
-		width: 100%;     /* Le footer prend toute la largeur de la fenêtre */
-		background-color: #1d3557; /* Couleur de fond */
-		color: #ecf0f1;  /* Couleur du texte */
-		text-align: center; /* Centrage du texte */
-		padding: 20px;   /
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        background-color: #1E2A38; /* Bleu foncé */
+        color: #FFFFFF;
+        text-align: center;
+        padding: 20px;
     }
 
     footer p {
@@ -239,12 +249,12 @@
     }
 
     footer a {
-        color: #007BFF;
+        color: #3A8DFF;
         text-decoration: underline;
     }
 
     footer a:hover {
-        color: #ecf0f1;
+        color: #FFFFFF;
     }
 
     footer .citation {
@@ -262,8 +272,8 @@
     .pdf-button {
         display: inline-block;
         text-decoration: none;
-        background-color: #007BFF;
-        color: #fff;
+        background-color: #3A8DFF;
+        color: #FFFFFF;
         padding: 10px 20px;
         border-radius: 5px;
         font-size: 1rem;
@@ -274,41 +284,107 @@
     }
 
     .pdf-button:hover {
-        background-color: #0056b3;
+        background-color: #0056B3;
+        transform: translateY(-3px);
+    }
+	/* ===========================
+       Boutons d'action
+    ============================ */
+    .action-buttons {
+        margin-top: 15px; /* Espacement entre le statut et les boutons */
+        display: flex;
+        justify-content: center; /* Centrer les boutons horizontalement */
+        gap: 10px; /* Espacement entre les boutons */
+    }
+
+    .action-link {
+        display: inline-block;
+        text-decoration: none;
+        background-color: #3A8DFF; /* Bleu clair */
+        color: #FFFFFF;
+        padding: 10px 15px;
+        border-radius: 8px;
+        font-size: 1rem;
+        font-weight: bold;
+        transition: background-color 0.3s ease, transform 0.2s ease;
+    }
+
+    .action-link:hover {
+        background-color: #0056B3; /* Bleu foncé au survol */
         transform: translateY(-3px);
     }
 
-    /* ===========================
-       7. Responsive Design
+    /* Boutons désactivés */
+    .action-link.disabled {
+        background-color: #CCC; /* Gris clair */
+        color: #666; /* Gris foncé */
+        cursor: not-allowed; /* Curseur non cliquable */
+        box-shadow: none; /* Pas d'effet de survol */
+        transform: none; /* Pas de mouvement */
+    }
+
+    .action-link.disabled:hover {
+        background-color: #CCC; /* Pas de changement au survol */
+        transform: none;
+    }
+	
+	/* ===========================
+       5. Media Queries (Responsiveness)
     ============================ */
-   /* Pour les écrans de taille normale (tablettes et ordinateurs) */
-        .box {
-            background-color: lightblue;
+    @media (max-width: 768px) {
+        .sidebar {
+            width: 100%;
+            position: relative;
+            box-shadow: none;
+        }
+
+        .main-content {
+            margin-left: 0;
             padding: 20px;
-            margin: 10px;
-            flex: 1;
-            box-sizing: border-box;
         }
 
-        /* Media query pour les petits écrans (téléphones) */
-        @media (max-width: 600px) {
-            .content {
-                flex-direction: column;
-            }
-            .box {
-                margin: 5px;
-                padding: 10px;
-            }
+        .cards {
+            flex-direction: column;
+            gap: 20px;
         }
 
-        /* Media query pour les tablettes (écrans entre 601px et 1024px) */
-        @media (min-width: 601px) and (max-width: 1024px) {
-            .content {
-                flex-direction: row;
-                justify-content: space-around;
-            }
+        .card {
+            flex: 1 1 100%;
         }
-</style>
+    }
+
+    @media (max-width: 480px) {
+        .sidebar img {
+            width: 70px;
+            height: 70px;
+        }
+
+        .sidebar h2 {
+            font-size: 1.3rem;
+        }
+
+        .sidebar p {
+            font-size: 0.85rem;
+        }
+
+        .nav-links a {
+            font-size: 0.9rem;
+            padding: 10px;
+        }
+
+        .main-content h1 {
+            font-size: 1.5rem;
+        }
+
+        .card-header {
+            font-size: 1rem;
+        }
+
+        .card-body p {
+            font-size: 0.9rem;
+        }
+    }
+    </style>
 	<!-- Précharge le fichier pour réduire la latence -->
 <link rel="preload" href="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs" as="script">
 
@@ -326,7 +402,7 @@
         <p>Ingénieur Testeur Logiciel | QA Analyst | Certifié ISTQB Fondation v4.0</p>
         <div class="nav-links">
             <a href="#about">Mon histoire</a>
-			<a href="#testacademy">Formation Test Academy</a>
+            <a href="#testacademy">Formation Test Academy</a>
             <a href="#projects">Projets réalisés</a>
             <a href="#cv">CV</a>
         </div>
@@ -337,23 +413,23 @@
         <h1>Bienvenue sur mon portfolio de testeur QA</h1>
         <section id="about">
             <h1>Mon histoire</h1>
-             <p>
-            <strong>Après plus de cinq ans d’expérience en développement logiciel</strong>, un drame personnel – la perte d’un parent très proche – a profondément bouleversé ma vision de la carrière et des priorités à la fin de l’année 2022.
-            Parallèlement, j'ai dû m'investir en tant qu’aidant familial pour m’occuper de mes frères en situation de handicap, ce qui a renforcé ma réflexion sur mes engagements personnels et professionnels.
-          </p>
-          <p>
-            Cette épreuve m’a poussé à prendre du recul et à entreprendre un <strong>bilan de compétences en 2024</strong> pour redéfinir mon projet professionnel.
-            <strong>Ce bilan</strong> a mis en lumière un réel intérêt pour <span style="color:var(--accent)">l’analyse</span>, <span style="color:var(--accent)">la rigueur</span>, <span style="color:var(--accent)">la détection d’anomalies</span> et <span style="color:var(--accent)">l’amélioration continue</span> : autant de qualités essentielles dans le domaine de la qualité logicielle.
-            J’ai compris que ce qui me passionnait le plus n’était pas seulement la conception d’un logiciel, mais la garantie de sa <strong>fiabilité</strong>, de sa <strong>robustesse</strong> et de sa <strong>performance</strong>.
-          </p>
-          <p>
-            En <strong>2024-2025</strong>, j’ai concrétisé cette réorientation en suivant une formation intensive chez <span style="color:var(--accent); font-weight:bold;">TestAcademy</span>, validée par la certification ISTQB – Testeur certifié niveau Fondation (v4.0) et l'obtention d'un diplôme de testeur logiciel. Je souhaite maintenant concrétiser cette formation par l'obtention d'un premier CDI en tant que testeur QA en entreprise.
-          </p>
+            <p>
+                <strong>Après plus de cinq ans d’expérience en développement logiciel</strong>, un drame personnel – la perte d’un parent très proche – a profondément bouleversé ma vision de la carrière et des priorités à la fin de l’année 2022.
+                Parallèlement, j'ai dû m'investir en tant qu’aidant familial pour m’occuper de mes frères en situation de handicap, ce qui a renforcé ma réflexion sur mes engagements personnels et professionnels.
+            </p>
+            <p>
+                Cette épreuve m’a poussé à prendre du recul et à entreprendre un <strong>bilan de compétences en 2024</strong> pour redéfinir mon projet professionnel.
+                <strong>Ce bilan</strong> a mis en lumière un réel intérêt pour <span style="color:var(--accent)">l’analyse</span>, <span style="color:var(--accent)">la rigueur</span>, <span style="color:var(--accent)">la détection d’anomalies</span> et <span style="color:var(--accent)">l’amélioration continue</span> : autant de qualités essentielles dans le domaine de la qualité logicielle.
+                J’ai compris que ce qui me passionnait le plus n’était pas seulement la conception d’un logiciel, mais la garantie de sa <strong>fiabilité</strong>, de sa <strong>robustesse</strong> et de sa <strong>performance</strong>.
+            </p>
+            <p>
+                En <strong>2024-2025</strong>, j’ai concrétisé cette réorientation en suivant une formation intensive chez <span style="color:var(--accent); font-weight:bold;">TestAcademy</span>, validée par la certification ISTQB – Testeur certifié niveau Fondation (v4.0) et l'obtention d'un diplôme de testeur logiciel. Je souhaite maintenant concrétiser cette formation par l'obtention d'un premier CDI en tant que testeur QA en entreprise.
+            </p>
         </section>
-		
-		 <!-- Formation Test Academy -->
+        
+         <!-- Formation Test Academy -->
       <section id="testacademy">
-	   <h1>Formation Test Academy</h1>
+       <h1>Formation Test Academy</h1>
         <p>
           Découvrez la structure de la formation Test Academy  que j'ai suivi à partir du 31 octobre 2024 jusqu'au 17 février 2025.
         </p>
@@ -379,9 +455,9 @@
         </div>
           <a href="Programme_Formation_Testeur_Pro.pdf" class="pdf-button">Téléchargez le programme détaillé en PDF</a>
         </div>
-	  
-	  </section>
-	  
+      
+      </section>
+      
       <section id="projects">
             <h1>Projets réalisés</h1>
             <div class="cards">
@@ -389,42 +465,48 @@
                     <div class="card-header">Projet de fin de formation Homey</div>
                     <div class="card-body">
                         <p>Test d'une application web de gestion de location saisonnières nommée HOMEY</p>
-						 <p class="dates">Début : Mars 2025 | Fin : Mai 2025 </p>
-						<span class="status terminated">Terminé</span>
-                        <a href="Projet_Homey.html">Voir le projet</a>
+                         <p class="dates">Début : Mars 2025 | Fin : Mai 2025 </p>
+                        <span class="status terminated">Terminé</span>
+                         <div class="action-buttons">
+                            <a href="Projet_Homey.html" class="action-link">Voir les détails</a>
+                            <a href="TableaudeBordQA_Homey.html" class="action-link">Voir le tableau de bord</a>
+                        </div>
                     </div>
                 </div>
                 <div class="card">
                     <div class="card-header">Micro Stage chez AMN BRAINS</div>
                     <div class="card-body">
                         <p>Test d'un logiciel de cybersécurité nommé AMN AUDITOR</p>
-						 <p class="dates">Début : Mai 2025 | En cours</p>
+                         <p class="dates">Début : Mai 2025 | En cours</p>
                           <span class="status in-progress">En cours</span>
-                        <a href="MicroStage_AmnBrains.html">Voir le projet</a>
+                       <div class="action-buttons">
+                            <a href="#" class="action-link disabled">Voir les détails</a>
+                            <a href="#" class="action-link disabled">Voir le tableau de bord</a>
+                        </div>
                     </div>
                 </div>
             </div>
         </section>
-		
-		<!-- CV Interactif -->
+        
+        <!-- CV Interactif -->
       <section id="cv">
         <h1>CV</h1>
         <p>
           Vous voulez en savoir plus sur moi ? Téléchargez directement mon CV ici ou allez voir mon CV interactif :
         </p>
         <a href="Maxime_JOANNIS_CV_Testeur_QA.pdf" class="pdf-button">Téléchargez mon CV en PDF</a>
-		<a href="CVInteractif.html" class="pdf-button">Voir mon CV interactif</a>
+        <a href="CVInteractif.html" class="pdf-button">Voir mon CV interactif</a>
       </section>
-	  
+      
     </div>
 
     <!-- Footer -->
     <footer>
-	 <span class="citation">"N'abandonne jamais, car c'est souvent juste après le dernier effort que le succès se dévoile."</span>
+     <span class="citation">"N'abandonne jamais, car c'est souvent juste après le dernier effort que le succès se dévoile."</span>
         <p>© 2025 Maxime Joannis - Tous droits réservés.  <a href="privacy.html">Politique de confidentialité</a></p>
     </footer>
-	
-	<!-- Stats sur le nombre de visites -->
+    
+    <!-- Stats sur le nombre de visites -->
   <script>
     var t = setInterval(function() {
         if (window.goatcounter && window.goatcounter.visit_count) {
