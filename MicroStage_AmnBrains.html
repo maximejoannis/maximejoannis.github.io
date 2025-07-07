@@ -5,10 +5,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Micro Stage AMN BRAINS</title>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat:400,700&display=swap">
-	<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet"> <!-- Ajout des icônes Bootstrap -->
     <style>
         /* ===========================
-           1. Reset CSS
+           Reset CSS
         ============================ */
         * {
             margin: 0;
@@ -18,24 +18,24 @@
 
         body {
             font-family: 'Montserrat', Arial, sans-serif;
+            background-color: #F2F4F7; /* Gris clair */
+            color: #333;
             display: flex;
             flex-direction: column;
             min-height: 100vh;
-            background-color: #f4f5f7; /* Fond général gris clair */
-            color: #333;
         }
 
         /* ===========================
-           2. Sidebar
+           Sidebar
         ============================ */
         .sidebar {
             width: 250px;
-            background-color: #1d3557; /* Bleu foncé */
-            color: #ecf0f1;
+            background-color: #1E2A38; /* Bleu foncé */
+            color: #FFFFFF; /* Texte blanc */
             padding: 20px;
             display: flex;
             flex-direction: column;
-            align-items: flex-start;
+            align-items: center;
             gap: 20px;
             position: fixed;
             top: 0;
@@ -45,33 +45,36 @@
 
         .sidebar h2 {
             font-size: 1.5rem;
-            margin-bottom: 10px;
+            margin-bottom: 0.5rem;
         }
 
-        .sidebar a {
+        .sidebar .nav-links {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            width: 100%;
+        }
+
+        .sidebar .nav-links a {
             text-decoration: none;
-            color: #ecf0f1;
+            color: #FFFFFF; /* Texte blanc */
             font-size: 1rem;
-            padding: 10px 15px;
-            border-radius: 5px;
-            transition: background 0.3s ease, transform 0.2s ease;
+            padding: 15px 20px;
+            text-align: center;
+            border-radius: 8px;
+            background-color: #34495E; /* Fond des mini-cards */
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            transition: background 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease;
         }
 
-        .sidebar a:hover {
-            background-color: #34495e;
-            transform: translateX(5px);
-        }
-		.intro {
-            background-color: #a8dadc; /* Bleu clair */
-            color: #1d3557;
-            padding: 20px;
-            border-radius: 8px;
-            margin-bottom: 20px;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        .sidebar .nav-links a:hover {
+            background-color: #3A8DFF; /* Bleu clair au survol */
+            transform: translateY(-5px);
+            box-shadow: 0 6px 10px rgba(0, 0, 0, 0.15);
         }
 
         /* ===========================
-           3. Main Content
+           Main Content
         ============================ */
         .main-content {
             margin-left: 270px;
@@ -80,191 +83,117 @@
             display: flex;
             flex-direction: column;
             gap: 20px;
-			padding-bottom: 80px; 
         }
 
         .main-content h1 {
             font-size: 2rem;
             margin-bottom: 20px;
-            color: #1d3557; /* Bleu foncé */
-			border-bottom: 2px solid #1d3557;
+            color: #1E2A38; /* Bleu foncé */
+            border-bottom: 3px solid #1E2A38;
+            padding-bottom: 10px;
         }
 
-        section {
-            background-color: #fff;
-            border-radius: 8px;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-            padding: 20px;
-            margin-bottom: 20px;
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-        }
-
-        section:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 6px 10px rgba(0, 0, 0, 0.15);
-        }
-
-        section h2 {
+        section h1 {
             font-size: 1.5rem;
+            color: #1E2A38; /* Bleu foncé */
             margin-bottom: 10px;
-            color: #007BFF; /* Bleu vif */
-            border-bottom: 2px solid #007BFF;
+            border-bottom: 2px solid #3A8DFF; /* Bleu clair */
             padding-bottom: 5px;
         }
-		section h3 {
-            font-size: 1.25rem;
-            color: #007BFF;
-            margin-bottom: 15px;
-            border-left: 4px solid #007BFF;
-            padding-left: 10px;
-            font-weight: 600;
-        }
 
-        section p {
-            font-size: 1rem;
-            line-height: 1.6;
-            margin-bottom: 15px;
-            color: #444;
-        }
-		
-		/* ===========================
-           4. Modern Table with Pagination
+        /* ===========================
+           Cards
         ============================ */
-        .modern-table {
-            width: 100%;
-            border-collapse: collapse;
-            margin-top: 20px;
+        .cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); /* Responsive grid */
+            gap: 20px;
+            margin-bottom: 60px; /* Ajout d'un espace en bas pour éviter le chevauchement */
         }
 
-        .modern-table th, .modern-table td {
-            text-align: left;
-            padding: 12px;
-            border-bottom: 1px solid #ddd;
+        .card {
+            background-color: #FFFFFF; /* Blanc pur */
+            border-top: 5px solid #3A8DFF; /* Bleu clair */
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+            padding: 20px; /* Ajustement de l'espace intérieur */
+            transition: transform 0.2s ease-in-out;
         }
 
-        .modern-table th {
-            background-color: #1d3557;
-            color: #ecf0f1;
-            font-weight: bold;
+        .card:hover {
+            transform: translateY(-4px);
         }
 
-        .modern-table tr:hover {
-            background-color: #f4f5f7;
+        .card h3 {
+            margin-top: 0;
+            margin-bottom: 10px;
+            font-size: 18px;
+            color: #1E2A38; /* Bleu foncé */
+            border-bottom: 2px solid #3A8DFF; /* Bleu clair */
+            padding-bottom: 5px;
         }
 
-        .pagination {
-            display: flex;
-            justify-content: center;
-            margin-top: 20px;
-            gap: 10px;
+        .card p {
+            margin: 5px 0;
+            color: #555;
+            font-size: 16px;
         }
-		
-		 /* ===========================
-           4. Modern Lists
-        ============================ */
-        .modern-list {
+
+        .card ul {
             list-style: none;
             padding: 0;
-            margin: 0;
-            display: flex;
-            flex-direction: column;
-            gap: 15px;
+            margin: 10px 0 0 0;
         }
 
-        .modern-list li {
+        .card ul li {
             display: flex;
             align-items: center;
-            gap: 15px;
-            background-color: #f9f9f9;
-            border: 1px solid #ddd;
-            border-radius: 8px;
-            padding: 15px;
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            gap: 10px;
+            margin-bottom: 8px;
         }
 
-        .modern-list li:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 6px 10px rgba(0, 0, 0, 0.15);
+        .card ul li i {
+            color: #3A8DFF; /* Bleu clair */
+            font-size: 16px;
         }
 
-        .modern-list li i {
-            font-size: 1.5rem;
-            color: #007BFF; /* Bleu vif */
-        }
-
-        .modern-list li span {
-            font-size: 1rem;
-            color: #333;
-        }
-		
-		table {
+        /* ===========================
+           Table
+        ============================ */
+        table {
             width: 100%;
             border-collapse: collapse;
-            margin-bottom: 20px;
+            margin-top: 15px; /* Alignement avec le titre */
         }
 
         table th, table td {
-            padding: 12px 15px;
+            padding: 10px;
             text-align: left;
             border-bottom: 1px solid #ddd;
         }
 
         table th {
-            background-color: #1d3557;
-            color: #fff;
-            font-weight: 600;
-        }
-
-        table tr:nth-child(even) {
-            background-color: #f9f9f9;
+            background-color: #3A8DFF; /* Bleu clair */
+            color: #FFFFFF; /* Blanc pur */
+            font-weight: bold;
         }
 
         table tr:hover {
-            background-color: #f1f1f1;
-        }
-
-        .progress-bar-container {
-            background-color: #e0e0e0;
-            border-radius: 5px;
-            overflow: hidden;
-            width: 100%;
-            height: 16px;
-            margin-top: 5px;
-        }
-
-        .progress-bar {
-            height: 100%;
-            border-radius: 5px;
-            text-align: center;
-            line-height: 16px;
-            color: #fff;
-            font-size: 0.8rem;
-        }
-
-        .progress-bar.green {
-            background-color: #4caf50;
-        }
-
-        .progress-bar.orange {
-            background-color: #ff9800;
-        }
-
-        .progress-bar.red {
-            background-color: #f44336;
+            background-color: #F2F4F7; /* Gris clair au survol */
         }
 
         /* ===========================
-           4. Footer
+           Footer
         ============================ */
-			footer {
-			position: fixed; /* Fixe le footer */
-			bottom: 0;       /* Colle le footer en bas de la fenêtre */
-			left: 0;         /* Colle le footer à gauche */
-			width: 100%;     /* Le footer prend toute la largeur de la fenêtre */
-			background-color: #1d3557; /* Couleur de fond */
-			color: #ecf0f1;  /* Couleur du texte */
-			text-align: center; /* Centrage du texte */
-			padding: 20px;   /
+        footer {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            background-color: #1E2A38; /* Bleu foncé */
+            color: #FFFFFF; /* Texte blanc */
+            text-align: center;
+            padding: 20px;
         }
 
         footer p {
@@ -272,107 +201,90 @@
         }
 
         footer a {
-            color: #007BFF;
+            color: #3A8DFF; /* Bleu clair */
             text-decoration: underline;
         }
 
         footer a:hover {
-            color: #ecf0f1;
+            color: #FFFFFF; /* Texte blanc au survol */
         }
-		footer .citation {
+
+        footer .citation {
             font-style: italic;
-			font-size: 0.9rem;
-			margin-bottom: 15px;
-			text-align: center; /* Centrage horizontal du texte */
-			margin: 0 auto; /* Centrage de l'élément */
-			max-width: calc(50% - 20px); /* Alignement avec la largeur des cards */
+            font-size: 0.9rem;
+            margin-bottom: 15px;
+            text-align: center;
+            margin: 0 auto;
+            max-width: calc(50% - 20px);
         }
-		.charts-container {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 40px;
-        }
-
-        .chart {
-            width: 48%;
-            background-color: #fff;
+		/* Style pour la section Note finale */
+        .final-note {
+            margin-top: 40px;
             padding: 20px;
+            background-color: #fff;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
             border-radius: 8px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            font-family: "Dancing Script", cursive;
+            font-size: 1.5em;
+            color: #2a2a2a;
+            text-align: center;
+            font-style: italic;
         }
-		 /* ===========================
-           6. Responsive Design
+		
+
+        /* ===========================
+           Responsive Design
         ============================ */
-        @media (max-width: 1024px) {
-            .sidebar {
-                width: 200px;
-            }
-
-            .main-content {
-                margin-left: 220px;
-                padding: 20px;
-            }
-
-            .sidebar h2 {
-                font-size: 1.3rem;
-            }
-
-            .sidebar p {
-                font-size: 0.9rem;
-            }
-
-            .nav-links a {
-                font-size: 0.9rem;
-            }
-			footer .citation {
-				 max-width: calc(75% - 20px); /* Réduit la largeur sur des écrans moyens */
-				 font-size: 0.85rem; /* Ajuste la taille de la police */
-			}		
-        }
-
         @media (max-width: 768px) {
             .sidebar {
-                position: relative;
-                width: 100%;
-                height: auto;
-                padding: 10px;
-            }
-
-            .sidebar img {
-                width: 70px;
-                height: 70px;
+                width: 200px; /* Réduction de la largeur de la sidebar */
             }
 
             .main-content {
-                margin-left: 0;
-                padding: 20px;
+                margin-left: 210px; /* Ajustement du contenu principal */
+                padding: 20px; /* Réduction des marges */
             }
 
-            footer .citation {
-                max-width: 90%; /* Prend presque toute la largeur sur des écrans plus petits */
-				font-size: 0.8rem; /* Réduit encore la taille de la police */
+            .cards {
+                grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); /* Grille adaptée aux petits écrans */
+            }
 
+            .card {
+                padding: 15px; /* Réduction de l'espace intérieur */
+            }
+
+            .main-content h1 {
+                font-size: 1.5rem; /* Ajustement de la taille du titre principal */
+            }
+
+            section h1 {
+                font-size: 1.2rem; /* Ajustement de la taille des sections */
+            }
+
+            footer p {
+                font-size: 0.9rem; /* Réduction de la taille du texte du footer */
             }
         }
 
         @media (max-width: 480px) {
-            .sidebar h2 {
-                font-size: 1rem;
+            .sidebar {
+                width: 100%; /* Sidebar pleine largeur */
+                position: static; /* Sidebar en haut */
+                padding: 10px; /* Réduction des marges */
             }
 
-            .sidebar p {
-                font-size: 0.8rem;
+            .main-content {
+                margin-left: 0;
+                padding: 10px; /* Réduction des marges */
             }
 
-            .nav-links a {
-                font-size: 0.8rem;
-                padding: 8px;
+            .cards {
+                grid-template-columns: 1fr; /* Une seule colonne pour les très petits écrans */
             }
 
-            footer .citation {
-                max-width: calc(75% - 20px); /* Réduit la largeur sur des écrans moyens */
-				font-size: 0.85rem; /* Ajuste la taille de la police */
+            footer {
+                position: static; /* Footer non fixe pour éviter les chevauchements */
+                padding: 10px; /* Réduction des marges */
             }
         }
     </style>
@@ -381,471 +293,240 @@
     <!-- Sidebar -->
     <div class="sidebar">
         <h2>Micro Stage AMN BRAINS</h2>
-		<a href="index.html">Retour à l'accueil</a>
-        <a href="#context">Présentation générale</a>
-        <a href="#perimetre">Mon périmètre de test</a>
-        <a href="#conception">Conception</a>
-        <a href="#execution">Exécution</a>
-        <a href="#livrables">Livrables produits</a>
+        <div class="nav-links">
+            <a href="index.html">Retour à l'accueil</a>
+            <a href="#context">Présentation générale</a>
+            <a href="#perimetre">Mon périmètre de test</a>
+            <a href="#activity">Activités de tests réalisées</a>
+			<a href="#livrables">Livrables produits</a>
+        </div>
     </div>
 
     <!-- Main Content -->
     <div class="main-content">
-         <h1>Présentation du micro stage chez l'entreprise AMN BRAINS</h1>
-		
-		<!-- Introduction Section -->
-        <div class="intro">
-            <h2>Introduction</h2>
-            <p>Bienvenue sur mon micro stage chez AMN BRAINS ! Ce projet vise à mettre en pratique les connaissances acquises durant cette formation dans des situations réelles, permettant de combler encore plus l'écart entre la théorie et la réalité.</p>
-        </div>
-
+        <h1>Bienvenue sur mon micro stage chez AMN BRAINS</h1>
         <section id="context">
             <h1>Présentation générale</h1>
-            <p>Le micro stage est un projet de test réel pour de véritables clients, m'offrant la possibilité d'aiguiser mes compétences dans des conditions authentiques et de renforcer ma confiance en mes capacités.
-               En retour, nos partenaires peuvent bénéficier de la découverte gratuite de défauts potentiellement non détectés jusqu'à présent ou renforcer leur confiance dans leurs logiciels. </p>
-			<h2>L'entreprise : Amn Brains</h2> 
-			<p>Amn Brains développe des solutions logicielles dans la Gouvernance de la Cybersécurité.</p>
-			<p>La complexité des systèmes d’information et la multiplication des techniques d’attaques conduisent généralement à des angles morts exploitables par les cyber attaquants. Leurs solutions sont conçues pour aider les professionnels de la cybersécurité (RSSI, Consultants, Auditeurs, Opérationnels) à combler ces difficultés en utilisant au maximum la puissance de la machine afin de leur permettre de se concentrer sur les aspects sur lesquels ils ont le plus de valeur ajoutée.</p>
-			<h2>Le logiciel à tester : Amn Auditor</h2> 
-			<p>AMN Auditor : Application Desktop de conduite d'Audit Multi-référentiel pour les auditeurs cybersécurité.</p>
-			<h2>Informations importantes </h2>
-			<p>Il n'y a pas de sprint sur ce projet. Il est géré par flux continu inspiré par la méthodologie KANBAN.</p>
-		</section>
-		
-		<section id="perimetre">
-		<h1>Mon périmètre de test</h1>
-		<h2>Exigence à tester </h2>
-	<table class="modern-table">
-        <tr>
-            <th>User story</th>
-            <th>Description</th>
-        </tr>
-        <tr>
-            <td>Génération des constats d’audit</td>
-            <td>En tant qu’auditeur en mission, je veux m’appuyer sur un utilitaire d’audit intelligent pour dérouler les principales étapes de ma mission (questionnement, constats, conformité, écarts, actions), afin de réaliser un audit structuré, réactif et piloté par les exigences du système audité, tout en bénéficiant d’une assistance contextuelle de l’IA.</td>
-        </tr>
-    </table>
-	<h2>Critères d'acceptations</h2>
-	<table class="modern-table">
-        <tr>
-            <th>Critères d'acceptations</th>
-            <th>Description</th>
-        </tr>
-        <tr>
-            <td>Génération depuis un point de contrôle</td>
-            <td>Lorsqu’un point de contrôle est marqué comme Conforme ou Non conforme, un texte est automatiquement généré et proposé à l’utilisateur. Ce texte :
-			<ul class="modern-list">
-                <li>
-                    <i>✔️</i>
-                    <span>Est généré dynamiquement en fonction du statut choisi (Conforme ou Non conforme)</span>
-                </li>
-                <li>
-                    <i>✔️</i>
-                    <span>Peut être modifié manuellement par l’utilisateur dans la zone de texte dédiée</span>
-                </li>
-				<li>
-                    <i>✔️</i>
-                    <span>Peut être orienté à l’aide de mots-clés spécifiques (exemple : “sécurité”, “documentation”, “performance”...)</span>
-                </li>
-                <li>
-                    <i>✔️</i>
-                    <span>Peut être validé par l’utilisateur en appuyant sur Entrée ou en cliquant sur le bouton "Ajouter"</span>
-                </li>
-			</ul> 
-			<p>Cette fonctionnalité permet de générer rapidement des constats d’audit pertinents et personnalisables selon le contexte de chaque point de contrôle.</p>
-			</td>
-        </tr>
-		 <tr>
-            <td>Génération du constat (Conformité ou Écart)</td>
-            <td>Lorsqu’un utilisateur saisit un mot-clé dans le champ de constat de conformité ou d’écart, un texte est automatiquement généré. Ce texte peut être orienté selon les mots-clés saisis, et reste entièrement modifiable.
-                L’utilisateur peut ajouter ce texte au constat en cliquant sur le bouton "Ajouter" ou en appuyant sur la touche Entrée. Ce système permet de gagner du temps tout en conservant une souplesse complète pour la rédaction des constats.
-			</td>
-        </tr>
-		<tr>
-            <td>Détail - Génération des actions de remédiation</td>
-            <td>Lorsqu’une non-conformité est ajoutée, des actions de remédiation sont générées automatiquement dans la zone dédiée. Ces actions sont orientées via les mots-clés saisis, et peuvent être ajustées ou complétées librement par l’utilisateur.
-                L’ajout des actions générées peut se faire en cliquant sur "Ajouter" ou en appuyant sur la touche Entrée.
-                L’objectif est de proposer une base de travail cohérente, rapide et personnalisable pour traiter efficacement les non-conformités.
-			</td>
-        </tr>
-    </table>
-		</section>
-		
-		<section id="conception">
-		<h1>Conception</h1>
-		<p>
-		<h2>Liste des cas de tests pour le critère d'acceptation : Génération depuis un point de contrôle</h2>
-		<table class="modern-table">
-        <tr>
-            <th>Clé</th>
-            <th>Résumé</th>
-			<th>Type de test</th>
-        </tr>
-         <tr>
-                    <td>AA-98</td>
-                    <td>TC3.1.1 – Génération d’un constat en cliquant sur "Conforme"</td>
-                    <td>Manuel</td>
-                   
-                </tr>
-                <tr>
-                    <td>AA-99</td>
-                    <td>TC3.1.2 – Génération d’un constat en cliquant sur "Non conforme"</td>
-                    <td>Manuel</td>
-                   
-                </tr>
-                <tr>
-                    <td>AA-100</td>
-                    <td>TC3.1.3 – Vérification de la cohérence entre point de contrôle et constat généré</td>
-                    <td>Manuel</td>
-                   
-                </tr>
-                <tr>
-                    <td>AA-101</td>
-                    <td>TC3.1.4 – Vérification de la zone de modification du constat généré</td>
-                    <td>Manuel</td>
-                   
-                </tr>
-                <tr>
-                    <td>AA-102</td>
-                    <td>TC3.1.5 – Orientation de la suggestion par mot-clé saisi</td>
-                    <td>Manuel</td>
-                   
-                </tr>
-                <tr>
-                    <td>AA-103</td>
-                    <td>TC3.1.6 – Suggestion générée sans mot-clé</td>
-                    <td>Manuel</td>
-                   
-                </tr>
-                <tr>
-                    <td>AA-104</td>
-                    <td>TC3.1.7 – Ajout du constat avec le bouton "Ajouter"</td>
-                    <td>Manuel</td>
-                   
-                </tr>
-                <tr>
-                    <td>AA-105</td>
-                    <td>TC3.1.8 – Ajout du constat avec la touche "Entrée"</td>
-                    <td>Manuel</td>
-                   
-                </tr>
-                <tr>
-                    <td>AA-106</td>
-                    <td>TC3.1.9 – Génération de plusieurs constats via plusieurs points de contrôle</td>
-                    <td>Manuel</td>
-                   
-                </tr>
-                <tr>
-                    <td>AA-107</td>
-                    <td>TC3.1.10 – Modification d’un constat après ajout</td>
-                    <td>Manuel</td>
-       
-                </tr>
-    </table>
-	<p>
-	<h2>Liste des cas de tests pour le critère d'acceptation : Génération du constat (Conformité ou Écart)</h2>
-	<table class="modern-table">
-        <tr>
-            <th>Clé</th>
-            <th>Résumé</th>
-			<th>Type de test</th>
-        </tr>
-         <tr>
-                    <td>AA-108</td>
-                    <td>TC3.2.1 – Génération d’un constat à partir d’un mot-clé saisi</td>
-                    <td>Manuel</td>
-                   
-                </tr>
-                <tr>
-                    <td>AA-109</td>
-                    <td>TC3.2.2 – Vérification de la pertinence de la suggestion générée</td>
-                    <td>Manuel</td>
-                   
-                </tr>
-                <tr>
-                    <td>AA-110</td>
-                    <td>TC3.2.3 – Aucun mot-clé saisi → aucun texte généré</td>
-                    <td>Manuel</td>
-                   
-                </tr>
-                <tr>
-                    <td>AA-111</td>
-                    <td>TC3.2.4 – Mot-clé inconnu → suggestion générique</td>
-                    <td>Manuel</td>
-                   
-                </tr>
-                <tr>
-                    <td>AA-112</td>
-                    <td>TC3.2.5 – Ajout du constat avec "Ajouter"</td>
-                    <td>Manuel</td>
-                   
-                </tr>
-                <tr>
-                    <td>AA-113</td>
-                    <td>TC3.2.6 – Ajout du constat avec "Entrée"</td>
-                    <td>Manuel</td>
-                   
-                </tr>
-                <tr>
-                    <td>AA-114</td>
-                    <td>TC3.2.7 – Modification manuelle de la suggestion générée</td>
-                    <td>Manuel</td>
-                   
-                </tr>
-                <tr>
-                    <td>AA-115</td>
-                    <td>TC3.2.8 – Réinitialisation du champ de saisie</td>
-                    <td>Manuel</td>
-                   
-                </tr>
-                <tr>
-                    <td>AA-116</td>
-                    <td>TC3.2.9 – Enchaînement de plusieurs constats générés</td>
-                    <td>Manuel</td>
-                   
-                </tr>
-                <tr>
-                    <td>AA-117</td>
-                    <td>TC3.2.10 – Suppression ou édition d’un constat généré</td>
-                    <td>Manuel</td>
-       
-                </tr>
-    </table>
-	<p>
-	<h2>Liste des cas de tests pour le critère d'acceptation : Génération des actions de remédiation</h2>
-	<table class="modern-table">
-        <tr>
-            <th>Clé</th>
-            <th>Résumé</th>
-			<th>Type de test</th>
-        </tr>
-         <tr>
-                    <td>AA-118</td>
-                    <td>TC3.3.1 – Activation de la zone d’action après ajout d’une non-conformité</td>
-                    <td>Manuel</td>
-                   
-                </tr>
-                <tr>
-                    <td>AA-119</td>
-                    <td>TC3.3.2 – Suggestion automatique d’action en cliquant dans le champ de saisie</td>
-                    <td>Manuel</td>
-                   
-                </tr>
-                <tr>
-                    <td>AA-120</td>
-                    <td>TC3.3.3 – Orientation de la suggestion via mot-clé</td>
-                    <td>Manuel</td>
-                   
-                </tr>
-                <tr>
-                    <td>AA-121</td>
-                    <td>TC3.3.4 – Génération d’une action sans mot-clé</td>
-                    <td>Manuel</td>
-                   
-                </tr>
-                <tr>
-                    <td>AA-122</td>
-                    <td>TC3.3.5 – Modification du texte généré avant ajout</td>
-                    <td>Manuel</td>
-                   
-                </tr>
-                <tr>
-                    <td>AA-123</td>
-                    <td>TC3.3.6 – Ajout de l’action via bouton "Ajouter"</td>
-                    <td>Manuel</td>
-                   
-                </tr>
-                <tr>
-                    <td>AA-124</td>
-                    <td>TC3.3.7 – Ajout de l’action via touche "Entrée"</td>
-                    <td>Manuel</td>
-                   
-                </tr>
-                <tr>
-                    <td>AA-125</td>
-                    <td>TC3.3.8 – Ajout de plusieurs actions à une non-conformité</td>
-                    <td>Manuel</td>
-                   
-                </tr>
-                <tr>
-                    <td>AA-126</td>
-                    <td>TC3.3.9 – Suppression ou édition d’une action générée</td>
-                    <td>Manuel</td>
-                   
-                </tr>
-                <tr>
-                    <td>AA-127</td>
-                    <td>TC3.3.10 – Relancer une suggestion après suppression d’une action</td>
-                    <td>Manuel</td>
-       
-                </tr>
-    </table>
-</section>
+            <div class="cards">
+                <!-- Card 1 -->
+                <div class="card">
+                    <h3>Contexte</h3>
+                    <p>J'ai fait partie d'une équipe multidisciplinaire composée : </p>
+                    <ul>
+                        <li><i class="bi bi-check-circle"></i> 1 Product Owner</li>
+                        <li><i class="bi bi-check-circle"></i> 9 développeurs</li>
+                        <li><i class="bi bi-check-circle"></i> 2 testeurs et 1 Test Manager</li>
+                        <li><i class="bi bi-check-circle"></i> 1 Scrum Master</li>
+                    </ul>
+                    
+                    <h3>Product Backlog</h3>
+                    <p>Le Product Backlog de Homey contient 30 exigences sous la forme d'histoires utilisateurs (User Stories). Ces User Stories décrivent les fonctionnalités attendues du produit du point de vue de l'utilisateur.</p>
+                    <p>Durée du Sprint : L'équipe a convenu que la durée d'un Sprint, c'est-à-dire la période pendant laquelle le travail est réalisé, serait de 2 semaines.</p>
+                </div>
 
-	<section id="execution">
-	<h1>Exécution</h1>
-	<h2>Rapport de Couverture des Tests</h2>
-        <table>
-            <thead>
-                <tr>
-                    <th>Clé</th>
-                    <th>Résumé</th>
-                    <th>Nombre Total de Tests</th>
-                    <th>Réussi</th>
-                    <th>Échoué</th>
-                    <th>Autre</th>
-                    <th>Complétude</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td>AA-64</td>
-                    <td>Générer les constats d'audit</td>
-                    <td>30</td>
-                    <td>23</td>
-                    <td>7</td>
-                    <td>0</td>
-                    <td>
-                        76.6%
-                        <div class="progress-bar-container">
-                            <div class="progress-bar orange" style="width: 76.6%;">76.6%</div>
-                        </div>
-                    </td>
-                </tr>
-                <tr>
-                    <td>AA-78</td>
-                    <td>EXIG-3.1 - Génération d'un constat depuis un point de contrôle</td>
-                    <td>10</td>
-                    <td>10</td>
-                    <td>0</td>
-                    <td>0</td>
-                    <td>
-                        100%
-                        <div class="progress-bar-container">
-                            <div class="progress-bar green" style="width: 100%;">100%</div>
-                        </div>
-                    </td>
-                </tr>
-                <tr>
-                    <td>AA-79</td>
-                    <td>EXIG-3.2 - Génération d'un constat depuis une exigence</td>
-                    <td>10</td>
-                    <td>6</td>
-                    <td>4</td>
-                    <td>0</td>
-                    <td>
-                        60%
-                        <div class="progress-bar-container">
-                            <div class="progress-bar red" style="width: 60%;">60%</div>
-                        </div>
-                    </td>
-                </tr>
-                <tr>
-                    <td>AA-80</td>
-                    <td>EXIG-3.3 - Génération d’une action corrective</td>
-                    <td>10</td>
-                    <td>7</td>
-                    <td>3</td>
-                    <td>0</td>
-                    <td>
-                        70%
-                        <div class="progress-bar-container">
-                            <div class="progress-bar orange" style="width: 70%;">70%</div>
-                        </div>
-                    </td>
-                </tr>
-            </tbody>
-        </table>
-		<h2>Vue d'ensemble du tableau Kanban AmnAuditor concernant mon périmètre de test</h2>
-		<div class="charts-container">
-            <div class="chart">
-                <canvas id="pieChart"></canvas>
+                <!-- Card 2 -->
+                <div class="card">
+                    <h3>Bénéfices de la simulation</h3>
+                    <p>Ce projet de fin de formation a eu les avantages suivants : </p>
+                    <ul>
+                        <li><i class="bi bi-check-circle"></i> Appliquer des techniques de test statique, des tests dynamiques manuels et des tests automatisés pour garantir la qualité du logiciel</li>
+                        <li><i class="bi bi-check-circle"></i> Développer ma capacité à travailler en autonomie ou en binôme, en fonction des exigences du projet.</li>
+                        <li><i class="bi bi-check-circle"></i> Préparer une soutenance de fin de formation où j'ai pu présenter mes travaux, justifier mes choix de test, et démontrer mes compétences en matière de conception et d'exécution de cas de test manuels et automatisés.</li>
+                        <li><i class="bi bi-check-circle"></i> Recevoir des retours d'expérience et des conseils personnalisés de la part des formateurs Test Academy pour continuer à progresser dans ma carrière de testeur.</li>
+                    </ul>
+                </div>
             </div>
-            <div class="chart">
-                <canvas id="barChart"></canvas>
+        </section>
+        
+        <section id="perimetre">
+            <h1>Mon périmètre de test</h1>
+            <div class="cards">
+                <div class="card">
+                    <h3>Mon périmètre</h3>
+                    <p>Le périmètre de test qui m'a été affecté à la suite du sprint planning est le suivant : </p>
+                    <ul>
+                        <li><i class="bi bi-check-circle"></i> Faire une demande de réservation</li>
+                        <li><i class="bi bi-check-circle"></i> Traiter une demande de réservation</li>
+                    </ul>
+                    <h3>Résumé des users stories</h3>
+                    <p>Voici le résumé : </p>
+                    <ul>
+                        <li><i class="bi bi-check-circle"></i>En tant que Voyageur Je souhaite envoyer une demande de réservation Afin de bénéficier d’un séjour dans un logement saisonnier</li>
+                        <li><i class="bi bi-check-circle"></i>En tant qu'Hôte Je souhaite accepter ou refuser une demande de réservation Afin de planifier les séjours dans mon logement</li>
+                    </ul>  
+                    <h3>Faire une demande de réservation - Critères d'acceptation</h3>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Scénario</th>
+                                <th>Critères d'acceptation</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Un Voyageur (connecté) fait une demande de réservation</td>
+                                <td>
+                                    <ul>
+                                        <li><i class="bi bi-check-circle"></i>ETANT DONNE un Voyageur connecté</li>
+                                        <li><i class="bi bi-check-circle"></i>QUAND l’utilisateur fait une demande de réservation</li>
+                                        <li><i class="bi bi-check-circle"></i>ALORS le système crée une nouvelle réservation dans le tableau de bord de l’hôte correspondant à l’annonce</li>
+                                        <li><i class="bi bi-check-circle"></i>ET le système crée un nouveau message dans le tableau de bord de l’hôte correspondant à l’annonce</li>
+                                    </ul>
+                                </td>
+                            </tr>
+							<tr>
+                                <td>Un Visiteur (non connecté) fait une demande de réservation</td>
+                                <td>
+                                    <ul>
+                                        <li><i class="bi bi-check-circle"></i>ETANT DONNE un Visiteur non connecté</li>
+                                        <li><i class="bi bi-check-circle"></i>QUAND l’utilisateur fait une demande de réservation</li>
+                                        <li><i class="bi bi-check-circle"></i>ALORS le système ne donne pas suite à la demande de réservation</li>
+                                    </ul>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+					 <h3>Traiter une demande de réservation - Critères d'acceptation</h3>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Scénario</th>
+                                <th>Critères d'acceptation</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>L’hôte confirme une demande de réservation</td>
+                                <td>
+                                    <ul>
+                                        <li><i class="bi bi-check-circle"></i>ETANT DONNE un hôte connecté à l’application</li>
+                                        <li><i class="bi bi-check-circle"></i>ET une réservation avec un statut « NOUVEAU »</li>
+                                        <li><i class="bi bi-check-circle"></i>QUAND l’hôte confirme une demande de réservation</li>
+                                        <li><i class="bi bi-check-circle"></i>ALORS le statut de la réservation devient « ATTENTE DE PAIEMENT » pour l’hôte</li>
+										<li><i class="bi bi-check-circle"></i>ET le statut de la réservation devient « DISPONIBLE » pour le voyageur </li>
+                                    </ul>
+                                </td>
+                            </tr>
+							<tr>
+                                <td>Le voyageur annule une demande de réservation</td>
+                                <td>
+                                    <ul>
+                                        <li><i class="bi bi-check-circle"></i>ETANT DONNE un voyageur connecté à l’application</li>
+                                        <li><i class="bi bi-check-circle"></i>ET une réservation avec un statut « NOUVEAU »</li>
+                                        <li><i class="bi bi-check-circle"></i>QUAND le voyageur annule une demande de réservation</li>
+										<li><i class="bi bi-check-circle"></i>ALORS le statut de la réservation devient « ANNULE » pour l’hôte</li>
+                                        <li><i class="bi bi-check-circle"></i>ET le statut de la réservation devient « ANNULE » pour le voyageur</li>
+                                    </ul>
+                                </td>
+                            </tr>
+							<tr>
+                                <td>L’hôte refuse une demande de réservation</td>
+                                <td>
+                                    <ul>
+                                        <li><i class="bi bi-check-circle"></i>ETANT DONNE un hôte connecté à l’application</li>
+                                        <li><i class="bi bi-check-circle"></i>ET une réservation avec un statut « NOUVEAU </li>
+                                        <li><i class="bi bi-check-circle"></i>QUAND l’hôte refuse une demande de réservation</li>
+										<li><i class="bi bi-check-circle"></i>ALORS le statut de la réservation devient « REFUSE » pour l’hôte</li>
+                                        <li><i class="bi bi-check-circle"></i>ET le statut de la réservation devient « REFUSE » pour le voyageur</li>
+                                    </ul>
+                                </td>
+                            </tr>
+							<tr>
+                                <td>Le voyageur paye une réservation</td>
+                                <td>
+                                    <ul>
+                                        <li><i class="bi bi-check-circle"></i>ETANT DONNE un voyageur connecté à l’application</li>
+                                        <li><i class="bi bi-check-circle"></i>ET une réservation avec un statut « ATTENTE DE PAIEMENT »</li>
+                                        <li><i class="bi bi-check-circle"></i>QUAND le voyageur paye une demande de réservation</li>
+										<li><i class="bi bi-check-circle"></i>ALORS le statut de la réservation devient « RESERVE » pour l’hôte</li>
+                                        <li><i class="bi bi-check-circle"></i>ET le statut de la réservation devient « RESERVE » pour le voyageur</li>
+                                    </ul>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
             </div>
-        </div>
-	</section>
-	
-	<section id="livrables">
-	<h1>Livrables produits (cette section sera complétée prochainement)</h1>
-	</section>
-	
+        </section>
+		
+		<section id="activity">
+		<h1>Activités de tests réalisées</h1>
+	 <div class="cards">
+                <!-- Card 1 -->
+                <div class="card">
+                    <h3>Analyse</h3>
+                    <p>Tâches réalisées : </p>
+                    <ul>
+                        <li><i class="bi bi-check-circle"></i>Détermination de la structure du périmètre fonctionnel</li>
+                        <li><i class="bi bi-check-circle"></i>Réalisation d'une revue des histoires utilisateur affectées à mon périmètre</li>
+                        <li><i class="bi bi-check-circle"></i>Mise à jour de la structure des tests</li>
+                        <li><i class="bi bi-check-circle"></i>Création du projet PFF_MaximeJoannis dans Jira</li>
+						<li><i class="bi bi-check-circle"></i>Création des EPICS dans Jira</li>
+                        <li><i class="bi bi-check-circle"></i>Création des users stories dans Jira</li>
+						<li><i class="bi bi-check-circle"></i>Ajout des conditions de test</li>
+                        <li><i class="bi bi-check-circle"></i>Démarrage du sprint</li>
+                    </ul>
+                    
+                    <h3>Conception</h3>
+                    <p>Tâches réalisées : </p>
+                    <ul>
+                        <li><i class="bi bi-check-circle"></i>Listing des cas de test des users stories affectées à mon périmètre de test</li>
+                        <li><i class="bi bi-check-circle"></i>Conception des cas de test associés aux différentes users stories de mon périmètres</li>
+                        <li><i class="bi bi-check-circle"></i>Création des cas de tests dans l'outil Jira</li>
+                    </ul>
+                    
+                </div>
 
-       
-    </div>
-
+                <!-- Card 2 -->
+                <div class="card">
+                    <h3>Implémentation</h3>
+                    <p>Tâches réalisées : </p>
+                    <ul>
+                        <li><i class="bi bi-check-circle"></i> Implémentation des cas de test</li>
+                        <li><i class="bi bi-check-circle"></i> Préparation des campagnes de test</li>
+                        <li><i class="bi bi-check-circle"></i> Création des plans de test</li>
+                        <li><i class="bi bi-check-circle"></i> Création des éxécutions de test dans Jira</li>
+						<li><i class="bi bi-check-circle"></i> Développement des tests automatisés sur les scénarios critiques</li>
+                    </ul>
+					 <h3>Exécution</h3>
+                    <p>Tâches réalisées : </p>
+                    <ul>
+                        <li><i class="bi bi-check-circle"></i> Initialisation des éxécutions des campagnes de test</li>
+                        <li><i class="bi bi-check-circle"></i> Lancement des éxécutions des campagnes de test</li>
+						<li><i class="bi bi-check-circle"></i> Exécution des tests automatisés</li>
+                        <li><i class="bi bi-check-circle"></i> Création du rapport de test final pour les 2 users stories</li>
+                    </ul>
+                </div>
+            </div>
+	 </section>
+	 
+	 <section id="livrables">
+	 <h1>Livrables produits</h1>
+	  <div class="cards">
+		<div class="card">
+			<ul>
+                <li><i class="bi bi-check-circle"></i> Cas de tests</li>
+                <li><i class="bi bi-check-circle"></i> Résultats d’exécution des tests manuels</li>
+                <li><i class="bi bi-check-circle"></i> Scripts automatisés</li>
+                <li><i class="bi bi-check-circle"></i> Résultats d’exécution des tests automatisés</li>
+			    <li><i class="bi bi-check-circle"></i> Rapports de défauts</li>
+				<li><i class="bi bi-check-circle"></i> Rapport Final de test</li>
+			    <li><i class="bi bi-check-circle"></i> Support de soutenance</li>
+            </ul>
+		</div>
+	</div>
+	 </section>
+	  
+ </div>
+	
+	 
     <!-- Footer -->
     <footer>
-	<span class="citation">"N'abandonne jamais, car c'est souvent juste après le dernier effort que le succès se dévoile."</span>
+        <span class="citation">"N'abandonne jamais, car c'est souvent juste après le dernier effort que le succès se dévoile."</span>
         <p>© 2025 Maxime Joannis - Tous droits réservés. <a href="privacy.html">Politique de confidentialité</a></p>
     </footer>
 	
-<script>
-        // Données pour le camembert
-        const pieData = {
-            labels: ['Test', 'Test Exécution', 'Test Plan', 'Sous-tâche', 'Story'],
-            datasets: [{
-                label: 'Répartition des Tickets',
-                data: [30, 1, 1, 3, 1],
-                backgroundColor: ['#4caf50', '#ff9800', '#2196f3', '#f44336', '#9c27b0'],
-                hoverOffset: 4
-            }]
-        };
-
-        // Options pour le camembert
-        const pieOptions = {
-            responsive: true,
-            plugins: {
-                legend: {
-                    position: 'bottom'
-                }
-            }
-        };
-
-        // Création du camembert
-        const pieCtx = document.getElementById('pieChart').getContext('2d');
-        new Chart(pieCtx, {
-            type: 'pie',
-            data: pieData,
-            options: pieOptions
-        });
-
-        // Données pour l'histogramme
-        const barData = {
-            labels: ['Test', 'Test Exécution', 'Test Plan', 'Sous-tâche', 'Story'],
-            datasets: [{
-                label: 'Nombre de Tickets',
-                data: [30, 1, 1, 3, 1],
-                backgroundColor: ['#4caf50', '#ff9800', '#2196f3', '#f44336', '#9c27b0']
-            }]
-        };
-
-        // Options pour l'histogramme
-        const barOptions = {
-            responsive: true,
-            plugins: {
-                legend: {
-                    display: false
-                }
-            },
-            scales: {
-                y: {
-                    beginAtZero: true
-                }
-            }
-        };
-
-        // Création de l'histogramme
-        const barCtx = document.getElementById('barChart').getContext('2d');
-        new Chart(barCtx, {
-            type: 'bar',
-            data: barData,
-            options: barOptions
-        });
-    </script>
-	
-	<!-- Stats sur le nombre de visites -->
+	 <!-- Stats sur le nombre de visites -->
   <script>
     var t = setInterval(function() {
         if (window.goatcounter && window.goatcounter.visit_count) {
@@ -858,5 +539,6 @@
   <script data-goatcounter="https://maximejoannis.goatcounter.com/count"
           async src="//gc.zgo.at/count.js">
   </script>
+  
 </body>
 </html>
