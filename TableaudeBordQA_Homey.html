@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tableau de Bord QA - Application Homey</title>
+    <title>Tableau de Bord QA - PFF Homey</title>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat:400,700&display=swap">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
 	<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
@@ -259,6 +259,11 @@
             height: 300px;
             margin: 0 auto;
         }
+		 .ticket-chart-container {
+			margin: 20px auto;
+			width: 80%;
+			text-align: center;
+		}
 		
 		/* Section des rapports */
         .progress-bar-container {
@@ -343,6 +348,104 @@
             background-color: #1E2A38;
         }
 		
+		.graph-container {
+			display: flex;
+			flex-direction: column;
+			align-items: center;
+			gap: 20px;
+       }
+		.node {
+			display: flex;
+			flex-direction: column;
+			align-items: center;
+			background-color: #ffffff;
+			border: 2px solid #007BFF;
+			border-radius: 8px;
+			padding: 10px 20px;
+			box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+			transition: transform 0.3s ease;
+		}
+		.node:hover {
+			transform: scale(1.05);
+		}
+		.node-title {
+			font-size: 18px;
+			font-weight: bold;
+			color: #007BFF;
+			margin-bottom: 5px;
+		}
+		.node-subtitle {
+			font-size: 14px;
+			color: #555;
+		}
+		.connections {
+			display: flex;
+			flex-wrap: wrap;
+			justify-content: center;
+			gap: 15px;
+		}
+		.connection {
+			position: relative;
+			display: flex;
+			flex-direction: column;
+			align-items: center;
+			gap: 10px;
+		}
+		.connection::before {
+			content: '';
+			position: absolute;
+			top: -10px;
+			width: 2px;
+			height: 30px;
+			background-color: #007BFF;
+		}
+		
+		.schedule-container {
+			background-color: #ffffff;
+			border: 2px solid #007BFF;
+			border-radius: 12px;
+			box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+			padding: 30px;
+			width: 400px;
+		}
+		.schedule-header {
+			text-align: center;
+			font-size: 24px;
+			font-weight: bold;
+			color: #007BFF;
+			margin-bottom: 20px;
+		}
+		.sprint {
+			display: flex;
+			justify-content: space-between;
+			align-items: center;
+			background-color: #f9f9ff;
+			border: 1px solid #007BFF;
+			border-radius: 8px;
+			padding: 10px 15px;
+			margin-bottom: 10px;
+			transition: transform 0.3s ease, box-shadow 0.3s ease;
+		}
+		.sprint:hover {
+			transform: translateY(-3px);
+			box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
+		}
+		.sprint-title {
+			font-size: 16px;
+			font-weight: bold;
+			color: #333;
+		}
+		.sprint-date {
+			font-size: 14px;
+			color: #555;
+		}
+		.duration {
+			text-align: center;
+			margin-top: 20px;
+			font-size: 16px;
+			color: #555;
+		}
+			
 
         /* ===========================
            Footer
@@ -453,7 +556,7 @@
 
     <!-- Bandeau -->
     <div class="banner">
-        Tableau de Bord QA - Application Homey
+        Tableau de Bord QA - Projet jira de fin de formation Homey
     </div>
 
     <!-- Main Content -->
@@ -473,6 +576,28 @@
                         <canvas id="automationChart"></canvas>
                     </div>
 					</ul>
+					<h3>Sprints</h3>
+		<div class="schedule-container">
+			<div class="schedule-header">Planning des Sprints</div>
+			<div class="sprint">
+				<div class="sprint-title">Sprint 1 - Phase conception</div>
+				<div class="sprint-date">9 mars - 22 mars</div>
+			</div>
+			<div class="sprint">
+				<div class="sprint-title">Sprint 2 - Phase implémentation</div>
+				<div class="sprint-date">23 mars - 5 avril</div>
+			</div>
+			<div class="sprint">
+				<div class="sprint-title">Sprint 3 - Phase exécution</div>
+				<div class="sprint-date">7 avril - 20 avril</div>
+			</div>
+			<div class="sprint">
+				<div class="sprint-title">Sprint 4 - Phase de préparation de la soutenance devant le grand jury</div>
+				<div class="sprint-date">27 avril - 4 mai</div>
+			</div>
+			<div class="duration">Durée d'un sprint : 2 semaines (14 jours)</div>
+		</div>
+					
                 </div>
 				<div class="card">
                     <h3>Indicateurs globaux</h3>
@@ -492,6 +617,10 @@
                             <p>4</p>
                         </div>
                 </div>
+			<div class="ticket-chart-container">
+			<h3>Répartition des tickets du projet jira Homey par type</h3>
+					<canvas id="ticketChart"></canvas>
+			</div>	
             </div>
 			</div>
         </section>
@@ -552,6 +681,67 @@
 		 
 		 <section id="rapport">
 		  <h1>Rapports</h1>
+		  
+		  <div class="cards">
+		  <div class="card">
+		  <h3>Rapport de traçabilité</h3>
+		  <div class="graph-container">
+			<!-- EPIC -->
+			<div class="node">
+				<div class="node-title">EPIC 1</div>
+				<div class="node-subtitle">Gestion des réservations</div>
+			</div>
+
+			<!-- Connections -->
+			<div class="connections">
+				<!-- US1 -->
+				<div class="connection">
+					<div class="node">
+						<div class="node-title">Story 1</div>
+						<div class="node-subtitle">Faire une demande de réservation</div>
+					</div>
+					<div class="connections">
+						<div class="node">
+							<div class="node-title">Sous-tâche 1 : Un Voyageur (connecté) fait une demande de réservation</div>
+							<div class="node-subtitle">13 tests</div>
+						</div>
+						<div class="node">
+							<div class="node-title">Sous-tâche 2 : Un Visiteur(non connecté) fait une demande de réservation</div>
+							<div class="node-subtitle">1 test</div>
+						</div>
+					</div>
+				</div>
+
+				<!-- US2 -->
+				<div class="connection">
+					<div class="node">
+						<div class="node-title">Story 2</div>
+						<div class="node-subtitle">Traiter une demande de réservation</div>
+					</div>
+					<div class="connections">
+						<div class="node">
+							<div class="node-title">Sous-tâche 3 : L’hôte confirme une demande de réservation</div>
+							<div class="node-subtitle">4 tests</div>
+						</div>
+						<div class="node">
+							<div class="node-title">Sous-tâche 4 : Le voyageur annule une demande de réservation</div>
+							<div class="node-subtitle">1 test</div>
+						</div>
+						<div class="node">
+							<div class="node-title">Sous-tâche 5 : L’hôte refuse une demande de réservation</div>
+							<div class="node-subtitle">1 test</div>
+						</div>
+						<div class="node">
+							<div class="node-title">Sous-tâche 6 : Le voyageur paye une réservation</div>
+							<div class="node-subtitle">3 tests</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		</div>
+		  </div>
+		  
 		  <div class="cards">
 		  <div class="card">
                 <h3>Rapport de Couverture de Test</h3>
@@ -1075,6 +1265,55 @@
             `);
         }
     </script>
+	
+	<script>
+    const ctxTickets = document.getElementById('ticketChart').getContext('2d');
+    const ticketChart = new Chart(ctxTickets, {
+        type: 'pie',
+        data: {
+            labels: [
+                'Epic Link',
+                'Tâches',
+                'Sous-tâches',
+                'Tickets de type test',
+                'Tickets de type execution tests',
+                'Tickets de type plan test',
+                'Tickets de type bug'
+            ],
+            datasets: [{
+                data: [1, 2, 6, 23, 2, 2, 4],
+                backgroundColor: [
+                    '#FF6384',
+                    '#36A2EB',
+                    '#FFCE56',
+                    '#4CAF50',
+                    '#FF5252',
+                    '#FFC107',
+                    '#B0BEC5'
+                ],
+                borderColor: '#FFFFFF',
+                borderWidth: 1
+            }]
+        },
+        options: {
+            responsive: true,
+            plugins: {
+                legend: {
+                    position: 'top'
+                },
+                tooltip: {
+                    callbacks: {
+                        label: function(context) {
+                            const total = context.dataset.data.reduce((a, b) => a + b, 0);
+                            const percentage = ((context.raw / total) * 100).toFixed(2);
+                            return `${context.label}: ${context.raw} (${percentage}%)`;
+                        }
+                    }
+                }
+            }
+        }
+    });
+</script>
 	
 	 <!-- Stats sur le nombre de visites -->
   <script>
