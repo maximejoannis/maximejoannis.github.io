@@ -1,512 +1,519 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Portfolio Maxime JOANNIS - QA</title>
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat:400,700&display=swap">
-    <style>
-    /* ===========================
-       1. Reset CSS
-    ============================ */
-    * {
-        margin: 0;
-        padding: 0;
-        box-sizing: border-box;
-    }
-
-    body {
-        font-family: 'Montserrat', Arial, sans-serif;
-        display: flex;
-        flex-direction: column;
-        min-height: 100vh;
-        background-color: #F2F4F7; /* Fond général gris clair */
-        color: #333;
-    }
-
-    /* ===========================
-       2. Sidebar
-    ============================ */
-    .sidebar {
-        width: 250px;
-        background-color: #1E2A38; /* Bleu foncé */
-        color: #FFFFFF; /* Texte blanc */
-        padding: 20px;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        gap: 20px;
-        position: fixed;
-        top: 0;
-        bottom: 0;
-        box-shadow: 2px 0 8px rgba(33, 45, 64, 0.1);
-    }
-
-    .sidebar img {
-        border-radius: 50%;
-        width: 90px;
-        height: 90px;
-        object-fit: cover;
-        border: 4px solid #3A8DFF; /* Bleu clair */
-        margin-bottom: 15px;
-    }
-
-    .sidebar h2 {
-        font-size: 1.5rem;
-        margin-bottom: 0.5rem;
-    }
-
-    .sidebar p {
-        font-size: 0.95rem;
-        color: #B0C4E6; /* Gris clair pour le texte secondaire */
-        text-align: center;
-        margin-bottom: 1.5rem;
-    }
-
-    .nav-links {
-        display: flex;
-        flex-direction: column;
-        gap: 15px;
-        width: 100%;
-    }
-
-    .nav-links a {
-        text-decoration: none;
-        color: #FFFFFF; /* Texte blanc */
-        font-size: 1rem;
-        padding: 15px 20px;
-        text-align: center;
-        border-radius: 8px;
-        background-color: #34495E; /* Fond des mini-cards */
-        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-        transition: background 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease;
-    }
-
-    .nav-links a:hover {
-        background-color: #3A8DFF; /* Couleur au survol */
-        transform: translateY(-5px);
-        box-shadow: 0 6px 10px rgba(0, 0, 0, 0.15);
-    }
-
-    /* ===========================
-       3. Main Content
-    ============================ */
-    .main-content {
-        margin-left: 270px;
-        flex: 1;
-        padding: 40px;
-        display: flex;
-        flex-direction: column;
-        gap: 20px;
-        padding-bottom: 80px;
-    }
-
-    .main-content h1 {
-        font-size: 2rem;
-        margin-bottom: 20px;
-        color: #1E2A38; /* Bleu foncé */
-        border-bottom: 2px solid #1E2A38;
-    }
-
-    section {
-        background-color: #FFFFFF; /* Blanc pur */
-        border-radius: 8px;
-        border-top: 5px solid #3A8DFF; /* Bleu clair */
-        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-        padding: 20px;
-        margin-bottom: 20px;
-        transition: transform 0.3s ease, box-shadow 0.3s ease;
-    }
-
-    section:hover {
-        transform: translateY(-5px);
-        box-shadow: 0 6px 10px rgba(0, 0, 0, 0.15);
-    }
-
-    section h2 {
-        font-size: 1.5rem;
-        margin-bottom: 10px;
-        color: #3A8DFF; /* Bleu clair */
-        border-bottom: 2px solid #3A8DFF;
-        padding-bottom: 5px;
-    }
-
-    section p {
-        font-size: 1rem;
-        line-height: 1.6;
-        margin-bottom: 15px;
-        color: #444;
-    }
-
-    /* ===========================
-       4. Cards
-    ============================ */
-    .cards {
-        display: flex;
-        flex-wrap: wrap;
-        gap: 20px;
-        justify-content: center;
-    }
-
-    .card {
-        flex: 1 1 calc(50% - 20px);
-        max-width: 500px;
-        background: linear-gradient(135deg, #FFFFFF, #F2F4F7); /* Dégradé moderne */
-        border: 1px solid #E0E0E0;
-        border-radius: 12px;
-        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-        overflow: hidden;
-        transition: transform 0.3s ease, box-shadow 0.3s ease, background 0.3s ease;
-    }
-
-    .card:hover {
-        transform: translateY(-8px);
-        box-shadow: 0 8px 12px rgba(0, 0, 0, 0.2);
-        background: linear-gradient(135deg, #3A8DFF, #0056B3); /* Dégradé bleu au survol */
-    }
-
-    .card-header {
-        background-color: #3A8DFF; /* Bleu clair */
-        color: #FFFFFF;
-        padding: 15px;
-        font-size: 1.1rem;
-        text-align: center;
-        font-weight: bold;
-        border-bottom: 2px solid #0056B3;
-        transition: background 0.3s ease;
-    }
-
-    .card-body {
-        padding: 20px;
-        text-align: center;
-    }
-
-    .card-body p {
-        font-size: 1rem;
-        line-height: 1.6;
-        margin-bottom: 15px;
-        color: #444;
-    }
-
-    .card-body a {
-        display: inline-block;
-        text-decoration: none;
-        background-color: #3A8DFF;
-        color: #FFFFFF;
-        padding: 10px 15px;
-        border-radius: 8px;
-        font-size: 1rem;
-        transition: background 0.3s ease, transform 0.2s ease;
-    }
-
-    .card-body a:hover {
-        background-color: #0056B3;
-        transform: translateY(-3px);
-    }
-
-    .card-body .dates {
-        font-size: 0.9rem;
-        color: #555;
-        margin-bottom: 10px;
-    }
-
-    .card-body .status {
-        display: inline-block;
-        padding: 5px 10px;
-        border-radius: 5px;
-        font-size: 0.9rem;
-        font-weight: bold;
-        text-transform: uppercase;
-        margin-bottom: 10px;
-    }
-
-    .status.terminated {
-        background-color: #28A745; /* Vert */
-        color: #FFFFFF;
-    }
-
-    .status.in-progress {
-        background-color: #FFC107; /* Jaune */
-        color: #FFFFFF;
-    }
-
-    /* ===========================
-       5. Footer
-    ============================ */
-    footer {
-        position: fixed;
-        bottom: 0;
-        left: 0;
-        width: 100%;
-        background-color: #1E2A38; /* Bleu foncé */
-        color: #FFFFFF;
-        text-align: center;
-        padding: 20px;
-    }
-
-    footer p {
-        font-size: 1rem;
-    }
-
-    footer a {
-        color: #3A8DFF;
-        text-decoration: underline;
-    }
-
-    footer a:hover {
-        color: #FFFFFF;
-    }
-
-    footer .citation {
-        font-style: italic;
-        font-size: 0.9rem;
-        margin-bottom: 15px;
-        text-align: center;
-        margin: 0 auto;
-        max-width: calc(50% - 20px);
-    }
-
-    /* ===========================
-       6. PDF Button
-    ============================ */
-    .pdf-button {
-        display: inline-block;
-        text-decoration: none;
-        background-color: #3A8DFF;
-        color: #FFFFFF;
-        padding: 10px 20px;
-        border-radius: 5px;
-        font-size: 1rem;
-        font-weight: bold;
-        text-align: center;
-        margin-top: 15px;
-        transition: background 0.3s ease, transform 0.2s ease;
-    }
-
-    .pdf-button:hover {
-        background-color: #0056B3;
-        transform: translateY(-3px);
-    }
-	/* ===========================
-       Boutons d'action
-    ============================ */
-    .action-buttons {
-        margin-top: 15px; /* Espacement entre le statut et les boutons */
-        display: flex;
-        justify-content: center; /* Centrer les boutons horizontalement */
-        gap: 10px; /* Espacement entre les boutons */
-    }
-
-    .action-link {
-        display: inline-block;
-        text-decoration: none;
-        background-color: #3A8DFF; /* Bleu clair */
-        color: #FFFFFF;
-        padding: 10px 15px;
-        border-radius: 8px;
-        font-size: 1rem;
-        font-weight: bold;
-        transition: background-color 0.3s ease, transform 0.2s ease;
-    }
-
-    .action-link:hover {
-        background-color: #0056B3; /* Bleu foncé au survol */
-        transform: translateY(-3px);
-    }
-
-    /* Boutons désactivés */
-    .action-link.disabled {
-        background-color: #CCC; /* Gris clair */
-        color: #666; /* Gris foncé */
-        cursor: not-allowed; /* Curseur non cliquable */
-        box-shadow: none; /* Pas d'effet de survol */
-        transform: none; /* Pas de mouvement */
-    }
-
-    .action-link.disabled:hover {
-        background-color: #CCC; /* Pas de changement au survol */
-        transform: none;
-    }
-	
-	/* ===========================
-       5. Media Queries (Responsiveness)
-    ============================ */
-    @media (max-width: 768px) {
-        .sidebar {
-            width: 100%;
-            position: relative;
-            box-shadow: none;
-        }
-
-        .main-content {
-            margin-left: 0;
-            padding: 20px;
-        }
-
-        .cards {
-            flex-direction: column;
-            gap: 20px;
-        }
-
-        .card {
-            flex: 1 1 100%;
-        }
-    }
-
-    @media (max-width: 480px) {
-        .sidebar img {
-            width: 70px;
-            height: 70px;
-        }
-
-        .sidebar h2 {
-            font-size: 1.3rem;
-        }
-
-        .sidebar p {
-            font-size: 0.85rem;
-        }
-
-        .nav-links a {
-            font-size: 0.9rem;
-            padding: 10px;
-        }
-
-        .main-content h1 {
-            font-size: 1.5rem;
-        }
-
-        .card-header {
-            font-size: 1rem;
-        }
-
-        .card-body p {
-            font-size: 0.9rem;
-        }
-    }
-    </style>
-	<!-- Précharge le fichier pour réduire la latence -->
-<link rel="preload" href="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs" as="script">
-
-   <!-- Script chargé de manière différée -->
-<script type="module" defer>
-  import mermaid from "https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs";
-  mermaid.initialize({ startOnLoad: true });
-</script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Maxime JOANNIS - Portfolio QA</title>
+  <link href="https://fonts.googleapis.com/css?family=Poppins:400,600,800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style-portfolio-maximejoannis.css">
+ 
+  <!-- Icônes FontAwesome CDN -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
 </head>
 <body>
-    <!-- Sidebar -->
-    <div class="sidebar">
-        <img src="Photo_Identite.jpg" alt="Photo de Maxime Joannis">
-        <h2>Maxime Joannis</h2>
-        <p>Ingénieur Testeur Logiciel | QA Analyst | Certifié ISTQB Fondation v4.0</p>
-        <div class="nav-links">
-            <a href="#about">Mon histoire</a>
-            <a href="#testacademy">Formation Test Academy</a>
-            <a href="#projects">Projets QA réalisés</a>
-            <a href="#cv">CV</a>
+  <aside class="sidebar">
+    <div class="sidebar-profile">
+  <div class="profile-pic">
+    <img src="Photo_Identite.jpg" alt="Photo de profil">
+  </div>
+  <div class="sidebar-name">Maxime Joannis</div>
+</div>
+      <nav>
+        <a href="#" class="active" onclick="showSection('accueil')">Accueil</a>
+        <a href="#" onclick="showSection('quisuisje')">Qui suis-je ?</a>
+        <a href="#" onclick="showSection('raison')">La raison de ma reconversion</a>
+        <a href="#" onclick="showSection('formation')">Formation Test Academy</a>
+        <a href="#" onclick="showSection('projetsqa')">Projets QA réalisés</a>
+        <a href="#" onclick="showSection('cv')">CV</a>
+        <a href="#" onclick="showSection('evolutions')">Evolutions à venir</a>
+		<a href="#" onclick="showSection('contact')">Contact</a>
+      </nav>
+    </div>
+  </aside>
+  <main class="main-content">
+   <!-- Accueil -->
+<section id="accueil">
+  <div class="cards-grid-1">
+    <div class="qa-card-large">
+      <div class="qa-card-header-large">Bienvenue sur mon Portfolio QA !</div>
+      <div class="qa-card-body-large">
+        <h3 style="color: var(--violet); font-weight: bold;">Maxime Joannis – Testeur QA | Certifié ISTQB | Ex-développeur full stack</h3>
+        <p>
+          Quand je commence quelque chose, je vais toujours jusqu'au bout malgré les difficultés. Vous savez pourquoi ? Car ma motivation est toujours intacte quelque soit les circonstances.
+		  Ce n’est pas quelque chose qui faisait partie de moi à l’origine. J’ai dû l’apprendre et la renforcer au fil des années à travers les épreuves de la vie.
+        </p>
+        <p>
+		  Bonjour à tous et à toutes, </br>
+          Dans ce portfolio, vous trouverez mon histoire, mes projets QA, ma vision de la qualité logicielle
+          ainsi qu’un aperçu de mon évolution professionnelle et de mes ambitions pour l'avenir. 
+        </p>
+        <div style="margin-top: 1.5rem; display: flex; flex-wrap: wrap; gap: 1rem;">
+          <a href="Maxime_JOANNIS_CV.pdf" class="qa-btn" download>📄 Téléchargez mon CV en PDF</a>
+          <a href="#" class="qa-btn secondary" onclick="showSection('projetsqa')">🔍 Explorer mes projets</a>
+          <a href="#contact" class="qa-btn" onclick="showSection('contact')">📬 Me contacter</a>
         </div>
+      </div>
+    </div>
+	  <div class="citation-carousel-loop">
+		  <div class="citation-track">
+			<div class="citation-item">"La qualité n’est jamais un accident ; c’est toujours le résultat d’un effort intelligent." — John Ruskin</div>
+			<div class="citation-item">"La qualité, c’est quand le client revient, pas le produit." — Phil Crosby</div>
+			<div class="citation-item">"Si vous ne pouvez pas décrire ce que vous faites comme un processus, vous ne savez pas ce que vous faites." — W. Edwards Deming</div>
+			<div class="citation-item">"Tout test non automatisé finit par ne plus être exécuté." — Kent Beck</div>
+			<div class="citation-item">"Tester montre la présence de bugs, non leur absence." — Edsger W. Dijkstra</div>
+			<div class="citation-item">"Un bon test est celui qui peut échouer." — Cem Kaner</div>
+
+			<!-- duplication pour boucle fluide -->
+			<div class="citation-item">"La qualité n’est jamais un accident ; c’est toujours le résultat d’un effort intelligent." — John Ruskin</div>
+			<div class="citation-item">"La qualité, c’est quand le client revient, pas le produit." — Phil Crosby</div>
+			<div class="citation-item">"Si vous ne pouvez pas décrire ce que vous faites comme un processus, vous ne savez pas ce que vous faites." — W. Edwards Deming</div>
+			<div class="citation-item">"Tout test non automatisé finit par ne plus être exécuté." — Kent Beck</div>
+			<div class="citation-item">"Tester montre la présence de bugs, non leur absence." — Edsger W. Dijkstra</div>
+			<div class="citation-item">"Un bon test est celui qui peut échouer." — Cem Kaner</div>
+		  </div>
+      </div>
+</div>
+	
+</section>
+
+   <!-- Qui suis-je ? -->
+<section id="quisuisje" style="display:none;">
+  <div class="cards-grid-1">
+    <div class="qa-card-large">
+      <div class="qa-card-header-large">A propos de moi</div>
+      <div class="qa-card-body-large">
+        <p>
+          Je m'appelle Maxime Joannis. Tout à commencé en 2017 où à la suite d'un stage de 6 mois qui s'est poursuivi par un CDD, ma carrière dans le domaine du développement a pris un véritable tournant.
+		  J'ai été embauché en 2018 dans une ESN comme Ingénieur d'études - Développeur FullStack. J'avais aussi le choix d'être embauché dans une autre ESN en tant que consultant MOA Junior. Mais finalement, mon choix a été guidé par le fait de vouloir
+		  commencer par de la technique avant de faire du fonctionnel. 
+		  Après plus de 6 ans en développement full stack, j’ai opéré une reconversion stratégique vers la qualité logicielle.
+		  J'ai découvert à l'occasion que j'avais un appétit réel pour le test grâce à un bilan de compétences réalisé en 2024. Aujourd’hui certifié ISTQB, je maîtrise les notions fondamentales du test. 
+		  J'ai acquis aussi : 
+        </p>
+        <ul class="styled-list">
+          <li>De la rigueur, un esprit d’analyse et un certain sens du détail</li>
+          <li>Une double compétence QA + Dev qui me permet de parler la langue des développeurs</li>
+        </ul>
+		<p>
+          J'aborde le test logiciel comme une mission d'enquête qu'on m'a confié afin de vérifier la qualité d'un logiciel (ou application web), 
+          de fouiller, de chercher des indices et de remonter les bugs. 		  
+        </p>
+        <p style="margin-top: 1.2rem;"><strong>Actuellement, je recherche et je suis disponible pour des opportunités sur les postes suivants :</strong></p>
+       <ul class="styled-list">
+        <li>Testeur Logiciel / QA Analyst Junior</li>
+        <li>Testeur de Recette Fonctionnelle</li>
+        <li>Testeur Fonctionnel / QA Fonctionnel</li>
+        <li>Analyste de Test (Junior)</li>
+        <li>Testeur d’Application Web</li>
+        <li>Assistant QA / Testeur QA en Agence ou SSII</li>
+      </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+   <!-- La raison de ma reconversion -->
+<section id="raison" style="display:none;">
+  <div class="cards-grid-1">
+    <div class="qa-card-large">
+      <div class="qa-card-header-large">La raison de ma reconversion</div>
+      <div class="qa-card-body-large">
+         <p>
+        Après plus de cinq ans d’expérience en développement logiciel, un drame personnel – la perte d’un parent très proche –
+        a profondément bouleversé ma vision de la carrière et des priorités à la fin de l’année 2022.
+      </p>
+      <p>
+        Cette épreuve m’a poussé à prendre du recul et à entreprendre un bilan de compétences en 2024 
+        pour redéfinir mon projet professionnel. Ce bilan a mis en lumière un réel intérêt pour :
+      </p>
+      <ul class="styled-list">
+        <li>Le test</li>
+        <li>La détection d’anomalies</li>
+        <li>L’amélioration continue</li>
+      </ul>
+      <p>
+        J’ai compris que ce qui me passionnait le plus n’était pas seulement la conception d’un logiciel, 
+        mais la garantie de sa fiabilité, de sa robustesse et de sa performance.
+      </p>
+      <p>
+        En 2024-2025, j’ai concrétisé cette réorientation en suivant une formation intensive chez <strong>TestAcademy</strong>, 
+        validée par la certification <strong>ISTQB – Testeur certifié niveau Fondation (v4.0)</strong>.
+      </p>
+      <p>Cette formation m’a permis de renforcer mes compétences sur les axes suivants :</p>
+      <ul class="styled-list">
+        <li>Méthodologie de test : analyse, conception, implémentation, exécution</li>
+        <li>Tests manuels & automatisés (Selenium, Postman)</li>
+        <li>Programmation Python & SQL</li>
+        <li>Intégration & déploiement continu avec Jenkins</li>
+        <li>Gestion de projets : Agile, Scrum, cycle en V</li>
+        <li>Projet de fin de formation & micro-stage professionnel</li>
+      </ul>
+      <p>
+        Aujourd’hui, je suis pleinement prêt à m’investir dans un nouveau rôle où je pourrai mettre mes compétences techniques 
+        et mon sens du détail au service de la qualité logicielle.
+      </p>
+      <p>
+        <strong>Cette réorientation n’est pas un simple virage, mais un nouveau départ, une nouvelle aventure, fondé sur une conviction :</strong><br>
+        <em>des logiciels robustes sont la clé de la satisfaction utilisateur.</em>
+      </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+    <!-- Formation Test Academy -->
+   <section id="formation" style="display:none;">
+  <h3>Formation TestAcademy – 2024-2025</h3>
+
+  <!-- Présentation globale -->
+  <div class="cards-grid-1">
+    <div class="qa-card-large">
+      <div class="qa-card-header-large">Formation certifiante ISTQB – Testeur logiciel</div>
+      <div class="qa-card-body-large">
+        <p>
+          J’ai suivi une formation intensive et professionnalisante avec <strong>TestAcademy</strong>, 
+          validée par la certification <strong>ISTQB Foundation – version 4.0</strong>.
+          Cette formation m’a permis d’acquérir une méthode rigoureuse, des outils concrets et une expérience pratique dans un contexte Agile.
+        </p>
+        <p><strong>Les compétences développées :</strong></p>
+        <ul class="styled-list">
+          <li>Méthodologie de test complète (analyse, conception, exécution, validation)</li>
+          <li>Tests manuels & automatisés (Selenium, Postman, Robot Framework)</li>
+          <li>Gestion des campagnes de test avec JIRA / XRay</li>
+          <li>CI/CD avec Jenkins</li>
+          <li>Programmation Python orientée test</li>
+          <li>Bases de données et langage SQL appliqués aux tests</li>
+          <li>Pratique sur application web de location (Homey) en environnement Scrum</li>
+        </ul>
+        <p><strong>Évaluations et livrables :</strong></p>
+        <ul class="styled-list">
+          <li>Examens réguliers (QCM, cas pratiques)</li>
+          <li>Projet de fin de formation sur une application réelle</li>
+          <li>Soutenance devant un grand jury et accompagnement individuel</li>
+        </ul>
+        <a href="Programme_Formation_Testeur_Pro.pdf" class="qa-btn" download>
+          📥 Téléchargez le programme complet (PDF)
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modules de formation -->
+  <h3>Modules de la formation</h3>
+  <div class="cards-grid-2">
+
+    <div class="qa-card">
+      <div class="qa-card-header">Méthode</div>
+      <div class="qa-card-body">
+        <div class="qa-desc">
+         Cette section vous accompagne étape par étape pour assimiler une méthode de test complète et structurée.
+        </div>
+        <div class="qa-info-row">
+          <span class="qa-status termine">Module 1</span>
+        </div>
+      </div>
     </div>
 
-    <!-- Main Content -->
-    <div class="main-content">
-        <h1>Bienvenue sur mon portfolio de testeur QA</h1>
-        <section id="about">
-            <h1>Mon histoire</h1>
-            <p>
-                <strong>Après plus de cinq ans d’expérience en développement logiciel</strong>, un drame personnel – la perte d’un parent très proche – a profondément bouleversé ma vision de la carrière et des priorités à la fin de l’année 2022.
-                Parallèlement, j'ai dû m'investir en tant qu’aidant familial pour m’occuper de mes frères en situation de handicap, ce qui a renforcé ma réflexion sur mes engagements personnels et professionnels.
-            </p>
-            <p>
-                Cette épreuve m’a poussé à prendre du recul et à entreprendre un <strong>bilan de compétences en 2024</strong> pour redéfinir mon projet professionnel.
-                <strong>Ce bilan</strong> a mis en lumière un réel intérêt pour <span style="color:var(--accent)">l’analyse</span>, <span style="color:var(--accent)">la rigueur</span>, <span style="color:var(--accent)">la détection d’anomalies</span> et <span style="color:var(--accent)">l’amélioration continue</span> : autant de qualités essentielles dans le domaine de la qualité logicielle.
-                J’ai compris que ce qui me passionnait le plus n’était pas seulement la conception d’un logiciel, mais la garantie de sa <strong>fiabilité</strong>, de sa <strong>robustesse</strong> et de sa <strong>performance</strong>.
-            </p>
-            <p>
-                En <strong>2024-2025</strong>, j’ai concrétisé cette réorientation en suivant une formation intensive chez <span style="color:var(--accent); font-weight:bold;">TestAcademy</span>, validée par la certification ISTQB – Testeur certifié niveau Fondation (v4.0) et l'obtention d'un diplôme de testeur logiciel. Je souhaite maintenant concrétiser cette formation par l'obtention d'un premier CDI en tant que testeur QA en entreprise.
-            </p>
-        </section>
-        
-         <!-- Formation Test Academy -->
-      <section id="testacademy">
-       <h1>Formation Test Academy</h1>
-        <p>
-          Découvrez la structure de la formation Test Academy  que j'ai suivi à partir du 31 octobre 2024 jusqu'au 17 février 2025.
-        </p>
-        <div class="about-list-flex">
-             </p>
-        <div class="mermaid">
-          mindmap
-  root((Test Academy))
-    A0 Modules
-      La méthode
-      L'outillage
-      L'entraînement
-      Le mode projet
-      La certification ISTQB Fondation V4.0
-    B0 Modules
-      L'automatisation WEB
-      L'automatisation API
-      La Programmation Python
-      Le CD/CI avec Jenkins
-    X0 Modules
-      Le projet de fin de formation
-      Micro Stage      
+    <div class="qa-card">
+      <div class="qa-card-header">L'outillage</div>
+      <div class="qa-card-body">
+        <div class="qa-desc">
+          Cette section vous accompagne à la maîtrise de l’outil de gestion des cas de test: JIRA.
         </div>
-          <a href="Programme_Formation_Testeur_Pro.pdf" class="pdf-button">Téléchargez le programme détaillé en PDF</a>
+        <div class="qa-info-row">
+          <span class="qa-status termine">Module 2</span>
         </div>
-      
-      </section>
-      
-      <section id="projects">
-            <h1>Projets QA réalisés</h1>
-            <div class="cards">
-                <div class="card">
-                    <div class="card-header">Projet de fin de formation Homey</div>
-                    <div class="card-body">
-                        <p>Test d'une application web de gestion de location saisonnières nommée HOMEY</p>
-                         <p class="dates">Début : Mars 2025 | Fin : Mai 2025 </p>
-                        <span class="status terminated">Terminé</span>
-                         <div class="action-buttons">
-                            <a href="Projet_Homey.html" class="action-link">Voir les détails</a>
-                            <a href="TableaudeBordQA_Homey.html" class="action-link">Voir le tableau de bord</a>
-                        </div>
-                    </div>
-                </div>
-                <div class="card">
-                    <div class="card-header">Micro Stage chez AMN BRAINS</div>
-                    <div class="card-body">
-                        <p>Test d'un logiciel de cybersécurité nommé AMN AUDITOR</p>
-                         <p class="dates">Début : Mai 2025 | En cours</p>
-                          <span class="status in-progress">En cours</span>
-                       <div class="action-buttons">
-                            <a href="MicroStage_AmnBrains.html" class="action-link">Voir les détails</a>
-                            <a href="#" class="action-link disabled">Voir le tableau de bord</a>
-                        </div>
-                    </div>
-                </div>
+      </div>
+    </div>
+
+    <div class="qa-card">
+      <div class="qa-card-header">La Pratique</div>
+      <div class="qa-card-body">
+        <div class="qa-desc">
+          Cette section vous permet de mettre en pratique toutes les compétences acquises sur l’application web : Homey.
+        </div>
+        <div class="qa-info-row">
+          <span class="qa-status termine">Module 3</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="qa-card">
+      <div class="qa-card-header">L'Automatisation Web</div>
+      <div class="qa-card-body">
+        <div class="qa-desc">
+           Cette section vous accompagne afin de maîtriser l’automatisation des tests sur application web.
+        </div>
+        <div class="qa-info-row">
+          <span class="qa-status termine">Module 4</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="qa-card">
+      <div class="qa-card-header">L’automatisation API</div>
+      <div class="qa-card-body">
+        <div class="qa-desc">
+           Cette section vous accompagne afin de maîtriser l’automatisation des tests sur API.
+        </div>
+        <div class="qa-info-row">
+          <span class="qa-status termine">Module 5</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="qa-card">
+      <div class="qa-card-header">Préparation à l'examen de certification ISTQB niveau Fondation</div>
+      <div class="qa-card-body">
+        <div class="qa-desc">
+           Le cours est une préparation pratique à l’examen de
+ certification ISTQB. 
+        </div>
+        <div class="qa-info-row">
+          <span class="qa-status termine">Module 6</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="qa-card">
+      <div class="qa-card-header">Le mode Projet</div>
+      <div class="qa-card-body">
+        <div class="qa-desc">
+           Présentation des modèles de gestion de projet : cascade,
+ cycle en V et Scrum.
+        </div>
+        <div class="qa-info-row">
+          <span class="qa-status termine">Module 7</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="qa-card">
+      <div class="qa-card-header">Le CI/CD avec Jenkins</div>
+      <div class="qa-card-body">
+        <div class="qa-desc">
+          Présentation, utilisation et entraînement sur l’outils Jenkins
+ pour l’intégration Continue / Déploiement Continu.
+        </div>
+        <div class="qa-info-row">
+          <span class="qa-status termine">Module 8</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="qa-card">
+      <div class="qa-card-header"> La Programmation Python</div>
+      <div class="qa-card-body">
+        <div class="qa-desc">
+         Dans cette leçon, nous explorons les bases de la programmation en Python.
+        </div>
+        <div class="qa-info-row">
+          <span class="qa-status termine">Module 9</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="qa-card">
+      <div class="qa-card-header"> Le langage SQL</div>
+      <div class="qa-card-body">
+        <div class="qa-desc">
+           Cette section vous accompagne à la maîtrise du langage SQL. 
+        </div>
+        <div class="qa-info-row">
+          <span class="qa-status termine">Module 10</span>
+        </div>
+      </div>
+    </div>
+	
+	<div class="qa-card">
+      <div class="qa-card-header">Le projet de fin de formation</div>
+      <div class="qa-card-body">
+        <div class="qa-desc">
+            Ce projet vous donne l'opportunité de mettre en pratique
+ toutes vos connaissances en test logiciel.
+        </div>
+        <div class="qa-info-row">
+          <span class="qa-status termine">Module 11</span>
+        </div>
+      </div>
+    </div>
+	
+	<div class="qa-card">
+      <div class="qa-card-header">Le micro stage</div>
+      <div class="qa-card-body">
+        <div class="qa-desc">
+            Ce micro stage vous donne l'opportunité de mettre en pratique
+ toutes vos connaissances en test logiciel dans un contexte réel. 
+        </div>
+        <div class="qa-info-row">
+          <span class="qa-status termine">Module 12</span>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+    <!-- Projets QA réalisés -->
+    <section id="projetsqa" style="display:none;">
+      <h3>Projets QA réalisés</h3>
+      <div class="cards-grid-2">
+        <!-- Card 1 -->
+        <div class="qa-card">
+          <div class="qa-card-header">
+            Projet de fin de formation Homey
+          </div>
+          <div class="qa-card-body">
+            <div class="qa-desc">
+              Test d'une application web de gestion de location saisonnières nommée HOMEY
             </div>
-        </section>
-        
-        <!-- CV Interactif -->
-      <section id="cv">
-        <h1>CV</h1>
-        <p>
+            <div class="qa-info-row">
+              <span class="qa-status termine">Terminé</span>
+              <span class="qa-dates">03/2025 - 05/2025</span>
+            </div>
+            <div class="qa-card-actions">
+              <a href="Projet_Homey.html" class="qa-btn">Détails du projet</a>
+              <a href="DashbordQA_Homey.html" class="qa-btn secondary">Tableau de bord</a>
+            </div>
+          </div>
+        </div>
+        <!-- Card 2 -->
+        <div class="qa-card">
+          <div class="qa-card-header">
+            Micro Stage chez AMN BRAINS
+          </div>
+          <div class="qa-card-body">
+            <div class="qa-desc">
+              Test d'un logiciel de cybersécurité nommé AMN AUDITOR. 
+            </div>
+            <div class="qa-info-row">
+              <span class="qa-status encours">En cours</span>
+              <span class="qa-dates">05/2025 - Actuel</span>
+            </div>
+            <div class="qa-card-actions">
+              <a href="MicroStage_AmnBrains.html" class="qa-btn">Détails du projet</a>
+              <a href="#" class="qa-btn disabled" tabindex="-1" aria-disabled="true" style="pointer-events:none;opacity:0.6;">Tableau de Bord</a>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+    <!-- CV -->
+    <section id="cv" style="display:none;">
+      <div class="cards-grid-1">
+        <div class="qa-card-large">
+          <div class="qa-card-header-large">CV</div>
+          <div class="qa-card-body-large">
+            <p>
           Vous voulez en savoir plus sur moi ? Téléchargez directement mon CV ici ou allez voir mon CV interactif :
-        </p>
-        <a href="Maxime_JOANNIS_CV_Testeur_QA.pdf" class="pdf-button">Téléchargez mon CV en PDF</a>
-        <a href="#" class="action-link disabled">CV Interactif en cours de refonte</a>
-      </section>
-      
+           </p>
+            <a href="Maxime_JOANNIS_CV.pdf" class="qa-btn" download>Téléchargez mon CV en PDF</a>
+			 <a href="CV_Interactif.html" class="qa-btn">CV Interactif</a>
+          </div>
+        </div>
+      </div>
+    </section>
+	
+    <!-- Evolutions à venir -->
+<section id="evolutions" style="display:none;">
+  <h3>Evolutions prévues pour 2025 et 2026</h3>
+  <div class="cards-grid-2">
+
+    <!-- Export PDF -->
+    <div class="qa-card">
+      <div class="qa-card-header">Export PDF des tableaux de bord</div>
+      <div class="qa-card-body">
+        <div class="qa-desc">
+          Ajout d’un bouton d’export pour générer automatiquement un rapport PDF des projets QA via <code>jsPDF</code> ou <code>html2pdf.js</code>, avec logo, date, et structure responsive.
+        </div>
+        <div class="qa-info-row">
+          <span class="qa-status encours">En cours</span>
+          <span class="qa-dates">T3 2025</span>
+        </div>
+      </div>
     </div>
 
-    <!-- Footer -->
+    <!-- Filtres dynamiques -->
+    <div class="qa-card">
+      <div class="qa-card-header">Filtres dynamiques sur les projets QA réalisés</div>
+      <div class="qa-card-body">
+        <div class="qa-desc">
+          Mise en place d’un système de filtres par outil, statut, période et technologie (ex : Cypress, Postman, Jenkins) pour améliorer l’expérience utilisateur.
+        </div>
+        <div class="qa-info-row">
+          <span class="qa-status encours">En cours</span>
+          <span class="qa-dates">T3 2025</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Graphiques qualité -->
+    <div class="qa-card">
+      <div class="qa-card-header">Graphiques qualité (Chart.js)</div>
+      <div class="qa-card-body">
+        <div class="qa-desc">
+          Visualisation des indicateurs QA (taux de couverture, bugs corrigés, avancement) via des graphiques interactifs intégrés dans chaque projet.
+        </div>
+        <div class="qa-info-row">
+          <span class="qa-status encours">En cours</span>
+          <span class="qa-dates">T4 2025</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Mode sombre / clair -->
+    <div class="qa-card">
+      <div class="qa-card-header">Mode sombre / clair</div>
+      <div class="qa-card-body">
+        <div class="qa-desc">
+          Ajout d’un bouton de bascule entre les thèmes clair et sombre pour un confort visuel optimal, avec sauvegarde du choix utilisateur.
+        </div>
+        <div class="qa-info-row">
+          <span class="qa-status encours">Prototype</span>
+          <span class="qa-dates">T4 2025</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+	<section id="contact" style="display:none;">
+  <div class="cards-grid-1">
+    <div class="qa-card-large">
+      <div class="qa-card-header-large">
+        <i class="fas fa-paper-plane"></i> Contact
+      </div>
+      <div class="qa-card-body-large">
+        <p>
+          Une question, un conseil, un commentaire sur mon portfolio QA, une opportunité QA en CDI à me proposer ou juste envie d’échanger ?  
+          N’hésitez pas à me contacter, je réponds rapidement à tous les messages !
+        </p>
+        <div class="contact-info" style="margin-top:1.2rem; font-size:1.15rem;">
+          <div style="margin-bottom:0.6rem;">
+            <i class="fas fa-envelope" style="color:var(--bleu-vif);margin-right:0.5em;"></i>
+            maxime.joannis6@gmail.com
+          </div>
+          <div>
+            <i class="fas fa-phone" style="color:var(--violet-vif);margin-right:0.5em;"></i>
+            06 26 98 92 96
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+   <div style="height:3.5rem"></div>
+</main>
+  
+ <!-- Footer -->
     <footer>
      <span class="citation">"N'abandonne jamais, car c'est souvent juste après le dernier effort que le succès se dévoile."</span>
         <p>© 2025 Maxime Joannis - Tous droits réservés.  <a href="privacy.html">Politique de confidentialité</a></p>
     </footer>
-    
-    <!-- Stats sur le nombre de visites -->
+	
+	 <!-- Stats sur le nombre de visites -->
   <script>
     var t = setInterval(function() {
         if (window.goatcounter && window.goatcounter.visit_count) {
@@ -519,5 +526,24 @@
   <script data-goatcounter="https://maximejoannis.goatcounter.com/count"
           async src="//gc.zgo.at/count.js">
   </script>
+	
+  <script>
+    function showSection(id) {
+      document.querySelectorAll('main section').forEach(sec => sec.style.display = 'none');
+      document.getElementById(id).style.display = '';
+      document.querySelectorAll('.sidebar nav a').forEach(link => link.classList.remove('active'));
+      let navLinks = document.querySelectorAll('.sidebar nav a');
+      if (id === 'accueil') navLinks[0].classList.add('active');
+      if (id === 'quisuisje') navLinks[1].classList.add('active');
+      if (id === 'raison') navLinks[2].classList.add('active');
+      if (id === 'formation') navLinks[3].classList.add('active');
+      if (id === 'projetsqa') navLinks[4].classList.add('active');
+      if (id === 'cv') navLinks[5].classList.add('active');
+      if (id === 'evolutions') navLinks[6].classList.add('active');
+	  if (id === 'contact') navLinks[7].classList.add('active');
+    }
+    showSection('accueil');
+  </script>
+  
 </body>
 </html>

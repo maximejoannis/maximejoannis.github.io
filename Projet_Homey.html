@@ -1,574 +1,415 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Projet de fin de formation Homey</title>
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat:400,700&display=swap">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet"> <!-- Ajout des icônes Bootstrap -->
-    <style>
-        /* ===========================
-           Reset CSS
-        ============================ */
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        body {
-            font-family: 'Montserrat', Arial, sans-serif;
-            background-color: #F2F4F7; /* Gris clair */
-            color: #333;
-            display: flex;
-            flex-direction: column;
-            min-height: 100vh;
-        }
-
-        /* ===========================
-           Sidebar
-        ============================ */
-        .sidebar {
-            width: 250px;
-            background-color: #1E2A38; /* Bleu foncé */
-            color: #FFFFFF; /* Texte blanc */
-            padding: 20px;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 20px;
-            position: fixed;
-            top: 0;
-            bottom: 0;
-            box-shadow: 2px 0 8px rgba(33, 45, 64, 0.1);
-        }
-
-        .sidebar h2 {
-            font-size: 1.5rem;
-            margin-bottom: 0.5rem;
-        }
-
-        .sidebar .nav-links {
-            display: flex;
-            flex-direction: column;
-            gap: 12px;
-            width: 100%;
-        }
-
-        .sidebar .nav-links a {
-            text-decoration: none;
-            color: #FFFFFF; /* Texte blanc */
-            font-size: 1rem;
-            padding: 15px 20px;
-            text-align: center;
-            border-radius: 8px;
-            background-color: #34495E; /* Fond des mini-cards */
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-            transition: background 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease;
-        }
-
-        .sidebar .nav-links a:hover {
-            background-color: #3A8DFF; /* Bleu clair au survol */
-            transform: translateY(-5px);
-            box-shadow: 0 6px 10px rgba(0, 0, 0, 0.15);
-        }
-
-        /* ===========================
-           Main Content
-        ============================ */
-        .main-content {
-            margin-left: 270px;
-            flex: 1;
-            padding: 40px;
-            display: flex;
-            flex-direction: column;
-            gap: 20px;
-        }
-
-        .main-content h1 {
-            font-size: 2rem;
-            margin-bottom: 20px;
-            color: #1E2A38; /* Bleu foncé */
-            border-bottom: 3px solid #1E2A38;
-            padding-bottom: 10px;
-        }
-
-        section h1 {
-            font-size: 1.5rem;
-            color: #1E2A38; /* Bleu foncé */
-            margin-bottom: 10px;
-            border-bottom: 2px solid #3A8DFF; /* Bleu clair */
-            padding-bottom: 5px;
-        }
-
-        /* ===========================
-           Cards
-        ============================ */
-        .cards {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); /* Responsive grid */
-            gap: 20px;
-            margin-bottom: 60px; /* Ajout d'un espace en bas pour éviter le chevauchement */
-        }
-
-        .card {
-            background-color: #FFFFFF; /* Blanc pur */
-            border-top: 5px solid #3A8DFF; /* Bleu clair */
-            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
-            border-radius: 8px;
-            padding: 20px; /* Ajustement de l'espace intérieur */
-            transition: transform 0.2s ease-in-out;
-        }
-
-        .card:hover {
-            transform: translateY(-4px);
-        }
-
-        .card h3 {
-            margin-top: 0;
-            margin-bottom: 10px;
-            font-size: 18px;
-            color: #1E2A38; /* Bleu foncé */
-            border-bottom: 2px solid #3A8DFF; /* Bleu clair */
-            padding-bottom: 5px;
-        }
-
-        .card p {
-            margin: 5px 0;
-            color: #555;
-            font-size: 16px;
-        }
-
-        .card ul {
-            list-style: none;
-            padding: 0;
-            margin: 10px 0 0 0;
-        }
-
-        .card ul li {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            margin-bottom: 8px;
-        }
-
-        .card ul li i {
-            color: #3A8DFF; /* Bleu clair */
-            font-size: 16px;
-        }
-
-        /* ===========================
-           Table
-        ============================ */
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            margin-top: 15px; /* Alignement avec le titre */
-        }
-
-        table th, table td {
-            padding: 10px;
-            text-align: left;
-            border-bottom: 1px solid #ddd;
-        }
-
-        table th {
-            background-color: #3A8DFF; /* Bleu clair */
-            color: #FFFFFF; /* Blanc pur */
-            font-weight: bold;
-        }
-
-        table tr:hover {
-            background-color: #F2F4F7; /* Gris clair au survol */
-        }
-
-        /* ===========================
-           Footer
-        ============================ */
-        footer {
-            position: fixed;
-            bottom: 0;
-            left: 0;
-            width: 100%;
-            background-color: #1E2A38; /* Bleu foncé */
-            color: #FFFFFF; /* Texte blanc */
-            text-align: center;
-            padding: 20px;
-        }
-
-        footer p {
-            font-size: 1rem;
-        }
-
-        footer a {
-            color: #3A8DFF; /* Bleu clair */
-            text-decoration: underline;
-        }
-
-        footer a:hover {
-            color: #FFFFFF; /* Texte blanc au survol */
-        }
-
-        footer .citation {
-            font-style: italic;
-            font-size: 0.9rem;
-            margin-bottom: 15px;
-            text-align: center;
-            margin: 0 auto;
-            max-width: calc(50% - 20px);
-        }
-		/* Style pour la section Note finale */
-        .final-note {
-            margin-top: 40px;
-            padding: 20px;
-            background-color: #fff;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-            border-radius: 8px;
-            font-family: "Dancing Script", cursive;
-            font-size: 1.5em;
-            color: #2a2a2a;
-            text-align: center;
-            font-style: italic;
-        }
-		
-
-        /* ===========================
-           Responsive Design
-        ============================ */
-        @media (max-width: 768px) {
-            .sidebar {
-                width: 200px; /* Réduction de la largeur de la sidebar */
-            }
-
-            .main-content {
-                margin-left: 210px; /* Ajustement du contenu principal */
-                padding: 20px; /* Réduction des marges */
-            }
-
-            .cards {
-                grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); /* Grille adaptée aux petits écrans */
-            }
-
-            .card {
-                padding: 15px; /* Réduction de l'espace intérieur */
-            }
-
-            .main-content h1 {
-                font-size: 1.5rem; /* Ajustement de la taille du titre principal */
-            }
-
-            section h1 {
-                font-size: 1.2rem; /* Ajustement de la taille des sections */
-            }
-
-            footer p {
-                font-size: 0.9rem; /* Réduction de la taille du texte du footer */
-            }
-        }
-
-        @media (max-width: 480px) {
-            .sidebar {
-                width: 100%; /* Sidebar pleine largeur */
-                position: static; /* Sidebar en haut */
-                padding: 10px; /* Réduction des marges */
-            }
-
-            .main-content {
-                margin-left: 0;
-                padding: 10px; /* Réduction des marges */
-            }
-
-            .cards {
-                grid-template-columns: 1fr; /* Une seule colonne pour les très petits écrans */
-            }
-
-            footer {
-                position: static; /* Footer non fixe pour éviter les chevauchements */
-                padding: 10px; /* Réduction des marges */
-            }
-        }
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Projet Homey - Maxime JOANNIS</title>
+  <link href="https://fonts.googleapis.com/css?family=Poppins:400,600,800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+  <link rel="stylesheet" href="style-portfolio-maximejoannis.css">
 </head>
 <body>
-    <!-- Sidebar -->
-    <div class="sidebar">
-        <h2>Projet Homey</h2>
-        <div class="nav-links">
-            <a href="index.html">Retour à l'accueil</a>
-            <a href="#context">Présentation générale</a>
-            <a href="#perimetre">Mon périmètre de test</a>
-            <a href="#activity">Activités de tests réalisées</a>
-			<a href="#livrables">Livrables produits</a>
-            <a href="#note-finale">Note finale du jury</a>
-            <a href="#sprintretro">Sprint Retrospective</a>
-        </div>
+  <!-- Sidebar -->
+  <aside class="sidebar">
+   <div class="sidebar-profile">
+  <div class="profile-pic">
+    <img src="Photo_Identite.jpg" alt="Photo de profil">
+  </div>
+  <div class="sidebar-name">Maxime Joannis</div>
+</div>
+    <nav>
+      <a href="index.html">Accueil</a>
+      <a href="#" class="active" onclick="ShowSection('presentation')">Présentation</a>
+      <a href="#" onclick="ShowSection('perimetre')">Mon périmètre de test</a>
+	  <a href="#" onclick="ShowSection('dependances')">Dépendances fonctionnelles</a>
+	  <a href="#" onclick="ShowSection('activites')">Activités de tests réalisés</a>
+	  <a href="#" onclick="ShowSection('livrables')">Livrables produits</a>
+    </nav>
+  </aside>
+  <!-- Main Content -->
+  <main class="main-content">
+    <h1>Projet de fin de formation : <span style="color:var(--bleu)">Homey</span></h1>
+
+ <!-- Présentation complète fusionnée -->
+<section id="presentation" class="section-projet">
+  <div class="qa-card-large">
+    <div class="qa-card-header-large">🏠 Présentation du projet HOMEY</div>
+    <div class="qa-card-body-large">
+      <p>
+        <strong>HOMEY</strong> est une application web de gestion des locations saisonnières, développée dans le cadre d’un projet de formation QA. Accessible à l’adresse
+        <a href="http://livraison3.testacademy.fr/" target="_blank">livraison3.testacademy.fr</a>, elle permet aux hôtes de gérer leurs annonces, d’accepter des réservations et de suivre leurs activités en toute simplicité.
+      </p>
+
+      <p><strong>Objectifs fonctionnels :</strong></p>
+      <ul class="styled-list">
+        <li>🧾 Création et gestion des annonces (photos, descriptions, prix, disponibilités)</li>
+        <li>📆 Calendrier de disponibilité et traitement des demandes de réservation</li>
+        <li>💬 Messagerie intégrée entre hôtes et voyageurs</li>
+        <li>💳 Paiement en ligne sécurisé et gestion des annulations</li>
+        <li>📊 Suivi des réservations avec statuts (en attente, confirmé, annulé)</li>
+      </ul>
+
+      <p><strong>Tests réalisés :</strong></p>
+      <ul class="styled-list">
+        <li>Vérification des statuts et transitions de réservation</li>
+        <li>Tests manuels des fonctionnalités critiques (réservation, paiement, messagerie)</li>
+        <li>Automatisation de scénarios avec Playwright</li>
+        <li>Contrôle des données en base (via SQL / PHPMyAdmin)</li>
+      </ul>
+
+      <div class="project-images">
+        <img src="AccueilHomey.png" alt="Dashboard Homey">
+        <img src="homey_login.png" alt="Login Homey">
+      </div>
+
+      <hr>
+
+      <h3>📌 Contexte de réalisation</h3>
+      <p>J’ai travaillé au sein d’une équipe projet pluridisciplinaire composée de :</p>
+      <ul class="styled-list">
+        <li>1 Product Owner</li>
+        <li>9 développeurs</li>
+        <li>2 testeurs + 1 Test Manager</li>
+        <li>1 Scrum Master</li>
+      </ul>
+
+      <h3>🗂️ Product Backlog & Méthodologie Agile</h3>
+      <p>Le backlog de <strong>Homey</strong> contenait 30 User Stories, chacune décrivant une fonctionnalité du point de vue de l'utilisateur.</p>
+      <p>Nous avons utilisé la méthode <strong>Scrum</strong> avec des <strong>Sprints de 2 semaines</strong>, permettant un développement itératif, collaboratif et orienté qualité.</p>
+
+      <hr>
+
+      <h3>🎯 Bénéfices de la simulation</h3>
+      <p>Ce projet m’a permis de :</p>
+      <ul class="styled-list">
+        <li>Appliquer des tests statiques, dynamiques manuels et automatisés</li>
+        <li>Travailler en autonomie ou en binôme selon les besoins QA</li>
+        <li>Préparer une soutenance avec livrables, cas de test et justification des choix</li>
+        <li>Recevoir des retours détaillés des formateurs pour progresser dans mon parcours QA</li>
+      </ul>
     </div>
+  </div>
+</section>
 
-    <!-- Main Content -->
-    <div class="main-content">
-        <h1>Bienvenue sur le projet de fin de formation Homey</h1>
-        <section id="context">
-            <h1>Présentation générale</h1>
-            <div class="cards">
-                <!-- Card 1 -->
-                <div class="card">
-                    <h3>Contexte</h3>
-                    <p>J'ai fait partie d'une équipe multidisciplinaire composée : </p>
-                    <ul>
-                        <li><i class="bi bi-check-circle"></i> 1 Product Owner</li>
-                        <li><i class="bi bi-check-circle"></i> 9 développeurs</li>
-                        <li><i class="bi bi-check-circle"></i> 2 testeurs et 1 Test Manager</li>
-                        <li><i class="bi bi-check-circle"></i> 1 Scrum Master</li>
-                    </ul>
-                    
-                    <h3>Product Backlog</h3>
-                    <p>Le Product Backlog de Homey contient 30 exigences sous la forme d'histoires utilisateurs (User Stories). Ces User Stories décrivent les fonctionnalités attendues du produit du point de vue de l'utilisateur.</p>
-                    <p>Durée du Sprint : L'équipe a convenu que la durée d'un Sprint, c'est-à-dire la période pendant laquelle le travail est réalisé, serait de 2 semaines.</p>
-                </div>
 
-                <!-- Card 2 -->
-                <div class="card">
-                    <h3>Bénéfices de la simulation</h3>
-                    <p>Ce projet de fin de formation a eu les avantages suivants : </p>
-                    <ul>
-                        <li><i class="bi bi-check-circle"></i> Appliquer des techniques de test statique, des tests dynamiques manuels et des tests automatisés pour garantir la qualité du logiciel</li>
-                        <li><i class="bi bi-check-circle"></i> Développer ma capacité à travailler en autonomie ou en binôme, en fonction des exigences du projet.</li>
-                        <li><i class="bi bi-check-circle"></i> Préparer une soutenance de fin de formation où j'ai pu présenter mes travaux, justifier mes choix de test, et démontrer mes compétences en matière de conception et d'exécution de cas de test manuels et automatisés.</li>
-                        <li><i class="bi bi-check-circle"></i> Recevoir des retours d'expérience et des conseils personnalisés de la part des formateurs Test Academy pour continuer à progresser dans ma carrière de testeur.</li>
-                    </ul>
-                </div>
-            </div>
-        </section>
-        
-        <section id="perimetre">
-            <h1>Mon périmètre de test</h1>
-            <div class="cards">
-                <div class="card">
-                    <h3>Mon périmètre</h3>
-                    <p>Le périmètre de test qui m'a été affecté à la suite du sprint planning est le suivant : </p>
-                    <ul>
-                        <li><i class="bi bi-check-circle"></i> Faire une demande de réservation</li>
-                        <li><i class="bi bi-check-circle"></i> Traiter une demande de réservation</li>
-                    </ul>
-                    <h3>Résumé des users stories</h3>
-                    <p>Voici le résumé : </p>
-                    <ul>
-                        <li><i class="bi bi-check-circle"></i>En tant que Voyageur Je souhaite envoyer une demande de réservation Afin de bénéficier d’un séjour dans un logement saisonnier</li>
-                        <li><i class="bi bi-check-circle"></i>En tant qu'Hôte Je souhaite accepter ou refuser une demande de réservation Afin de planifier les séjours dans mon logement</li>
-                    </ul>  
-                    <h3>Faire une demande de réservation - Critères d'acceptation</h3>
-                    <table>
-                        <thead>
-                            <tr>
-                                <th>Scénario</th>
-                                <th>Description</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td>Un Voyageur (connecté) fait une demande de réservation</td>
-                                <td>
-                                    <ul>
-                                        <li><i class="bi bi-check-circle"></i>ETANT DONNE un Voyageur connecté</li>
-                                        <li><i class="bi bi-check-circle"></i>QUAND l’utilisateur fait une demande de réservation</li>
-                                        <li><i class="bi bi-check-circle"></i>ALORS le système crée une nouvelle réservation dans le tableau de bord de l’hôte correspondant à l’annonce</li>
-                                        <li><i class="bi bi-check-circle"></i>ET le système crée un nouveau message dans le tableau de bord de l’hôte correspondant à l’annonce</li>
-                                    </ul>
-                                </td>
-                            </tr>
-							<tr>
-                                <td>Un Visiteur (non connecté) fait une demande de réservation</td>
-                                <td>
-                                    <ul>
-                                        <li><i class="bi bi-check-circle"></i>ETANT DONNE un Visiteur non connecté</li>
-                                        <li><i class="bi bi-check-circle"></i>QUAND l’utilisateur fait une demande de réservation</li>
-                                        <li><i class="bi bi-check-circle"></i>ALORS le système ne donne pas suite à la demande de réservation</li>
-                                    </ul>
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
-					 <h3>Traiter une demande de réservation - Critères d'acceptation</h3>
-                    <table>
-                        <thead>
-                            <tr>
-                                <th>Scénario</th>
-                                <th>Description</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td>L’hôte confirme une demande de réservation</td>
-                                <td>
-                                    <ul>
-                                        <li><i class="bi bi-check-circle"></i>ETANT DONNE un hôte connecté à l’application</li>
-                                        <li><i class="bi bi-check-circle"></i>ET une réservation avec un statut « NOUVEAU »</li>
-                                        <li><i class="bi bi-check-circle"></i>QUAND l’hôte confirme une demande de réservation</li>
-                                        <li><i class="bi bi-check-circle"></i>ALORS le statut de la réservation devient « ATTENTE DE PAIEMENT » pour l’hôte</li>
-										<li><i class="bi bi-check-circle"></i>ET le statut de la réservation devient « DISPONIBLE » pour le voyageur </li>
-                                    </ul>
-                                </td>
-                            </tr>
-							<tr>
-                                <td>Le voyageur annule une demande de réservation</td>
-                                <td>
-                                    <ul>
-                                        <li><i class="bi bi-check-circle"></i>ETANT DONNE un voyageur connecté à l’application</li>
-                                        <li><i class="bi bi-check-circle"></i>ET une réservation avec un statut « NOUVEAU »</li>
-                                        <li><i class="bi bi-check-circle"></i>QUAND le voyageur annule une demande de réservation</li>
-										<li><i class="bi bi-check-circle"></i>ALORS le statut de la réservation devient « ANNULE » pour l’hôte</li>
-                                        <li><i class="bi bi-check-circle"></i>ET le statut de la réservation devient « ANNULE » pour le voyageur</li>
-                                    </ul>
-                                </td>
-                            </tr>
-							<tr>
-                                <td>L’hôte refuse une demande de réservation</td>
-                                <td>
-                                    <ul>
-                                        <li><i class="bi bi-check-circle"></i>ETANT DONNE un hôte connecté à l’application</li>
-                                        <li><i class="bi bi-check-circle"></i>ET une réservation avec un statut « NOUVEAU </li>
-                                        <li><i class="bi bi-check-circle"></i>QUAND l’hôte refuse une demande de réservation</li>
-										<li><i class="bi bi-check-circle"></i>ALORS le statut de la réservation devient « REFUSE » pour l’hôte</li>
-                                        <li><i class="bi bi-check-circle"></i>ET le statut de la réservation devient « REFUSE » pour le voyageur</li>
-                                    </ul>
-                                </td>
-                            </tr>
-							<tr>
-                                <td>Le voyageur paye une réservation</td>
-                                <td>
-                                    <ul>
-                                        <li><i class="bi bi-check-circle"></i>ETANT DONNE un voyageur connecté à l’application</li>
-                                        <li><i class="bi bi-check-circle"></i>ET une réservation avec un statut « ATTENTE DE PAIEMENT »</li>
-                                        <li><i class="bi bi-check-circle"></i>QUAND le voyageur paye une demande de réservation</li>
-										<li><i class="bi bi-check-circle"></i>ALORS le statut de la réservation devient « RESERVE » pour l’hôte</li>
-                                        <li><i class="bi bi-check-circle"></i>ET le statut de la réservation devient « RESERVE » pour le voyageur</li>
-                                    </ul>
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-        </section>
-		
-		<section id="activity">
-		<h1>Activités de tests réalisées</h1>
-	 <div class="cards">
-                <!-- Card 1 -->
-                <div class="card">
-                    <h3>Analyse</h3>
-                    <p>Tâches réalisées : </p>
-                    <ul>
-                        <li><i class="bi bi-check-circle"></i>Détermination de la structure du périmètre fonctionnel</li>
-                        <li><i class="bi bi-check-circle"></i>Réalisation d'une revue des histoires utilisateur affectées à mon périmètre</li>
-                        <li><i class="bi bi-check-circle"></i>Mise à jour de la structure des tests</li>
-                        <li><i class="bi bi-check-circle"></i>Création du projet PFF_MaximeJoannis dans Jira</li>
-						<li><i class="bi bi-check-circle"></i>Création des EPICS dans Jira</li>
-                        <li><i class="bi bi-check-circle"></i>Création des users stories dans Jira</li>
-						<li><i class="bi bi-check-circle"></i>Ajout des conditions de test</li>
-                        <li><i class="bi bi-check-circle"></i>Démarrage du sprint</li>
-                    </ul>
-                    
-                    <h3>Conception</h3>
-                    <p>Tâches réalisées : </p>
-                    <ul>
-                        <li><i class="bi bi-check-circle"></i>Listing des cas de test des users stories affectées à mon périmètre de test</li>
-                        <li><i class="bi bi-check-circle"></i>Conception des cas de test associés aux différentes users stories de mon périmètres</li>
-                        <li><i class="bi bi-check-circle"></i>Création des cas de tests dans l'outil Jira</li>
-                    </ul>
-                    
-                </div>
 
-                <!-- Card 2 -->
-                <div class="card">
-                    <h3>Implémentation</h3>
-                    <p>Tâches réalisées : </p>
-                    <ul>
-                        <li><i class="bi bi-check-circle"></i> Implémentation des cas de test</li>
-                        <li><i class="bi bi-check-circle"></i> Préparation des campagnes de test</li>
-                        <li><i class="bi bi-check-circle"></i> Création des plans de test</li>
-                        <li><i class="bi bi-check-circle"></i> Création des éxécutions de test dans Jira</li>
-						<li><i class="bi bi-check-circle"></i> Développement des tests automatisés sur les scénarios critiques</li>
-                    </ul>
-					 <h3>Exécution</h3>
-                    <p>Tâches réalisées : </p>
-                    <ul>
-                        <li><i class="bi bi-check-circle"></i> Initialisation des éxécutions des campagnes de test</li>
-                        <li><i class="bi bi-check-circle"></i> Lancement des éxécutions des campagnes de test</li>
-						<li><i class="bi bi-check-circle"></i> Exécution des tests automatisés</li>
-                        <li><i class="bi bi-check-circle"></i> Création du rapport de test final pour les 2 users stories</li>
-                    </ul>
-                </div>
-            </div>
-	 </section>
-	 
-	 <section id="livrables">
-	 <h1>Livrables produits</h1>
-	  <div class="cards">
-		<div class="card">
-			<ul>
-                <li><i class="bi bi-check-circle"></i> Cas de tests</li>
-                <li><i class="bi bi-check-circle"></i> Résultats d’exécution des tests manuels</li>
-                <li><i class="bi bi-check-circle"></i> Scripts automatisés</li>
-                <li><i class="bi bi-check-circle"></i> Résultats d’exécution des tests automatisés</li>
-			    <li><i class="bi bi-check-circle"></i> Rapports de défauts</li>
-				<li><i class="bi bi-check-circle"></i> Rapport Final de test</li>
-			    <li><i class="bi bi-check-circle"></i> Support de soutenance</li>
-            </ul>
+    <!-- Périmètre de test -->
+ <section id="perimetre" class="section-projet" style="display: none;">
+  <div class="qa-card-large">
+    <div class="qa-card-header-large">🧪 Mon périmètre de test</div>
+    <div class="qa-card-body-large">
+      <h3>Périmètre attribué</h3>
+      <p>Le périmètre de test qui m'a été confié lors du Sprint Planning concernait :</p>
+      <ul class="styled-list">
+        <li>Faire une demande de réservation</li>
+        <li>Traiter une demande de réservation</li>
+      </ul>
+
+      <h3>Résumé des User Stories</h3>
+      <ul class="styled-list">
+        <li>En tant que Voyageur, je souhaite envoyer une demande de réservation afin de bénéficier d’un séjour dans un logement saisonnier.</li>
+        <li>En tant qu’Hôte, je souhaite accepter ou refuser une demande de réservation afin de planifier les séjours dans mon logement.</li>
+      </ul>
+
+      <h3>📌 Faire une demande de réservation – Critères d’acceptation</h3>
+      <div class="table-container">
+        <table class="modern-table">
+          <thead>
+            <tr>
+              <th>Scénario</th>
+              <th>Description</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Voyageur connecté</td>
+             <td>
+			  <span><i class="bi bi-check-circle"></i> ETANT DONNE un Voyageur connecté</span><br>
+			  <span><i class="bi bi-check-circle"></i> QUAND il fait une demande de réservation</span><br>
+			  <span><i class="bi bi-check-circle"></i> ALORS le système crée une nouvelle réservation…</span>
+			</td>
+            </tr>
+			
+           <tr>
+			  <td>Visiteur non connecté</td>
+			  <td>
+				<span><i class="bi bi-check-circle"></i> ETANT DONNE un Visiteur non connecté</span><br>
+				<span><i class="bi bi-check-circle"></i> QUAND il tente une réservation</span><br>
+				<span><i class="bi bi-check-circle"></i> ALORS le système ne donne pas suite à la demande</span>
+			  </td>
+			</tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h3>📌 Traiter une demande de réservation – Critères d’acceptation</h3>
+      <div class="table-container">
+        <table class="modern-table">
+          <thead>
+            <tr>
+              <th>Scénario</th>
+              <th>Description</th>
+            </tr>
+          </thead>
+          <tbody>
+          <tr>
+			  <td>Confirmation par l’hôte</td>
+			  <td>
+				<span><i class="bi bi-check-circle"></i> ETANT DONNE un hôte connecté et une réservation <span class="badge badge-nouveau">NOUVEAU</span></span><br>
+				<span><i class="bi bi-check-circle"></i> QUAND il confirme la demande</span><br>
+				<span><i class="bi bi-check-circle"></i> ALORS statut devient <span class="badge badge-attente">ATTENTE DE PAIEMENT</span> (hôte) et <span class="badge badge-disponible">DISPONIBLE</span> (voyageur)</span>
+			  </td>
+			</tr>
+			<tr>
+			  <td>Annulation par le voyageur</td>
+			  <td>
+				<span><i class="bi bi-check-circle"></i> ETANT DONNE un voyageur connecté et une réservation <span class="badge badge-nouveau">NOUVEAU</span></span><br>
+				<span><i class="bi bi-check-circle"></i> QUAND il annule la demande</span><br>
+				<span><i class="bi bi-check-circle"></i> ALORS le statut devient <span class="badge badge-annule">ANNULE</span> pour les deux parties</span>
+			  </td>
+			</tr>
+			<tr>
+			  <td>Refus par l’hôte</td>
+			  <td>
+				<span><i class="bi bi-check-circle"></i> ETANT DONNE un hôte connecté et une réservation <span class="badge badge-nouveau">NOUVEAU</span></span><br>
+				<span><i class="bi bi-check-circle"></i> QUAND il refuse la demande</span><br>
+				<span><i class="bi bi-check-circle"></i> ALORS le statut devient <span class="badge badge-refuse">REFUSE</span> pour l’hôte et le voyageur</span>
+			  </td>
+			</tr>
+			<tr>
+			  <td>Paiement par le voyageur</td>
+			  <td>
+				<span><i class="bi bi-check-circle"></i> ETANT DONNE un voyageur connecté et une réservation <span class="badge badge-attente">ATTENTE DE PAIEMENT</span></span><br>
+				<span><i class="bi bi-check-circle"></i> QUAND il procède au paiement</span><br>
+				<span><i class="bi bi-check-circle"></i> ALORS le statut devient <span class="badge badge-reserve">RESERVE</span> pour l’hôte et le voyageur</span>
+			  </td>
+			</tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</section>
+ 
+ <!-- Dépendances fonctionnelles -->
+	<section id="dependances" class="section-projet">
+	  <div class="qa-card-large">
+		<div class="qa-card-header-large">🔗 Dépendances fonctionnelles</div>
+		<div class="qa-card-body-large">
+		  <p>La User Story <strong>"Faire une demande de réservation"</strong> dépend directement des fonctionnalités suivantes :</p>
+
+		  <div class="table-container">
+			<table class="modern-table">
+			  <thead>
+				<tr>
+				  <th>Fonctionnalité</th>
+				  <th>Description</th>
+				  <th>Type de dépendance</th>
+				</tr>
+			  </thead>
+			  <tbody>
+				<tr>
+				  <td>S’inscrire</td>
+				  <td>Permet à un utilisateur de créer un compte avant d’interagir avec la plateforme.</td>
+				  <td><span class="badge badge-prerequis">Prérequis</span></td>
+				</tr>
+				<tr>
+				  <td>Se connecter</td>
+				  <td>Permet à un utilisateur existant d'accéder à ses fonctionnalités personnelles.</td>
+				  <td><span class="badge badge-prerequis">Prérequis</span></td>
+				</tr>
+				<tr>
+				  <td>Réaliser une recherche simple</td>
+				  <td>Permet au voyageur de consulter les annonces et de sélectionner un logement.</td>
+				  <td><span class="badge badge-fonctionnel">Fonctionnel</span></td>
+				</tr>
+			  </tbody>
+			</table>
+		  </div>
+		  
+		   <p>La User Story <strong>"Traiter une demande de réservation"</strong> dépend directement des fonctionnalités suivantes :</p>
+
+		  <div class="table-container">
+			<table class="modern-table">
+			  <thead>
+				<tr>
+				  <th>Fonctionnalité</th>
+				  <th>Description</th>
+				  <th>Type de dépendance</th>
+				</tr>
+			  </thead>
+			  <tbody>
+				<tr>
+				  <td>Devenir Hôte</td>
+				  <td>Permet de créer et d'avoir un compte Hôte pour créer des annonces et recevoir des demandes de réservations.</td>
+				  <td><span class="badge badge-prerequis">Prérequis</span></td>
+				</tr>
+				<tr>
+				  <td>Créer une annonce</td>
+				  <td>Permet à un hôte de créer des annonces.</td>
+				  <td><span class="badge badge-fonctionnel">Fonctionnel</span></td>
+				</tr>
+			  </tbody>
+			</table>
+		  </div>
 		</div>
-	</div>
-	 </section>
-	 
-	 <section id="note-finale">
-	 <h1>Note finale du grand jury</h1>
-	  <div class="cards">
-	   <div class="card">
-	   <p>La soutenance a duré 20 minutes et après il y a eu 10 minutes de questions réponses.</p>
-	   
-	   <section class="final-note">
-        <p>
-            "Le travail effectué sur le projet jira Homey a été de grande qualité. Parmi nos apprenants, ta présentation a été l'une des meilleures avec des schémas très clairs.
-			La présentation de ton travail a été de grande qualité. Mais on s'attendait à voir aussi une démonstration d'un script automatisé sur un scénario critique pendant
-			la soutenance. Tu n'as pas eu le temps de le faire car tu as un perdu un peu de temps sur la présentation un peu trop détaillé du contexte du projet.
-			Pour le reste, ça reste du très bon travail."
-        </p>
-    </section>
-	   </div>
 	  </div>
-	 </section>
-	 
-	  <section id="sprintretro">
-	  <h1>Sprint Retrospective</h1>
-	  <div class="cards">
-	   <div class="card">
-	   
-	   <h3>Points forts</h3>
-                    <ul>
-                        <li><i class="bi bi-check-circle"></i> Utilisation efficace des outils de gestion des tests pour un suivi précis</li>
-                        <li><i class="bi bi-check-circle"></i> User Stories bien définies, facilitant la rédaction de cas de test pertinents</li>
-                        <li><i class="bi bi-check-circle"></i> Adaptabilité de l'équipe face aux imprévus et amélioration continue grâce aux rétrospectives</li>
-                    </ul>
-	   </div>
-	    <div class="card">
-	   
-	   <h3>Points faibles</h3>
-                    <ul>
-                        <li><i class="bi bi-check-circle"></i> Difficultés rencontrées sur le développement des tests automatisés</li>
-                    </ul>
-	   </div>
-	   </div>
-	  </section>
-	  
- </div>
-	
-	 
-    <!-- Footer -->
+	</section>
+
+		<!-- Activités de tests réalisés -->
+		<section id="activites" class="section-projet" style="display:none">
+
+		<div class="cards-grid-2">
+
+		<div class="qa-card">
+		  <div class="qa-card-header">Analyse</div>
+		  <div class="qa-card-body">
+			<div class="qa-desc">
+			 Tâches réalisées :
+			</div>
+			<ul class="styled-list">
+            <li>Détermination de la structure du périmètre fonctionnel</li>
+            <li>Revue des User Stories affectées</li>
+            <li>Mise à jour de la structure des tests</li>
+            <li>Création du projet PFF_MaximeJoannis dans Jira</li>
+            <li>Création des EPICS et User Stories dans Jira</li>
+            <li>Ajout des conditions de test</li>
+            <li>Démarrage du sprint</li>
+          </ul>
+		  </div>
+		</div>
+
+		<div class="qa-card">
+		  <div class="qa-card-header">Conception</div>
+		  <div class="qa-card-body">
+			<div class="qa-desc">
+			 Tâches réalisées :
+			</div>
+			<ul class="styled-list">
+            <li>Listing et rédaction des cas de test</li>
+            <li>Conception des cas pour chaque User Story</li>
+            <li>Création des cas de test dans Jira</li>
+          </ul>
+		  </div>
+		</div>
+		
+		<div class="qa-card">
+		  <div class="qa-card-header">Implémentation</div>
+		  <div class="qa-card-body">
+			<div class="qa-desc">
+			 Tâches réalisées :
+			</div>
+			<ul class="styled-list">
+            <li>Implémentation des cas de test</li>
+            <li>Préparation des campagnes de test</li>
+            <li>Création des plans de test</li>
+			<li>Création des éxécutions de test dans Jira</li>
+			<li>Développement des tests automatisés sur les scénarios critiques</li>
+          </ul>
+		  </div>
+		</div>
+		
+		<div class="qa-card">
+		  <div class="qa-card-header">Exécution</div>
+		  <div class="qa-card-body">
+			<div class="qa-desc">
+			 Tâches réalisées :
+			</div>
+			<ul class="styled-list">
+             <li>Initialisation des éxécutions des campagnes de test</li>
+             <li>Lancement des éxécutions des campagnes de test</li>
+			 <li>Exécution des tests automatisés</li>
+             <li>Création du rapport de test final</li>
+          </ul>
+		  </div>
+		</div>
+		
+	</div>   
+	</section>
+
+    <!-- Livrables produits -->
+    <section id="livrables" class="section-projet" style="display:none">
+		 <div class="qa-card-large qa-card-livrables" style="width:100%;margin-bottom:2rem;">
+	  <div class="qa-card-header-large">
+		<i class="fa-solid fa-file-lines" style="margin-right:0.7em;color:var(--bleu-vif);"></i>
+		Livrables produits
+	  </div>
+	  <div class="qa-card-body-large">
+		<div class="table-container">
+		  <table class="modern-table">
+			<thead>
+			  <tr>
+				<th>Nom du livrable</th>
+				<th>Livrables</th>
+			  </tr>
+			</thead>
+			<tbody>
+			  <tr>
+				<td>Cas de tests</td>
+				<td>
+				  <a href="CT_FaireDemandeReservation.html" target="_blank" class="action-link">Story 1 : Faire une demande de réservation</a><br>
+				  <a href="CT_TraiterDemandeReservation.html" target="_blank" class="action-link">Story 2 : Traiter une demande de réservation</a>
+				</td>
+			  </tr>
+			  <tr>
+				<td>Résultats d’exécution des tests manuels</td>
+				<td>
+				  <a href="RapportExecution_UserStory1.html" target="_blank" class="action-link">Story 1</a><br>
+				  <a href="RapportExecution_UserStory2.html" target="_blank" class="action-link">Story 2</a>
+				</td>
+			  </tr>
+			  <tr>
+				<td>Scripts automatisés</td>
+				<td>
+				  <a href="Script_TA_SC1.html" target="_blank" class="action-link">Scénario automatisé de la story 1 en étant connecté</a><br>
+				  <a href="Script_TA_SC2.html" target="_blank" class="action-link">Scénario automatisé de la story 1 en étant non connecté</a><br>
+				  <a href="Script_TA_SC3.html" target="_blank" class="action-link">Scénario automatisé de la story 2</a>
+				</td>
+			  </tr>
+			  <tr>
+				<td>Résultats d’exécution des tests automatisés</td>
+				<td>
+				  <a href="RapportExecution_TAStory1.html" target="_blank" class="action-link">Story 1</a><br>
+				  <a href="RapportExecution_TAStory2.html" target="_blank" class="action-link">Story 2</a>
+				</td>
+			  </tr>
+			  <tr>
+				<td>Rapports de défauts</td>
+				<td>
+				  <a href="#" onclick="viewImage('RapportDefaut_Page1.png')" class="action-link">Anomalie1</a><br>
+				  <a href="#" onclick="viewImage('RapportDefaut_Page2.png')" class="action-link">Anomalie2</a><br>
+				  <a href="RapportDefaut2.html" target="_blank" class="action-link">Anomalie3</a><br>
+				  <a href="RapportDefaut3.html" target="_blank" class="action-link">Anomalie4</a>
+				</td>
+			  </tr>
+			  <tr>
+				<td>Rapport Final de test</td>
+				<td>
+				  <a href="RapportFinal.html" target="_blank" class="action-link">Rapport Final</a>
+				</td>
+			  </tr>
+			  <tr>
+				<td>Support de soutenance</td>
+				<td>
+				  <a href="SupportPresentation_PFFHomey.pptx" target="_blank" class="action-link">Téléchargez mon support de présentation</a>
+				</td>
+			  </tr>
+			</tbody>
+		  </table>
+		</div>
+	  </div>
+		</div>
+   </section>
+
+    <div style="height:2.5rem"></div>
+  </main>
+  <!-- Footer -->
     <footer>
-        <span class="citation">"N'abandonne jamais, car c'est souvent juste après le dernier effort que le succès se dévoile."</span>
-        <p>© 2025 Maxime Joannis - Tous droits réservés. <a href="privacy.html">Politique de confidentialité</a></p>
+     <span class="citation">"N'abandonne jamais, car c'est souvent juste après le dernier effort que le succès se dévoile."</span>
+        <p>© 2025 Maxime Joannis - Tous droits réservés.  <a href="privacy.html">Politique de confidentialité</a></p>
     </footer>
 	
-	 <!-- Stats sur le nombre de visites -->
+		 <!-- Stats sur le nombre de visites -->
   <script>
     var t = setInterval(function() {
         if (window.goatcounter && window.goatcounter.visit_count) {
@@ -581,6 +422,70 @@
   <script data-goatcounter="https://maximejoannis.goatcounter.com/count"
           async src="//gc.zgo.at/count.js">
   </script>
+	
+  <script>
+    // Navigation dynamique des sections Projet Homey
+    function ShowSection(id) {
+      // Masquer toutes les sections projet
+      document.querySelectorAll('.section-projet').forEach(sec => sec.style.display = 'none');
+      // Désactiver tous les liens nav
+      document.querySelectorAll('.sidebar nav a').forEach(a => a.classList.remove('active'));
+      // Afficher la section demandée
+      document.getElementById(id).style.display = '';
+      // Activer le lien correspondant
+      document.querySelectorAll('.sidebar nav a').forEach(a => {
+        if (a.getAttribute('onclick') && a.getAttribute('onclick').includes("'" + id + "'")) {
+          a.classList.add('active');
+        }
+      });
+    }
+    // Affichage par défaut : Présentation
+    window.addEventListener('DOMContentLoaded', function() {
+      ShowSection('presentation');
+    });
+  </script>
   
+  <script>
+        function viewImage(imageName) {
+            const newWindow = window.open("", "_blank");
+            newWindow.document.write(`
+                <html>
+                    <head>
+                        <title>Image: ${imageName}</title>
+                        <style>
+                            body {
+                                text-align: center;
+                                padding: 20px;
+                                font-family: 'Montserrat', Arial, sans-serif;
+                            }
+                            img {
+                                max-width: 100%;
+                                height: auto;
+                            }
+                            .download-link {
+                                display: inline-block;
+                                margin-top: 20px;
+                                padding: 10px 20px;
+                                background-color: #3A8DFF;
+                                color: #FFFFFF;
+                                text-decoration: none;
+                                border-radius: 5px;
+                                cursor: pointer;
+                            }
+                            .download-link:hover {
+                                background-color: #1E2A38;
+                            }
+                        </style>
+                    </head>
+                    <body>
+                        <img src="${imageName}" alt="${imageName}">
+                        <br>
+                        <a href="${imageName}" download="${imageName}" class="download-link">Télécharger l'image</a>
+                    </body>
+                </html>
+            `);
+        }
+    </script>
+	
 </body>
 </html>

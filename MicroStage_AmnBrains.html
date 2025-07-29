@@ -1,494 +1,290 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Micro Stage AMN BRAINS</title>
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat:400,700&display=swap">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet"> <!-- Ajout des icônes Bootstrap -->
-    <style>
-        /* ===========================
-           Reset CSS
-        ============================ */
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        body {
-            font-family: 'Montserrat', Arial, sans-serif;
-            background-color: #F2F4F7; /* Gris clair */
-            color: #333;
-            display: flex;
-            flex-direction: column;
-            min-height: 100vh;
-        }
-
-        /* ===========================
-           Sidebar
-        ============================ */
-        .sidebar {
-            width: 250px;
-            background-color: #1E2A38; /* Bleu foncé */
-            color: #FFFFFF; /* Texte blanc */
-            padding: 20px;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 20px;
-            position: fixed;
-            top: 0;
-            bottom: 0;
-            box-shadow: 2px 0 8px rgba(33, 45, 64, 0.1);
-        }
-
-        .sidebar h2 {
-            font-size: 1.5rem;
-            margin-bottom: 0.5rem;
-        }
-
-        .sidebar .nav-links {
-            display: flex;
-            flex-direction: column;
-            gap: 12px;
-            width: 100%;
-        }
-
-        .sidebar .nav-links a {
-            text-decoration: none;
-            color: #FFFFFF; /* Texte blanc */
-            font-size: 1rem;
-            padding: 15px 20px;
-            text-align: center;
-            border-radius: 8px;
-            background-color: #34495E; /* Fond des mini-cards */
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-            transition: background 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease;
-        }
-
-        .sidebar .nav-links a:hover {
-            background-color: #3A8DFF; /* Bleu clair au survol */
-            transform: translateY(-5px);
-            box-shadow: 0 6px 10px rgba(0, 0, 0, 0.15);
-        }
-
-        /* ===========================
-           Main Content
-        ============================ */
-        .main-content {
-            margin-left: 270px;
-            flex: 1;
-            padding: 40px;
-            display: flex;
-            flex-direction: column;
-            gap: 20px;
-        }
-
-        .main-content h1 {
-            font-size: 2rem;
-            margin-bottom: 20px;
-            color: #1E2A38; /* Bleu foncé */
-            border-bottom: 3px solid #1E2A38;
-            padding-bottom: 10px;
-        }
-
-        section h1 {
-            font-size: 1.5rem;
-            color: #1E2A38; /* Bleu foncé */
-            margin-bottom: 10px;
-            border-bottom: 2px solid #3A8DFF; /* Bleu clair */
-            padding-bottom: 5px;
-        }
-
-        /* ===========================
-           Cards
-        ============================ */
-        .cards {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); /* Responsive grid */
-            gap: 20px;
-            margin-bottom: 60px; /* Ajout d'un espace en bas pour éviter le chevauchement */
-        }
-
-        .card {
-            background-color: #FFFFFF; /* Blanc pur */
-            border-top: 5px solid #3A8DFF; /* Bleu clair */
-            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
-            border-radius: 8px;
-            padding: 20px; /* Ajustement de l'espace intérieur */
-            transition: transform 0.2s ease-in-out;
-        }
-
-        .card:hover {
-            transform: translateY(-4px);
-        }
-
-        .card h3 {
-            margin-top: 0;
-            margin-bottom: 10px;
-            font-size: 18px;
-            color: #1E2A38; /* Bleu foncé */
-            border-bottom: 2px solid #3A8DFF; /* Bleu clair */
-            padding-bottom: 5px;
-        }
-
-        .card p {
-            margin: 5px 0;
-            color: #555;
-            font-size: 16px;
-        }
-
-        .card ul {
-            list-style: none;
-            padding: 0;
-            margin: 10px 0 0 0;
-        }
-
-        .card ul li {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            margin-bottom: 8px;
-        }
-
-        .card ul li i {
-            color: #3A8DFF; /* Bleu clair */
-            font-size: 16px;
-        }
-
-        /* ===========================
-           Table
-        ============================ */
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            margin-top: 15px; /* Alignement avec le titre */
-        }
-
-        table th, table td {
-            padding: 10px;
-            text-align: left;
-            border-bottom: 1px solid #ddd;
-        }
-
-        table th {
-            background-color: #3A8DFF; /* Bleu clair */
-            color: #FFFFFF; /* Blanc pur */
-            font-weight: bold;
-        }
-
-        table tr:hover {
-            background-color: #F2F4F7; /* Gris clair au survol */
-        }
-
-        /* ===========================
-           Footer
-        ============================ */
-        footer {
-            position: fixed;
-            bottom: 0;
-            left: 0;
-            width: 100%;
-            background-color: #1E2A38; /* Bleu foncé */
-            color: #FFFFFF; /* Texte blanc */
-            text-align: center;
-            padding: 20px;
-        }
-
-        footer p {
-            font-size: 1rem;
-        }
-
-        footer a {
-            color: #3A8DFF; /* Bleu clair */
-            text-decoration: underline;
-        }
-
-        footer a:hover {
-            color: #FFFFFF; /* Texte blanc au survol */
-        }
-
-        footer .citation {
-            font-style: italic;
-            font-size: 0.9rem;
-            margin-bottom: 15px;
-            text-align: center;
-            margin: 0 auto;
-            max-width: calc(50% - 20px);
-        }
-		/* Style pour la section Note finale */
-        .final-note {
-            margin-top: 40px;
-            padding: 20px;
-            background-color: #fff;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-            border-radius: 8px;
-            font-family: "Dancing Script", cursive;
-            font-size: 1.5em;
-            color: #2a2a2a;
-            text-align: center;
-            font-style: italic;
-        }
-		
-
-        /* ===========================
-           Responsive Design
-        ============================ */
-        @media (max-width: 768px) {
-            .sidebar {
-                width: 200px; /* Réduction de la largeur de la sidebar */
-            }
-
-            .main-content {
-                margin-left: 210px; /* Ajustement du contenu principal */
-                padding: 20px; /* Réduction des marges */
-            }
-
-            .cards {
-                grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); /* Grille adaptée aux petits écrans */
-            }
-
-            .card {
-                padding: 15px; /* Réduction de l'espace intérieur */
-            }
-
-            .main-content h1 {
-                font-size: 1.5rem; /* Ajustement de la taille du titre principal */
-            }
-
-            section h1 {
-                font-size: 1.2rem; /* Ajustement de la taille des sections */
-            }
-
-            footer p {
-                font-size: 0.9rem; /* Réduction de la taille du texte du footer */
-            }
-        }
-
-        @media (max-width: 480px) {
-            .sidebar {
-                width: 100%; /* Sidebar pleine largeur */
-                position: static; /* Sidebar en haut */
-                padding: 10px; /* Réduction des marges */
-            }
-
-            .main-content {
-                margin-left: 0;
-                padding: 10px; /* Réduction des marges */
-            }
-
-            .cards {
-                grid-template-columns: 1fr; /* Une seule colonne pour les très petits écrans */
-            }
-
-            footer {
-                position: static; /* Footer non fixe pour éviter les chevauchements */
-                padding: 10px; /* Réduction des marges */
-            }
-        }
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Micro Stage AMN BRAINS</title>
+  <link href="https://fonts.googleapis.com/css?family=Poppins:400,600,800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+  <link rel="stylesheet" href="style-portfolio-maximejoannis.css">
 </head>
 <body>
-    <!-- Sidebar -->
-    <div class="sidebar">
-        <h2>Micro Stage AMN BRAINS</h2>
-        <div class="nav-links">
-            <a href="index.html">Retour à l'accueil</a>
-            <a href="#context">Présentation générale</a>
-            <a href="#perimetre">Mon périmètre de test</a>
-            <a href="#activity">Activités de tests réalisées</a>
-			<a href="#livrables">Livrables produits</a>
-        </div>
+ <!-- Sidebar -->
+  <aside class="sidebar">
+   <div class="sidebar-profile">
+  <div class="profile-pic">
+    <img src="Photo_Identite.jpg" alt="Photo de profil">
+  </div>
+  <div class="sidebar-name">Maxime Joannis</div>
+</div>
+    <nav>
+      <a href="index.html">Accueil</a>
+      <a href="#" class="active" onclick="ShowSection('presentation')">Présentation</a>
+      <a href="#" onclick="ShowSection('perimetre')">Mon périmètre de test</a>
+	  <a href="#" onclick="ShowSection('activites')">Activités de tests réalisés</a>
+	  <a href="#" onclick="ShowSection('livrables')">Livrables produits</a>
+    </nav>
+  </aside>
+  
+  <!-- Main Content -->
+  <main class="main-content">
+    <h1>Micro Stage <span style="color:var(--bleu)">AMN BRAINS</span></h1>
+
+    <!-- Présentation -->
+   <section id="presentation" class="section-projet">
+		  <div class="qa-card-large" style="width:100%;margin-bottom:2rem;">
+	  <div class="qa-card-header-large">
+		<i class="fa-solid fa-user-graduate" style="margin-right:0.7em;color:var(--bleu-vif);"></i>
+		Présentation générale
+	  </div>
+	  <div class="qa-card-body-large">
+		<h3>Introduction</h3>
+		<p>
+		  Le micro stage est un projet de test réel pour de véritables clients, m'offrant la possibilité d'aiguiser mes compétences dans des conditions authentiques et de renforcer ma confiance en mes capacités.<br>
+		  En retour, nos partenaires peuvent bénéficier de la découverte gratuite de défauts potentiellement non détectés jusqu'à présent ou renforcer leur confiance dans leurs logiciels.
+		</p>
+
+		<h3>L'entreprise : Amn Brains</h3>
+		<p>
+		  Amn Brains développe des solutions logicielles dans la Gouvernance de la Cybersécurité. La complexité des systèmes d’information et la multiplication des techniques d’attaques conduisent généralement à des angles morts exploitables par les cyber attaquants.<br>
+		  Leurs solutions sont conçues pour aider les professionnels de la cybersécurité (RSSI, Consultants, Auditeurs, Opérationnels) à combler ces difficultés en utilisant au maximum la puissance de la machine afin de leur permettre de se concentrer sur les aspects sur lesquels ils ont le plus de valeur ajoutée.
+		</p>
+		
+		<h3>Le logiciel à tester : Amn Auditor</h3>
+		<p>
+		  <strong>AMN Auditor</strong> : Application Desktop de conduite d'Audit Multi-référentiel pour les auditeurs cybersécurité.
+		</p>
+
+		<hr style="margin:1.4em 0;">
+
+		<h3>Informations importantes</h3>
+		<ul class="styled-list">
+		  <li>Il n'y a pas de sprint sur ce projet. Il est géré par flux continu inspiré par la méthodologie KANBAN.</li>
+		  <li>Je travaille en équipe sur ce projet avec un autre testeur QA et un product owner.</li>
+		  <li>Des daily-meetings réguliers ont lieu chaque jour du lundi au vendredi entre 13h et 13h10.</li>
+		  <li>Je travaille sur ce projet à distance.</li>
+		  <li>Ce projet permet de solidifier mes compétences en QA et de constituer une expérience professionnelle solide de longue durée.</li>
+		</ul>
+	  </div>
+	</div>
+ </section>
+
+    <!-- Perimètre de test -->
+    <section id="perimetre" class="section-projet" style="display: none;">
+      <div class="qa-card-large" style="width:100%;margin-bottom:2rem;">
+  <div class="qa-card-header-large">
+    <i class="fa-solid fa-bullseye" style="margin-right:0.7em;color:var(--bleu-vif);"></i>
+    Mon périmètre de test
+  </div>
+  <div class="qa-card-body-large">
+    <h3>Mon périmètre</h3>
+    <p>Le périmètre de test qui m'a été affecté par le PO est le suivant :</p>
+    <ul class="styled-list">
+      <li>Génération des constats d’audit</li>
+      <li>Points de contrôle et association avec les éléments d'environnement</li>
+    </ul>
+
+    <h3>Résumé des user stories</h3>
+    <p>Voici le résumé :</p>
+    <ul class="styled-list">
+      <li>
+        En tant qu’auditeur en mission, je veux m’appuyer sur un utilitaire d’audit intelligent pour dérouler les principales étapes de ma mission (questionnement, constats, conformité, écarts, actions), afin de réaliser un audit structuré, réactif et piloté par les exigences du système audité, tout en bénéficiant d’une assistance contextuelle de l’IA.
+      </li>
+      <li>
+        En tant qu’auditeur en mission,
+        Je veux m’appuyer sur un utilitaire d’audit intelligent pour me proposer des points de contrôle pour chaque exigence du référentiel d’audit.
+        Je veux aussi que les points de contrôle soient ciblés sur les éléments de l’environnement décrit.
+        Afin de : réaliser un audit le plus exhaustif possible.
+      </li>
+    </ul>
+
+    <h3>Génération des constats d’audit - Critères d'acceptation</h3>
+    <div class="table-container" style="overflow-x:auto;">
+      <table class="modern-table">
+        <thead>
+          <tr>
+            <th>Scénario</th>
+            <th>Description</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Génération depuis un point de contrôle</td>
+            <td>
+              <p>Lorsqu’un point de contrôle est marqué comme Conforme ou Non conforme, un texte est automatiquement généré et proposé à l’utilisateur. Ce texte :</p>
+              <ul class="styled-list">
+                <li>Est généré dynamiquement en fonction du statut choisi (Conforme ou Non conforme)</li>
+                <li>Peut être modifié manuellement par l’utilisateur dans la zone de texte dédiée</li>
+                <li>Peut être orienté à l’aide de mots-clés spécifiques (exemple : “sécurité”, “documentation”, “performance”...)</li>
+                <li>Peut être validé par l’utilisateur en appuyant sur Entrée ou en cliquant sur le bouton "Ajouter"</li>
+              </ul>
+              <p>Cette fonctionnalité permet de générer rapidement des constats d’audit pertinents et personnalisables selon le contexte de chaque point de contrôle.</p>
+            </td>
+          </tr>
+          <tr>
+            <td>Génération du constat (Conformité ou Écart)</td>
+            <td>
+              <p>Lorsqu’un utilisateur saisit un mot-clé dans le champ de constat de conformité ou d’écart, un texte est automatiquement généré. Ce texte peut être orienté selon les mots-clés saisis, et reste entièrement modifiable. L’utilisateur peut ajouter ce texte au constat en cliquant sur le bouton "Ajouter" ou en appuyant sur la touche Entrée. Ce système permet de gagner du temps tout en conservant une souplesse complète pour la rédaction des constats.</p>
+            </td>
+          </tr>
+          <tr>
+            <td>Génération des actions de remédiation</td>
+            <td>
+              <p>Lorsqu’une non-conformité est ajoutée, des actions de remédiation sont générées automatiquement dans la zone dédiée. Ces actions sont orientées via les mots-clés saisis, et peuvent être ajustées ou complétées librement par l’utilisateur. L’ajout des actions générées peut se faire en cliquant sur "Ajouter" ou en appuyant sur la touche Entrée. L’objectif est de proposer une base de travail cohérente, rapide et personnalisable pour traiter efficacement les non-conformités.</p>
+            </td>
+          </tr>
+        </tbody>
+      </table>
     </div>
 
-    <!-- Main Content -->
-    <div class="main-content">
-        <h1>Bienvenue sur mon micro stage chez AMN BRAINS</h1>
-        <section id="context">
-            <h1>Présentation générale</h1>
-            <div class="cards">
-                <!-- Card 1 -->
-                <div class="card">
-				 <h3>Introduction</h3>
-            <p>Le micro stage est un projet de test réel pour de véritables clients, m'offrant la possibilité d'aiguiser mes compétences dans des conditions authentiques et de renforcer ma confiance en mes capacités.
-               En retour, nos partenaires peuvent bénéficier de la découverte gratuite de défauts potentiellement non détectés jusqu'à présent ou renforcer leur confiance dans leurs logiciels. </p>
-                    <h3>L'entreprise : Amn Brains</h3>
-                    <p>Amn Brains développe des solutions logicielles dans la Gouvernance de la Cybersécurité. La complexité des systèmes d’information et la multiplication des techniques d’attaques conduisent généralement à des angles morts exploitables par les cyber attaquants. Leurs solutions sont conçues pour aider les professionnels de la cybersécurité (RSSI, Consultants, Auditeurs, Opérationnels) à combler ces difficultés en utilisant au maximum la puissance de la machine afin de leur permettre de se concentrer sur les aspects sur lesquels ils ont le plus de valeur ajoutée.</p>
-                    
-                    <h3>Le logiciel à tester : Amn Auditor</h3>
-                    <p>AMN Auditor : Application Desktop de conduite d'Audit Multi-référentiel pour les auditeurs cybersécurité.</p>
-                </div>
+    <h3 style="margin-top:2em;">Points de contrôle et association avec les éléments d'environnement - Critères d'acceptation</h3>
+    <div class="table-container" style="overflow-x:auto;">
+      <table class="modern-table">
+        <thead>
+          <tr>
+            <th>Scénario</th>
+            <th>Description</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Obtenir des points de contrôle ciblés sur les éléments de l'environnement</td>
+            <td>
+              <ul class="styled-list">
+                <li>Étant donné que l’environnement est décrit</li>
+                <li>Quand je lance l’utilitaire d’audit,</li>
+                <li>Et que j'ouvre les exigences du référentiel</li>
+                <li>Alors des points de contrôle sont affichés,</li>
+                <li>Et ces points de contrôle pourraient être associés à des éléments de l'environnement. Un point de contrôle est associé à un élément d'environnement si ce point de contrôle est associé à un des types de cet élément dans les données du référentiel.</li>
+              </ul>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
 
-                <!-- Card 2 -->
-                <div class="card">
-                    <h3>Informations importantes</h3>
-                    <p>Ce qu'il faut savoir : </p>
-                    <ul>
-                        <li><i class="bi bi-check-circle"></i> Il n'y a pas de sprint sur ce projet. Il est géré par flux continu inspiré par la méthodologie KANBAN.</li>
-                        <li><i class="bi bi-check-circle"></i> Je travaille en équipe sur ce projet avec un autre testeur QA et un product owner.</li>
-                        <li><i class="bi bi-check-circle"></i> Des daily-meetings réguliers ont lieu chaque jour du lundi au vendredi entre 13h et 13h10.</li>
-						<li><i class="bi bi-check-circle"></i> Je travaille sur ce projet à distance. </li>
-						<li><i class="bi bi-check-circle"></i> Ce projet permet de solidier mes compétences en QA et de constituer une expérience professionnelle solide de longue durée.</li>
-                    </ul>
-                </div>
-            </div>
-        </section>
-        
-        <section id="perimetre">
-            <h1>Mon périmètre de test</h1>
-            <div class="cards">
-                <div class="card">
-                    <h3>Mon périmètre</h3>
-                    <p>Le périmètre de test qui m'a été affecté par le PO est le suivant : </p>
-                    <ul>
-                        <li><i class="bi bi-check-circle"></i> Génération des constats d’audit</li>
-                        <li><i class="bi bi-check-circle"></i> Points de contrôle et association avec les élément d'environnement</li>
-                    </ul>
-                    <h3>Résumé des users stories</h3>
-                    <p>Voici le résumé : </p>
-                    <ul>
-                        <li><i class="bi bi-check-circle"></i>En tant qu’auditeur en mission, je veux m’appuyer sur un utilitaire d’audit intelligent pour dérouler les principales étapes de ma mission (questionnement, constats, conformité, écarts, actions), afin de réaliser un audit structuré, réactif et piloté par les exigences du système audité, tout en bénéficiant d’une assistance contextuelle de l’IA.</li>
-                        <li><i class="bi bi-check-circle"></i>En tant qu’Auditeur en mission,
-						Je veux m’appuyer sur un utilitaire d’audit intelligent pour me proposer des points de contrôle pour chaque exigence du référentiel d’audit
-						Je veux aussi que les points de contrôle soit ciblé sur les élément de l’environnement décrit
-						Afin de : Réaliser un audit le plus exhaustif possible.
-						</li>
-                    </ul>  
-                    <h3>Génération des constats d’audit - Critères d'acceptation</h3>
-                    <table>
-                        <thead>
-                            <tr>
-                                <th>Scénario</th>
-                                <th>Description</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td>Génération depuis un point de contrôle</td>
-                                <td>
-								<p>Lorsqu’un point de contrôle est marqué comme Conforme ou Non conforme, un texte est automatiquement généré et proposé à l’utilisateur. Ce texte :</p>
-                                    <ul>
-                                        <li><i class="bi bi-check-circle"></i>Est généré dynamiquement en fonction du statut choisi (Conforme ou Non conforme)</li>
-                                        <li><i class="bi bi-check-circle"></i>Peut être modifié manuellement par l’utilisateur dans la zone de texte dédiée</li>
-                                        <li><i class="bi bi-check-circle"></i>Peut être orienté à l’aide de mots-clés spécifiques (exemple : “sécurité”, “documentation”, “performance”...)</li>
-                                        <li><i class="bi bi-check-circle"></i>Peut être validé par l’utilisateur en appuyant sur Entrée ou en cliquant sur le bouton "Ajouter"</li>
-                                    </ul>
-									<p>Cette fonctionnalité permet de générer rapidement des constats d’audit pertinents et personnalisables selon le contexte de chaque point de contrôle.</p>
-                                </td>
-                            </tr>
-							<tr>
-                                <td>Génération du constat (Conformité ou Écart)</td>
-                                <td>
-                                    <p>Lorsqu’un utilisateur saisit un mot-clé dans le champ de constat de conformité ou d’écart, un texte est automatiquement généré. Ce texte peut être orienté selon les mots-clés saisis, et reste entièrement modifiable. L’utilisateur peut ajouter ce texte au constat en cliquant sur le bouton "Ajouter" ou en appuyant sur la touche Entrée. Ce système permet de gagner du temps tout en conservant une souplesse complète pour la rédaction des constats.</p>
-                                </td>
-                            </tr>
-							<tr>
-                                <td>Génération des actions de remédiation</td>
-                                <td>
-                                    <p>Lorsqu’une non-conformité est ajoutée, des actions de remédiation sont générées automatiquement dans la zone dédiée. Ces actions sont orientées via les mots-clés saisis, et peuvent être ajustées ou complétées librement par l’utilisateur. L’ajout des actions générées peut se faire en cliquant sur "Ajouter" ou en appuyant sur la touche Entrée. L’objectif est de proposer une base de travail cohérente, rapide et personnalisable pour traiter efficacement les non-conformités.</p>
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
-					 <h3>Points de contrôle et association avec les élément d'environnement - Critères d'acceptation</h3>
-                    <table>
-                        <thead>
-                            <tr>
-                                <th>Scénario</th>
-                                <th>Description</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td>Obtenir des points de contrôle ciblé sur les éléments de l'environnement</td>
-                                <td>
-                                    <ul>
-                                        <li><i class="bi bi-check-circle"></i>Étant donné que l’environnement est décrit</li>
-                                        <li><i class="bi bi-check-circle"></i>Quand je lance l’utilitaire d’audit,</li>
-                                        <li><i class="bi bi-check-circle"></i>Et que j'ouvre les exigences du référentiel</li>
-                                        <li><i class="bi bi-check-circle"></i>Alors des points de contrôle sont affichés,</li>
-										<li><i class="bi bi-check-circle"></i>Et ces points de contrôle pourraient être associés à des éléments de l'environnement. Un point de contrôle est associé à un élément d'environnement si ce point de contrôle est associé à un des types de cet élément dans les données du référentiel.</li>
-                                    </ul>
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-        </section>
-		
-		<section id="activity">
-		<h1>Activités de tests réalisées</h1>
-	 <div class="cards">
-                <!-- Card 1 -->
-                <div class="card">
-                    <h3>Analyse</h3>
-                    <p>Tâches réalisées : </p>
-                    <ul>
-                        <li><i class="bi bi-check-circle"></i>Réalisation d'une revue des histoires utilisateur affectées à mon périmètre</li>
-                        <li><i class="bi bi-check-circle"></i>Mise à jour de la structure des tests</li>
-                    </ul>
-                    
-                    <h3>Conception</h3>
-                    <p>Tâches réalisées : </p>
-                    <ul>
-                        <li><i class="bi bi-check-circle"></i>Listing des cas de test des users stories affectées à mon périmètre de test</li>
-                        <li><i class="bi bi-check-circle"></i>Conception des cas de test associés aux différentes users stories de mon périmètres</li>
-                        <li><i class="bi bi-check-circle"></i>Création des cas de tests dans l'outil Jira</li>
-                    </ul>
-                    
-                </div>
+    </section>
 
-                <!-- Card 2 -->
-                <div class="card">
-                    <h3>Implémentation</h3>
-                    <p>Tâches réalisées : </p>
-                    <ul>
-                        <li><i class="bi bi-check-circle"></i> Implémentation des cas de test</li>
-                        <li><i class="bi bi-check-circle"></i> Préparation des campagnes de test</li>
-                        <li><i class="bi bi-check-circle"></i> Création des plans de test</li>
-                        <li><i class="bi bi-check-circle"></i> Création des éxécutions de test dans Jira</li>
-						<li><i class="bi bi-check-circle"></i> Développement des tests automatisés sur les scénarios critiques</li>
-                    </ul>
-					 <h3>Exécution</h3>
-                    <p>Tâches réalisées : </p>
-                    <ul>
-                        <li><i class="bi bi-check-circle"></i> Initialisation des éxécutions des campagnes de test</li>
-                        <li><i class="bi bi-check-circle"></i> Lancement des éxécutions des campagnes de test</li>
-						<li><i class="bi bi-check-circle"></i> Exécution des tests automatisés</li>
-                        <li><i class="bi bi-check-circle"></i> Création du rapport de test final pour les 2 users stories</li>
-                    </ul>
-                </div>
-            </div>
-	 </section>
-	 
-	 <section id="livrables">
-	 <h1>Livrables produits</h1>
-	  <div class="cards">
-		<div class="card">
-			<ul>
-                <li><i class="bi bi-check-circle"></i> Cas de tests</li>
-                <li><i class="bi bi-check-circle"></i> Résultats d’exécution des tests manuels</li>
-                <li><i class="bi bi-check-circle"></i> Scripts automatisés</li>
-                <li><i class="bi bi-check-circle"></i> Résultats d’exécution des tests automatisés</li>
-			    <li><i class="bi bi-check-circle"></i> Rapports de défauts</li>
-				<li><i class="bi bi-check-circle"></i> Rapport Final de test</li>
-            </ul>
-		</div>
-	</div>
-	 </section>
-	  
- </div>
-	
-	 
-    <!-- Footer -->
+    <!-- Activités -->
+    <section id="activites" class="section-projet" style="display:none">
+     <div class="qa-card-large">
+  <div class="qa-card-header-large">
+    <i class="fa-solid fa-flask-vial"></i>
+    Activités de tests réalisées
+  </div>
+  <div class="qa-card-body-large">
+    <div class="qa-cards-grid">
+      <!-- Carte 1 -->
+      <div class="qa-card-step">
+        <div class="qa-step-title">
+          <i class="fa-solid fa-magnifying-glass-chart"></i> Analyse
+        </div>
+        <ul class="styled-list">
+          <li>Revue des histoires utilisateur affectées à mon périmètre</li>
+          <li>Mise à jour de la structure des tests</li>
+        </ul>
+        <div class="qa-step-title">
+          <i class="fa-solid fa-pencil-ruler"></i> Conception
+        </div>
+        <ul class="styled-list">
+          <li>Listing des cas de test des users stories</li>
+          <li>Conception des cas de test associés</li>
+          <li>Création des cas de tests dans Jira</li>
+        </ul>
+      </div>
+      <!-- Carte 2 -->
+      <div class="qa-card-step">
+        <div class="qa-step-title">
+          <i class="fa-solid fa-code"></i> Implémentation
+        </div>
+        <ul class="styled-list">
+          <li>Implémentation des cas de test</li>
+          <li>Préparation des campagnes de test</li>
+          <li>Création des plans de test</li>
+          <li>Création des éxécutions de test dans Jira</li>
+          <li>Développement des tests automatisés</li>
+        </ul>
+        <div class="qa-step-title">
+          <i class="fa-solid fa-play-circle"></i> Exécution
+        </div>
+        <ul class="styled-list">
+          <li>Initialisation des éxécutions des campagnes</li>
+          <li>Lancement des éxécutions</li>
+          <li>Exécution des tests automatisés</li>
+          <li>Création du rapport de test final</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+    </section>
+
+    <!-- Livrables -->
+   <section id="livrables" class="section-projet" style="display:none">
+      <div class="qa-card">
+        <div class="qa-card-header">Livrables produits</div>
+        <div class="qa-card-body">
+          <ul class="styled-list">
+            <li>Cas de tests</li>
+            <li>Résultats d’exécution des tests manuels</li>
+            <li>Scripts automatisés</li>
+            <li>Résultats d’exécution des tests automatisés</li>
+			<li>Rapports de défauts</li>
+		    <li>Rapport Final de test</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <div style="height:3.5rem"></div>
+  </main>
+  <!-- Footer -->
     <footer>
-        <span class="citation">"N'abandonne jamais, car c'est souvent juste après le dernier effort que le succès se dévoile."</span>
-        <p>© 2025 Maxime Joannis - Tous droits réservés. <a href="privacy.html">Politique de confidentialité</a></p>
+     <span class="citation">"N'abandonne jamais, car c'est souvent juste après le dernier effort que le succès se dévoile."</span>
+        <p>© 2025 Maxime Joannis - Tous droits réservés.  <a href="privacy.html">Politique de confidentialité</a></p>
     </footer>
 	
 	 <!-- Stats sur le nombre de visites -->
+  <script>
+    var t = setInterval(function() {
+        if (window.goatcounter && window.goatcounter.visit_count) {
+            clearInterval(t)
+            window.goatcounter.visit_count({append: 'body'})
+        }
+    }, 100)
+  </script>
+
+  <script data-goatcounter="https://maximejoannis.goatcounter.com/count"
+          async src="//gc.zgo.at/count.js">
+  </script>
+	
+	 <script>
+    // Navigation dynamique des sections Projet Homey
+    function ShowSection(id) {
+      // Masquer toutes les sections projet
+      document.querySelectorAll('.section-projet').forEach(sec => sec.style.display = 'none');
+      // Désactiver tous les liens nav
+      document.querySelectorAll('.sidebar nav a').forEach(a => a.classList.remove('active'));
+      // Afficher la section demandée
+      document.getElementById(id).style.display = '';
+      // Activer le lien correspondant
+      document.querySelectorAll('.sidebar nav a').forEach(a => {
+        if (a.getAttribute('onclick') && a.getAttribute('onclick').includes("'" + id + "'")) {
+          a.classList.add('active');
+        }
+      });
+    }
+    // Affichage par défaut : Présentation
+    window.addEventListener('DOMContentLoaded', function() {
+      ShowSection('presentation');
+    });
+  </script>
+  
+   <!-- Stats sur le nombre de visites -->
   <script>
     var t = setInterval(function() {
         if (window.goatcounter && window.goatcounter.visit_count) {
