@@ -3,18 +3,17 @@
 ![GitHub repo size](https://img.shields.io/github/repo-size/maximejoannis/maximejoannis.github.io?color=blue&label=Taille%20du%20repo)
 ![GitHub last commit](https://img.shields.io/github/last-commit/maximejoannis/maximejoannis.github.io?color=brightgreen&label=Dernière%20MAJ)
 ![Visitors](https://visitor-badge.laobi.icu/badge?page_id=maximejoannis.portfolio)
-![Made with Love](https://img.shields.io/badge/Fait%20avec-%E2%9D%A4-red)
 
 ---
 
 ## 👋 À propos de moi
-🎯 **Profession** : Testeur QA Fonctionnel Junior + Ex-Développeur Fullstack  
+🎯 **Profil** : Ingénieur/Testeur QA Fonctionnel Junior + Ex-Développeur Fullstack  
 📍 **Localisation** : Île-de-France  
 📫 **Contact** : [maxime.joannis6@gmail.com](mailto:maxime.joannis6@gmail.com)  
 💼 **LinkedIn** : [Mon profil](https://www.linkedin.com/in/maxime-joannis-37ab528)  
 🌐 **Portfolio Netlify** : [maximejoannis.netlify.app](https://maximejoannis.netlify.app)  
 
-💬 *Testeur QA certifié ISTQB, passionné par la qualité logicielle, combinant 6 ans en développement et 2,5 ans en QA (manuel + automatisé).*
+💬 *Testeur QA certifié ISTQB, passionné par la qualité logicielle, combinant plus de 6 ans en développement et 2,5 ans en QA (manuel + automatisé).*
 
 ---
 
