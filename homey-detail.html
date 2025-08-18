@@ -1,0 +1,491 @@
+<!DOCTYPE html>
+<html lang="fr">
+   <head>
+      <meta charset="UTF-8" />
+      <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+      <title>Projet Homey - Détail | Maxime Joannis Portfolio QA</title>
+      <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet">
+      <link rel="stylesheet" href="style-portfolio-maximejoannis.css">
+   </head>
+   <body>
+      <aside class="profile-menu">
+         <div class="profile-header">
+            <h1 class="profile-name">Maxime Joannis</h1>
+            <div class="profile-title">Ingénieur/Testeur QA fonctionnel junior – Certifié ISTQB &amp; Ex-Développeur Fullstack</div>
+         </div>
+         <nav class="profile-nav">
+            <a href="index.html" class="menu-link menu-link-accueil">Accueil</a>
+            <a href="#" class="menu-link active" data-section="presentation">Présentation du projet de fin de formation Homey</a>
+            <a href="#" class="menu-link" data-section="perimetre">Mon périmètre de test</a>
+            <a href="#" class="menu-link" data-section="dependances">Dépendances fonctionnelles</a>
+            <a href="#" class="menu-link" data-section="activites">Activités de tests réalisées</a>
+            <a href="#" class="menu-link" data-section="livrables">Livrables produits</a>
+         </nav>
+         <div class="profile-socials">
+            <a href="https://github.com/maximejoannis/maximejoannis.github.io" target="_blank" title="GitHub">
+               <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                  <path d="M12 2C6.477 2 2 6.484 2 12.012c0 4.418 2.865 8.167 6.839 9.489.5.09.682-.217.682-.482 0-.237-.009-.868-.013-1.703-2.782.605-3.369-1.341-3.369-1.341-.454-1.157-1.109-1.465-1.109-1.465-.908-.62.069-.608.069-.608 1.004.07 1.532 1.031 1.532 1.031.892 1.528 2.341 1.088 2.91.833.091-.646.35-1.088.636-1.339-2.221-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.025A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.748-1.025 2.748-1.025.546 1.378.202 2.397.099 2.65.64.7 1.028 1.595 1.028 2.688 0 3.848-2.337 4.695-4.566 4.944.359.309.678.92.678 1.854 0 1.338-.012 2.419-.012 2.747 0 .267.18.576.688.479C19.137 20.176 22 16.427 22 12.012 22 6.484 17.523 2 12 2z"/>
+               </svg>
+            </a>
+            <a href="https://www.linkedin.com/in/maxime-joannis-37ab528" target="_blank" title="LinkedIn">
+               <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                  <rect x="2" y="2" width="20" height="20" rx="5"/>
+                  <path d="M8 11v5M8 8v.01M12 16v-5M16 16v-3a2 2 0 0 0-4 0"/>
+               </svg>
+            </a>
+         </div>
+      </aside>
+      <main>
+	  
+	  
+        <section id="presentation" class="active">
+  <div class="homey-glass-card">
+    <div class="homey-header-row">
+      <div>
+        <div class="homey-logo-circle">
+          <span class="homey-logo-text">🏠</span>
+        </div>
+        <h2 class="homey-title">Présentation du projet de fin de formation <span class="homey-highlight">HOMEY</span></h2>
+        <div class="homey-subtitle">Une application web pour la gestion des locations saisonnières</div>
+      </div>
+      <a href="http://livraison3.testacademy.fr/" target="_blank" class="homey-app-btn">Voir l’application</a>
+    </div>
+    <div class="homey-content-row">
+      <div class="homey-description">
+        <p>
+          <strong>HOMEY</strong> permet aux hôtes de gérer leurs annonces, d’accepter des réservations et de suivre leurs activités simplement. Elle permet aussi aux voyageurs de consulter des annonces, d'effectuer des demandes 
+		  de réservations et de les payer. 
+        </p>
+        <div class="homey-goals">
+          <div class="homey-goal-title">Objectifs fonctionnels :</div>
+          <ul class="homey-goal-list">
+            <li><span class="homey-badge">📸</span> Création & gestion des annonces (photos, descriptions, prix, disponibilités)</li>
+            <li><span class="homey-badge">🗓️</span> Calendrier de disponibilité & traitement des demandes</li>
+            <li><span class="homey-badge">💬</span> Messagerie intégrée entre hôtes et voyageurs</li>
+            <li><span class="homey-badge">💳</span> Paiement en ligne sécurisé & gestion des annulations</li>
+            <li><span class="homey-badge">📈</span> Suivi des réservations avec statuts</li>
+          </ul>
+        </div>
+        <div class="homey-tests">
+          <div class="homey-goal-title">Tests réalisés :</div>
+          <ul class="homey-goal-list">
+            <li>Vérification des statuts et transitions de réservation</li>
+            <li>Tests manuels des fonctionnalités critiques</li>
+            <li>Automatisation des scénarios critiques</li>
+          </ul>
+        </div>
+      </div>
+      <div class="homey-images">
+        <img src="AccueilHomey.png" alt="Dashboard Homey" class="homey-img">
+        <img src="homey_login.png" alt="Login Homey" class="homey-img">
+      </div>
+    </div>
+    <div class="homey-context-row">
+      <div class="homey-context-col">
+        <h3>Contexte de réalisation</h3>
+        <ul>
+          <li>1 Product Owner</li>
+          <li>9 développeurs</li>
+          <li>2 testeurs + 1 Test Manager</li>
+          <li>1 Scrum Master</li>
+        </ul>
+      </div>
+      <div class="homey-context-col">
+        <h3>🗂️ Product Backlog & Méthodologie Agile</h3>
+        <p>30 User Stories • Méthode <strong>Scrum</strong> • Sprints de 2 semaines</p>
+      </div>
+      <div class="homey-context-col">
+        <h3>🎯 Bénéfices de la simulation</h3>
+        <ul>
+          <li>Appliquer des tests statiques, dynamiques manuels et automatisés</li>
+          <li>Travailler en autonomie ou en binôme selon les besoins QA</li>
+          <li>Préparer une soutenance avec livrables, cas de test et justification des choix</li>
+          <li>Recevoir des retours détaillés des formateurs pour progresser dans mon parcours QA</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+		 
+         <!-- Périmètre de test -->
+         <section id="perimetre">
+            <div class="section-title">Mon périmètre de test</div>
+            <div class="qa-card-large">
+                  <p>Le périmètre de test qui m'a été confié lors du Sprint Planning concernait :</p>
+                  <ul class="styled-list">
+                     <li>Faire une demande de réservation</li>
+                     <li>Traiter une demande de réservation</li>
+                  </ul>
+                  <h3>Résumé des User Stories</h3>
+                  <ul class="styled-list">
+                     <li>En tant que Voyageur, je souhaite envoyer une demande de réservation afin de bénéficier d’un séjour dans un logement saisonnier.</li>
+                     <li>En tant qu’Hôte, je souhaite accepter ou refuser une demande de réservation afin de planifier les séjours dans mon logement.</li>
+                  </ul>
+                  <h3>Faire une demande de réservation – Critères d’acceptation</h3>
+                  <div class="table-container">
+                     <table class="modern-table">
+                        <thead>
+                           <tr>
+                              <th>Scénario</th>
+                              <th>Description</th>
+                           </tr>
+                        </thead>
+                        <tbody>
+                           <tr>
+                              <td>Voyageur connecté</td>
+                              <td>
+                                 <span>✔️ ETANT DONNE un Voyageur connecté</span><br>
+                                 <span>✔️ QUAND il fait une demande de réservation</span><br>
+                                 <span>✔️ ALORS le système crée une nouvelle réservation…</span>
+                              </td>
+                           </tr>
+                           <tr>
+                              <td>Visiteur non connecté</td>
+                              <td>
+                                 <span>✔️ ETANT DONNE un Visiteur non connecté</span><br>
+                                 <span>✔️ QUAND il tente une réservation</span><br>
+                                 <span>✔️ ALORS le système ne donne pas suite à la demande</span>
+                              </td>
+                           </tr>
+                        </tbody>
+                     </table>
+                  </div>
+                  <h3>Traiter une demande de réservation – Critères d’acceptation</h3>
+                  <div class="table-container">
+                     <table class="modern-table">
+                        <thead>
+                           <tr>
+                              <th>Scénario</th>
+                              <th>Description</th>
+                           </tr>
+                        </thead>
+                        <tbody>
+                           <tr>
+                              <td>Confirmation par l’hôte</td>
+                              <td>
+                                 <span>✔️ ETANT DONNE un hôte connecté et une réservation <span class="badge badge-nouveau">NOUVEAU</span></span><br>
+                                 <span>✔️ QUAND il confirme la demande</span><br>
+                                 <span>✔️ ALORS le statut devient <span class="badge badge-attente">ATTENTE DE PAIEMENT</span> pour l'hôte et <span class="badge badge-disponible">DISPONIBLE</span> pour le voyageur</span>
+                              </td>
+                           </tr>
+                           <tr>
+                              <td>Annulation par le voyageur</td>
+                              <td>
+                                 <span>✔️ ETANT DONNE un voyageur connecté et une réservation <span class="badge badge-nouveau">NOUVEAU</span></span><br>
+                                 <span>✔️ QUAND il annule la demande</span><br>
+                                 <span>✔️ ALORS le statut devient <span class="badge badge-annule">ANNULE</span> pour les deux parties</span>
+                              </td>
+                           </tr>
+                           <tr>
+                              <td>Refus par l’hôte</td>
+                              <td>
+                                 <span>✔️ ETANT DONNE un hôte connecté et une réservation <span class="badge badge-nouveau">NOUVEAU</span></span><br>
+                                 <span>✔️ QUAND il refuse la demande</span><br>
+                                 <span>✔️ ALORS le statut devient <span class="badge badge-refuse">REFUSE</span> pour l’hôte et le voyageur</span>
+                              </td>
+                           </tr>
+                           <tr>
+                              <td>Paiement par le voyageur</td>
+                              <td>
+                                 <span>✔️ ETANT DONNE un voyageur connecté et une réservation <span class="badge badge-attente">ATTENTE DE PAIEMENT</span></span><br>
+                                 <span>✔️ QUAND il procède au paiement</span><br>
+                                 <span>✔️ ALORS le statut devient <span class="badge badge-reserve">RESERVE</span> pour l’hôte et le voyageur</span>
+                              </td>
+                           </tr>
+                        </tbody>
+                     </table>
+                  </div>
+               </div>
+            </div>
+         </section>
+         <!-- Dépendances fonctionnelles -->
+         <section id="dependances">
+            <div class="section-title">Dépendances fonctionnelles</div>
+            <div class="qa-card-large">
+               <div class="qa-card-header-large">🔗 Dépendances fonctionnelles</div>
+               <div class="qa-card-body-large">
+                  <p>La User Story <strong>"Faire une demande de réservation"</strong> dépend directement des fonctionnalités suivantes :</p>
+                  <div class="table-container">
+                     <table class="modern-table">
+                        <thead>
+                           <tr>
+                              <th>Fonctionnalité</th>
+                              <th>Description</th>
+                              <th>Type de dépendance</th>
+                           </tr>
+                        </thead>
+                        <tbody>
+                           <tr>
+                              <td>S’inscrire</td>
+                              <td>Permet à un utilisateur de créer un compte avant d’interagir avec la plateforme.</td>
+                              <td><span class="badge badge-prerequis">Prérequis</span></td>
+                           </tr>
+                           <tr>
+                              <td>Se connecter</td>
+                              <td>Permet à un utilisateur existant d'accéder à ses fonctionnalités personnelles.</td>
+                              <td><span class="badge badge-prerequis">Prérequis</span></td>
+                           </tr>
+                           <tr>
+                              <td>Réaliser une recherche simple</td>
+                              <td>Permet au voyageur de consulter les annonces et de sélectionner un logement.</td>
+                              <td><span class="badge badge-fonctionnel">Fonctionnel</span></td>
+                           </tr>
+                        </tbody>
+                     </table>
+                  </div>
+                  <p>La User Story <strong>"Traiter une demande de réservation"</strong> dépend directement des fonctionnalités suivantes :</p>
+                  <div class="table-container">
+                     <table class="modern-table">
+                        <thead>
+                           <tr>
+                              <th>Fonctionnalité</th>
+                              <th>Description</th>
+                              <th>Type de dépendance</th>
+                           </tr>
+                        </thead>
+                        <tbody>
+                           <tr>
+                              <td>Devenir Hôte</td>
+                              <td>Permet de créer et d'avoir un compte Hôte pour créer des annonces et recevoir des demandes de réservations.</td>
+                              <td><span class="badge badge-prerequis">Prérequis</span></td>
+                           </tr>
+                           <tr>
+                              <td>Créer une annonce</td>
+                              <td>Permet à un hôte de créer des annonces.</td>
+                              <td><span class="badge badge-fonctionnel">Fonctionnel</span></td>
+                           </tr>
+                        </tbody>
+                     </table>
+                  </div>
+               </div>
+            </div>
+         </section>
+         <!-- Activités de tests réalisés -->
+         <section id="activites">
+            <div class="section-title">Activités de tests réalisés</div>
+            <div class="cards-grid-2">
+               <div class="qa-card">
+                  <div class="qa-card-header">Analyse</div>
+                  <div class="qa-card-body">
+                     <div class="qa-desc">Tâches réalisées :</div>
+                     <ul class="styled-list">
+                        <li>Détermination de la structure du périmètre fonctionnel</li>
+                        <li>Revue des User Stories affectées</li>
+                        <li>Mise à jour de la structure des tests</li>
+                        <li>Création du projet PFF_MaximeJoannis dans Jira</li>
+                        <li>Création des EPICS et User Stories dans Jira</li>
+                        <li>Ajout des conditions de test</li>
+                        <li>Démarrage du sprint</li>
+                     </ul>
+                  </div>
+               </div>
+               <div class="qa-card">
+                  <div class="qa-card-header">Conception</div>
+                  <div class="qa-card-body">
+                     <div class="qa-desc">Tâches réalisées :</div>
+                     <ul class="styled-list">
+                        <li>Listing et rédaction des cas de test</li>
+                        <li>Conception des cas pour chaque User Story</li>
+                        <li>Création des cas de test dans Jira</li>
+                     </ul>
+                  </div>
+               </div>
+               <div class="qa-card">
+                  <div class="qa-card-header">Implémentation</div>
+                  <div class="qa-card-body">
+                     <div class="qa-desc">Tâches réalisées :</div>
+                     <ul class="styled-list">
+                        <li>Implémentation des cas de test</li>
+                        <li>Préparation des campagnes de test</li>
+                        <li>Création des plans de test</li>
+                        <li>Création des exécutions de test dans Jira</li>
+                        <li>Développement des tests automatisés sur les scénarios critiques</li>
+                     </ul>
+                  </div>
+               </div>
+               <div class="qa-card">
+                  <div class="qa-card-header">Exécution</div>
+                  <div class="qa-card-body">
+                     <div class="qa-desc">Tâches réalisées :</div>
+                     <ul class="styled-list">
+                        <li>Initialisation des exécutions des campagnes de test</li>
+                        <li>Lancement des exécutions des campagnes de test</li>
+                        <li>Exécution des tests automatisés</li>
+                        <li>Création du rapport de test final</li>
+                     </ul>
+                  </div>
+               </div>
+            </div>
+         </section>
+         <!-- Livrables produits -->
+         <!-- Livrables produits -->
+<section id="livrables">
+  <div class="section-title">Livrables produits</div>
+  <div class="qa-card-large qa-card-livrables" style="width:100%;margin-bottom:2rem;">
+    <div class="qa-card-body-large">
+      <div class="table-container">
+        <table class="modern-table">
+          <thead>
+            <tr>
+              <th>Nom du livrable</th>
+              <th>Livrables</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Cas de tests</td>
+              <td>
+                <a href="CT_FaireDemandeReservation.html" target="_blank" class="action-link modern-link">Story 1 : Faire une demande de réservation</a><br>
+                <a href="CT_TraiterDemandeReservation.html" target="_blank" class="action-link modern-link">Story 2 : Traiter une demande de réservation</a>
+              </td>
+            </tr>
+            <tr>
+              <td>Résultats d’exécution des tests manuels</td>
+              <td>
+                <a href="RapportExecution_UserStory1.html" target="_blank" class="action-link modern-link">Story 1</a><br>
+                <a href="RapportExecution_UserStory2.html" target="_blank" class="action-link modern-link">Story 2</a>
+              </td>
+            </tr>
+            <tr>
+              <td>Scripts automatisés</td>
+              <td>
+                <a href="Script_TA_SC1.html" target="_blank" class="action-link modern-link">Scénario automatisé de la story 1 en étant connecté</a><br>
+                <a href="Script_TA_SC2.html" target="_blank" class="action-link modern-link">Scénario automatisé de la story 1 en étant non connecté</a><br>
+                <a href="Script_TA_SC3.html" target="_blank" class="action-link modern-link">Scénario automatisé de la story 2</a>
+              </td>
+            </tr>
+            <tr>
+              <td>Résultats d’exécution des tests automatisés</td>
+              <td>
+                <a href="RapportExecution_TAStory1.html" target="_blank" class="action-link modern-link">Story 1</a><br>
+                <a href="RapportExecution_TAStory2.html" target="_blank" class="action-link modern-link">Story 2</a>
+              </td>
+            </tr>
+            <tr>
+              <td>Rapports de défauts</td>
+              <td>
+                <a href="#" onclick="viewImage('RapportDefaut_Page1.png')" class="action-link modern-link">Anomalie1</a><br>
+                <a href="#" onclick="viewImage('RapportDefaut_Page2.png')" class="action-link modern-link">Anomalie2</a><br>
+                <a href="RapportDefaut2.html" target="_blank" class="action-link modern-link">Anomalie3</a><br>
+                <a href="RapportDefaut3.html" target="_blank" class="action-link modern-link">Anomalie4</a>
+              </td>
+            </tr>
+            <tr>
+              <td>Rapport Final de test</td>
+              <td>
+                <a href="RapportFinal.html" target="_blank" class="action-link modern-link">Rapport Final</a>
+              </td>
+            </tr>
+            <tr>
+              <td>Support de soutenance</td>
+              <td>
+                <a href="SupportPresentation_PFFHomey.pptx" target="_blank" class="action-link modern-link">Téléchargez mon support de présentation</a>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</section>
+
+         <footer id="page-footer">
+            <div class="footer-content">
+               <span class="citation">"N'abandonne jamais, car c'est souvent juste après le dernier effort que le succès se dévoile."</span>
+               <p>© 2025 Maxime Joannis - Tous droits réservés.  <a href="privacy.html">Politique de confidentialité</a></p>
+            </div>
+         </footer>
+      </main>
+      <!-- Navigation dynamique -->
+		 <script>
+		// Navigation dynamique du menu latéral
+		document.querySelectorAll('.menu-link').forEach(link => {
+			// On ignore le lien accueil !
+			if (link.classList.contains('menu-link-accueil')) return;
+			link.addEventListener('click', function(e) {
+				e.preventDefault();
+				document.querySelectorAll('.menu-link').forEach(l => l.classList.remove('active'));
+				this.classList.add('active');
+				const sectionId = this.getAttribute('data-section');
+				document.querySelectorAll('main > section').forEach(sec => sec.classList.remove('active'));
+				document.getElementById(sectionId).classList.add('active');
+				setTimeout(toggleFooterOnScroll, 50);
+			});
+		});
+		// Par défaut, affiche la section présentation
+		document.querySelectorAll('main > section').forEach(sec => sec.classList.remove('active'));
+		document.getElementById('presentation').classList.add('active');
+	  </script>
+
+      <!-- Footer dynamique -->
+      <script>
+         function toggleFooterOnScroll() {
+            const footer = document.getElementById('page-footer');
+            const main = document.querySelector('main');
+            const scrollY = window.scrollY || window.pageYOffset;
+            const viewportHeight = window.innerHeight;
+            const mainRect = main.getBoundingClientRect();
+            const mainBottom = main.offsetTop + main.offsetHeight;
+            const pageBottom = scrollY + viewportHeight;
+            if (pageBottom >= mainBottom - 2) {
+               footer.style.display = 'block';
+            } else {
+               footer.style.display = 'none';
+            }
+         }
+         window.addEventListener('scroll', toggleFooterOnScroll);
+         window.addEventListener('resize', toggleFooterOnScroll);
+         document.addEventListener('DOMContentLoaded', toggleFooterOnScroll);
+      </script>
+      <!-- Affichage d'image rapport défaut -->
+      <script>
+         function viewImage(imageName) {
+            const newWindow = window.open("", "_blank");
+            newWindow.document.write(`
+                <html>
+                    <head>
+                        <title>Image: ${imageName}</title>
+                        <style>
+                            body {
+                                text-align: center;
+                                padding: 20px;
+                                font-family: 'Inter', Arial, sans-serif;
+                                background: #101529;
+                                color: #eaf6fb;
+                            }
+                            img {
+                                max-width: 100%;
+                                height: auto;
+                                margin-top: 2em;
+                                box-shadow: 0 2px 32px #1fe1d911;
+                                border-radius: 12px;
+                            }
+                            .download-link {
+                                display: inline-block;
+                                margin-top: 20px;
+                                padding: 10px 20px;
+                                background: linear-gradient(90deg, #1fe1d9 0%, #ff38b0 100%);
+                                color: #182033;
+                                text-decoration: none;
+                                border-radius: 8px;
+                                font-weight: 700;
+                                box-shadow: 0 2px 12px #1fe1d922;
+                            }
+                            .download-link:hover {
+                                background: linear-gradient(90deg, #ff38b0 80%, #1fe1d9 100%);
+                                color: #fff;
+                            }
+                        </style>
+                    </head>
+                    <body>
+                        <img src="${imageName}" alt="${imageName}">
+                        <br>
+                        <a href="${imageName}" download="${imageName}" class="download-link">Télécharger l'image</a>
+                    </body>
+                </html>
+            `);
+         }
+      </script>
+   </body>
+</html>

@@ -1,0 +1,685 @@
+<!DOCTYPE html>
+<html lang="fr">
+   <head>
+      <meta charset="UTF-8" />
+      <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+      <title>Maxime Joannis - Dashboard QA Homey</title>
+      <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet">
+      <link rel="stylesheet" href="style-portfolio-maximejoannis.css">
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+      <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+   </head>
+   <body>
+      <!-- Sidebar / Menu latéral -->
+      <aside class="profile-menu">
+         <div class="profile-header">
+            <h1 class="profile-name">Maxime Joannis</h1>
+            <div class="profile-title"> Ingénieur/Testeur QA fonctionnel junior – Certifié ISTQB &amp; Ex-Développeur Fullstack</div>
+         </div>
+         <nav class="profile-nav">
+            <a href="index.html" class="menu-link menu-link-accueil">Accueil</a>
+            <a href="homey-detail.html" class="menu-link menu-link-homey">Projet Homey</a>
+            <a href="#" class="menu-link active" data-section="dashboard-qa">Tableau de bord QA Homey</a>
+            <a href="#" class="menu-link" data-section="rapports">Rapports QA</a>
+         </nav>
+         <div class="profile-socials">
+            <a href="https://github.com/maximejoannis/maximejoannis.github.io" target="_blank" title="GitHub">
+               <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                  <path d="M12 2C6.477 2 2 6.484 2 12.012c0 4.418 2.865 8.167 6.839 9.489.5.09.682-.217.682-.482 0-.237-.009-.868-.013-1.703-2.782.605-3.369-1.341-3.369-1.341-.454-1.157-1.109-1.465-1.109-1.465-.908-.62.069-.608.069-.608 1.004.07 1.532 1.031 1.532 1.031.892 1.528 2.341 1.088 2.91.833.091-.646.35-1.088.636-1.339-2.221-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.025A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.748-1.025 2.748-1.025.546 1.378.202 2.397.099 2.65.64.7 1.028 1.595 1.028 2.688 0 3.848-2.337 4.695-4.566 4.944.359.309.678.92.678 1.854 0 1.338-.012 2.419-.012 2.747 0 .267.18.576.688.479C19.137 20.176 22 16.427 22 12.012 22 6.484 17.523 2 12 2z"/>
+               </svg>
+            </a>
+            <a href="https://www.linkedin.com/in/maxime-joannis-37ab528" target="_blank" title="LinkedIn">
+               <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                  <rect x="2" y="2" width="20" height="20" rx="5"/>
+                  <path d="M8 11v5M8 8v.01M12 16v-5M16 16v-3a2 2 0 0 0-4 0"/>
+               </svg>
+            </a>
+         </div>
+      </aside>
+      <main>
+         <!-- SECTION 1 : DASHBOARD QA HOMEY -->
+         <section id="dashboard-qa" class="active">
+            <div class="section-title"><i class="fa-solid fa-chart-line" style="margin-right:0.5em;color:#1fe1d9;"></i>Tableau de Bord QA - Homey</div>
+            <div class="cards-grid-2" style="grid-template-columns: repeat(3, 1fr);gap:2em;margin-bottom:2.5em;">
+               <div class="qa-card">
+                  <div class="qa-card-header">Tests automatisés</div>
+                  <div class="qa-card-body">
+                     <span style="font-size:2.2rem;font-weight:700;color:#1fe1d9;">3</span>
+                  </div>
+               </div>
+               <div class="qa-card">
+                  <div class="qa-card-header">Couverture fonctionnelle</div>
+                  <div class="qa-card-body">
+                     <span style="font-size:2.2rem;font-weight:700;color:#64ffda;">26,67%</span>
+                     <span class="qa-desc">Fonctionnalités clés couvertes</span>
+                  </div>
+               </div>
+               <div class="qa-card">
+                  <div class="qa-card-header">Taux de réussite globale des tests</div>
+                  <div class="qa-card-body">
+                     <span style="font-size:2.2rem;font-weight:700;color:#ffe138;">84.62%</span>
+                  </div>
+               </div>
+            </div>
+            <!-- SPRINTS -->
+            <div class="qa-card-large qa-card-sprints" style="width:100%;margin-bottom:2rem;">
+               <div class="qa-card-header-large">
+                  <i class="fa-solid fa-calendar-days" style="margin-right:0.7em;color:#1fe1d9;"></i>
+                  Sprints
+               </div>
+               <div class="qa-card-body-large">
+                  <div class="schedule-container">
+                     <div class="schedule-header">Planning des Sprints</div>
+                     <div class="sprint">
+                        <div class="sprint-title">Sprint 1 - Phase conception</div>
+                        <div class="sprint-date">9 mars - 22 mars</div>
+                     </div>
+                     <div class="sprint">
+                        <div class="sprint-title">Sprint 2 - Phase implémentation</div>
+                        <div class="sprint-date">23 mars - 5 avril</div>
+                     </div>
+                     <div class="sprint">
+                        <div class="sprint-title">Sprint 3 - Phase exécution</div>
+                        <div class="sprint-date">7 avril - 20 avril</div>
+                     </div>
+                     <div class="sprint">
+                        <div class="sprint-title">Sprint 4 - Préparation soutenance grand jury</div>
+                        <div class="sprint-date">27 avril - 4 mai</div>
+                     </div>
+                     <div class="duration">Durée d'un sprint : <b>2 semaines (14 jours)</b></div>
+                  </div>
+               </div>
+            </div>
+            <!-- CHARTS -->
+            <div class="charts-section" style="display: flex; flex-wrap: wrap; gap:2em;">
+               <div class="chart-card" style="flex:1 1 340px;min-width:320px;">
+                  <h3>Nombre de tests manuels et automatisés</h3>
+                  <div class="chart-container">
+                     <canvas id="automationChart"></canvas>
+                  </div>
+               </div>
+               <div class="chart-card" style="flex:1 1 340px;min-width:320px;">
+                  <h3>Répartition des tickets du projet Jira Homey par type</h3>
+                  <canvas id="ticketChart"></canvas>
+               </div>
+            </div>
+            <div class="charts-section" style="display: flex; flex-wrap: wrap; gap:2em;margin-top:2em;">
+               <div class="chart-card" style="flex:1 1 340px;min-width:320px;">
+                  <h3>Avancement des tests (Planifiés vs Exécutés)</h3>
+                  <div class="progress-chart-container">
+                     <canvas id="progressChart"></canvas>
+                  </div>
+               </div>
+               <div class="chart-card" style="flex:1 1 340px;min-width:320px;">
+                  <h3>Répartition des statuts des tests</h3>
+                  <div class="status-chart-container">
+                     <canvas id="statusChart"></canvas>
+                  </div>
+               </div>
+               <div class="chart-card" style="flex:1 1 340px;min-width:320px;">
+                  <h3>Taux d’échec des tests</h3>
+                  <div class="failure-chart-container">
+                     <canvas id="failureChart"></canvas>
+                  </div>
+               </div>
+               <div class="chart-card" style="flex:1 1 340px;min-width:320px;">
+                  <h3>Couverture fonctionnelle</h3>
+                  <div class="coverage-chart-container">
+                     <canvas id="coverageChart"></canvas>
+                  </div>
+               </div>
+               <div class="chart-card" style="flex:1 1 340px;min-width:320px;">
+                  <h3>Diagramme de couverture</h3>
+                  <p>Nombre total de tests : 26</p>
+                  <p>Tests automatisés : 3</p>
+                  <p>Couverture des tests automatisés : 11.54%</p>
+                  <div class="automated-tests-chart-container">
+                     <canvas id="automatedTestsChart"></canvas>
+                  </div>
+               </div>
+               <div class="chart-card" style="flex:1 1 340px;min-width:320px;">
+                  <h3>Taux de réussite des tests</h3>
+                  <p>Nombre total de tests exécutés : 26</p>
+                  <p>Tests réussis : 22</p>
+                  <p>Taux de réussite : 84.62%</p>
+                  <div class="success-rate-chart-container">
+                     <canvas id="successRateChart"></canvas>
+                  </div>
+               </div>
+            </div>
+         </section>
+         <!-- SECTION 2 : RAPPORTS QA -->
+         <section id="rapports">
+            <div class="section-title"><i class="fa-solid fa-file-alt" style="margin-right:0.5em;color:#ff38b0;"></i>Rapports QA - Projet Homey</div>
+            <!-- Rapport de traçabilité -->
+            <div class="qa-card-large qa-card-rapports" style="width:100%;margin-bottom:2rem;">
+               <div class="qa-card-header-large">
+                  <i class="fa-solid fa-diagram-project" style="margin-right:0.7em;color:#1fe1d9;"></i>
+                  Rapport de Traçabilité
+               </div>
+               <div class="qa-card-body-large">
+                  <div class="graph-container">
+                     <!-- EPIC -->
+                     <div class="node">
+                        <div class="node-title">EPIC 1</div>
+                        <div class="node-subtitle">Gestion des réservations</div>
+                     </div>
+                     <!-- Connections -->
+                     <div class="connections">
+                        <!-- US1 -->
+                        <div class="connection">
+                           <div class="node">
+                              <div class="node-title">Story 1</div>
+                              <div class="node-subtitle">Faire une demande de réservation</div>
+                           </div>
+                           <div class="connections">
+                              <div class="node">
+                                 <div class="node-title">Sous-tâche 1 : Un Voyageur (connecté) fait une demande de réservation</div>
+                                 <div class="node-subtitle">13 tests</div>
+                              </div>
+                              <div class="node">
+                                 <div class="node-title">Sous-tâche 2 : Un Visiteur(non connecté) fait une demande de réservation</div>
+                                 <div class="node-subtitle">1 test</div>
+                              </div>
+                           </div>
+                        </div>
+                        <!-- US2 -->
+                        <div class="connection">
+                           <div class="node">
+                              <div class="node-title">Story 2</div>
+                              <div class="node-subtitle">Traiter une demande de réservation</div>
+                           </div>
+                           <div class="connections">
+                              <div class="node">
+                                 <div class="node-title">Sous-tâche 3 : L’hôte confirme une demande de réservation</div>
+                                 <div class="node-subtitle">4 tests</div>
+                              </div>
+                              <div class="node">
+                                 <div class="node-title">Sous-tâche 4 : Le voyageur annule une demande de réservation</div>
+                                 <div class="node-subtitle">1 test</div>
+                              </div>
+                              <div class="node">
+                                 <div class="node-title">Sous-tâche 5 : L’hôte refuse une demande de réservation</div>
+                                 <div class="node-subtitle">1 test</div>
+                              </div>
+                              <div class="node">
+                                 <div class="node-title">Sous-tâche 6 : Le voyageur paye une réservation</div>
+                                 <div class="node-subtitle">3 tests</div>
+                              </div>
+                           </div>
+                        </div>
+                     </div>
+                  </div>
+               </div>
+            </div>
+            <!-- Rapport de couverture de test -->
+            <div class="qa-card-large qa-card-rapports" style="width:100%;margin-bottom:2rem;">
+               <div class="qa-card-header-large">
+                  <i class="fa-solid fa-chart-simple" style="margin-right:0.7em;color:#1fe1d9;"></i>
+                  Rapport de Couverture de Test
+               </div>
+               <div class="qa-card-body-large">
+                  <table class="qa-table">
+                     <thead>
+                        <tr>
+                           <th>Résumé</th>
+                           <th>Nombre Total de Tests</th>
+                           <th>Réussi</th>
+                           <th>Échoué</th>
+                           <th>Complétude</th>
+                        </tr>
+                     </thead>
+                     <tbody>
+                        <tr>
+                           <td>Faire une demande de réservation</td>
+                           <td>14</td>
+                           <td>11</td>
+                           <td>3</td>
+                           <td>
+                              78.57% 
+                              <div class="progress-bar-container">
+                                 <div class="progress-bar orange" style="width: 78.57%;">78.57%</div>
+                              </div>
+                           </td>
+                        </tr>
+                        <tr>
+                           <td>Scénario : Un Voyageur (connecté) fait une demande de réservation</td>
+                           <td>13</td>
+                           <td>10</td>
+                           <td>3</td>
+                           <td>
+                              70%
+                              <div class="progress-bar-container">
+                                 <div class="progress-bar orange" style="width: 70%;">70%</div>
+                              </div>
+                           </td>
+                        </tr>
+                        <tr>
+                           <td>Scénario : Un Visiteur(non connecté) fait une demande de réservation</td>
+                           <td>1</td>
+                           <td>1</td>
+                           <td>0</td>
+                           <td>
+                              100%
+                              <div class="progress-bar-container">
+                                 <div class="progress-bar green" style="width: 100%;">100%</div>
+                              </div>
+                           </td>
+                        </tr>
+                        <tr>
+                           <td>Traiter une demande de réservation</td>
+                           <td>9</td>
+                           <td>8</td>
+                           <td>1</td>
+                           <td>
+                              88.89% 
+                              <div class="progress-bar-container">
+                                 <div class="progress-bar green" style="width: 88.89%;">88.89%</div>
+                              </div>
+                           </td>
+                        </tr>
+                        <tr>
+                           <td>Scénario : L’hôte confirme une demande de réservation</td>
+                           <td>4</td>
+                           <td>4</td>
+                           <td>0</td>
+                           <td>
+                              100% 
+                              <div class="progress-bar-container">
+                                 <div class="progress-bar green" style="width: 100%;">100%</div>
+                              </div>
+                           </td>
+                        </tr>
+                        <tr>
+                           <td>Scénario : Le voyageur annule une demande de réservation</td>
+                           <td>1</td>
+                           <td>1</td>
+                           <td>0</td>
+                           <td>
+                              100% 
+                              <div class="progress-bar-container">
+                                 <div class="progress-bar green" style="width: 100%;">100%</div>
+                              </div>
+                           </td>
+                        </tr>
+                        <tr>
+                           <td>Scénario : L’hôte refuse une demande de réservation</td>
+                           <td>1</td>
+                           <td>1</td>
+                           <td>0</td>
+                           <td>
+                              100% 
+                              <div class="progress-bar-container">
+                                 <div class="progress-bar green" style="width: 100%;">100%</div>
+                              </div>
+                           </td>
+                        </tr>
+                        <tr>
+                           <td>Scénario : Le voyageur paye une réservation</td>
+                           <td>3</td>
+                           <td>3</td>
+                           <td>0</td>
+                           <td>
+                              100% 
+                              <div class="progress-bar-container">
+                                 <div class="progress-bar green" style="width: 100%;">100%</div>
+                              </div>
+                           </td>
+                        </tr>
+                     </tbody>
+                  </table>
+               </div>
+            </div>
+            <!-- Rapport d'exécution des tests -->
+            <div class="qa-card-large qa-card-rapports" style="width:100%;margin-bottom:2rem;">
+               <div class="qa-card-header-large">
+                  <i class="fa-solid fa-clipboard-check" style="margin-right:0.7em;color:#1fe1d9;"></i>
+                  Rapport d'exécution des tests
+               </div>
+               <div class="qa-card-body-large">
+                  <table class="qa-table">
+                     <thead>
+                        <tr>
+                           <th>Résumé</th>
+                           <th>Défauts</th>
+                           <th>Statut</th>
+                        </tr>
+                     </thead>
+                     <tbody>
+                        <tr>
+                           <td>Exécution des tests V1 de la story : Faire une demande de réservation</td>
+                           <td>3</td>
+                           <td>
+                              78.57% 
+                              <div class="progress-bar-container">
+                                 <div class="progress-bar orange" style="width: 78.57%;">78.57%</div>
+                              </div>
+                           </td>
+                        </tr>
+                        <tr>
+                           <td>Exécution des tests V1 de la story : Traiter une demande de réservation</td>
+                           <td>1</td>
+                           <td>
+                              88.89%
+                              <div class="progress-bar-container">
+                                 <div class="progress-bar green" style="width: 88.89%;">88.89%</div>
+                              </div>
+                           </td>
+                        </tr>
+                     </tbody>
+                  </table>
+               </div>
+            </div>
+            <!-- Liste des bugs -->
+            <div class="qa-card-large qa-card-rapports" style="width:100%;">
+               <div class="qa-card-header-large">
+                  <i class="fa-solid fa-bug" style="margin-right:0.7em;color:#ff38b0;"></i>
+                  Liste des bugs
+               </div>
+               <div class="qa-card-body-large">
+                  <table class="qa-table">
+                     <thead>
+                        <tr>
+                           <th>ID du bug</th>
+                           <th>Description</th>
+                           <th>Priorité</th>
+                        </tr>
+                     </thead>
+                     <tbody>
+                        <tr>
+                           <td>BUG-001</td>
+                           <td>Impossible de fermer le calendrier après ouverture pour sélection de date</td>
+                           <td>Mineur</td>
+                        </tr>
+                        <tr>
+                           <td>BUG-002</td>
+                           <td>Impossible de créer un compte hôte</td>
+                           <td>Critique</td>
+                        </tr>
+                        <tr>
+                           <td>BUG-003</td>
+                           <td>L'hôte ne reçoit aucun message suite à une demande de réservation</td>
+                           <td>Majeur</td>
+                        </tr>
+                        <tr>
+                           <td>BUG-004</td>
+                           <td>Le bouton "Appliquer une remise" n'est pas visible</td>
+                           <td>Majeur</td>
+                        </tr>
+                     </tbody>
+                  </table>
+               </div>
+            </div>
+         </section>
+         <footer id="page-footer">
+            <div class="footer-content">
+               <span class="citation">"N'abandonne jamais, car c'est souvent juste après le dernier effort que le succès se dévoile."</span>
+               <p>© 2025 Maxime Joannis - Tous droits réservés.  <a href="privacy.html">Politique de confidentialité</a></p>
+            </div>
+         </footer>
+      </main>
+      <!-- JS de navigation et Chart.js -->
+      <script>
+         // Navigation dynamique du menu
+         // Navigation dynamique du menu latéral
+		  document.querySelectorAll('.menu-link').forEach(link => {
+			// On ignore les liens accueil et projet homey !
+			if (link.classList.contains('menu-link-accueil')) return;
+			if (link.classList.contains('menu-link-homey')) return;
+			link.addEventListener('click', function(e) {
+			  e.preventDefault();
+			  document.querySelectorAll('.menu-link').forEach(l => l.classList.remove('active'));
+			  this.classList.add('active');
+			  const sectionId = this.getAttribute('data-section');
+			  document.querySelectorAll('main > section').forEach(sec => sec.classList.remove('active'));
+			  document.getElementById(sectionId).classList.add('active');
+			  setTimeout(toggleFooterOnScroll, 50);
+			});
+		  });
+		  // Par défaut, affiche la section dashboard-qa
+		  document.querySelectorAll('main > section').forEach(sec => sec.classList.remove('active'));
+          document.getElementById('dashboard-qa').classList.add('active');
+
+         // Footer dynamique
+         function toggleFooterOnScroll() {
+           const footer = document.getElementById('page-footer');
+           const main = document.querySelector('main');
+           const scrollY = window.scrollY || window.pageYOffset;
+           const viewportHeight = window.innerHeight;
+           const mainRect = main.getBoundingClientRect();
+           const mainBottom = main.offsetTop + main.offsetHeight;
+           const pageBottom = scrollY + viewportHeight;
+           if (pageBottom >= mainBottom - 2) {
+             footer.style.display = 'block';
+           } else {
+             footer.style.display = 'none';
+           }
+         }
+         window.addEventListener('scroll', toggleFooterOnScroll);
+         window.addEventListener('resize', toggleFooterOnScroll);
+         document.addEventListener('DOMContentLoaded', toggleFooterOnScroll);
+
+         // Chart.js : Graphiques KPI
+         document.addEventListener('DOMContentLoaded', function() {
+           // 1. Tests manuels vs automatisés
+           const ctx1 = document.getElementById('automationChart').getContext('2d');
+           new Chart(ctx1, {
+             type: 'pie',
+             data: {
+               labels: ['Tests automatisés', 'Tests manuels'],
+               datasets: [{
+                 data: [3, 23],
+                 backgroundColor: ['#3A8DFF', '#F2F4F7'],
+                 borderColor: ['#1E2A38', '#1E2A38'],
+                 borderWidth: 1
+               }]
+             },
+             options: { responsive: true, plugins: { legend: { position: 'top' } } }
+           });
+           // 2. Tickets Jira par type
+           const ctx2 = document.getElementById('ticketChart').getContext('2d');
+           new Chart(ctx2, {
+             type: 'pie',
+             data: {
+               labels: [
+                 'Epic Link','Tâches','Sous-tâches',
+                 'Tickets de type test','Tickets de type execution tests',
+                 'Tickets de type plan test','Tickets de type bug'
+               ],
+               datasets: [{
+                 data: [1,2,6,23,2,2,4],
+                 backgroundColor: ['#FF6384','#36A2EB','#FFCE56','#4CAF50','#FF5252','#FFC107','#B0BEC5'],
+                 borderColor: '#FFFFFF',
+                 borderWidth: 1
+               }]
+             },
+             options: {
+               responsive: true,
+               plugins: {
+                 legend: { position: 'top' },
+                 tooltip: {
+                   callbacks: {
+                     label: function(context) {
+                       const total = context.dataset.data.reduce((a, b) => a + b, 0);
+                       const percentage = ((context.raw / total) * 100).toFixed(2);
+                       return `${context.label}: ${context.raw} (${percentage}%)`;
+                     }
+                   }
+                 }
+               }
+             }
+           });
+           // 3. Avancement des tests
+           const ctx3 = document.getElementById('progressChart').getContext('2d');
+           new Chart(ctx3, {
+             type: 'bar',
+             data: {
+               labels: ['Tests planifiés', 'Tests exécutés'],
+               datasets: [{
+                 label: 'Avancement des tests',
+                 data: [26, 26],
+                 backgroundColor: ['#3A8DFF', '#1E2A38'],
+                 borderColor: ['#1E2A38', '#1E2A38'],
+                 borderWidth: 1
+               }]
+             },
+             options: {
+               responsive: true,
+               plugins: {
+                 legend: { display: false },
+                 tooltip: {
+                   callbacks: {
+                     label: function(context) { return `${context.label}: ${context.raw} tests`; }
+                   }
+                 }
+               },
+               scales: { y: { beginAtZero: true, ticks: { stepSize: 5 } } }
+             }
+           });
+           // 4. Taux d’échec des tests
+           const ctx4 = document.getElementById('failureChart').getContext('2d');
+           new Chart(ctx4, {
+             type: 'bar',
+             data: {
+               labels: ['Tests échoués', 'Tests réussis'],
+               datasets: [{
+                 label: 'Résultats des tests',
+                 data: [4, 22],
+                 backgroundColor: ['#FF4C4C', '#4CAF50'],
+                 borderColor: ['#B22222', '#2E8B57'],
+                 borderWidth: 1
+               }]
+             },
+             options: {
+               responsive: true,
+               plugins: {
+                 legend: { display: false },
+                 tooltip: {
+                   callbacks: {
+                     label: function(context) { return `${context.label}: ${context.raw} tests`; }
+                   }
+                 }
+               },
+               scales: { y: { beginAtZero: true, ticks: { stepSize: 5 } } }
+             }
+           });
+           // 5. Répartition des statuts des tests
+           const ctx5 = document.getElementById('statusChart').getContext('2d');
+           new Chart(ctx5, {
+             type: 'pie',
+             data: {
+               labels: ['Passé', 'Échoué', 'Bloqué', 'Non exécuté'],
+               datasets: [{
+                 data: [19, 3, 1, 0],
+                 backgroundColor: ['#4CAF50', '#FF4C4C', '#FFC107', '#B0BEC5'],
+                 borderColor: ['#2E8B57', '#B22222', '#FFA000', '#78909C'],
+                 borderWidth: 1
+               }]
+             },
+             options: {
+               responsive: true,
+               plugins: {
+                 legend: { position: 'top' },
+                 tooltip: {
+                   callbacks: {
+                     label: function(context) {
+                       const total = context.dataset.data.reduce((a, b) => a + b, 0);
+                       const percentage = ((context.raw / total) * 100).toFixed(2);
+                       return `${context.label}: ${context.raw} tests (${percentage}%)`;
+                     }
+                   }
+                 }
+               }
+             }
+           });
+           // 6. Couverture fonctionnelle
+           const ctx6 = document.getElementById('coverageChart').getContext('2d');
+           new Chart(ctx6, {
+             type: 'pie',
+             data: {
+               labels: ['Fonctionnalités couvertes', 'Fonctionnalités non couvertes'],
+               datasets: [{
+                 data: [8, 22],
+                 backgroundColor: ['#4CAF50', '#FFC107'],
+                 borderColor: ['#2E8B57', '#FFA000'],
+                 borderWidth: 1
+               }]
+             },
+             options: {
+               responsive: true,
+               plugins: {
+                 legend: { position: 'top' },
+                 tooltip: {
+                   callbacks: {
+                     label: function(context) {
+                       const total = context.dataset.data.reduce((a, b) => a + b, 0);
+                       const percentage = ((context.raw / total) * 100).toFixed(2);
+                       return `${context.label}: ${context.raw} fonctionnalités (${percentage}%)`;
+                     }
+                   }
+                 }
+               }
+             }
+           });
+           // 7. Couverture des tests automatisés
+           const ctx7 = document.getElementById('automatedTestsChart').getContext('2d');
+           new Chart(ctx7, {
+             type: 'pie',
+             data: {
+               labels: ['Tests automatisés', 'Tests non automatisés'],
+               datasets: [{
+                 data: [3, 23],
+                 backgroundColor: ['#4CAF50', '#FFC107'],
+                 borderColor: ['#2E8B57', '#FFA000'],
+                 borderWidth: 1
+               }]
+             },
+             options: {
+               responsive: true,
+               plugins: {
+                 legend: { position: 'top' },
+                 tooltip: {
+                   callbacks: {
+                     label: function(context) {
+                       const total = context.dataset.data.reduce((a, b) => a + b, 0);
+                       const percentage = ((context.raw / total) * 100).toFixed(2);
+                       return `${context.label}: ${context.raw} tests (${percentage}%)`;
+                     }
+                   }
+                 }
+               }
+             }
+           });
+           // 8. Taux de réussite des tests
+           const ctx8 = document.getElementById('successRateChart').getContext('2d');
+           new Chart(ctx8, {
+             type: 'pie',
+             data: {
+               labels: ['Tests réussis', 'Tests échoués'],
+               datasets: [{
+                 data: [22, 4],
+                 backgroundColor: ['#4CAF50', '#FF5252'],
+                 borderColor: ['#2E8B57', '#FF0000'],
+                 borderWidth: 1
+               }]
+             },
+             options: {
+               responsive: true,
+               plugins: {
+                 legend: { position: 'top' },
+                 tooltip: {
+                   callbacks: {
+                     label: function(context) {
+                       const total = context.dataset.data.reduce((a, b) => a + b, 0);
+                       const percentage = ((context.raw / total) * 100).toFixed(2);
+                       return `${context.label}: ${context.raw} tests (${percentage}%)`;
+                     }
+                   }
+                 }
+               }
+             }
+           });
+         });
+      </script>
+   </body>
+</html>

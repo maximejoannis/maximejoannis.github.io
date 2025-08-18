@@ -7,64 +7,150 @@
   <meta name="keywords" content="Politique de confidentialité, données personnelles, cookies, Maxime Joannis" />
   <meta name="author" content="Maxime JOANNIS" />
   <title>Politique de confidentialité - Maxime JOANNIS</title>
-
-  <!-- Google Fonts : Inter -->
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet" />
-
-  <!-- Bootstrap CSS -->
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
-
+  
   <style>
-    body {
-      font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
-        Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
-      background: linear-gradient(135deg, #e0ebff 0%, #f9fbff 100%);
-      color: #1a2e4a;
-      margin: 0;
-      padding: 3rem 1rem 4rem;
-      max-width: 720px;
-      margin-left: auto;
-      margin-right: auto;
-    }
-    h1 {
-      font-weight: 700;
-      font-size: 2.8rem;
-      margin-bottom: 1.5rem;
-      text-align: center;
-      color: #003366;
-      text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.1);
-    }
-    h2 {
-      font-weight: 700;
-      font-size: 1.8rem;
-      margin-top: 2.5rem;
-      margin-bottom: 1rem;
-      color: #003366;
-      border-bottom: 3px solid #3a6df0;
-      padding-bottom: 0.3rem;
-    }
-    p, ul {
-      font-size: 1.1rem;
-      line-height: 1.6;
-      color: #1a2e4a;
-    }
-    ul {
-      padding-left: 1.3rem;
-    }
-    ul li {
-      margin-bottom: 0.6rem;
-      font-weight: 600;
-    }
-    footer {
-      margin-top: 3rem;
-      text-align: center;
-      font-size: 0.95rem;
-      color: #a8c1ff;
-    }
-  </style>
+/* ================================
+   SPÉCIFIQUE PAGE CONFIDENTIALITÉ
+   Style Brittany Chiang
+   ================================ */
+
+body {
+  font-family: 'Inter', Arial, sans-serif;
+  background: #15192e;
+  margin: 0;
+  min-height: 100vh;
+}
+
+.privacy {
+  background: rgba(16, 21, 41, 0.92);
+  border-radius: 20px;
+  box-shadow: 0 4px 32px #1fe1d933;
+  max-width: 700px;
+  margin: 4em auto 3em auto;
+  padding: 3em 2.5em 2em 2.5em;
+  color: #eaf6fb;
+  font-size: 1.13em;
+  line-height: 1.7;
+  position: relative;
+  backdrop-filter: blur(2px);
+  animation: fadeIn 0.7s;
+  display: block;
+}
+
+.section-title {
+  font-size: 2.4em;
+  font-weight: 800;
+  margin-bottom: 1.2em;
+  letter-spacing: -1px;
+  color: #1fe1d9;
+  text-shadow: 0 0 16px #1fe1d988, 0 2px 12px #22304b88;
+  animation: neon-flicker 2s infinite alternate;
+  text-align: center;
+}
+
+.privacy h2 {
+  position: relative;
+  font-size: 1.25em;
+  font-weight: 600;
+  margin-top: 2.2em;
+  margin-bottom: 1em;
+  color: #ff38b0;
+  padding-left: 1.1em;
+  letter-spacing: 0.5px;
+}
+
+.privacy h2::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0.15em;
+  width: 6px;
+  height: 1.4em;
+  border-radius: 4px;
+  background: linear-gradient(180deg, #1fe1d9 0%, #ff38b0 100%);
+  box-shadow: 0 0 8px #1fe1d988;
+}
+
+.privacy ul {
+  padding-left: 1.5em;
+  margin-bottom: 1.5em;
+}
+
+.privacy li {
+  margin-bottom: 0.7em;
+  list-style: disc;
+}
+
+.privacy a {
+  color: #1fe1d9;
+  text-decoration: underline;
+  transition: color 0.2s, text-shadow 0.2s;
+  word-break: break-all;
+}
+
+.privacy a:hover {
+  color: #ff38b0;
+  text-shadow: 0 0 8px #ff38b088;
+}
+
+.privacy strong {
+  color: #ff38b0;
+  font-weight: 600;
+}
+
+.privacy footer {
+  margin-top: 2.5em;
+  text-align: right;
+  font-size: 0.98em;
+  color: #91e3ee;
+  opacity: 0.7;
+  border-top: 1px solid #22304b44;
+  padding-top: 1em;
+}
+
+@media (max-width: 900px) {
+  .privacy {
+    padding: 1.5em 0.8em 1em 0.8em;
+    max-width: 98vw;
+    margin: 2em auto 1em auto;
+  }
+  .section-title {
+    font-size: 1.7em;
+  }
+  .privacy h2 {
+    font-size: 1.05em;
+    padding-left: 0.8em;
+  }
+  .privacy h2::before {
+    width: 4px;
+    height: 1.1em;
+  }
+}
+
+/* Animation fadeIn */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(32px);}
+  to   { opacity: 1; transform: translateY(0);}
+}
+/* Animation néon Brittany Chiang */
+@keyframes neon-flicker {
+  0%, 19%, 21%, 23%, 25%, 54%, 56%, 100% {
+    text-shadow:
+      0 0 16px #1fe1d988,
+      0 2px 12px #22304b88;
+    opacity: 1;
+  }
+  20%, 22%, 24%, 55% {
+    text-shadow: none;
+    opacity: 0.7;
+  }
+}
+</style>
 </head>
 <body>
-  <h1>Politique de confidentialité</h1>
+<main>
+  <section class="privacy">
+  <h1 class="section-title">Politique de confidentialité</h1>
 
   <p>Ce site est strictement personnel. Il ne collecte aucune donnée personnelle, ne dépose aucun cookie de suivi, et ne fait appel à aucun service tiers de collecte de données. Aucune information vous concernant n’est enregistrée ou traitée via ce site.</p>
   <p><strong>Dernière mise à jour :</strong> 14 juin 2025</p>
@@ -92,19 +178,7 @@
     Dernière mise à jour : 14 juin 2025
   </footer>
   
-   <!-- Stats-->
-  <script>
-    var t = setInterval(function() {
-        if (window.goatcounter && window.goatcounter.visit_count) {
-            clearInterval(t)
-            window.goatcounter.visit_count({append: 'body'})
-        }
-    }, 100)
-</script>
-  
-  <script data-goatcounter="https://maximejoannis.goatcounter.com/count"
-        async src="//gc.zgo.at/count.js">
-  </script>
-  
+  </section>
+</main>
 </body>
 </html>

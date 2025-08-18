@@ -1,0 +1,396 @@
+<!DOCTYPE html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Projet AMN Auditor - Détail | Maxime Joannis Portfolio QA</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style-portfolio-maximejoannis.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+  </head>
+  <body>
+    <aside class="profile-menu">
+      <div class="profile-header">
+        <h1 class="profile-name">Maxime Joannis</h1>
+        <div class="profile-title">Testeur QA fonctionnel junior – Certifié ISTQB & Ex-Développeur Fullstack</div>
+      </div>
+      <nav class="profile-nav">
+        <a href="index.html" class="menu-link menu-link-accueil">Accueil</a>
+        <a href="#" class="menu-link active" data-section="presentation">Présentation du micro stage AMN Auditor</a>
+        <a href="#" class="menu-link" data-section="perimetre">Mon périmètre de test</a>
+        <a href="#" class="menu-link" data-section="activites">Activités de tests réalisées</a>
+        <a href="#" class="menu-link" data-section="livrables">Livrables produits</a>
+      </nav>
+      <div class="profile-socials">
+        <a href="https://github.com/maximejoannis/amn-auditor-qa" target="_blank" title="GitHub">
+          <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+            <path d="M12 2C6.477 2 2 6.484 2 12.012c0 4.418 2.865 8.167 6.839 9.489.5.09.682-.217.682-.482 0-.237-.009-.868-.013-1.703-2.782.605-3.369-1.341-3.369-1.341-.454-1.157-1.109-1.465-1.109-1.465-.908-.62.069-.608.069-.608 1.004.07 1.532 1.031 1.532 1.031.892 1.528 2.341 1.088 2.91.833.091-.646.35-1.088.636-1.339-2.221-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.025A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.748-1.025 2.748-1.025.546 1.378.202 2.397.099 2.65.64.7 1.028 1.595 1.028 2.688 0 3.848-2.337 4.695-4.566 4.944.359.309.678.92.678 1.854 0 1.338-.012 2.419-.012 2.747 0 .267.18.576.688.479C19.137 20.176 22 16.427 22 12.012 22 6.484 17.523 2 12 2z"/>
+          </svg>
+        </a>
+        <a href="https://www.linkedin.com/in/maxime-joannis-37ab528" target="_blank" title="LinkedIn">
+          <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+            <rect x="2" y="2" width="20" height="20" rx="5"/>
+            <path d="M8 11v5M8 8v.01M12 16v-5M16 16v-3a2 2 0 0 0-4 0"/>
+          </svg>
+        </a>
+      </div>
+    </aside>
+    <main>
+      <!-- Présentation -->
+      <section id="presentation" class="active">
+        <div class="homey-glass-card">
+          <div class="homey-header-row">
+            <div>
+              <div class="homey-logo-circle">
+                <span class="homey-logo-text"><i class="fa-solid fa-bolt"></i></span>
+              </div>
+              <h2 class="homey-title">Présentation du micro stage <span class="homey-highlight">AMN Auditor</span></h2>
+              <div class="homey-subtitle">Application Desktop d’audit multi-référentiel pour la cybersécurité</div>
+            </div>
+          </div>
+          <div class="homey-content-row">
+            <div class="homey-description">
+              <h3>Introduction</h3>
+              <p>
+                Le micro stage est un projet de test réel pour de véritables clients, m'offrant la possibilité d'aiguiser mes compétences dans des conditions authentiques et de renforcer ma confiance en mes capacités.
+              </p>
+              <h3>L'entreprise Amn Brains</h3>
+              <p>
+                Amn Brains développe des solutions logicielles dans la Gouvernance de la Cybersécurité. La complexité des systèmes d’information et la multiplication des techniques d’attaques conduisent généralement à des angles morts exploitables par les cyber attaquants.<br>
+                Leurs solutions sont conçues pour aider les professionnels de la cybersécurité (RSSI, Consultants, Auditeurs, Opérationnels) à combler ces difficultés en utilisant au maximum la puissance de la machine afin de leur permettre de se concentrer sur les aspects sur lesquels ils ont le plus de valeur ajoutée.
+              </p>
+              <h3>Le logiciel à tester : Amn Auditor</h3>
+              <div class="qa-card-large" style="width:100%;margin-bottom:2rem;">
+                <div class="qa-card-header-large">
+                  <i class="fa-solid fa-bolt" style="margin-right:0.7em;color:var(--violet-electric);"></i>
+                  AMN Auditor : Application Desktop de conduite d'Audit Multi-référentiel pour les auditeurs cybersécurité.
+                </div>
+                <div class="qa-card-body-large">
+                  <p>
+                    <strong>Amn Auditor</strong> est un logiciel desktop destiné aux auditeurs, qui offre une rédaction assistée et accélérée des rapports d’audit de conformité grâce à :
+                  </p>
+                  <ul class="styled-list">
+                    <li>Prise de notes en direct pendant les entretiens et transformation de ces notes en rapports d’audit percutants</li>
+                    <li>Autocomplétion pour une rédaction plus rapide</li>
+                    <li>Assistance par des suggestions de contrôles à effectuer et de mesures à recommander</li>
+                    <li>Automatisation des tâches mécaniques</li>
+                  </ul>
+                  <hr style="margin:1.4em 0;">
+                  <h4>Fonctionnalités principales :</h4>
+                  <ul class="styled-list">
+                    <li>Rédaction accélérée et assistée des notes et constats d’audit avec suggestion et autocomplétion</li>
+                    <li>Utilitaire de prise de notes optimisé pour les entretiens</li>
+                    <li>Suggestions automatiques de contrôles et de mesures à proposer</li>
+                    <li>Recherche, filtrage et accès rapide à une bibliothèque de critères et référentiels</li>
+                    <li>Grilles d’audit prêtes à l’emploi ou personnalisables, création manuelle ou via Excel</li>
+                    <li>Tableaux de bord riches en indicateurs pour faciliter la restitution client</li>
+                    <li>Feuille de route intégrée : planification, gestion, priorisation et suivi des actions</li>
+                    <li>Gestion des audits multi-référentiels</li>
+                    <li>Organisation des entretiens et interventions, répartition des tâches</li>
+                    <li>Génération des livrables : export Excel des grilles, écarts, actions</li>
+                    <li>Gestion des non-conformités, suivi des écarts et des actions de remédiation</li>
+                    <li>Fonctionnalités avancées de recherche et de filtrage</li>
+                  </ul>
+                </div>
+              </div>
+              <hr style="margin:1.4em 0;">
+              <h3>Informations importantes</h3>
+              <ul class="styled-list">
+                <li>Projet géré par flux continu inspiré KANBAN (pas de sprint)</li>
+                <li>Travail en équipe avec un autre testeur QA et un product owner/test manager</li>
+                <li>Daily-meetings chaque jour du lundi au vendredi entre 13h et 13h10</li>
+                <li>Projet réalisé intégralement à distance</li>
+                <li>Permet de solidifier mes compétences en QA et de constituer une expérience professionnelle solide</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </section>
+      <!-- Périmètre de test -->
+      <section id="perimetre">
+        <div class="section-title">Mon périmètre de test</div>
+        <div class="qa-card-large" style="width:100%;margin-bottom:2rem;">
+          <div class="qa-card-body-large">
+            <p>Le périmètre de test qui m'a été affecté par le PO est le suivant :</p>
+            <ul class="styled-list">
+              <li>Génération des constats d’audit</li>
+              <li>Points de contrôle et association avec les éléments d'environnement</li>
+            </ul>
+            <h3>Résumé des user stories</h3>
+            <p>Voici le résumé :</p>
+            <ul class="styled-list">
+              <li>
+                En tant qu’auditeur en mission, je veux m’appuyer sur un utilitaire d’audit intelligent pour dérouler les principales étapes de ma mission (questionnement, constats, conformité, écarts, actions), afin de réaliser un audit structuré, réactif et piloté par les exigences du système audité, tout en bénéficiant d’une assistance contextuelle de l’IA.
+              </li>
+              <li>
+                En tant qu’auditeur en mission, je veux m’appuyer sur un utilitaire d’audit intelligent pour me proposer des points de contrôle pour chaque exigence du référentiel d’audit. Je veux aussi que les points de contrôle soient ciblés sur les éléments de l’environnement décrit. Afin de : réaliser un audit le plus exhaustif possible.
+              </li>
+            </ul>
+            <h3>Génération des constats d’audit - Critères d'acceptation</h3>
+            <div class="table-container">
+              <table class="modern-table">
+                <thead>
+                  <tr>
+                    <th>Scénario</th>
+                    <th>Description</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>Génération depuis un point de contrôle</td>
+                    <td>
+                      <p>Lorsqu’un point de contrôle est marqué comme Conforme ou Non conforme, un texte est automatiquement généré et proposé à l’utilisateur. Ce texte :</p>
+                      <ul class="styled-list">
+                        <li>Est généré dynamiquement en fonction du statut choisi (Conforme ou Non conforme)</li>
+                        <li>Peut être modifié manuellement par l’utilisateur dans la zone de texte dédiée</li>
+                        <li>Peut être orienté à l’aide de mots-clés spécifiques (exemple : “sécurité”, “documentation”, “performance”…)</li>
+                        <li>Peut être validé par l’utilisateur en appuyant sur Entrée ou en cliquant sur le bouton "Ajouter"</li>
+                      </ul>
+                      <p>Cette fonctionnalité permet de générer rapidement des constats d’audit pertinents et personnalisables selon le contexte de chaque point de contrôle.</p>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>Génération du constat (Conformité ou Écart)</td>
+                    <td>
+                      <p>Lorsqu’un utilisateur saisit un mot-clé dans le champ de constat de conformité ou d’écart, un texte est automatiquement généré. Ce texte peut être orienté selon les mots-clés saisis, et reste entièrement modifiable. L’utilisateur peut ajouter ce texte au constat en cliquant sur le bouton "Ajouter" ou en appuyant sur la touche Entrée. Ce système permet de gagner du temps tout en conservant une souplesse complète pour la rédaction des constats.</p>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>Génération des actions de remédiation</td>
+                    <td>
+                      <p>Lorsqu’une non-conformité est ajoutée, des actions de remédiation sont générées automatiquement dans la zone dédiée. Ces actions sont orientées via les mots-clés saisis, et peuvent être ajustées ou complétées librement par l’utilisateur. L’ajout des actions générées peut se faire en cliquant sur "Ajouter" ou en appuyant sur la touche Entrée. L’objectif est de proposer une base de travail cohérente, rapide et personnalisable pour traiter efficacement les non-conformités.</p>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <h3>Points de contrôle et association avec les éléments d'environnement - Critères d'acceptation</h3>
+            <div class="table-container">
+              <table class="modern-table">
+                <thead>
+                  <tr>
+                    <th>Scénario</th>
+                    <th>Description</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>Obtenir des points de contrôle ciblés sur les éléments de l'environnement</td>
+                    <td>
+                        Étant donné que l’environnement est décrit<br>
+                        Quand je lance l’utilitaire d’audit,<br>
+                        Et que j'ouvre les exigences du référentiel<br>
+                        Alors des points de contrôle sont affichés,<br>
+                        Et ces points de contrôle pourraient être associés à des éléments de l'environnement. Un point de contrôle est associé à un élément d'environnement si ce point de contrôle est associé à un des types de cet élément dans les données du référentiel.<br>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </section>
+	  
+      <!-- Activités de tests réalisées -->
+      <section id="activites" class="qa-activites-modern">
+        <div class="section-title">Activités de tests réalisées</div>
+        <div class="qa-card-large">
+          <div class="qa-card-header-large">
+            Etat d'avancement des tâches 
+          </div>
+          <div class="qa-card-body-large">
+            <!-- Barre de progression globale -->
+            <div class="progress-bar-container" style="margin-bottom:2rem;">
+              <div class="progress-bar green" style="width: 35%;">35% terminé</div>
+            </div>
+            <!-- Graphe d'avancement type Monday.com -->
+            <div class="monday-board">
+              <div class="monday-row monday-header">
+                <div class="monday-col task">Tâche</div>
+                <div class="monday-col status">Statut</div>
+                <div class="monday-col details">Détails</div>
+              </div>
+              <div class="monday-row">
+                <div class="monday-col task">
+                  Cas de tests manuels (Jira/Xray)
+                </div>
+                <div class="monday-col status"><span class="status-badge done">Terminé</span></div>
+                <div class="monday-col details">Conception, exécution et documentation des anomalies</div>
+              </div>
+              <div class="monday-row">
+                <div class="monday-col task">
+                  Plan de test (IEEE 29119-3)
+                </div>
+                <div class="monday-col status"><span class="status-badge progress">En cours</span></div>
+                <div class="monday-col details">Rédaction assistée par IA (objectifs, risques, critères...)</div>
+              </div>
+              <div class="monday-row">
+                <div class="monday-col task">
+                  Automatisation & IA
+                </div>
+                <div class="monday-col status"><span class="status-badge todo">A faire</span></div>
+                <div class="monday-col details">Automatisation via outil IA, Playwright (JavaScript)</div>
+              </div>
+              <div class="monday-row">
+                <div class="monday-col task">
+                   Tests d’acceptance (UI)
+                </div>
+                <div class="monday-col status"><span class="status-badge todo">À faire</span></div>
+                <div class="monday-col details">Génération de scénarios Gherkin à partir de captures d’écran, analyse UI</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+      <!-- Livrables produits -->
+      <section id="livrables" class="qa-activites-modern">
+        <div class="section-title">Livrables produits</div>
+        <div class="qa-card-large qa-card-livrables" style="width:100%;margin-bottom:2rem;">
+          <div class="qa-card-body-large">
+            <div class="progress-bar-container" style="margin-bottom:2rem;">
+              <div class="progress-bar green" style="width: 35%;">35% terminé</div>
+            </div>
+            <div class="monday-board">
+              <div class="monday-row monday-header">
+                <div class="monday-col task">Livrable</div>
+                <div class="monday-col status">Statut</div>
+                <div class="monday-col details">Détail / Date</div>
+              </div>
+              <div class="monday-row">
+                <div class="monday-col task">
+                  Cas de tests manuels
+                </div>
+                <div class="monday-col status"><span class="status-badge done">Terminé</span></div>
+                <div class="monday-col details">33 cas de tests conçus et exécutés</div>
+              </div>
+              <div class="monday-row">
+                <div class="monday-col task">
+                  Plan de test (IEEE 29119-3)
+                </div>
+                <div class="monday-col status"><span class="status-badge progress">En cours</span></div>
+                <div class="monday-col details">Rédaction assistée par IA</div>
+              </div>
+              <div class="monday-row">
+                <div class="monday-col task">
+                  Scripts automatisés
+                </div>
+                <div class="monday-col status"><span class="status-badge todo">À faire</span></div>
+                <div class="monday-col details">Automatisation Playwright / IA à venir</div>
+              </div>
+              <div class="monday-row">
+                <div class="monday-col task">
+                  Rapports de défauts
+                </div>
+                <div class="monday-col status"><span class="status-badge progress">En cours</span></div>
+                <div class="monday-col details">Détection et suivi des anomalies dans Jira/Xray</div>
+              </div>
+              <div class="monday-row">
+                <div class="monday-col task">
+                  Rapport final de test
+                </div>
+                <div class="monday-col status"><span class="status-badge todo">À faire</span></div>
+                <div class="monday-col details">Synthèse finale du micro stage</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+      <!-- Footer -->
+      <footer id="page-footer">
+        <div class="footer-content">
+          <span class="citation">"N'abandonne jamais, car c'est souvent juste après le dernier effort que le succès se dévoile."</span>
+          <p>© 2025 Maxime Joannis - Tous droits réservés.  <a href="privacy.html">Politique de confidentialité</a></p>
+        </div>
+      </footer>
+    </main>
+    <!-- Navigation dynamique -->
+    <script>
+      // Navigation dynamique du menu latéral
+      document.querySelectorAll('.menu-link').forEach(link => {
+        // On ignore le lien accueil !
+        if (link.classList.contains('menu-link-accueil')) return;
+        link.addEventListener('click', function(e) {
+          e.preventDefault();
+          document.querySelectorAll('.menu-link').forEach(l => l.classList.remove('active'));
+          this.classList.add('active');
+          const sectionId = this.getAttribute('data-section');
+          document.querySelectorAll('main > section').forEach(sec => sec.classList.remove('active'));
+          document.getElementById(sectionId).classList.add('active');
+          setTimeout(toggleFooterOnScroll, 50);
+        });
+      });
+      // Par défaut, affiche la section présentation
+      document.querySelectorAll('main > section').forEach(sec => sec.classList.remove('active'));
+      document.getElementById('presentation').classList.add('active');
+    </script>
+    <!-- Footer dynamique -->
+    <script>
+      function toggleFooterOnScroll() {
+        const footer = document.getElementById('page-footer');
+        const main = document.querySelector('main');
+        const scrollY = window.scrollY || window.pageYOffset;
+        const viewportHeight = window.innerHeight;
+        const mainRect = main.getBoundingClientRect();
+        const mainBottom = main.offsetTop + main.offsetHeight;
+        const pageBottom = scrollY + viewportHeight;
+        if (pageBottom >= mainBottom - 2) {
+          footer.style.display = 'block';
+        } else {
+          footer.style.display = 'none';
+        }
+      }
+      window.addEventListener('scroll', toggleFooterOnScroll);
+      window.addEventListener('resize', toggleFooterOnScroll);
+      document.addEventListener('DOMContentLoaded', toggleFooterOnScroll);
+    </script>
+    <!-- Affichage d'image rapport défaut (pour homogénéité) -->
+    <script>
+      function viewImage(imageName) {
+        const newWindow = window.open("", "_blank");
+        newWindow.document.write(`
+            <html>
+                <head>
+                    <title>Image: ${imageName}</title>
+                    <style>
+                        body {
+                            text-align: center;
+                            padding: 20px;
+                            font-family: 'Inter', Arial, sans-serif;
+                            background: #101529;
+                            color: #eaf6fb;
+                        }
+                        img {
+                            max-width: 100%;
+                            height: auto;
+                            margin-top: 2em;
+                            box-shadow: 0 2px 32px #1fe1d911;
+                            border-radius: 12px;
+                        }
+                        .download-link {
+                            display: inline-block;
+                            margin-top: 20px;
+                            padding: 10px 20px;
+                            background: linear-gradient(90deg, #1fe1d9 0%, #ff38b0 100%);
+                            color: #182033;
+                            text-decoration: none;
+                            border-radius: 8px;
+                            font-weight: 700;
+                            box-shadow: 0 2px 12px #1fe1d922;
+                        }
+                        .download-link:hover {
+                            background: linear-gradient(90deg, #ff38b0 80%, #1fe1d9 100%);
+                            color: #fff;
+                        }
+                    </style>
+                </head>
+                <body>
+                    <img src="${imageName}" alt="${imageName}">
+                    <br>
+                    <a href="${imageName}" download="${imageName}" class="download-link">Télécharger l'image</a>
+                </body>
+            </html>
+        `);
+      }
+    </script>
+  </body>
+</html>
