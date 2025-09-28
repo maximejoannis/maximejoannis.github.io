@@ -29,7 +29,7 @@ Ce dépôt a été créé pour démontrer mes compétences en **test logiciel** 
 
 ## 🏆 Projets QA réalisés
 
-### 🔹 [Projet Homey](homey-detail.html) – Projet de fin de formation (Mars – Mai 2025)
+### 🔹 [Projet Homey](homey-detail.html) – Projet de fin de formation (Février – Avril 2025)
 
 **Contexte :**  
 Projet simulé en environnement **Agile Scrum** dans le cadre de la formation Testeur Logiciel.  
@@ -66,7 +66,7 @@ Jira, Xray, Visual Studio Code, Excel, RobotFramework, Python, Selenium
 
 ---
 
-### 🔹 [Micro-stage AMN Auditor](amn-auditor-detail.html) – Mission client (Mai 2025 – Présent)
+### 🔹 [Micro-stage AMN Auditor](amn-auditor-detail.html) – Mission client (Avril 2025 – Présent)
 
 **Contexte :**  
 Validation qualité d'un logiciel desktop de **conduite d’audit multi-référentiel** (secteur cybersécurité) au sein d’une **équipe Agile**, à travers la conception, l’exécution et l’automatisation de tests fonctionnels, sous la supervision d’un Test Manager et en collaboration avec un Product Owner.  
