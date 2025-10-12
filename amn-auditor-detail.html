@@ -18,7 +18,7 @@
         <a href="index.html" class="menu-link menu-link-accueil">Accueil</a>
         <a href="#" class="menu-link active" data-section="presentation">Présentation du micro stage AMN Auditor</a>
         <a href="#" class="menu-link" data-section="perimetre">Mon périmètre de test</a>
-        <a href="#" class="menu-link" data-section="activites">Activités de tests réalisées</a>
+        <a href="#" class="menu-link" data-section="activites">Tâches réalisées</a>
         <a href="#" class="menu-link" data-section="livrables">Livrables produits</a>
       </nav>
       <div class="profile-socials">
@@ -139,7 +139,7 @@
                   <tr>
                     <td>Génération depuis un point de contrôle</td>
                     <td>
-                      <p>Lorsqu’un point de contrôle est marqué comme Conforme ou Non conforme, un texte est automatiquement généré et proposé à l’utilisateur. Ce texte :</p>
+                      Lorsqu’un point de contrôle est marqué comme Conforme ou Non conforme, un texte est automatiquement généré et proposé à l’utilisateur. Ce texte :
                       <ul class="styled-list">
                         <li>Est généré dynamiquement en fonction du statut choisi (Conforme ou Non conforme)</li>
                         <li>Peut être modifié manuellement par l’utilisateur dans la zone de texte dédiée</li>
@@ -152,13 +152,13 @@
                   <tr>
                     <td>Génération du constat (Conformité ou Écart)</td>
                     <td>
-                      <p>Lorsqu’un utilisateur saisit un mot-clé dans le champ de constat de conformité ou d’écart, un texte est automatiquement généré. Ce texte peut être orienté selon les mots-clés saisis, et reste entièrement modifiable. L’utilisateur peut ajouter ce texte au constat en cliquant sur le bouton "Ajouter" ou en appuyant sur la touche Entrée. Ce système permet de gagner du temps tout en conservant une souplesse complète pour la rédaction des constats.</p>
+                      Lorsqu’un utilisateur saisit un mot-clé dans le champ de constat de conformité ou d’écart, un texte est automatiquement généré. Ce texte peut être orienté selon les mots-clés saisis, et reste entièrement modifiable. L’utilisateur peut ajouter ce texte au constat en cliquant sur le bouton "Ajouter" ou en appuyant sur la touche Entrée. Ce système permet de gagner du temps tout en conservant une souplesse complète pour la rédaction des constats.
                     </td>
                   </tr>
                   <tr>
                     <td>Génération des actions de remédiation</td>
                     <td>
-                      <p>Lorsqu’une non-conformité est ajoutée, des actions de remédiation sont générées automatiquement dans la zone dédiée. Ces actions sont orientées via les mots-clés saisis, et peuvent être ajustées ou complétées librement par l’utilisateur. L’ajout des actions générées peut se faire en cliquant sur "Ajouter" ou en appuyant sur la touche Entrée. L’objectif est de proposer une base de travail cohérente, rapide et personnalisable pour traiter efficacement les non-conformités.</p>
+                      Lorsqu’une non-conformité est ajoutée, des actions de remédiation sont générées automatiquement dans la zone dédiée. Ces actions sont orientées via les mots-clés saisis, et peuvent être ajustées ou complétées librement par l’utilisateur. L’ajout des actions générées peut se faire en cliquant sur "Ajouter" ou en appuyant sur la touche Entrée. L’objectif est de proposer une base de travail cohérente, rapide et personnalisable pour traiter efficacement les non-conformités.
                     </td>
                   </tr>
                 </tbody>
@@ -193,7 +193,7 @@
 	  
       <!-- Activités de tests réalisées -->
       <section id="activites" class="qa-activites-modern">
-        <div class="section-title">Activités de tests réalisées</div>
+        <div class="section-title">Tâches réalisées</div>
         <div class="qa-card-large">
           <div class="qa-card-header-large">
             Etat d'avancement des tâches 
@@ -201,95 +201,99 @@
           <div class="qa-card-body-large">
             <!-- Barre de progression globale -->
             <div class="progress-bar-container" style="margin-bottom:2rem;">
-              <div class="progress-bar green" style="width: 35%;">35% terminé</div>
+              <div class="progress-bar green" style="width: 57%;">57% terminé</div>
             </div>
             <!-- Graphe d'avancement type Monday.com -->
             <div class="monday-board">
               <div class="monday-row monday-header">
                 <div class="monday-col task">Tâche</div>
                 <div class="monday-col status">Statut</div>
-                <div class="monday-col details">Détails</div>
               </div>
               <div class="monday-row">
                 <div class="monday-col task">
-                  Cas de tests manuels (Jira/Xray)
+                 Analyse des user stories et de leurs critères d’acceptation, puis conception et planification des cas de tests associés.
                 </div>
                 <div class="monday-col status"><span class="status-badge done">Terminé</span></div>
-                <div class="monday-col details">Conception, exécution et documentation des anomalies</div>
               </div>
               <div class="monday-row">
                 <div class="monday-col task">
-                  Plan de test (IEEE 29119-3)
+                  Association des cas de tests aux critères d’acceptation dans Jira/Xray, et exécution de 33 cas de tests fonctionnels (taux de réussite : 78,8 %).
+                </div>
+                <div class="monday-col status"><span class="status-badge done">Terminé</span></div>
+              </div>
+              <div class="monday-row">
+                <div class="monday-col task">
+                  Détection, reproduction et consignation de 3 anomalies, avec création et suivi de 46 tickets dans Jira/Xray.
+                </div>
+                <div class="monday-col status"><span class="status-badge done">Terminé</span></div>
+              </div>
+              <div class="monday-row">
+                <div class="monday-col task">
+                   Rédaction par IA d’un plan de test structuré selon la norme IEEE 29119-3, à partir de la description du logiciel et des user stories.
                 </div>
                 <div class="monday-col status"><span class="status-badge progress">En cours</span></div>
-                <div class="monday-col details">Rédaction assistée par IA (objectifs, risques, critères...)</div>
               </div>
-              <div class="monday-row">
+			   <div class="monday-row">
                 <div class="monday-col task">
-                  Automatisation & IA
+                   Tentative d’automatisation des tests fonctionnels avec WinAppDriver, suivie d’un rapport d’analyse technique transmis au test manager.
                 </div>
-                <div class="monday-col status"><span class="status-badge todo">A faire</span></div>
-                <div class="monday-col details">Automatisation via outil IA, Playwright (JavaScript)</div>
+                <div class="monday-col status"><span class="status-badge done">Terminé</span></div>
               </div>
-              <div class="monday-row">
+			  <div class="monday-row">
                 <div class="monday-col task">
-                   Tests d’acceptance (UI)
+                   Génération par IA de tests d’acceptance automatisés (formats Gherkin et Robot Framework) à partir de captures d’écran d’interfaces utilisateur.
                 </div>
-                <div class="monday-col status"><span class="status-badge todo">À faire</span></div>
-                <div class="monday-col details">Génération de scénarios Gherkin à partir de captures d’écran, analyse UI</div>
+                <div class="monday-col status"><span class="status-badge progress">En cours</span></div>
+              </div>
+			  <div class="monday-row">
+                <div class="monday-col task">
+                    Génération des livrables QA : rapport final, rapports de défauts, patrimoine des tests manuels et automatisés.
+                </div>
+                <div class="monday-col status"><span class="status-badge progress">En cours</span></div>
               </div>
             </div>
           </div>
         </div>
       </section>
+	  
       <!-- Livrables produits -->
       <section id="livrables" class="qa-activites-modern">
         <div class="section-title">Livrables produits</div>
-        <div class="qa-card-large qa-card-livrables" style="width:100%;margin-bottom:2rem;">
+        <div class="qa-card-large">
           <div class="qa-card-body-large">
             <div class="progress-bar-container" style="margin-bottom:2rem;">
-              <div class="progress-bar green" style="width: 35%;">35% terminé</div>
+              <div class="progress-bar green" style="width: 25%;">25% terminé</div>
             </div>
             <div class="monday-board">
               <div class="monday-row monday-header">
                 <div class="monday-col task">Livrable</div>
                 <div class="monday-col status">Statut</div>
-                <div class="monday-col details">Détail / Date</div>
               </div>
               <div class="monday-row">
                 <div class="monday-col task">
                   Cas de tests manuels
                 </div>
                 <div class="monday-col status"><span class="status-badge done">Terminé</span></div>
-                <div class="monday-col details">33 cas de tests conçus et exécutés</div>
-              </div>
-              <div class="monday-row">
-                <div class="monday-col task">
-                  Plan de test (IEEE 29119-3)
-                </div>
-                <div class="monday-col status"><span class="status-badge progress">En cours</span></div>
-                <div class="monday-col details">Rédaction assistée par IA</div>
               </div>
               <div class="monday-row">
                 <div class="monday-col task">
                   Scripts automatisés
                 </div>
-                <div class="monday-col status"><span class="status-badge todo">À faire</span></div>
-                <div class="monday-col details">Automatisation Playwright / IA à venir</div>
+                <div class="monday-col status"><span class="status-badge progress">En cours</span></div>
               </div>
               <div class="monday-row">
                 <div class="monday-col task">
                   Rapports de défauts
                 </div>
                 <div class="monday-col status"><span class="status-badge progress">En cours</span></div>
-                <div class="monday-col details">Détection et suivi des anomalies dans Jira/Xray</div>
+                
               </div>
               <div class="monday-row">
                 <div class="monday-col task">
                   Rapport final de test
                 </div>
                 <div class="monday-col status"><span class="status-badge todo">À faire</span></div>
-                <div class="monday-col details">Synthèse finale du micro stage</div>
+               
               </div>
             </div>
           </div>
