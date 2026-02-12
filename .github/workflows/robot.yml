@@ -37,10 +37,15 @@ jobs:
           done
           curl -s http://localhost:4444/wd/hub/status
 
-      - name: Run Robot tests (remote)
+      - name: Run Robot tests (remote) - produce output.xml
         run: |
           mkdir -p results
-          robot --outputdir results --output output.xml --log log.html --report report.html -v REMOTE_URL:http://localhost:4444/wd/hub tests
+          robot --outputdir results --output output.xml --log NONE --report NONE -v REMOTE_URL:http://localhost:4444/wd/hub tests
+
+      - name: Generate report + log with Rebot (always)
+        if: always()
+        run: |
+          rebot --outputdir results --log log.html --report report.html results/output.xml
 
       - name: List results
         if: always()
