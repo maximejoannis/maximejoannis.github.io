@@ -4,6 +4,7 @@ Library    SeleniumLibrary
 *** Variables ***
 ${URL}    http://livraison3.testacademy.fr
 ${NAVIGATEUR}    chrome
+${REMOTE_URL}    None
 
 # --- Auth (existant) ---
 ${LIEN SE CONNECTER}    xpath=//a[contains(text(),'Se connecter')]
@@ -46,7 +47,8 @@ ${HIDDEN_ACTION}    xpath=//div[@id='modal-contact-host']//input[@name='action']
 
 *** Keywords ***
 Ouvrir Le Navigateur Et Accéder A L'Application
-    Open Browser    ${URL}    ${NAVIGATEUR}
+    Run Keyword If    '${REMOTE_URL}'!='None'    Open Browser    ${URL}    chrome    remote_url=${REMOTE_URL}
+    ...    ELSE    Open Browser    ${URL}    chrome
     Maximize Browser Window
 
 Fermer Le Navigateur
