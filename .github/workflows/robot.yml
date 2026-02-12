@@ -8,6 +8,9 @@ on:
 jobs:
   robot:
     runs-on: ubuntu-latest
+    env:
+      SE_MANAGER_LOG_LEVEL: "INFO"
+      SELENIUM_MANAGER_LOG_LEVEL: "INFO"
     steps:
       - uses: actions/checkout@v4
 
