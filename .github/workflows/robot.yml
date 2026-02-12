@@ -8,13 +8,10 @@ on:
 jobs:
   robot:
     runs-on: ubuntu-latest
-
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v4
+      - uses: actions/checkout@v4
 
-      - name: Setup Python
-        uses: actions/setup-python@v5
+      - uses: actions/setup-python@v5
         with:
           python-version: "3.11"
 
@@ -23,10 +20,13 @@ jobs:
           python -m pip install --upgrade pip
           pip install -r requirements.txt
 
-      - name: Install Chrome
-        uses: browser-actions/setup-chrome@v1
+      - name: Show versions
+        run: |
+          google-chrome --version || true
+          chromedriver --version || true
+          python -c "import selenium; print('selenium', selenium.__version__)"
+          python -c "import SeleniumLibrary; print('SeleniumLibrary', SeleniumLibrary.__version__)"
 
-      # Fournit un "écran virtuel" pour Chrome sur Linux (souvent nécessaire)
       - name: Run Robot tests
         uses: GabrielBB/xvfb-action@v1
         with:
