@@ -40,7 +40,13 @@ jobs:
       - name: Run Robot tests (remote)
         run: |
           mkdir -p results
-          robot -d results -v REMOTE_URL:http://localhost:4444/wd/hub tests
+          robot --outputdir results --output output.xml --log log.html --report report.html -v REMOTE_URL:http://localhost:4444/wd/hub tests
+
+      - name: List results
+        if: always()
+        run: |
+          echo "=== results directory ==="
+          ls -la results || true
 
       - name: Upload Robot reports
         if: always()
