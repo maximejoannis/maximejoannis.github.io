@@ -8,9 +8,15 @@ on:
 jobs:
   robot:
     runs-on: ubuntu-latest
-    env:
-      SE_MANAGER_LOG_LEVEL: "INFO"
-      SELENIUM_MANAGER_LOG_LEVEL: "INFO"
+
+    services:
+      selenium:
+        image: selenium/standalone-chrome:latest
+        ports:
+          - 4444:4444
+        options: >-
+          --shm-size=2g
+
     steps:
       - uses: actions/checkout@v4
 
@@ -23,19 +29,18 @@ jobs:
           python -m pip install --upgrade pip
           pip install -r requirements.txt
 
-      - name: Show versions
+      - name: Wait for Selenium Grid
         run: |
-          google-chrome --version || true
-          chromedriver --version || true
-          python -c "import selenium; print('selenium', selenium.__version__)"
-          python -c "import SeleniumLibrary; print('SeleniumLibrary', SeleniumLibrary.__version__)"
+          for i in {1..30}; do
+            curl -s http://localhost:4444/wd/hub/status | grep -q '"ready":true' && break
+            sleep 1
+          done
+          curl -s http://localhost:4444/wd/hub/status
 
-      - name: Run Robot tests
-        uses: GabrielBB/xvfb-action@v1
-        with:
-          run: |
-            mkdir -p results
-            robot -d results tests
+      - name: Run Robot tests (remote)
+        run: |
+          mkdir -p results
+          robot -d results -v REMOTE_URL:http://localhost:4444/wd/hub tests
 
       - name: Upload Robot reports
         if: always()
