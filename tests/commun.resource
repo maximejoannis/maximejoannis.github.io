@@ -18,7 +18,7 @@ ${UTILISATEUR VALIDE}         mjoan
 ${MOT DE PASSE VALIDE}        rt
 ${BOUTON SE CONNECTER}        css=.homey_login_button
 ${ZONE ERREUR}                css=#modal-login .error
-${TITRE PAGE TABLEAU DE BORD} Tableau de bord - Livraison 3
+${TITRE PAGE TABLEAU DE BORD}    Tableau de bord - Livraison 3
 
 # --- Parcours home -> annonce (locators du .side) ---
 ${BTN_CHERCHER_HOME}          css=.search-button > .btn-primary:nth-child(1)
