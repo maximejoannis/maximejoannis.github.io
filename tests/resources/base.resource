@@ -36,4 +36,28 @@ Aller Sur La Premiere Annonce Depuis La Home
 
 Capturer Preuves Echec
     ${ts}=    Get Current Date    result_format=%Y%m%d_%H%M%S
-    Capture Page Screenshot    results/FAIL_${TEST NAME}_${ts}.png
+    ${nom}=   Set Variable    ${TEST NAME}
+
+    # --- Nettoyage robuste pour noms de fichiers (compat NTFS / GitHub artifacts) ---
+    ${safe}=    Replace String    ${nom}    ${SPACE}    _
+    ${safe}=    Replace String    ${safe}    /    _
+    ${safe}=    Replace String    ${safe}    \    _
+    ${safe}=    Replace String    ${safe}    :    _
+    ${safe}=    Replace String    ${safe}    "    _
+    ${safe}=    Replace String    ${safe}    '    _
+    ${safe}=    Replace String    ${safe}    <    _
+    ${safe}=    Replace String    ${safe}    >    _
+    ${safe}=    Replace String    ${safe}    |    _
+    ${safe}=    Replace String    ${safe}    *    _
+    ${safe}=    Replace String    ${safe}    ?    _
+
+    Create Directory    results
+
+    Log    [ECHEC] Screenshot + HTML pour: ${nom}    console=yes
+    Capture Page Screenshot    results/FAIL_${safe}_${ts}.png
+
+    ${html}=    Get Source
+    Create File    results/FAIL_${safe}_${ts}.html    ${html}    encoding=UTF-8
+
+    ${url}=    Get Location
+    Log    [ECHEC] URL: ${url}    console=yes
