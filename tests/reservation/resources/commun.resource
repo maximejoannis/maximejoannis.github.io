@@ -110,3 +110,155 @@ Ouvrir Le Navigateur Et Accéder A L'Application
 
 Fermer Le Navigateur
     Close Browser
+
+# =========================
+# Utilitaires "métier" (logging clair)
+# =========================
+Etape
+    [Arguments]    ${message}
+    Log    [ETAPE] ${message}    console=yes
+
+# =========================
+# Auth (existant)
+# =========================
+Accéder A La Page De Connexion
+    Click Element    ${LIEN SE CONNECTER}
+
+Saisir Le Nom D'Utilisateur
+    [Arguments]    ${utilisateur valide}
+    Wait Until Element Is Visible    ${CHAMP NOM UTILISATEUR}    ${TIMEOUT_UI}
+    Click Element    ${CHAMP NOM UTILISATEUR}
+    Input Text    ${CHAMP NOM UTILISATEUR}    ${utilisateur valide}
+
+Saisir Le Mot De Passe
+    [Arguments]    ${mot de passe}
+    Input Text    ${CHAMP MOT DE PASSE}    ${mot de passe}
+
+Soumette Le Formulaire De Connexion
+    Click Button    ${BOUTON SE CONNECTER}
+
+# =========================
+# Parcours home -> annonce
+# =========================
+Aller Sur La Premiere Annonce Depuis La Home
+    Etape    Aller sur la première annonce depuis la home
+    Wait Until Element Is Visible    ${BTN_CHERCHER_HOME}    ${TIMEOUT_UI}
+    Click Element    ${BTN_CHERCHER_HOME}
+    Execute Javascript    window.scrollTo(0,0)
+    Wait Until Element Is Visible    ${PREMIERE_ANNONCE_TRIGGER}    ${TIMEOUT_UI}
+    Click Element    ${PREMIERE_ANNONCE_TRIGGER}
+
+# =========================
+# Demande de réservation (non connecté)
+# =========================
+Selectionner Une Date D'Arrivee Et Une Date De Depart
+    Etape    Sélectionner une date d'arrivée et une date de départ
+    Wait Until Element Is Visible    ${CHAMP_RESERVATION_ARRIVEE}    ${TIMEOUT_UI}
+    Click Element    ${CHAMP_RESERVATION_ARRIVEE}
+    Wait Until Element Is Visible    ${CALENDRIER_JOUR_COURANT}    ${TIMEOUT_UI}
+    Click Element    ${CALENDRIER_JOUR_COURANT}
+    Wait Until Element Is Visible    ${CALENDRIER_JOUR_DEPART}    ${TIMEOUT_UI}
+    Click Element    ${CALENDRIER_JOUR_DEPART}
+
+Selectionner Des Voyageurs (1 Adulte + 1 Enfant)
+    Etape    Sélectionner des voyageurs (1 adulte + 1 enfant)
+    Wait Until Element Is Visible    ${CHAMP_RESERVATION_VOYAGEURS}    ${TIMEOUT_UI}
+    Click Element    ${CHAMP_RESERVATION_VOYAGEURS}
+    Wait Until Element Is Visible    ${BTN_ADULTE_PLUS}    ${TIMEOUT_UI}
+    Click Element    ${BTN_ADULTE_PLUS}
+    Wait Until Element Is Visible    ${BTN_ENFANT_PLUS}    ${TIMEOUT_UI}
+    Click Element    ${BTN_ENFANT_PLUS}
+    Wait Until Element Is Visible    ${BTN_APPLIQUER_VOYAGEURS}    ${TIMEOUT_UI}
+    Click Element    ${BTN_APPLIQUER_VOYAGEURS}
+
+Ouvrir Le Calendrier (Champ Arrivee)
+    Etape    Ouvrir le calendrier via le champ arrivée
+    Wait Until Element Is Visible    ${CHAMP_RESERVATION_ARRIVEE}    ${TIMEOUT_UI}
+    Click Element    ${CHAMP_RESERVATION_ARRIVEE}
+    Wait Until Element Is Visible    ${CALENDRIER_JOUR_COURANT}    ${TIMEOUT_UI}
+
+Ouvrir Le Sélecteur Voyageurs
+    Etape    Ouvrir le sélecteur voyageurs
+    Wait Until Element Is Visible    ${CHAMP_RESERVATION_VOYAGEURS}    ${TIMEOUT_UI}
+    Click Element    ${CHAMP_RESERVATION_VOYAGEURS}
+    Wait Until Element Is Visible    ${BTN_APPLIQUER_VOYAGEURS}    ${TIMEOUT_UI}
+
+Selectionner L'Extra "Breakfast"
+    Etape    Sélectionner l'extra Breakfast
+    Wait Until Page Contains Element    ${LBL_EXTRA_BREAKFAST}    ${TIMEOUT_UI}
+    Scroll Element Into View    ${LBL_EXTRA_BREAKFAST}
+    Wait Until Element Is Visible    ${LBL_EXTRA_BREAKFAST}    ${TIMEOUT_UI}
+    Click Element    ${LBL_EXTRA_BREAKFAST}
+
+Selectionner L'Extra "Lunch"
+    Etape    Sélectionner l'extra Lunch
+    Wait Until Page Contains Element    ${LBL_EXTRA_LUNCH}    ${TIMEOUT_UI}
+    Scroll Element Into View    ${LBL_EXTRA_LUNCH}
+    Wait Until Element Is Visible    ${LBL_EXTRA_LUNCH}    ${TIMEOUT_UI}
+    Click Element    ${LBL_EXTRA_LUNCH}
+
+Selectionner L'Extra "Dinner"
+    Etape    Sélectionner l'extra Dinner
+    Wait Until Page Contains Element    ${LBL_EXTRA_DINNER}    ${TIMEOUT_UI}
+    Scroll Element Into View    ${LBL_EXTRA_DINNER}
+    Wait Until Element Is Visible    ${LBL_EXTRA_DINNER}    ${TIMEOUT_UI}
+    Click Element    ${LBL_EXTRA_DINNER}
+
+Cliquer Sur "Demande De Réservation"
+    Etape    Cliquer sur Demande de réservation
+    Wait Until Page Contains Element    ${BTN_DEMANDE_RESERVATION}    ${TIMEOUT_UI}
+    Scroll Element Into View    ${BTN_DEMANDE_RESERVATION}
+    Wait Until Element Is Visible    ${BTN_DEMANDE_RESERVATION}    ${TIMEOUT_UI}
+    Click Button    ${BTN_DEMANDE_RESERVATION}
+
+# =========================
+# Contacter l'hôte (inchangé)
+# =========================
+Ouvrir La Modal Contacter L'Hote
+    Wait Until Element Is Visible    ${BTN_CONTACTER_HOTE}    ${TIMEOUT_UI}
+    Click Element    ${BTN_CONTACTER_HOTE}
+    Wait Until Element Is Visible    ${MODAL_CONTACTER_HOTE}    ${TIMEOUT_UI}
+
+Fermer La Modal Contacter L'Hote
+    Wait Until Element Is Visible    ${BTN_FERMER_MODAL_CONTACT}    ${TIMEOUT_UI}
+    Click Element    ${BTN_FERMER_MODAL_CONTACT}
+
+Renseigner Le Formulaire Contacter L'Hote
+    [Arguments]    ${nom}    ${email}    ${telephone}    ${message}
+    Wait Until Element Is Visible    ${CHAMP_CONTACT_NOM}    ${TIMEOUT_UI}
+    Click Element    ${CHAMP_CONTACT_NOM}
+    Input Text    ${CHAMP_CONTACT_NOM}    ${nom}
+    Click Element    ${CHAMP_CONTACT_EMAIL}
+    Input Text    ${CHAMP_CONTACT_EMAIL}    ${email}
+    Click Element    ${CHAMP_CONTACT_TELEPHONE}
+    Input Text    ${CHAMP_CONTACT_TELEPHONE}    ${telephone}
+    Click Element    ${CHAMP_CONTACT_MESSAGE}
+    Input Text    ${CHAMP_CONTACT_MESSAGE}    ${message}
+
+Soumettre Le Formulaire Contacter L'Hote
+    Wait Until Element Is Visible    ${BTN_CONTACT_SOUMETTRE}    ${TIMEOUT_UI}
+    Click Element    ${BTN_CONTACT_SOUMETTRE}
+
+# =========================
+# Assertions utilitaires (inchangé)
+# =========================
+Textarea Value Should Be
+    [Arguments]    ${locator}    ${expected}
+    ${value}=    Get Value    ${locator}
+    Should Be Equal    ${value}    ${expected}
+
+Element Attribute Should Be
+    [Arguments]    ${locator}    ${attribute}    ${expected}
+    ${value}=    Get Element Attribute    ${locator}    ${attribute}
+    Should Be Equal    ${value}    ${expected}
+
+Element Attribute Should Not Be Empty
+    [Arguments]    ${locator}    ${attribute}
+    ${value}=    Get Element Attribute    ${locator}    ${attribute}
+    Should Not Be Empty    ${value}
+
+Field Value Should Not Be Empty
+    [Arguments]    ${locator}
+    ${value}=    Get Value    ${locator}
+    Should Not Be Empty    ${value}
+
