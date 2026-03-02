@@ -89,6 +89,39 @@ Garantir la qualité d’une application web de gestion de locations saisonnièr
 
 ---
 
+# 🔹 🎮 Démo Interactive — Simulation Workflow & Campagne QA
+
+📄 Fichier :
+👉 `homey-demo.html`
+
+## 🎯 Objectif
+
+Simuler un cycle QA complet :
+
+1. Voyageur → Demande de réservation
+2. Hôte → Acceptation / Refus
+3. Activation d’anomalies simulées
+4. Exécution d’une campagne de 20 cas de test
+5. Application des correctifs
+6. Relance → validation PASS
+
+## 📊 Caractéristiques
+
+* 20 cas de test simulés
+* 9 anomalies regroupées (Validation / Pricing / Workflow)
+* KPI PASS / FAIL en temps réel
+* Simulation FAIL → PATCH → PASS
+* Visualisation d’un cycle de correction complet
+
+## 💡 Valeur démontrée
+
+* Compréhension des workflows métier
+* Structuration d’une campagne QA
+* Analyse modulaire des anomalies
+* Illustration d’un cycle correctif
+* Approche pédagogique orientée démonstration recruteur
+---
+
 # 🔹 2️⃣ Enrichissement IA — Robot Framework (Homey)
 
 📄 Détail projet :
