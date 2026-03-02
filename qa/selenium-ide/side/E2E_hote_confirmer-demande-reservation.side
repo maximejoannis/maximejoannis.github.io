@@ -1,0 +1,233 @@
+{
+  "id": "cc793a8d-9489-4d89-909b-0c519e02df9f",
+  "version": "2.0",
+  "name": "HOMEY",
+  "url": "http://livraison3.testacademy.fr",
+  "tests": [{
+    "id": "4f342ce5-d2e7-453a-a2c0-d8c4b22b7d40",
+    "name": "E2E - Hôte - Confirmer demande réservation",
+    "commands": [{
+      "id": "0dc3ec5b-f7e1-47b6-af81-203ee25df190",
+      "comment": "",
+      "command": "open",
+      "target": "/",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "412d22c4-61a0-4893-a42c-2727595c8e28",
+      "comment": "",
+      "command": "setWindowSize",
+      "target": "1550x830",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "b415b2cd-9b17-4e60-8842-85aac52524b8",
+      "comment": "",
+      "command": "click",
+      "target": "linkText=Se connecter",
+      "targets": [
+        ["linkText=Se connecter", "linkText"],
+        ["css=.login-register > li:nth-child(1) > a", "css:finder"],
+        ["xpath=//a[contains(text(),'Se connecter')]", "xpath:link"],
+        ["xpath=//header[@id='homey_nav_sticky']/div/div/div[3]/div/ul/li/a", "xpath:idRelative"],
+        ["xpath=//a[contains(@href, '#')]", "xpath:href"],
+        ["xpath=//div/ul/li/a", "xpath:position"],
+        ["xpath=//a[contains(.,'Se connecter')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "33e9e2c2-a435-4dc0-9058-0b1d6b8b45e0",
+      "comment": "",
+      "command": "mouseOver",
+      "target": "linkText=Se connecter",
+      "targets": [
+        ["linkText=Se connecter", "linkText"],
+        ["css=.login-register > li:nth-child(1) > a", "css:finder"],
+        ["xpath=//a[contains(text(),'Se connecter')]", "xpath:link"],
+        ["xpath=//header[@id='homey_nav_sticky']/div/div/div[3]/div/ul/li/a", "xpath:idRelative"],
+        ["xpath=//a[contains(@href, '#')]", "xpath:href"],
+        ["xpath=//div/ul/li/a", "xpath:position"],
+        ["xpath=//a[contains(.,'Se connecter')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "99727f7c-723c-4a26-ba71-f02b52dcd644",
+      "comment": "",
+      "command": "mouseOut",
+      "target": "linkText=Se connecter",
+      "targets": [
+        ["linkText=Se connecter", "linkText"],
+        ["css=.login-register > li:nth-child(1) > a", "css:finder"],
+        ["xpath=//a[contains(text(),'Se connecter')]", "xpath:link"],
+        ["xpath=//header[@id='homey_nav_sticky']/div/div/div[3]/div/ul/li/a", "xpath:idRelative"],
+        ["xpath=//a[contains(@href, '#')]", "xpath:href"],
+        ["xpath=//div/ul/li/a", "xpath:position"],
+        ["xpath=//a[contains(.,'Se connecter')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "8287e7db-f0c3-4763-a070-775c478bb0eb",
+      "comment": "",
+      "command": "click",
+      "target": "name=username",
+      "targets": [
+        ["name=username", "name"],
+        ["css=#modal-login .form-group:nth-child(1) > .form-control", "css:finder"],
+        ["xpath=//input[@name='username']", "xpath:attributes"],
+        ["xpath=//div[@id='modal-login']/div/div[2]/div/div[2]/div[2]/form/div/input", "xpath:idRelative"],
+        ["xpath=//div/div[2]/div[2]/form/div/input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "f562f79d-a6a8-4432-891f-b482211fa9c0",
+      "comment": "",
+      "command": "type",
+      "target": "name=username",
+      "targets": [
+        ["name=username", "name"],
+        ["css=#modal-login .form-group:nth-child(1) > .form-control", "css:finder"],
+        ["xpath=//input[@name='username']", "xpath:attributes"],
+        ["xpath=//div[@id='modal-login']/div/div[2]/div/div[2]/div[2]/form/div/input", "xpath:idRelative"],
+        ["xpath=//div/div[2]/div[2]/form/div/input", "xpath:position"]
+      ],
+      "value": "Hotetest"
+    }, {
+      "id": "098f65a3-64d9-449f-ad83-1325637bb88c",
+      "comment": "",
+      "command": "click",
+      "target": "css=#modal-login .modal-body",
+      "targets": [
+        ["css=#modal-login .modal-body", "css:finder"],
+        ["xpath=//div[@id='modal-login']/div/div[2]/div/div[2]", "xpath:idRelative"],
+        ["xpath=//div[4]/div/div[2]/div/div[2]", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "6cf129a5-8fca-4534-aeab-1aee547eaf2c",
+      "comment": "",
+      "command": "click",
+      "target": "name=password",
+      "targets": [
+        ["name=password", "name"],
+        ["css=.form-group:nth-child(2) > .password-input-2", "css:finder"],
+        ["xpath=//input[@name='password']", "xpath:attributes"],
+        ["xpath=//div[@id='modal-login']/div/div[2]/div/div[2]/div[2]/form/div[2]/input", "xpath:idRelative"],
+        ["xpath=//form/div[2]/input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "df3c1825-dfc2-4725-8bfd-211eb4852a61",
+      "comment": "",
+      "command": "type",
+      "target": "name=password",
+      "targets": [
+        ["name=password", "name"],
+        ["css=.form-group:nth-child(2) > .password-input-2", "css:finder"],
+        ["xpath=//input[@name='password']", "xpath:attributes"],
+        ["xpath=//div[@id='modal-login']/div/div[2]/div/div[2]/div[2]/form/div[2]/input", "xpath:idRelative"],
+        ["xpath=//form/div[2]/input", "xpath:position"]
+      ],
+      "value": "test"
+    }, {
+      "id": "03546859-409e-430b-a891-82c8fea86ccb",
+      "comment": "",
+      "command": "click",
+      "target": "css=#modal-login .modal-body",
+      "targets": [
+        ["css=#modal-login .modal-body", "css:finder"],
+        ["xpath=//div[@id='modal-login']/div/div[2]/div/div[2]", "xpath:idRelative"],
+        ["xpath=//div[4]/div/div[2]/div/div[2]", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "f342e37f-09a2-453f-8125-0c934f57ece5",
+      "comment": "",
+      "command": "click",
+      "target": "css=.homey_login_button",
+      "targets": [
+        ["css=.homey_login_button", "css:finder"],
+        ["xpath=(//button[@type='submit'])[5]", "xpath:attributes"],
+        ["xpath=//div[@id='modal-login']/div/div[2]/div/div[2]/div[2]/form/button", "xpath:idRelative"],
+        ["xpath=//form/button", "xpath:position"],
+        ["xpath=//button[contains(.,'Se connecter')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "4dc118be-3d99-43c0-885d-ebcdade1ff25",
+      "comment": "",
+      "command": "mouseOver",
+      "target": "css=.homey_login_button",
+      "targets": [
+        ["css=.homey_login_button", "css:finder"],
+        ["xpath=(//button[@type='submit'])[5]", "xpath:attributes"],
+        ["xpath=//div[@id='modal-login']/div/div[2]/div/div[2]/div[2]/form/button", "xpath:idRelative"],
+        ["xpath=//form/button", "xpath:position"],
+        ["xpath=//button[contains(.,'Se connecter')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "d6a1a410-2df7-4f60-af96-93b6533c501e",
+      "comment": "",
+      "command": "mouseOut",
+      "target": "css=.homey_login_button",
+      "targets": [
+        ["css=.homey_login_button", "css:finder"],
+        ["xpath=(//button[@type='submit'])[5]", "xpath:attributes"],
+        ["xpath=//div[@id='modal-login']/div/div[2]/div/div[2]/div[2]/form/button", "xpath:idRelative"],
+        ["xpath=//form/button", "xpath:position"],
+        ["xpath=//button[contains(.,'Se connecter')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "d03ea47b-e1bf-460f-a13f-15cca2bf087e",
+      "comment": "",
+      "command": "click",
+      "target": "linkText=Confirmer",
+      "targets": [
+        ["linkText=Confirmer", "linkText"],
+        ["css=tr:nth-child(1) .btn", "css:finder"],
+        ["xpath=//a[contains(text(),'Confirmer')]", "xpath:link"],
+        ["xpath=//section[@id='body-area']/div[3]/div/div/div/div/div/div[2]/div[2]/table/tbody/tr/td[11]/div/a", "xpath:idRelative"],
+        ["xpath=//a[@href='http://livraison3.testacademy.fr/index.php/reservations/?reservation_detail=7450']", "xpath:href"],
+        ["xpath=//td[11]/div/a", "xpath:position"],
+        ["xpath=//a[contains(.,'Confirmer')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "c1ff6b72-eaef-4a88-b980-5ce87fbcf043",
+      "comment": "",
+      "command": "click",
+      "target": "css=.confirm-offsite-reservation:nth-child(2)",
+      "targets": [
+        ["css=.confirm-offsite-reservation:nth-child(2)", "css:finder"],
+        ["xpath=//section[@id='body-area']/div[3]/aside/button", "xpath:idRelative"],
+        ["xpath=//aside/button", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "eca907d6-1521-4503-a66a-049f464dca82",
+      "comment": "",
+      "command": "click",
+      "target": "linkText=Réservations",
+      "targets": [
+        ["linkText=Réservations", "linkText"],
+        ["css=.board-panel-item-active > a", "css:finder"],
+        ["xpath=(//a[contains(text(),'Réservations')])[3]", "xpath:link"],
+        ["xpath=//section[@id='body-area']/div[2]/div/ul/li[5]/a", "xpath:idRelative"],
+        ["xpath=(//a[@href='http://livraison3.testacademy.fr/index.php/reservations/'])[3]", "xpath:href"],
+        ["xpath=//div[2]/div/ul/li[5]/a", "xpath:position"]
+      ],
+      "value": ""
+    }]
+  }],
+  "suites": [{
+    "id": "292ca972-20a8-45f3-b93c-a629a1ca1ec8",
+    "name": "Default Suite",
+    "persistSession": false,
+    "parallel": false,
+    "timeout": 300,
+    "tests": ["4f342ce5-d2e7-453a-a2c0-d8c4b22b7d40"]
+  }],
+  "urls": ["http://livraison3.testacademy.fr/"],
+  "plugins": []
+}

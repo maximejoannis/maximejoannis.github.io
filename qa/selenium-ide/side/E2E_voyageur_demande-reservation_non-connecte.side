@@ -1,0 +1,203 @@
+{
+  "id": "ef65abe1-6834-461a-af9d-471d832d2cd9",
+  "version": "2.0",
+  "name": "HOMEY",
+  "url": "http://livraison3.testacademy.fr",
+  "tests": [{
+    "id": "4c713ddf-537f-454c-a7ac-0b219f666e78",
+    "name": "E2E - Voyageur - Demande réservation (non connecté)",
+    "commands": [{
+      "id": "5eb7f229-7cbb-4039-8e91-9cddf64a4fa8",
+      "comment": "",
+      "command": "open",
+      "target": "/",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "e8aa6f39-18bc-4db0-8871-9121e2caef21",
+      "comment": "",
+      "command": "setWindowSize",
+      "target": "1056x696",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "6dad68f4-8ab4-42e5-85f4-1121a75ede02",
+      "comment": "",
+      "command": "click",
+      "target": "css=.search-button > .btn-primary:nth-child(1)",
+      "targets": [
+        ["css=.search-button > .btn-primary:nth-child(1)", "css:finder"],
+        ["xpath=//button[@type='submit']", "xpath:attributes"],
+        ["xpath=//div[@id='section-body']/section/div[2]/div/form/div[4]/button", "xpath:idRelative"],
+        ["xpath=//form/div[4]/button", "xpath:position"],
+        ["xpath=//button[contains(.,'Chercher')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "0c80a905-caae-4175-aa66-339eaf8ec7e7",
+      "comment": "",
+      "command": "runScript",
+      "target": "window.scrollTo(0,0)",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "08e5ff87-53d4-47bc-b323-0894c0e6a4bf",
+      "comment": "",
+      "command": "click",
+      "target": "css=.infobox_trigger:nth-child(1) .hover-effect",
+      "targets": [
+        ["css=.infobox_trigger:nth-child(1) .hover-effect", "css:finder"],
+        ["xpath=//div[@id='homey_halfmap_listings_container']/div/div/div/div/a", "xpath:idRelative"],
+        ["xpath=(//a[@href='http://livraison3.testacademy.fr/index.php/listing/beautiful-cove/'])[3]", "xpath:href"],
+        ["xpath=//div[4]/div/div/div/div/a", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "c67a985e-f1db-4ac0-b1fd-1b537e8e397a",
+      "comment": "",
+      "command": "click",
+      "target": "name=arrive",
+      "targets": [
+        ["name=arrive", "name"],
+        ["css=.block-body-sidebar .search-date-range-arrive > .form-control", "css:finder"],
+        ["xpath=//input[@name='arrive']", "xpath:attributes"],
+        ["xpath=//div[@id='single-listing-date-range']/div/input", "xpath:idRelative"],
+        ["xpath=//input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "ea3e9bbb-7bc5-4738-a9e2-173dec0b3b09",
+      "comment": "",
+      "command": "click",
+      "target": "css=.block-body-sidebar > #single-listing-date-range > #single-booking-search-calendar .current-day",
+      "targets": [
+        ["css=.block-body-sidebar > #single-listing-date-range > #single-booking-search-calendar .current-day", "css:finder"],
+        ["xpath=//div[@id='single-booking-search-calendar']/div/ul[2]/li[19]", "xpath:idRelative"],
+        ["xpath=//div[3]/div/ul[2]/li[19]", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "86eef81a-fec7-48c2-b837-9c85c49afbd7",
+      "comment": "",
+      "command": "click",
+      "target": "css=.block-body-sidebar > #single-listing-date-range > #single-booking-search-calendar > .single-listing-calendar-wrap:nth-child(2) .current-month:nth-child(29) > .day-number",
+      "targets": [
+        ["css=.block-body-sidebar > #single-listing-date-range > #single-booking-search-calendar > .single-listing-calendar-wrap:nth-child(2) .current-month:nth-child(29) > .day-number", "css:finder"],
+        ["xpath=//div[@id='single-booking-search-calendar']/div[2]/ul[2]/li[29]/span", "xpath:idRelative"],
+        ["xpath=//div[3]/div[2]/ul[2]/li[29]/span", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "f634916a-d375-4cf7-ba2e-3e911197f84b",
+      "comment": "",
+      "command": "click",
+      "target": "name=guests",
+      "targets": [
+        ["name=guests", "name"],
+        ["css=.on-focus", "css:finder"],
+        ["xpath=//input[@name='guests']", "xpath:attributes"],
+        ["xpath=//div[@id='homey_remove_on_mobile']/div/div[2]/div/div[3]/input", "xpath:idRelative"],
+        ["xpath=//div[3]/input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "71485af3-53d7-4fd2-ab5f-1111cf0be05b",
+      "comment": "",
+      "command": "click",
+      "target": "css=.sidebar-booking-module-body:nth-child(2) .adult_plus > .fa",
+      "targets": [
+        ["css=.sidebar-booking-module-body:nth-child(2) .adult_plus > .fa", "css:finder"],
+        ["xpath=//div[@id='homey_remove_on_mobile']/div/div[2]/div/div[3]/div/div/button/i", "xpath:idRelative"],
+        ["xpath=//div[3]/div/div/button/i", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "a164cd9d-add6-4843-8fc1-42bea0d42acb",
+      "comment": "",
+      "command": "click",
+      "target": "css=.sidebar-booking-module-body:nth-child(2) .child_plus > .fa",
+      "targets": [
+        ["css=.sidebar-booking-module-body:nth-child(2) .child_plus > .fa", "css:finder"],
+        ["xpath=//div[@id='homey_remove_on_mobile']/div/div[2]/div/div[3]/div/div[2]/button/i", "xpath:idRelative"],
+        ["xpath=//div[2]/button/i", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "b5d1d347-af8b-48fb-acbc-173c72bc2944",
+      "comment": "",
+      "command": "click",
+      "target": "css=.sidebar-booking-module-body:nth-child(2) .guest-apply-btn > .btn",
+      "targets": [
+        ["css=.sidebar-booking-module-body:nth-child(2) .guest-apply-btn > .btn", "css:finder"],
+        ["xpath=(//button[@type='button'])[10]", "xpath:attributes"],
+        ["xpath=//div[@id='homey_remove_on_mobile']/div/div[2]/div/div[3]/div/div[3]/button", "xpath:idRelative"],
+        ["xpath=//div[3]/button", "xpath:position"],
+        ["xpath=//button[contains(.,'Appliquer')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "c89dbb35-0e2a-4d90-a2b6-049c3f6bd80d",
+      "comment": "",
+      "command": "click",
+      "target": "css=.sidebar-booking-module-body:nth-child(2) li:nth-child(1) .control__indicator",
+      "targets": [
+        ["css=.sidebar-booking-module-body:nth-child(2) li:nth-child(1) .control__indicator", "css:finder"],
+        ["xpath=//div[@id='homey_remove_on_mobile']/div/div[2]/div/div[4]/ul/li/label/span[2]", "xpath:idRelative"],
+        ["xpath=//label/span[2]", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "4006b5cc-7509-4ede-a612-a01c64e76cd3",
+      "comment": "",
+      "command": "click",
+      "target": "id=request_for_reservation",
+      "targets": [
+        ["id=request_for_reservation", "id"],
+        ["css=#request_for_reservation", "css:finder"],
+        ["xpath=//button[@id='request_for_reservation']", "xpath:attributes"],
+        ["xpath=//div[@id='homey_remove_on_mobile']/div/div[2]/div/button", "xpath:idRelative"],
+        ["xpath=//div[2]/div/button", "xpath:position"],
+        ["xpath=//button[contains(.,'Demande de réservation')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "910f9091-6f23-4fb4-84a2-09f1a94fe5f3",
+      "comment": "",
+      "command": "mouseOver",
+      "target": "id=request_for_reservation",
+      "targets": [
+        ["id=request_for_reservation", "id"],
+        ["css=#request_for_reservation", "css:finder"],
+        ["xpath=//button[@id='request_for_reservation']", "xpath:attributes"],
+        ["xpath=//div[@id='homey_remove_on_mobile']/div/div[2]/div/button", "xpath:idRelative"],
+        ["xpath=//div[2]/div/button", "xpath:position"],
+        ["xpath=//button[contains(.,'Demande de réservation')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "5cff4813-a0e3-46dc-94d4-ad039820ca86",
+      "comment": "",
+      "command": "mouseOut",
+      "target": "id=request_for_reservation",
+      "targets": [
+        ["id=request_for_reservation", "id"],
+        ["css=#request_for_reservation", "css:finder"],
+        ["xpath=//button[@id='request_for_reservation']", "xpath:attributes"],
+        ["xpath=//div[@id='homey_remove_on_mobile']/div/div[2]/div/button", "xpath:idRelative"],
+        ["xpath=//div[2]/div/button", "xpath:position"],
+        ["xpath=//button[contains(.,'Demande de réservation')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }]
+  }],
+  "suites": [{
+    "id": "e971a9f1-2e86-4ee5-a2eb-e19f53d66a9d",
+    "name": "Default Suite",
+    "persistSession": false,
+    "parallel": false,
+    "timeout": 300,
+    "tests": ["4c713ddf-537f-454c-a7ac-0b219f666e78"]
+  }],
+  "urls": ["http://livraison3.testacademy.fr/"],
+  "plugins": []
+}
