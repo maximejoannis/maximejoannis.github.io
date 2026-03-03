@@ -75,35 +75,57 @@ ${ZONE_CONTACT_MESSAGES}    css=#modal-contact-host .homey_contact_messages
 Setup Test
     Log    [SETUP] ${TEST NAME}    console=yes
     Ouvrir Le Navigateur Et Accéder A L'Application
+    ${url}=    Safe Get Location
+    Log    [SETUP] URL ouverte: ${url}    console=yes
 
 Teardown Test
     Run Keyword If Test Failed    Capturer Preuves Echec
-    Close Browser
+    ${url}=    Safe Get Location
+    Log    [TEARDOWN] URL finale: ${url}    console=yes
+    Safe Close Browser
 
 
 # ---------- Utils ----------
 Sanitize Filename
     [Arguments]    ${name}
-    # Remplace tout caractère interdit (NTFS + GitHub artifacts) par "_"
     ${safe}=    Replace String Using Regexp    ${name}    ["<>:|*?\r\n]    _
-    # Sécurise aussi / et \ (chemins)
     ${safe}=    Replace String Using Regexp    ${safe}    [\\/]    _
-    # Remplace les espaces multiples par "_"
     ${safe}=    Replace String Using Regexp    ${safe}    \s+    _
     [Return]    ${safe}
+
+Safe Get Location
+    ${res}=    Run Keyword And Ignore Error    Get Location
+    ${status}=    Set Variable    ${res}[0]
+    ${value}=     Set Variable    ${res}[1]
+    IF    '${status}' != 'PASS' or '${value}' == '${NONE}'
+        ${value}=    Set Variable    N/A
+    END
+    [Return]    ${value}
+
+Safe Capture Page Screenshot
+    [Arguments]    ${path}
+    Run Keyword And Ignore Error    Capture Page Screenshot    ${path}
+
+Safe Close Browser
+    Run Keyword And Ignore Error    Close Browser
 
 
 Capturer Preuves Echec
     ${ts}=    Get Current Date    result_format=%Y%m%d_%H%M%S
     ${nom}=   Set Variable    ${TEST NAME}
-
     ${safe}=    Sanitize Filename    ${nom}
 
     Create Directory    results
 
-    Capture Page Screenshot    results/FAIL_${safe}_${ts}.png
-    ${html}=    Get Source
-    Create File    results/FAIL_${safe}_${ts}.html    ${html}    encoding=UTF-8
+    Safe Capture Page Screenshot    results/FAIL_${safe}_${ts}.png
+
+    ${src}=    Run Keyword And Ignore Error    Get Source
+    IF    '${src}[0]' == 'PASS'
+        Create File    results/FAIL_${safe}_${ts}.html    ${src}[1]    encoding=UTF-8
+    END
+
+    ${url}=    Safe Get Location
+    Log    [ECHEC] URL: ${url}    console=yes
 
 
 Ouvrir Le Navigateur Et Accéder A L'Application
@@ -112,7 +134,8 @@ Ouvrir Le Navigateur Et Accéder A L'Application
     ...    ELSE
     ...    Open Browser    ${URL}    ${NAVIGATEUR}
 
-    Maximize Browser Window
+    # Plus stable en CI/headless que Maximize
+    Set Window Size    1920    1080
     Set Selenium Timeout    ${SELENIUM_TIMEOUT}
     Set Selenium Implicit Wait    ${SELENIUM_IMPLICIT}
 
@@ -221,7 +244,7 @@ Cliquer Sur "Demande De Réservation"
     Click Button    ${BTN_DEMANDE_RESERVATION}
 
 # =========================
-# Contacter l'hôte (inchangé)
+# Contacter l'hôte
 # =========================
 Ouvrir La Modal Contacter L'Hote
     Wait Until Element Is Visible    ${BTN_CONTACTER_HOTE}    ${TIMEOUT_UI}
@@ -239,7 +262,8 @@ Renseigner Le Formulaire Contacter L'Hote
     Input Text    ${CHAMP_CONTACT_NOM}    ${nom}
     Click Element    ${CHAMP_CONTACT_EMAIL}
     Input Text    ${CHAMP_CONTACT_EMAIL}    ${email}
-    Click Element    ${CHAMP_CONTACT_TELEPHONE}    ${telephone}
+    Click Element    ${CHAMP_CONTACT_TELEPHONE}
+    Input Text    ${CHAMP_CONTACT_TELEPHONE}    ${telephone}
     Click Element    ${CHAMP_CONTACT_MESSAGE}
     Input Text    ${CHAMP_CONTACT_MESSAGE}    ${message}
 
@@ -248,7 +272,7 @@ Soumettre Le Formulaire Contacter L'Hote
     Click Element    ${BTN_CONTACT_SOUMETTRE}
 
 # =========================
-# Assertions utilitaires (inchangé)
+# Assertions utilitaires
 # =========================
 Textarea Value Should Be
     [Arguments]    ${locator}    ${expected}
