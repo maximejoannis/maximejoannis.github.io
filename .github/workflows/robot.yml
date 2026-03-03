@@ -16,6 +16,8 @@ jobs:
           - 4444:4444
         options: >-
           --shm-size=2g
+        env:
+          SE_OPTS: "--session-request-timeout 300 --session-timeout 300"
 
     steps:
       - uses: actions/checkout@v4
@@ -32,11 +34,14 @@ jobs:
 
       - name: Wait for Selenium
         run: |
-          for i in {1..60}; do
-            curl -s http://localhost:4444/status | grep -q '"ready"[[:space:]]*:[[:space:]]*true' && break
+          for i in {1..90}; do
+            if curl -fsS http://localhost:4444/status | python -c "import sys, json; print(json.load(sys.stdin).get('value', {}).get('ready', False))" | grep -q True; then
+              echo "Selenium is ready"
+              break
+            fi
             sleep 1
           done
-          curl -s http://localhost:4444/status
+          curl -fsS http://localhost:4444/status
 
       - name: Run Robot tests (remote) - produce output.xml
         run: |
@@ -46,7 +51,7 @@ jobs:
             --output output.xml \
             --log NONE \
             --report NONE \
-            -v REMOTE_URL:http://localhost:4444/wd/hub \
+            -v REMOTE_URL:http://localhost:4444 \
             tests
 
       - name: Generate report + log with Rebot (always)
