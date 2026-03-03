@@ -1,0 +1,916 @@
+<!DOCTYPE html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Dashboard QA – Pipeline CI/CD Robot Fr:contentReference[oaicite:5]{index=5}ns) | Maxime Joannis</title>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+    <link rel="stylesheet" href="style-portfolio-maximejoannis.css" />
+
+    <noscript>
+      <style>
+        #loader { display: none !important; }
+        .content-section { display: block !important; opacity: 1 !important; }
+      </style>
+    </noscript>
+
+    <style>
+      /* Petit complément local (non destructif) */
+      .api-panel { margin-top: 12px; }
+      .api-panel .api-row { display:flex; gap:12px; flex-wrap:wrap; align-items:center; }
+      .api-panel input[type="password"]{
+        width: min(520px, 100%);
+        padding: 10px 12px;
+        border-radius: 10px;
+        border: 1px solid rgba(31,225,217,0.25);
+        background: rgba(255,255,255,0.04);
+        color: inherit;
+        outline: none;
+      }
+      .api-panel .btn-mini{
+        padding: 10px 14px;
+        border-radius: 10px;
+        border: 1px solid rgba(31,225,217,0.6);
+        background: rgba(31,225,217,0.12);
+        color: #1fe1d9;
+        font-weight: 800;
+        cursor: pointer;
+      }
+      .api-panel .btn-mini:hover{ background: rgba(31,225,217,0.18); }
+      .small-muted { font-size: 0.9rem; opacity: 0.8; }
+      .run-link { color: #1fe1d9; font-weight: 800; text-decoration:none; }
+      .run-link:hover { text-decoration: underline; }
+      .badge--success { background: rgba(46, 204, 113, 0.15); color: #2ecc71; border: 1px solid rgba(46,204,113,0.35); }
+      .badge--fail { background: rgba(255, 77, 77, 0.12); color: #ff4d4d; border: 1px solid rgba(255,77,77,0.35); }
+      .badge--neutral { background: rgba(255,255,255,0.06); color: rgba(255,255,255,0.85); border: 1px solid rgba(255,255,255,0.12); }
+      .pill--success { background: rgba(46,204,113,0.18); color: #2ecc71; }
+      .pill--fail { background: rgba(255,77,77,0.16); color: #ff4d4d; }
+      .pill--neutral { background: rgba(255,255,255,0.08); color: rgba(255,255,255,0.9); }
+    </style>
+  </head>
+
+  <body>
+    <!-- LOADER -->
+    <div id="loader">
+      <div class="qa-logo">
+        <div class="gear"></div>
+        <div class="scan-ring"></div>
+      </div>
+      <div class="loader-title">EXECUTION_INITIALIZATION...</div>
+      <div class="build-panel" aria-hidden="true">
+        <div class="build-row">
+          <span class="build-label">BUILD</span>
+          <span class="build-state" id="buildState">RUNNING</span>
+          <span class="build-icon" id="buildIcon"><i class="fas fa-spinner"></i></span>
+        </div>
+        <div class="build-bar" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0">
+          <div class="build-bar__fill" id="buildFill"></div>
+        </div>
+      </div>
+      <div class="loader-log-container">
+        <div class="log-line" id="log-1"></div>
+        <div class="log-line" id="log-2"></div>
+        <div class="log-line" id="log-3"></div>
+      </div>
+      <div class="loader-text">STATUS: LOADING DASHBOARD...</div>
+    </div>
+
+    <!-- SIDEBAR -->
+    <aside>
+      <div class="profile-block">
+        <div class="profile-avatar">MJ</div>
+        <div class="profile-text">
+          <div class="profile-name">Maxime Joannis</div>
+          <div class="profile-role">Ingénieur QA</div>
+        </div>
+      </div>
+
+      <nav>
+        <ul id="menu">
+          <li><a href="index.html" class="nav-link"><i class="fas fa-home"></i> Accueil</a></li>
+          <li><a href="detailPipelineCI.html" class="nav-link"><i class="fas fa-info-circle"></i> Détail projet Pipeline CI</a></li>
+          <hr style="border: 0; border-top: 1px solid rgba(255,255,255,0.1); margin: 10px 0;" />
+          <li><a class="nav-link active-link" data-target="dashboard"><i class="fas fa-chart-pie"></i> Tableau de bord CI</a></li>
+          <li><a class="nav-link" data-target="runs"><i class="fas fa-list-check"></i> Exécutions</a></li>
+        </ul>
+      </nav>
+    </aside>
+
+    <!-- MAIN -->
+    <div class="wrapper">
+      <header>
+        <button
+          id="focusBtn"
+          style="cursor:pointer; padding: 8px 15px; background: rgba(31,225,217,0.1); border: 1px solid #1fe1d9; color: #1fe1d9; border-radius: 8px; font-weight: bold;"
+        >
+          <i class="fas fa-expand-arrows-alt"></i> FOCUS
+        </button>
+
+        <div class="breadcrumb">Projet QA // <span id="breadcrumb-title">Dashboard CI</span></div>
+
+        <div class="menu-loader" id="menuLoader" aria-hidden="true">
+          <div class="menu-loader__scan"></div>
+          <span class="menu-loader__text" id="menuLoaderText">SWITCHING VIEW...</span>
+        </div>
+
+        <div class="status-badge" id="buildBadge">
+          <i class="fas fa-circle" style="font-size: 8px;"></i> BUILD: —
+        </div>
+
+        <div class="header-photo">
+          <img src="Photo_Identite.jpg" alt="Photo de Maxime" />
+        </div>
+      </header>
+
+      <main>
+        <!-- DASHBOARD -->
+        <section id="dashboard" class="content-section active">
+          <h2><i class="fas fa-chart-pie"></i> Tableau de bord CI — Pipeline Robot Framework</h2>
+
+          <div class="dashboard-block">
+            <div class="section-lead">
+              <p class="muted">
+                Synthèse des exécutions GitHub Actions du pipeline CI/CD (Robot Framework).
+                Données chargées en direct via l’API GitHub.
+              </p>
+
+              <div class="meta-row">
+                <span class="badge badge-info"><i class="fa-solid fa-robot"></i>&nbsp;Robot Framework</span>
+                <span class="badge badge-neutral"><i class="fa-solid fa-code-branch"></i>&nbsp;Repo : <strong id="repoLabel">—</strong></span>
+                <span class="badge badge-neutral"><i class="fa-solid fa-calendar-days"></i>&nbsp;Dernière exécution : <strong id="lastRunDate">—</strong></span>
+              </div>
+
+              <div class="api-panel card" style="width:100%; margin-top: 14px;">
+                <h3 style="margin-bottom: 8px;">
+                  <i class="fas fa-plug" style="margin-right:0.6em; color: var(--accent-color);"></i>
+                  Connexion API GitHub (optionnelle)
+                </h3>
+
+                <div class="api-row">
+                  <input
+                    id="ghToken"
+                    type="password"
+                    placeholder="Optionnel : coller un token GitHub (PAT) pour éviter le rate limit"
+                    autocomplete="off"
+                    spellcheck="false"
+                  />
+                  <button class="btn-mini" id="saveTokenBtn"><i class="fas fa-floppy-disk"></i> Enregistrer</button>
+                  <button class="btn-mini" id="clearTokenBtn" style="border-color: rgba(255,77,77,0.6); color:#ff4d4d; background: rgba(255,77,77,0.10);">
+                    <i class="fas fa-trash"></i> Effacer
+                  </button>
+                  <button class="btn-mini" id="refreshBtn"><i class="fas fa-rotate"></i> Rafraîchir</button>
+                </div>
+
+                <p class="small-muted" style="margin-top:10px;">
+                  Sans token, GitHub limite les requêtes API (≈60/h). Avec un token, tu évites les blocages en cas de rafraîchissements répétés.
+                </p>
+
+                <div id="apiStatus" class="muted" style="margin-top:8px;"></div>
+              </div>
+            </div>
+
+            <!-- KPI -->
+            <div class="results-grid kpi-global">
+              <div class="card results-card">
+                <div class="stat-label">Workflow</div>
+                <div class="stat-value" style="font-size: 1.2rem;" id="workflowName">—</div>
+                <p class="stat-hint">Fichier workflow : <code id="workflowFile">—</code></p>
+              </div>
+
+              <div class="card results-card">
+                <div class="stat-label">Runs analysés</div>
+                <div class="stat-value" id="runsCount">—</div>
+                <p class="stat-hint">Derniers runs récupérés via API</p>
+              </div>
+
+              <div class="card results-card">
+                <div class="stat-label">Taux de réussite</div>
+                <div class="stat-value" id="successRate">—</div>
+                <div class="progress-container" aria-label="Taux de réussite global">
+                  <div class="progress-info">
+                    <span>Succès</span>
+                    <span><strong id="successCount">—</strong> / <span id="totalCount">—</span></span>
+                  </div>
+                  <div class="progress-bar" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0">
+                    <div class="progress-fill" id="successFill" style="width:0%"></div>
+                  </div>
+                </div>
+                <div class="sub-stats">
+                  <span>OK : <span id="okCount">—</span></span>
+                  <span>KO : <span id="koCount">—</span></span>
+                </div>
+              </div>
+            </div>
+			
+			<!-- QUICK INSIGHTS (safe) -->
+<div class="results-grid" style="margin-top: 18px;">
+  <div class="card results-card">
+    <div class="stat-label">Durée moyenne</div>
+    <div class="stat-value" id="avgDuration">—</div>
+    <p class="stat-hint">Moyenne sur les runs analysés</p>
+  </div>
+
+  <div class="card results-card">
+    <div class="stat-label">Streak actuel</div>
+    <div class="stat-value" id="streakValue">—</div>
+    <p class="stat-hint" id="streakHint">—</p>
+  </div>
+
+  <div class="card results-card">
+    <div class="stat-label">5 derniers runs</div>
+    <div class="stat-value" id="last5Rate">—</div>
+    <p class="stat-hint">Taux de réussite (rolling)</p>
+  </div>
+  <div class="card results-card">
+  <div class="stat-label">Stabilité CI</div>
+  <div class="stat-value" id="stabilityBadge">—</div>
+  <p class="stat-hint" id="stabilityHint">—</p>
+</div>
+</div>
+
+
+            <br />
+
+            <!-- DERNIER RUN : jobs + artefacts -->
+            <div class="card" style="width:100%;">
+              <h3>
+                <i class="fas fa-bolt" style="margin-right:0.7em; color: var(--accent-color);"></i>
+                Dernière exécution — Détails
+              </h3>
+
+              <div class="table-container">
+                <table class="modern-table" aria-label="Détails dernier run">
+                  <thead>
+                    <tr>
+                      <th>Run</th>
+                      <th>Branche</th>
+                      <th>Statut</th>
+                      <th>Durée</th>
+                      <th>Jobs</th>
+                      <th>Artefacts</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td id="latestRunCell">—</td>
+                      <td id="latestBranchCell">—</td>
+                      <td id="latestStatusCell">—</td>
+                      <td id="latestDurationCell">—</td>
+                      <td id="latestJobsCell">—</td>
+                      <td id="latestArtifactsCell">—</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+
+              <div class="muted" style="margin-top: 10px;">
+                Astuce : clique sur un run dans le tableau “Exécutions” pour l’ouvrir dans GitHub Actions.
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- RUNS TABLE -->
+        <section id="runs" class="content-section">
+          <h2><i class="fas fa-list-check"></i> Exécutions GitHub Actions</h2>
+
+          <div class="card" style="width:100%;">
+            <h3>
+              <i class="fas fa-clock-rotate-left" style="margin-right:0.7em; color: var(--accent-color);"></i>
+              Historique des runs (dernier → plus ancien)
+            </h3>
+
+            <div class="table-container">
+              <table class="modern-table" aria-label="Historique des exécutions">
+                <thead>
+                  <tr>
+                    <th>#</th>
+                    <th>Date</th>
+                    <th>Branche</th>
+                    <th>Événement</th>
+                    <th>Statut</th>
+                    <th>Durée</th>
+                    <th>Lien</th>
+                  </tr>
+                </thead>
+                <tbody id="runsTbody">
+                  <tr><td colspan="7" class="muted">Chargement…</td></tr>
+                </tbody>
+              </table>
+            </div>
+
+            <div class="callout callout--thin" style="margin-top:16px;">
+              <div class="callout__icon"><i class="fas fa-circle-info"></i></div>
+              <div>
+                <div class="callout__title">Remarque</div>
+                <div class="muted">
+                  Pour limiter le nombre d’appels API, les jobs/artefacts sont détaillés uniquement pour la dernière exécution.
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+      </main>
+
+      <footer id="page-footer">
+        <div class="footer-content">
+          <span class="citation">
+            "N'abandonne jamais, car c'est souvent juste après le dernier effort que le succès se dévoile."
+          </span>
+          <p>
+            © 2026 Maxime Joannis - Tous droits réservés.
+            <a href="privacy.html">Politique de confidentialité</a>
+          </p>
+        </div>
+      </footer>
+    </div>
+
+    <script>
+      /**
+       * Dashboard Pipeline CI — GitHub Actions API
+       * - Fetch workflow runs
+       * - Compute KPIs
+       * - Show latest run details (jobs + artifacts)
+       *
+       * Notes:
+       * - Public API works without token but rate-limited.
+       * - Token (PAT) is optional and stored locally (localStorage).
+       */
+      const PipelineDashboardApp = {
+        // ---- CONFIG (à adapter si tu renommes le workflow) ----
+        config: {
+          owner: "maximejoannis",
+          repo: "maximejoannis.github.io",
+          workflowFile: "robot.yml", // <= ton fichier .github/workflows/robot.yml
+          perPage: 12,
+          reducedMotion: window.matchMedia("(prefers-reduced-motion: reduce)").matches,
+          loaderTimeout: 6500,
+          typeWriterSpeed: 50,
+          sectionLabels: {
+            dashboard: "DASHBOARD",
+            runs: "RUNS"
+          },
+          buildLogs: [
+            "> Fetching GitHub Actions runs... ",
+            "> Building KPI widgets... ",
+            "> Rendering dashboard... "
+          ]
+        },
+
+        state: {
+          token: null,
+          runs: [],
+          latestJobs: null,
+          latestArtifacts: null
+        },
+
+        // ---- INIT ----
+        init() {
+          this.hydrateToken();
+          this.initLoader();
+          this.initNavigation();
+          this.initFocusMode();
+          this.initControls();
+          this.bootstrapLabels();
+          this.loadAll();
+        },
+
+        bootstrapLabels() {
+          document.getElementById("repoLabel").textContent = `${this.config.owner}/${this.config.repo}`;
+          document.getElementById("workflowFile").textContent = this.config.workflowFile;
+        },
+
+        // ---- LOADER ----
+        initLoader() {
+          const nodes = {
+            loader: document.getElementById("loader"),
+            fill: document.getElementById("buildFill"),
+            state: document.getElementById("buildState"),
+            icon: document.getElementById("buildIcon"),
+            panel: document.querySelector(".build-panel"),
+            progressBar: document.querySelector(".build-bar")
+          };
+
+          setTimeout(() => this.closeLoader(nodes.loader), this.config.loaderTimeout);
+
+          this.config.buildLogs.forEach((text, idx) => {
+            setTimeout(() => {
+              const line = document.getElementById(`log-${idx + 1}`);
+              if (line) line.textContent = text;
+            }, this.config.reducedMotion ? 0 : idx * 260);
+          });
+
+          if (this.config.reducedMotion) {
+            this.closeLoader(nodes.loader);
+            return;
+          }
+
+          setTimeout(() => this.updateProgress(nodes, "70"), 140);
+
+          setTimeout(() => {
+            this.updateProgress(nodes, "100");
+            if (nodes.state) nodes.state.textContent = "READY";
+            if (nodes.icon) nodes.icon.innerHTML = '<i class="fas fa-check"></i>';
+            if (nodes.panel) nodes.panel.classList.add("is-success");
+            setTimeout(() => this.closeLoader(nodes.loader), 400);
+          }, 820);
+        },
+
+        updateProgress(nodes, value) {
+          if (nodes.fill) nodes.fill.style.width = `${value}%`;
+          if (nodes.progressBar) nodes.progressBar.setAttribute("aria-valuenow", value);
+        },
+
+        closeLoader(loader) {
+          if (loader && loader.style.display !== "none") {
+            loader.style.opacity = "0";
+            setTimeout(() => { loader.style.display = "none"; }, 250);
+          }
+        },
+
+        // ---- NAVIGATION ----
+        initNavigation() {
+          const links = document.querySelectorAll(".nav-link");
+          const sections = document.querySelectorAll(".content-section");
+          const breadcrumbTitle = document.getElementById("breadcrumb-title");
+          const menuLoader = document.getElementById("menuLoader");
+          const menuLoaderText = document.getElementById("menuLoaderText");
+
+          let typeTimeout;
+
+          const typeWriter = (text, element) => {
+            element.textContent = "";
+            let i = 0;
+            clearTimeout(typeTimeout);
+            const type = () => {
+              if (i < text.length) {
+                element.textContent += text.charAt(i);
+                i++;
+                typeTimeout = setTimeout(type, this.config.typeWriterSpeed);
+              }
+            };
+            type();
+          };
+
+          links.forEach(link => {
+            link.addEventListener("click", () => {
+              const targetId = link.getAttribute("data-target");
+              if (!targetId) return;
+
+              const currentSection = document.querySelector(".content-section.active");
+              if (currentSection?.id === targetId) return;
+
+              links.forEach(l => l.classList.remove("active-link"));
+              link.classList.add("active-link");
+
+              const newTitle = link.innerText.trim();
+              typeWriter(newTitle, breadcrumbTitle);
+
+              const label = this.config.sectionLabels[targetId] || newTitle.toUpperCase();
+              const delay = this.config.reducedMotion ? 0 : 200;
+
+              if (menuLoader && !this.config.reducedMotion) {
+                menuLoaderText.textContent = `LOADING: ${label}`;
+                menuLoader.classList.add("is-active");
+                menuLoader.setAttribute("aria-hidden", "false");
+              }
+
+              setTimeout(() => {
+                sections.forEach(s => s.classList.toggle("active", s.id === targetId));
+                window.scrollTo(0, 0);
+                if (menuLoader) {
+                  menuLoader.classList.remove("is-active");
+                  menuLoader.setAttribute("aria-hidden", "true");
+                }
+              }, delay);
+            });
+          });
+        },
+
+        // ---- FOCUS ----
+        initFocusMode() {
+          const focusBtn = document.getElementById("focusBtn");
+          if (!focusBtn) return;
+          focusBtn.addEventListener("click", () => {
+            document.body.classList.toggle("focus-active");
+            const isFocus = document.body.classList.contains("focus-active");
+            focusBtn.innerHTML = isFocus
+              ? '<i class="fas fa-compress-arrows-alt"></i> QUITTER'
+              : '<i class="fas fa-expand-arrows-alt"></i> FOCUS';
+          });
+        },
+
+        // ---- CONTROLS (token + refresh) ----
+        initControls() {
+          const input = document.getElementById("ghToken");
+          const saveBtn = document.getElementById("saveTokenBtn");
+          const clearBtn = document.getElementById("clearTokenBtn");
+          const refreshBtn = document.getElementById("refreshBtn");
+
+          if (this.state.token) input.value = this.state.token;
+
+          saveBtn.addEventListener("click", () => {
+            const v = (input.value || "").trim();
+            if (!v) {
+              this.setApiStatus("Token vide : rien à enregistrer.", "warn");
+              return;
+            }
+            localStorage.setItem("mj_gh_token", v);
+            this.state.token = v;
+            this.setApiStatus("Token enregistré (localStorage). Rafraîchis pour recharger.", "ok");
+          });
+
+          clearBtn.addEventListener("click", () => {
+            localStorage.removeItem("mj_gh_token");
+            this.state.token = null;
+            input.value = "";
+            this.setApiStatus("Token effacé. Retour en mode public (rate limit possible).", "warn");
+          });
+
+          refreshBtn.addEventListener("click", () => this.loadAll());
+        },
+
+        hydrateToken() {
+          const t = localStorage.getItem("mj_gh_token");
+          this.state.token = t ? t.trim() : null;
+        },
+
+        setApiStatus(msg, level = "info") {
+          const el = document.getElementById("apiStatus");
+          if (!el) return;
+          const icon = level === "ok" ? "fa-check" : (level === "warn" ? "fa-triangle-exclamation" : "fa-circle-info");
+          el.innerHTML = `<i class="fas ${icon}"></i> ${msg}`;
+        },
+
+        // ---- API HELPERS ----
+        ghHeaders() {
+          const h = {
+            "Accept": "application/vnd.github+json",
+            "X-GitHub-Api-Version": "2022-11-28"
+          };
+          if (this.state.token) h["Authorization"] = `Bearer ${this.state.token}`;
+          return h;
+        },
+
+        async ghFetchJson(url) {
+          const res = await fetch(url, { headers: this.ghHeaders() });
+          if (!res.ok) {
+            let detail = "";
+            try { detail = await res.text(); } catch {}
+            throw new Error(`GitHub API error ${res.status} — ${res.statusText}${detail ? " — " + detail : ""}`);
+          }
+          return res.json();
+        },
+
+        // ---- LOAD DATA ----
+        async loadAll() {
+          try {
+            this.setApiStatus("Chargement des runs GitHub Actions…", "info");
+
+            const workflowRunsUrl =
+              `https://api.github.com/repos/${this.config.owner}/${this.config.repo}` +
+              `/actions/workflows/${encodeURIComponent(this.config.workflowFile)}/runs?per_page=${this.config.perPage}`;
+
+            const runsPayload = await this.ghFetchJson(workflowRunsUrl);
+            const runs = Array.isArray(runsPayload.workflow_runs) ? runsPayload.workflow_runs : [];
+
+            this.state.runs = runs;
+
+            const workflowName = runsPayload?.workflow_runs?.[0]?.name || "Robot Framework Pipeline";
+            document.getElementById("workflowName").textContent = workflowName;
+
+            this.renderKpis(runs);
+            this.renderRunsTable(runs);
+			this.renderInsights(runs);
+			this.renderStability(runs);
+
+            if (runs.length > 0) {
+              await this.loadLatestDetails(runs[0]);
+              this.renderLatestRow(runs[0]);
+              this.updateBuildBadge(runs[0]);
+            } else {
+              this.setApiStatus("Aucun run trouvé pour ce workflow.", "warn");
+              this.updateBuildBadge(null);
+            }
+
+            this.setApiStatus("Données chargées ✅", "ok");
+          } catch (e) {
+            console.error(e);
+            this.setApiStatus(`Erreur : ${e.message}`, "warn");
+            this.updateBuildBadge(null);
+            this.renderRunsTable([]);
+            this.renderKpis([]);
+            this.renderLatestFallback(e.message);
+          }
+        },
+
+        async loadLatestDetails(latestRun) {
+          // On évite de faire trop d'appels : détails uniquement pour le dernier run.
+          try {
+            const jobsUrl =
+              `https://api.github.com/repos/${this.config.owner}/${this.config.repo}` +
+              `/actions/runs/${latestRun.id}/jobs?per_page=100`;
+            const artifactsUrl =
+              `https://api.github.com/repos/${this.config.owner}/${this.config.repo}` +
+              `/actions/runs/${latestRun.id}/artifacts?per_page=100`;
+
+            const [jobsPayload, artifactsPayload] = await Promise.all([
+              this.ghFetchJson(jobsUrl),
+              this.ghFetchJson(artifactsUrl)
+            ]);
+
+            this.state.latestJobs = jobsPayload?.jobs || [];
+            this.state.latestArtifacts = artifactsPayload?.artifacts || [];
+          } catch (e) {
+            // On ne casse pas le dashboard si jobs/artefacts échouent (rate limit ou restrictions)
+            console.warn("Latest details error:", e);
+            this.state.latestJobs = null;
+            this.state.latestArtifacts = null;
+          }
+        },
+
+        // ---- RENDER ----
+        renderKpis(runs) {
+          const total = runs.length;
+          const successes = runs.filter(r => (r.conclusion || "").toLowerCase() === "success").length;
+          const failures = runs.filter(r => (r.conclusion || "").toLowerCase() === "failure").length;
+          const rate = total > 0 ? Math.round((successes / total) * 100) : 0;
+
+          document.getElementById("runsCount").textContent = total ? String(total) : "0";
+          document.getElementById("successRate").textContent = total ? `${rate} %` : "—";
+          document.getElementById("successCount").textContent = total ? String(successes) : "—";
+          document.getElementById("totalCount").textContent = total ? String(total) : "—";
+          document.getElementById("okCount").textContent = total ? String(successes) : "—";
+          document.getElementById("koCount").textContent = total ? String(failures) : "—";
+
+          const fill = document.getElementById("successFill");
+          const pb = fill?.closest(".progress-bar");
+          if (fill) fill.style.width = `${rate}%`;
+          if (pb) pb.setAttribute("aria-valuenow", String(rate));
+
+          if (runs[0]?.created_at) {
+            document.getElementById("lastRunDate").textContent = this.formatDateFR(runs[0].created_at);
+          } else {
+            document.getElementById("lastRunDate").textContent = "—";
+          }
+        },
+
+        renderLatestFallback(msg) {
+          document.getElementById("latestRunCell").textContent = "—";
+          document.getElementById("latestBranchCell").textContent = "—";
+          document.getElementById("latestStatusCell").innerHTML = `<span class="badge badge--neutral">N/A</span>`;
+          document.getElementById("latestDurationCell").textContent = "—";
+          document.getElementById("latestJobsCell").textContent = "—";
+          document.getElementById("latestArtifactsCell").innerHTML = `<span class="muted">${msg || "—"}</span>`;
+        },
+
+        renderLatestRow(run) {
+          const runLink = `<a class="run-link" href="${run.html_url}" target="_blank" rel="noreferrer">#${run.run_number}</a>`;
+          document.getElementById("latestRunCell").innerHTML = runLink;
+          document.getElementById("latestBranchCell").textContent = run.head_branch || "—";
+          document.getElementById("latestStatusCell").innerHTML = this.renderStatusBadge(run);
+
+          const duration = this.computeDuration(run.run_started_at, run.updated_at || run.created_at);
+          document.getElementById("latestDurationCell").textContent = duration || "—";
+
+          // Jobs summary
+          if (Array.isArray(this.state.latestJobs)) {
+            const jobs = this.state.latestJobs;
+            const ok = jobs.filter(j => (j.conclusion || "").toLowerCase() === "success").length;
+            const ko = jobs.filter(j => (j.conclusion || "").toLowerCase() === "failure").length;
+            const total = jobs.length;
+            document.getElementById("latestJobsCell").innerHTML =
+              total
+                ? `<span class="pill pill--neutral">${total} job(s)</span> &nbsp; <span class="pill pill--success">OK ${ok}</span> &nbsp; <span class="pill pill--fail">KO ${ko}</span>`
+                : "—";
+          } else {
+            document.getElementById("latestJobsCell").innerHTML = `<span class="muted">Détails jobs indisponibles</span>`;
+          }
+
+          // Artifacts list (on affiche noms + taille ; lien vers run car télécharger l’archive via API nécessite souvent auth)
+          if (Array.isArray(this.state.latestArtifacts)) {
+            const arts = this.state.latestArtifacts;
+            if (!arts.length) {
+              document.getElementById("latestArtifactsCell").innerHTML = `<span class="muted">Aucun artefact</span>`;
+            } else {
+              const items = arts.slice(0, 4).map(a => {
+                const sizeMb = (a.size_in_bytes / (1024 * 1024)).toFixed(2);
+                return `<div><i class="fas fa-box-archive"></i> ${this.escapeHtml(a.name)} <span class="muted">(${sizeMb} MB)</span></div>`;
+              }).join("");
+              document.getElementById("latestArtifactsCell").innerHTML =
+                `${items}<div style="margin-top:6px;"><a class="run-link" href="${run.html_url}" target="_blank" rel="noreferrer">Ouvrir le run</a></div>`;
+            }
+          } else {
+            document.getElementById("latestArtifactsCell").innerHTML = `<span class="muted">Détails artefacts indisponibles</span>`;
+          }
+        },
+
+        renderRunsTable(runs) {
+          const tbody = document.getElementById("runsTbody");
+          if (!tbody) return;
+
+          if (!runs || !runs.length) {
+            tbody.innerHTML = `<tr><td colspan="7" class="muted">Aucune exécution disponible.</td></tr>`;
+            return;
+          }
+
+          tbody.innerHTML = runs.map((run, idx) => {
+            const date = this.formatDateFR(run.created_at);
+            const duration = this.computeDuration(run.run_started_at, run.updated_at || run.created_at) || "—";
+            const status = this.renderStatusPill(run);
+
+            const link = `<a class="run-link" href="${run.html_url}" target="_blank" rel="noreferrer">Ouvrir</a>`;
+            return `
+              <tr>
+                <td><strong>#${run.run_number ?? (idx + 1)}</strong></td>
+                <td>${date}</td>
+                <td>${this.escapeHtml(run.head_branch || "—")}</td>
+                <td>${this.escapeHtml(run.event || "—")}</td>
+                <td>${status}</td>
+                <td>${duration}</td>
+                <td>${link}</td>
+              </tr>
+            `;
+          }).join("");
+        },
+
+        updateBuildBadge(latestRun) {
+          const badge = document.getElementById("buildBadge");
+          if (!badge) return;
+
+          if (!latestRun) {
+            badge.innerHTML = `<i class="fas fa-circle" style="font-size: 8px;"></i> BUILD: —`;
+            return;
+          }
+          const c = (latestRun.conclusion || "").toLowerCase();
+          if (c === "success") {
+            badge.innerHTML = `<i class="fas fa-circle" style="font-size: 8px; color:#2ecc71;"></i> BUILD: SUCCESS`;
+          } else if (c === "failure") {
+            badge.innerHTML = `<i class="fas fa-circle" style="font-size: 8px; color:#ff4d4d;"></i> BUILD: FAILURE`;
+          } else {
+            badge.innerHTML = `<i class="fas fa-circle" style="font-size: 8px;"></i> BUILD: ${this.escapeHtml((latestRun.status || "—").toUpperCase())}`;
+          }
+        },
+
+        renderStatusBadge(run) {
+          const c = (run.conclusion || "").toLowerCase();
+          if (c === "success") return `<span class="badge badge--success">SUCCESS</span>`;
+          if (c === "failure") return `<span class="badge badge--fail">FAILURE</span>`;
+          if ((run.status || "").toLowerCase() === "in_progress") return `<span class="badge badge--neutral">IN PROGRESS</span>`;
+          return `<span class="badge badge--neutral">${this.escapeHtml((run.conclusion || run.status || "—").toUpperCase())}</span>`;
+        },
+
+        renderStatusPill(run) {
+          const c = (run.conclusion || "").toLowerCase();
+          if (c === "success") return `<span class="pill pill--success">PASS</span>`;
+          if (c === "failure") return `<span class="pill pill--fail">FAIL</span>`;
+          if ((run.status || "").toLowerCase() === "in_progress") return `<span class="pill pill--neutral">RUNNING</span>`;
+          return `<span class="pill pill--neutral">${this.escapeHtml((run.conclusion || run.status || "—").toUpperCase())}</span>`;
+        },
+		
+		// ---- INSIGHTS (safe, no new API calls) ----
+parseDurationToSeconds(label) {
+  // computeDuration retourne "XmYYs"
+  if (!label || label === "—") return null;
+  const s = String(label).toLowerCase();
+  const m = (s.match(/(\d+)\s*m/) || [])[1];
+  const sec = (s.match(/(\d+)\s*s/) || [])[1];
+  const total = (m ? parseInt(m, 10) * 60 : 0) + (sec ? parseInt(sec, 10) : 0);
+  return Number.isFinite(total) && total > 0 ? total : null;
+},
+
+formatSecondsToLabel(totalSec) {
+  const s = Math.max(0, Math.round(totalSec));
+  const m = Math.floor(s / 60);
+  const sec = s % 60;
+  if (m > 0) return `${m}m${String(sec).padStart(2,"0")}s`;
+  return `${sec}s`;
+},
+
+computeStreak(runs) {
+  if (!Array.isArray(runs) || !runs.length) return { type: "neutral", value: 0, hint: "—" };
+
+  const latest = (runs[0].conclusion || "").toLowerCase();
+  const isSuccess = latest === "success";
+  const isFailure = latest === "failure";
+
+  if (!isSuccess && !isFailure) {
+    return { type: "neutral", value: 0, hint: "Dernier run non conclu (running / cancelled…)" };
+  }
+
+  let count = 0;
+  for (const r of runs) {
+    const c = (r.conclusion || "").toLowerCase();
+    if (isSuccess && c === "success") count++;
+    else if (isFailure && c === "failure") count++;
+    else break;
+  }
+
+  return {
+    type: isSuccess ? "success" : "fail",
+    value: count,
+    hint: isSuccess ? `${count} succès consécutif(s)` : `${count} échec(s) consécutif(s)`
+  };
+},
+
+renderInsights(runs) {
+  const durations = (runs || []).map(r => {
+    const d = this.computeDuration(r.run_started_at, r.updated_at || r.created_at);
+    return this.parseDurationToSeconds(d);
+  }).filter(v => v !== null);
+
+  const avg = durations.length ? durations.reduce((a,b)=>a+b,0) / durations.length : null;
+  const avgEl = document.getElementById("avgDuration");
+  if (avgEl) avgEl.textContent = avg ? this.formatSecondsToLabel(avg) : "—";
+
+  const streak = this.computeStreak(runs || []);
+  const streakEl = document.getElementById("streakValue");
+  const streakHint = document.getElementById("streakHint");
+  if (streakEl) streakEl.textContent = streak.value ? String(streak.value) : "—";
+  if (streakHint) streakHint.textContent = streak.hint;
+
+  const last5 = (runs || []).slice(0, 5);
+  const total5 = last5.length;
+  const ok5 = last5.filter(r => (r.conclusion || "").toLowerCase() === "success").length;
+  const rate5 = total5 ? Math.round((ok5 / total5) * 100) : null;
+  const last5El = document.getElementById("last5Rate");
+  if (last5El) last5El.textContent = rate5 !== null ? `${rate5} %` : "—";
+},
+
+computeStability(runs) {
+  // Basé sur les 5 derniers runs conclus (success/failure)
+  const last = (runs || [])
+    .filter(r => ["success", "failure"].includes((r.conclusion || "").toLowerCase()))
+    .slice(0, 5);
+
+  if (last.length < 3) {
+    return { label: "—", hint: "Pas assez d'historique (min 3 runs conclus)", level: "neutral" };
+  }
+
+  const ok = last.filter(r => (r.conclusion || "").toLowerCase() === "success").length;
+  const rate = ok / last.length;
+
+  if (rate >= 0.8) return { label: "STABLE", hint: `≥ 80% de succès sur les ${last.length} derniers runs`, level: "success" };
+  if (rate >= 0.5) return { label: "FLUCTUANT", hint: `Entre 50% et 79% sur les ${last.length} derniers runs`, level: "neutral" };
+  return { label: "UNSTABLE", hint: `< 50% de succès sur les ${last.length} derniers runs`, level: "fail" };
+},
+
+renderStability(runs) {
+  const el = document.getElementById("stabilityBadge");
+  const hint = document.getElementById("stabilityHint");
+  if (!el || !hint) return;
+
+  const st = this.computeStability(runs);
+
+  // On utilise tes classes locales déjà définies (badge--success/fail/neutral) :contentReference[oaicite:2]{index=2}
+  el.classList.remove("badge--success", "badge--fail", "badge--neutral");
+  if (st.level === "success") el.classList.add("badge--success");
+  else if (st.level === "fail") el.classList.add("badge--fail");
+  else el.classList.add("badge--neutral");
+
+  el.textContent = st.label;
+  hint.textContent = st.hint;
+},
+
+
+        // ---- UTILS ----
+        formatDateFR(iso) {
+          try {
+            const d = new Date(iso);
+            return d.toLocaleString("fr-FR", { year:"numeric", month:"2-digit", day:"2-digit", hour:"2-digit", minute:"2-digit" });
+          } catch {
+            return "—";
+          }
+        },
+
+        computeDuration(startIso, endIso) {
+          if (!startIso || !endIso) return null;
+          try {
+            const s = new Date(startIso).getTime();
+            const e = new Date(endIso).getTime();
+            if (!isFinite(s) || !isFinite(e) || e <= s) return null;
+            const sec = Math.floor((e - s) / 1000);
+            const m = Math.floor(sec / 60);
+            const r = sec % 60;
+            return `${m}m${String(r).padStart(2,"0")}s`;
+          } catch {
+            return null;
+          }
+        },
+
+        escapeHtml(str) {
+          return String(str).replace(/[&<>"']/g, (m) => ({
+            "&": "&amp;",
+            "<": "&lt;",
+            ">": "&gt;",
+            '"': "&quot;",
+            "'": "&#039;"
+          }[m]));
+        }
+      };
+
+      document.addEventListener("DOMContentLoaded", () => PipelineDashboardApp.init());
+    </script>
+  </body>
+</html>

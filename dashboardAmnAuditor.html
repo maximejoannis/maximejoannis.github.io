@@ -1,0 +1,795 @@
+<!DOCTYPE html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Maxime Joannis - Portfolio QA</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="style-portfolio-maximejoannis.css">
+    <noscript>
+      <style>
+        #loader { display: none !important; }
+        .content-section { display: block !important; opacity: 1 !important; }
+      </style>
+    </noscript>
+  </head>
+  <body>
+    <div id="loader">
+      <div class="qa-logo">
+        <div class="gear"></div>
+        <div class="scan-ring"></div>
+      </div>
+      <div class="loader-title">EXECUTION_INITIALIZATION...</div>
+      <div class="build-panel" aria-hidden="true">
+        <div class="build-row">
+          <span class="build-label">BUILD</span>
+          <span class="build-state" id="buildState">RUNNING</span>
+          <span class="build-icon" id="buildIcon"><i class="fas fa-spinner"></i></span>
+        </div>
+        <div class="build-bar" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0">
+          <div class="build-bar__fill" id="buildFill"></div>
+        </div>
+      </div>
+      <div class="loader-log-container">
+        <div class="log-line" id="log-1"></div>
+        <div class="log-line" id="log-2"></div>
+        <div class="log-line" id="log-3"></div>
+      </div>
+      <div class="loader-text">STATUS: RUNNING TESTS...</div>
+    </div>
+    <aside>
+      <div class="profile-block">
+        <div class="profile-avatar">MJ</div>
+        <div class="profile-text">
+          <div class="profile-name">Maxime Joannis</div>
+          <div class="profile-role">Ingénieur QA</div>
+        </div>
+      </div>
+      <nav>
+        <ul id="menu">
+          <li><a href="index.html" class="nav-link"><i class="fas fa-home"></i> Accueil</a></li>
+          <li><a href="detailAmnAuditor.html" class="nav-link"><i class="fas fa-info-circle"></i> Projet AmnAuditor</a></li>
+          <hr style="border: 0; border-top: 1px solid rgba(255,255,255,0.1); margin: 10px 0;">
+          <li><a class="nav-link active-link" data-target="presentation"><i class="fas fa-chart-pie"></i> Tableau de bord QA</a></li>
+          <li><a class="nav-link" data-target="deliverables"><i class="fas fa-file-alt"></i> Rapports QA</a></li>
+        </ul>
+      </nav>
+    </aside>
+    <div class="wrapper">
+      <header>
+        <button id="focusBtn" style="cursor:pointer; padding: 8px 15px; background: rgba(31,225,217,0.1); border: 1px solid #1fe1d9; color: #1fe1d9; border-radius: 8px; font-weight: bold;">
+        <i class="fas fa-expand-arrows-alt"></i> FOCUS
+        </button>
+        <div class="breadcrumb">Portfolio QA // <span id="breadcrumb-title">Tableau de bord QA</span></div>
+        <div class="menu-loader" id="menuLoader" aria-hidden="true">
+          <div class="menu-loader__scan"></div>
+          <span class="menu-loader__text" id="menuLoaderText">SWITCHING VIEW...</span>
+        </div>
+        <div class="status-badge">
+          <i class="fas fa-circle" style="font-size: 8px;"></i> BUILD: SUCCESS
+        </div>
+        <div class="header-photo">
+          <img src="Photo_Identite.jpg" alt="Photo de Maxime">
+        </div>
+      </header>
+      <main>
+        <!-- SECTION : TABLEAU DE BORD QA -->
+        <!-- SECTION : TABLEAU DE BORD QA (DASHBOARD) -->
+        <section class="content-section active" id="presentation">
+          <h2><i class="fas fa-chart-pie"></i> Tableau de bord QA — Projet Amn Auditor</h2>
+          <!-- KPIs GLOBAUX -->
+          <div class="results-grid">
+            <div class="card results-card">
+              <div class="stat-label">Tests planifiés</div>
+              <div class="stat-value">33</div>
+              <p style="margin-top: 10px; color: var(--text-muted);">
+                Périmètre fonctionnel défini
+              </p>
+            </div>
+            <div class="card results-card">
+              <div class="stat-label">Tests exécutés</div>
+              <div class="stat-value">33</div>
+              <div aria-label="Exécution des tests" class="progress-container">
+                <div class="progress-info">
+                  <span>Exécution</span>
+                  <span><strong style="color: var(--accent-color);">100 %</strong></span>
+                </div>
+                <div aria-valuemax="100" aria-valuemin="0" aria-valuenow="100" class="progress-bar" role="progressbar">
+                  <div class="progress-fill" style="width:100%"></div>
+                </div>
+              </div>
+              <div class="sub-stats">
+                <span>Couverture tests : OK</span>
+                <span>Scope : 33/33</span>
+              </div>
+            </div>
+            <div class="card results-card">
+              <div class="stat-label">Taux de réussite global</div>
+              <div class="stat-value">78,79 %</div>
+              <div aria-label="Taux de réussite global" class="progress-container">
+                <div class="progress-info">
+                  <span>Succès</span>
+                  <span>78,79 %</span>
+                </div>
+                <div aria-valuemax="100" aria-valuemin="0" aria-valuenow="79" class="progress-bar" role="progressbar">
+                  <div class="progress-fill" style="width:78.79%"></div>
+                </div>
+              </div>
+              <div class="sub-stats">
+                <span>OK : 26</span>
+                <span>KO : 7</span>
+              </div>
+            </div>
+          </div>
+          <!-- RÉPARTITION DES TESTS PAR PARCOURS -->
+          <div style="margin-top: 28px;">
+            <h2 style="font-size: 1.4rem; margin-bottom: 18px;"><i class="fas fa-layer-group"></i></h2>
+            <div class="grid">
+              <div class="card">
+                <h3 style="margin-bottom: 10px;">Génération des constats d’audit</h3>
+                <div aria-label="Réussite Génération des constats d’audit" class="progress-container">
+                  <div class="progress-info">
+                    <span>Réussite</span>
+                    <span>76,60 %</span>
+                  </div>
+                  <div aria-valuemax="100" aria-valuemin="0" aria-valuenow="77" class="progress-bar" role="progressbar">
+                    <div class="progress-fill" style="width:76.60%"></div>
+                  </div>
+                </div>
+                <p style="margin-top: 10px; color: var(--text-muted);">Conformité / non-conformité / actions — génération assistée &amp; robustesse.</p>
+              </div>
+              <div class="card">
+                <h3 style="margin-bottom: 10px;">Points de contrôle &amp; association environnement</h3>
+                <div aria-label="Réussite Points de contrôle &amp; association environnement" class="progress-container">
+                  <div class="progress-info">
+                    <span>Réussite</span>
+                    <span>100 %</span>
+                  </div>
+                  <div aria-valuemax="100" aria-valuemin="0" aria-valuenow="100" class="progress-bar" role="progressbar">
+                    <div class="progress-fill" style="width:100%"></div>
+                  </div>
+                </div>
+                <p style="margin-top: 10px; color: var(--text-muted);">Ciblage des points de contrôle selon les éléments d’environnement décrits.</p>
+              </div>
+            </div>
+          </div>
+          <!-- STATUT DES TESTS + ANOMALIES -->
+          <div style="margin-top: 28px;">
+            <h2 style="font-size: 1.4rem; margin-bottom: 18px;">
+              <i class="fas fa-bug"></i> Statut &amp; Anomalies
+            </h2>
+            <div class="results-grid">
+              <div class="card results-card">
+                <div class="stat-label">Statut des tests</div>
+                <div style="display:flex; gap:18px; align-items:flex-end; margin-top: 10px;">
+                  <div>
+                    <div class="stat-main" style="margin:0;">78,79 %</div>
+                    <div class="stat-label" style="margin:0;">Succès</div>
+                  </div>
+                  <div>
+                    <div class="stat-main" style="margin:0; color: var(--danger-color);">21,21 %</div>
+                    <div class="stat-label" style="margin:0;">Échecs</div>
+                  </div>
+                </div>
+                <div class="sub-stats" style="margin-top: 14px;">
+                  <span>26 réussis</span>
+                  <span>7 échoués</span>
+                </div>
+              </div>
+              <div class="card results-card">
+                <div class="stat-label">Anomalies détectées</div>
+                <div class="bug-count">8</div>
+                <div aria-label="Répartition des anomalies par criticité" class="bug-distribution">
+                  <div class="bug-item major"><span>8</span> Majeures</div>
+                </div>
+                <p style="margin-top: 10px; color: var(--text-muted);">Synthèse : 8 anomalies majeures.</p>
+              </div>
+            </div>
+          </div>
+          <!-- AUTOMATISATION + JIRA/XRAY -->
+          <div style="margin-top: 28px;">
+            <h2 style="font-size: 1.4rem; margin-bottom: 18px;">
+              <i class="fas fa-robot"></i> Automatisation &amp; Activité Jira / Xray
+            </h2>
+            <div class="grid">
+              <div class="card auto-highlight">
+                <h3>Automatisation (Desktop Electron)</h3>
+                <div aria-label="Automatisation — stratégie validée" class="success-circle">
+                  <div class="percentage">VALIDÉ</div>
+                  <div class="desc">UIA + DevTools</div>
+                </div>
+                <div class="sub-stats">
+                  <span>Résultat</span>
+                  <span>Stratégie hybride</span>
+                </div>
+                <ul class="skill-list" style="margin-top: 14px;">
+                  <li>Remote debugging Electron activé</li>
+                  <li>Extraction UIA + DOM (Chrome DevTools Protocol)</li>
+                </ul>
+              </div>
+              <div class="card">
+                <h3>Jira / Xray — Volumétrie</h3>
+                <div class="jira-tags" style="margin-top: 12px;"><span class="tag">Tests : 33</span><span class="tag">Sous-tâches : 3</span><span class="tag">Bugs : 8</span><span class="tag">Plans de test : 2</span><span class="tag">Exécutions : 2</span><span class="tag"><strong>Total : 48</strong></span></div>
+                <p style="margin-top: 14px; color: var(--text-muted);">Traçabilité complète : exigences → tests → exécutions → anomalies.</p>
+              </div>
+            </div>
+          </div>
+          <!-- BADGES QUALITÉ + GO/NO GO -->
+          <div style="margin-top: 28px;">
+            <h2 style="font-size: 1.4rem; margin-bottom: 18px;">
+              <i class="fas fa-award"></i> Badges qualité &amp; Décision
+            </h2>
+            <div class="grid">
+              <div class="card">
+                <h3>Badges qualité</h3>
+                <div class="jira-tags" style="margin-top: 12px;">
+                  <span class="tag">Coverage OK — 100 % exécutés</span>
+                  <span class="tag">Automatisation fiable — 100 %</span>
+                  <span class="tag">Anomalies détectées — 8 bugs</span>
+                  <span class="tag">Reporting complet — livrables</span>
+                  <span class="tag">Agile Ready — Scrum</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+        <!-- SECTION : RAPPORTS QA -->
+        <section id="deliverables" class="content-section">
+          <h2><i class="fas fa-file-alt"></i> Rapports QA — Projet Amn Auditor</h2>
+          <!-- Rapport de traçabilité -->
+          <div class="card" style="width:100%; margin-bottom: 2rem;">
+            <h3>
+              <i class="fas fa-diagram-project" style="margin-right:0.7em; color: var(--accent-color);"></i>
+              Rapport de Traçabilité
+            </h3>
+            <p style="color: var(--text-muted); margin-top:10px;">
+              Traçabilité complète : exigences Jira → cas de test → exécutions Xray → anomalies.
+              Données issues d’un Requirement Traceability Report exporté depuis Jira/Xray.
+            </p>
+            <div style="margin-top: 16px;">
+              <div class="homey-glass-card" style="padding: 18px;">
+                <!-- EPIC -->
+                <div class="tag" style="display:inline-block; margin-bottom: 12px;">
+                  EPIC — Génération des constats d’audit
+                </div>
+                <div style="display:flex; flex-direction:column; gap:14px;">
+                  <!-- EXIG 3.1 -->
+                  <div class="card" style="padding: 16px; border-radius: 14px;">
+                    <div style="font-weight:900; color: var(--accent-color); font-family:'Courier New', monospace;">
+                      EXIG-3.1
+                    </div>
+                    <div style="color: var(--text-muted); margin-top:4px;">
+                      Génération d’un constat depuis un point de contrôle
+                    </div>
+                    <div class="sub-stats" style="margin-top:10px;">
+                      <span>Tests : 10</span>
+                      <span>OK : 10</span>
+                      <span>KO : 0</span>
+                      <span>100 %</span>
+                    </div>
+                  </div>
+                  <!-- EXIG 3.2 -->
+                  <div class="card" style="padding: 16px; border-radius: 14px;">
+                    <div style="font-weight:900; color: var(--accent-color); font-family:'Courier New', monospace;">
+                      EXIG-3.2
+                    </div>
+                    <div style="color: var(--text-muted); margin-top:4px;">
+                      Génération d’un constat depuis une recommandation
+                    </div>
+                    <div class="sub-stats" style="margin-top:10px;">
+                      <span>Tests : 10</span>
+                      <span>OK : 6</span>
+                      <span>KO : 4</span>
+                      <span>60 %</span>
+                    </div>
+                  </div>
+                  <!-- EXIG 3.3 -->
+                  <div class="card" style="padding: 16px; border-radius: 14px;">
+                    <div style="font-weight:900; color: var(--accent-color); font-family:'Courier New', monospace;">
+                      EXIG-3.3
+                    </div>
+                    <div style="color: var(--text-muted); margin-top:4px;">
+                      Génération d’une action corrective
+                    </div>
+                    <div class="sub-stats" style="margin-top:10px;">
+                      <span>Tests : 10</span>
+                      <span>OK : 7</span>
+                      <span>KO : 3</span>
+                      <span>70 %</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!-- EPIC : Points de contrôle -->
+            <div class="homey-glass-card" style="padding: 18px; margin-top:20px;">
+              <div class="tag" style="display:inline-block; margin-bottom: 12px;">
+                EPIC — Points de contrôle & association environnement
+              </div>
+              <div style="display:flex; flex-direction:column; gap:14px;">
+                <div class="card" style="padding: 16px; border-radius: 14px;">
+                  <div style="font-weight:900; color: var(--accent-color); font-family:'Courier New', monospace;">
+                    USER STORY
+                  </div>
+                  <div style="color: var(--text-muted); margin-top:4px;">
+                    Association d’un environnement et filtrage des points de contrôle
+                  </div>
+                  <div class="sub-stats" style="margin-top:10px;">
+                    <span>Tests : 3</span>
+                    <span>OK : 3</span>
+                    <span>KO : 0</span>
+                    <span>100 %</span>
+                  </div>
+                  <p style="margin-top:10px; color: var(--text-muted); font-size:0.85rem;">
+                    Vérification de l’association environnement, filtrage des points de contrôle et cohérence des données affichées.
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- Rapport de couverture de test -->
+          <div class="card" style="width:100%; margin-bottom: 2rem;">
+            <h3>
+              <i class="fas fa-chart-simple" style="margin-right:0.7em; color: var(--accent-color);"></i>
+              Rapport de Couverture de Test
+            </h3>
+            <p style="color: var(--text-muted); margin-top:10px;">
+              Données issues d’un Test Coverage Report Xray (Jira). Couverture calculée automatiquement à partir des exécutions de tests.
+            </p>
+            <div class="table-container">
+              <table class="modern-table" aria-label="Rapport de couverture de test">
+                <thead>
+                  <tr>
+                    <th>Résumé</th>
+                    <th>Nombre Total</th>
+                    <th>Réussi</th>
+                    <th>Échoué</th>
+                    <th>Complétude</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>Générer les constats d’audit</td>
+                    <td>30</td>
+                    <td>23</td>
+                    <td>7</td>
+                    <td>
+                      <strong>76,6 %</strong>
+                      <div class="progress-bar-container" style="margin-top:8px;">
+                        <div class="progress-fill" style="width:76.6%; height: 6px;"></div>
+                      </div>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>EXIG-3.1 – Génération d’un constat depuis un point de contrôle</td>
+                    <td>10</td>
+                    <td>10</td>
+                    <td>0</td>
+                    <td>
+                      <strong>100 %</strong>
+                      <div class="progress-bar-container" style="margin-top:8px;">
+                        <div class="progress-fill" style="width:100%; height: 6px;"></div>
+                      </div>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>EXIG-3.2 – Génération d’un constat depuis une recommandation</td>
+                    <td>10</td>
+                    <td>6</td>
+                    <td>4</td>
+                    <td>
+                      <strong>60 %</strong>
+                      <div class="progress-bar-container" style="margin-top:8px;">
+                        <div class="progress-fill" style="width:60%; height: 6px;"></div>
+                      </div>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>EXIG-3.3 – Génération d’une action corrective</td>
+                    <td>10</td>
+                    <td>7</td>
+                    <td>3</td>
+                    <td>
+                      <strong>70 %</strong>
+                      <div class="progress-bar-container" style="margin-top:8px;">
+                        <div class="progress-fill" style="width:70%; height: 6px;"></div>
+                      </div>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>Points de contrôle & association environnement</td>
+                    <td>3</td>
+                    <td>3</td>
+                    <td>0</td>
+                    <td>
+                      <strong>100 %</strong>
+                      <div class="progress-bar-container" style="margin-top:8px;">
+                        <div class="progress-fill" style="width:100%; height: 6px;"></div>
+                      </div>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+          <!-- Rapport d'exécution des tests -->
+          <div class="card" style="width:100%; margin-bottom: 2rem;">
+            <h3>
+              <i class="fas fa-clipboard-check" style="margin-right:0.7em; color: var(--accent-color);"></i>
+              Rapport d’exécution des tests
+            </h3>
+            <p style="color: var(--text-muted); margin-top:10px;">
+              Résultats issus des campagnes d’exécution Xray. Statuts calculés automatiquement à partir des tests exécutés.
+            </p>
+            <div class="table-container">
+              <table class="modern-table" aria-label="Rapport d’exécution des tests">
+                <thead>
+                  <tr>
+                    <th>Résumé</th>
+                    <th>Tests exécutés</th>
+                    <th>Tests échoués</th>
+                    <th>Complétude</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>Exécution V1 — Génération des constats d’audit</td>
+                    <td>30</td>
+                    <td>7</td>
+                    <td>
+                      <strong>76,67 %</strong>
+                      <div class="progress-bar-container" style="margin-top:8px;">
+                        <div class="progress-fill" style="width:76.67%; height: 6px;"></div>
+                      </div>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>Exécution V1 — Points de contrôle & association environnement</td>
+                    <td>3</td>
+                    <td>0</td>
+                    <td>
+                      <strong>100 %</strong>
+                      <div class="progress-bar-container" style="margin-top:8px;">
+                        <div class="progress-fill" style="width:100%; height: 6px;"></div>
+                      </div>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+          <!-- Liste des bugs -->
+          <div class="card" style="width:100%;">
+            <h3>
+              <i class="fas fa-bug" style="margin-right:0.7em; color: var(--danger-color);"></i>
+              Liste des bugs
+            </h3>
+            <div class="table-container">
+              <table class="modern-table" aria-label="Liste des bugs">
+                <thead>
+                  <tr>
+                    <th>ID du bug</th>
+                    <th>Description</th>
+                    <th>Priorité</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><strong>AA-197</strong></td>
+                    <td>Ajout d’un constat de conformité via recommandation provoque un comportement incorrect</td>
+                    <td><span class="badge status-attente">Majeur</span></td>
+                  </tr>
+                  <tr>
+                    <td><strong>AA-195</strong></td>
+                    <td>Ajout d’une action corrective via recommandation provoque un comportement incorrect</td>
+                    <td><span class="badge status-attente">Majeur</span></td>
+                  </tr>
+                  <tr>
+                    <td><strong>AA-192</strong></td>
+                    <td>Impossible de modifier le texte généré avant ajout du constat</td>
+                    <td><span class="badge status-attente">Majeur</span></td>
+                  </tr>
+                  <tr>
+                    <td><strong>AA-190</strong></td>
+                    <td>Impossible de modifier une suggestion générée</td>
+                    <td><span class="badge status-attente">Majeur</span></td>
+                  </tr>
+                  <tr>
+                    <td><strong>AA-187</strong></td>
+                    <td>Suggestion d’écart générée même sans mot-clé significatif</td>
+                    <td><span class="badge status-attente">Majeur</span></td>
+                  </tr>
+                  <tr>
+                    <td><strong>AA-183</strong></td>
+                    <td>Ajout multiple du même constat "Non-Conforme" possible</td>
+                    <td><span class="badge status-attente">Majeur</span></td>
+                  </tr>
+                  <tr>
+                    <td><strong>AA-182</strong></td>
+                    <td>Ajout multiple du même constat "Conforme" possible</td>
+                    <td><span class="badge status-attente">Majeur</span></td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </section>
+      </main>
+      <footer id="page-footer">
+        <div class="footer-content">
+          <span class="citation">
+          "N'abandonne jamais, car c'est souvent juste après le dernier effort que le succès se dévoile."
+          </span>
+          <p>
+            © 2026 Maxime Joannis - Tous droits réservés.
+            <a href="privacy.html">Politique de confidentialité</a>
+          </p>
+        </div>
+      </footer>
+    </div>
+    <script>
+      /**
+       * Project Detail Dashboard Logic
+       * Version: 2.0 - Optimized for Maintenance
+       */
+      const ProjectDetailApp = {
+        // --- CONFIGURATION ---
+        config: {
+          loaderTimeout: 8000,
+          typeWriterSpeed: 50,
+          reducedMotion: window.matchMedia("(prefers-reduced-motion: reduce)").matches,
+          sectionLabels: {
+            presentation: "PRÉSENTATION",
+            strategy: "STRATÉGIE QA",
+            execution: "CONCEPTION & EXEC",
+            automation: "AUTOMATISATION",
+            results: "RÉSULTATS",
+            deliverables: "LIVRABLES",
+            feedback: "RETOURS"
+          },
+          buildLogs: [
+            "> Loading Dashboard Widgets... OK",
+            "> Syncing Test Artifacts... OK",
+            "> Build: SUCCESS — Launching UI"
+          ]
+        },
+      
+        // --- INITIALISATION ---
+        init() {
+          this.initLoader();
+          this.initNavigation();
+          this.initFocusMode();
+          this.initErrorHandlers();
+          // Expose viewImage globally for onclick events in HTML
+          this.viewImage = viewImage; 
+        },
+      
+        // --- GESTION DU LOADER (Animation de démarrage) ---
+        initLoader() {
+          const nodes = {
+            loader: document.getElementById("loader"),
+            fill: document.getElementById("buildFill"),
+            state: document.getElementById("buildState"),
+            icon: document.getElementById("buildIcon"),
+            panel: document.querySelector(".build-panel"),
+            progressBar: document.querySelector(".build-bar")
+          };
+      
+          // Fail-safe global
+          setTimeout(() => this.closeLoader(nodes.loader), this.config.loaderTimeout);
+      
+          // Affichage des logs progressifs
+          this.config.buildLogs.forEach((text, index) => {
+            setTimeout(() => {
+              const line = document.getElementById(`log-${index + 1}`);
+              if (line) line.textContent = text;
+            }, this.config.reducedMotion ? 0 : index * 250);
+          });
+      
+          if (this.config.reducedMotion) {
+            this.closeLoader(nodes.loader);
+            return;
+          }
+      
+          // Animation de la barre de progression
+          setTimeout(() => this.updateProgress(nodes, "85"), 120);
+      
+          setTimeout(() => {
+            this.updateProgress(nodes, "100");
+            if (nodes.state) nodes.state.textContent = "SUCCESS";
+            if (nodes.icon) nodes.icon.innerHTML = '<i class="fas fa-check"></i>';
+            if (nodes.panel) nodes.panel.classList.add("is-success");
+            
+            setTimeout(() => this.closeLoader(nodes.loader), 400);
+          }, 720);
+        },
+      
+        updateProgress(nodes, value) {
+          if (nodes.fill) nodes.fill.style.width = `${value}%`;
+          if (nodes.progressBar) nodes.progressBar.setAttribute("aria-valuenow", value);
+        },
+      
+        closeLoader(loader) {
+          if (loader && loader.style.display !== "none") {
+            loader.style.opacity = "0";
+            setTimeout(() => { loader.style.display = "none"; }, 250);
+          }
+        },
+      
+        // --- NAVIGATION (Transitions et Typewriter) ---
+        initNavigation() {
+          const links = document.querySelectorAll('.nav-link');
+          const sections = document.querySelectorAll('.content-section');
+          const breadcrumbTitle = document.getElementById('breadcrumb-title');
+          const menuLoader = document.getElementById("menuLoader");
+          const menuLoaderText = document.getElementById("menuLoaderText");
+          
+          let typeTimeout;
+      
+          const typeWriter = (text, element) => {
+            element.textContent = "";
+            let i = 0;
+            clearTimeout(typeTimeout);
+            const type = () => {
+              if (i < text.length) {
+                element.textContent += text.charAt(i);
+                i++;
+                typeTimeout = setTimeout(type, this.config.typeWriterSpeed);
+              }
+            };
+            type();
+          };
+      
+          links.forEach(link => {
+            link.addEventListener("click", (e) => {
+              const targetId = link.getAttribute("data-target");
+              if (!targetId) return; // Ignore les liens externes (ex: index.html)
+      
+              const currentSection = document.querySelector(".content-section.active");
+              if (currentSection?.id === targetId) return;
+      
+              // Mise à jour UI Menu
+              links.forEach(l => l.classList.remove("active-link"));
+              link.classList.add("active-link");
+      
+              // Animation Breadcrumb
+              const newTitle = link.innerText.trim();
+              typeWriter(newTitle, breadcrumbTitle);
+      
+              // Transition avec Micro-loader
+              const label = this.config.sectionLabels[targetId] || newTitle.toUpperCase();
+              const delay = this.config.reducedMotion ? 0 : 200;
+      
+              if (menuLoader && !this.config.reducedMotion) {
+                menuLoaderText.textContent = `LOADING: ${label}`;
+                menuLoader.classList.add("is-active");
+                menuLoader.setAttribute("aria-hidden", "false");
+              }
+      
+              setTimeout(() => {
+                sections.forEach(s => s.classList.toggle("active", s.id === targetId));
+                window.scrollTo(0, 0);
+                if (menuLoader) {
+                  menuLoader.classList.remove("is-active");
+                  menuLoader.setAttribute("aria-hidden", "true");
+                }
+              }, delay);
+            });
+          });
+        },
+      
+        // --- MODE FOCUS ---
+        initFocusMode() {
+          const focusBtn = document.getElementById('focusBtn');
+          if (!focusBtn) return;
+      
+          focusBtn.addEventListener('click', () => {
+            document.body.classList.toggle('focus-active');
+            const isFocus = document.body.classList.contains('focus-active');
+            focusBtn.innerHTML = isFocus
+              ? '<i class="fas fa-compress-arrows-alt"></i> QUITTER'
+              : '<i class="fas fa-expand-arrows-alt"></i> FOCUS';
+          });
+        },
+      
+        // --- GESTION DES ERREURS ---
+        initErrorHandlers() {
+          window.onerror = (message, source, lineno) => {
+            const statusText = document.querySelector(".loader-text");
+            if (statusText) {
+              statusText.style.color = "#ff4d4d";
+              statusText.textContent = "CRITICAL_ERROR: Script execution failed.";
+            }
+          };
+        }
+      };
+      
+      /**
+       * Fonction autonome pour afficher une image dans une popup
+       * Génère un document HTML complet à la volée
+       */
+      function viewImage(imageName) {
+        const newWindow = window.open("", "_blank");
+        newWindow.document.write(`
+          <!DOCTYPE html>
+          <html lang="fr">
+            <head>
+              <meta charset="UTF-8">
+              <title>Aperçu Anomalie : ${imageName}</title>
+              <style>
+                body {
+                  text-align: center;
+                  padding: 40px 20px;
+                  font-family: 'Inter', system-ui, -apple-system, sans-serif;
+                  background: #101529;
+                  color: #eaf6fb;
+                  margin: 0;
+                  display: flex;
+                  flex-direction: column;
+                  align-items: center;
+                  justify-content: center;
+                  min-height: 100vh;
+                }
+                h2 {
+                  color: #1fe1d9;
+                  font-size: 1.2rem;
+                  letter-spacing: 2px;
+                  text-transform: uppercase;
+                  margin-bottom: 20px;
+                }
+                .img-container {
+                  position: relative;
+                  padding: 10px;
+                  background: rgba(31, 225, 217, 0.1);
+                  border-radius: 16px;
+                  border: 1px solid rgba(31, 225, 217, 0.2);
+                  box-shadow: 0 0 50px rgba(0,0,0,0.5);
+                }
+                img {
+                  max-width: 90vw;
+                  max-height: 70vh;
+                  display: block;
+                  border-radius: 8px;
+                }
+                .actions { margin-top: 30px; }
+                .btn {
+                  display: inline-block;
+                  padding: 12px 24px;
+                  background: #1fe1d9;
+                  color: #101529;
+                  text-decoration: none;
+                  border-radius: 6px;
+                  font-weight: 800;
+                  font-size: 0.9rem;
+                  transition: all 0.3s ease;
+                  border: none;
+                  cursor: pointer;
+                  text-transform: uppercase;
+                  letter-spacing: 1px;
+                }
+                .btn:hover {
+                  background: #ffffff;
+                  transform: translateY(-2px);
+                  box-shadow: 0 5px 15px rgba(31, 225, 217, 0.4);
+                }
+              </style>
+            </head>
+            <body>
+              <h2><i class="fas fa-bug"></i> Capture d'écran : ${imageName}</h2>
+              <div class="img-container">
+                <img src="${imageName}" alt="Capture d'anomalie">
+              </div>
+              <div class="actions">
+                <a href="${imageName}" download="${imageName}" class="btn">Télécharger le rapport</a>
+                <button onclick="window.close()" class="btn" style="background: transparent; color: #1fe1d9; border: 1px solid #1fe1d9; margin-left: 10px;">Fermer</button>
+              </div>
+            </body>
+          </html>
+        `);
+      }
+      
+      // Initialisation au chargement du DOM
+      document.addEventListener("DOMContentLoaded", () => ProjectDetailApp.init());
+    </script>
+  </body>
+</html>

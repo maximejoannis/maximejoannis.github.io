@@ -1,0 +1,438 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>QA Dashboard Portfolio | Maxime Joannis</title>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<link rel="stylesheet" href="style-portfolio-maximejoannis.css">
+</head>
+
+<body>
+<div id="loader">
+<div class="qa-logo">
+  <div class="gear"></div>
+  <div class="scan-ring"></div>
+</div>
+
+
+  <div style="font-size: 1.4rem; font-weight: 700;">SYSTEM BOOTING...</div>
+  <div class="loader-scan"></div>
+  <div class="loader-text">Initializing QA modules</div>
+</div>
+
+<!-- SIDEBAR -->
+<aside>
+
+  <div class="profile-block">
+    <div class="profile-avatar">MJ</div>
+    <div class="profile-text">
+      <div class="profile-name">Maxime Joannis</div>
+      <div class="profile-role">Ingénieur QA</div>
+    </div>
+  </div>
+
+  <nav>
+    <ul id="menu">
+      <li><a class="nav-link active-link" data-target="home"><i class="fas fa-home"></i> Accueil</a></li>
+      <li><a class="nav-link" data-target="about"><i class="fas fa-user-astronaut"></i> A propos de moi</a></li>
+      <li><a class="nav-link" data-target="skills"><i class="fas fa-toolbox"></i> Compétences</a></li>
+      <li><a class="nav-link" data-target="projects"><i class="fas fa-rocket"></i> Projets QA</a></li>
+	  <li><a class="nav-link" data-target="metrics"><i class="fas fa-chart-line"></i> QA Metrics</a></li>
+      <li><a class="nav-link" data-target="personal-projects"><i class="fas fa-flask"></i> Apprentissages</a></li>
+      <li><a class="nav-link" data-target="experience"><i class="fas fa-briefcase"></i> Expériences</a></li>
+      <li><a class="nav-link" data-target="learning"><i class="fas fa-graduation-cap"></i> Courbe d'apprentissage</a></li>
+    </ul>
+  </nav>
+</aside>
+
+<!-- MAIN WRAPPER -->
+<div class="wrapper">
+
+<header>
+  <button id="focusBtn" style="cursor:pointer; padding: 8px 15px; background: rgba(31,225,217,0.1); border: 1px solid #1fe1d9; color: #1fe1d9; border-radius: 8px; font-weight: bold;">
+    <i class="fas fa-expand-arrows-alt"></i> FOCUS
+  </button>
+  
+
+  <div class="breadcrumb">Portfolio QA // <span id="breadcrumb-title">Accueil</span></div>
+
+  <div class="status-badge">
+    <i class="fas fa-circle" style="font-size: 8px;"></i> SYSTEM ONLINE
+  </div>
+  <div class="header-photo">
+  <img src="Photo_Identite.jpg" alt="Photo de Maxime">
+</div>
+</header>
+
+<main>
+
+<!-- HOME -->
+<section id="home" class="content-section active">
+<h1 style="font-size: clamp(2.5rem, 5vw, 3.8rem); line-height: 1.1; margin-bottom: 25px; font-weight: 800; background: linear-gradient(to right, #eaf6fb, #1fe1d9); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">
+      Bonjour, moi c'est Maxime Joannis
+      Ingénieur QA | certifié ISTQB
+      
+    </h1>
+
+  <div style="min-height: 60vh; display: flex; flex-direction: column; justify-content: center;">
+    
+
+    <p style="font-size: 1.3rem; color: var(--text-muted); max-width: 850px; margin-bottom: 35px; border-left: 4px solid var(--accent-color); padding-left: 20px;">
+     Passionné par la qualité logicielle, depuis une mission chez un client où la qualité était au coeur de mon travail, j’aide les équipes à livrer des applications, des logiciels et des processus métier fiables grâce à une approche mêlant analyse rigoureuse, tests manuels et automatisation. 
+	 J’aime comprendre, enquêter et investiguer.
+    </p>
+
+    <div style="display: flex; gap: 10px; margin-bottom: 45px; flex-wrap: wrap;">
+      <span class="status-badge" style="background: rgba(31,225,217,0.2);"></i> Analyse des spécifications</span>
+      <span class="status-badge">Analyse de diagrammes BPMN</span> 
+	  <span class="status-badge">Tests fonctionnels</span>
+      <span class="status-badge">Automatisation</span>
+      <span class="status-badge">Méthodologie Agile / Scrum</span>
+    </div>
+
+    <div class="cta-group">
+      <a href="#" class="cta-primary"><i class="fas fa-file-download"></i> Télécharger le CV</a>
+	   <a href="https://www.linkedin.com/in/maxime-joannis" target="_blank" class="cta-secondary">
+  <i class="fab fa-linkedin"></i> Profil LinkedIn</a>
+	   <a href="https://github.com/MaximeJoannis?tab=repositories" target="_blank" class="cta-secondary">
+  <i class="fab fa-github"></i> Voir mes projets
+</a>
+      <a href="https://github.com/MaximeJoannis" target="_blank" class="cta-secondary">
+  <i class="fab fa-github"></i> Accéder au GitHub
+</a>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section id="about" class="content-section">
+  <h2><i class="fas fa-terminal"></i>A propos de moi</h2>
+  <div class="card">
+<div class="about-section">
+
+  <p class="about-intro">
+    <strong>Ingénieur QA certifié ISTQB</strong>, j’ai d’abord construit mon parcours pendant plus de six ans dans le développement, au sein d’environnements réglementaires et exigeants dans le secteur bancaire. D'abord à la Banque Postale et ensuite en CDI chez Infotel Conseil. Pendant plus de cinq ans, j’ai travaillé sur des projets où la qualité occupait une place centrale.
+  </p>
+
+  <p class="about-block">
+    Avec le temps, j’ai compris que les défauts les plus coûteux ne provenaient pas uniquement du code, mais souvent d’incompréhensions métier, de règles implicites mal traduites ou de processus insuffisamment sécurisés.
+    <br><br>
+    En 2024, après une longue mission en régie de 3 ans à la Banque de France, une remise en question personnelle et professionnelle m’a conduit à clarifier ce que je voulais et pouvais réellement apporter : <strong>tester, investiguer, comprendre, améliorer et poser les bonnes questions</strong>.  
+    Le test logiciel s’est alors imposé comme une évidence — non pas comme une étape finale, mais comme une évolution de carrière logique et implacable.</strong>.
+  </p>
+
+  <p class="about-block">
+    Cette même année, j’ai pleinement assumé cette orientation vers la QA.  
+    J’ai suivi une formation intensive chez Test Academy que j'ai validé en obtenant la certification ISTQB Foundation v4.0 et un diplôme de testeur logiciel.
+    <br><br>
+    Après cette formation, j’ai effectué une mission chez un client chez AMN BRAINS où j'ai participé au test et à l'automatisation d'un utilitaire d’audit intelligent générant constats, points de contrôle, écarts et actions à partir de règles métiers et d’une IA contextuelle.
+    <br><br>
+    J’ai aussi effectué une autre mission chez ce même client où j'ai participé au pilotage et à l'exécution de 4 campagnes de tests fonctionnels de niveau 1 sur des processus BPMN critiques orientés cybersécurité, avec pour objectif d’assurer la stabilité des workflows Camunda et la fiabilité des données persistées dans Baserow, indispensables à la traçabilité SSI.
+    En parallèle, j'ai conduit de 2 campagnes de tests fonctionnels de niveau 2, incluant une analyse approfondie des règles métier, des scénarios limites et des transitions d’états.
+    <br><br>
+    Mon profil hybride est unique : je combine à la fois les compétences de développeur et testeur logiciel, avec un grand intérêt pour la qualité.
+  </p>
+
+  <p class="about-outro">
+    Aujourd’hui, je me positionne comme <strong>Ingénieur QA</strong>, convaincu qu’un logiciel de qualité est avant tout un logiciel fiable, compréhensible et digne de confiance.
+  </p>
+
+</div>
+
+    <br>
+    <p style="border-left: 3px solid var(--accent-color); padding-left: 15px; font-style: italic;">"La qualité n'est pas une option, c'est le socle de la performance."</p>
+  </div>
+</section>
+
+<!-- SKILLS -->
+<section id="skills" class="content-section">
+  <h2><i class="fas fa-cogs"></i> Compétences</h2>
+  <div class="grid">
+    <div class="card">
+      <h3>Méthodologie</h3>
+    <p>Tests fonctionnels / non fonctionnels</p>
+	<p>Tests exploratoires</p>
+	<p>Tests de régression</p>
+	<p>Analyse des exigences et critères d’acceptation</p>
+	<p>Rédaction de plans de test et stratégies de test</p>
+	<p>Méthodes Agile (Scrum, Kanban)</p>
+	<p>Participation aux cérémonies Agile (daily, sprint planning, revue, rétro)</p>
+	<p>Collaboration QA–Dev–PO</p>
+    </div>
+    <div class="card">
+      <h3>Gestion des tests</h3>
+      <p>Outils de gestion des tests</p>
+      <p>Jira + Xray</p>
+      <p>GitLab (gestion des tests, suivi des anomalies, traçabilité)</p>
+    </div>
+    <div class="card">
+      <h3>Outils d'automatisation</h3>
+      <p>Selenium WebDriver, Robot Framework, Pytest, WinAppDriver, Postman</p>
+    </div>
+	<div class="card">
+      <h3>Langages de développement</h3>
+      <p>JavaScript, Python, Java (8,17)</p>
+    </div>
+	<div class="card">
+      <h3>Bases de données</h3>
+      <p>MySQL, SQL, PostgreSQL, DbHeaver</p>
+    </div>
+	<div class="card">
+      <h3>Outils IDE</h3>
+      <p>Eclipse</p>
+<p>Visual Studio Code</p>
+<p>IntelliJ</p>
+<p>Rational Application Developer</p>
+<p>Atom Editor</p>
+    </div>
+	<div class="card">
+      <h3>Tests unitaires</h3>
+      <p>JUnit, Mockito</p>
+    </div>
+  </div>
+</section>
+
+<!-- PROJECTS -->
+<section id="projects" class="content-section">
+  <h2><i class="fas fa-code-branch"></i> Projets QA réalisés</h2>
+  <div class="grid">
+    
+    <div class="card project-card">
+      <div class="project-header">
+        <h3>Projet de fin de formation Homey</h3>
+        <span class="project-date">JAN 2025 - MAI 2025</span>
+      </div>
+      
+      <span class="project-role">Ingénieur QA Fonctionnel & Automatisation</span>
+      
+      <p>Projet Agile Scrum – Simulation professionnelle encadrée</p>
+
+      <div class="project-tags">
+        <span class="status-badge">Jira/Xray</span>
+        <span class="status-badge">Python</span>
+        <span class="status-badge">Robot Framework</span>
+		<span class="status-badge">Selenium</span>
+		<span class="status-badge">Visual Studio Code</span>
+		<span class="status-badge">Excel</span>
+      </div>
+	  
+	  <div class="project-actions">
+    <a href="detail-homey.html" class="btn-action">
+      <i class="fas fa-file-alt"></i>
+      <span>Détails du projet</span>
+    </a>
+	
+	<a href="https://votre-rapport-allure.com" target="_blank" class="btn-action btn-primary-action">
+      <i class="fas fa-external-link-alt"></i>
+      <span>Tableau de bord QA</span>
+    </a>
+    
+    <a href="https://github.com/MaximeJoannis/votre-repo" target="_blank" class="btn-action">
+      <i class="fab fa-github"></i>
+      <span>README GitHub</span>
+    </a>
+    
+  </div>
+    </div>
+
+    <div class="card project-card">
+      <div class="project-header">
+        <h3>API Testing Pipeline</h3>
+        <span class="project-date">MISSION CLIENT</span>
+      </div>
+      
+      <span class="project-role"><i class="fas fa-server"></i> Spécialiste Backend Test</span>
+      
+      <p>Mise en place d'une couche de validation continue pour services REST.</p>
+      
+      <ul class="project-details">
+        <li><i class="fas fa-check-circle"></i> Création de collections Postman documentées.</li>
+        <li><i class="fas fa-check-circle"></i> Intégration Newman dans Azure DevOps.</li>
+        <li><i class="fas fa-check-circle"></i> Monitoring des performances des endpoints.</li>
+      </ul>
+
+      <div class="project-tags">
+        <span class="status-badge">Postman</span>
+        <span class="status-badge">CI/CD</span>
+        <span class="status-badge">Azure</span>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<section id="metrics" class="content-section">
+  <h2><i class="fas fa-chart-line"></i> QA Metrics</h2>
+
+  <div class="grid">
+
+    <div class="card" style="border-left: 4px solid var(--accent-color);">
+      <h3>Coverage</h3>
+      <p style="font-size: 2rem; font-weight: 700; color: var(--accent-color);">87%</p>
+      <p>Couverture fonctionnelle sur les parcours critiques.</p>
+    </div>
+
+    <div class="card" style="border-left: 4px solid var(--success-color);">
+      <h3>Tests Automatisés</h3>
+      <p style="font-size: 2rem; font-weight: 700; color: var(--success-color);">312</p>
+      <p>Tests E2E, API et composants exécutés quotidiennement.</p>
+    </div>
+
+    <div class="card" style="border-left: 4px solid var(--warning-color);">
+      <h3>Flakiness</h3>
+      <p style="font-size: 2rem; font-weight: 700; color: var(--warning-color);">3.4%</p>
+      <p>Taux d’instabilité détecté sur les tests UI.</p>
+    </div>
+
+    <div class="card" style="border-left: 4px solid var(--accent-color);">
+      <h3>Temps d’Exécution</h3>
+      <p style="font-size: 2rem; font-weight: 700; color: var(--accent-color);">14 min</p>
+      <p>Durée moyenne d’un pipeline complet QA.</p>
+    </div>
+
+    <div class="card" style="border-left: 4px solid var(--success-color);">
+      <h3>Stabilité CI/CD</h3>
+      <p style="font-size: 2rem; font-weight: 700; color: var(--success-color);">98.2%</p>
+      <p>Taux de réussite des pipelines sur les 30 derniers jours.</p>
+    </div>
+
+    <div class="card" style="border-left: 4px solid var(--warning-color);">
+      <h3>Vulnérabilités</h3>
+      <p style="font-size: 2rem; font-weight: 700; color: var(--warning-color);">2</p>
+      <p>Vulnérabilités critiques détectées via scans OWASP.</p>
+    </div>
+
+  </div>
+</section>
+
+<!-- PERSONAL PROJECTS -->
+<section id="personal-projects" class="content-section">
+  <h2><i class="fas fa-flask"></i> Laboratoire Personnel</h2>
+  <div class="grid">
+    <div class="card">
+      <h3>Framework Auto-setup</h3>
+      <p>Script boilerplate utilisant Playwright et Cucumber pour démarrer un projet d'automatisation BDD en moins de 2 minutes.</p>
+      <span class="status-badge">Node.js</span>
+      <span class="status-badge">Cucumber</span>
+    </div>
+    <div class="card">
+      <h3>Bug Hunter Extension</h3>
+      <p>Outil navigateur pour capturer des captures d'écran et logs techniques formatés pour les rapports Jira.</p>
+      <span class="status-badge">JavaScript</span>
+      <span class="status-badge">Chrome API</span>
+    </div>
+  </div>
+</section>
+
+<!-- LEARNING -->
+<section id="learning" class="content-section">
+  <h2><i class="fas fa-graduation-cap"></i> Courbe d'Apprentissage</h2>
+  <div class="grid">
+    <div class="card" style="border-left: 4px solid var(--accent-color);">
+      <div style="display: flex; justify-content: space-between; align-items: center;">
+        <h3>IA pour le Testing</h3>
+        <span class="status-badge" style="background: rgba(31,225,217,0.2);">En cours</span>
+      </div>
+      <p>
+	        <p>Exploration des outils de génération de cas de test via LLM et auto‑healing des sélecteurs.</p>
+    </div>
+
+    <div class="card" style="border-left: 4px solid var(--warning-color);">
+      <div style="display: flex; justify-content: space-between; align-items: center;">
+        <h3>Cybersécurité (OWASP)</h3>
+        <span class="status-badge" style="color: var(--warning-color); border-color: var(--warning-color);">Niveau 1</span>
+      </div>
+      <p>Apprentissage des tests d'intrusion basiques et détection des vulnérabilités critiques (XSS, SQLi).</p>
+    </div>
+
+    <div class="card" style="border-left: 4px solid var(--success-color);">
+      <div style="display: flex; justify-content: space-between; align-items: center;">
+        <h3>Docker & K8s</h3>
+        <span class="status-badge" style="color: var(--success-color); border-color: var(--success-color);">Acquis</span>
+      </div>
+      <p>Conteneurisation des environnements de test pour garantir la parité entre local et CI/CD.</p>
+    </div>
+  </div>
+</section>
+
+<!-- EXPERIENCE -->
+<section id="experience" class="content-section">
+  <h2><i class="fas fa-history"></i> Logs de Mission</h2>
+
+  <div class="card">
+    <div style="display: flex; justify-content: space-between; flex-wrap: wrap; gap: 10px;">
+      <h3>Lead QA Engineer @ TechCorp</h3>
+      <span style="color: var(--accent-color); font-weight: 600;">2023 - Présent</span>
+    </div>
+    <p>Direction de la stratégie qualité pour une plateforme SaaS. Migration de tests manuels vers Cypress. Réduction du temps de validation de 3 jours à 4 heures.</p>
+  </div>
+
+  <div class="card" style="margin-top: 25px;">
+    <div style="display: flex; justify-content: space-between; flex-wrap: wrap; gap: 10px;">
+      <h3>QA Analyst @ WebAgency</h3>
+      <span style="color: var(--accent-color); font-weight: 600;">2020 - 2023</span>
+    </div>
+    <p>Tests fonctionnels sur applications mobiles (iOS/Android). Rédaction de plans de tests et gestion des anomalies sous Jira.</p>
+  </div>
+</section>
+
+</main>
+
+<footer>
+  <p>MAXIME JOANNIS // QA PORTFOLIO 2026</p>
+  <div style="margin-top: 15px;">
+    <i class="fab fa-github"></i>
+    <i class="fab fa-linkedin"></i>
+    <i class="fas fa-envelope-open-text"></i>
+  </div>
+</footer>
+
+</div> <!-- end wrapper -->
+
+<script>
+// NAVIGATION LOGIC
+const links = document.querySelectorAll('.nav-link');
+const sections = document.querySelectorAll('.content-section');
+const breadcrumbTitle = document.getElementById('breadcrumb-title');
+
+links.forEach(link => {
+  link.addEventListener('click', () => {
+    const target = link.getAttribute('data-target');
+
+    links.forEach(l => l.classList.remove('active-link'));
+    link.classList.add('active-link');
+
+    sections.forEach(section => {
+      section.classList.remove('active');
+      if (section.id === target) {
+        section.classList.add('active');
+        breadcrumbTitle.textContent = link.innerText.trim();
+      }
+    });
+
+    window.scrollTo(0, 0);
+  });
+});
+
+// FOCUS MODE LOGIC
+const focusBtn = document.getElementById('focusBtn');
+focusBtn.addEventListener('click', () => {
+  document.body.classList.toggle('focus-active');
+  const isFocus = document.body.classList.contains('focus-active');
+  focusBtn.innerHTML = isFocus
+    ? '<i class="fas fa-compress-arrows-alt"></i> QUITTER'
+    : '<i class="fas fa-expand-arrows-alt"></i> FOCUS';
+});
+</script>
+
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+  setTimeout(() => {
+    document.getElementById("loader").style.display = "none";
+  }, 3200);
+});
+</script>
+
+</body>
+</html>

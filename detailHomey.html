@@ -1,0 +1,977 @@
+<!DOCTYPE html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Maxime Joannis - Portfolio QA</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="style-portfolio-maximejoannis.css">
+    <noscript>
+      <style>
+        #loader { display: none !important; }
+        .content-section { display: block !important; opacity: 1 !important; }
+      </style>
+    </noscript>
+  </head>
+  <body>
+    <div id="loader">
+      <div class="qa-logo">
+        <div class="gear"></div>
+        <div class="scan-ring"></div>
+      </div>
+      <div class="loader-title">EXECUTION_INITIALIZATION...</div>
+      <div class="build-panel" aria-hidden="true">
+        <div class="build-row">
+          <span class="build-label">BUILD</span>
+          <span class="build-state" id="buildState">RUNNING</span>
+          <span class="build-icon" id="buildIcon"><i class="fas fa-spinner"></i></span>
+        </div>
+        <div class="build-bar" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0">
+          <div class="build-bar__fill" id="buildFill"></div>
+        </div>
+      </div>
+      <div class="loader-log-container">
+        <div class="log-line" id="log-1"></div>
+        <div class="log-line" id="log-2"></div>
+        <div class="log-line" id="log-3"></div>
+      </div>
+      <div class="loader-text">STATUS: RUNNING TESTS...</div>
+    </div>
+    <aside>
+      <div class="profile-block">
+        <div class="profile-avatar">MJ</div>
+        <div class="profile-text">
+          <div class="profile-name">Maxime Joannis</div>
+          <div class="profile-role">Ingénieur QA</div>
+        </div>
+      </div>
+      <nav>
+        <ul id="menu">
+          <li><a href="index.html#projects" class="nav-link"><i class="fas fa-home"></i> Retour aux projets</a></li>
+          <li><a class="nav-link active-link" data-target="presentation"><i class="fas fa-project-diagram"></i> Présentation</a></li>
+          <li><a class="nav-link" data-target="strategy"><i class="fas fa-chess-knight"></i> Stratégie de test</a></li>
+          <li><a class="nav-link" data-target="execution"><i class="fas fa-vial"></i> Conception & Exécution</a></li>
+          <li><a class="nav-link" data-target="automation"><i class="fas fa-robot"></i> Automatisation</a></li>
+          <li><a class="nav-link" data-target="results"><i class="fas fa-chart-bar"></i> Résultats clés</a></li>
+          <li><a class="nav-link" data-target="deliverables"><i class="fas fa-file-export"></i> Livrables produits</a></li>
+          <li><a class="nav-link" data-target="feedback"><i class="fas fa-comment-dots"></i> Apprentissages</a></li>
+        </ul>
+      </nav>
+    </aside>
+    <div class="wrapper">
+      <header>
+        <button id="focusBtn" style="cursor:pointer; padding: 8px 15px; background: rgba(31,225,217,0.1); border: 1px solid #1fe1d9; color: #1fe1d9; border-radius: 8px; font-weight: bold;">
+        <i class="fas fa-expand-arrows-alt"></i> FOCUS
+        </button>
+        <div class="breadcrumb">Portfolio QA // <span id="breadcrumb-title">Présentation</span></div>
+        <div class="menu-loader" id="menuLoader" aria-hidden="true">
+          <div class="menu-loader__scan"></div>
+          <span class="menu-loader__text" id="menuLoaderText">SWITCHING VIEW...</span>
+        </div>
+        <div class="status-badge">
+          <i class="fas fa-circle" style="font-size: 8px;"></i> BUILD: SUCCESS
+        </div>
+        <div class="header-photo">
+          <img src="Photo_Identite.jpg" alt="Photo de Maxime">
+        </div>
+      </header>
+      <main>
+        <section id="presentation" class="content-section active">
+          <div class="homey-glass-card">
+            <div class="homey-header-row" style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 30px;">
+              <div>
+                <div class="homey-logo-circle" style="width: 50px; height: 50px; background: var(--accent-color); border-radius: 12px; display: flex; align-items: center; justify-content: center; font-size: 1.5rem; margin-bottom: 15px;">
+                  <span class="homey-logo-text">🏠</span>
+                </div>
+                <h2 class="homey-title" style="margin-bottom: 5px;"><i class="fas fa-home"></i> Présentation du projet <span class="homey-highlight" style="color: var(--accent-color);">HOMEY</span></h2>
+                <div class="homey-subtitle" style="color: var(--text-muted); font-size: 1.1rem;">Une application web pour la gestion des locations saisonnières</div>
+              </div>
+              <a href="http://livraison3.testacademy.fr/" target="_blank" class="cta-primary">
+              <i class="fas fa-external-link-alt"></i> Voir l’application
+              </a>
+            </div>
+            <div class="grid">
+              <div class="card">
+                <p style="margin-bottom: 20px;">
+                  <strong>HOMEY</strong> permet aux hôtes de gérer leurs annonces, d’accepter des réservations et de suivre leurs activités simplement. Elle permet aussi aux voyageurs de consulter des annonces, d'effectuer des demandes de réservations et de les payer. 
+                </p>
+                <div class="homey-goals">
+                  <h3 style="font-size: 1rem; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 15px;">Objectifs fonctionnels :</h3>
+                  <ul class="skill-list">
+                    <li><span class="homey-badge">📸</span> Création & gestion des annonces</li>
+                    <li><span class="homey-badge">🗓️</span> Calendrier de disponibilité & traitement</li>
+                    <li><span class="homey-badge">💬</span> Messagerie intégrée hôtes/voyageurs</li>
+                    <li><span class="homey-badge">💳</span> Paiement sécurisé & annulations</li>
+                    <li><span class="homey-badge">📈</span> Suivi des réservations avec statuts</li>
+                  </ul>
+                </div>
+              </div>
+              <div class="homey-images" style="display: flex; flex-direction: column; gap: 15px;">
+                <img src="AccueilHomey.png" alt="Dashboard Homey" class="card" style="padding: 5px; width: 100%; object-fit: cover; border-color: var(--border-color);">
+                <img src="homey_login.png" alt="Login Homey" class="card" style="padding: 5px; width: 100%; object-fit: cover; border-color: var(--border-color);">
+              </div>
+            </div>
+            <div class="card" style="margin-top: 25px; border-top: 3px solid var(--accent-color);">
+              <div class="grid">
+                <div>
+                  <h3 style="font-size: 0.9rem;"><i class="fas fa-users"></i> Contexte de réalisation</h3>
+                  <ul class="task-sub-list" style="margin-top: 10px;">
+                    <li><i class="fas fa-user-tie"></i> 1 Product Owner</li>
+                    <li><i class="fas fa-code"></i> 9 développeurs</li>
+                    <li><i class="fas fa-vial"></i> 2 testeurs + 1 Test Manager</li>
+                    <li><i class="fas fa-sync"></i> 1 Scrum Master</li>
+                  </ul>
+                </div>
+                <div>
+                  <h3 style="font-size: 0.9rem;"><i class="fas fa-project-diagram"></i> Méthodologie Agile</h3>
+                  <p style="font-size: 0.9rem; margin-top: 10px;">30 User Stories • Méthode <strong>Scrum</strong> • Sprints de 2 semaines</p>
+                  <div class="status-badge" style="margin-top: 10px;">Sprints de 2 semaines</div>
+                </div>
+              </div>
+            </div>
+            <div class="card auto-highlight" style="margin-top: 25px;">
+              <h3 style="font-size: 1rem;"><i class="fas fa-bullseye"></i> Bénéfices de la simulation</h3>
+              <ul class="skill-list" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 10px; margin-top: 15px;">
+                <li>Tests statiques, dynamiques manuels et automatisés</li>
+                <li>Travail en autonomie ou en binôme (Pair Testing)</li>
+                <li>Soutenance avec livrables et cas de test</li>
+                <li>Feedback continu des formateurs experts</li>
+              </ul>
+            </div>
+          </div>
+        </section>
+        <section id="strategy" class="content-section">
+          <h2><i class="fas fa-chess-knight"></i> Stratégie de test</h2>
+          <div class="grid">
+            <div class="card project-card">
+              <div class="obj-header">
+                <i class="fas fa-bullseye"></i>
+                <h3>Objectif & Périmètre</h3>
+              </div>
+              <p><strong>Objectif :</strong> Valider les fonctionnalités critiques du tunnel de réservation et garantir une expérience utilisateur fluide sur les parcours principaux.</p>
+              <div style="margin-top: 15px;">
+                <span class="tech-stack-mini">DANS LE PÉRIMÈTRE</span>
+                <ul class="task-sub-list">
+                  <li><i class="fas fa-check"></i> Recherche & filtres d'annonces</li>
+                  <li><i class="fas fa-check"></i> Tunnel de réservation (Booking)</li>
+                  <li><i class="fas fa-check"></i> Gestion des statuts (Hôte/Voyageur)</li>
+                </ul>
+              </div>
+              <div style="margin-top: 15px;">
+                <span class="tech-stack-mini" style="background: rgba(255, 77, 77, 0.1); color: #ff4d4d;">HORS PÉRIMÈTRE</span>
+                <ul class="task-sub-list">
+                  <li><i class="fas fa-times"></i> Tests de charge (Performance)</li>
+                  <li><i class="fas fa-times"></i> Sécurité infrastructure profonde</li>
+                </ul>
+              </div>
+            </div>
+            <div class="card project-card">
+              <div class="obj-header">
+                <i class="fas fa-map-signs"></i>
+                <h3>Approche</h3>
+              </div>
+              <p>Combinaison hybride de <strong>tests manuels</strong> pour valider l'UX/UI et de <strong>tests automatisés</strong> pour sécuriser la non-régression sur le "Happy Path".</p>
+              <div class="objective-quote" style="margin-top: 20px; padding: 15px;">
+                <i class="fas fa-shield-alt"></i>
+                "Priorisation basée sur les risques (Risk-Based Testing) concentrée sur le flux de paiement et les transitions de statuts."
+              </div>
+            </div>
+          </div>
+          <div class="card auto-highlight" style="margin-top: 25px;">
+            <h3><i class="fas fa-vials"></i> Typologies de tests réalisés</h3>
+            <div class="results-grid" style="margin-top: 20px;">
+              <div class="ritual-step">
+                <i class="fas fa-check-double"></i>
+                <span>Fonctionnels</span>
+                <p style="font-size: 0.8rem; color: var(--text-muted);">Validation des critères d'acceptation (US).</p>
+              </div>
+              <div class="ritual-step">
+                <i class="fas fa-robot"></i>
+                <span>Automatisés</span>
+                <p style="font-size: 0.8rem; color: var(--text-muted);">Scripts Robot Framework pour la non-régression.</p>
+              </div>
+            </div>
+          </div>
+          <div class="card auto-highlight" style="margin-top: 25px;">
+            <div class="obj-header">
+              <i class="fas fa-microscope"></i>
+              <h3>Mon périmètre de test (Sprint Planning)</h3>
+            </div>
+            <p style="margin-top: 15px;">Le périmètre spécifique qui m'a été confié concernait le flux complet de réservation :</p>
+            <ul class="skill-list" style="margin: 15px 0;">
+              <li><i class="fas fa-arrow-right"></i> Faire une demande de réservation</li>
+              <li><i class="fas fa-arrow-right"></i> Traiter une demande de réservation (Hôte)</li>
+            </ul>
+            <h4 style="color: var(--accent-color); margin: 25px 0 15px 0;"><i class="fas fa-user-tag"></i> Résumé des User Stories</h4>
+            <div class="grid">
+              <div class="card" style="background: rgba(255,255,255,0.05);">
+                <p style="font-size: 0.9rem;"><strong>Voyageur :</strong> Envoyer une demande de réservation afin de bénéficier d’un séjour dans un logement saisonnier.</p>
+              </div>
+              <div class="card" style="background: rgba(255,255,255,0.05);">
+                <p style="font-size: 0.9rem;"><strong>Hôte :</strong> Accepter ou refuser une demande de réservation afin de planifier les séjours.</p>
+              </div>
+            </div>
+            <h4 style="color: var(--accent-color); margin: 30px 0 15px 0;"><i class="fas fa-clipboard-check"></i> Critères d’acceptation (Gherkin)</h4>
+            <div class="table-container">
+              <table class="modern-table">
+                <thead>
+                  <tr>
+                    <th>Fonctionnalité / Scénario</th>
+                    <th>Description des Critères</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr style="background: rgba(31, 225, 217, 0.05);">
+                    <td colspan="2" style="font-weight: bold; text-align: center; color: var(--accent-color);">FAIRE UNE DEMANDE DE RÉSERVATION</td>
+                  </tr>
+                  <tr>
+                    <td>Voyageur connecté</td>
+                    <td>
+                      <span style="color: var(--success-color);">✔️</span> <strong>ETANT DONNE</strong> un Voyageur connecté<br>
+                      <span style="color: var(--success-color);">✔️</span> <strong>QUAND</strong> il fait une demande de réservation<br>
+                      <span style="color: var(--success-color);">✔️</span> <strong>ALORS</strong> le système crée une nouvelle réservation...
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>Visiteur non connecté</td>
+                    <td>
+                      <span style="color: var(--success-color);">✔️</span> <strong>ETANT DONNE</strong> un Visiteur non connecté<br>
+                      <span style="color: var(--success-color);">✔️</span> <strong>QUAND</strong> il tente une réservation<br>
+                      <span style="color: var(--success-color);">✔️</span> <strong>ALORS</strong> le système ne donne pas suite à la demande
+                    </td>
+                  </tr>
+                  <tr style="background: rgba(31, 225, 217, 0.05);">
+                    <td colspan="2" style="font-weight: bold; text-align: center; color: var(--accent-color);">TRAITER UNE DEMANDE (TRANSITIONS DE STATUTS)</td>
+                  </tr>
+                  <tr>
+                    <td>Confirmation par l’hôte</td>
+                    <td>
+                      <span style="color: var(--success-color);">✔️</span> <strong>ETANT DONNE</strong> un hôte connecté et une réservation <span class="badge status-nouveau">NOUVEAU</span><br>
+                      <span style="color: var(--success-color);">✔️</span> <strong>QUAND</strong> il confirme la demande<br>
+                      <span style="color: var(--success-color);">✔️</span> <strong>ALORS</strong> le statut devient <span class="badge status-attente">ATTENTE DE PAIEMENT</span>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>Annulation par le voyageur</td>
+                    <td>
+                      <span style="color: var(--success-color);">✔️</span> <strong>ETANT DONNE</strong> un voyageur connecté et une réservation <span class="badge status-nouveau">NOUVEAU</span><br>
+                      <span style="color: var(--success-color);">✔️</span> <strong>QUAND</strong> il annule la demande<br>
+                      <span style="color: var(--success-color);">✔️</span> <strong>ALORS</strong> le statut devient <span class="badge status-annule">ANNULÉ</span>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>Refus par l’hôte</td>
+                    <td>
+                      <span style="color: var(--success-color);">✔️</span> <strong>ETANT DONNE</strong> un hôte connecté et une réservation <span class="badge status-nouveau">NOUVEAU</span><br>
+                      <span style="color: var(--success-color);">✔️</span> <strong>QUAND</strong> il refuse la demande<br>
+                      <span style="color: var(--success-color);">✔️</span> <strong>ALORS</strong> le statut devient <span class="badge status-refuse">REFUSÉ</span>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>Paiement voyageur</td>
+                    <td>
+                      <span style="color: var(--success-color);">✔️</span> <strong>ETANT DONNE</strong> un voyageur connecté et une réservation <span class="badge status-attente">ATTENTE DE PAIEMENT</span><br>
+                      <span style="color: var(--success-color);">✔️</span> <strong>QUAND</strong> il procède au paiement<br>
+                      <span style="color: var(--success-color);">✔️</span> <strong>ALORS</strong> le statut devient <span class="badge status-reserve">RÉSERVÉ</span>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </section>
+        <section id="execution" class="content-section">
+          <h2><i class="fas fa-microscope"></i> Conception & Exécution</h2>
+          <div class="grid">
+            <div class="card status-card">
+              <div class="stat-value">26</div>
+              <div class="stat-label">Tests Fonctionnels</div>
+              <div class="progress-bar-container">
+                <div class="progress-fill" style="width: 100%; background: var(--accent-color);"></div>
+              </div>
+            </div>
+            <div class="card status-card">
+              <div class="stat-value" style="color: var(--success-color);">84,62 %</div>
+              <div class="stat-label">Taux de Succès (Pass Rate)</div>
+              <div class="progress-bar-container">
+                <div class="progress-fill" style="width: 84.62%; background: var(--success-color);"></div>
+              </div>
+            </div>
+          </div>
+          <div class="card" style="margin-top: 25px;">
+            <h3><i class="fas fa-list-check"></i> Exemples de cas de test</h3>
+            <div class="table-container">
+              <table class="modern-table">
+                <thead>
+                  <tr>
+                    <th>ID</th>
+                    <th>Titre du cas de test</th>
+                    <th>Priorité</th>
+                    <th>Statut Final</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>TC-RES-01</td>
+                    <td>Demande de réservation avec dates valides (Voyageur)</td>
+                    <td><span class="badge" style="color: #ff4d4d; border-color: #ff4d4d;">P0 - Critique</span></td>
+                    <td><span class="badge status-reserve">PASS</span></td>
+                  </tr>
+                  <tr>
+                    <td>TC-RES-05</td>
+                    <td>Acceptation d'une réservation par l'hôte</td>
+                    <td><span class="badge" style="color: #ff4d4d; border-color: #ff4d4d;">P0 - Critique</span></td>
+                    <td><span class="badge status-reserve">PASS</span></td>
+                  </tr>
+                  <tr>
+                    <td>TC-PAY-02</td>
+                    <td>Paiement par carte bancaire (Simulation Stripe)</td>
+                    <td><span class="badge" style="color: #f1c40f; border-color: #f1c40f;">P1 - Haute</span></td>
+                    <td><span class="badge status-annule">FAIL</span></td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+          <div class="grid" style="margin-top: 25px;">
+            <div class="card project-card">
+              <div class="obj-header">
+                <i class="fas fa-bug"></i>
+                <h3>Gestion des anomalies</h3>
+              </div>
+              <ul class="task-sub-list">
+                <li><strong>Création :</strong> Rédaction de tickets de bugs détaillés (Etapes de reproduction, logs, screenshots).</li>
+                <li><strong>Sévérité :</strong> Qualification précise de l'impact métier pour aider à la priorisation.</li>
+              </ul>
+            </div>
+          </div>
+        </section>
+        <section id="automation" class="content-section">
+  <h2><i class="fas fa-robot"></i> Automatisation des tests</h2>
+
+  <div class="grid">
+    <!-- POURQUOI AUTOMATISER -->
+    <div class="card project-card">
+      <div class="obj-header">
+        <i class="fas fa-microchip"></i>
+        <h3>Pourquoi automatiser ?</h3>
+      </div>
+
+      <p style="margin-bottom: 15px;">
+        L'automatisation a été mise en place pour répondre à deux enjeux majeurs :
+      </p>
+
+      <ul class="task-sub-list">
+        <li>
+          <i class="fas fa-shield-virus"></i>
+          <strong>Sécuriser les parcours critiques :</strong>
+          Garantir que les fonctionnalités vitales (Réservation / Paiement) fonctionnent.
+        </li>
+        <li>
+          <i class="fas fa-history"></i>
+          <strong>Réduire les régressions :</strong>
+          Rejouer rapidement les scénarios critiques après correctifs et changements UI.
+        </li>
+      </ul>
+    </div>
+
+    <!-- "TERMINAL" / APERÇU SUITE -->
+    <div class="card" style="background: #0d1117; border: 1px solid #30363d; font-family: 'Courier New', monospace; position: relative; overflow: hidden;">
+      <div style="background: #161b22; padding: 5px 15px; border-bottom: 1px solid #30363d; font-size: 0.7rem; color: #8b949e; display: flex; justify-content: space-between;">
+        <span>robot_suite_homey.robot</span>
+        <div style="display: flex; gap: 5px;">
+          <div style="width: 8px; height: 8px; border-radius: 50%; background: #ff5f56;"></div>
+          <div style="width: 8px; height: 8px; border-radius: 50%; background: #ffbd2e;"></div>
+          <div style="width: 8px; height: 8px; border-radius: 50%; background: #27c93f;"></div>
+        </div>
+      </div>
+
+      <div style="padding: 15px; font-size: 0.8rem; color: #d1d5db;">
+        <p style="color: #8b949e;"># Scénarios critiques automatisés (Robot Framework + Selenium)</p>
+
+        <p><span style="color: #2ecc71;">[PASS]</span> SC1_Demande_Reservation_Utilisateur_Connecte</p>
+        <p><span style="color: #2ecc71;">[PASS]</span> SC2_Demande_Reservation_Utilisateur_Non_Connecte</p>
+        <p><span style="color: #2ecc71;">[PASS]</span> SC3_Confirmation_Reservation_Cote_Hote</p>
+
+        <div style="margin-top: 15px; border-top: 1px solid #30363d; padding-top: 10px;">
+          <p>Scénarios exécutés : <span style="color: var(--accent-color);">3/3</span></p>
+          <p>Statut : <span style="background: rgba(46, 204, 113, 0.2); color: #2ecc71; padding: 2px 5px; border-radius: 3px;">SUCCESS</span></p>
+        </div>
+      </div>
+
+      <div style="position: absolute; bottom: 15px; right: 15px; width: 10px; height: 2px; background: var(--accent-color); animation: blink 1s infinite;"></div>
+    </div>
+  </div>
+
+  <!-- SCENARIOS AUTOMATISES -->
+  <div class="grid" style="margin-top: 25px;">
+    <div class="card project-card">
+      <div class="obj-header">
+        <i class="fas fa-cogs"></i>
+        <h3>Scénarios automatisés réalisés</h3>
+      </div>
+
+      <div class="automation-flow">
+        <div class="auto-step">
+          <div class="auto-step__badge"><i class="fas fa-user-check"></i></div>
+          <div>
+            <div class="auto-step__title">SC1 – Demande de réservation (utilisateur connecté)</div>
+            <div class="auto-step__meta">
+              Connexion → Navigation accueil → Recherche d’un logement → Demande de réservation.
+              Validation du parcours nominal complet.
+            </div>
+          </div>
+        </div>
+
+        <div class="auto-step">
+          <div class="auto-step__badge"><i class="fas fa-user-times"></i></div>
+          <div>
+            <div class="auto-step__title">SC2 – Demande de réservation (utilisateur non connecté)</div>
+            <div class="auto-step__meta">
+              Tentative de réservation sans authentification.
+              Vérification automatisée du message d’erreur et du blocage du processus.
+            </div>
+          </div>
+        </div>
+
+        <div class="auto-step">
+          <div class="auto-step__badge"><i class="fas fa-check-circle"></i></div>
+          <div>
+            <div class="auto-step__title">SC3 – Confirmation de réservation (côté hôte)</div>
+            <div class="auto-step__meta">
+              Connexion hôte → Accès aux réservations → Confirmation d’une réservation existante.
+              Validation d’une transition métier critique.
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="auto-result">
+        <div class="auto-result__kpi">
+          <span class="auto-result__label">Couverture :</span>
+          <span class="auto-result__value">3 scénarios critiques automatisés</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- APPROCHE TECHNIQUE -->
+    <div class="card project-card card-compact">
+      <div class="obj-header">
+        <i class="fas fa-tools"></i>
+        <h3>Approche technique</h3>
+      </div>
+
+      <ul class="skill-list">
+        <li>Robot Framework + SeleniumLibrary</li>
+        <li>Scripts structurés en Keywords réutilisables</li>
+        <li>Gestion centralisée des variables (URL, navigateur, locators)</li>
+        <li>Locators XPath / CSS + attentes explicites pour fiabiliser l’exécution</li>
+        <li>Approche orientée “parcours métier critiques”</li>
+      </ul>
+	  <br>
+	  <div class="obj-header">
+      <i class="fas fa-bolt"></i>
+      <h3>Valeur apportée</h3>
+    </div>
+
+    <ul class="skill-list" style="margin-top: 10px;">
+      <li>Sécurisation du tunnel de réservation via re-run rapide après correctifs</li>
+      <li>Détection plus rapide des régressions UI sur les actions sensibles</li>
+      <li>Validation automatisée d’un contrôle négatif (réservation sans login)</li>
+      <li>Gains de temps sur les campagnes de re-tests et montée en fiabilité</li>
+    </ul>
+    </div>
+  </div>
+</section>
+
+        <section id="results" class="content-section">
+          <h2><i class="fas fa-chart-line"></i> Résultats clés</h2>
+          <div class="results-grid">
+            <div class="card results-card">
+              <h3><i class="fas fa-tasks"></i> Tests Fonctionnels</h3>
+              <div class="stat-main">23 <span class="stat-label">Tests exécutés</span></div>
+              <div class="progress-container">
+                <div class="progress-info"><span>Taux de réussite global</span><span>84.6%</span></div>
+                <div class="progress-bar">
+                  <div class="progress-fill" style="width: 84.6%;"></div>
+                </div>
+              </div>
+              <div class="sub-stats">
+                <div class="sub-stat-item"><span>Effectuer une demande de réservation.</span> <strong>78.6%</strong></div>
+                <div class="sub-stat-item"><span>Traitement de la demande de réservation.</span> <strong>88.9%</strong></div>
+              </div>
+              <div class="coverage-badge">Couverture fonctionnelle : 26.67% (8/30 US)</div>
+            </div>
+            <div class="card results-card">
+              <h3><i class="fas fa-bug"></i> Anomalies détectées</h3>
+              <div class="bug-count">4 <span class="stat-label">Total identifiés</span></div>
+              <div class="bug-distribution">
+                <div class="bug-item critical"><span>1</span> Critique</div>
+                <div class="bug-item major"><span>2</span> Majeures</div>
+                <div class="bug-item minor"><span>1</span> Mineure</div>
+              </div>
+            </div>
+            <div class="card results-card auto-highlight">
+              <h3><i class="fas fa-robot"></i> Automatisation</h3>
+              <div class="stat-main">3 <span class="stat-label">scénarios critiques automatisés</span></div>
+              <div class="success-circle">
+                <span class="percentage">100%</span>
+                <span class="desc">Success Rate</span>
+              </div>
+              <p class="auto-tech">Scripts robustes (Robot Framework) garantissant la non-régression.</p>
+            </div>
+            <div class="card results-card jira-full">
+              <h3><i class="fab fa-jira"></i> Activité Jira & Xray</h3>
+              <div class="jira-summary">40 <span class="stat-label">Tickets créés au total</span></div>
+              <div class="jira-tags">
+                <span class="tag">23 Tests</span>
+                <span class="tag">6 Sous-tâches</span>
+                <span class="tag">4 Bugs</span>
+                <span class="tag">2 US</span>
+                <span class="tag">2 Plans de test</span>
+                <span class="tag">2 Exécutions</span>
+                <span class="tag">1 Epic</span>
+              </div>
+            </div>
+          </div>
+        </section>
+        <section id="deliverables" class="content-section">
+          <h2><i class="fas fa-file-export"></i> Livrables produits</h2>
+          <div class="card auto-highlight">
+            <p style="margin-bottom: 20px; color: var(--text-muted);">
+              Retrouvez ici l'ensemble des documents produits durant le cycle de test du projet HOMEY. 
+            </p>
+            <div class="table-container">
+              <table class="modern-table">
+                <thead>
+                  <tr>
+                    <th>Type de livrable</th>
+                    <th>Fichiers & Liens d'accès</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td style="font-weight: bold;"><i class="fas fa-clipboard-list" style="color: var(--accent-color);"></i> Cas de tests</td>
+                    <td>
+                      <a href="CT_FaireDemandeReservation.html" target="_blank" class="modern-link">
+                      <i class="fas fa-external-link-alt"></i> Story 1 : Faire une demande de réservation
+                      </a><br>
+                      <a href="CT_TraiterDemandeReservation.html" target="_blank" class="modern-link">
+                      <i class="fas fa-external-link-alt"></i> Story 2 : Traiter une demande de réservation
+                      </a>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td style="font-weight: bold;"><i class="fas fa-check-double" style="color: var(--success-color);"></i> Résultats (Manuels)</td>
+                    <td>
+                      <a href="RapportExecution_UserStory1.html" target="_blank" class="modern-link">Rapport d'exécution Story 1</a><br>
+                      <a href="RapportExecution_UserStory2.html" target="_blank" class="modern-link">Rapport d'exécution Story 2</a>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td style="font-weight: bold;"><i class="fas fa-robot" style="color: #f1c40f;"></i> Scripts Automatisés</td>
+                    <td>
+                      <a href="Script_TA_SC1.html" target="_blank" class="modern-link"><i class="fas fa-code"></i> Story 1 (Connecté)</a><br>
+                      <a href="Script_TA_SC2.html" target="_blank" class="modern-link"><i class="fas fa-code"></i> Story 1 (Non connecté)</a><br>
+                      <a href="Script_TA_SC3.html" target="_blank" class="modern-link"><i class="fas fa-code"></i> Story 2</a>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td style="font-weight: bold;"><i class="fas fa-chart-line" style="color: #1fe1d9;"></i> Rapports Automation</td>
+                    <td>
+                      <a href="RapportExecution_TAStory1.html" target="_blank" class="modern-link">Robot Log : Story 1</a><br>
+                      <a href="RapportExecution_TAStory2.html" target="_blank" class="modern-link">Robot Log : Story 2</a>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td style="font-weight: bold;"><i class="fas fa-bug" style="color: #ff4d4d;"></i> Rapports de défauts</td>
+                    <td>
+                      <div class="bug-links">
+                        <a href="#" onclick="ProjectDetailApp.viewImage('RapportDefaut_Page1.png')" class="modern-link"><i class="fas fa-image"></i> Anomalie 1</a>
+                        <a href="#" onclick="ProjectDetailApp.viewImage('RapportDefaut_Page2.png')" class="modern-link"><i class="fas fa-image"></i> Anomalie 2</a><br>
+                        <a href="RapportDefaut2.html" target="_blank" class="modern-link"><i class="fas fa-file-code"></i> Anomalie 3</a>
+                        <a href="RapportDefaut3.html" target="_blank" class="modern-link"><i class="fas fa-file-code"></i> Anomalie 4</a>
+                      </div>
+                    </td>
+                  </tr>
+                  <tr style="background: rgba(31, 225, 217, 0.05);">
+                    <td style="font-weight: bold;"><i class="fas fa-file-signature"></i> Rapport Final de Test</td>
+                    <td>
+                      <a href="RapportFinal.html" target="_blank" class="modern-link" style="font-weight: bold; color: var(--accent-color);">
+                      <i class="fas fa-file-pdf"></i> Consulter le Rapport de Synthèse Final
+                      </a>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td style="font-weight: bold;"><i class="fas fa-chalkboard-teacher"></i> Support Soutenance</td>
+                    <td>
+                      <a href="SupportPresentation_PFFHomey.pptx" target="_blank" class="cta-primary" style="padding: 5px 15px; font-size: 0.8rem; text-decoration: none;">
+                      <i class="fas fa-download"></i> PPTX Présentation
+                      </a>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </section>
+        <section id="feedback" class="content-section">
+          <h2><i class="fas fa-lightbulb"></i> Retours d'expérience</h2>
+          <div class="grid grid-vertical">
+            <!-- CE QUE LE PROJET M'A APPRIS -->
+            <div class="card project-card learn-card learn-card--insights">
+              <div class="obj-header">
+                <i class="fas fa-lightbulb"></i>
+                <h3>Ce que ce projet m’a appris</h3>
+              </div>
+              <p class="learn-intro">
+                J’ai constaté sur le terrain que les <strong>tests exploratoires</strong> révèlent des anomalies
+                que les scénarios scriptés ne couvrent pas toujours, notamment sur les parcours réels et les cas limites.
+              </p>
+              <div class="learn-points">
+                <div class="learn-point">
+                  <i class="fas fa-compass"></i>
+                  <div>
+                    <strong>Exploratoire + scripts = couverture plus réaliste</strong>
+                    <p>Les sessions exploratoires ont mis en évidence des incohérences UX et des comportements inattendus.</p>
+                  </div>
+                </div>
+                <div class="learn-point">
+                  <i class="fas fa-layer-group"></i>
+                  <div>
+                    <strong>Approche hybride (manuel + exploratoire + auto)</strong>
+                    <p>Manuel pour l’UX/UI, automatisation pour sécuriser la non-régression sur les parcours critiques.</p>
+                  </div>
+                </div>
+                <div class="learn-point">
+                  <i class="fas fa-bullseye"></i>
+                  <div>
+                    <strong>Priorisation par les risques</strong>
+                    <p>Focus sur paiement, transitions de statuts et scénarios à fort impact métier.</p>
+                  </div>
+                </div>
+              </div>
+              <div class="objective-quote learn-quote">
+                <i class="fas fa-quote-left"></i>
+                "J’ai compris que la qualité se construit à chaque étape, pas seulement en fin de chaîne."
+              </div>
+            </div>
+            <!-- DÉFIS -->
+            <div class="card project-card learn-card learn-card--challenges">
+              <div class="obj-header">
+                <i class="fas fa-mountain"></i>
+                <h3>Défis relevés</h3>
+              </div>
+              <ul class="task-sub-list learn-list">
+                <li><i class="fas fa-check"></i> Comprendre rapidement les flux métier et la logique des statuts.</li>
+                <li><i class="fas fa-check"></i> Identifier les cas limites sur le tunnel de réservation.</li>
+                <li><i class="fas fa-check"></i> Maintenir une couverture pertinente malgré un périmètre large.</li>
+                <li><i class="fas fa-check"></i> Automatiser des scénarios fiables dans un environnement de test contraint.</li>
+              </ul>
+              <div class="learn-kpi">
+                <span class="learn-kpi__label">Objectif :</span>
+                <span class="learn-kpi__value">Maximiser la détection d’anomalies sans sacrifier la stabilité de la non-régression.</span>
+              </div>
+            </div>
+            <!-- RÉSOLUTIONS -->
+            <div class="card project-card learn-card learn-card--solutions">
+              <div class="obj-header">
+                <i class="fas fa-wrench"></i>
+                <h3>Comment j’ai résolu ces défis</h3>
+              </div>
+              <div class="learn-actions">
+                <div class="learn-action">
+                  <span class="learn-pill"><i class="fas fa-search"></i> Analyse</span>
+                  <p>Découpage des User Stories + critères Gherkin, puis conception des tests par objectifs.</p>
+                </div>
+                <div class="learn-action">
+                  <span class="learn-pill"><i class="fas fa-shield-alt"></i> Risk-Based</span>
+                  <p>Priorisation sur paiement, transitions critiques et données sensibles, pour maximiser l’impact métier couvert.</p>
+                </div>
+                <div class="learn-action">
+                  <span class="learn-pill"><i class="fas fa-robot"></i> Automatisation</span>
+                  <p>Scripts robustes sur les parcours critiques afin de sécuriser la non-régression et gagner du temps sur les re-runs.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+      </main>
+      <footer id="page-footer">
+        <div class="footer-content">
+          <span class="citation">
+          "N'abandonne jamais, car c'est souvent juste après le dernier effort que le succès se dévoile."
+          </span>
+          <p>
+            © 2026 Maxime Joannis - Tous droits réservés.
+            <a href="privacy.html">Politique de confidentialité</a>
+          </p>
+        </div>
+      </footer>
+    </div>
+    <script>
+      /**
+       * Project Detail Dashboard Logic
+       * Version: 2.0 - Optimized for Maintenance
+       */
+      const ProjectDetailApp = {
+        // --- CONFIGURATION ---
+        config: {
+          loaderTimeout: 8000,
+          typeWriterSpeed: 50,
+          reducedMotion: window.matchMedia("(prefers-reduced-motion: reduce)").matches,
+          sectionLabels: {
+            presentation: "PRÉSENTATION",
+            strategy: "STRATÉGIE QA",
+            execution: "CONCEPTION & EXEC",
+            automation: "AUTOMATISATION",
+            results: "RÉSULTATS",
+            deliverables: "LIVRABLES",
+            feedback: "RETOURS"
+          },
+          buildLogs: [
+            "> Loading Dashboard Widgets... OK",
+            "> Syncing Test Artifacts... OK",
+            "> Build: SUCCESS — Launching UI"
+          ]
+        },
+      
+        // --- INITIALISATION ---
+        init() {
+          this.initLoader();
+          this.initNavigation();
+          this.initFocusMode();
+          this.initErrorHandlers();
+          // Expose viewImage globally for onclick events in HTML
+          this.viewImage = viewImage; 
+        },
+      
+        // --- GESTION DU LOADER (Animation de démarrage) ---
+        initLoader() {
+          const nodes = {
+            loader: document.getElementById("loader"),
+            fill: document.getElementById("buildFill"),
+            state: document.getElementById("buildState"),
+            icon: document.getElementById("buildIcon"),
+            panel: document.querySelector(".build-panel"),
+            progressBar: document.querySelector(".build-bar")
+          };
+      
+          // Fail-safe global
+          setTimeout(() => this.closeLoader(nodes.loader), this.config.loaderTimeout);
+      
+          // Affichage des logs progressifs
+          this.config.buildLogs.forEach((text, index) => {
+            setTimeout(() => {
+              const line = document.getElementById(`log-${index + 1}`);
+              if (line) line.textContent = text;
+            }, this.config.reducedMotion ? 0 : index * 250);
+          });
+      
+          if (this.config.reducedMotion) {
+            this.closeLoader(nodes.loader);
+            return;
+          }
+      
+          // Animation de la barre de progression
+          setTimeout(() => this.updateProgress(nodes, "85"), 120);
+      
+          setTimeout(() => {
+            this.updateProgress(nodes, "100");
+            if (nodes.state) nodes.state.textContent = "SUCCESS";
+            if (nodes.icon) nodes.icon.innerHTML = '<i class="fas fa-check"></i>';
+            if (nodes.panel) nodes.panel.classList.add("is-success");
+            
+            setTimeout(() => this.closeLoader(nodes.loader), 400);
+          }, 720);
+        },
+      
+        updateProgress(nodes, value) {
+          if (nodes.fill) nodes.fill.style.width = `${value}%`;
+          if (nodes.progressBar) nodes.progressBar.setAttribute("aria-valuenow", value);
+        },
+      
+        closeLoader(loader) {
+          if (loader && loader.style.display !== "none") {
+            loader.style.opacity = "0";
+            setTimeout(() => { loader.style.display = "none"; }, 250);
+          }
+        },
+      
+        // --- NAVIGATION (Transitions et Typewriter) ---
+        initNavigation() {
+          const links = document.querySelectorAll('.nav-link');
+          const sections = document.querySelectorAll('.content-section');
+          const breadcrumbTitle = document.getElementById('breadcrumb-title');
+          const menuLoader = document.getElementById("menuLoader");
+          const menuLoaderText = document.getElementById("menuLoaderText");
+          
+          let typeTimeout;
+      
+          const typeWriter = (text, element) => {
+            element.textContent = "";
+            let i = 0;
+            clearTimeout(typeTimeout);
+            const type = () => {
+              if (i < text.length) {
+                element.textContent += text.charAt(i);
+                i++;
+                typeTimeout = setTimeout(type, this.config.typeWriterSpeed);
+              }
+            };
+            type();
+          };
+      
+          links.forEach(link => {
+            link.addEventListener("click", (e) => {
+              const targetId = link.getAttribute("data-target");
+              if (!targetId) return; // Ignore les liens externes (ex: index.html)
+      
+              const currentSection = document.querySelector(".content-section.active");
+              if (currentSection?.id === targetId) return;
+      
+              // Mise à jour UI Menu
+              links.forEach(l => l.classList.remove("active-link"));
+              link.classList.add("active-link");
+      
+              // Animation Breadcrumb
+              const newTitle = link.innerText.trim();
+              typeWriter(newTitle, breadcrumbTitle);
+      
+              // Transition avec Micro-loader
+              const label = this.config.sectionLabels[targetId] || newTitle.toUpperCase();
+              const delay = this.config.reducedMotion ? 0 : 200;
+      
+              if (menuLoader && !this.config.reducedMotion) {
+                menuLoaderText.textContent = `LOADING: ${label}`;
+                menuLoader.classList.add("is-active");
+                menuLoader.setAttribute("aria-hidden", "false");
+              }
+      
+              setTimeout(() => {
+                sections.forEach(s => s.classList.toggle("active", s.id === targetId));
+                window.scrollTo(0, 0);
+                if (menuLoader) {
+                  menuLoader.classList.remove("is-active");
+                  menuLoader.setAttribute("aria-hidden", "true");
+                }
+              }, delay);
+            });
+          });
+        },
+      
+        // --- MODE FOCUS ---
+        initFocusMode() {
+          const focusBtn = document.getElementById('focusBtn');
+          if (!focusBtn) return;
+      
+          focusBtn.addEventListener('click', () => {
+            document.body.classList.toggle('focus-active');
+            const isFocus = document.body.classList.contains('focus-active');
+            focusBtn.innerHTML = isFocus
+              ? '<i class="fas fa-compress-arrows-alt"></i> QUITTER'
+              : '<i class="fas fa-expand-arrows-alt"></i> FOCUS';
+          });
+        },
+      
+        // --- GESTION DES ERREURS ---
+        initErrorHandlers() {
+          window.onerror = (message, source, lineno) => {
+            const statusText = document.querySelector(".loader-text");
+            if (statusText) {
+              statusText.style.color = "#ff4d4d";
+              statusText.textContent = "CRITICAL_ERROR: Script execution failed.";
+            }
+          };
+        }
+      };
+      
+      /**
+       * Fonction autonome pour afficher une image dans une popup
+       * Génère un document HTML complet à la volée
+       */
+      function viewImage(imageName) {
+        const newWindow = window.open("", "_blank");
+        newWindow.document.write(`
+          <!DOCTYPE html>
+          <html lang="fr">
+            <head>
+              <meta charset="UTF-8">
+              <title>Aperçu Anomalie : ${imageName}</title>
+              <style>
+                body {
+                  text-align: center;
+                  padding: 40px 20px;
+                  font-family: 'Inter', system-ui, -apple-system, sans-serif;
+                  background: #101529;
+                  color: #eaf6fb;
+                  margin: 0;
+                  display: flex;
+                  flex-direction: column;
+                  align-items: center;
+                  justify-content: center;
+                  min-height: 100vh;
+                }
+                h2 {
+                  color: #1fe1d9;
+                  font-size: 1.2rem;
+                  letter-spacing: 2px;
+                  text-transform: uppercase;
+                  margin-bottom: 20px;
+                }
+                .img-container {
+                  position: relative;
+                  padding: 10px;
+                  background: rgba(31, 225, 217, 0.1);
+                  border-radius: 16px;
+                  border: 1px solid rgba(31, 225, 217, 0.2);
+                  box-shadow: 0 0 50px rgba(0,0,0,0.5);
+                }
+                img {
+                  max-width: 90vw;
+                  max-height: 70vh;
+                  display: block;
+                  border-radius: 8px;
+                }
+                .actions { margin-top: 30px; }
+                .btn {
+                  display: inline-block;
+                  padding: 12px 24px;
+                  background: #1fe1d9;
+                  color: #101529;
+                  text-decoration: none;
+                  border-radius: 6px;
+                  font-weight: 800;
+                  font-size: 0.9rem;
+                  transition: all 0.3s ease;
+                  border: none;
+                  cursor: pointer;
+                  text-transform: uppercase;
+                  letter-spacing: 1px;
+                }
+                .btn:hover {
+                  background: #ffffff;
+                  transform: translateY(-2px);
+                  box-shadow: 0 5px 15px rgba(31, 225, 217, 0.4);
+                }
+              </style>
+            </head>
+            <body>
+              <h2><i class="fas fa-bug"></i> Capture d'écran : ${imageName}</h2>
+              <div class="img-container">
+                <img src="${imageName}" alt="Capture d'anomalie">
+              </div>
+              <div class="actions">
+                <a href="${imageName}" download="${imageName}" class="btn">Télécharger le rapport</a>
+                <button onclick="window.close()" class="btn" style="background: transparent; color: #1fe1d9; border: 1px solid #1fe1d9; margin-left: 10px;">Fermer</button>
+              </div>
+            </body>
+          </html>
+        `);
+      }
+      
+      // Initialisation au chargement du DOM
+      document.addEventListener("DOMContentLoaded", () => ProjectDetailApp.init());
+    </script>
+  </body>
+</html>

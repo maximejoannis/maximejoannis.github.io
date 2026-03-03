@@ -1,0 +1,1280 @@
+<!DOCTYPE html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard QA – Enrichissement Robot Framework via IA (Homey) | Maxime Joannis</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="style-portfolio-maximejoannis.css">
+    <noscript>
+      <style>
+        #loader { display: none !important; }
+        .content-section { display: block !important; opacity: 1 !important; }
+      </style>
+    </noscript>
+  </head>
+  <body>
+    <div id="loader">
+      <div class="qa-logo">
+        <div class="gear"></div>
+        <div class="scan-ring"></div>
+      </div>
+      <div class="loader-title">EXECUTION_INITIALIZATION...</div>
+      <div class="build-panel" aria-hidden="true">
+        <div class="build-row">
+          <span class="build-label">BUILD</span>
+          <span class="build-state" id="buildState">RUNNING</span>
+          <span class="build-icon" id="buildIcon"><i class="fas fa-spinner"></i></span>
+        </div>
+        <div class="build-bar" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0">
+          <div class="build-bar__fill" id="buildFill"></div>
+        </div>
+      </div>
+      <div class="loader-log-container">
+        <div class="log-line" id="log-1"></div>
+        <div class="log-line" id="log-2"></div>
+        <div class="log-line" id="log-3"></div>
+      </div>
+      <div class="loader-text">STATUS: RUNNING TESTS...</div>
+    </div>
+    <aside>
+      <div class="profile-block">
+        <div class="profile-avatar">MJ</div>
+        <div class="profile-text">
+          <div class="profile-name">Maxime Joannis</div>
+          <div class="profile-role">Ingénieur QA</div>
+        </div>
+      </div>
+      <nav>
+        <ul id="menu">
+          <li><a href="index.html" class="nav-link"><i class="fas fa-home"></i> Accueil</a></li>
+          <li><a href="detailHomey_IA.html" class="nav-link"><i class="fas fa-info-circle"></i> Projet Enrichissement via IA</a></li>
+          <hr style="border: 0; border-top: 1px solid rgba(255,255,255,0.1); margin: 10px 0;">
+          <li><a class="nav-link active-link" data-target="presentation"><i class="fas fa-chart-pie"></i> Tableau de bord QA</a></li>
+          <li><a class="nav-link" data-target="deliverables"><i class="fas fa-file-alt"></i> Rapports QA</a></li>
+        </ul>
+      </nav>
+    </aside>
+    <div class="wrapper">
+      <header>
+        <button id="focusBtn" style="cursor:pointer; padding: 8px 15px; background: rgba(31,225,217,0.1); border: 1px solid #1fe1d9; color: #1fe1d9; border-radius: 8px; font-weight: bold;">
+        <i class="fas fa-expand-arrows-alt"></i> FOCUS
+        </button>
+        <div class="breadcrumb">Projet QA // <span id="breadcrumb-title">Dashboard IA</span></div>
+        <div class="menu-loader" id="menuLoader" aria-hidden="true">
+          <div class="menu-loader__scan"></div>
+          <span class="menu-loader__text" id="menuLoaderText">SWITCHING VIEW...</span>
+        </div>
+        <div class="status-badge">
+          <i class="fas fa-circle" style="font-size: 8px;"></i> BUILD: SUCCESS
+        </div>
+        <div class="header-photo">
+          <img src="Photo_Identite.jpg" alt="Photo de Maxime">
+        </div>
+      </header>
+      <main>
+        <!-- SECTION : TABLEAU DE BORD QA -->
+        <!-- SECTION : TABLEAU DE BORD QA (DASHBOARD) -->
+        <section id="presentation" class="content-section active">
+          <h2><i class="fas fa-chart-pie"></i> Tableau de bord QA — Homey (Enrichissement via IA)</h2>
+
+          <div class="dashboard-block">
+            <div class="section-lead">
+              <p class="muted">
+                Synthèse des suites Robot Framework du projet <strong>Homey</strong> (enrichissement via IA).
+              </p>
+              <div class="meta-row">
+                <span class="badge badge-info"><i class="fa-solid fa-robot"></i>&nbsp;Robot Framework</span>
+                <span class="badge badge-neutral"><i class="fa-solid fa-calendar-days"></i>&nbsp;Dernière exécution : <strong>18/02/2026</strong></span>
+              </div>
+            </div>
+
+            <!-- KPI GLOBAUX -->
+            <div class="results-grid kpi-global">
+              <div class="card results-card">
+                <div class="stat-label">Tests automatisés</div>
+                <div class="stat-value">40</div>
+                <p class="stat-hint">Total (3 parcours) — Robot Framework + Selenium</p>
+              </div>
+
+              <div class="card results-card">
+                <div class="stat-label">Suites suivies</div>
+                <div class="stat-value">3</div>
+                <p class="stat-hint">contacterHote • demandeReservationNonConnecte • demandeReservationConnecte • traiterDemandeReservation</p>
+              </div>
+
+              <div class="card results-card">
+                <div class="stat-label">Taux de réussite global</div>
+                <div class="stat-value">100 %</div>
+                <div class="progress-container" aria-label="Taux de réussite global">
+                  <div class="progress-info">
+                    <span>Succès</span>
+                    <span><strong>40</strong> / 40</span>
+                  </div>
+                  <div class="progress-bar" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="75">
+                    <div class="progress-fill" style="width:100%"></div>
+                  </div>
+                </div>
+                <div class="sub-stats">
+                  <span>OK : 40</span>
+                  <span>KO : 0</span>
+                </div>
+              </div>
+            </div>
+<br>
+            <!-- DÉFAUTS MAJEURS DÉCOUVERTS -->
+            <div class="card qa-alert">
+              <div class="qa-alert__title">
+                <i class="fa-solid fa-triangle-exclamation"></i>
+                Défauts critiques découverts (impact métier)
+              </div>
+              <ul class="qa-alert__list">
+                <li><strong>Messagerie voyageur → hôte :</strong> les messages envoyés ne sont pas transmis.</li>
+                <li><strong>Historique voyageur :</strong> les messages ne sont pas visibles dans la liste des messages.</li>
+                <li><strong>Capacité de réservation :</strong> au-delà de <strong>9</strong> demandes, impossible d’effectuer une nouvelle demande côté voyageur.</li>
+                <li><strong>Réception hôte :</strong> l’hôte ne reçoit plus les demandes au-delà de <strong>9</strong>.</li>
+				<li><strong>Réception message voyageur :</strong> l’hôte ne reçoit pas les messages du voyageur.</li>
+              </ul>
+              <div class="qa-alert__footer">
+                <span class="badge badge-danger">NO GO (blocant)</span>
+                <span class="muted">Même avec des tests UI “PASS”, les flux backend / persistance restent défaillants.</span>
+              </div>
+            </div>
+
+           
+<br>
+			<header class="suite-detail__header">
+  <div>
+    <h3 class="suite-detail__title">Suite : 3_contacter-hote</h3>
+    <p class="suite-detail__subtitle">
+      RobotFramework Maxime JoannisV1.1 · Robot 7.3.2 (Python 3.10.11 win32) · Généré le 2026-02-18 12:32:16
+    </p>
+  </div>
+
+  <div class="suite-detail__badges" aria-label="Statuts">
+    <span class="badge badge--pass">PASS</span>
+  </div>
+</header>
+
+<section class="suite-detail__kpis" aria-label="KPI">
+  <div class="kpi">
+    <div class="kpi__label">Tests</div>
+    <div class="kpi__value">10</div>
+  </div>
+  <div class="kpi kpi--pass">
+    <div class="kpi__label">Pass</div>
+    <div class="kpi__value">10</div>
+  </div>
+  <div class="kpi kpi--fail">
+    <div class="kpi__label">Fail</div>
+    <div class="kpi__value">0</div>
+  </div>
+  <div class="kpi">
+    <div class="kpi__label">Skip</div>
+    <div class="kpi__value">0</div>
+  </div>
+  <div class="kpi">
+    <div class="kpi__label">Taux de réussite</div>
+    <div class="kpi__value">100%</div>
+  </div>
+  <div class="kpi">
+    <div class="kpi__label">Durée totale (suite)</div>
+    <div class="kpi__value">2m00s</div>
+    <div class="kpi__hint">~119.86s</div>
+  </div>
+</section>
+
+<section class="suite-detail__meta" aria-label="Environnement & Contexte">
+  <h4 class="suite-detail__section-title">Environnement</h4>
+  <dl class="meta-grid">
+    <div class="meta-item">
+      <dt>Navigateur</dt>
+      <dd>Chrome</dd>
+    </div>
+    <div class="meta-item">
+      <dt>Base URL</dt>
+      <dd>http://livraison3.testacademy.fr</dd>
+    </div>
+    <div class="meta-item">
+      <dt>Type</dt>
+      <dd>Test UI Web (SeleniumLibrary)</dd>
+    </div>
+    <div class="meta-item">
+      <dt>Exécution</dt>
+      <dd>18/02/2026</dd>
+    </div>
+  </dl>
+
+  <h4 class="suite-detail__section-title">Ce que couvre la suite</h4>
+  <ul class="suite-detail__bullets">
+    <li>Accès à une annonce depuis la home puis ouverture de la modal “Contacter l’hôte”</li>
+    <li>Présence des champs du formulaire (Nom, Email, Téléphone, Message) + zone de messages</li>
+    <li>Saisie et soumission du formulaire + contrôle des valeurs saisies</li>
+    <li>Fermeture de la modal via le bouton X + vérification de disparition</li>
+    <li>Vérification des champs cachés (target_email, host_contact_security, permalink, listing_title, action)</li>
+    <li>Contrôles UI : titre de modal, placeholders, méthode POST, attributs du bouton “Soumettre”</li>
+  </ul>
+</section>
+
+<section class="suite-detail__tests" aria-label="Détail des cas de test">
+  <div class="suite-detail__tests-head">
+    <h4 class="suite-detail__section-title">Détail des tests (CT)</h4>
+    <p class="suite-detail__section-hint">10/10 PASS · 0 FAIL · Durées par test (elapsed)</p>
+  </div>
+
+  <div class="table-wrap" role="region" aria-label="Tableau des tests" tabindex="0">
+    <table class="tests-table">
+      <thead>
+        <tr>
+          <th style="width: 64px;">ID</th>
+          <th>Nom du test</th>
+          <th style="width: 90px;">Statut</th>
+          <th style="width: 110px;">Durée</th>
+          <th style="width: 260px;">Points vérifiés</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>CT1</td>
+          <td>Ouvrir la modal “Contacter l'hôte” depuis une annonce</td>
+          <td><span class="pill pill--pass">PASS</span></td>
+          <td>15.67s</td>
+          <td>Bouton “Contacter l’hôte” + modal visible (id=modal-contact-host)</td>
+        </tr>
+        <tr>
+          <td>CT2</td>
+          <td>Vérifier la présence des champs du formulaire “Contacter l'hôte”</td>
+          <td><span class="pill pill--pass">PASS</span></td>
+          <td>11.66s</td>
+          <td>Champs name/email/phone/message + bouton soumettre + zone messages</td>
+        </tr>
+        <tr>
+          <td>CT3</td>
+          <td>Renseigner les champs et soumettre le formulaire “Contacter l'hôte”</td>
+          <td><span class="pill pill--pass">PASS</span></td>
+          <td>13.09s</td>
+          <td>Saisie + clic soumettre + vérif valeurs (Nom/Email/Tel/Message)</td>
+        </tr>
+        <tr>
+          <td>CT4</td>
+          <td>Fermer la modal “Contacter l'hôte” via le bouton X</td>
+          <td><span class="pill pill--pass">PASS</span></td>
+          <td>11.48s</td>
+          <td>Clic sur X + modal non visible (timeout=5s)</td>
+        </tr>
+        <tr>
+          <td>CT5</td>
+          <td>Vérifier la présence des champs cachés du formulaire de contact</td>
+          <td><span class="pill pill--pass">PASS</span></td>
+          <td>11.13s</td>
+          <td>Inputs cachés présents : target_email, host_contact_security, permalink, listing_title, action</td>
+        </tr>
+        <tr>
+          <td>CT6</td>
+          <td>Vérifier le titre de la modal “Contactez l'hôte”</td>
+          <td><span class="pill pill--pass">PASS</span></td>
+          <td>11.46s</td>
+          <td>Titre exact : “Contactez l'hôte” (css=#modal-contact-host .modal-title)</td>
+        </tr>
+        <tr>
+          <td>CT7</td>
+          <td>Vérifier les placeholders des champs du formulaire “Contacter l'hôte”</td>
+          <td><span class="pill pill--pass">PASS</span></td>
+          <td>11.14s</td>
+          <td>Placeholders : Nom / Email / Téléphone / Message</td>
+        </tr>
+        <tr>
+          <td>CT8</td>
+          <td>Vérifier que le formulaire “Contacter l'hôte” est en méthode POST</td>
+          <td><span class="pill pill--pass">PASS</span></td>
+          <td>11.05s</td>
+          <td>Form method = post (xpath form[@method='POST'])</td>
+        </tr>
+        <tr>
+          <td>CT9</td>
+          <td>Vérifier les attributs du bouton “Soumettre” (type + class)</td>
+          <td><span class="pill pill--pass">PASS</span></td>
+          <td>10.80s</td>
+          <td>type=submit + class contient “contact_listing_host”</td>
+        </tr>
+        <tr>
+          <td>CT10</td>
+          <td>Vérifier que les champs cachés ont bien une valeur (value non vide)</td>
+          <td><span class="pill pill--pass">PASS</span></td>
+          <td>11.70s</td>
+          <td>value non vide sur les champs cachés (target_email, security, permalink, title, action)</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<section class="suite-detail__footer" aria-label="Résumé exécution">
+  <h4 class="suite-detail__section-title">Résumé</h4>
+  <div class="summary-cards">
+    <div class="summary-card">
+      <div class="summary-card__label">Résultat global</div>
+      <div class="summary-card__value">PASS (10/10)</div>
+      <div class="summary-card__hint">Aucun échec, aucun test ignoré</div>
+    </div>
+    <div class="summary-card">
+      <div class="summary-card__label">Focus métier</div>
+      <div class="summary-card__value">Contacter l’hôte</div>
+      <div class="summary-card__hint">Modal · Formulaire · Champs cachés · POST · Attributs UI</div>
+    </div>
+    <div class="summary-card">
+      <div class="summary-card__label">Observabilité</div>
+      <div class="summary-card__value">Logs SETUP/ETAPE/TEARDOWN</div>
+      <div class="summary-card__hint">+ capture preuves sur échec (Run Keyword If Test Failed)</div>
+    </div>
+  </div>
+</section>
+			
+			<br>
+			
+			<!-- Contenu à coller DANS <div class="card suite-detail"> ... </div> -->
+
+<header class="suite-detail__header">
+  <div>
+    <h3 class="suite-detail__title">Suite : 3_demandeReservationNonConnecte</h3>
+    <p class="suite-detail__subtitle">
+      Robot Framework Maxime JoannisV1.3 · Robot 7.3.2 (Python 3.10.11 win32) · Généré le 2026-02-18 12:36:36
+    </p>
+  </div>
+
+  <div class="suite-detail__badges" aria-label="Statuts">
+    <span class="badge badge--pass">PASS</span>
+  </div>
+</header>
+
+<section class="suite-detail__kpis" aria-label="KPI">
+  <div class="kpi">
+    <div class="kpi__label">Tests</div>
+    <div class="kpi__value">10</div>
+  </div>
+  <div class="kpi kpi--pass">
+    <div class="kpi__label">Pass</div>
+    <div class="kpi__value">10</div>
+  </div>
+  <div class="kpi kpi--fail">
+    <div class="kpi__label">Fail</div>
+    <div class="kpi__value">0</div>
+  </div>
+  <div class="kpi">
+    <div class="kpi__label">Skip</div>
+    <div class="kpi__value">0</div>
+  </div>
+  <div class="kpi">
+    <div class="kpi__label">Taux de réussite</div>
+    <div class="kpi__value">100%</div>
+  </div>
+  <div class="kpi">
+    <div class="kpi__label">Durée totale (suite)</div>
+    <div class="kpi__value">1m56s</div>
+    <div class="kpi__hint">~115.64s</div>
+  </div>
+</section>
+
+<section class="suite-detail__meta" aria-label="Environnement & Contexte">
+  <h4 class="suite-detail__section-title">Environnement</h4>
+  <dl class="meta-grid">
+    <div class="meta-item">
+      <dt>Navigateur</dt>
+      <dd>Chrome</dd>
+    </div>
+    <div class="meta-item">
+      <dt>Base URL</dt>
+      <dd>http://livraison3.testacademy.fr</dd>
+    </div>
+    <div class="meta-item">
+      <dt>Type</dt>
+      <dd>Test UI Web (SeleniumLibrary)</dd>
+    </div>
+    <div class="meta-item">
+      <dt>Exécution</dt>
+      <dd>18/02/2026</dd>
+    </div>
+  </dl>
+
+  <h4 class="suite-detail__section-title">Ce que couvre la suite</h4>
+  <ul class="suite-detail__bullets">
+    <li>Accès à une annonce depuis la home + présence du module de réservation</li>
+    <li>Sélection dates (arrivée/départ) + vérif non vide</li>
+    <li>Sélecteur voyageurs (adulte + enfant) + bouton “Appliquer”</li>
+    <li>Sélection extras : Breakfast, Lunch, Dinner + multi-sélection</li>
+    <li>Non connecté : clic “Demande de réservation” → message “Vous devez vous connecter…”</li>
+    <li>Attributs champs : readonly + placeholders (Début / Fin / Voyageurs)</li>
+  </ul>
+</section>
+
+<section class="suite-detail__tests" aria-label="Détail des cas de test">
+  <div class="suite-detail__tests-head">
+    <h4 class="suite-detail__section-title">Détail des tests (CT)</h4>
+    <p class="suite-detail__section-hint">10/10 PASS · 0 FAIL · Durées par test (elapsed)</p>
+  </div>
+
+  <div class="table-wrap" role="region" aria-label="Tableau des tests" tabindex="0">
+    <table class="tests-table">
+      <thead>
+        <tr>
+          <th style="width: 64px;">ID</th>
+          <th>Nom du test</th>
+          <th style="width: 90px;">Statut</th>
+          <th style="width: 110px;">Durée</th>
+          <th style="width: 260px;">Points vérifiés</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>CT1</td>
+          <td>Accéder à une annonce et vérifier la présence du module de réservation</td>
+          <td><span class="pill pill--pass">PASS</span></td>
+          <td>10.63s</td>
+          <td>Champs arrivée/départ/voyageurs + bouton “Demande de réservation” présents</td>
+        </tr>
+        <tr>
+          <td>CT2</td>
+          <td>Sélectionner une date d'arrivée et une date de départ</td>
+          <td><span class="pill pill--pass">PASS</span></td>
+          <td>11.72s</td>
+          <td>Valeurs de dates non vides (arrivée/départ)</td>
+        </tr>
+        <tr>
+          <td>CT3</td>
+          <td>Sélectionner des voyageurs (adulte + enfant) et appliquer</td>
+          <td><span class="pill pill--pass">PASS</span></td>
+          <td>11.20s</td>
+          <td>Voyageurs appliqués + valeur non vide</td>
+        </tr>
+        <tr>
+          <td>CT4</td>
+          <td>Sélectionner un extra (“Breakfast”)</td>
+          <td><span class="pill pill--pass">PASS</span></td>
+          <td>11.72s</td>
+          <td>Checkbox Breakfast sélectionnée</td>
+        </tr>
+        <tr>
+          <td>CT5</td>
+          <td>Demande de réservation non connecté affiche le message “Vous devez vous connecter...”</td>
+          <td><span class="pill pill--pass">PASS</span></td>
+          <td>13.46s</td>
+          <td>Message attendu après clic “Demande de réservation”</td>
+        </tr>
+        <tr>
+          <td>CT6</td>
+          <td>Vérifier les attributs des champs (readonly + placeholders)</td>
+          <td><span class="pill pill--pass">PASS</span></td>
+          <td>10.86s</td>
+          <td>readonly + placeholders : Début / Fin / Voyageurs</td>
+        </tr>
+        <tr>
+          <td>CT7</td>
+          <td>Ouvrir le calendrier via le champ arrivée affiche le calendrier</td>
+          <td><span class="pill pill--pass">PASS</span></td>
+          <td>10.83s</td>
+          <td>Affichage calendrier (jour courant visible)</td>
+        </tr>
+        <tr>
+          <td>CT8</td>
+          <td>Ouvrir le sélecteur de voyageurs affiche le bouton Appliquer</td>
+          <td><span class="pill pill--pass">PASS</span></td>
+          <td>11.42s</td>
+          <td>Bouton “Appliquer” visible</td>
+        </tr>
+        <tr>
+          <td>CT9</td>
+          <td>Sélectionner un extra (“Lunch”)</td>
+          <td><span class="pill pill--pass">PASS</span></td>
+          <td>10.97s</td>
+          <td>Checkbox Lunch sélectionnée</td>
+        </tr>
+        <tr>
+          <td>CT10</td>
+          <td>Sélectionner plusieurs extras (Breakfast + Lunch + Dinner)</td>
+          <td><span class="pill pill--pass">PASS</span></td>
+          <td>12.30s</td>
+          <td>3 checkboxes sélectionnées</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<section class="suite-detail__footer" aria-label="Résumé exécution">
+  <h4 class="suite-detail__section-title">Résumé</h4>
+  <div class="summary-cards">
+    <div class="summary-card">
+      <div class="summary-card__label">Résultat global</div>
+      <div class="summary-card__value">PASS (10/10)</div>
+      <div class="summary-card__hint">Aucun échec, aucun test ignoré</div>
+    </div>
+    <div class="summary-card">
+      <div class="summary-card__label">Focus métier</div>
+      <div class="summary-card__value">Réservation non connecté</div>
+      <div class="summary-card__hint">Calendrier · Voyageurs · Extras · Message connexion</div>
+    </div>
+    <div class="summary-card">
+      <div class="summary-card__label">Observabilité</div>
+      <div class="summary-card__value">Logs SETUP/ETAPE/TEARDOWN</div>
+      <div class="summary-card__hint">+ capture preuves sur échec (Run Keyword If Test Failed)</div>
+    </div>
+  </div>
+</section>
+<br>
+<header class="suite-detail__header">
+<div>
+<h3 class="suite-detail__title">Suite : 3_demandeReservationConnecte</h3>
+<p class="suite-detail__subtitle">
+Robot Framework Maxime JoannisV1.4 · Robot 7.3.2 (Python 3.10.11 win32) · Généré le 2026-02-18 12:40:11
+</p>
+</div>
+
+<div class="suite-detail__badges" aria-label="Statuts">
+<span class="badge badge--pass">PASS</span>
+</div>
+</header>
+
+<section class="suite-detail__kpis" aria-label="KPI">
+<div class="kpi">
+<div class="kpi__label">Tests</div>
+<div class="kpi__value">10</div>
+</div>
+<div class="kpi kpi--pass">
+<div class="kpi__label">Pass</div>
+<div class="kpi__value">10</div>
+</div>
+<div class="kpi kpi--fail">
+<div class="kpi__label">Fail</div>
+<div class="kpi__value">0</div>
+</div>
+<div class="kpi">
+<div class="kpi__label">Skip</div>
+<div class="kpi__value">0</div>
+</div>
+<div class="kpi">
+<div class="kpi__label">Taux de réussite</div>
+<div class="kpi__value">100%</div>
+</div>
+<div class="kpi">
+<div class="kpi__label">Durée totale (suite)</div>
+<div class="kpi__value">1m53s</div>
+<div class="kpi__hint">~112.78s</div>
+</div>
+</section>
+
+<section class="suite-detail__meta" aria-label="Environnement & Contexte">
+<h4 class="suite-detail__section-title">Environnement</h4>
+<dl class="meta-grid">
+<div class="meta-item">
+<dt>Navigateur</dt>
+<dd>Chrome</dd>
+</div>
+<div class="meta-item">
+<dt>Base URL</dt>
+<dd>http://livraison3.testacademy.fr</dd>
+</div>
+<div class="meta-item">
+<dt>Type</dt>
+<dd>Test UI Web (SeleniumLibrary)</dd>
+</div>
+<div class="meta-item">
+<dt>Exécution</dt>
+<dd>18/02/2026</dd>
+</div>
+</dl>
+
+<h4 class="suite-detail__section-title">Ce que couvre la suite</h4>
+<ul class="suite-detail__bullets">
+<li>Connexion préalable au compte voyageur (bypass login)</li>
+<li>Accès à une annonce spécifique et vérification de la disponibilité du module</li>
+<li>Sélection dynamique des dates de séjour via le widget calendrier</li>
+<li>Configuration du nombre de voyageurs (adultes et enfants) via le sélecteur</li>
+<li>Interaction avec le bouton principal de demande de réservation</li>
+<li>Vérification de l'apparition et de l'exactitude du bloc "Détails des coûts" après interaction</li>
+</ul>
+</section>
+
+<section class="suite-detail__tests" aria-label="Détail des cas de test">
+<div class="suite-detail__tests-head">
+<h4 class="suite-detail__section-title">Détail des tests (CT)</h4>
+<p class="suite-detail__section-hint">10/10 PASS · 0 FAIL · Durées par test (elapsed)</p>
+</div>
+
+<div class="table-wrap" role="region" aria-label="Tableau des tests" tabindex="0">
+<table class="tests-table">
+<thead>
+<tr>
+<th style="width: 64px;">ID</th>
+<th>Nom du test</th>
+<th style="width: 90px;">Statut</th>
+<th style="width: 110px;">Durée</th>
+<th style="width: 260px;">Points vérifiés</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>CT1</td>
+<td>Connexion réussie (réservation connecté)</td>
+<td><span class="pill pill--pass">PASS</span></td>
+<td>9.24s</td>
+<td>Login OK + présence de l'icône de profil voyageur</td>
+</tr>
+<tr>
+<td>CT2</td>
+<td>Accéder à une annonce en étant connecté</td>
+<td><span class="pill pill--pass">PASS</span></td>
+<td>10.91s</td>
+<td>Redirection vers l'annonce + présence du module de réservation</td>
+</tr>
+<tr>
+<td>CT3</td>
+<td>Ouvrir le calendrier via le champ arrivée (connecté)</td>
+<td><span class="pill pill--pass">PASS</span></td>
+<td>10.97s</td>
+<td>Focus champ + visibilité du widget calendrier</td>
+</tr>
+<tr>
+<td>CT4</td>
+<td>Sélectionner les dates d'arrivée et de départ</td>
+<td><span class="pill pill--pass">PASS</span></td>
+<td>11.53s</td>
+<td>Injection des dates + valeurs non vides dans les inputs</td>
+</tr>
+<tr>
+<td>CT5</td>
+<td>Ouvrir le sélecteur de voyageurs (connecté)</td>
+<td><span class="pill pill--pass">PASS</span></td>
+<td>10.83s</td>
+<td>Clic champ + popup de sélection visible</td>
+</tr>
+<tr>
+<td>CT6</td>
+<td>Ajouter des voyageurs (adulte + enfant)</td>
+<td><span class="pill pill--pass">PASS</span></td>
+<td>11.19s</td>
+<td>Incrémentation des compteurs + bouton "Appliquer"</td>
+</tr>
+<tr>
+<td>CT7</td>
+<td>Cliquer sur "Demande de réservation" (connecté)</td>
+<td><span class="pill pill--pass">PASS</span></td>
+<td>10.74s</td>
+<td>Action de soumission du formulaire de réservation</td>
+</tr>
+<tr>
+<td>CT8</td>
+<td>Vérifier l'affichage du bloc "Détails des coûts"</td>
+<td><span class="pill pill--pass">PASS</span></td>
+<td>10.89s</td>
+<td>Présence du conteneur récapitulatif des prix</td>
+</tr>
+<tr>
+<td>CT9</td>
+<td>Vérifier l'affichage des lignes de coûts</td>
+<td><span class="pill pill--pass">PASS</span></td>
+<td>10.98s</td>
+<td>Visibilité des labels (Prix, Total, etc.) dans le bloc</td>
+</tr>
+<tr>
+<td>CT10</td>
+<td>Vérification finale du bloc de calcul des coûts</td>
+<td><span class="pill pill--pass">PASS</span></td>
+<td>11.85s</td>
+<td>Vérification que le résumé financier est complet et rendu</td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+
+<section class="suite-detail__footer" aria-label="Résumé exécution">
+<h4 class="suite-detail__section-title">Résumé</h4>
+<div class="summary-cards">
+<div class="summary-card">
+<div class="summary-card__label">Résultat global</div>
+<div class="summary-card__value">PASS (10/10)</div>
+<div class="summary-card__hint">Aucun échec sur le flux de réservation connecté</div>
+</div>
+<div class="summary-card">
+<div class="summary-card__label">Focus métier</div>
+<div class="summary-card__value">Réservation Voyageur</div>
+<div class="summary-card__hint">Login · Calendrier · Guests · Calcul des coûts UI</div>
+</div>
+<div class="summary-card">
+<div class="summary-card__label">Observabilité</div>
+<div class="summary-card__value">Logs Selenium/Robot</div>
+<div class="summary-card__hint">Traces complètes des sélecteurs CSS et Xpath</div>
+</div>
+</div>
+</section>
+<br>
+
+<header class="suite-detail__header">
+<div>
+<h3 class="suite-detail__title">Suite : 3_traiterDemandeReservation</h3>
+<p class="suite-detail__subtitle">
+Robot Framework Maxime JoannisV2.1 · Robot 7.3.2 (Python 3.10.11 win32) · Généré le 2026-02-18 12:48:01
+</p>
+</div>
+
+<div class="suite-detail__badges" aria-label="Statuts">
+<span class="badge badge--pass">PASS</span>
+</div>
+</header>
+
+<section class="suite-detail__kpis" aria-label="KPI">
+<div class="kpi">
+<div class="kpi__label">Tests</div>
+<div class="kpi__value">10</div>
+</div>
+<div class="kpi kpi--pass">
+<div class="kpi__label">Pass</div>
+<div class="kpi__value">10</div>
+</div>
+<div class="kpi kpi--fail">
+<div class="kpi__label">Fail</div>
+<div class="kpi__value">0</div>
+</div>
+<div class="kpi">
+<div class="kpi__label">Skip</div>
+<div class="kpi__value">0</div>
+</div>
+<div class="kpi">
+<div class="kpi__label">Taux de réussite</div>
+<div class="kpi__value">100%</div>
+</div>
+<div class="kpi">
+<div class="kpi__label">Durée totale (suite)</div>
+<div class="kpi__value">2m07s</div>
+<div class="kpi__hint">~127.24s</div>
+</div>
+</section>
+
+<section class="suite-detail__meta" aria-label="Environnement & Contexte">
+<h4 class="suite-detail__section-title">Environnement</h4>
+<dl class="meta-grid">
+<div class="meta-item">
+<dt>Navigateur</dt>
+<dd>Chrome</dd>
+</div>
+<div class="meta-item">
+<dt>Base URL</dt>
+<dd>http://livraison3.testacademy.fr</dd>
+</div>
+<div class="meta-item">
+<dt>Type</dt>
+<dd>Test UI Web (Hôte)</dd>
+</div>
+<div class="meta-item">
+<dt>Compte Test</dt>
+<dd>Hotetest</dd>
+</div>
+</dl>
+
+<h4 class="suite-detail__section-title">Ce que couvre la suite</h4>
+<ul class="suite-detail__bullets">
+<li>Connexion sécurisée à l'interface de gestion Hôte</li>
+<li>Navigation dynamique vers la liste des réservations via la sidebar</li>
+<li>Traitement des demandes en attente (clic sur "Confirmer")</li>
+<li>Vérification de l'état de la liste (gestion des cas de listes vides ou paiements en attente)</li>
+<li>Accès aux fiches détaillées des réservations et contrôle des données (prix, identifiants)</li>
+<li>Processus de déconnexion et retour à l'écran de login</li>
+</ul>
+</section>
+
+<section class="suite-detail__tests" aria-label="Détail des cas de test">
+<div class="suite-detail__tests-head">
+<h4 class="suite-detail__section-title">Détail des tests (CT)</h4>
+<p class="suite-detail__section-hint">10/10 PASS · 0 FAIL · Exécution séquentielle</p>
+</div>
+
+<div class="table-wrap" role="region" aria-label="Tableau des tests" tabindex="0">
+<table class="tests-table">
+<thead>
+<tr>
+<th style="width: 64px;">ID</th>
+<th>Nom du test</th>
+<th style="width: 90px;">Statut</th>
+<th style="width: 110px;">Durée</th>
+<th style="width: 260px;">Points vérifiés</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>CT1</td>
+<td>Confirmer une demande (Dashboard)</td>
+<td><span class="pill pill--pass">PASS</span></td>
+<td>13.12s</td>
+<td>Login hôte + validation lien direct "Confirmer"</td>
+</tr>
+<tr>
+<td>CT2</td>
+<td>Confirmer une demande (Liste)</td>
+<td><span class="pill pill--pass">PASS</span></td>
+<td>12.51s</td>
+<td>Accès sidebar + clic "Confirmer" robuste</td>
+</tr>
+<tr>
+<td>CT3</td>
+<td>Vérifier état liste réservations</td>
+<td><span class="pill pill--pass">PASS</span></td>
+<td>12.63s</td>
+<td>Contrôle présence éléments ou message "Aucune réservation"</td>
+</tr>
+<tr>
+<td>CT4</td>
+<td>Gestion robuste du flux confirmation</td>
+<td><span class="pill pill--pass">PASS</span></td>
+<td>13.08s</td>
+<td>Interaction avec JS si clic Selenium intercepté</td>
+</tr>
+<tr>
+<td>CT5</td>
+<td>Accéder aux détails d'une réservation</td>
+<td><span class="pill pill--pass">PASS</span></td>
+<td>12.44s</td>
+<td>Redirection vers la page de détails via lien "Détails"</td>
+</tr>
+<tr>
+<td>CT6</td>
+<td>Vérifier affichage bloc détails</td>
+<td><span class="pill pill--pass">PASS</span></td>
+<td>12.72s</td>
+<td>Visibilité des informations transactionnelles</td>
+</tr>
+<tr>
+<td>CT7</td>
+<td>Validation données de réservation</td>
+<td><span class="pill pill--pass">PASS</span></td>
+<td>12.59s</td>
+<td>Exactitude des labels et identifiants dans la fiche</td>
+</tr>
+<tr>
+<td>CT8</td>
+<td>Vérification champs non vides</td>
+<td><span class="pill pill--pass">PASS</span></td>
+<td>12.38s</td>
+<td>Contrôle de l'intégrité des données affichées (prix > 0)</td>
+</tr>
+<tr>
+<td>CT9</td>
+<td>Retour accueil tableau de bord</td>
+<td><span class="pill pill--pass">PASS</span></td>
+<td>12.15s</td>
+<td>Navigation retour via menu principal</td>
+</tr>
+<tr>
+<td>CT10</td>
+<td>Se déconnecter (Sidebar)</td>
+<td><span class="pill pill--pass">PASS</span></td>
+<td>11.41s</td>
+<td>Clic logout + confirmation redirection login</td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+
+<section class="suite-detail__footer" aria-label="Résumé exécution">
+<h4 class="suite-detail__section-title">Résumé</h4>
+<div class="summary-cards">
+<div class="summary-card">
+<div class="summary-card__label">Résultat global</div>
+<div class="summary-card__value">PASS (10/10)</div>
+<div class="summary-card__hint">Flux hôte validé sans régression majeure</div>
+</div>
+<div class="summary-card">
+<div class="summary-card__label">Stabilité</div>
+<div class="summary-card__value">Élevée</div>
+<div class="summary-card__hint">Utilisation de mots-clés robustes (clics JS)</div>
+</div>
+<div class="summary-card">
+<div class="summary-card__label">Action requise</div>
+<div class="summary-card__value">Aucune</div>
+<div class="summary-card__hint">Tous les indicateurs sont au vert</div>
+</div>
+</div>
+</section>
+
+          </div>
+
+        </section>
+        <!-- SECTION : RAPPORTS QA -->
+        <section id="deliverables" class="content-section">
+  <h2><i class="fas fa-file-alt"></i> Rapports QA — Homey (Standard ISTQB)</h2>
+
+  <div class="card" style="width:100%; margin-bottom: 2rem;">
+    <h3>
+      <i class="fas fa-clipboard-check" style="margin-right:0.7em; color: var(--accent-color);"></i>
+      Synthèse du Rapport de Test Final (ISTQB)
+    </h3>
+    <div class="table-container">
+      <table class="modern-table" aria-label="Rapport de test final ISTQB">
+        <thead>
+          <tr>
+            <th>Élément de mesure</th>
+            <th>Valeur / Résultat</th>
+            <th>Commentaires (Évaluation de la qualité)</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>Période de test</strong></td>
+            <td>Exécution du 18/02/2026</td>
+            <td>Clôture de la suite d'automatisation Robot Framework.</td>
+          </tr>
+          <tr>
+            <td><strong>Tests exécutés (UI)</strong></td>
+            <td>40</td>
+            <td>Totalité des parcours automatisés Selenium.</td>
+          </tr>
+          <tr>
+            <td><strong>Taux de succès</strong></td>
+            <td>100 % (40 PASS / 0 FAIL)</td>
+            <td>Conformité totale des interfaces et sélecteurs UI.</td>
+          </tr>
+          <tr>
+            <td><strong>Suites couvertes</strong></td>
+            <td>4 parcours majeurs</td>
+            <td>Contact Hôte, Réservations (Connecté/Non-connecté) et Traitement.</td>
+          </tr>
+          <tr>
+            <td><strong>Critères de sortie</strong></td>
+            <td><span class="badge status-annule">NON ATTEINTS</span></td>
+            <td>Malgré un succès UI à 100%, les défauts backend bloquent la mise en production.</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <div class="card" style="width:100%;">
+    <h3>
+      <i class="fas fa-bug" style="margin-right:0.7em; color: var(--danger-color);"></i>
+      Journal des Défauts (Impact Métier Critique)
+    </h3>
+    <div class="table-container">
+      <table class="modern-table" aria-label="Liste des défauts critiques">
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>Description du dysfonctionnement</th>
+            <th>Sévérité</th>
+            <th>Statut</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>BUG-CRIT-01</strong></td>
+            <td>Échec de transmission de la messagerie voyageur vers l'hôte.</td>
+            <td><span class="badge badge-danger">Bloquant</span></td>
+            <td>OUVERT</td>
+          </tr>
+          <tr>
+            <td><strong>BUG-CRIT-02</strong></td>
+            <td>Historique de messagerie voyageur invisible dans l'interface.</td>
+            <td><span class="badge badge-danger">Bloquant</span></td>
+            <td>OUVERT</td>
+          </tr>
+          <tr>
+            <td><strong>BUG-CRIT-03</strong></td>
+            <td>Blocage du flux de réservation voyageur après la 9ème demande.</td>
+            <td><span class="badge badge-danger">Bloquant</span></td>
+            <td>OUVERT</td>
+          </tr>
+          <tr>
+            <td><strong>BUG-CRIT-04</strong></td>
+            <td>Non-réception des demandes par l'hôte au-delà du seuil de 9.</td>
+            <td><span class="badge badge-danger">Bloquant</span></td>
+            <td>OUVERT</td>
+          </tr>
+          <tr>
+            <td><strong>BUG-CRIT-05</strong></td>
+            <td>L'hôte ne reçoit pas les messages envoyés par le voyageur.</td>
+            <td><span class="badge badge-danger">Bloquant</span></td>
+            <td>OUVERT</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+      </main>
+      <footer id="page-footer">
+        <div class="footer-content">
+          <span class="citation">
+          "N'abandonne jamais, car c'est souvent juste après le dernier effort que le succès se dévoile."
+          </span>
+          <p>
+            © 2026 Maxime Joannis - Tous droits réservés.
+            <a href="privacy.html">Politique de confidentialité</a>
+          </p>
+        </div>
+      </footer>
+    </div>
+    <script>
+      /**
+       * Project Detail Dashboard Logic
+       * Version: 2.0 - Optimized for Maintenance
+       */
+      const ProjectDetailApp = {
+        // --- CONFIGURATION ---
+        config: {
+          loaderTimeout: 8000,
+          typeWriterSpeed: 50,
+          reducedMotion: window.matchMedia("(prefers-reduced-motion: reduce)").matches,
+          sectionLabels: {
+            presentation: "PRÉSENTATION",
+            strategy: "STRATÉGIE QA",
+            execution: "CONCEPTION & EXEC",
+            automation: "AUTOMATISATION",
+            results: "RÉSULTATS",
+            deliverables: "LIVRABLES",
+            feedback: "RETOURS"
+          },
+          buildLogs: [
+            "> Loading Dashboard Widgets... OK",
+            "> Syncing Test Artifacts... OK",
+            "> Build: SUCCESS — Launching UI"
+          ]
+        },
+      
+        // --- INITIALISATION ---
+        init() {
+          this.initLoader();
+          this.initNavigation();
+          this.initFocusMode();
+          this.initErrorHandlers();
+          // Expose viewImage globally for onclick events in HTML
+          this.viewImage = viewImage; 
+        },
+      
+        // --- GESTION DU LOADER (Animation de démarrage) ---
+        initLoader() {
+          const nodes = {
+            loader: document.getElementById("loader"),
+            fill: document.getElementById("buildFill"),
+            state: document.getElementById("buildState"),
+            icon: document.getElementById("buildIcon"),
+            panel: document.querySelector(".build-panel"),
+            progressBar: document.querySelector(".build-bar")
+          };
+      
+          // Fail-safe global
+          setTimeout(() => this.closeLoader(nodes.loader), this.config.loaderTimeout);
+      
+          // Affichage des logs progressifs
+          this.config.buildLogs.forEach((text, index) => {
+            setTimeout(() => {
+              const line = document.getElementById(`log-${index + 1}`);
+              if (line) line.textContent = text;
+            }, this.config.reducedMotion ? 0 : index * 250);
+          });
+      
+          if (this.config.reducedMotion) {
+            this.closeLoader(nodes.loader);
+            return;
+          }
+      
+          // Animation de la barre de progression
+          setTimeout(() => this.updateProgress(nodes, "85"), 120);
+      
+          setTimeout(() => {
+            this.updateProgress(nodes, "100");
+            if (nodes.state) nodes.state.textContent = "SUCCESS";
+            if (nodes.icon) nodes.icon.innerHTML = '<i class="fas fa-check"></i>';
+            if (nodes.panel) nodes.panel.classList.add("is-success");
+            
+            setTimeout(() => this.closeLoader(nodes.loader), 400);
+          }, 720);
+        },
+      
+        updateProgress(nodes, value) {
+          if (nodes.fill) nodes.fill.style.width = `${value}%`;
+          if (nodes.progressBar) nodes.progressBar.setAttribute("aria-valuenow", value);
+        },
+      
+        closeLoader(loader) {
+          if (loader && loader.style.display !== "none") {
+            loader.style.opacity = "0";
+            setTimeout(() => { loader.style.display = "none"; }, 250);
+          }
+        },
+      
+        // --- NAVIGATION (Transitions et Typewriter) ---
+        initNavigation() {
+          const links = document.querySelectorAll('.nav-link');
+          const sections = document.querySelectorAll('.content-section');
+          const breadcrumbTitle = document.getElementById('breadcrumb-title');
+          const menuLoader = document.getElementById("menuLoader");
+          const menuLoaderText = document.getElementById("menuLoaderText");
+          
+          let typeTimeout;
+      
+          const typeWriter = (text, element) => {
+            element.textContent = "";
+            let i = 0;
+            clearTimeout(typeTimeout);
+            const type = () => {
+              if (i < text.length) {
+                element.textContent += text.charAt(i);
+                i++;
+                typeTimeout = setTimeout(type, this.config.typeWriterSpeed);
+              }
+            };
+            type();
+          };
+      
+          links.forEach(link => {
+            link.addEventListener("click", (e) => {
+              const targetId = link.getAttribute("data-target");
+              if (!targetId) return; // Ignore les liens externes (ex: index.html)
+      
+              const currentSection = document.querySelector(".content-section.active");
+              if (currentSection?.id === targetId) return;
+      
+              // Mise à jour UI Menu
+              links.forEach(l => l.classList.remove("active-link"));
+              link.classList.add("active-link");
+      
+              // Animation Breadcrumb
+              const newTitle = link.innerText.trim();
+              typeWriter(newTitle, breadcrumbTitle);
+      
+              // Transition avec Micro-loader
+              const label = this.config.sectionLabels[targetId] || newTitle.toUpperCase();
+              const delay = this.config.reducedMotion ? 0 : 200;
+      
+              if (menuLoader && !this.config.reducedMotion) {
+                menuLoaderText.textContent = `LOADING: ${label}`;
+                menuLoader.classList.add("is-active");
+                menuLoader.setAttribute("aria-hidden", "false");
+              }
+      
+              setTimeout(() => {
+                sections.forEach(s => s.classList.toggle("active", s.id === targetId));
+                window.scrollTo(0, 0);
+                if (menuLoader) {
+                  menuLoader.classList.remove("is-active");
+                  menuLoader.setAttribute("aria-hidden", "true");
+                }
+              }, delay);
+            });
+          });
+        },
+      
+        // --- MODE FOCUS ---
+        initFocusMode() {
+          const focusBtn = document.getElementById('focusBtn');
+          if (!focusBtn) return;
+      
+          focusBtn.addEventListener('click', () => {
+            document.body.classList.toggle('focus-active');
+            const isFocus = document.body.classList.contains('focus-active');
+            focusBtn.innerHTML = isFocus
+              ? '<i class="fas fa-compress-arrows-alt"></i> QUITTER'
+              : '<i class="fas fa-expand-arrows-alt"></i> FOCUS';
+          });
+        },
+      
+        // --- GESTION DES ERREURS ---
+        initErrorHandlers() {
+          window.onerror = (message, source, lineno) => {
+            const statusText = document.querySelector(".loader-text");
+            if (statusText) {
+              statusText.style.color = "#ff4d4d";
+              statusText.textContent = "CRITICAL_ERROR: Script execution failed.";
+            }
+          };
+        }
+      };
+      
+      /**
+       * Fonction autonome pour afficher une image dans une popup
+       * Génère un document HTML complet à la volée
+       */
+      function viewImage(imageName) {
+        const newWindow = window.open("", "_blank");
+        newWindow.document.write(`
+          <!DOCTYPE html>
+          <html lang="fr">
+            <head>
+              <meta charset="UTF-8">
+              <title>Aperçu Anomalie : ${imageName}</title>
+              <style>
+                body {
+                  text-align: center;
+                  padding: 40px 20px;
+                  font-family: 'Inter', system-ui, -apple-system, sans-serif;
+                  background: #101529;
+                  color: #eaf6fb;
+                  margin: 0;
+                  display: flex;
+                  flex-direction: column;
+                  align-items: center;
+                  justify-content: center;
+                  min-height: 100vh;
+                }
+                h2 {
+                  color: #1fe1d9;
+                  font-size: 1.2rem;
+                  letter-spacing: 2px;
+                  text-transform: uppercase;
+                  margin-bottom: 20px;
+                }
+                .img-container {
+                  position: relative;
+                  padding: 10px;
+                  background: rgba(31, 225, 217, 0.1);
+                  border-radius: 16px;
+                  border: 1px solid rgba(31, 225, 217, 0.2);
+                  box-shadow: 0 0 50px rgba(0,0,0,0.5);
+                }
+                img {
+                  max-width: 90vw;
+                  max-height: 70vh;
+                  display: block;
+                  border-radius: 8px;
+                }
+                .actions { margin-top: 30px; }
+                .btn {
+                  display: inline-block;
+                  padding: 12px 24px;
+                  background: #1fe1d9;
+                  color: #101529;
+                  text-decoration: none;
+                  border-radius: 6px;
+                  font-weight: 800;
+                  font-size: 0.9rem;
+                  transition: all 0.3s ease;
+                  border: none;
+                  cursor: pointer;
+                  text-transform: uppercase;
+                  letter-spacing: 1px;
+                }
+                .btn:hover {
+                  background: #ffffff;
+                  transform: translateY(-2px);
+                  box-shadow: 0 5px 15px rgba(31, 225, 217, 0.4);
+                }
+              </style>
+            </head>
+            <body>
+              <h2><i class="fas fa-bug"></i> Capture d'écran : ${imageName}</h2>
+              <div class="img-container">
+                <img src="${imageName}" alt="Capture d'anomalie">
+              </div>
+              <div class="actions">
+                <a href="${imageName}" download="${imageName}" class="btn">Télécharger le rapport</a>
+                <button onclick="window.close()" class="btn" style="background: transparent; color: #1fe1d9; border: 1px solid #1fe1d9; margin-left: 10px;">Fermer</button>
+              </div>
+            </body>
+          </html>
+        `);
+      }
+      
+      // Initialisation au chargement du DOM
+      document.addEventListener("DOMContentLoaded", () => ProjectDetailApp.init());
+    </script>
+  </body>
+</html>

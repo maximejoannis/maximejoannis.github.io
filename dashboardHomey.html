@@ -1,0 +1,855 @@
+<!DOCTYPE html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Maxime Joannis - Portfolio QA</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="style-portfolio-maximejoannis.css">
+    <noscript>
+      <style>
+        #loader { display: none !important; }
+        .content-section { display: block !important; opacity: 1 !important; }
+      </style>
+    </noscript>
+  </head>
+  <body>
+    <div id="loader">
+      <div class="qa-logo">
+        <div class="gear"></div>
+        <div class="scan-ring"></div>
+      </div>
+      <div class="loader-title">EXECUTION_INITIALIZATION...</div>
+      <div class="build-panel" aria-hidden="true">
+        <div class="build-row">
+          <span class="build-label">BUILD</span>
+          <span class="build-state" id="buildState">RUNNING</span>
+          <span class="build-icon" id="buildIcon"><i class="fas fa-spinner"></i></span>
+        </div>
+        <div class="build-bar" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0">
+          <div class="build-bar__fill" id="buildFill"></div>
+        </div>
+      </div>
+      <div class="loader-log-container">
+        <div class="log-line" id="log-1"></div>
+        <div class="log-line" id="log-2"></div>
+        <div class="log-line" id="log-3"></div>
+      </div>
+      <div class="loader-text">STATUS: RUNNING TESTS...</div>
+    </div>
+    <aside>
+      <div class="profile-block">
+        <div class="profile-avatar">MJ</div>
+        <div class="profile-text">
+          <div class="profile-name">Maxime Joannis</div>
+          <div class="profile-role">Ingénieur QA</div>
+        </div>
+      </div>
+      <nav>
+        <ul id="menu">
+          <li><a href="index.html" class="nav-link"><i class="fas fa-home"></i> Accueil</a></li>
+          <li><a href="detailHomey.html" class="nav-link"><i class="fas fa-info-circle"></i> Projet Homey</a></li>
+          <hr style="border: 0; border-top: 1px solid rgba(255,255,255,0.1); margin: 10px 0;">
+          <li><a class="nav-link active-link" data-target="presentation"><i class="fas fa-chart-pie"></i> Tableau de bord QA</a></li>
+          <li><a class="nav-link" data-target="deliverables"><i class="fas fa-file-alt"></i> Rapports QA</a></li>
+        </ul>
+      </nav>
+    </aside>
+    <div class="wrapper">
+      <header>
+        <button id="focusBtn" style="cursor:pointer; padding: 8px 15px; background: rgba(31,225,217,0.1); border: 1px solid #1fe1d9; color: #1fe1d9; border-radius: 8px; font-weight: bold;">
+        <i class="fas fa-expand-arrows-alt"></i> FOCUS
+        </button>
+        <div class="breadcrumb">Portfolio QA // <span id="breadcrumb-title">Tableau de bord QA</span></div>
+        <div class="menu-loader" id="menuLoader" aria-hidden="true">
+          <div class="menu-loader__scan"></div>
+          <span class="menu-loader__text" id="menuLoaderText">SWITCHING VIEW...</span>
+        </div>
+        <div class="status-badge">
+          <i class="fas fa-circle" style="font-size: 8px;"></i> BUILD: SUCCESS
+        </div>
+        <div class="header-photo">
+          <img src="Photo_Identite.jpg" alt="Photo de Maxime">
+        </div>
+      </header>
+      <main>
+        <!-- SECTION : TABLEAU DE BORD QA -->
+        <!-- SECTION : TABLEAU DE BORD QA (DASHBOARD) -->
+        <section id="presentation" class="content-section active">
+          <h2><i class="fas fa-chart-pie"></i> Tableau de bord QA — Projet Homey</h2>
+          <!-- KPIs GLOBAUX -->
+          <div class="results-grid">
+            <div class="card results-card">
+              <div class="stat-label">Tests planifiés</div>
+              <div class="stat-value">23</div>
+              <p style="margin-top: 10px; color: var(--text-muted);">
+                Périmètre fonctionnel défini
+              </p>
+            </div>
+            <div class="card results-card">
+              <div class="stat-label">Tests exécutés</div>
+              <div class="stat-value">23</div>
+              <div class="progress-container" aria-label="Exécution des tests">
+                <div class="progress-info">
+                  <span>Exécution</span>
+                  <span><strong style="color: var(--accent-color);">100 %</strong></span>
+                </div>
+                <div class="progress-bar" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="100">
+                  <div class="progress-fill" style="width:100%"></div>
+                </div>
+              </div>
+              <div class="sub-stats">
+                <span>Couverture tests : OK</span>
+                <span>Scope : 23/23</span>
+              </div>
+            </div>
+            <div class="card results-card">
+              <div class="stat-label">Taux de réussite global</div>
+              <div class="stat-value">84,62 %</div>
+              <div class="progress-container" aria-label="Taux de réussite global">
+                <div class="progress-info">
+                  <span>Succès</span>
+                  <span>84,62 %</span>
+                </div>
+                <div class="progress-bar" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="85">
+                  <div class="progress-fill" style="width:84.62%"></div>
+                </div>
+              </div>
+              <div class="sub-stats">
+                <span>OK : 19</span>
+                <span>KO : 4</span>
+              </div>
+            </div>
+            <div class="card results-card">
+              <div class="stat-label">Couverture fonctionnelle</div>
+              <div class="stat-value">26,67 %</div>
+              <div class="progress-container" aria-label="Couverture fonctionnelle sur user stories">
+                <div class="progress-info">
+                  <span>Sur 30 User Stories</span>
+                  <span>26,67 %</span>
+                </div>
+                <div class="progress-bar" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="27">
+                  <div class="progress-fill" style="width:26.67%"></div>
+                </div>
+              </div>
+              <div class="sub-stats">
+                <span>Base : 30 US</span>
+                <span>Focus : critiques</span>
+              </div>
+            </div>
+          </div>
+          <!-- RÉPARTITION DES TESTS PAR PARCOURS -->
+          <div style="margin-top: 28px;">
+            <h2 style="font-size: 1.4rem; margin-bottom: 18px;">
+              <i class="fas fa-route"></i> Répartition des tests par parcours
+            </h2>
+            <div class="grid">
+              <div class="card">
+                <h3 style="margin-bottom: 10px;">Faire une demande de réservation</h3>
+                <div class="progress-container" aria-label="Réussite Faire une demande de réservation">
+                  <div class="progress-info">
+                    <span>Réussite</span>
+                    <span><strong style="color: var(--accent-color);">78,57 %</strong></span>
+                  </div>
+                  <div class="progress-bar" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="79">
+                    <div class="progress-fill" style="width:78.57%"></div>
+                  </div>
+                </div>
+                <p style="margin-top: 10px; color: var(--text-muted);">
+                  Parcours côté voyageur — validations fonctionnelles + UX.
+                </p>
+              </div>
+              <div class="card">
+                <h3 style="margin-bottom: 10px;">Traiter une demande de réservation</h3>
+                <div class="progress-container" aria-label="Réussite Traiter une demande de réservation">
+                  <div class="progress-info">
+                    <span>Réussite</span>
+                    <span><strong style="color: var(--accent-color);">88,89 %</strong></span>
+                  </div>
+                  <div class="progress-bar" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="89">
+                    <div class="progress-fill" style="width:88.89%"></div>
+                  </div>
+                </div>
+                <p style="margin-top: 10px; color: var(--text-muted);">
+                  Parcours côté hôte — décision / disponibilité / traitement.
+                </p>
+              </div>
+            </div>
+          </div>
+          <!-- STATUT DES TESTS + ANOMALIES -->
+          <div style="margin-top: 28px;">
+            <h2 style="font-size: 1.4rem; margin-bottom: 18px;">
+              <i class="fas fa-bug"></i> Statut & Anomalies
+            </h2>
+            <div class="results-grid">
+              <div class="card results-card">
+                <div class="stat-label">Statut des tests</div>
+                <div style="display:flex; gap:18px; align-items:flex-end; margin-top: 10px;">
+                  <div>
+                    <div class="stat-main" style="margin:0;">84,62 %</div>
+                    <div class="stat-label" style="margin:0;">Succès</div>
+                  </div>
+                  <div>
+                    <div class="stat-main" style="margin:0; color: var(--danger-color);">15,38 %</div>
+                    <div class="stat-label" style="margin:0;">Échecs</div>
+                  </div>
+                </div>
+                <div class="sub-stats" style="margin-top: 14px;">
+                  <span>19 réussis</span>
+                  <span>4 échoués</span>
+                </div>
+              </div>
+              <div class="card results-card">
+                <div class="stat-label">Anomalies détectées</div>
+                <div class="bug-count">4</div>
+                <div class="bug-distribution" aria-label="Répartition des anomalies par criticité">
+                  <div class="bug-item critical">
+                    <span>1</span> Critique
+                  </div>
+                  <div class="bug-item major">
+                    <span>2</span> Majeures
+                  </div>
+                  <div class="bug-item minor">
+                    <span>1</span> Mineure
+                  </div>
+                </div>
+                <p style="margin-top: 10px; color: var(--text-muted);">
+                  Synthèse : 1 critique, 2 majeures, 1 mineure.
+                </p>
+              </div>
+            </div>
+          </div>
+          <!-- AUTOMATISATION + JIRA/XRAY -->
+          <div style="margin-top: 28px;">
+            <h2 style="font-size: 1.4rem; margin-bottom: 18px;">
+              <i class="fas fa-robot"></i> Automatisation & Activité Jira / Xray
+            </h2>
+            <div class="grid">
+              <div class="card auto-highlight">
+                <h3>Automatisation</h3>
+                <div class="success-circle" aria-label="Taux de réussite automatisation 100%">
+                  <div class="percentage">100%</div>
+                  <div class="desc">Réussite</div>
+                </div>
+                <div class="sub-stats">
+                  <span>Scénarios</span>
+                  <span><strong style="color: var(--accent-color);">3</strong></span>
+                </div>
+                <ul class="skill-list" style="margin-top: 14px;">
+                  <li>Connexion utilisateur</li>
+                  <li>Recherche d’un logement</li>
+                  <li>Demande de réservation</li>
+                </ul>
+              </div>
+              <div class="card">
+                <h3>Jira / Xray — Volumétrie</h3>
+                <div class="jira-tags" style="margin-top: 12px;">
+                  <span class="tag">Tests : 23</span>
+                  <span class="tag">Sous-tâches : 6</span>
+                  <span class="tag">User Stories : 2</span>
+                  <span class="tag">Epic : 1</span>
+                  <span class="tag">Bugs : 4</span>
+                  <span class="tag">Plans de test : 2</span>
+                  <span class="tag">Executions : 2</span>
+                  <span class="tag"><strong>Total : 40</strong></span>
+                </div>
+                <p style="margin-top: 14px; color: var(--text-muted);">
+                  Traçabilité complète : exigences → tests → exécutions → anomalies.
+                </p>
+              </div>
+            </div>
+          </div>
+          <!-- BADGES QUALITÉ + GO/NO GO -->
+          <div style="margin-top: 28px;">
+            <h2 style="font-size: 1.4rem; margin-bottom: 18px;">
+              <i class="fas fa-award"></i> Badges qualité & Décision
+            </h2>
+            <div class="grid">
+              <div class="card">
+                <h3>Badges qualité</h3>
+                <div class="jira-tags" style="margin-top: 12px;">
+                  <span class="tag">Coverage OK — 100 % exécutés</span>
+                  <span class="tag">Automatisation fiable — 100 %</span>
+                  <span class="tag">Anomalies détectées — 4 bugs</span>
+                  <span class="tag">Reporting complet — livrables</span>
+                  <span class="tag">Agile Ready — Scrum</span>
+                  <span class="tag">GO/NO GO — préconisation</span>
+                </div>
+              </div>
+              <div class="card" style="border-left: 4px solid var(--warning-color);">
+                <h3 style="color: var(--warning-color);">
+                  <i class="fas fa-clipboard-check"></i> Recommandation : GO sous conditions
+                </h3>
+                <ul class="skill-list" style="margin-top: 12px;">
+                  <li>Parcours critiques automatisés et stables</li>
+                  <li>Quelques anomalies à corriger avant déploiement</li>
+                  <li>Qualité globale satisfaisante (84,62 %)</li>
+                </ul>
+                <div class="cta-group" style="margin-top: 16px;">
+                  <a class="cta-secondary" href="#" onclick="return false;">
+                  <i class="fas fa-shield-check"></i> GO sous conditions
+                  </a>
+                  <a class="cta-secondary" href="#" onclick="return false;">
+                  <i class="fas fa-triangle-exclamation"></i> Correctifs requis
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+        <!-- SECTION : RAPPORTS QA -->
+        <section id="deliverables" class="content-section">
+          <h2><i class="fas fa-file-alt"></i> Rapports QA — Projet Homey</h2>
+          <!-- Rapport de traçabilité -->
+          <div class="card" style="width:100%; margin-bottom: 2rem;">
+            <h3>
+              <i class="fas fa-diagram-project" style="margin-right:0.7em; color: var(--accent-color);"></i>
+              Rapport de Traçabilité
+            </h3>
+            <div style="margin-top: 16px;">
+              <div class="homey-glass-card" style="padding: 18px;">
+                <!-- EPIC -->
+                <div class="tag" style="display:inline-block; margin-bottom: 12px;">EPIC 1 — Gestion des réservations</div>
+                <div style="display:flex; flex-direction:column; gap:14px;">
+                  <!-- US1 -->
+                  <div class="card" style="padding: 16px; border-radius: 14px;">
+                    <div style="display:flex; align-items:center; justify-content:space-between; gap:12px;">
+                      <div>
+                        <div style="font-weight:900; color: var(--accent-color); font-family:'Courier New', monospace;">Story 1</div>
+                        <div style="color: var(--text-muted); margin-top: 4px;">Faire une demande de réservation</div>
+                      </div>
+                      <span class="tag">Sous-tâches : 2</span>
+                    </div>
+                    <div style="margin-top: 12px; display:grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 10px;">
+                      <div class="ritual-step" style="text-align:left;">
+                        <span style="letter-spacing:0; text-transform:none; font-weight:800;">
+                        Sous-tâche 1 : Voyageur (connecté)
+                        </span>
+                        <div style="color: var(--text-muted); font-size: 0.85rem;">13 tests</div>
+                      </div>
+                      <div class="ritual-step" style="text-align:left;">
+                        <span style="letter-spacing:0; text-transform:none; font-weight:800;">
+                        Sous-tâche 2 : Visiteur (non connecté)
+                        </span>
+                        <div style="color: var(--text-muted); font-size: 0.85rem;">1 test</div>
+                      </div>
+                    </div>
+                  </div>
+                  <!-- US2 -->
+                  <div class="card" style="padding: 16px; border-radius: 14px;">
+                    <div style="display:flex; align-items:center; justify-content:space-between; gap:12px;">
+                      <div>
+                        <div style="font-weight:900; color: var(--accent-color); font-family:'Courier New', monospace;">Story 2</div>
+                        <div style="color: var(--text-muted); margin-top: 4px;">Traiter une demande de réservation</div>
+                      </div>
+                      <span class="tag">Sous-tâches : 4</span>
+                    </div>
+                    <div style="margin-top: 12px; display:grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 10px;">
+                      <div class="ritual-step" style="text-align:left;">
+                        <span style="letter-spacing:0; text-transform:none; font-weight:800;">
+                        Sous-tâche 3 : L’hôte confirme
+                        </span>
+                        <div style="color: var(--text-muted); font-size: 0.85rem;">4 tests</div>
+                      </div>
+                      <div class="ritual-step" style="text-align:left;">
+                        <span style="letter-spacing:0; text-transform:none; font-weight:800;">
+                        Sous-tâche 4 : Le voyageur annule
+                        </span>
+                        <div style="color: var(--text-muted); font-size: 0.85rem;">1 test</div>
+                      </div>
+                      <div class="ritual-step" style="text-align:left;">
+                        <span style="letter-spacing:0; text-transform:none; font-weight:800;">
+                        Sous-tâche 5 : L’hôte refuse
+                        </span>
+                        <div style="color: var(--text-muted); font-size: 0.85rem;">1 test</div>
+                      </div>
+                      <div class="ritual-step" style="text-align:left;">
+                        <span style="letter-spacing:0; text-transform:none; font-weight:800;">
+                        Sous-tâche 6 : Le voyageur paye
+                        </span>
+                        <div style="color: var(--text-muted); font-size: 0.85rem;">3 tests</div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- Rapport de couverture de test -->
+          <div class="card" style="width:100%; margin-bottom: 2rem;">
+            <h3>
+              <i class="fas fa-chart-simple" style="margin-right:0.7em; color: var(--accent-color);"></i>
+              Rapport de Couverture de Test
+            </h3>
+            <div class="table-container">
+              <table class="modern-table" aria-label="Rapport de couverture de test">
+                <thead>
+                  <tr>
+                    <th>Résumé</th>
+                    <th>Nombre Total</th>
+                    <th>Réussi</th>
+                    <th>Échoué</th>
+                    <th>Complétude</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>Faire une demande de réservation</td>
+                    <td>14</td>
+                    <td>11</td>
+                    <td>3</td>
+                    <td>
+                      <strong>78,57 %</strong>
+                      <div class="progress-bar-container" style="margin-top:8px;">
+                        <div class="progress-fill" style="width:78.57%; height: 6px;"></div>
+                      </div>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>Scénario : Voyageur (connecté) fait une demande</td>
+                    <td>13</td>
+                    <td>10</td>
+                    <td>3</td>
+                    <td>
+                      <strong>70 %</strong>
+                      <div class="progress-bar-container" style="margin-top:8px;">
+                        <div class="progress-fill" style="width:70%; height: 6px;"></div>
+                      </div>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>Scénario : Visiteur (non connecté) fait une demande</td>
+                    <td>1</td>
+                    <td>1</td>
+                    <td>0</td>
+                    <td>
+                      <strong>100 %</strong>
+                      <div class="progress-bar-container" style="margin-top:8px;">
+                        <div class="progress-fill" style="width:100%; height: 6px;"></div>
+                      </div>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>Traiter une demande de réservation</td>
+                    <td>9</td>
+                    <td>8</td>
+                    <td>1</td>
+                    <td>
+                      <strong>88,89 %</strong>
+                      <div class="progress-bar-container" style="margin-top:8px;">
+                        <div class="progress-fill" style="width:88.89%; height: 6px;"></div>
+                      </div>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>Scénario : L’hôte confirme une demande</td>
+                    <td>4</td>
+                    <td>4</td>
+                    <td>0</td>
+                    <td>
+                      <strong>100 %</strong>
+                      <div class="progress-bar-container" style="margin-top:8px;">
+                        <div class="progress-fill" style="width:100%; height: 6px;"></div>
+                      </div>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>Scénario : Le voyageur annule une demande</td>
+                    <td>1</td>
+                    <td>1</td>
+                    <td>0</td>
+                    <td>
+                      <strong>100 %</strong>
+                      <div class="progress-bar-container" style="margin-top:8px;">
+                        <div class="progress-fill" style="width:100%; height: 6px;"></div>
+                      </div>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>Scénario : L’hôte refuse une demande</td>
+                    <td>1</td>
+                    <td>1</td>
+                    <td>0</td>
+                    <td>
+                      <strong>100 %</strong>
+                      <div class="progress-bar-container" style="margin-top:8px;">
+                        <div class="progress-fill" style="width:100%; height: 6px;"></div>
+                      </div>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>Scénario : Le voyageur paye une réservation</td>
+                    <td>3</td>
+                    <td>3</td>
+                    <td>0</td>
+                    <td>
+                      <strong>100 %</strong>
+                      <div class="progress-bar-container" style="margin-top:8px;">
+                        <div class="progress-fill" style="width:100%; height: 6px;"></div>
+                      </div>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+          <!-- Rapport d'exécution des tests -->
+          <div class="card" style="width:100%; margin-bottom: 2rem;">
+            <h3>
+              <i class="fas fa-clipboard-check" style="margin-right:0.7em; color: var(--accent-color);"></i>
+              Rapport d’exécution des tests
+            </h3>
+            <div class="table-container">
+              <table class="modern-table" aria-label="Rapport d’exécution des tests">
+                <thead>
+                  <tr>
+                    <th>Résumé</th>
+                    <th>Défauts</th>
+                    <th>Statut</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>Exécution V1 — Story : Faire une demande de réservation</td>
+                    <td>3</td>
+                    <td>
+                      <strong>78,57 %</strong>
+                      <div class="progress-bar-container" style="margin-top:8px;">
+                        <div class="progress-fill" style="width:78.57%; height: 6px;"></div>
+                      </div>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>Exécution V1 — Story : Traiter une demande de réservation</td>
+                    <td>1</td>
+                    <td>
+                      <strong>88,89 %</strong>
+                      <div class="progress-bar-container" style="margin-top:8px;">
+                        <div class="progress-fill" style="width:88.89%; height: 6px;"></div>
+                      </div>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+          <!-- Liste des bugs -->
+          <div class="card" style="width:100%;">
+            <h3>
+              <i class="fas fa-bug" style="margin-right:0.7em; color: var(--danger-color);"></i>
+              Liste des bugs
+            </h3>
+            <div class="table-container">
+              <table class="modern-table" aria-label="Liste des bugs">
+                <thead>
+                  <tr>
+                    <th>ID du bug</th>
+                    <th>Description</th>
+                    <th>Priorité</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><strong>BUG-001</strong></td>
+                    <td>Impossible de fermer le calendrier après sélection de date</td>
+                    <td><span class="badge status-attente">Mineur</span></td>
+                  </tr>
+                  <tr>
+                    <td><strong>BUG-002</strong></td>
+                    <td>Impossible de créer un compte hôte</td>
+                    <td><span class="badge status-annule">Critique</span></td>
+                  </tr>
+                  <tr>
+                    <td><strong>BUG-003</strong></td>
+                    <td>L’hôte ne reçoit aucun message suite à une demande de réservation</td>
+                    <td><span class="badge status-attente">Majeur</span></td>
+                  </tr>
+                  <tr>
+                    <td><strong>BUG-004</strong></td>
+                    <td>Le bouton “Appliquer une remise” n’est pas visible</td>
+                    <td><span class="badge status-attente">Majeur</span></td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </section>
+      </main>
+      <footer id="page-footer">
+        <div class="footer-content">
+          <span class="citation">
+          "N'abandonne jamais, car c'est souvent juste après le dernier effort que le succès se dévoile."
+          </span>
+          <p>
+            © 2026 Maxime Joannis - Tous droits réservés.
+            <a href="privacy.html">Politique de confidentialité</a>
+          </p>
+        </div>
+      </footer>
+    </div>
+    <script>
+      /**
+       * Project Detail Dashboard Logic
+       * Version: 2.0 - Optimized for Maintenance
+       */
+      const ProjectDetailApp = {
+        // --- CONFIGURATION ---
+        config: {
+          loaderTimeout: 8000,
+          typeWriterSpeed: 50,
+          reducedMotion: window.matchMedia("(prefers-reduced-motion: reduce)").matches,
+          sectionLabels: {
+            presentation: "PRÉSENTATION",
+            strategy: "STRATÉGIE QA",
+            execution: "CONCEPTION & EXEC",
+            automation: "AUTOMATISATION",
+            results: "RÉSULTATS",
+            deliverables: "LIVRABLES",
+            feedback: "RETOURS"
+          },
+          buildLogs: [
+            "> Loading Dashboard Widgets... OK",
+            "> Syncing Test Artifacts... OK",
+            "> Build: SUCCESS — Launching UI"
+          ]
+        },
+      
+        // --- INITIALISATION ---
+        init() {
+          this.initLoader();
+          this.initNavigation();
+          this.initFocusMode();
+          this.initErrorHandlers();
+          // Expose viewImage globally for onclick events in HTML
+          this.viewImage = viewImage; 
+        },
+      
+        // --- GESTION DU LOADER (Animation de démarrage) ---
+        initLoader() {
+          const nodes = {
+            loader: document.getElementById("loader"),
+            fill: document.getElementById("buildFill"),
+            state: document.getElementById("buildState"),
+            icon: document.getElementById("buildIcon"),
+            panel: document.querySelector(".build-panel"),
+            progressBar: document.querySelector(".build-bar")
+          };
+      
+          // Fail-safe global
+          setTimeout(() => this.closeLoader(nodes.loader), this.config.loaderTimeout);
+      
+          // Affichage des logs progressifs
+          this.config.buildLogs.forEach((text, index) => {
+            setTimeout(() => {
+              const line = document.getElementById(`log-${index + 1}`);
+              if (line) line.textContent = text;
+            }, this.config.reducedMotion ? 0 : index * 250);
+          });
+      
+          if (this.config.reducedMotion) {
+            this.closeLoader(nodes.loader);
+            return;
+          }
+      
+          // Animation de la barre de progression
+          setTimeout(() => this.updateProgress(nodes, "85"), 120);
+      
+          setTimeout(() => {
+            this.updateProgress(nodes, "100");
+            if (nodes.state) nodes.state.textContent = "SUCCESS";
+            if (nodes.icon) nodes.icon.innerHTML = '<i class="fas fa-check"></i>';
+            if (nodes.panel) nodes.panel.classList.add("is-success");
+            
+            setTimeout(() => this.closeLoader(nodes.loader), 400);
+          }, 720);
+        },
+      
+        updateProgress(nodes, value) {
+          if (nodes.fill) nodes.fill.style.width = `${value}%`;
+          if (nodes.progressBar) nodes.progressBar.setAttribute("aria-valuenow", value);
+        },
+      
+        closeLoader(loader) {
+          if (loader && loader.style.display !== "none") {
+            loader.style.opacity = "0";
+            setTimeout(() => { loader.style.display = "none"; }, 250);
+          }
+        },
+      
+        // --- NAVIGATION (Transitions et Typewriter) ---
+        initNavigation() {
+          const links = document.querySelectorAll('.nav-link');
+          const sections = document.querySelectorAll('.content-section');
+          const breadcrumbTitle = document.getElementById('breadcrumb-title');
+          const menuLoader = document.getElementById("menuLoader");
+          const menuLoaderText = document.getElementById("menuLoaderText");
+          
+          let typeTimeout;
+      
+          const typeWriter = (text, element) => {
+            element.textContent = "";
+            let i = 0;
+            clearTimeout(typeTimeout);
+            const type = () => {
+              if (i < text.length) {
+                element.textContent += text.charAt(i);
+                i++;
+                typeTimeout = setTimeout(type, this.config.typeWriterSpeed);
+              }
+            };
+            type();
+          };
+      
+          links.forEach(link => {
+            link.addEventListener("click", (e) => {
+              const targetId = link.getAttribute("data-target");
+              if (!targetId) return; // Ignore les liens externes (ex: index.html)
+      
+              const currentSection = document.querySelector(".content-section.active");
+              if (currentSection?.id === targetId) return;
+      
+              // Mise à jour UI Menu
+              links.forEach(l => l.classList.remove("active-link"));
+              link.classList.add("active-link");
+      
+              // Animation Breadcrumb
+              const newTitle = link.innerText.trim();
+              typeWriter(newTitle, breadcrumbTitle);
+      
+              // Transition avec Micro-loader
+              const label = this.config.sectionLabels[targetId] || newTitle.toUpperCase();
+              const delay = this.config.reducedMotion ? 0 : 200;
+      
+              if (menuLoader && !this.config.reducedMotion) {
+                menuLoaderText.textContent = `LOADING: ${label}`;
+                menuLoader.classList.add("is-active");
+                menuLoader.setAttribute("aria-hidden", "false");
+              }
+      
+              setTimeout(() => {
+                sections.forEach(s => s.classList.toggle("active", s.id === targetId));
+                window.scrollTo(0, 0);
+                if (menuLoader) {
+                  menuLoader.classList.remove("is-active");
+                  menuLoader.setAttribute("aria-hidden", "true");
+                }
+              }, delay);
+            });
+          });
+        },
+      
+        // --- MODE FOCUS ---
+        initFocusMode() {
+          const focusBtn = document.getElementById('focusBtn');
+          if (!focusBtn) return;
+      
+          focusBtn.addEventListener('click', () => {
+            document.body.classList.toggle('focus-active');
+            const isFocus = document.body.classList.contains('focus-active');
+            focusBtn.innerHTML = isFocus
+              ? '<i class="fas fa-compress-arrows-alt"></i> QUITTER'
+              : '<i class="fas fa-expand-arrows-alt"></i> FOCUS';
+          });
+        },
+      
+        // --- GESTION DES ERREURS ---
+        initErrorHandlers() {
+          window.onerror = (message, source, lineno) => {
+            const statusText = document.querySelector(".loader-text");
+            if (statusText) {
+              statusText.style.color = "#ff4d4d";
+              statusText.textContent = "CRITICAL_ERROR: Script execution failed.";
+            }
+          };
+        }
+      };
+      
+      /**
+       * Fonction autonome pour afficher une image dans une popup
+       * Génère un document HTML complet à la volée
+       */
+      function viewImage(imageName) {
+        const newWindow = window.open("", "_blank");
+        newWindow.document.write(`
+          <!DOCTYPE html>
+          <html lang="fr">
+            <head>
+              <meta charset="UTF-8">
+              <title>Aperçu Anomalie : ${imageName}</title>
+              <style>
+                body {
+                  text-align: center;
+                  padding: 40px 20px;
+                  font-family: 'Inter', system-ui, -apple-system, sans-serif;
+                  background: #101529;
+                  color: #eaf6fb;
+                  margin: 0;
+                  display: flex;
+                  flex-direction: column;
+                  align-items: center;
+                  justify-content: center;
+                  min-height: 100vh;
+                }
+                h2 {
+                  color: #1fe1d9;
+                  font-size: 1.2rem;
+                  letter-spacing: 2px;
+                  text-transform: uppercase;
+                  margin-bottom: 20px;
+                }
+                .img-container {
+                  position: relative;
+                  padding: 10px;
+                  background: rgba(31, 225, 217, 0.1);
+                  border-radius: 16px;
+                  border: 1px solid rgba(31, 225, 217, 0.2);
+                  box-shadow: 0 0 50px rgba(0,0,0,0.5);
+                }
+                img {
+                  max-width: 90vw;
+                  max-height: 70vh;
+                  display: block;
+                  border-radius: 8px;
+                }
+                .actions { margin-top: 30px; }
+                .btn {
+                  display: inline-block;
+                  padding: 12px 24px;
+                  background: #1fe1d9;
+                  color: #101529;
+                  text-decoration: none;
+                  border-radius: 6px;
+                  font-weight: 800;
+                  font-size: 0.9rem;
+                  transition: all 0.3s ease;
+                  border: none;
+                  cursor: pointer;
+                  text-transform: uppercase;
+                  letter-spacing: 1px;
+                }
+                .btn:hover {
+                  background: #ffffff;
+                  transform: translateY(-2px);
+                  box-shadow: 0 5px 15px rgba(31, 225, 217, 0.4);
+                }
+              </style>
+            </head>
+            <body>
+              <h2><i class="fas fa-bug"></i> Capture d'écran : ${imageName}</h2>
+              <div class="img-container">
+                <img src="${imageName}" alt="Capture d'anomalie">
+              </div>
+              <div class="actions">
+                <a href="${imageName}" download="${imageName}" class="btn">Télécharger le rapport</a>
+                <button onclick="window.close()" class="btn" style="background: transparent; color: #1fe1d9; border: 1px solid #1fe1d9; margin-left: 10px;">Fermer</button>
+              </div>
+            </body>
+          </html>
+        `);
+      }
+      
+      // Initialisation au chargement du DOM
+      document.addEventListener("DOMContentLoaded", () => ProjectDetailApp.init());
+    </script>
+  </body>
+</html>

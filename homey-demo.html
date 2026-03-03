@@ -1,0 +1,1261 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Homey — Démo Lite v2 (inspirée Homey)</title>
+
+  <!-- Inspired by the Homey theme structure (listing + booking overlay) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+  <style>
+
+    :root{
+      /* === Palette (PORTFOLIO) === */
+      --text-main: #ffffff;
+      --text-muted: rgba(235, 242, 255, 0.72);
+      --text-soft: rgba(235, 242, 255, 0.50);
+
+      --accent-color: #1fe1d9;
+      --accent-strong: #39f0e2;
+      --accent-glow: rgba(31,225,217,0.35);
+
+      --bg-main: #101529;
+      --sidebar-bg: rgba(16, 21, 41, 0.96);
+      --header-bg: rgba(18, 26, 52, 0.88);
+      --card-bg: rgba(34, 48, 75, 0.55);
+      --card-bg-strong: rgba(28, 40, 68, 0.75);
+
+      --border-color: rgba(31,225,217,0.30);
+      --border-soft: rgba(255,255,255,0.08);
+
+      --success-color: #3ee98a;
+      --warning-color: #ffd86b;
+      --danger-color: #ff6b6b;
+
+      --shadow-soft: 0 10px 25px rgba(0,0,0,0.35);
+      --shadow-glow: 0 0 18px rgba(31,225,217,0.18);
+
+      /* === Demo tokens (mapped) === */
+      --accent: var(--accent-color);
+      --accent2: var(--accent-strong);
+      --accent3: rgba(255,255,255,0.18);
+
+      --ink: var(--text-main);
+      --muted: var(--text-muted);
+      --bg: var(--bg-main);
+
+      --card: var(--card-bg);
+      --card2: var(--card-bg-strong);
+      --line: var(--border-color);
+
+      --shadow: var(--shadow-soft);
+      --shadow2: var(--shadow-glow);
+
+      --radius: 16px;
+      --mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+    }
+
+*{box-sizing:border-box}
+        body{
+      margin:0;
+      font-family: "Quicksand", system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, Cantarell, Arial;
+      color:var(--ink);
+      background:
+        radial-gradient(1200px 640px at 10% -10%, rgba(31,225,217,.18), transparent 60%),
+        radial-gradient(900px 620px at 100% 0%, rgba(57,240,226,.10), transparent 58%),
+        linear-gradient(120deg, var(--bg-main) 0%, #22304b 60%, var(--accent-color) 100%);
+      background-attachment: fixed;
+      min-height:100vh;
+    }
+    body:before{
+      content:"";
+      position:fixed; inset:0;
+      pointer-events:none;
+      background-image:
+        linear-gradient(rgba(31,225,217,.035) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(31,225,217,.035) 1px, transparent 1px);
+      background-size: 42px 42px;
+      opacity:.55;
+      mix-blend-mode: screen;
+    }
+    a{color:var(--accent); text-decoration:none}
+a:hover{text-decoration:underline}
+
+    .wrap{max-width:1180px; margin:0 auto; padding: 18px 14px 50px;}
+    .topbar{
+      background: rgba(7,22,43,.58);
+      border:1px solid rgba(31,225,217,.16);
+      backdrop-filter: blur(14px);
+      border-radius: 16px;
+      box-shadow: var(--shadow2);
+      padding: 14px 14px;
+      display:flex; gap:12px; flex-wrap:wrap; align-items:center; justify-content:space-between;
+    }
+    .brand{display:flex; align-items:center; gap:10px;}
+    .logo{
+      width:36px; height:36px; border-radius: 10px;
+      background: linear-gradient(135deg, var(--accent-color), var(--accent-strong), #22304b);
+      display:grid; place-items:center; color:#001423; font-weight:900;
+      box-shadow: 0 0 22px rgba(31,225,217,.28);
+    }
+    .titleblock h1{margin:0; font-size: 1.15rem; line-height:1.15}
+    .titleblock p{margin:3px 0 0; color:var(--muted); font-size:.92rem}
+    .actions{display:flex; gap:10px; flex-wrap:wrap; align-items:center;}
+    .btn{
+      border:1px solid rgba(31,225,217,.18);
+      background: rgba(7,22,43,.55);
+      color: var(--ink);
+      border-radius: 10px;
+      padding: 10px 12px;
+      font-weight: 800;
+      cursor:pointer;
+      display:inline-flex; gap:8px; align-items:center;
+      transition: transform .06s ease, box-shadow .12s ease, border-color .12s ease, background .12s ease;
+      user-select:none;
+    }
+    .btn:hover{box-shadow: var(--shadow2)}
+    .btn:active{transform: translateY(1px)}
+    .btn-primary{
+      border-color: rgba(31,225,217,.28);
+      background: linear-gradient(135deg, rgba(31,225,217,.18), rgba(109,187,255,.14));
+      color: var(--ink);
+      box-shadow: 0 0 18px rgba(31,225,217,.18);
+    }
+    .btn-ghost{ background: transparent; }
+    .badge{
+      font-family: var(--mono);
+      font-weight: 900;
+      font-size: .78rem;
+      padding: 6px 10px;
+      border-radius: 999px;
+      border:1px solid rgba(31,225,217,.22);
+      background: linear-gradient(135deg, rgba(46,211,255,.12), rgba(109,187,255,.10));
+      color: var(--ink);
+      display:inline-flex; gap:8px; align-items:center;
+    }
+
+    .grid{display:grid; grid-template-columns: 1.3fr .8fr; gap: 14px; margin-top: 14px;}
+    @media (max-width: 980px){ .grid{grid-template-columns:1fr} }
+
+    .card{
+      background: var(--card);
+      border:1px solid rgba(31,225,217,.16);
+      border-radius: 16px;
+      box-shadow: var(--shadow);
+      overflow:hidden;
+      backdrop-filter: blur(14px);
+    }
+    .card-h{
+      padding: 12px 14px;
+      border-bottom:1px solid rgba(46,211,255,.14);
+      display:flex; align-items:center; justify-content:space-between; gap:10px; flex-wrap:wrap;
+      background: linear-gradient(to bottom, rgba(7,22,43,.78), rgba(11,58,110,.35));
+    }
+    .card-h h2{margin:0; font-size: 1.02rem}
+    .tabs{display:flex; gap:10px; flex-wrap:wrap}
+    .tab{
+      border:1px solid rgba(31,225,217,.18);
+      background: rgba(7,22,43,.50);
+      border-radius: 999px;
+      padding: 9px 12px;
+      font-weight: 900;
+      cursor:pointer;
+      display:inline-flex; gap:8px; align-items:center;
+      color: var(--ink);
+    }
+    .tab.is-active{
+      border-color: rgba(31,225,217,.42);
+      background: linear-gradient(135deg, rgba(31,225,217,.18), rgba(109,187,255,.14));
+      color: var(--accent-color);
+      box-shadow: 0 0 16px rgba(31,225,217,.16);
+    }
+    .card-b{padding: 14px;}
+
+    /* Listing cards inspired by Homey "media property-item" */
+    .item-row{display:grid; gap:12px;}
+    .item-wrap{border:1px solid var(--line); border-radius: 14px; overflow:hidden; background: var(--card);}
+    .property-item{display:flex; gap:0; align-items:stretch;}
+    .media-left{width: 240px; position:relative; background: rgba(7,22,43,.65);}
+    .media-left img{width:100%; height:100%; object-fit:cover; display:block; min-height: 155px;}
+    @media (max-width: 720px){ .property-item{flex-direction:column;} .media-left{width:100%} }
+    .item-media-price{
+      position:absolute; left:10px; top:10px;
+      background: rgba(7,22,43,.72);
+      border:1px solid rgba(31,225,217,.16);
+      border-radius: 999px;
+      padding: 6px 10px;
+      font-weight: 800;
+      box-shadow: 0 10px 18px rgba(20,20,40,.12);
+    }
+    .item-media-price sup{font-size:.75em}
+    .item-media-price sub{font-size:.75em; color:var(--muted)}
+    .item-user-image{
+      position:absolute; right:10px; bottom:10px;
+      width: 38px; height: 38px;
+      border-radius: 999px;
+      border:2px solid #fff;
+      overflow:hidden;
+      box-shadow: 0 10px 18px rgba(20,20,40,.14);
+      background: var(--card);
+    }
+    .item-user-image img{width:100%; height:100%; object-fit:cover}
+    .media-body{padding: 12px 12px;}
+    .title{margin:0; font-size: 1.05rem; font-weight: 800}
+    address.item-address{margin:4px 0 0; font-style:normal; color:var(--muted); font-size:.92rem}
+    .item-amenities{margin: 10px 0 0; padding:0; list-style:none; display:flex; gap:12px; flex-wrap:wrap; color:rgba(234,246,255,.85);}
+    .item-amenities li{display:flex; gap:7px; align-items:center; font-weight: 700; font-size:.92rem}
+    .item-amenities i{color: var(--accent)}
+    .item-footer{margin-top: 12px; display:flex; align-items:center; justify-content:space-between; gap:10px; flex-wrap:wrap;}
+    .btn-full-width{width:100%; justify-content:center}
+    .btn-primary-homey{
+      background: linear-gradient(135deg, var(--accent-color), var(--accent-strong));
+      border-color: transparent;
+      color: #001423;
+      font-weight: 900;
+      box-shadow: 0 0 22px rgba(31,225,217,.18);
+    }
+    .btn-primary-homey:hover{box-shadow: 0 0 30px rgba(31,225,217,.30)}
+    .small{color:var(--muted); font-size:.92rem; margin:0}
+
+    table{width:100%; border-collapse: collapse; overflow:hidden; border-radius: 12px; border:1px solid rgba(31,225,217,.16); background: rgba(7,22,43,.55)}
+    th,td{padding: 10px; border-bottom: 1px solid var(--line); text-align:left; font-size:.92rem; vertical-align:top}
+    th{background: rgba(7,22,43,.72); font-weight: 900; color: var(--accent-color)}
+    tr:last-child td{border-bottom:none}
+    .status{
+      font-family: var(--mono);
+      font-weight: 800;
+      font-size:.78rem;
+      padding: 5px 9px;
+      border-radius: 999px;
+      border:1px solid var(--line);
+      display:inline-flex; gap:8px; align-items:center;
+      background: var(--card);
+    }
+    .SENT{border-color: rgba(31,225,217,.30); background: rgba(46,211,255,.10); color: var(--accent-color);}
+    .ACCEPTED{border-color: rgba(62,233,138,.35); background: rgba(62,233,138,.10); color: var(--success-color);}
+    .REFUSED{border-color: rgba(255,107,107,.35); background: rgba(255,107,107,.12); color: var(--danger-color);}
+
+    /* Overlay booking module inspired by Homey overlay-booking-module */
+    .overlay-booking-module{
+      position: fixed; inset:0;
+      display:none;
+      z-index: 9999;
+      background: rgba(2,8,20,.68);
+      backdrop-filter: blur(10px);
+      padding: 16px;
+      align-items: center;
+      justify-content: center;
+    }
+    .overlay-card{
+      width: min(980px, 100%);
+      background: rgba(7,22,43,.78);
+      border-radius: 16px;
+      border:1px solid rgba(31,225,217,.18);
+      box-shadow: 0 22px 60px rgba(0,0,0,.55);
+      overflow:hidden;
+      display:grid;
+      grid-template-columns: 1.1fr .9fr;
+      backdrop-filter: blur(16px);
+    }
+    @media (max-width: 980px){ .overlay-card{grid-template-columns: 1fr} }
+    .overlay-head{
+      grid-column: 1 / -1;
+      padding: 12px 14px;
+      border-bottom:1px solid rgba(46,211,255,.14);
+      display:flex; align-items:center; justify-content:space-between; gap:10px; flex-wrap:wrap;
+      background: linear-gradient(to bottom, rgba(7,22,43,.85), rgba(11,58,110,.35));
+    }
+    .overlay-search-title{font-weight: 900; color:var(--ink)}
+    .overlay-booking-module-close{
+      border:none; background: transparent;
+      cursor:pointer; font-size: 18px; padding: 6px 10px;
+      border-radius: 10px;
+      color: var(--ink);
+    }
+    .overlay-booking-module-close:hover{background: rgba(46,211,255,.10)}
+    .overlay-left{padding: 14px; border-right:1px solid var(--line);}
+    @media (max-width: 980px){ .overlay-left{border-right:none; border-bottom:1px solid var(--line)} }
+    .overlay-right{padding: 14px;}
+    .summary-img{border-radius: 12px; overflow:hidden; border:1px solid var(--line); background: rgba(7,22,43,.65);}
+    .summary-img img{width:100%; height: 210px; object-fit:cover; display:block}
+    .summary-title{margin: 10px 0 0; font-size: 1.05rem; font-weight: 900}
+    .summary-sub{margin: 3px 0 0; color:var(--muted); font-size:.92rem}
+
+    .block{border:1px solid var(--line); border-radius: 14px; padding: 12px; background: var(--card)}
+    .search-date-range{display:grid; grid-template-columns: 1fr 1fr; gap: 10px;}
+    .form-control{
+      width:100%;
+      border:1px solid rgba(31,225,217,.18);
+      border-radius: 10px;
+      padding: 10px 10px;
+      font: inherit;
+      outline:none;
+      background: rgba(7,22,43,.62);
+      color: var(--ink);
+    }
+    .form-control:focus{border-color: rgba(31,225,217,.55); box-shadow: 0 0 0 4px rgba(31,225,217,.16)}
+    .search-guests{margin-top: 10px; display:flex; align-items:center; justify-content:space-between; gap:10px}
+    .guests-pill{
+      border:1px solid var(--line);
+      border-radius: 999px;
+      padding: 8px 10px;
+      font-weight: 800;
+      display:inline-flex; gap:8px; align-items:center;
+      background: rgba(7,22,43,.55);
+    }
+    .btn-secondary-outlined{
+      border:1px solid var(--line);
+      background: rgba(7,22,43,.55);
+      border-radius: 10px;
+      padding: 8px 10px;
+      cursor:pointer;
+      color: var(--ink);
+    }
+    .btn-secondary-outlined:hover{box-shadow: 0 10px 22px rgba(20,20,40,.08)}
+    .guest-pop{
+      display:none;
+      margin-top: 10px;
+      border:1px dashed var(--line);
+      border-radius: 12px;
+      padding: 12px;
+      background: rgba(7,22,43,.55);
+    }
+    .calc-row{display:flex; align-items:center; justify-content:space-between; gap:10px; padding: 8px 0;}
+    .quantity-calculator{font-weight: 900; font-family: var(--mono); min-width: 26px; text-align:center}
+    .search-extra-services{margin-top: 10px;}
+    .extra-services-list{margin: 10px 0 0; padding:0; list-style:none; display:grid; gap:10px;}
+    .extra-services-list li{display:flex; align-items:center; justify-content:space-between; gap:10px}
+    .control{display:flex; gap:10px; align-items:center; font-weight: 800;}
+    .control input{accent-color: var(--accent);}
+    .search-message{margin-top: 10px;}
+    .text-center{text-align:center}
+    .text-small{font-size:.9rem; color:var(--muted)}
+    .payment-list{margin-top: 10px; border-top:1px solid var(--line); padding-top: 10px; display:grid; gap:8px; font-weight: 700; color:rgba(234,246,255,.88)}
+    .pay-row{display:flex; justify-content:space-between; gap:10px}
+    .pay-total{font-weight: 900; color:var(--ink)}
+    .pill{font-family: var(--mono); font-weight: 800; font-size:.78rem; padding: 4px 8px; border-radius: 999px; border:1px solid var(--line); background: rgba(7,22,43,.55)}
+
+    .qa-row{display:grid; grid-template-columns: 1fr; gap: 10px;}
+    .kpis{display:grid; grid-template-columns: repeat(3, 1fr); gap:10px;}
+    @media (max-width: 700px){ .kpis{grid-template-columns:1fr} }
+    .kpi{border:1px solid rgba(31,225,217,.16); border-radius: 14px; padding: 10px 12px; background: rgba(7,22,43,.55)}
+    .k{color:var(--muted); font-size:.85rem; font-weight:800}
+    .v{margin-top:4px; font-size:1.05rem; font-weight:900}
+    details{border:1px solid rgba(31,225,217,.16); border-radius: 14px; padding: 10px 12px; background: rgba(7,22,43,.55)}
+    details summary{cursor:pointer; font-weight: 900; color:var(--ink)}
+    .case{border:1px solid rgba(31,225,217,.16); border-radius: 14px; padding: 10px 12px; display:flex; justify-content:space-between; gap:12px; background: rgba(7,22,43,.55)}
+    .case-left{display:flex; gap:10px; align-items:flex-start}
+    .tcid{font-family: var(--mono); font-weight: 900; font-size:.8rem; border:1px solid var(--line); border-radius: 10px; padding: 6px 8px; background: rgba(7,22,43,.55); min-width: 58px; text-align:center}
+    .tct{font-weight: 900}
+    .tcd{margin-top:3px; color:var(--muted); font-size:.9rem}
+    .st{font-family: var(--mono); font-weight: 900; font-size:.8rem; border-radius: 999px; padding: 6px 10px; border:1px solid var(--line); background: rgba(7,22,43,.55)}
+    .st.RUNNING{border-color: rgba(245,158,11,.35); background: rgba(245,158,11,.10); color:#92400e}
+    .st.PASS{border-color: rgba(16,185,129,.35); background: rgba(16,185,129,.10); color:#0f7a56}
+    .st.FAIL{border-color: rgba(239,68,68,.25); background: rgba(239,68,68,.10); color:#b91c1c}
+
+    .toasts{position:fixed; right:14px; bottom:14px; z-index:10000; display:grid; gap:10px; width: min(420px, calc(100vw - 28px)); pointer-events:none;}
+    .toast{
+      pointer-events:none;
+      background: rgba(7,22,43,.78);
+      border:1px solid var(--line);
+      border-left: 4px solid var(--accent-color);
+      border-radius: 14px;
+      box-shadow: 0 12px 26px rgba(20,20,40,.18);
+      padding: 10px 12px;
+      display:flex; gap:10px; align-items:flex-start;
+      animation: pop .16s ease;
+    }
+    .toast .t{font-weight: 900}
+    .toast .m{margin-top:2px; color:var(--muted); font-size:.92rem}
+    .toast.ok{border-left-color:#10b981}
+    .toast.warn{border-left-color:#f59e0b}
+    .toast.err{border-left-color:#ef4444}
+    @keyframes pop{from{transform: translateY(6px); opacity:.0} to{transform: translateY(0); opacity:1}}
+  </style>
+</head>
+
+<body>
+  <div class="wrap">
+    <div class="topbar">
+      <div class="brand">
+        <div class="logo">H</div>
+        <div class="titleblock">
+          <h1>Homey — Démo Lite v2</h1>
+          <p>Voyageur → Demande de réservation (overlay) → Hôte accepte/refuse → QA (20 tests / 9 anomalies groupées)</p>
+        </div>
+      </div>
+      <div class="actions">
+        <span class="badge"><i class="fa fa-bolt"></i> Démo 60 s</span>
+        <button class="btn btn-primary" id="btnGuided"><i class="fa fa-play"></i> Lancer</button>
+        <button class="btn btn-ghost" id="btnReset"><i class="fa fa-refresh"></i> Réinitialiser</button>
+      </div>
+    </div>
+
+    <div class="grid">
+      <section class="card">
+        <div class="card-h">
+          <h2><i class="fa fa-home" style="color:var(--accent)"></i> Application</h2>
+          <div class="tabs">
+            <button class="tab is-active" id="tabTraveler"><i class="fa fa-user"></i> Interface Voyageur</button>
+            <button class="tab" id="tabHost"><i class="fa fa-shield"></i> Interface Hôte</button>
+            <button class="tab" id="tabQA"><i class="fa fa-bug"></i> Environnement de test QA</button>
+          </div>
+        </div>
+
+        <div class="card-b">
+          <div id="viewTraveler">
+            <p class="small">Choisis une annonce puis clique <strong>Demande de réservation</strong> (fenêtre inspirée de Homey).</p>
+            <div class="item-row" id="listingRow"></div>
+
+            <div style="margin-top:14px; display:flex; align-items:center; justify-content:space-between; gap:10px; flex-wrap:wrap;">
+              <h2 style="margin:0; font-size: 1.02rem;"><i class="fa fa-list" style="color:var(--accent)"></i> Mes réservations</h2>
+              <div style="display:flex; gap:10px; flex-wrap:wrap;">
+                <button class="btn" id="btnSeed"><i class="fa fa-magic"></i> Créer 2 demandes</button>
+                <button class="btn" id="btnClear"><i class="fa fa-trash"></i> Vider les demandes</button>
+              </div>
+            </div>
+
+            <div style="margin-top:10px;">
+              <table aria-label="Réservations voyageur">
+                <thead>
+                  <tr>
+                    <th>Annonce</th>
+                    <th>Dates</th>
+                    <th>Total</th>
+                    <th>Statut</th>
+                  </tr>
+                </thead>
+                <tbody id="travelerTable"></tbody>
+              </table>
+            </div>
+
+            <p class="small" style="margin-top:10px;">
+              Statuts : <span class="status SENT"><i class="fa fa-paper-plane"></i> Envoyée</span>
+              → <span class="status ACCEPTED"><i class="fa fa-check"></i> Acceptée</span> /
+              <span class="status REFUSED"><i class="fa fa-times"></i> Refusée</span>
+            </p>
+          </div>
+
+          <div id="viewHost" style="display:none;">
+            <p class="small">Boîte de réception de l’hôte : traiter les demandes en attente.</p>
+
+            <div style="display:flex; align-items:center; justify-content:space-between; gap:10px; flex-wrap:wrap;">
+              <div style="display:flex; gap:10px; align-items:center; flex-wrap:wrap;">
+                <span class="badge"><i class="fa fa-inbox"></i> En attente : <span id="hostPending">0</span></span>
+                <span class="pill">hôte: <span id="hostName"></span></span>
+              </div>
+              <div style="display:flex; gap:10px; flex-wrap:wrap; align-items:center;">
+                <label class="small" style="display:flex; gap:8px; align-items:center;">
+                  Filtre
+                  <select class="form-control" id="hostFilter" style="padding:8px 10px; width:auto;">
+                    <option value="all">Tous</option>
+                    <option value="SENT">Envoyée</option>
+                    <option value="ACCEPTED">Acceptée</option>
+                    <option value="REFUSED">Refusée</option>
+                  </select>
+                </label>
+                <button class="btn" id="btnHostAuto"><i class="fa fa-gears"></i> Automatique</button>
+              </div>
+            </div>
+
+            <div style="margin-top:10px;">
+              <table aria-label="Inbox hôte">
+                <thead>
+                  <tr>
+                    <th>Réservation</th>
+                    <th>Dates</th>
+                    <th>Total</th>
+                    <th>Statut</th>
+                    <th>Actions</th>
+                  </tr>
+                </thead>
+                <tbody id="hostTable"></tbody>
+              </table>
+            </div>
+
+            <p class="small" style="margin-top:10px;">
+              Chaque action (si pas d’anomalie Workflow) notifie le voyageur.
+            </p>
+          </div>
+
+          <div id="viewQA" style="display:none;">
+            <p class="small">Anomalies (9) regroupées par module → lancer les tests → appliquer les correctifs → relancer.</p>
+
+            <div class="qa-row">
+              <div class="block">
+                <div style="display:flex; align-items:center; justify-content:space-between; gap:10px; flex-wrap:wrap;">
+                  <strong><i class="fa fa-toggle-on" style="color:var(--accent)"></i> Anomalies (3 groupes)</strong>
+                  <div style="display:flex; gap:10px; flex-wrap:wrap;">
+                    <button class="btn" id="tglValidation"><i class="fa fa-toggle-off"></i> Validation</button>
+                    <button class="btn" id="tglPricing"><i class="fa fa-toggle-off"></i> Pricing</button>
+                    <button class="btn" id="tglWorkflow"><i class="fa fa-toggle-off"></i> Workflow</button>
+                    <button class="btn btn-primary" id="btnPatch"><i class="fa fa-wrench"></i> Appliquer les correctifs</button>
+                  </div>
+                </div>
+                <p class="small" style="margin-top:8px; margin-bottom:0;">
+                  (Validation = dates/capacité/doublons · Tarification = services/arrondis · Parcours = notifications/statuts/filtre)
+                </p>
+              </div>
+
+              <div class="kpis">
+                <div class="kpi"><div class="k">Total cas de test</div><div class="v">20</div></div>
+                <div class="kpi"><div class="k">RÉUSSIS</div><div class="v" id="kPass">—</div></div>
+                <div class="kpi"><div class="k">ÉCHOUÉS</div><div class="v" id="kFail">—</div></div>
+              </div>
+
+              <div class="block">
+                <div style="display:flex; align-items:center; justify-content:space-between; gap:10px; flex-wrap:wrap;">
+                  <strong><i class="fa fa-flask" style="color:var(--accent)"></i> Cas de test (résumé)</strong>
+                  <div style="display:flex; gap:10px; flex-wrap:wrap;">
+                    <button class="btn btn-primary" id="btnRun"><i class="fa fa-play"></i> Lancer les tests</button>
+                    <button class="btn" id="btnStop"><i class="fa fa-stop"></i> Arrêter</button>
+                  </div>
+                </div>
+                <div id="runnerTop" style="display:grid; gap:10px; margin-top:10px;"></div>
+                <details style="margin-top:10px;">
+                  <summary>Voir les 15 autres cas de test</summary>
+                  <div id="runnerMore" style="display:grid; gap:10px; margin-top:10px;"></div>
+                </details>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <aside class="card">
+        <div class="card-h">
+          <h2><i class="fa fa-bullseye" style="color:var(--accent)"></i> Parcours rapide</h2>
+          <span class="pill">60–90s</span>
+        </div>
+        <div class="card-b">
+          <ol class="small" style="margin:0; padding-left: 18px; display:grid; gap:8px;">
+            <li>Voyageur : ouvre une annonce + fenêtre → <strong>Demande de réservation</strong></li>
+            <li>Voyageur : voit la demande en <strong>SENT</strong> dans “Mes réservations”</li>
+            <li>Hôte : accepte/refuse → voyageur notifié</li>
+            <li>QA : anomalies ON → tests FAIL</li>
+            <li>Patch → relance → tests PASS</li>
+          </ol>
+
+          <div style="margin-top:12px; border-top:1px solid var(--line); padding-top: 12px;">
+            <p class="small" style="margin:0;">
+              <strong>Astuce :</strong> clique <span class="badge"><i class="fa fa-bolt"></i> Démo 60 s</span> puis <strong>Lancer</strong>.
+            </p>
+          </div>
+
+          <div style="margin-top: 12px;" class="block">
+            <strong style="display:block; margin-bottom:8px;"><i class="fa fa-info-circle" style="color:var(--accent)"></i> Données simulées</strong>
+            <p class="small" style="margin:0;">
+              Images “fake”, prix et options calculés localement. Aucun backend.
+            </p>
+          </div>
+        </div>
+      </aside>
+    </div>
+  </div>
+
+  <div id="overlayBooking" class="overlay-booking-module" aria-hidden="true">
+    <div class="overlay-card" role="dialog" aria-modal="true">
+      <div class="overlay-head">
+        <div class="overlay-search-title">Demande de réservation</div>
+        <button type="button" class="overlay-booking-module-close" id="btnCloseOverlay" aria-label="Fermer">
+          <i class="fa fa-times" aria-hidden="true"></i>
+        </button>
+      </div>
+
+      <div class="overlay-left">
+        <div class="summary-img"><img id="ovImg" alt="image annonce" src=""></div>
+        <div class="summary-title" id="ovTitle">—</div>
+        <div class="summary-sub" id="ovSub">—</div>
+
+        <div style="margin-top:12px;" class="block">
+          <div class="payment-list" id="costBox">
+            <div class="pay-row"><span>Nuits</span><span id="cNights">—</span></div>
+            <div class="pay-row"><span>Sous-total</span><span id="cSub">—</span></div>
+            <div class="pay-row"><span>Frais ménage</span><span id="cClean">—</span></div>
+            <div class="pay-row"><span>Extras</span><span id="cExtras">—</span></div>
+            <div class="pay-row"><span>Frais service</span><span id="cService">—</span></div>
+            <div class="pay-row pay-total"><span>Total</span><span id="cTotal">—</span></div>
+            <div class="text-small"><i class="fa fa-info-circle"></i> Aucun paiement immédiat</div>
+            <div id="ovErr" class="text-small" style="color:#b91c1c; font-weight:800; display:none;"></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="overlay-right">
+        <div class="block">
+          <div class="search-date-range" id="single-listing-date-range">
+            <div class="search-date-range-arrive">
+              <input name="arrive" type="date" class="form-control check_in_date" id="inArrive" placeholder="Début">
+            </div>
+            <div class="search-date-range-depart">
+              <input name="depart" type="date" class="form-control check_out_date" id="inDepart" placeholder="Fin">
+            </div>
+          </div>
+
+          <div class="search-guests">
+            <div class="guests-pill" id="btnGuests"><i class="fa fa-user"></i> <span id="guestLabel">2 adultes, 0 enfant</span></div>
+            <button class="btn-secondary-outlined" type="button" id="btnToggleGuests"><i class="fa fa-caret-down"></i></button>
+          </div>
+
+          <div class="guest-pop" id="guestPop">
+            <div class="calc-row">
+              <div><strong>Adultes</strong><div class="text-small">min 1</div></div>
+              <div style="display:flex; gap:8px; align-items:center;">
+                <button class="btn-secondary-outlined" type="button" id="adultMinus"><i class="fa fa-minus"></i></button>
+                <span class="quantity-calculator" id="adultQty">2</span>
+                <button class="btn-secondary-outlined" type="button" id="adultPlus"><i class="fa fa-plus"></i></button>
+              </div>
+            </div>
+            <div class="calc-row" style="border-top:1px solid var(--line); padding-top:10px;">
+              <div><strong>Enfants</strong><div class="text-small">0+</div></div>
+              <div style="display:flex; gap:8px; align-items:center;">
+                <button class="btn-secondary-outlined" type="button" id="childMinus"><i class="fa fa-minus"></i></button>
+                <span class="quantity-calculator" id="childQty">0</span>
+                <button class="btn-secondary-outlined" type="button" id="childPlus"><i class="fa fa-plus"></i></button>
+              </div>
+            </div>
+            <div style="margin-top:10px;">
+              <button class="btn btn-primary btn-full-width" type="button" id="btnApplyGuests">Appliquer</button>
+            </div>
+          </div>
+
+          <div class="search-extra-services">
+            <strong>Services supplémentaires</strong>
+            <ul class="extra-services-list">
+              <li>
+                <label class="control"><input type="checkbox" data-name="Petit-déjeuner" data-price="16" data-type="per_guest" class="extra"> Petit-déjeuner</label>
+                <span>16.00€</span>
+              </li>
+              <li>
+                <label class="control"><input type="checkbox" data-name="Déjeuner" data-price="24" data-type="per_guest" class="extra"> Déjeuner</label>
+                <span>24.00€</span>
+              </li>
+              <li>
+                <label class="control"><input type="checkbox" data-name="Dîner" data-price="24" data-type="per_guest" class="extra"> Dîner</label>
+                <span>24.00€</span>
+              </li>
+            </ul>
+          </div>
+
+          <div class="search-message">
+            <textarea class="form-control" rows="3" id="guestMsg" placeholder="Présentez-vous à l'hôte"></textarea>
+          </div>
+
+          <div style="margin-top:10px;">
+            <button id="request_for_reservation" type="button" class="btn btn-primary-homey btn-full-width">
+              Demande de réservation
+            </button>
+            <div class="text-center text-small" style="margin-top:8px;"><i class="fa fa-info-circle"></i> Aucun paiement immédiat</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="toasts" id="toasts" aria-live="polite"></div>
+
+<script>
+(function(){
+  const $ = (id)=>document.getElementById(id);
+
+  const euro = (n)=> `${Math.round(n)}€`;
+  const uid = ()=> Math.random().toString(16).slice(2,10).toUpperCase();
+  const sleep = (ms)=> new Promise(r=>setTimeout(r,ms));
+  const parseDate = (v)=> v ? new Date(v+"T00:00:00") : null;
+  const fmt = (d)=> d.toISOString().slice(0,10);
+  const nights = (a,b)=> !a||!b ? 0 : Math.round((b.getTime()-a.getTime())/(1000*60*60*24));
+
+  function svgData(label, a, b){
+    const svg = `
+      <svg xmlns="http://www.w3.org/2000/svg" width="1200" height="760" viewBox="0 0 1200 760">
+        <defs><linearGradient id="g" x1="0" y1="0" x2="1" y2="1">
+          <stop offset="0" stop-color="${a}"/><stop offset="1" stop-color="${b}"/>
+        </linearGradient></defs>
+        <rect width="1200" height="760" fill="url(#g)"/>
+        <rect x="48" y="60" width="520" height="92" rx="18" fill="rgba(255,255,255,0.16)"/>
+        <text x="78" y="122" font-family="Quicksand, ui-sans-serif" font-size="44" fill="rgba(255,255,255,0.92)" font-weight="700">${label}</text>
+        <path d="M0 610 C 240 500, 420 720, 650 620 S 980 570, 1200 680 L 1200 760 L 0 760 Z" fill="rgba(0,0,0,0.18)"/>
+        <circle cx="1060" cy="160" r="160" fill="rgba(255,255,255,0.12)"/>
+      </svg>`;
+    return "data:image/svg+xml;charset=UTF-8,"+encodeURIComponent(svg);
+  }
+
+  function toast(kind, title, msg){
+    const el=document.createElement("div");
+    el.className="toast "+kind;
+    el.innerHTML = `<div><div class="t">${title}</div><div class="m">${msg}</div></div>`;
+    $("toasts").appendChild(el);
+    setTimeout(()=>{ el.style.opacity="0"; el.style.transform="translateY(4px)"; }, 3200);
+    setTimeout(()=> el.remove(), 3600);
+  }
+
+  const RULES = { cleaningFee: 35, serviceFeeRate: 0.10, minAdults: 1 };
+
+  const app = {
+    traveler: "mjoan",
+    host: "anir",
+    listings: [
+      { id:"L1", title:"Crique magnifique", address:"142 Bay Rd, Miami Beach, FL 33139", beds:2, baths:1, maxGuests:4, nightly:175, img: svgData("CRIQUE MAGNIFIQUE", "#f15e75", "#ffb199") },
+      { id:"L2", title:"Chambre simple spacieuse", address:"2001 Webster St, San Francisco, CA 94115", beds:2, baths:1, maxGuests:1, nightly:67, img: svgData("CHAMBRE SIMPLE", "#3b82f6", "#a78bfa") },
+      { id:"L3", title:"Studio moderne", address:"Rue Oberkampf, Paris 11e", beds:1, baths:1, maxGuests:2, nightly:95, img: svgData("STUDIO MODERNE", "#10b981", "#60a5fa") },
+      { id:"L4", title:"Maison familiale", address:"Boulogne-Billancourt, FR", beds:3, baths:2, maxGuests:6, nightly:210, img: svgData("MAISON FAMILIALE", "#111827", "#f59e0b") }
+    ],
+    bookings: [],
+    activeListingId: null,
+    overlayGuests: { adults: 2, children: 0 },
+    bugs: {
+      B01_DateValidationBroken:false, B02_CapacityNotEnforced:false, B06_DuplicateSubmission:false,
+      B03_PriceServiceWrong:false, B04_ExtrasNotCounted:false, B05_ServiceRoundingOdd:false,
+      B07_HostActionDoesNotNotify:false, B08_StatusNotPersisted:false, B09_FilterHostBroken:false
+    },
+    groups: { validation:false, pricing:false, workflow:false },
+    stop:false,
+    patched:false
+  };
+
+  const views = { traveler: $("viewTraveler"), host: $("viewHost"), qa: $("viewQA") };
+  function show(which){
+    $("tabTraveler").classList.toggle("is-active", which==="traveler");
+    $("tabHost").classList.toggle("is-active", which==="host");
+    $("tabQA").classList.toggle("is-active", which==="qa");
+    views.traveler.style.display = which==="traveler" ? "block" : "none";
+    views.host.style.display = which==="host" ? "block" : "none";
+    views.qa.style.display = which==="qa" ? "block" : "none";
+  }
+
+  function fakeAvatar(seed){
+    const svg = `
+      <svg xmlns="http://www.w3.org/2000/svg" width="80" height="80">
+        <defs><linearGradient id="g" x1="0" y1="0" x2="1" y2="1">
+          <stop offset="0" stop-color="#f15e75"/><stop offset="1" stop-color="#ffd1da"/>
+        </linearGradient></defs>
+        <rect width="80" height="80" fill="url(#g)"/>
+        <circle cx="40" cy="33" r="14" fill="rgba(255,255,255,.85)"/>
+        <path d="M16 72c6-16 18-20 24-20s18 4 24 20" fill="rgba(255,255,255,.82)"/>
+        <text x="8" y="16" font-family="ui-monospace, Menlo, Consolas" font-size="12" fill="rgba(0,0,0,.35)">${seed.slice(0,8)}</text>
+      </svg>`;
+    return "data:image/svg+xml;charset=UTF-8,"+encodeURIComponent(svg);
+  }
+
+  function renderListings(){
+    const row = $("listingRow");
+    row.innerHTML="";
+    app.listings.forEach(l=>{
+      const wrap=document.createElement("div");
+      wrap.className="item-wrap";
+      wrap.innerHTML=`
+        <div class="media property-item">
+          <div class="media-left">
+            <img alt="${l.title}" src="${l.img}">
+            <div class="item-media-price">
+              <span class="item-price">${l.nightly.toFixed(2)}<sup>€</sup><sub>/nuit</sub></span>
+            </div>
+            <div class="item-user-image">
+              <img alt="${app.host}" src="${fakeAvatar(app.host)}">
+            </div>
+          </div>
+          <div class="media-body item-body clearfix">
+            <h2 class="title">${l.title}</h2>
+            <address class="item-address">${l.address}</address>
+            <ul class="item-amenities">
+              <li><i class="fa fa-bed"></i> <span class="total-beds">${l.beds}</span> <span class="item-label">Chambres</span></li>
+              <li><i class="fa fa-shower"></i> <span class="total-baths">${l.baths}</span> <span class="item-label">Salle de bain</span></li>
+              <li><i class="fa fa-user"></i> <span class="total-guests">${l.maxGuests}</span> <span class="item-label">Voyageurs</span></li>
+            </ul>
+
+            <div class="item-footer">
+              <button class="btn btn-primary-homey" data-book="${l.id}">
+                <i class="fa fa-calendar"></i> Demande de réservation
+              </button>
+              <span class="pill">id: ${l.id}</span>
+            </div>
+          </div>
+        </div>
+      `;
+      row.appendChild(wrap);
+    });
+    row.querySelectorAll("[data-book]").forEach(b=>{
+      b.addEventListener("click", ()=> openOverlay(b.getAttribute("data-book")));
+    });
+  }
+
+  function statusChip(s){
+    const label = s==="SENT" ? "Envoyée" : s==="ACCEPTED" ? "Acceptée" : "Refusée";
+    return `<span class="status ${s}"><i class="fa ${s==="SENT"?"fa-paper-plane":s==="ACCEPTED"?"fa-check":"fa-times"}"></i> ${label}</span>`;
+  }
+
+  function renderTraveler(){
+    const tbody = $("travelerTable");
+    const rows = app.bookings.filter(b=>b.traveler===app.traveler).sort((a,b)=>b.createdAt-a.createdAt);
+    tbody.innerHTML = rows.length ? "" : `<tr><td colspan="4" class="small">Aucune réservation.</td></tr>`;
+    rows.forEach(b=>{
+      tbody.insertAdjacentHTML("beforeend",`
+        <tr>
+          <td><strong>${b.listingTitle}</strong><div class="text-small">#${b.id}</div></td>
+          <td>${b.arrive} → ${b.depart}</td>
+          <td><strong>${euro(b.total)}</strong></td>
+          <td>${statusChip(b.status)}</td>
+        </tr>
+      `);
+    });
+  }
+
+  function renderHost(){
+    $("hostName").textContent = app.host;
+    $("hostPending").textContent = String(app.bookings.filter(b=>b.host===app.host && b.status==="SENT").length);
+    const filter = $("hostFilter").value;
+    let rows = app.bookings.filter(b=>b.host===app.host);
+
+    if(!app.bugs.B09_FilterHostBroken){
+      if(filter!=="all") rows = rows.filter(b=>b.status===filter);
+    }
+    rows = rows.sort((a,b)=>b.createdAt-a.createdAt);
+
+    const tbody = $("hostTable");
+    tbody.innerHTML = rows.length ? "" : `<tr><td colspan="5" class="small">Aucune demande.</td></tr>`;
+    rows.forEach(b=>{
+      const canAct = b.status==="SENT";
+      tbody.insertAdjacentHTML("beforeend",`
+        <tr>
+          <td><strong>#${b.id}</strong><div class="text-small">${b.listingTitle}</div></td>
+          <td>${b.arrive} → ${b.depart}</td>
+          <td><strong>${euro(b.total)}</strong></td>
+          <td>${statusChip(b.status)}</td>
+          <td>
+            <button class="btn btn-primary" data-acc="${b.id}" ${canAct?"":"disabled"}><i class="fa fa-check"></i></button>
+            <button class="btn" data-ref="${b.id}" ${canAct?"":"disabled"}><i class="fa fa-times"></i></button>
+          </td>
+        </tr>
+      `);
+    });
+    tbody.querySelectorAll("[data-acc]").forEach(x=>x.addEventListener("click", ()=> hostDecision(x.getAttribute("data-acc"), true)));
+    tbody.querySelectorAll("[data-ref]").forEach(x=>x.addEventListener("click", ()=> hostDecision(x.getAttribute("data-ref"), false)));
+  }
+
+  function hostDecision(id, accept){
+    const b = app.bookings.find(x=>x.id===id);
+    if(!b) return;
+    const newStatus = accept ? "ACCEPTED" : "REFUSED";
+
+    if(app.bugs.B08_StatusNotPersisted){
+      toast("warn","Hôte", `Bug: statut non persisté (#${id}).`);
+      renderHost();
+      return;
+    }
+    b.status = newStatus;
+
+    if(!app.bugs.B07_HostActionDoesNotNotify){
+      toast("ok","Notification", `#${id} → ${newStatus}`);
+      renderTraveler();
+    }
+    renderHost();
+  }
+
+  const overlay = $("overlayBooking");
+  function openOverlay(listingId){
+    const l = app.listings.find(x=>x.id===listingId);
+    if(!l) return;
+    app.activeListingId = listingId;
+
+    $("ovImg").src = l.img;
+    $("ovTitle").textContent = l.title;
+    $("ovSub").textContent = `${l.address} · ${l.nightly}€/nuit · max ${l.maxGuests}`;
+    $("guestMsg").value = "";
+    app.overlayGuests = { adults: 2, children: 0 };
+    $("adultQty").textContent = "2";
+    $("childQty").textContent = "0";
+    updateGuestLabel();
+
+    if(app.patched){
+      const t=new Date();
+      $("inArrive").value = fmt(new Date(t.getFullYear(), t.getMonth(), t.getDate()+10));
+      $("inDepart").value = fmt(new Date(t.getFullYear(), t.getMonth(), t.getDate()+12));
+    } else {
+      $("inArrive").value = "";
+      $("inDepart").value = "";
+    }
+
+    document.querySelectorAll(".extra").forEach(x=> x.checked=false);
+
+    $("guestPop").style.display = "none";
+    $("ovErr").style.display = "none";
+    $("ovErr").textContent = "";
+    recomputeCost();
+    overlay.style.display = "flex";
+    overlay.setAttribute("aria-hidden","false");
+  }
+
+  function closeOverlay(){
+    overlay.style.display="none";
+    overlay.setAttribute("aria-hidden","true");
+  }
+
+  function extrasTotal(guestCount, nNights){
+    let total=0;
+    document.querySelectorAll(".extra:checked").forEach(x=>{
+      const price = Number(x.getAttribute("data-price")||0);
+      const type = x.getAttribute("data-type");
+      if(type==="per_guest") total += price * guestCount * nNights;
+      else total += price * nNights;
+    });
+    if(app.bugs.B04_ExtrasNotCounted) total = 0;
+    return total;
+  }
+
+  function computeCost(l, arrive, depart, adults, children){
+    const g = adults + children;
+    if(adults < RULES.minAdults) return { ok:false, error:`Au moins ${RULES.minAdults} adulte requis.` };
+    if(!arrive || !depart) return { ok:false, error:"Dates requises." };
+    const n = nights(arrive, depart);
+
+    if(!app.bugs.B01_DateValidationBroken){
+      if(n <= 0) return { ok:false, error:"La date de départ doit être après l'arrivée." };
+    }
+    if(!app.bugs.B02_CapacityNotEnforced){
+      if(g > l.maxGuests) return { ok:false, error:`Capacité dépassée (${g}/${l.maxGuests}).` };
+    }
+
+    const safeN = Math.max(0, n);
+    const sub = l.nightly * safeN;
+    const extras = extrasTotal(g, safeN);
+
+    const rate = app.bugs.B03_PriceServiceWrong ? 0.08 : RULES.serviceFeeRate;
+    let service = (sub + RULES.cleaningFee + extras) * rate;
+    if(app.bugs.B05_ServiceRoundingOdd) service = Math.floor(service);
+
+    const total = sub + RULES.cleaningFee + extras + service;
+    return { ok:true, data:{ n:safeN, sub, extras, service, total } };
+  }
+
+  function recomputeCost(){
+    const l = app.listings.find(x=>x.id===app.activeListingId);
+    if(!l) return;
+
+    const arrive = parseDate($("inArrive").value);
+    const depart = parseDate($("inDepart").value);
+    const adults = app.overlayGuests.adults;
+    const children = app.overlayGuests.children;
+
+    const r = computeCost(l, arrive, depart, adults, children);
+    if(!r.ok){
+      $("ovErr").style.display="block";
+      $("ovErr").textContent=r.error;
+      $("cNights").textContent="—";
+      $("cSub").textContent="—";
+      $("cClean").textContent=euro(RULES.cleaningFee);
+      $("cExtras").textContent="—";
+      $("cService").textContent="—";
+      $("cTotal").textContent="—";
+      return;
+    }
+    $("ovErr").style.display="none";
+    $("cNights").textContent = String(r.data.n);
+    $("cSub").textContent = euro(r.data.sub);
+    $("cClean").textContent = euro(RULES.cleaningFee);
+    $("cExtras").textContent = euro(r.data.extras);
+    $("cService").textContent = euro(r.data.service);
+    $("cTotal").textContent = euro(r.data.total);
+  }
+
+  function updateGuestLabel(){
+    $("guestLabel").textContent = `${app.overlayGuests.adults} adultes, ${app.overlayGuests.children} enfant`;
+  }
+
+  function submitReservation(){
+    const l = app.listings.find(x=>x.id===app.activeListingId);
+    if(!l) return;
+
+    const arriveV = $("inArrive").value;
+    const departV = $("inDepart").value;
+    const arrive = parseDate(arriveV);
+    const depart = parseDate(departV);
+
+    const r = computeCost(l, arrive, depart, app.overlayGuests.adults, app.overlayGuests.children);
+    if(!r.ok){ toast("err","Erreur", r.error); return; }
+
+    const mk = ()=>({
+      id: uid(),
+      traveler: app.traveler,
+      host: app.host,
+      listingId: l.id,
+      listingTitle: l.title,
+      arrive: arriveV,
+      depart: departV,
+      total: r.data.total,
+      status: "SENT",
+      createdAt: Date.now()
+    });
+
+    const b1 = mk();
+    app.bookings.push(b1);
+    if(app.bugs.B06_DuplicateSubmission){
+      const b2 = mk(); b2.createdAt = Date.now()+1;
+      app.bookings.push(b2);
+    }
+
+    toast("ok","Demande envoyée", `#${b1.id} : Envoyée`);
+    closeOverlay();
+    renderTraveler(); renderHost();
+  }
+
+  const tests = [
+    {id:"CT01", title:"Annonces : affichage", desc:"Vérifier que 4 annonces sont visibles.", run: async()=>{ if(app.listings.length<4) throw new Error(); }},
+    {id:"CT02", title:"Demande de réservation : ouverture", desc:"Depuis une annonce, ouvrir la fenêtre « Demande de réservation ».", run: async()=>{ openOverlay("L1"); await sleep(30); if(getComputedStyle(overlay).display!=="flex") throw new Error(); closeOverlay(); }},
+    {id:"CT03", title:"Demande de réservation : contrôle des dates", desc:"Refuser si la date de départ est antérieure ou égale à la date d’arrivée.", run: async()=>{ const l=app.listings[0]; const t=new Date(); const a=new Date(t.getFullYear(),t.getMonth(),t.getDate()+10); const d=new Date(t.getFullYear(),t.getMonth(),t.getDate()+10); const r=computeCost(l,a,d,1,0); if(app.bugs.B01_DateValidationBroken){ if(!r.ok) throw new Error("Bug attendu"); } else { if(r.ok) throw new Error("Doit refuser"); } }},
+    {id:"CT04", title:"Demande de réservation : capacité maximale", desc:"Refuser si le nombre de voyageurs dépasse la capacité du logement.", run: async()=>{ const l=app.listings[1]; const t=new Date(); const a=new Date(t.getFullYear(),t.getMonth(),t.getDate()+10); const d=new Date(t.getFullYear(),t.getMonth(),t.getDate()+12); const r=computeCost(l,a,d,2,2); if(app.bugs.B02_CapacityNotEnforced){ if(!r.ok) throw new Error("Bug attendu"); } else { if(r.ok) throw new Error("Doit refuser"); } }},
+    {id:"CT05", title:"Décision de l’hôte : information du voyageur", desc:"Après acceptation ou refus, le voyageur voit le nouveau statut.", run: async()=>{ if(app.bookings.length===0){ openOverlay("L1"); const t=new Date(); $("inArrive").value=fmt(new Date(t.getFullYear(),t.getMonth(),t.getDate()+10)); $("inDepart").value=fmt(new Date(t.getFullYear(),t.getMonth(),t.getDate()+12)); recomputeCost(); submitReservation(); } const b=app.bookings.find(x=>x.status==="SENT")||app.bookings[0]; show("host"); renderHost(); hostDecision(b.id,true); show("traveler"); renderTraveler(); const html=$("travelerTable").innerHTML; if(app.bugs.B07_HostActionDoesNotNotify){ if(html.includes("ACCEPTED")||html.includes("REFUSED")) throw new Error("Bug attendu"); } else { if(!html.includes("ACCEPTED")&&!html.includes("REFUSED")) throw new Error("Update manquant"); } }},
+    {id:"CT06", title:"Soumission : une seule demande", desc:"Un clic sur « Demande de réservation » crée une seule demande.", run: async()=>{ const before=app.bookings.length; openOverlay("L2"); const t=new Date(); $("inArrive").value=fmt(new Date(t.getFullYear(),t.getMonth(),t.getDate()+14)); $("inDepart").value=fmt(new Date(t.getFullYear(),t.getMonth(),t.getDate()+16)); recomputeCost(); submitReservation(); const delta=app.bookings.length-before; if(app.bugs.B06_DuplicateSubmission){ if(delta<2) throw new Error(); } else { if(delta!==1) throw new Error(); } }},
+    {id:"CT07", title:"Tarification : services supplémentaires", desc:"Un service supplémentaire modifie le montant total.", run: async()=>{ openOverlay("L1"); const t=new Date(); $("inArrive").value=fmt(new Date(t.getFullYear(),t.getMonth(),t.getDate()+10)); $("inDepart").value=fmt(new Date(t.getFullYear(),t.getMonth(),t.getDate()+12)); app.overlayGuests={adults:2,children:1}; updateGuestLabel(); document.querySelectorAll(".extra")[0].checked=true; recomputeCost(); const totalWith=$("cTotal").textContent; document.querySelectorAll(".extra")[0].checked=false; recomputeCost(); const totalWithout=$("cTotal").textContent; closeOverlay(); if(app.bugs.B04_ExtrasNotCounted){ if(totalWith!==totalWithout) throw new Error("Bug attendu"); } else { if(totalWith===totalWithout) throw new Error(); } }},
+    {id:"CT08", title:"Hôte : filtre par statut", desc:"Le filtre de statut affiche uniquement les demandes correspondantes.", run: async()=>{ show("host"); $("hostFilter").value="SENT"; renderHost(); const rows=[...$("hostTable").querySelectorAll("tr")]; const ok=rows.every(r=>r.innerHTML.includes("SENT")||r.textContent.includes("Aucune")); if(app.bugs.B09_FilterHostBroken){ if(ok) throw new Error("Bug attendu"); } else { if(!ok) throw new Error(); } }},
+    {id:"CT09", title:"Hôte : enregistrement du statut", desc:"Le statut de la demande est bien enregistré après action de l’hôte.", run: async()=>{ const b=app.bookings[0]; if(!b) return; b.status="SENT"; hostDecision(b.id,true); if(app.bugs.B08_StatusNotPersisted){ if(b.status==="ACCEPTED") throw new Error("Bug attendu"); } else { if(b.status!=="ACCEPTED") throw new Error(); } }},
+    {id:"CT10", title:"Voyageur : vider la liste", desc:"Vider la liste des demandes et afficher « Aucune réservation ».", run: async()=>{ app.bookings=[]; renderTraveler(); if(!$("travelerTable").textContent.toLowerCase().includes("aucune")) throw new Error(); }},
+    {id:"CT11", title:"Données d’exemple : 2 demandes", desc:"Créer automatiquement 2 demandes d’exemple.", run: async()=>{ app.bookings=[]; seed2(); if(app.bookings.length<2) throw new Error(); }},
+    {id:"CT12", title:"Tarification : affichage du total", desc:"Afficher un montant total lorsque les dates sont renseignées.", run: async()=>{ openOverlay("L3"); const t=new Date(); $("inArrive").value=fmt(new Date(t.getFullYear(),t.getMonth(),t.getDate()+10)); $("inDepart").value=fmt(new Date(t.getFullYear(),t.getMonth(),t.getDate()+12)); recomputeCost(); if($("cTotal").textContent==="—") throw new Error(); closeOverlay(); }},
+    {id:"CT13", title:"Voyageurs : minimum d’adultes", desc:"Refuser une demande si le nombre d’adultes est à 0.", run: async()=>{ const l=app.listings[0]; const t=new Date(); const a=new Date(t.getFullYear(),t.getMonth(),t.getDate()+10); const d=new Date(t.getFullYear(),t.getMonth(),t.getDate()+12); const r=computeCost(l,a,d,0,0); if(r.ok) throw new Error(); }},
+    {id:"CT14", title:"Tarification : frais de service", desc:"Calculer et afficher des frais de service supérieurs à 0.", run: async()=>{ if(app.bugs.B03_PriceServiceWrong) return; const l=app.listings[0]; const t=new Date(); const a=new Date(t.getFullYear(),t.getMonth(),t.getDate()+10); const d=new Date(t.getFullYear(),t.getMonth(),t.getDate()+12); const r=computeCost(l,a,d,1,0); if(!r.ok) throw new Error(); if(r.data.service<=0) throw new Error(); }},
+    {id:"CT15", title:"Décision de l’hôte : refus visible", desc:"Après refus, le voyageur voit le statut « Refusée ».", run: async()=>{ seed2(); const b=app.bookings.find(x=>x.status==="SENT"); show("host"); renderHost(); hostDecision(b.id,false); show("traveler"); renderTraveler(); const html=$("travelerTable").innerHTML; if(app.bugs.B07_HostActionDoesNotNotify){ if(html.includes("REFUSED")) throw new Error("Bug attendu"); } else { if(!html.includes("REFUSED")&&!html.includes("ACCEPTED")) throw new Error(); } }},
+    {id:"CT16", title:"Hôte : liste vide", desc:"Afficher une boîte de réception vide sans erreur.", run: async()=>{ app.bookings=[]; renderHost(); }},
+    {id:"CT17", title:"Demande de réservation : fermeture", desc:"Fermer la fenêtre et revenir à l’application.", run: async()=>{ openOverlay("L4"); closeOverlay(); if(getComputedStyle(overlay).display==="flex") throw new Error(); }},
+    {id:"CT18", title:"Correctifs : dates préremplies", desc:"Après application des correctifs, les dates sont préremplies à l’ouverture.", run: async()=>{ applyPatch(); openOverlay("L1"); if(!$("inArrive").value||!$("inDepart").value) throw new Error(); closeOverlay(); }},
+    {id:"CT19", title:"Correctifs : anomalies désactivées", desc:"Après application des correctifs, toutes les anomalies simulées sont désactivées.", run: async()=>{ applyPatch(); if(Object.values(app.bugs).some(v=>v===true)) throw new Error(); }},
+    {id:"CT20", title:"Campagne : exécution complète", desc:"Lancer l’ensemble des cas de test (campagne complète).", run: async()=>{}},
+  ];
+
+  function renderRunner(){
+    const top = tests.slice(0,5);
+    const more = tests.slice(5);
+    $("runnerTop").innerHTML="";
+    $("runnerMore").innerHTML="";
+    const mk = (tc)=> {
+      const div=document.createElement("div");
+      div.className="case";
+      div.innerHTML = `
+        <div class="case-left">
+          <div class="tcid">${tc.id}</div>
+          <div>
+            <div class="tct">${tc.title}</div>
+            <div class="tcd">${tc.desc}</div>
+          </div>
+        </div>
+        <div class="st" id="st-${tc.id}">EN ATTENTE</div>
+      `;
+      return div;
+    };
+    top.forEach(tc=> $("runnerTop").appendChild(mk(tc)));
+    more.forEach(tc=> $("runnerMore").appendChild(mk(tc)));
+  }
+  function setSt(id, st){
+    const el = $("st-"+id);
+    if(!el) return;
+    el.className = "st "+st;
+    const label = st==="RUNNING" ? "EN COURS" : st==="PASS" ? "RÉUSSI" : st==="FAIL" ? "ÉCHOUÉ" : "EN ATTENTE";
+    el.textContent = label;
+  }
+
+  async function runTests(){
+    app.stop=false;
+    let pass=0, fail=0;
+    $("kPass").textContent="—"; $("kFail").textContent="—";
+    for(const tc of tests){
+      if(app.stop) break;
+      setSt(tc.id,"RUNNING");
+      try{
+        await sleep(130);
+        await tc.run();
+        setSt(tc.id,"PASS");
+        pass++;
+      } catch(e){
+        setSt(tc.id,"FAIL");
+        fail++;
+      }
+      await sleep(60);
+    }
+    $("kPass").textContent=String(pass);
+    $("kFail").textContent=String(fail);
+    toast(fail===0?"ok":"warn","Tests", fail===0 ? "Tests réussis ✅" : `Tests en échec ❌ (${fail} échec(s))`);
+  }
+
+  function applyGroup(group, enabled){
+    if(group==="validation"){
+      app.bugs.B01_DateValidationBroken = enabled;
+      app.bugs.B02_CapacityNotEnforced = enabled;
+      app.bugs.B06_DuplicateSubmission = enabled;
+    }
+    if(group==="pricing"){
+      app.bugs.B03_PriceServiceWrong = enabled;
+      app.bugs.B04_ExtrasNotCounted = enabled;
+      app.bugs.B05_ServiceRoundingOdd = enabled;
+    }
+    if(group==="workflow"){
+      app.bugs.B07_HostActionDoesNotNotify = enabled;
+      app.bugs.B08_StatusNotPersisted = enabled;
+      app.bugs.B09_FilterHostBroken = enabled;
+    }
+  }
+  function setToggle(btn, on){
+    const label = btn.getAttribute("data-label");
+    btn.innerHTML = on ? `<i class="fa fa-toggle-on"></i> ${label}` : `<i class="fa fa-toggle-off"></i> ${label}`;
+    btn.classList.toggle("btn-primary", on);
+  }
+  function toggleGroup(group, btn){
+    app.groups[group] = !app.groups[group];
+    applyGroup(group, app.groups[group]);
+    setToggle(btn, app.groups[group]);
+    toast(app.groups[group]?"warn":"ok","Anomalies", `${btn.getAttribute("data-label")} : ${app.groups[group]?"Activées":"Désactivées"}`);
+  }
+  function applyPatch(){
+    Object.keys(app.bugs).forEach(k=> app.bugs[k]=false);
+    app.groups.validation = app.groups.pricing = app.groups.workflow = false;
+    setToggle($("tglValidation"), false);
+    setToggle($("tglPricing"), false);
+    setToggle($("tglWorkflow"), false);
+    app.patched = true;
+    toast("ok","Patch","Correctifs appliqués + dates préremplies activées.");
+  }
+
+  function seed2(){
+    const mk = (listingId, addA, addD)=>{
+      const l = app.listings.find(x=>x.id===listingId);
+      const t = new Date();
+      const a = new Date(t.getFullYear(),t.getMonth(),t.getDate()+addA);
+      const d = new Date(t.getFullYear(),t.getMonth(),t.getDate()+addD);
+      const r = computeCost(l, a, d, 2, 0);
+      app.bookings.push({
+        id: uid(),
+        traveler: app.traveler,
+        host: app.host,
+        listingId: l.id,
+        listingTitle: l.title,
+        arrive: fmt(a),
+        depart: fmt(d),
+        total: r.ok ? r.data.total : 0,
+        status: "SENT",
+        createdAt: Date.now()
+      });
+    };
+    mk("L1", 10, 12);
+    mk("L2", 16, 18);
+    renderTraveler(); renderHost();
+  }
+
+  async function guided(){
+    toast("ok","Démo 60 s","Overlay → réservation SENT → hôte traite → anomalies ON → tests FAIL → patch → tests PASS");
+    show("traveler");
+    await sleep(350);
+    openOverlay("L1");
+    const t=new Date();
+    $("inArrive").value = fmt(new Date(t.getFullYear(), t.getMonth(), t.getDate()+10));
+    $("inDepart").value = fmt(new Date(t.getFullYear(), t.getMonth(), t.getDate()+12));
+    document.querySelectorAll(".extra")[0].checked = true;
+    recomputeCost();
+    await sleep(220);
+    submitReservation();
+    await sleep(280);
+
+    show("host");
+    await sleep(220);
+    renderHost();
+    const first = app.bookings.find(x=>x.status==="SENT");
+    if(first) hostDecision(first.id, true);
+    await sleep(280);
+
+    show("qa");
+    await sleep(220);
+
+    if(!app.groups.validation) toggleGroup("validation", $("tglValidation"));
+    if(!app.groups.pricing) toggleGroup("pricing", $("tglPricing"));
+    if(!app.groups.workflow) toggleGroup("workflow", $("tglWorkflow"));
+    await sleep(220);
+
+    await runTests();
+    await sleep(260);
+
+    applyPatch();
+    await sleep(220);
+
+    await runTests();
+  }
+
+  $("tabTraveler").addEventListener("click", ()=> show("traveler"));
+  $("tabHost").addEventListener("click", ()=> show("host"));
+  $("tabQA").addEventListener("click", ()=> show("qa"));
+
+  $("btnSeed").addEventListener("click", ()=>{ seed2(); toast("ok","Création","2 demandes créées."); });
+  $("btnClear").addEventListener("click", ()=>{ app.bookings=[]; renderTraveler(); renderHost(); toast("warn","Données","Demandes vidées."); });
+
+  $("hostFilter").addEventListener("change", ()=> renderHost());
+  $("btnHostAuto").addEventListener("click", async()=>{
+    const pend = app.bookings.filter(b=>b.status==="SENT");
+    if(pend.length===0){ toast("warn","Hôte","Aucune demande."); return; }
+    hostDecision(pend[0].id, true);
+    await sleep(180);
+    if(pend[1]) hostDecision(pend[1].id, false);
+    toast("ok","Hôte","Auto: 1 accept / 1 refuse (si dispo).");
+  });
+
+  $("btnCloseOverlay").addEventListener("click", closeOverlay);
+  overlay.addEventListener("click", (e)=>{ if(e.target===overlay) closeOverlay(); });
+  window.addEventListener("keydown", (e)=>{ if(e.key==="Escape" && getComputedStyle(overlay).display==="flex") closeOverlay(); });
+
+  $("btnToggleGuests").addEventListener("click", ()=> {
+    const pop = $("guestPop");
+    pop.style.display = pop.style.display==="block" ? "none" : "block";
+  });
+  $("btnGuests").addEventListener("click", ()=> $("btnToggleGuests").click());
+
+  $("adultPlus").addEventListener("click", ()=>{ app.overlayGuests.adults++; $("adultQty").textContent=String(app.overlayGuests.adults); });
+  $("adultMinus").addEventListener("click", ()=>{ app.overlayGuests.adults=Math.max(1, app.overlayGuests.adults-1); $("adultQty").textContent=String(app.overlayGuests.adults); });
+  $("childPlus").addEventListener("click", ()=>{ app.overlayGuests.children++; $("childQty").textContent=String(app.overlayGuests.children); });
+  $("childMinus").addEventListener("click", ()=>{ app.overlayGuests.children=Math.max(0, app.overlayGuests.children-1); $("childQty").textContent=String(app.overlayGuests.children); });
+  $("btnApplyGuests").addEventListener("click", ()=>{ updateGuestLabel(); $("guestPop").style.display="none"; recomputeCost(); });
+
+  ["change","input"].forEach(evt=>{
+    $("inArrive").addEventListener(evt, recomputeCost);
+    $("inDepart").addEventListener(evt, recomputeCost);
+    document.querySelectorAll(".extra").forEach(x=> x.addEventListener(evt, recomputeCost));
+  });
+
+  $("request_for_reservation").addEventListener("click", submitReservation);
+
+  $("tglValidation").setAttribute("data-label","Validation");
+  $("tglPricing").setAttribute("data-label","Tarification");
+  $("tglWorkflow").setAttribute("data-label","Parcours");
+  setToggle($("tglValidation"), false);
+  setToggle($("tglPricing"), false);
+  setToggle($("tglWorkflow"), false);
+
+  $("tglValidation").addEventListener("click", ()=> toggleGroup("validation", $("tglValidation")));
+  $("tglPricing").addEventListener("click", ()=> toggleGroup("pricing", $("tglPricing")));
+  $("tglWorkflow").addEventListener("click", ()=> toggleGroup("workflow", $("tglWorkflow")));
+  $("btnPatch").addEventListener("click", applyPatch);
+  $("btnRun").addEventListener("click", runTests);
+  $("btnStop").addEventListener("click", ()=>{ app.stop=true; toast("warn","Tests","Arrêt demandé."); });
+
+  $("btnGuided").addEventListener("click", guided);
+  $("btnReset").addEventListener("click", ()=>{
+    app.bookings=[];
+    Object.keys(app.bugs).forEach(k=> app.bugs[k]=false);
+    app.groups.validation = app.groups.pricing = app.groups.workflow = false;
+    setToggle($("tglValidation"), false);
+    setToggle($("tglPricing"), false);
+    setToggle($("tglWorkflow"), false);
+    app.patched=false;
+    renderTraveler(); renderHost(); renderRunner();
+    $("kPass").textContent="—"; $("kFail").textContent="—";
+    toast("ok","Reset","État initial restauré.");
+    show("traveler");
+  });
+
+  renderListings();
+  renderTraveler();
+  renderHost();
+  renderRunner();
+  show("traveler");
+})();
+</script>
+</body>
+</html>

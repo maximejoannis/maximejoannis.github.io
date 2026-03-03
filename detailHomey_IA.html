@@ -1,0 +1,818 @@
+<!DOCTYPE html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Detail Projet – Enrichissement Robot Framework via IA (Homey) | Maxime Joannis</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="style-portfolio-maximejoannis.css">
+    <noscript>
+      <style>
+        #loader { display: none !important; }
+        .content-section { display: block !important; opacity: 1 !important; }
+      </style>
+    </noscript>
+  </head>
+  <body>
+    <div id="loader">
+      <div class="qa-logo">
+        <div class="gear"></div>
+        <div class="scan-ring"></div>
+      </div>
+      <div class="loader-title">EXECUTION_INITIALIZATION...</div>
+      <div class="build-panel" aria-hidden="true">
+        <div class="build-row">
+          <span class="build-label">BUILD</span>
+          <span class="build-state" id="buildState">RUNNING</span>
+          <span class="build-icon" id="buildIcon"><i class="fas fa-spinner"></i></span>
+        </div>
+        <div class="build-bar" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0">
+          <div class="build-bar__fill" id="buildFill"></div>
+        </div>
+      </div>
+      <div class="loader-log-container">
+        <div class="log-line" id="log-1"></div>
+        <div class="log-line" id="log-2"></div>
+        <div class="log-line" id="log-3"></div>
+      </div>
+      <div class="loader-text">STATUS: RUNNING TESTS...</div>
+    </div>
+    <aside>
+      <div class="profile-block">
+        <div class="profile-avatar">MJ</div>
+        <div class="profile-text">
+          <div class="profile-name">Maxime Joannis</div>
+          <div class="profile-role">Ingénieur QA</div>
+        </div>
+      </div>
+      <nav>
+        <ul id="menu">
+  <li><a href="index.html#projects" class="nav-link"><i class="fas fa-home"></i> Retour aux projets</a></li>
+  <li><a class="nav-link active-link" data-target="overview"><i class="fas fa-compass"></i> Vue d’ensemble</a></li>
+  <li><a class="nav-link" data-target="methodology"><i class="fas fa-route"></i> Méthodologie</a></li>
+  <li><a class="nav-link" data-target="scope"><i class="fas fa-layer-group"></i> Périmètre & Qualité</a></li>
+  <li><a class="nav-link" data-target="results"><i class="fas fa-chart-line"></i> Résultats</a></li>
+  <li><a class="nav-link" data-target="deliverables"><i class="fas fa-file-export"></i> Livrables produits</a></li>
+  <li><a class="nav-link" data-target="skills"><i class="fas fa-toolbox"></i> Compétences</a></li>
+</ul>
+      </nav>
+    </aside>
+    <div class="wrapper">
+      <header>
+        <button id="focusBtn" style="cursor:pointer; padding: 8px 15px; background: rgba(31,225,217,0.1); border: 1px solid #1fe1d9; color: #1fe1d9; border-radius: 8px; font-weight: bold;">
+        <i class="fas fa-expand-arrows-alt"></i> FOCUS
+        </button>
+        <div class="breadcrumb">Projet QA // <span id="breadcrumb-title">Présentation</span></div>
+        <div class="menu-loader" id="menuLoader" aria-hidden="true">
+          <div class="menu-loader__scan"></div>
+          <span class="menu-loader__text" id="menuLoaderText">SWITCHING VIEW...</span>
+        </div>
+        <div class="status-badge">
+          <i class="fas fa-circle" style="font-size: 8px;"></i> BUILD: SUCCESS
+        </div>
+        <div class="header-photo">
+          <img src="Photo_Identite.jpg" alt="Photo de Maxime">
+        </div>
+      </header>
+      
+<main>
+
+  <!-- OVERVIEW -->
+  <section id="overview" class="content-section active">
+    <div class="homey-glass-card detail-hero">
+      <div class="detail-hero__top">
+        <div class="detail-hero__brand">
+          <div class="detail-hero__icon" aria-hidden="true">🤖</div>
+          <div>
+            <p class="detail-hero__eyebrow">Projet QA • Automatisation • IA responsable</p>
+            <h1 class="detail-hero__title">Enrichissement d’une suite de tests Robot Framework via IA</h1>
+            <p class="muted detail-hero__subtitle">
+              Dans le cadre du projet Agile Homey (application web de réservation), j’ai renforcé une suite existante
+              <strong>sans jamais altérer le comportement fonctionnel réel</strong>, en utilisant l’IA comme accélérateur
+              sous contraintes strictes de conformité QA.
+            </p>
+          </div>
+        </div>
+
+        <div class="detail-hero__badges">
+          <span class="badge"><i class="fas fa-calendar"></i> janv. 2026 – févr. 2026</span>
+          <span class="badge"><i class="fas fa-graduation-cap"></i> Test Academy</span>
+          <span class="badge"><i class="fas fa-robot"></i> Robot Framework</span>
+          <span class="badge"><i class="fas fa-globe"></i> Web</span>
+        </div>
+      </div>
+
+      <div class="kpi-grid">
+        <div class="kpi">
+          <div class="kpi__label">Tests automatisés</div>
+          <div class="kpi__value">40</div>
+          <div class="kpi__hint muted">Parcours critiques couverts</div>
+        </div>
+        <div class="kpi">
+          <div class="kpi__label">Sources analysées</div>
+          <div class="kpi__value">4 <span class="kpi__suffix">.side</span></div>
+          <div class="kpi__hint muted">+ pages HTML IHM + scripts existants</div>
+        </div>
+        <div class="kpi">
+          <div class="kpi__label">Anomalies détectées</div>
+          <div class="kpi__value">2</div>
+          <div class="kpi__hint muted">Grâce à l’enrichissement</div>
+        </div>
+        <div class="kpi">
+          <div class="kpi__label">Objectif</div>
+          <div class="kpi__value">CI/CD</div>
+          <div class="kpi__hint muted">Suite stable & industrialisable</div>
+        </div>
+      </div>
+
+      <div class="grid-split">
+        <div class="card card--soft">
+          <div class="obj-header">
+            <i class="fas fa-bullseye"></i>
+            <h3>Contexte & Objectifs</h3>
+          </div>
+          <ul class="nice-list">
+            <li><strong>Environnement :</strong> Projet Agile Homey (application web de réservation)</li>
+            <li><strong>Enjeu :</strong> renforcer la robustesse de la suite existante <em>sans modifier le réel</em></li>
+            <li><strong>Objectifs :</strong> industrialiser et augmenter la couverture (réservation, demande, confirmation hôte)</li>
+            <li><strong>Levier :</strong> IA utilisée comme accélérateur, sous contrôle humain</li>
+          </ul>
+
+          <div class="objective-quote">
+            <i class="fas fa-quote-left"></i>
+            « Utiliser l’IA pour aller plus vite, pas pour inventer : la vérité vient du produit. »
+          </div>
+        </div>
+
+        <div class="card card--soft">
+          <div class="obj-header">
+            <i class="fas fa-triangle-exclamation"></i>
+            <h3>Contraintes & Garde‑fous QA</h3>
+          </div>
+
+          <ul class="checklist">
+            <li><i class="fas fa-check"></i> Ne rien inventer : rester fidèle aux comportements réels</li>
+            <li><i class="fas fa-check"></i> Ne supprimer aucun test existant</li>
+            <li><i class="fas fa-check"></i> Produire des fichiers complets, cohérents et maintenables</li>
+            <li><i class="fas fa-check"></i> Signaler toute info manquante ou incohérente</li>
+            <li><i class="fas fa-check"></i> Préserver stabilité, lisibilité, réutilisabilité</li>
+          </ul>
+
+          <div class="callout">
+            <div class="callout__icon"><i class="fas fa-shield-halved"></i></div>
+            <div>
+              <div class="callout__title">Conformité avant vitesse</div>
+              <div class="muted">Chaque proposition IA est vérifiée, ajustée et validée sur des sources réelles (IHM / .side / scripts).</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- METHODOLOGY -->
+  <section id="methodology" class="content-section">
+    <div class="homey-glass-card">
+      <div class="section-head">
+        <h2><i class="fas fa-route"></i> Démarche & Méthodologie</h2>
+        <p class="muted">Une progression structurée, orientée fiabilité, maintenabilité et traçabilité.</p>
+      </div>
+
+      <div class="stepper">
+        <div class="step">
+          <div class="step__dot"><i class="fas fa-search"></i></div>
+          <div class="step__content">
+            <h3>Analyse initiale</h3>
+            <ul class="nice-list">
+              <li>Étude croisée de 4 fichiers <code>.side</code> (Selenium IDE)</li>
+              <li>Analyse des pages HTML IHM et des scripts Robot Framework existants</li>
+              <li>Vérification des sélecteurs, IDs et comportements dynamiques</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="step">
+          <div class="step__dot"><i class="fas fa-cubes"></i></div>
+          <div class="step__content">
+            <h3>Structuration & architecture</h3>
+            <ul class="nice-list">
+              <li>Organisation des tests selon une logique proche du <strong>Page Object Model (POM‑like)</strong></li>
+              <li>Mutualisation des keywords via <code>commun.resource</code></li>
+              <li>Normalisation des patterns d’interaction (waits, clics, saisies, assertions)</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="step">
+          <div class="step__dot"><i class="fas fa-vial"></i></div>
+          <div class="step__content">
+            <h3>Enrichissement de la suite</h3>
+            <ul class="nice-list">
+              <li>Ajout de scénarios <strong>positifs et négatifs</strong></li>
+              <li>Renforcement des flux critiques sans modifier l’existant</li>
+              <li>Amélioration de la lisibilité (naming, granularité, réutilisation)</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="step">
+          <div class="step__dot"><i class="fas fa-robot"></i></div>
+          <div class="step__content">
+            <h3>IA encadrée (sans hallucination)</h3>
+            <ul class="nice-list">
+              <li>Génération assistée de tests <strong>uniquement</strong> à partir de sources réelles</li>
+              <li>Vérification systématique humaine</li>
+              <li>IA = accélérateur de production, <em>pas</em> source de vérité</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <div class="divider"></div>
+
+      <div class="grid-split">
+        <div class="card card--soft">
+          <div class="obj-header">
+            <i class="fas fa-sitemap"></i>
+            <h3>Ce que j’ai standardisé</h3>
+          </div>
+          <ul class="task-sub-list">
+            <li><i class="fas fa-layer-group"></i> Structure de dossiers & suites</li>
+            <li><i class="fas fa-link"></i> Mutualisation de keywords</li>
+            <li><i class="fas fa-hourglass-half"></i> Attentes robustes & synchronisation</li>
+            <li><i class="fas fa-crosshairs"></i> Sélecteurs fiables & maintenus</li>
+            <li><i class="fas fa-clipboard-check"></i> Assertions cohérentes</li>
+            <li><i class="fas fa-wrench"></i> Helpers & patterns réutilisables</li>
+          </ul>
+        </div>
+
+        <div class="card card--soft">
+          <div class="obj-header">
+            <i class="fas fa-handshake-angle"></i>
+            <h3>Pourquoi ça marche</h3>
+          </div>
+          <p class="muted" style="margin-top:0;">
+            Parce que l’enrichissement est guidé par une contrainte forte : <strong>la réalité fonctionnelle</strong>.
+            Le gain est double : plus de couverture <em>et</em> une suite plus lisible, prête à être industrialisée.
+          </p>
+          <div class="pill-row">
+            <span class="pill"><i class="fas fa-check"></i> Stable</span>
+            <span class="pill"><i class="fas fa-code-branch"></i> Maintenable</span>
+            <span class="pill"><i class="fas fa-diagram-project"></i> POM‑like</span>
+            <span class="pill"><i class="fas fa-rocket"></i> CI‑ready</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SCOPE & QUALITY -->
+  <section id="scope" class="content-section">
+    <div class="homey-glass-card">
+      <div class="section-head">
+        <h2><i class="fas fa-layer-group"></i> Périmètre automatisé & Preuves de qualité</h2>
+        <p class="muted">Couverture, exécution, et éléments de traçabilité pour un pilotage fiable.</p>
+      </div>
+
+      <div class="grid-split">
+        <div class="card card--soft">
+          <div class="obj-header">
+            <i class="fas fa-sitemap"></i>
+            <h3>Périmètre automatisé</h3>
+          </div>
+          <ul class="nice-list">
+            <li><strong>40 tests automatisés</strong> au total</li>
+            <li>Réservation (voyageur non connecté)</li>
+            <li>Demande de réservation (voyageur connecté)</li>
+            <li>Confirmation / gestion côté hôte</li>
+          </ul>
+          <div class="mini-kpis">
+            <div class="mini-kpi"><span class="mini-kpi__n">+</span> scénarios négatifs</div>
+            <div class="mini-kpi"><span class="mini-kpi__n">0</span> suppression de tests existants</div>
+          </div>
+        </div>
+
+        <div class="card card--soft">
+          <div class="obj-header">
+            <i class="fas fa-shield-halved"></i>
+            <h3>Traçabilité & Qualité</h3>
+          </div>
+          <ul class="nice-list">
+            <li>Captures d’écran automatiques</li>
+            <li>Enregistrements vidéo des exécutions</li>
+            <li>Rapports HTML Robot Framework</li>
+            <li>Historique complet des exécutions</li>
+          </ul>
+          <div class="callout callout--thin">
+            <div class="callout__icon"><i class="fas fa-file-lines"></i></div>
+            <div>
+              <div class="callout__title">Auditabilité</div>
+              <div class="muted">Chaque run peut être rejoué et justifié via preuves (report + captures + vidéos).</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- RESULTS -->
+  <section id="results" class="content-section">
+    <div class="homey-glass-card">
+      <div class="section-head">
+        <h2><i class="fas fa-chart-line"></i> Résultats & Impacts</h2>
+        <p class="muted">Ce que l’enrichissement a concrètement apporté à la qualité et à l’industrialisation.</p>
+      </div>
+
+      <div class="cards-3">
+        <div class="card card--soft">
+          <h3 class="card-title"><i class="fas fa-bug"></i> Détection</h3>
+          <p class="muted">Deux anomalies supplémentaires ont été détectées grâce aux nouveaux scénarios.</p>
+          <div class="metric">
+            <span class="metric__label">Anomalies</span>
+            <span class="metric__value">+2</span>
+          </div>
+        </div>
+
+        <div class="card card--soft">
+          <h3 class="card-title"><i class="fas fa-expand"></i> Couverture</h3>
+          <p class="muted">Couverture élargie des flux critiques (réservation → demande → confirmation hôte).</p>
+          <div class="metric">
+            <span class="metric__label">Couverture</span>
+            <span class="metric__value">↑</span>
+          </div>
+        </div>
+
+        <div class="card card--soft">
+          <h3 class="card-title"><i class="fas fa-gears"></i> Industrialisation</h3>
+          <p class="muted">Suite plus stable, plus lisible et prête pour intégration CI/CD.</p>
+          <div class="metric">
+            <span class="metric__label">CI/CD</span>
+            <span class="metric__value">Ready</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="divider"></div>
+
+      <div class="card card--soft">
+        <div class="obj-header">
+          <i class="fas fa-wand-magic-sparkles"></i>
+          <h3>Avant / Après (valeur ajoutée)</h3>
+        </div>
+        <div class="before-after">
+          <div class="ba">
+            <div class="ba__title">Avant</div>
+            <ul class="nice-list">
+              <li>Suite existante à renforcer</li>
+              <li>Couverture partielle des cas négatifs</li>
+              <li>Patterns hétérogènes</li>
+            </ul>
+          </div>
+          <div class="ba ba--accent">
+            <div class="ba__title">Après</div>
+            <ul class="nice-list">
+              <li>Scénarios enrichis (positifs & négatifs)</li>
+              <li>Architecture POM‑like + mutualisation</li>
+              <li>Preuves + historique d’exécution</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  
+  <section id="deliverables" class="content-section">
+  <h2><i class="fas fa-box-open"></i> Livrables Techniques de l'Automatisation</h2>
+
+  <div class="card" style="width:100%;">
+    <h3>
+      <i class="fas fa-code-branch" style="margin-right:0.7em; color: var(--accent-color);"></i>
+      Inventaire des Scripts et Ressources
+    </h3>
+    
+    <div class="table-container">
+      <table class="modern-table" aria-label="Liste des fichiers sources">
+        <thead>
+          <tr>
+            <th>Nom du fichier</th>
+            <th>Format / Type</th>
+            <th>Description & Rôle dans le projet</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><code>3_contacter-hote.robot</code></td>
+            <td><span class="badge" style="background: #5d2f86; color: white;">Robot Script</span></td>
+            <td>Tests automatisés du formulaire de mise en relation voyageur-hôte.</td>
+          </tr>
+          <tr>
+            <td><code>3_demandeReservationNonConnecte.robot</code></td>
+            <td><span class="badge" style="background: #5d2f86; color: white;">Robot Script</span></td>
+            <td>Validation du parcours de réservation pour un utilisateur anonyme.</td>
+          </tr>
+          <tr>
+            <td><code>3_demandeReservationConnecte.robot</code></td>
+            <td><span class="badge" style="background: #5d2f86; color: white;">Robot Script</span></td>
+            <td>Tests de bout en bout du flux de réservation (voyageur authentifié).</td>
+          </tr>
+          <tr>
+            <td><code>3_confirmerDemandeReservation.robot</code></td>
+            <td><span class="badge" style="background: #5d2f86; color: white;">Robot Script</span></td>
+            <td>Automatisation du traitement des réservations côté interface Hôte.</td>
+          </tr>
+          
+          <tr>
+            <td><code>commun.resource</code></td>
+            <td><span class="badge" style="background: #2e7d32; color: white;">Resource</span></td>
+            <td>Librairie centrale : mutualisation des sélecteurs CSS/XPath et mots-clés (Keywords).</td>
+          </tr>
+          
+          <tr>
+            <td><code>record-contacter hote.side</code></td>
+            <td><span class="badge" style="background: #1565c0; color: white;">Selenium SIDE</span></td>
+            <td>Capture initiale du flux de mise en relation (Contact Hôte).</td>
+          </tr>
+          <tr>
+            <td><code>demandeReservationNonConnecte.side</code></td>
+            <td><span class="badge" style="background: #1565c0; color: white;">Selenium SIDE</span></td>
+            <td>Enregistrement du prototype de navigation (Non Connecté).</td>
+          </tr>
+          <tr>
+            <td><code>demandeReservationConnecte.side</code></td>
+            <td><span class="badge" style="background: #1565c0; color: white;">Selenium SIDE</span></td>
+            <td>Enregistrement du prototype de navigation (Connecté).</td>
+          </tr>
+          <tr>
+            <td><code>record-confirmerDemandeReservation.side</code></td>
+            <td><span class="badge" style="background: #1565c0; color: white;">Selenium SIDE</span></td>
+            <td>Script Selenium IDE capturant le flux de confirmation de l'hôte.</td>
+          </tr>
+		  <tr>
+            <td><code>output.xml</code></td>
+            <td><span class="badge" style="background: #f57c00; color: white;">XML Report</span></td>
+            <td>Rapport technique détaillé de l'exécution (logs, durées, statuts de chaque mot-clé).</td>
+          </tr>
+		  <tr>
+            <td><code>automatisationContacterHote.mp4</code></td>
+            <td><span class="badge" style="background: #e91e63; color: white;">Vidéo MP4</span></td>
+            <td>Saisie et soumission du formulaire de contact depuis une annonce.</td>
+          </tr>
+          <tr>
+            <td><code>automatisationDemandeReservationNonConnecte.mp4</code></td>
+            <td><span class="badge" style="background: #e91e63; color: white;">Vidéo MP4</span></td>
+            <td>Parcours de réservation complet pour un utilisateur non-authentifié.</td>
+          </tr>
+          <tr>
+            <td><code>automatisationDemandeReservationConnecte.mp4</code></td>
+            <td><span class="badge" style="background: #e91e63; color: white;">Vidéo MP4</span></td>
+            <td>Flux de réservation avec tunnel d'achat (utilisateur connecté).</td>
+          </tr>
+          <tr>
+            <td><code>automatisationConfirmerDemandeReservation.mp4</code></td>
+            <td><span class="badge" style="background: #e91e63; color: white;">Vidéo MP4</span></td>
+            <td>Gestion du tableau de bord hôte et confirmation des demandes.</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+  <!-- SKILLS & VALUE -->
+  <section id="skills" class="content-section">
+    <div class="homey-glass-card">
+      <div class="section-head">
+        <h2><i class="fas fa-toolbox"></i> Compétences & Valeur ajoutée</h2>
+        <p class="muted">Ce projet illustre une approche QA pragmatique : qualité, rigueur et industrialisation.</p>
+      </div>
+
+      <div class="grid-split">
+        <div class="card card--soft">
+          <div class="obj-header">
+            <i class="fas fa-screwdriver-wrench"></i>
+            <h3>Compétences mobilisées</h3>
+          </div>
+
+          <div class="tag-grid">
+            <span class="tag"><i class="fas fa-robot"></i> Robot Framework</span>
+            <span class="tag"><i class="fas fa-magnifying-glass"></i> Analyse IHM & sélecteurs</span>
+            <span class="tag"><i class="fas fa-diagram-project"></i> Structuration POM‑like</span>
+            <span class="tag"><i class="fas fa-code"></i> Mutualisation keywords</span>
+            <span class="tag"><i class="fas fa-bug"></i> Debugging & stabilisation</span>
+            <span class="tag"><i class="fas fa-file-lines"></i> Reporting & preuves</span>
+            <span class="tag"><i class="fas fa-rocket"></i> CI/CD readiness</span>
+            <span class="tag"><i class="fas fa-brain"></i> IA responsable en QA</span>
+          </div>
+        </div>
+
+        <div class="card card--soft">
+          <div class="obj-header">
+            <i class="fas fa-award"></i>
+            <h3>Conclusion</h3>
+          </div>
+          <p class="muted" style="margin-top:0;">
+            Ce projet montre ma capacité à <strong>industrialiser</strong> une suite de tests,
+            à <strong>renforcer la qualité sans casser l’existant</strong>, et à utiliser l’IA de manière
+            <strong>responsable</strong> : accélérer la production tout en restant strictement fidèle au produit.
+          </p>
+
+          <div class="callout">
+            <div class="callout__icon"><i class="fas fa-star"></i></div>
+            <div>
+              <div class="callout__title">Valeur ajoutée</div>
+              <div class="muted">Couverture + stabilité + maintenabilité → une suite durable, exploitable en CI/CD.</div>
+            </div>
+          </div>
+
+          <div class="objective-quote" style="margin-top:18px;">
+            <i class="fas fa-quote-left"></i>
+            « Une automatisation utile est une automatisation <strong>fiable</strong>, <strong>traçable</strong> et <strong>maintenable</strong>. »
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+      <footer id="page-footer">
+        <div class="footer-content">
+          <span class="citation">
+          "N'abandonne jamais, car c'est souvent juste après le dernier effort que le succès se dévoile."
+          </span>
+          <p>
+            © 2026 Maxime Joannis - Tous droits réservés.
+            <a href="privacy.html">Politique de confidentialité</a>
+          </p>
+        </div>
+      </footer>
+    </div>
+    <script>
+      /**
+       * Project Detail Dashboard Logic
+       * Version: 2.0 - Optimized for Maintenance
+       */
+      const ProjectDetailApp = {
+        // --- CONFIGURATION ---
+        config: {
+          loaderTimeout: 8000,
+          typeWriterSpeed: 50,
+          reducedMotion: window.matchMedia("(prefers-reduced-motion: reduce)").matches,
+          sectionLabels: {
+            contexte: "CONTEXTE",
+            objectif: "OBJECTIF",
+            defis: "DÉFIS & CONTRAINTES",
+            demarche: "DÉMARCHE",
+            perimetre: "PÉRIMÈTRE",
+            tracabilite: "TRAÇABILITÉ",
+            resultats: "RÉSULTATS",
+			deliverables: "LIVRABLES",
+            competences: "COMPÉTENCES",
+            conclusion: "CONCLUSION"
+          },
+          buildLogs: [
+            "> Loading Dashboard Widgets... OK",
+            "> Syncing Test Artifacts... OK",
+            "> Build: SUCCESS — Launching UI"
+          ]
+        },
+      
+        // --- INITIALISATION ---
+        init() {
+          this.initLoader();
+          this.initNavigation();
+          this.initFocusMode();
+          this.initErrorHandlers();
+          // Expose viewImage globally for onclick events in HTML
+          this.viewImage = viewImage; 
+        },
+      
+        // --- GESTION DU LOADER (Animation de démarrage) ---
+        initLoader() {
+          const nodes = {
+            loader: document.getElementById("loader"),
+            fill: document.getElementById("buildFill"),
+            state: document.getElementById("buildState"),
+            icon: document.getElementById("buildIcon"),
+            panel: document.querySelector(".build-panel"),
+            progressBar: document.querySelector(".build-bar")
+          };
+      
+          // Fail-safe global
+          setTimeout(() => this.closeLoader(nodes.loader), this.config.loaderTimeout);
+      
+          // Affichage des logs progressifs
+          this.config.buildLogs.forEach((text, index) => {
+            setTimeout(() => {
+              const line = document.getElementById(`log-${index + 1}`);
+              if (line) line.textContent = text;
+            }, this.config.reducedMotion ? 0 : index * 250);
+          });
+      
+          if (this.config.reducedMotion) {
+            this.closeLoader(nodes.loader);
+            return;
+          }
+      
+          // Animation de la barre de progression
+          setTimeout(() => this.updateProgress(nodes, "85"), 120);
+      
+          setTimeout(() => {
+            this.updateProgress(nodes, "100");
+            if (nodes.state) nodes.state.textContent = "SUCCESS";
+            if (nodes.icon) nodes.icon.innerHTML = '<i class="fas fa-check"></i>';
+            if (nodes.panel) nodes.panel.classList.add("is-success");
+            
+            setTimeout(() => this.closeLoader(nodes.loader), 400);
+          }, 720);
+        },
+      
+        updateProgress(nodes, value) {
+          if (nodes.fill) nodes.fill.style.width = `${value}%`;
+          if (nodes.progressBar) nodes.progressBar.setAttribute("aria-valuenow", value);
+        },
+      
+        closeLoader(loader) {
+          if (loader && loader.style.display !== "none") {
+            loader.style.opacity = "0";
+            setTimeout(() => { loader.style.display = "none"; }, 250);
+          }
+        },
+      
+        // --- NAVIGATION (Transitions et Typewriter) ---
+        initNavigation() {
+          const links = document.querySelectorAll('.nav-link');
+          const sections = document.querySelectorAll('.content-section');
+          const breadcrumbTitle = document.getElementById('breadcrumb-title');
+          const menuLoader = document.getElementById("menuLoader");
+          const menuLoaderText = document.getElementById("menuLoaderText");
+          
+          let typeTimeout;
+      
+          const typeWriter = (text, element) => {
+            element.textContent = "";
+            let i = 0;
+            clearTimeout(typeTimeout);
+            const type = () => {
+              if (i < text.length) {
+                element.textContent += text.charAt(i);
+                i++;
+                typeTimeout = setTimeout(type, this.config.typeWriterSpeed);
+              }
+            };
+            type();
+          };
+      
+          links.forEach(link => {
+            link.addEventListener("click", (e) => {
+              const targetId = link.getAttribute("data-target");
+              if (!targetId) return; // Ignore les liens externes (ex: index.html)
+      
+              const currentSection = document.querySelector(".content-section.active");
+              if (currentSection?.id === targetId) return;
+      
+              // Mise à jour UI Menu
+              links.forEach(l => l.classList.remove("active-link"));
+              link.classList.add("active-link");
+      
+              // Animation Breadcrumb
+              const newTitle = link.innerText.trim();
+              typeWriter(newTitle, breadcrumbTitle);
+      
+              // Transition avec Micro-loader
+              const label = this.config.sectionLabels[targetId] || newTitle.toUpperCase();
+              const delay = this.config.reducedMotion ? 0 : 200;
+      
+              if (menuLoader && !this.config.reducedMotion) {
+                menuLoaderText.textContent = `LOADING: ${label}`;
+                menuLoader.classList.add("is-active");
+                menuLoader.setAttribute("aria-hidden", "false");
+              }
+      
+              setTimeout(() => {
+                sections.forEach(s => s.classList.toggle("active", s.id === targetId));
+                window.scrollTo(0, 0);
+                if (menuLoader) {
+                  menuLoader.classList.remove("is-active");
+                  menuLoader.setAttribute("aria-hidden", "true");
+                }
+              }, delay);
+            });
+          });
+        },
+      
+        // --- MODE FOCUS ---
+        initFocusMode() {
+          const focusBtn = document.getElementById('focusBtn');
+          if (!focusBtn) return;
+      
+          focusBtn.addEventListener('click', () => {
+            document.body.classList.toggle('focus-active');
+            const isFocus = document.body.classList.contains('focus-active');
+            focusBtn.innerHTML = isFocus
+              ? '<i class="fas fa-compress-arrows-alt"></i> QUITTER'
+              : '<i class="fas fa-expand-arrows-alt"></i> FOCUS';
+          });
+        },
+      
+        // --- GESTION DES ERREURS ---
+        initErrorHandlers() {
+          window.onerror = (message, source, lineno) => {
+            const statusText = document.querySelector(".loader-text");
+            if (statusText) {
+              statusText.style.color = "#ff4d4d";
+              statusText.textContent = "CRITICAL_ERROR: Script execution failed.";
+            }
+          };
+        }
+      };
+      
+      /**
+       * Fonction autonome pour afficher une image dans une popup
+       * Génère un document HTML complet à la volée
+       */
+      function viewImage(imageName) {
+        const newWindow = window.open("", "_blank");
+        newWindow.document.write(`
+          <!DOCTYPE html>
+          <html lang="fr">
+            <head>
+              <meta charset="UTF-8">
+              <title>Detail Projet – Enrichissement Robot Framework via IA (Homey) | Maxime Joannis</title>
+              <style>
+                body {
+                  text-align: center;
+                  padding: 40px 20px;
+                  font-family: 'Inter', system-ui, -apple-system, sans-serif;
+                  background: #101529;
+                  color: #eaf6fb;
+                  margin: 0;
+                  display: flex;
+                  flex-direction: column;
+                  align-items: center;
+                  justify-content: center;
+                  min-height: 100vh;
+                }
+                h2 {
+                  color: #1fe1d9;
+                  font-size: 1.2rem;
+                  letter-spacing: 2px;
+                  text-transform: uppercase;
+                  margin-bottom: 20px;
+                }
+                .img-container {
+                  position: relative;
+                  padding: 10px;
+                  background: rgba(31, 225, 217, 0.1);
+                  border-radius: 16px;
+                  border: 1px solid rgba(31, 225, 217, 0.2);
+                  box-shadow: 0 0 50px rgba(0,0,0,0.5);
+                }
+                img {
+                  max-width: 90vw;
+                  max-height: 70vh;
+                  display: block;
+                  border-radius: 8px;
+                }
+                .actions { margin-top: 30px; }
+                .btn {
+                  display: inline-block;
+                  padding: 12px 24px;
+                  background: #1fe1d9;
+                  color: #101529;
+                  text-decoration: none;
+                  border-radius: 6px;
+                  font-weight: 800;
+                  font-size: 0.9rem;
+                  transition: all 0.3s ease;
+                  border: none;
+                  cursor: pointer;
+                  text-transform: uppercase;
+                  letter-spacing: 1px;
+                }
+                .btn:hover {
+                  background: #ffffff;
+                  transform: translateY(-2px);
+                  box-shadow: 0 5px 15px rgba(31, 225, 217, 0.4);
+                }
+              </style>
+            </head>
+            <body>
+              <h2><i class="fas fa-bug"></i> Capture d'écran : ${imageName}</h2>
+              <div class="img-container">
+                <img src="${imageName}" alt="Capture d'anomalie">
+              </div>
+              <div class="actions">
+                <a href="${imageName}" download="${imageName}" class="btn">Télécharger le rapport</a>
+                <button onclick="window.close()" class="btn" style="background: transparent; color: #1fe1d9; border: 1px solid #1fe1d9; margin-left: 10px;">Fermer</button>
+              </div>
+            </body>
+          </html>
+        `);
+      }
+      
+      // Initialisation au chargement du DOM
+      document.addEventListener("DOMContentLoaded", () => ProjectDetailApp.init());
+    </script>
+  </body>
+</html>

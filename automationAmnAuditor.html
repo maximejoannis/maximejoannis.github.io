@@ -1,0 +1,795 @@
+<!DOCTYPE html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Maxime Joannis - AMN Auditor | Automation Engineering</title>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+    <link rel="stylesheet" href="style-portfolio-maximejoannis.css" />
+
+    <noscript>
+      <style>
+        #loader { display: none !important; }
+        .content-section { display: block !important; opacity: 1 !important; }
+      </style>
+    </noscript>
+
+    <style>
+      /* Petits ajouts locaux (non destructifs) */
+      .mono {
+        font-family: "Courier New", ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+        font-size: 0.9rem;
+      }
+      .code-chip {
+        display:inline-flex; align-items:center; gap:10px;
+        padding:10px 14px; border-radius:12px;
+        border: 1px solid var(--border-color);
+        background: rgba(255,255,255,0.03);
+        color: var(--text-main);
+        text-decoration:none;
+        transition: all .2s ease;
+      }
+      .code-chip:hover { transform: translateY(-2px); border-color: var(--accent-color); }
+      .callout {
+        border-left: 4px solid var(--accent-color);
+        padding: 14px 18px;
+        background: rgba(255,255,255,0.03);
+        border-radius: 12px;
+        color: var(--text-muted);
+      }
+      .timeline {
+        display:flex; flex-direction:column; gap:12px;
+      }
+      .timeline .step {
+        display:flex; gap:12px; align-items:flex-start;
+        background: rgba(255,255,255,0.02);
+        border: 1px solid rgba(255,255,255,0.06);
+        border-radius: 14px;
+        padding: 14px 16px;
+      }
+      .timeline .step i { color: var(--accent-color); margin-top: 2px; }
+      .diagram {
+        border-radius: 18px;
+        border: 1px solid var(--border-color);
+        background: rgba(16,21,41,0.35);
+        padding: 18px;
+        overflow:auto;
+      }
+      .diagram pre { margin:0; color: var(--text-muted); }
+      .pill {
+        display:inline-flex; align-items:center; gap:8px;
+        padding: 6px 12px;
+        border-radius: 999px;
+        border: 1px solid var(--border-color);
+        background: rgba(31, 225, 217, 0.08);
+        color: var(--accent-color);
+        font-weight: 700;
+        font-size: .75rem;
+      }
+      .two-col {
+        display:grid;
+        grid-template-columns: 1.35fr 1fr;
+        gap: 20px;
+      }
+      @media (max-width: 980px) {
+        .two-col { grid-template-columns: 1fr; }
+      }
+      .kbd {
+        font-family: inherit;
+        font-size: .85rem;
+        padding: 2px 8px;
+        border-radius: 8px;
+        border: 1px solid rgba(255,255,255,0.12);
+        background: rgba(255,255,255,0.05);
+      }
+      .mini-table {
+        width:100%;
+        border-collapse: collapse;
+        overflow:hidden;
+        border-radius: 14px;
+        border: 1px solid rgba(255,255,255,0.08);
+      }
+      .mini-table th, .mini-table td {
+        padding: 12px 12px;
+        border-bottom: 1px solid rgba(255,255,255,0.08);
+        text-align:left;
+        vertical-align: top;
+      }
+      .mini-table th {
+        color: var(--text-main);
+        font-size: .9rem;
+        background: rgba(255,255,255,0.03);
+      }
+      .mini-table td { color: var(--text-muted); font-size: .9rem; }
+      .mini-table tr:last-child td { border-bottom: none; }
+    </style>
+  </head>
+
+  <body>
+    <!-- LOADER (même esprit que tes autres pages) -->
+    <div id="loader">
+      <div class="qa-logo">
+        <div class="gear"></div>
+        <div class="scan-ring"></div>
+      </div>
+      <div class="loader-title">EXECUTION_INITIALIZATION...</div>
+
+      <div class="build-panel" aria-hidden="true">
+        <div class="build-row">
+          <span class="build-label">BUILD</span>
+          <span class="build-state" id="buildState">RUNNING</span>
+          <span class="build-icon" id="buildIcon"><i class="fas fa-spinner"></i></span>
+        </div>
+        <div class="build-bar" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0">
+          <div class="build-bar__fill" id="buildFill"></div>
+        </div>
+      </div>
+
+      <div class="loader-log-container">
+        <div class="log-line" id="log-1"></div>
+        <div class="log-line" id="log-2"></div>
+        <div class="log-line" id="log-3"></div>
+      </div>
+
+      <div class="loader-text">STATUS: BUILDING AUTOMATION STACK...</div>
+    </div>
+
+    <!-- SIDEBAR -->
+    <aside>
+      <div class="profile-block">
+        <div class="profile-avatar">MJ</div>
+        <div class="profile-text">
+          <div class="profile-name">Maxime Joannis</div>
+          <div class="profile-role">Ingénieur QA</div>
+        </div>
+      </div>
+
+      <nav>
+        <ul id="menu">
+          <li><a href="index.html#projects" class="nav-link"><i class="fas fa-home"></i> Retour aux projets</a></li>
+          <li><a href="detailAmnAuditor.html" class="nav-link"><i class="fas fa-info-circle"></i> Projet AMN Auditor</a></li>
+          <li><a href="dashboardAmnAuditor.html" class="nav-link"><i class="fas fa-chart-pie"></i> Dashboard QA</a></li>
+
+          <hr style="border:0; border-top:1px solid rgba(255,255,255,0.1); margin: 10px 0;" />
+
+          <li><a class="nav-link active-link" data-target="overview"><i class="fas fa-robot"></i> Vue d’ensemble</a></li>
+          <li><a class="nav-link" data-target="architecture"><i class="fas fa-sitemap"></i> Architecture</a></li>
+          <li><a class="nav-link" data-target="toolbox"><i class="fas fa-toolbox"></i> Stack & outils</a></li>
+          <li><a class="nav-link" data-target="selectors"><i class="fas fa-crosshairs"></i> DOM & sélecteurs</a></li>
+          <li><a class="nav-link" data-target="recipes"><i class="fas fa-flask"></i> Recettes & scripts</a></li>
+          <li><a class="nav-link" data-target="next"><i class="fas fa-road"></i> Prochaines étapes</a></li>
+        </ul>
+      </nav>
+    </aside>
+
+    <!-- WRAPPER -->
+    <div class="wrapper">
+      <header>
+        <button
+          id="focusBtn"
+          style="cursor:pointer; padding: 8px 15px; background: rgba(31,225,217,0.1); border: 1px solid #1fe1d9; color: #1fe1d9; border-radius: 8px; font-weight: bold;"
+        >
+          <i class="fas fa-expand-arrows-alt"></i> FOCUS
+        </button>
+
+        <div class="breadcrumb">Portfolio QA // <span id="breadcrumb-title">Vue d’ensemble</span></div>
+
+        <div class="menu-loader" id="menuLoader" aria-hidden="true">
+          <div class="menu-loader__scan"></div>
+          <span class="menu-loader__text" id="menuLoaderText">SWITCHING VIEW...</span>
+        </div>
+
+        <div class="status-badge">
+          <i class="fas fa-circle" style="font-size: 8px;"></i> BUILD: SUCCESS
+        </div>
+
+        <div class="header-photo">
+          <img src="Photo_Identite.jpg" alt="Photo de Maxime" />
+        </div>
+      </header>
+
+      <main>
+        <!-- ===================================================== -->
+        <!-- 1) OVERVIEW -->
+        <!-- ===================================================== -->
+        <section id="overview" class="content-section active">
+          <div class="homey-glass-card" style="padding: 34px;">
+            <div style="display:flex; justify-content:space-between; align-items:flex-start; gap:18px; flex-wrap:wrap;">
+              <div style="max-width: 920px;">
+                <div style="display:flex; align-items:center; gap:12px; flex-wrap:wrap;">
+                  <span class="pill"><i class="fas fa-robot"></i> Desktop Automation</span>
+                  <span class="pill"><i class="fas fa-bolt"></i> Electron App</span>
+                  <span class="pill"><i class="fas fa-code"></i> Reverse Engineering</span>
+                </div>
+
+                <h2 style="margin-top: 14px; margin-bottom: 8px;">
+                  <i class="fas fa-robot"></i> AMN Auditor — Ingénierie d’automatisation
+                </h2>
+
+                <p style="color: var(--text-muted); line-height: 1.75;">
+                  Objectif : rendre testables et automatisables des parcours critiques sur une application <strong>desktop Electron</strong>,
+                  en combinant <strong>UI Automation Windows</strong> et <strong>extraction DOM</strong> via DevTools.
+                </p>
+
+                <div class="callout" style="margin-top: 16px;">
+                  <strong style="color: var(--text-main);">Contrainte principale :</strong>
+                  sur une app Electron, l’arbre UIA Windows remonte souvent un “Chrome Legacy Window” avec peu d’éléments exploitables.
+                  → solution : <strong>hybride</strong> (UIA / WinAppDriver pour le shell + DevTools pour le DOM React).
+                </div>
+
+                <div class="cta-group" style="margin-top: 18px;">
+                  <a href="detailAmnAuditor.html" class="cta-secondary">
+                    <i class="fas fa-project-diagram"></i> Contexte & mission
+                  </a>
+                  <a href="dashboardAmnAuditor.html" class="cta-secondary">
+                    <i class="fas fa-chart-bar"></i> Dashboard QA
+                  </a>
+                  <a href="index.html#projects" class="cta-primary">
+                    <i class="fas fa-rocket"></i> Retour aux projets
+                  </a>
+                </div>
+              </div>
+
+              <div style="min-width: 320px; max-width: 440px;">
+                <div class="card" style="padding:22px; border-radius:18px; background: rgba(16,21,41,0.35);">
+                  <div class="obj-header" style="margin-bottom:12px;">
+                    <i class="fa-solid fa-gauge-high"></i>
+                    <h3 style="margin:0;">Quick facts</h3>
+                  </div>
+                  <ul class="task-sub-list" style="gap:12px;">
+                    <li><i class="fa-solid fa-layer-group"></i> <strong>Approche :</strong> hybrid automation</li>
+                    <li><i class="fa-solid fa-magnifying-glass"></i> <strong>But :</strong> exposer des sélecteurs fiables</li>
+                    <li><i class="fa-solid fa-terminal"></i> <strong>Résultat :</strong> base d’automatisation exploitable</li>
+                    <li><i class="fa-solid fa-file-lines"></i> <strong>Artefacts :</strong> rapports DOM + inventaires UIA</li>
+                  </ul>
+
+                  <div style="margin-top:14px; display:flex; flex-wrap:wrap; gap:10px;">
+                    <span class="status-badge"><i class="fas fa-check-circle"></i> Stratégie validée</span>
+                    <span class="status-badge"><i class="fas fa-crosshairs"></i> Sélecteurs identifiés</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="grid" style="margin-top: 18px;">
+              <div class="card status-card" style="border-radius:18px;">
+                <div class="stat-value"><i class="fa-solid fa-diagram-project"></i></div>
+                <div class="stat-label">Approche</div>
+                <p style="margin-top:10px;">Décomposition en couches : <strong>Shell Windows</strong> + <strong>DOM Electron</strong>.</p>
+              </div>
+              <div class="card status-card" style="border-radius:18px;">
+                <div class="stat-value"><i class="fa-solid fa-file-code"></i></div>
+                <div class="stat-label">Sorties</div>
+                <p style="margin-top:10px;">Rapports structurés : DOM hiérarchique, éléments interactifs, UIA inventory.</p>
+              </div>
+              <div class="card status-card" style="border-radius:18px;">
+                <div class="stat-value"><i class="fa-solid fa-shield-halved"></i></div>
+                <div class="stat-label">Valeur</div>
+                <p style="margin-top:10px;">Réduction du risque : accélérer la non-régression sur parcours critiques.</p>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- ===================================================== -->
+        <!-- 2) ARCHITECTURE -->
+        <!-- ===================================================== -->
+        <section id="architecture" class="content-section">
+          <h2><i class="fas fa-sitemap"></i> Architecture de l’automatisation</h2>
+
+          <div class="two-col">
+            <div class="card">
+              <div class="obj-header">
+                <i class="fas fa-network-wired"></i>
+                <h3>Vue système</h3>
+              </div>
+
+              <p style="color: var(--text-muted); line-height:1.75;">
+                L’objectif est de garder une <strong>traçabilité</strong> entre :
+                l’extraction du DOM, l’inventaire des éléments, puis l’écriture de scripts (Playwright / WinAppDriver).
+              </p>
+
+              <div class="diagram" style="margin-top:14px;">
+                <pre class="mono">
+AMN Auditor (Electron Desktop)
+    ├─ Windows layer (UIA / WinAppDriver)
+    │    ├─ inventory UIA (pywinauto)
+    │    └─ attach WinAppDriver via window handle
+    └─ Web layer (DOM React via DevTools)
+         ├─ remote debugging port (9222)
+         ├─ DOM extraction (CDP / WebSocket)
+         └─ selectors extraction (IDs / interactives)
+                </pre>
+              </div>
+
+              <div class="callout" style="margin-top:14px;">
+                Exemple concret : deux boutons clés identifiés via extraction DOM :
+                <span class="mono">#home-create-project-btn</span> et <span class="mono">#home-open-project-btn</span>. :contentReference[oaicite:2]{index=2}
+              </div>
+            </div>
+
+            <div class="card">
+              <div class="obj-header">
+                <i class="fas fa-route"></i>
+                <h3>Workflow (du “black box” au test auto)</h3>
+              </div>
+
+              <div class="timeline">
+                <div class="step">
+                  <i class="fas fa-play"></i>
+                  <div>
+                    <strong>1. Lancer l’app</strong>
+                    <div style="color: var(--text-muted); margin-top:4px;">Vérifier que l’UI est stable (loader terminé).</div>
+                  </div>
+                </div>
+                <div class="step">
+                  <i class="fas fa-plug"></i>
+                  <div>
+                    <strong>2. Exposer DevTools</strong>
+                    <div style="color: var(--text-muted); margin-top:4px;">Remote debugging (port 9222), puis connexion CDP/WebSocket.</div>
+                  </div>
+                </div>
+                <div class="step">
+                  <i class="fas fa-crosshairs"></i>
+                  <div>
+                    <strong>3. Extraire le DOM + interactifs</strong>
+                    <div style="color: var(--text-muted); margin-top:4px;">Générer rapports : hiérarchie + interactifs filtrés.</div>
+                  </div>
+                </div>
+                <div class="step">
+                  <i class="fas fa-robot"></i>
+                  <div>
+                    <strong>4. Écrire les scripts</strong>
+                    <div style="color: var(--text-muted); margin-top:4px;">Playwright Electron pour le DOM ; WinAppDriver/UIA pour la fenêtre.</div>
+                  </div>
+                </div>
+                <div class="step">
+                  <i class="fas fa-clipboard-check"></i>
+                  <div>
+                    <strong>5. Stabiliser</strong>
+                    <div style="color: var(--text-muted); margin-top:4px;">Attentes, sélecteurs robustes, réduction flakiness.</div>
+                  </div>
+                </div>
+              </div>
+
+              <div style="margin-top: 14px;">
+                <span class="tech-stack-mini">RÈGLE D’OR</span>
+                <p style="color: var(--text-muted); margin-top:8px;">
+                  Si UIA ne remonte pas le DOM React, <strong>ne pas forcer</strong> : passer sur DevTools/Playwright.
+                </p>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- ===================================================== -->
+        <!-- 3) TOOLBOX -->
+        <!-- ===================================================== -->
+        <section id="toolbox" class="content-section">
+          <h2><i class="fas fa-toolbox"></i> Stack & outils</h2>
+
+          <div class="grid">
+            <div class="card project-card">
+              <div class="obj-header">
+                <i class="fa-solid fa-desktop"></i>
+                <h3>Couche Windows</h3>
+              </div>
+              <ul class="skill-list" style="margin-top:12px;">
+                <li><strong>pywinauto (backend UIA)</strong> : inventaire et exploration</li>
+                <li><strong>WinAppDriver</strong> : driver WebDriver Windows</li>
+                <li><strong>Attach par handle</strong> : connexion à une fenêtre existante</li>
+              </ul>
+            </div>
+
+            <div class="card project-card">
+              <div class="obj-header">
+                <i class="fa-solid fa-globe"></i>
+                <h3>Couche Electron / DOM</h3>
+              </div>
+              <ul class="skill-list" style="margin-top:12px;">
+                <li><strong>DevTools Protocol</strong> : extraction DOM (WebSocket)</li>
+                <li><strong>Playwright Electron</strong> : automation UI du rendu web</li>
+                <li><strong>Parse DOM</strong> : BeautifulSoup / lxml</li>
+              </ul>
+            </div>
+
+            <div class="card project-card">
+              <div class="obj-header">
+                <i class="fa-solid fa-box"></i>
+                <h3>Node.js / dépendances</h3>
+              </div>
+              <p style="color: var(--text-muted); margin-top:10px;">
+                Stack JS orientée automation : Playwright + drivers. (voir <span class="mono">package.json</span>)
+              </p>
+              <div style="margin-top:12px; display:flex; flex-wrap:wrap; gap:10px;">
+                <a class="code-chip" href="package.json" target="_blank" rel="noopener">
+                  <i class="fa-solid fa-file-code"></i> package.json
+                </a>
+              </div>
+            </div>
+          </div>
+
+          <div class="card auto-highlight" style="margin-top: 20px; border-radius: 20px;">
+            <div class="obj-header">
+              <i class="fas fa-award"></i>
+              <h3>Compétences démontrées</h3>
+            </div>
+            <div class="results-grid" style="margin-top: 14px;">
+              <div class="ritual-step">
+                <i class="fas fa-magnifying-glass"></i>
+                <span>Reverse engineering</span>
+                <p style="font-size:0.8rem; color: var(--text-muted);">Comprendre une app non documentée, identifier les points d’accroche.</p>
+              </div>
+              <div class="ritual-step">
+                <i class="fas fa-crosshairs"></i>
+                <span>Sélecteurs robustes</span>
+                <p style="font-size:0.8rem; color: var(--text-muted);">Extraction d’IDs et interactifs pour fiabiliser les scripts.</p>
+              </div>
+              <div class="ritual-step">
+                <i class="fas fa-layer-group"></i>
+                <span>Approche hybride</span>
+                <p style="font-size:0.8rem; color: var(--text-muted);">UIA/WinAppDriver + DevTools/Playwright selon la couche cible.</p>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- ===================================================== -->
+        <!-- 4) SELECTORS -->
+        <!-- ===================================================== -->
+        <section id="selectors" class="content-section">
+          <h2><i class="fas fa-crosshairs"></i> DOM & sélecteurs</h2>
+
+          <div class="grid">
+            <div class="card">
+              <div class="obj-header">
+                <i class="fas fa-code"></i>
+                <h3>Rapports générés</h3>
+              </div>
+
+              <p style="color: var(--text-muted); line-height: 1.75;">
+                Les rapports permettent de passer d’un DOM “massif” à une liste exploitable pour l’automatisation :
+                hiérarchie complète → interactifs → interactifs filtrés (ID/Name).
+              </p>
+
+              <div style="display:flex; flex-wrap:wrap; gap:10px; margin-top: 12px;">
+                <a class="code-chip" href="amn_auditor_dom_hierarchique.txt" target="_blank" rel="noopener">
+                  <i class="fas fa-file-alt"></i> DOM hiérarchique
+                </a>
+
+                <a class="code-chip" href="amn_auditor_elements_interactifs.txt" target="_blank" rel="noopener">
+                  <i class="fas fa-hand-pointer"></i> Interactifs (liste)
+                </a>
+
+                <a class="code-chip" href="amn_auditor_dom_interactif_id_name.txt" target="_blank" rel="noopener">
+                  <i class="fas fa-filter"></i> Interactifs (ID/Name)
+                </a>
+              </div>
+
+              <div class="callout" style="margin-top: 14px;">
+                Sur l’écran d’accueil, deux boutons clés sont identifiés avec des IDs stables (ex. <span class="mono">home-create-project-btn</span>). :contentReference[oaicite:3]{index=3}
+              </div>
+            </div>
+
+            <div class="card">
+              <div class="obj-header">
+                <i class="fas fa-list-check"></i>
+                <h3>Stratégie de sélection</h3>
+              </div>
+
+              <table class="mini-table" style="margin-top: 10px;">
+                <thead>
+                  <tr>
+                    <th>Priorité</th>
+                    <th>Sélecteur</th>
+                    <th>Pourquoi</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><span class="pill"><i class="fas fa-star"></i> P1</span></td>
+                    <td class="mono">#id</td>
+                    <td>Stable, unique, rapide</td>
+                  </tr>
+                  <tr>
+                    <td><span class="pill"><i class="fas fa-star"></i> P2</span></td>
+                    <td class="mono">[name="..."]</td>
+                    <td>Souvent stable côté formulaires</td>
+                  </tr>
+                  <tr>
+                    <td><span class="pill"><i class="fas fa-star"></i> P3</span></td>
+                    <td class="mono">text= / role=</td>
+                    <td>Lisible mais fragile (i18n / UI)</td>
+                  </tr>
+                  <tr>
+                    <td><span class="pill"><i class="fas fa-triangle-exclamation"></i> P4</span></td>
+                    <td class="mono">.class...</td>
+                    <td>Souvent dynamique (framework)</td>
+                  </tr>
+                </tbody>
+              </table>
+
+              <div style="margin-top: 14px;">
+                <span class="tech-stack-mini">CONSEIL</span>
+                <p style="color: var(--text-muted); margin-top: 8px;">
+                  Pour limiter la flakiness : privilégier <span class="kbd">ID</span> / <span class="kbd">Name</span>,
+                  et encapsuler les attentes (loader, état detached/visible).
+                </p>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- ===================================================== -->
+        <!-- 5) RECIPES -->
+        <!-- ===================================================== -->
+        <section id="recipes" class="content-section">
+          <h2><i class="fas fa-flask"></i> Recettes & scripts</h2>
+
+          <div class="card auto-highlight" style="border-radius: 20px;">
+            <div class="obj-header">
+              <i class="fas fa-terminal"></i>
+              <h3>Scripts (accès rapide)</h3>
+            </div>
+
+            <p style="color: var(--text-muted); line-height: 1.75;">
+              Ci-dessous, des entrées directes vers tes scripts/outils. (Ils doivent être présents dans ton repo à la racine
+              ou dans un dossier si tu préfères — dans ce cas, ajuste simplement les <span class="mono">href</span>.)
+            </p>
+
+            <div class="grid" style="margin-top: 14px;">
+              <div class="card" style="padding: 18px; border-radius: 16px; background: rgba(255,255,255,0.03);">
+                <h3 style="font-size:1rem;"><i class="fas fa-plug" style="margin-right:10px;"></i> DevTools / DOM extraction</h3>
+                <div style="display:flex; flex-wrap:wrap; gap:10px; margin-top: 10px;">
+                  <a class="code-chip" href="extract_amnauditor_dom.py" target="_blank" rel="noopener">
+                    <i class="fa-brands fa-python"></i> extract_amnauditor_dom.py
+                  </a>
+                  <a class="code-chip" href="extract_amnauditor_dom_complet.py" target="_blank" rel="noopener">
+                    <i class="fa-brands fa-python"></i> extract_amnauditor_dom_complet.py
+                  </a>
+                  <a class="code-chip" href="test_dom_connection.py" target="_blank" rel="noopener">
+                    <i class="fa-brands fa-python"></i> test_dom_connection.py
+                  </a>
+                </div>
+              </div>
+
+              <div class="card" style="padding: 18px; border-radius: 16px; background: rgba(255,255,255,0.03);">
+                <h3 style="font-size:1rem;"><i class="fas fa-filter" style="margin-right:10px;"></i> Parsing & inventaires</h3>
+                <div style="display:flex; flex-wrap:wrap; gap:10px; margin-top: 10px;">
+                  <a class="code-chip" href="extract_full_dom_elements.py" target="_blank" rel="noopener">
+                    <i class="fa-brands fa-python"></i> extract_full_dom_elements.py
+                  </a>
+                  <a class="code-chip" href="extract_interactive_elements.py" target="_blank" rel="noopener">
+                    <i class="fa-brands fa-python"></i> extract_interactive_elements.py
+                  </a>
+                  <a class="code-chip" href="amn_auditor_inspect.py" target="_blank" rel="noopener">
+                    <i class="fa-brands fa-python"></i> amn_auditor_inspect.py
+                  </a>
+                </div>
+              </div>
+
+              <div class="card" style="padding: 18px; border-radius: 16px; background: rgba(255,255,255,0.03);">
+                <h3 style="font-size:1rem;"><i class="fas fa-window-maximize" style="margin-right:10px;"></i> UIA / WinAppDriver</h3>
+                <div style="display:flex; flex-wrap:wrap; gap:10px; margin-top: 10px;">
+                  <a class="code-chip" href="amn_auditor_uia_scan.py" target="_blank" rel="noopener">
+                    <i class="fa-brands fa-python"></i> amn_auditor_uia_scan.py
+                  </a>
+                  <a class="code-chip" href="attach_amnauditor_winappdriver.py" target="_blank" rel="noopener">
+                    <i class="fa-brands fa-python"></i> attach_amnauditor_winappdriver.py
+                  </a>
+                  <a class="code-chip" href="test_open_existing_project_full.py" target="_blank" rel="noopener">
+                    <i class="fa-brands fa-python"></i> test_open_existing_project_full.py
+                  </a>
+                </div>
+              </div>
+
+              <div class="card" style="padding: 18px; border-radius: 16px; background: rgba(255,255,255,0.03);">
+                <h3 style="font-size:1rem;"><i class="fas fa-bolt" style="margin-right:10px;"></i> Playwright / Node</h3>
+                <div style="display:flex; flex-wrap:wrap; gap:10px; margin-top: 10px;">
+                  <a class="code-chip" href="amn-auditor-playwright.js" target="_blank" rel="noopener">
+                    <i class="fa-brands fa-js"></i> amn-auditor-playwright.js
+                  </a>
+                  <a class="code-chip" href="test.js" target="_blank" rel="noopener">
+                    <i class="fa-brands fa-js"></i> test.js
+                  </a>
+                  <a class="code-chip" href="explore.js" target="_blank" rel="noopener">
+                    <i class="fa-brands fa-js"></i> explore.js
+                  </a>
+                </div>
+              </div>
+            </div>
+
+            <div class="callout" style="margin-top: 16px;">
+              <strong style="color: var(--text-main);">Astuce :</strong>
+              si tu ranges tout dans <span class="mono">/projects/amn-auditor-automation/</span>,
+              il suffira d’ajuster les liens en <span class="mono">href="projects/amn-auditor-automation/..."</span>.
+            </div>
+          </div>
+
+          <div class="card" style="margin-top: 18px;">
+            <div class="obj-header">
+              <i class="fas fa-check-double"></i>
+              <h3>Checklist de stabilisation</h3>
+            </div>
+
+            <ul class="skill-list" style="margin-top: 12px;">
+              <li>Attendre la disparition du loader (état <span class="mono">detached</span>) avant d’interagir</li>
+              <li>Préférer les sélecteurs <span class="mono">#id</span> aux classes UI dynamiques</li>
+              <li>Centraliser les timeouts et les “waits” dans des helpers</li>
+              <li>Tracer les étapes clés (logs) + capturer screenshot sur échec</li>
+              <li>Isoler les flows : smoke (N0) → non-régression (N1)</li>
+            </ul>
+          </div>
+        </section>
+
+        <!-- ===================================================== -->
+        <!-- 6) NEXT -->
+        <!-- ===================================================== -->
+        <section id="next" class="content-section">
+          <h2><i class="fas fa-road"></i> Prochaines étapes</h2>
+
+          <div class="grid">
+            <div class="card project-card">
+              <div class="obj-header">
+                <i class="fas fa-diagram-project"></i>
+                <h3>Industrialiser</h3>
+              </div>
+              <ul class="skill-list" style="margin-top:12px;">
+                <li>Structurer un mini framework (helpers, waits, selectors)</li>
+                <li>Ajouter une convention de nommage des tests</li>
+                <li>Produire un rapport HTML (Allure / équivalent) si besoin</li>
+              </ul>
+            </div>
+
+            <div class="card project-card">
+              <div class="obj-header">
+                <i class="fas fa-shield"></i>
+                <h3>Robustesse</h3>
+              </div>
+              <ul class="skill-list" style="margin-top:12px;">
+                <li>Détecter les composants dynamiques / i18n (texte fragile)</li>
+                <li>Créer des “anchors” (data-testid) si tu as la main produit</li>
+                <li>Réduire les flakiness : retries contrôlés + screenshots</li>
+              </ul>
+            </div>
+
+            <div class="card project-card">
+              <div class="obj-header">
+                <i class="fas fa-file-lines"></i>
+                <h3>Valorisation portfolio</h3>
+              </div>
+              <ul class="skill-list" style="margin-top:12px;">
+                <li>Ajouter 2–3 captures (DevTools, UIA, script run)</li>
+                <li>Mettre une mini “Architecture” sur la card projet</li>
+                <li>Faire un mini “TL;DR” (2 lignes) orienté recruteur</li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="cta-group" style="margin-top: 18px;">
+            <a href="detailAmnAuditor.html" class="cta-secondary">
+              <i class="fas fa-info-circle"></i> Revenir à la présentation
+            </a>
+            <a href="dashboardAmnAuditor.html" class="cta-secondary">
+              <i class="fas fa-chart-pie"></i> Revenir au dashboard
+            </a>
+            <a href="index.html#projects" class="cta-primary">
+              <i class="fas fa-rocket"></i> Retour aux projets
+            </a>
+          </div>
+        </section>
+      </main>
+
+      <footer>
+        <div style="opacity: .9;">
+          <span class="mono">Portfolio QA</span> — Maxime Joannis · <span style="color: var(--accent-color); font-weight:700;">AMN Auditor Automation</span>
+        </div>
+        <div style="margin-top: 12px;">
+          <a href="https://www.linkedin.com/in/maxime-joannis-37ab5283/" target="_blank" rel="noopener" aria-label="LinkedIn">
+            <i class="fab fa-linkedin"></i>
+          </a>
+          <a href="https://github.com/MaximeJoannis" target="_blank" rel="noopener" aria-label="GitHub">
+            <i class="fab fa-github"></i>
+          </a>
+        </div>
+      </footer>
+    </div>
+
+    <script>
+      // =========================================================
+      // Loader (simple + cohérent avec tes pages)
+      // =========================================================
+      const loader = document.getElementById("loader");
+      const buildFill = document.getElementById("buildFill");
+      const buildState = document.getElementById("buildState");
+      const buildIcon = document.getElementById("buildIcon");
+
+      const logs = [
+        "BOOTSTRAP: loading UI automation layers...",
+        "CONNECT: preparing DevTools/WinAppDriver hooks...",
+        "READY: selectors & recipes are available."
+      ];
+
+      function typeLog(el, text, delay = 0) {
+        setTimeout(() => {
+          let i = 0;
+          const t = setInterval(() => {
+            el.textContent = text.slice(0, i++);
+            if (i > text.length) clearInterval(t);
+          }, 18);
+        }, delay);
+      }
+
+      window.addEventListener("load", () => {
+        const l1 = document.getElementById("log-1");
+        const l2 = document.getElementById("log-2");
+        const l3 = document.getElementById("log-3");
+
+        typeLog(l1, logs[0], 150);
+        typeLog(l2, logs[1], 650);
+        typeLog(l3, logs[2], 1150);
+
+        let p = 0;
+        const t = setInterval(() => {
+          p += Math.floor(Math.random() * 10) + 6;
+          if (p >= 100) p = 100;
+          buildFill.style.width = p + "%";
+          if (p === 100) {
+            clearInterval(t);
+            buildState.textContent = "SUCCESS";
+            buildIcon.innerHTML = '<i class="fas fa-check"></i>';
+            setTimeout(() => loader.style.display = "none", 450);
+          }
+        }, 160);
+      });
+
+      // =========================================================
+      // Navigation sections
+      // =========================================================
+      const links = Array.from(document.querySelectorAll('.nav-link[data-target]'));
+      const sections = Array.from(document.querySelectorAll('.content-section'));
+      const crumbTitle = document.getElementById("breadcrumb-title");
+      const menuLoader = document.getElementById("menuLoader");
+      const menuLoaderText = document.getElementById("menuLoaderText");
+
+      function showSection(id) {
+        sections.forEach(s => s.classList.remove("active"));
+        const target = document.getElementById(id);
+        if (target) target.classList.add("active");
+      }
+
+      function setActiveLink(clicked) {
+        links.forEach(l => l.classList.remove("active-link"));
+        clicked.classList.add("active-link");
+      }
+
+      links.forEach(link => {
+        link.addEventListener("click", () => {
+          const target = link.getAttribute("data-target");
+          if (!target) return;
+
+          // petite animation "switch"
+          menuLoader.style.display = "inline-flex";
+          menuLoaderText.textContent = "SWITCHING VIEW...";
+
+          setTimeout(() => {
+            showSection(target);
+            setActiveLink(link);
+            crumbTitle.textContent = link.textContent.trim();
+            menuLoader.style.display = "none";
+            window.scrollTo({ top: 0, behavior: "smooth" });
+          }, 220);
+        });
+      });
+
+      // =========================================================
+      // Focus mode (comme tes pages)
+      // =========================================================
+      const focusBtn = document.getElementById("focusBtn");
+      focusBtn.addEventListener("click", () => {
+        document.body.classList.toggle("focus-active");
+      });
+    </script>
+  </body>
+</html>

@@ -1,0 +1,748 @@
+<!DOCTYPE html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Détail Projet – Pipeline CI/CD de tests automatisés (GitHub Actions) | Maxime Joannis</title>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+    <link rel="stylesheet" href="style-portfolio-maximejoannis.css" />
+
+    <noscript>
+      <style>
+        #loader { display: none !important; }
+        .content-section { display: block !important; opacity: 1 !important; }
+      </style>
+    </noscript>
+  </head>
+
+  <body>
+    <!-- LOADER -->
+    <div id="loader">
+      <div class="qa-logo">
+        <div class="gear"></div>
+        <div class="scan-ring"></div>
+      </div>
+      <div class="loader-title">EXECUTION_INITIALIZATION...</div>
+      <div class="build-panel" aria-hidden="true">
+        <div class="build-row">
+          <span class="build-label">BUILD</span>
+          <span class="build-state" id="buildState">RUNNING</span>
+          <span class="build-icon" id="buildIcon"><i class="fas fa-spinner"></i></span>
+        </div>
+        <div class="build-bar" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0">
+          <div class="build-bar__fill" id="buildFill"></div>
+        </div>
+      </div>
+
+      <div class="loader-log-container">
+        <div class="log-line" id="log-1"></div>
+        <div class="log-line" id="log-2"></div>
+        <div class="log-line" id="log-3"></div>
+      </div>
+      <div class="loader-text">STATUS: RUNNING PIPELINE...</div>
+    </div>
+
+    <!-- SIDEBAR -->
+    <aside>
+      <div class="profile-block">
+        <div class="profile-avatar">MJ</div>
+        <div class="profile-text">
+          <div class="profile-name">Maxime Joannis</div>
+          <div class="profile-role">Ingénieur QA</div>
+        </div>
+      </div>
+
+      <nav>
+        <ul id="menu">
+          <li><a href="index.html#projects" class="nav-link"><i class="fas fa-home"></i> Retour aux projets</a></li>
+
+          <li>
+            <a class="nav-link active-link" data-target="overview">
+              <i class="fas fa-compass"></i> Vue d’ensemble
+            </a>
+          </li>
+
+          <li>
+            <a class="nav-link" data-target="implementation">
+              <i class="fas fa-gears"></i> Implémentation
+            </a>
+          </li>
+
+          <li>
+            <a class="nav-link" data-target="results">
+              <i class="fas fa-chart-line"></i> Résultats
+            </a>
+          </li>
+
+          <li>
+            <a class="nav-link" data-target="deliverables">
+              <i class="fas fa-file-export"></i> Livrables produits
+            </a>
+          </li>
+
+          <li>
+            <a class="nav-link" data-target="conclusion">
+              <i class="fas fa-award"></i> Conclusion
+            </a>
+          </li>
+        </ul>
+      </nav>
+    </aside>
+
+    <!-- MAIN WRAPPER -->
+    <div class="wrapper">
+      <header>
+        <button
+          id="focusBtn"
+          style="cursor:pointer; padding: 8px 15px; background: rgba(31,225,217,0.1); border: 1px solid #1fe1d9; color: #1fe1d9; border-radius: 8px; font-weight: bold;"
+        >
+          <i class="fas fa-expand-arrows-alt"></i> FOCUS
+        </button>
+
+        <div class="breadcrumb">Projet QA // <span id="breadcrumb-title">Vue d’ensemble</span></div>
+
+        <div class="menu-loader" id="menuLoader" aria-hidden="true">
+          <div class="menu-loader__scan"></div>
+          <span class="menu-loader__text" id="menuLoaderText">SWITCHING VIEW...</span>
+        </div>
+
+        <div class="status-badge">
+          <i class="fas fa-circle" style="font-size: 8px;"></i> BUILD: SUCCESS
+        </div>
+
+        <div class="header-photo">
+          <img src="Photo_Identite.jpg" alt="Photo de Maxime" />
+        </div>
+      </header>
+
+      <main>
+        <!-- OVERVIEW -->
+        <section id="overview" class="content-section active">
+          <div class="homey-glass-card detail-hero">
+            <div class="detail-hero__top">
+              <div class="detail-hero__brand">
+                <div class="detail-hero__icon" aria-hidden="true">⚙️</div>
+                <div>
+                  <p class="detail-hero__eyebrow">Projet QA • CI/CD • Industrialisation</p>
+                  <h1 class="detail-hero__title">Pipeline CI/CD de tests automatisés (GitHub Actions)</h1>
+                  <p class="muted detail-hero__subtitle">
+                    Sur mon dépôt GitHub <strong>portfolio QA</strong>, j’ai conçu un pipeline CI/CD déclenché à chaque
+                    <strong>push</strong> ou <strong>pull request</strong> pour exécuter automatiquement une suite Robot Framework,
+                    générer les rapports et archiver les preuves.
+                  </p>
+                </div>
+              </div>
+
+              <div class="detail-hero__badges">
+                <span class="badge"><i class="fas fa-robot"></i> Robot Framework</span>
+                <span class="badge"><i class="fas fa-play"></i> push / PR</span>
+                <span class="badge"><i class="fas fa-file-signature"></i> Rapports auto</span>
+                <span class="badge"><i class="fas fa-box-archive"></i> Artefacts</span>
+              </div>
+            </div>
+
+            <div class="kpi-grid">
+              <div class="kpi">
+                <div class="kpi__label">Tests automatisés</div>
+                <div class="kpi__value">20</div>
+                <div class="kpi__hint muted">Exécutés en CI</div>
+              </div>
+              <div class="kpi">
+                <div class="kpi__label">Déclencheurs</div>
+                <div class="kpi__value">2</div>
+                <div class="kpi__hint muted">push + pull request</div>
+              </div>
+              <div class="kpi">
+                <div class="kpi__label">Sorties</div>
+                <div class="kpi__value">3</div>
+                <div class="kpi__hint muted">output.xml + log.html + report.html</div>
+              </div>
+              <div class="kpi">
+                <div class="kpi__label">Objectif</div>
+                <div class="kpi__value">CI</div>
+                <div class="kpi__hint muted">Exécution reproductible</div>
+              </div>
+            </div>
+
+            <div class="grid-split">
+              <div class="card card--soft">
+                <div class="obj-header">
+                  <i class="fas fa-triangle-exclamation"></i>
+                  <h3>Problématique (enjeu)</h3>
+                </div>
+                <ul class="nice-list">
+                  <li>Exécution locale variable selon la machine et la configuration.</li>
+                  <li>Besoin de traçabilité et d’un reporting centralisé.</li>
+                  <li>Industrialisation pour détecter rapidement les régressions.</li>
+                </ul>
+
+                <div class="callout callout--thin">
+                  <div class="callout__icon"><i class="fas fa-shield-halved"></i></div>
+                  <div>
+                    <div class="callout__title">Indépendance des environnements</div>
+                    <div class="muted">Le pipeline standardise l’exécution et réduit les “works on my machine”.</div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="card card--soft">
+                <div class="obj-header">
+                  <i class="fas fa-bullseye"></i>
+                  <h3>Objectif & Périmètre</h3>
+                </div>
+
+                <ul class="checklist">
+                  <li><i class="fas fa-check"></i> Déclencher la CI à chaque push/PR</li>
+                  <li><i class="fas fa-check"></i> Exécuter 20 tests Robot Framework</li>
+                  <li><i class="fas fa-check"></i> Générer automatiquement les rapports</li>
+                  <li><i class="fas fa-check"></i> Archiver artefacts + preuves (captures/logs)</li>
+                  <li><i class="fas fa-check"></i> Rendre les runs auditables et comparables</li>
+                </ul>
+
+                <div class="objective-quote">
+                  <i class="fas fa-quote-left"></i>
+                  « Une CI utile, c’est une CI reproductible, traçable et exploitable. »
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- IMPLEMENTATION -->
+        <section id="implementation" class="content-section">
+          <div class="homey-glass-card">
+            <div class="section-head">
+              <h2><i class="fas fa-gears"></i> Implémentation (pipeline + workflow + qualité)</h2>
+              <p class="muted">Réalisation, enchaînement d’étapes, et pratiques pour une CI fiable.</p>
+            </div>
+
+            <div class="stepper">
+              <div class="step">
+                <div class="step__dot"><i class="fas fa-code"></i></div>
+                <div class="step__content">
+                  <h3>Workflow GitHub Actions</h3>
+                  <ul class="nice-list">
+                    <li>Création d’un workflow YAML déclenché sur <strong>push</strong> et <strong>pull request</strong>.</li>
+                    <li>Organisation des jobs/steps pour une lecture “pro” (setup → run → reports → artefacts).</li>
+                  </ul>
+                </div>
+              </div>
+
+              <div class="step">
+                <div class="step__dot"><i class="fas fa-download"></i></div>
+                <div class="step__content">
+                  <h3>Setup automatique de l’environnement</h3>
+                  <ul class="nice-list">
+                    <li>Installation Python + dépendances Robot Framework.</li>
+                    <li>Préparation des prérequis d’exécution UI (driver/grid selon le run).</li>
+                  </ul>
+                </div>
+              </div>
+
+              <div class="step">
+                <div class="step__dot"><i class="fas fa-vial"></i></div>
+                <div class="step__content">
+                  <h3>Exécution de la suite (20 tests)</h3>
+                  <ul class="nice-list">
+                    <li>Lancement Robot Framework en pipeline avec statut CI (success/fail).</li>
+                    <li>Logs exploitables pour diagnostic en cas d’échec.</li>
+                  </ul>
+                </div>
+              </div>
+
+              <div class="step">
+                <div class="step__dot"><i class="fas fa-file-lines"></i></div>
+                <div class="step__content">
+                  <h3>Reporting & Artefacts</h3>
+                  <ul class="nice-list">
+                    <li>Génération automatique : <code>output.xml</code>, <code>log.html</code>, <code>report.html</code>.</li>
+                    <li>Upload des artefacts (rapports + preuves : captures/logs).</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+
+            <div class="divider"></div>
+
+            <div class="grid-split">
+              <div class="card card--soft">
+                <div class="obj-header">
+                  <i class="fas fa-diagram-project"></i>
+                  <h3>Workflow d’exécution (lecture rapide)</h3>
+                </div>
+                <ol class="nice-list" style="padding-left: 18px;">
+                  <li>Push/PR → déclenchement GitHub Actions</li>
+                  <li>Setup Python + dépendances</li>
+                  <li>Démarrage/connexion au runtime UI (grid si activé)</li>
+                  <li>Exécution Robot Framework (20 tests)</li>
+                  <li>Génération rapports + collecte preuves</li>
+                  <li>Upload artefacts → consultation dans l’onglet Actions</li>
+                </ol>
+              </div>
+
+              <div class="card card--soft">
+                <div class="obj-header">
+                  <i class="fas fa-shield-halved"></i>
+                  <h3>Bonnes pratiques CI (qualité)</h3>
+                </div>
+
+                <ul class="task-sub-list">
+                  <li><i class="fas fa-check"></i> Environnement standardisé (reproductibilité)</li>
+                  <li><i class="fas fa-check"></i> Traçabilité : rapports + preuves attachées au run</li>
+                  <li><i class="fas fa-check"></i> Feedback rapide sur PR (régression visible)</li>
+                  <li><i class="fas fa-check"></i> Exécution indépendante du poste local</li>
+                  <li><i class="fas fa-check"></i> Diagnostic facilité via logs/artefacts</li>
+                </ul>
+
+                <div class="pill-row">
+                  <span class="pill"><i class="fas fa-repeat"></i> Reproductible</span>
+                  <span class="pill"><i class="fas fa-magnifying-glass"></i> Traçable</span>
+                  <span class="pill"><i class="fas fa-bolt"></i> Rapide</span>
+                  <span class="pill"><i class="fas fa-toolbox"></i> Exploitable</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- RESULTS -->
+        <section id="results" class="content-section">
+          <div class="homey-glass-card">
+            <div class="section-head">
+              <h2><i class="fas fa-chart-line"></i> Résultats & valeur</h2>
+              <p class="muted">Ce que l’industrialisation apporte concrètement au projet.</p>
+            </div>
+
+            <div class="cards-3">
+              <div class="card card--soft">
+                <h3 class="card-title"><i class="fas fa-play-circle"></i> Automatisation</h3>
+                <p class="muted">Exécution automatique des tests à chaque modification du dépôt.</p>
+                <div class="metric">
+                  <span class="metric__label">Runs</span>
+                  <span class="metric__value">Auto</span>
+                </div>
+              </div>
+
+              <div class="card card--soft">
+                <h3 class="card-title"><i class="fas fa-file-lines"></i> Reporting centralisé</h3>
+                <p class="muted">Rapports RF disponibles dans GitHub Actions, consultables par l’équipe.</p>
+                <div class="metric">
+                  <span class="metric__label">Rapports</span>
+                  <span class="metric__value">OK</span>
+                </div>
+              </div>
+
+              <div class="card card--soft">
+                <h3 class="card-title"><i class="fas fa-bug"></i> Régressions</h3>
+                <p class="muted">Détection rapide des échecs (signal CI clair) et diagnostic via logs/artefacts.</p>
+                <div class="metric">
+                  <span class="metric__label">Feedback</span>
+                  <span class="metric__value">Fast</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="divider"></div>
+
+            <div class="card card--soft">
+              <div class="obj-header">
+                <i class="fas fa-wand-magic-sparkles"></i>
+                <h3>Impact professionnel</h3>
+              </div>
+              <div class="before-after">
+                <div class="ba">
+                  <div class="ba__title">Avant</div>
+                  <ul class="nice-list">
+                    <li>Exécutions locales, résultats variables</li>
+                    <li>Preuves dispersées</li>
+                    <li>Régressions détectées tard</li>
+                  </ul>
+                </div>
+                <div class="ba ba--accent">
+                  <div class="ba__title">Après</div>
+                  <ul class="nice-list">
+                    <li>CI reproductible (push/PR)</li>
+                    <li>Rapports & artefacts centralisés</li>
+                    <li>Régression visible immédiatement</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- DELIVERABLES -->
+<section id="deliverables" class="content-section">
+  <div class="homey-glass-card">
+    <div class="section-head">
+      <h2><i class="fas fa-file-export"></i> Livrables produits</h2>
+      <p class="muted">
+        Inventaire des fichiers du dépôt (sources) et des artefacts générés automatiquement par la CI GitHub Actions.
+      </p>
+    </div>
+
+    <div class="card" style="width:100%;">
+      <h3>
+        <i class="fas fa-box-open" style="margin-right:0.7em; color: var(--accent-color);"></i>
+        Inventaire des livrables (Repo + CI)
+      </h3>
+
+      <div class="table-container">
+        <table class="modern-table" aria-label="Liste des livrables CI/CD Robot Framework">
+          <thead>
+            <tr>
+              <th>Nom du fichier</th>
+              <th>Format / Type</th>
+              <th>Description & rôle dans le pipeline</th>
+              <th>Emplacement</th>
+            </tr>
+          </thead>
+
+          <tbody>
+            <!-- SOURCES (REPO) -->
+            <tr>
+              <td><code>.github/workflows/robot.yml</code></td>
+              <td><span class="badge" style="background:#1565c0; color:#fff;">Workflow CI</span></td>
+              <td>Workflow GitHub Actions : déclenchement push/PR, setup Python, exécution Robot Framework, upload des artefacts.</td>
+              <td><span class="pill"><i class="fas fa-code-branch"></i> Repo</span></td>
+            </tr>
+
+            <tr>
+              <td><code>requirements.txt</code></td>
+              <td><span class="badge" style="background:#2e7d32; color:#fff;">Python deps</span></td>
+              <td>Versions figées des dépendances (Robot Framework / SeleniumLibrary / Selenium) pour garantir la reproductibilité en CI.</td>
+              <td><span class="pill"><i class="fas fa-code-branch"></i> Repo</span></td>
+            </tr>
+
+            <tr>
+              <td><code>tests/commun.resource</code></td>
+              <td><span class="badge" style="background:#2e7d32; color:#fff;">Resource</span></td>
+              <td>Librairie partagée : keywords réutilisables, helpers, variables et sélecteurs pour standardiser les suites.</td>
+              <td><span class="pill"><i class="fas fa-folder"></i> tests/</span></td>
+            </tr>
+
+            <tr>
+              <td><code>tests/3_contacter-hote.robot</code></td>
+              <td><span class="badge" style="background:#5d2f86; color:#fff;">Robot Suite</span></td>
+              <td>Suite Robot Framework : automatisation du parcours “Contacter l’hôte”.</td>
+              <td><span class="pill"><i class="fas fa-folder"></i> tests/</span></td>
+            </tr>
+
+            <tr>
+              <td><code>tests/3_demandeReservationNonConnecte.robot</code></td>
+              <td><span class="badge" style="background:#5d2f86; color:#fff;">Robot Suite</span></td>
+              <td>Suite Robot Framework : exécution du parcours de réservation “voyageur non connecté”.</td>
+              <td><span class="pill"><i class="fas fa-folder"></i> tests/</span></td>
+            </tr>
+
+            <!-- BONUS : SUITES ROBOT PRESENTES A LA RACINE (détectées dans le repo) -->
+            <tr>
+              <td><code>Faire_Demande_Reservation_Non_Connecte.robot</code></td>
+              <td><span class="badge" style="background:#5d2f86; color:#fff;">Robot Suite</span></td>
+              <td>Suite Robot Framework (racine) : scénario réservation non connecté (variante / historique du projet).</td>
+              <td><span class="pill"><i class="fas fa-code-branch"></i> Repo</span></td>
+            </tr>
+
+            <tr>
+              <td><code>Faire_Demande_Reservation_Connecte.robot</code></td>
+              <td><span class="badge" style="background:#5d2f86; color:#fff;">Robot Suite</span></td>
+              <td>Suite Robot Framework (racine) : scénario réservation connecté (variante / historique du projet).</td>
+              <td><span class="pill"><i class="fas fa-code-branch"></i> Repo</span></td>
+            </tr>
+
+            <tr>
+              <td><code>Faire_Confirmation_Reservation.robot</code></td>
+              <td><span class="badge" style="background:#5d2f86; color:#fff;">Robot Suite</span></td>
+              <td>Suite Robot Framework (racine) : traitement / confirmation côté hôte (variante / historique du projet).</td>
+              <td><span class="pill"><i class="fas fa-code-branch"></i> Repo</span></td>
+            </tr>
+
+            <tr>
+              <td><code>README.md</code></td>
+              <td><span class="badge" style="background:#455a64; color:#fff;">Documentation</span></td>
+              <td>Documentation d’exécution (local/CI), prérequis et consignes de lancement.</td>
+              <td><span class="pill"><i class="fas fa-code-branch"></i> Repo</span></td>
+            </tr>
+
+            <!-- ARTEFACTS (CI) -->
+            <tr>
+              <td><code>output.xml</code></td>
+              <td><span class="badge" style="background:#f57c00; color:#fff;">XML Report</span></td>
+              <td>Rapport technique détaillé Robot Framework : statuts, durées, logs par keyword/test.</td>
+              <td><span class="pill"><i class="fas fa-cloud-arrow-up"></i> Artefacts CI</span></td>
+            </tr>
+
+            <tr>
+              <td><code>log.html</code></td>
+              <td><span class="badge" style="background:#f57c00; color:#fff;">HTML Log</span></td>
+              <td>Log HTML Robot Framework : traces exploitables pour diagnostic (étapes + erreurs).</td>
+              <td><span class="pill"><i class="fas fa-cloud-arrow-up"></i> Artefacts CI</span></td>
+            </tr>
+
+            <tr>
+              <td><code>report.html</code></td>
+              <td><span class="badge" style="background:#f57c00; color:#fff;">HTML Report</span></td>
+              <td>Rapport de synthèse Robot Framework : vue “manager-friendly” (pass/fail, stats).</td>
+              <td><span class="pill"><i class="fas fa-cloud-arrow-up"></i> Artefacts CI</span></td>
+            </tr>
+
+            <tr>
+              <td><code>screenshots/*.png</code></td>
+              <td><span class="badge" style="background:#e91e63; color:#fff;">Captures</span></td>
+              <td>Captures automatiques (notamment en échec) pour preuve de test et triage rapide.</td>
+              <td><span class="pill"><i class="fas fa-cloud-arrow-up"></i> Artefacts CI</span></td>
+            </tr>
+
+            <tr>
+              <td><code>logs/*.log</code></td>
+              <td><span class="badge" style="background:#e91e63; color:#fff;">Logs</span></td>
+              <td>Logs pipeline (debug, erreurs Selenium, traces d’exécution runner) archivés pour investigation.</td>
+              <td><span class="pill"><i class="fas fa-cloud-arrow-up"></i> Artefacts CI</span></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="callout callout--thin" style="margin-top:16px;">
+        <div class="callout__icon"><i class="fas fa-circle-info"></i></div>
+        <div>
+          <div class="callout__title">Lecture</div>
+          <div class="muted">
+            Les fichiers “Repo” sont versionnés. Les éléments “Artefacts CI” sont générés à chaque run et uploadés dans GitHub Actions.
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+        <!-- CONCLUSION -->
+        <section id="conclusion" class="content-section">
+          <div class="homey-glass-card">
+            <div class="section-head">
+              <h2><i class="fas fa-award"></i> Conclusion</h2>
+              <p class="muted">Synthèse courte et exploitable (CV / entretien).</p>
+            </div>
+
+            <div class="grid-split">
+              <div class="card card--soft">
+                <div class="obj-header">
+                  <i class="fas fa-pen-nib"></i>
+                  <h3>Pitch (2 lignes)</h3>
+                </div>
+                <p class="muted" style="margin-top:0;">
+                  Conception d’un pipeline GitHub Actions exécutant automatiquement <strong>20 tests Robot Framework</strong> à chaque
+                  <strong>push/PR</strong>, avec génération des rapports et archivage des artefacts.<br />
+                  Standardisation complète de l’environnement CI pour garantir <strong>reproductibilité</strong>, <strong>traçabilité</strong>
+                  et détection rapide des régressions.
+                </p>
+
+                <div class="objective-quote" style="margin-top:18px;">
+                  <i class="fas fa-quote-left"></i>
+                  « Industrialiser, c’est rendre la qualité mesurable, rejouable et partageable. »
+                </div>
+              </div>
+
+              <div class="card card--soft">
+                <div class="obj-header">
+                  <i class="fas fa-star"></i>
+                  <h3>Valeur ajoutée</h3>
+                </div>
+                <ul class="checklist">
+                  <li><i class="fas fa-check"></i> CI “pro” réutilisable sur d’autres projets</li>
+                  <li><i class="fas fa-check"></i> Réduction du risque de régression</li>
+                  <li><i class="fas fa-check"></i> Traçabilité et preuves centralisées</li>
+                  <li><i class="fas fa-check"></i> Diagnostic accéléré en cas d’échec</li>
+                </ul>
+
+                <div class="pill-row">
+                  <span class="pill"><i class="fas fa-rocket"></i> DevOps-ready</span>
+                  <span class="pill"><i class="fas fa-check-double"></i> QA-driven</span>
+                  <span class="pill"><i class="fas fa-clipboard-list"></i> Auditable</span>
+                  <span class="pill"><i class="fas fa-bolt"></i> Feedback loop</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+      </main>
+
+      <footer id="page-footer">
+        <div class="footer-content">
+          <span class="citation">
+            "N'abandonne jamais, car c'est souvent juste après le dernier effort que le succès se dévoile."
+          </span>
+          <p>
+            © 2026 Maxime Joannis - Tous droits réservés.
+            <a href="privacy.html">Politique de confidentialité</a>
+          </p>
+        </div>
+      </footer>
+    </div>
+
+    <script>
+      /**
+       * Project Detail Dashboard Logic
+       * Version: 2.0 - Optimized for Maintenance
+       */
+      const ProjectDetailApp = {
+        config: {
+          loaderTimeout: 8000,
+          typeWriterSpeed: 50,
+          reducedMotion: window.matchMedia("(prefers-reduced-motion: reduce)").matches,
+          sectionLabels: {
+            overview: "OVERVIEW",
+            implementation: "IMPLEMENTATION",
+            results: "RESULTS",
+            deliverables: "DELIVERABLES",
+            conclusion: "CONCLUSION"
+          },
+          buildLogs: [
+            "> Loading CI Workflow... OK",
+            "> Installing Dependencies... OK",
+            "> Running Robot Tests... OK"
+          ]
+        },
+
+        init() {
+          this.initLoader();
+          this.initNavigation();
+          this.initFocusMode();
+          this.initErrorHandlers();
+        },
+
+        initLoader() {
+          const nodes = {
+            loader: document.getElementById("loader"),
+            fill: document.getElementById("buildFill"),
+            state: document.getElementById("buildState"),
+            icon: document.getElementById("buildIcon"),
+            panel: document.querySelector(".build-panel"),
+            progressBar: document.querySelector(".build-bar")
+          };
+
+          setTimeout(() => this.closeLoader(nodes.loader), this.config.loaderTimeout);
+
+          this.config.buildLogs.forEach((text, index) => {
+            setTimeout(() => {
+              const line = document.getElementById(`log-${index + 1}`);
+              if (line) line.textContent = text;
+            }, this.config.reducedMotion ? 0 : index * 250);
+          });
+
+          if (this.config.reducedMotion) {
+            this.closeLoader(nodes.loader);
+            return;
+          }
+
+          setTimeout(() => this.updateProgress(nodes, "85"), 120);
+
+          setTimeout(() => {
+            this.updateProgress(nodes, "100");
+            if (nodes.state) nodes.state.textContent = "SUCCESS";
+            if (nodes.icon) nodes.icon.innerHTML = '<i class="fas fa-check"></i>';
+            if (nodes.panel) nodes.panel.classList.add("is-success");
+
+            setTimeout(() => this.closeLoader(nodes.loader), 400);
+          }, 720);
+        },
+
+        updateProgress(nodes, value) {
+          if (nodes.fill) nodes.fill.style.width = `${value}%`;
+          if (nodes.progressBar) nodes.progressBar.setAttribute("aria-valuenow", value);
+        },
+
+        closeLoader(loader) {
+          if (loader && loader.style.display !== "none") {
+            loader.style.opacity = "0";
+            setTimeout(() => { loader.style.display = "none"; }, 250);
+          }
+        },
+
+        initNavigation() {
+          const links = document.querySelectorAll(".nav-link");
+          const sections = document.querySelectorAll(".content-section");
+          const breadcrumbTitle = document.getElementById("breadcrumb-title");
+          const menuLoader = document.getElementById("menuLoader");
+          const menuLoaderText = document.getElementById("menuLoaderText");
+
+          let typeTimeout;
+
+          const typeWriter = (text, element) => {
+            element.textContent = "";
+            let i = 0;
+            clearTimeout(typeTimeout);
+            const type = () => {
+              if (i < text.length) {
+                element.textContent += text.charAt(i);
+                i++;
+                typeTimeout = setTimeout(type, this.config.typeWriterSpeed);
+              }
+            };
+            type();
+          };
+
+          links.forEach(link => {
+            link.addEventListener("click", () => {
+              const targetId = link.getAttribute("data-target");
+              if (!targetId) return;
+
+              const currentSection = document.querySelector(".content-section.active");
+              if (currentSection?.id === targetId) return;
+
+              links.forEach(l => l.classList.remove("active-link"));
+              link.classList.add("active-link");
+
+              const newTitle = link.innerText.trim();
+              typeWriter(newTitle, breadcrumbTitle);
+
+              const label = this.config.sectionLabels[targetId] || newTitle.toUpperCase();
+              const delay = this.config.reducedMotion ? 0 : 200;
+
+              if (menuLoader && !this.config.reducedMotion) {
+                menuLoaderText.textContent = `LOADING: ${label}`;
+                menuLoader.classList.add("is-active");
+                menuLoader.setAttribute("aria-hidden", "false");
+              }
+
+              setTimeout(() => {
+                sections.forEach(s => s.classList.toggle("active", s.id === targetId));
+                window.scrollTo(0, 0);
+                if (menuLoader) {
+                  menuLoader.classList.remove("is-active");
+                  menuLoader.setAttribute("aria-hidden", "true");
+                }
+              }, delay);
+            });
+          });
+        },
+
+        initFocusMode() {
+          const focusBtn = document.getElementById("focusBtn");
+          if (!focusBtn) return;
+
+          focusBtn.addEventListener("click", () => {
+            document.body.classList.toggle("focus-active");
+            const isFocus = document.body.classList.contains("focus-active");
+            focusBtn.innerHTML = isFocus
+              ? '<i class="fas fa-compress-arrows-alt"></i> QUITTER'
+              : '<i class="fas fa-expand-arrows-alt"></i> FOCUS';
+          });
+        },
+
+        initErrorHandlers() {
+          window.onerror = () => {
+            const statusText = document.querySelector(".loader-text");
+            if (statusText) {
+              statusText.style.color = "#ff4d4d";
+              statusText.textContent = "CRITICAL_ERROR: Script execution failed.";
+            }
+          };
+        }
+      };
+
+      document.addEventListener("DOMContentLoaded", () => ProjectDetailApp.init());
+    </script>
+  </body>
+</html>
