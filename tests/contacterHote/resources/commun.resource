@@ -74,15 +74,24 @@ Teardown Test
     Fermer Le Navigateur
 
 
+# ---------- Utils ----------
+Sanitize Filename
+    [Arguments]    ${name}
+    # Remplace tout caractère interdit (NTFS + GitHub artifacts) par "_"
+    ${safe}=    Replace String Using Regexp    ${name}    ["<>:|*?\r\n]    _
+    # Sécurise aussi / et \ (chemins)
+    ${safe}=    Replace String Using Regexp    ${safe}    [\\/]    _
+    # Remplace les espaces multiples par "_"
+    ${safe}=    Replace String Using Regexp    ${safe}    \s+    _
+    [Return]    ${safe}
+
+
 Capturer Preuves Echec
     ${ts}=    Get Current Date    result_format=%Y%m%d_%H%M%S
     ${nom}=   Set Variable    ${TEST NAME}
 
-    # Nettoyage pour noms de fichiers (CI friendly)
-    ${safe}=    Replace String    ${nom}    ${SPACE}    _
-    ${safe}=    Replace String    ${safe}    /    _
-    ${safe}=    Replace String    ${safe}    :    _
-    ${safe}=    Replace String    ${safe}    \    _
+    # Nettoyage pour noms de fichiers (CI friendly, sans caractères interdits)
+    ${safe}=    Sanitize Filename    ${nom}
 
     Log    [ECHEC] Capture des preuves pour: ${nom}    console=yes
 
@@ -168,4 +177,3 @@ Element Attribute Should Not Be Empty
     [Arguments]    ${locator}    ${attribute}
     ${value}=    Get Element Attribute    ${locator}    ${attribute}
     Should Not Be Empty    ${value}
-
