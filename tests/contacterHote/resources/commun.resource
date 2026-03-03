@@ -60,18 +60,18 @@ Setup Test
 
     Ouvrir Le Navigateur Et Accéder A L'Application
 
-    ${url}=    Get Location
+    ${url}=    Safe Get Location
     Log    [SETUP] URL ouverte: ${url}    console=yes
 
 Teardown Test
     Run Keyword If Test Failed    Capturer Preuves Echec
 
-    ${url}=    Get Location
+    ${url}=    Safe Get Location
     Log    [TEARDOWN] URL finale: ${url}    console=yes
     Log    [TEARDOWN] Fin du test: ${TEST NAME}    console=yes
     Log    ==================================================    console=yes
 
-    Fermer Le Navigateur
+    Safe Close Browser
 
 
 # ---------- Utils ----------
@@ -85,25 +85,41 @@ Sanitize Filename
     ${safe}=    Replace String Using Regexp    ${safe}    \s+    _
     [Return]    ${safe}
 
+Safe Get Location
+    ${res}=    Run Keyword And Ignore Error    Get Location
+    ${status}=    Set Variable    ${res}[0]
+    ${value}=     Set Variable    ${res}[1]
+    IF    '${status}' != 'PASS' or '${value}' == '${NONE}'
+        ${value}=    Set Variable    N/A
+    END
+    [Return]    ${value}
+
+Safe Capture Page Screenshot
+    [Arguments]    ${path}
+    Run Keyword And Ignore Error    Capture Page Screenshot    ${path}
+
+Safe Close Browser
+    Run Keyword And Ignore Error    Close Browser
+
 
 Capturer Preuves Echec
     ${ts}=    Get Current Date    result_format=%Y%m%d_%H%M%S
     ${nom}=   Set Variable    ${TEST NAME}
 
-    # Nettoyage pour noms de fichiers (CI friendly, sans caractères interdits)
     ${safe}=    Sanitize Filename    ${nom}
 
     Log    [ECHEC] Capture des preuves pour: ${nom}    console=yes
 
-    # Mettre les preuves dans results/ (uploadé en artefact)
     Create Directory    results
 
-    Capture Page Screenshot    results/FAIL_${safe}_${ts}.png
+    Safe Capture Page Screenshot    results/FAIL_${safe}_${ts}.png
 
-    ${html}=    Get Source
-    Create File    results/FAIL_${safe}_${ts}.html    ${html}    encoding=UTF-8
+    ${src}=    Run Keyword And Ignore Error    Get Source
+    IF    '${src}[0]' == 'PASS'
+        Create File    results/FAIL_${safe}_${ts}.html    ${src}[1]    encoding=UTF-8
+    END
 
-    ${url}=    Get Location
+    ${url}=    Safe Get Location
     Log    [ECHEC] URL: ${url}    console=yes
 
 
