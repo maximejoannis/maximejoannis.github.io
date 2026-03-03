@@ -11,11 +11,13 @@ jobs:
 
     services:
       selenium:
-        image: selenium/standalone-chrome:latest
+        image: selenium/standalone-chrome:4.22.0
         ports:
           - 4444:4444
         options: >-
           --shm-size=2g
+        env:
+          SE_OPTS: "--session-request-timeout 300 --session-timeout 300"
 
     steps:
       - uses: actions/checkout@v4
@@ -31,12 +33,21 @@ jobs:
           pip install -r requirements.txt
 
       - name: Wait for Selenium
+        shell: bash
         run: |
-          for i in {1..60}; do
-            curl -s http://localhost:4444/status | grep -q '"ready"[[:space:]]*:[[:space:]]*true' && break
+          set -e
+          echo "Waiting for Selenium on http://localhost:4444/status ..."
+          for i in {1..120}; do
+            if curl -fsS http://localhost:4444/status | grep -q '"ready"[[:space:]]*:[[:space:]]*true'; then
+              echo "Selenium is ready ✅"
+              curl -fsS http://localhost:4444/status
+              exit 0
+            fi
             sleep 1
           done
-          curl -s http://localhost:4444/status
+          echo "Selenium did not become ready in time ❌"
+          curl -fsS http://localhost:4444/status || true
+          exit 1
 
       - name: Run Robot tests (remote) - produce output.xml
         run: |
@@ -46,13 +57,21 @@ jobs:
             --output output.xml \
             --log NONE \
             --report NONE \
-            -v REMOTE_URL:http://localhost:4444/wd/hub \
+            -v REMOTE_URL:http://localhost:4444 \
             tests
 
       - name: Generate report + log with Rebot (always)
         if: always()
         run: |
           rebot --outputdir results --log log.html --report report.html results/output.xml
+
+      - name: Selenium logs (on failure)
+        if: failure()
+        run: |
+          echo "=== docker ps -a ==="
+          docker ps -a
+          echo "=== selenium logs ==="
+          docker logs "$(docker ps -aq --filter 'ancestor=selenium/standalone-chrome:4.22.0' | head -n 1)" || true
 
       - name: Upload Robot reports
         if: always()
