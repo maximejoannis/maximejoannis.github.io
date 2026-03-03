@@ -1,4 +1,5 @@
 # 🧪 Maxime Joannis — Portfolio QA
+[![Robot tests](https://github.com/maximejoannis/maximejoannis.github.io/actions/workflows/robot.yml/badge.svg?branch=main)](https://github.com/maximejoannis/maximejoannis.github.io/actions/workflows/robot.yml)
 
 Bienvenue sur mon **portfolio QA**.
 
