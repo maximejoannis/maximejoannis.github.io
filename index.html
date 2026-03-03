@@ -1,836 +1,1165 @@
 <!DOCTYPE html>
 <html lang="fr">
-   <head>
-      <meta charset="UTF-8" />
-      <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-      <title>Maxime Joannis - Portfolio QA</title>
-      <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet">
-      <link rel="stylesheet" href="style-portfolio-maximejoannis.css">
-   </head>
-   <body>
-      <aside class="profile-menu">
-         <div class="profile-header">
-            <h1 class="profile-name">Maxime Joannis</h1>
-            <div class="profile-title"> Ingénieur QA fonctionnel et automatisation – Certifié ISTQB &amp; Ex-Développeur Fullstack</div>
-            <p class="profile-desc">
-            </p>
-         </div>
-         <nav class="profile-nav">
-            <a href="#" class="menu-link active" data-section="about">À propos de moi</a>
-            <a href="#" class="menu-link" data-section="formation">Formation Test Academy</a>
-            <a href="#" class="menu-link" data-section="projects">Projets QA réalisés</a>
-            <a href="#" class="menu-link" data-section="cv">Expériences professionnelles</a>
-         </nav>
-         <div class="profile-socials">
-            <!-- Exemples d'icônes SVG, tu peux remplacer/ajouter -->
-            <a href="https://github.com/maximejoannis/maximejoannis.github.io" target="_blank" title="GitHub">
-               <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-                  <path d="M12 2C6.477 2 2 6.484 2 12.012c0 4.418 2.865 8.167 6.839 9.489.5.09.682-.217.682-.482 0-.237-.009-.868-.013-1.703-2.782.605-3.369-1.341-3.369-1.341-.454-1.157-1.109-1.465-1.109-1.465-.908-.62.069-.608.069-.608 1.004.07 1.532 1.031 1.532 1.031.892 1.528 2.341 1.088 2.91.833.091-.646.35-1.088.636-1.339-2.221-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.025A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.748-1.025 2.748-1.025.546 1.378.202 2.397.099 2.65.64.7 1.028 1.595 1.028 2.688 0 3.848-2.337 4.695-4.566 4.944.359.309.678.92.678 1.854 0 1.338-.012 2.419-.012 2.747 0 .267.18.576.688.479C19.137 20.176 22 16.427 22 12.012 22 6.484 17.523 2 12 2z"/>
-               </svg>
-            </a>
-            <a href="https://www.linkedin.com/in/maxime-joannis-37ab528" target="_blank" title="LinkedIn">
-               <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-                  <rect x="2" y="2" width="20" height="20" rx="5"/>
-                  <path d="M8 11v5M8 8v.01M12 16v-5M16 16v-3a2 2 0 0 0-4 0"/>
-               </svg>
-            </a>
-            <!-- Ajoute d'autres icônes au besoin -->
-         </div>
-      </aside>
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Maxime Joannis - Portfolio QA</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="style-portfolio-maximejoannis.css">
+    <noscript>
+      <style>
+        #loader { display: none !important; }
+        .content-section { display: block !important; opacity: 1 !important; }
+      </style>
+    </noscript>
+  </head>
+  <body>
+    <div id="loader">
+      <div class="qa-logo">
+        <div class="gear"></div>
+        <div class="scan-ring"></div>
+      </div>
+      <div style="font-size: 1.4rem; font-weight: 700; margin-top: 20px;">EXECUTION_INITIALIZATION...</div>
+      <div class="build-panel" aria-hidden="true">
+        <div class="build-row">
+          <span class="build-label">BUILD</span>
+          <span class="build-state" id="buildState">RUNNING</span>
+          <span class="build-icon" id="buildIcon"><i class="fas fa-spinner"></i></span>
+        </div>
+        <div class="build-bar" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0">
+          <div class="build-bar__fill" id="buildFill"></div>
+        </div>
+      </div>
+      <div class="loader-log-container">
+        <div class="log-line" id="log-1"></div>
+        <div class="log-line" id="log-2"></div>
+        <div class="log-line" id="log-3"></div>
+      </div>
+      <div class="loader-scan"></div>
+      <div class="loader-text">STATUS: RUNNING TESTS...</div>
+    </div>
+    <aside>
+      <div class="profile-block">
+        <div class="profile-avatar">MJ</div>
+        <div class="profile-text">
+          <div class="profile-name">Maxime Joannis</div>
+          <div class="profile-role">Ingénieur QA</div>
+        </div>
+      </div>
+      <nav>
+        <ul id="menu">
+          <li><a class="nav-link active-link" data-target="home"><i class="fas fa-home"></i> Accueil</a></li>
+          <li><a class="nav-link" data-target="about"><i class="fas fa-user-astronaut"></i> A propos de moi</a></li>
+          <li><a class="nav-link" data-target="formation"><i class="fas fa-graduation-cap"></i> Formation Test Academy</a></li>
+          <li><a class="nav-link" data-target="projects"><i class="fas fa-rocket"></i> Projets QA</a></li>
+          <li><a class="nav-link" data-target="experience"><i class="fas fa-briefcase"></i> Expériences professionnelles</a></li>
+        </ul>
+      </nav>
+    </aside>
+    <div class="wrapper">
+      <header>
+        <button id="focusBtn" style="cursor:pointer; padding: 8px 15px; background: rgba(31,225,217,0.1); border: 1px solid #1fe1d9; color: #1fe1d9; border-radius: 8px; font-weight: bold;">
+        <i class="fas fa-expand-arrows-alt"></i> FOCUS
+        </button>
+        <div class="breadcrumb">Portfolio QA // <span id="breadcrumb-title">Accueil</span></div>
+        <div class="menu-loader" id="menuLoader" aria-hidden="true">
+          <div class="menu-loader__scan"></div>
+          <span class="menu-loader__text" id="menuLoaderText">SWITCHING VIEW...</span>
+        </div>
+        <div class="status-badge">
+          <i class="fas fa-circle" style="font-size: 8px;"></i> BUILD : SUCCESS
+        </div>
+        <div class="header-photo">
+          <img src="Photo_Identite.jpg" alt="Photo de Maxime">
+        </div>
+      </header>
       <main>
-         <section id="about" class="active">
-  <div class="section-title">À propos de moi</div>
+        <section id="home" class="content-section active">
+  <h1 style="font-size: clamp(1.5rem, 5vw, 2.8rem); line-height: 1.1; margin-bottom: 10px; font-weight: 700; background: linear-gradient(to right, #eaf6fb, #1fe1d9); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">
+    Bonjour, moi c'est Maxime Joannis<br>
+    Ingénieur QA | certifié ISTQB (CTFL v4.0)
+  </h1>
 
-  <div class="about-box">
-    <p>
-      <strong>Après plus de six années d’expérience</strong> en développement fullstack Java/Angular — 
-      dont près de six ans en CDI chez Infotel Conseil (Banque de France, BNP Paribas…) — 
-      j’ai choisi en 2024 de donner une nouvelle direction à ma carrière : <strong>devenir Ingénieur QA</strong>.
+  <!-- Accroche / promesse -->
+  <p style="
+      font-size: 1.2rem;
+      color: var(--text-muted);
+      max-width: 900px;
+      margin-bottom: 18px;
+      border-left: 4px solid var(--accent-color);
+      padding-left: 20px;
+    ">
+    <strong style="color: var(--text-main);">Sécuriser les applications critiques</strong> grâce à une approche hybride
+    <strong style="color: var(--text-main);">QA & développement</strong> : c’est la dynamique qui guide mon travail.
+    J’interviens avec méthode, traçabilité et exigence pour garantir la fiabilité, la robustesse et la conformité
+    d’applications à forts enjeux métier et réglementaires.
+  </p>
+
+  <!-- Preuves rapides -->
+  <div class="card" style="max-width: 980px;">
+    <div style="display:flex; flex-wrap:wrap; gap:10px; margin-bottom: 14px;">
+      <span class="status-badge"><i class="fas fa-shield-alt"></i> Qualité & Conformité</span>
+      <span class="status-badge"><i class="fas fa-code"></i> Profil hybride QA / Dev</span>
+      <span class="status-badge"><i class="fas fa-project-diagram"></i> Processus BPMN / Camunda</span>
+      <span class="status-badge"><i class="fas fa-robot"></i> Automatisation Robot Framework</span>
+      <span class="status-badge"><i class="fas fa-bug"></i> Jira / Xray</span>
+    </div>
+
+    <p style="color: var(--text-muted); margin-bottom: 14px;">
+      Après plusieurs années en développement bancaire, je me suis spécialisé en test logiciel (2024),
+      confirmé en 2025 par l’obtention de la certification ISTQB et d’un diplôme de testeur logiciel.
+      Cette double compétence me permet de challenger les spécifications, sécuriser les processus,
+      analyser les impacts et contribuer à des décisions structurantes (ex : GO / NO GO).
     </p>
 
-    <p>
-      Ce virage est le fruit d’une réflexion profonde, nourrie par des épreuves personnelles et 
-      un engagement familial fort. Suite à la perte d’un proche en 2022, 
-      j’ai assumé seul un rôle d’aidant auprès de mes frères en situation de handicap. 
-      Cette période m’a appris la <em>résilience</em>, l’<em>écoute</em> et la <em>rigueur</em> — 
-      des qualités que j’ai naturellement retrouvées dans le métier du test logiciel.
-    </p>
+    <div class="grid" style="grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 16px;">
+      <!-- Homey -->
+<div class="card" style="padding: 18px; background: rgba(255,255,255,0.02); position:relative;">
+<span class="badge-live">
+  <i class="fas fa-circle"></i> Démo live
+</span>
+        <h3 style="margin-bottom: 8px;">Projet Agile Homey - E-Commerce</h3>
+        <p style="color: var(--text-muted); margin-bottom: 10px;">
+          Application web de gestion de locations saisonnières (processus de réservation).
+        </p>
+        <ul class="skill-list" style="margin:0;">
+          <li>Analyse user stories & critères d’acceptation</li>
+          <li>Tests fonctionnels + suivi anomalies (Jira / Xray)</li>
+          <li>Automatisation des parcours critiques</li>
+          <li>Participation à la décision GO / NO GO</li>
+        </ul>
+		<div style="margin-top:15px;">
+		  <a href="homey-demo.html" target="_blank" 
+			 style="
+			   display:inline-flex;
+			   align-items:center;
+			   gap:8px;
+			   padding:10px 16px;
+			   border-radius:10px;
+			   background: linear-gradient(135deg, #1fe1d9, #39f0e2);
+			   color:#001423;
+			   font-weight:700;
+			   text-decoration:none;
+			   box-shadow:0 0 18px rgba(31,225,217,0.25);
+			 ">
+			<i class="fas fa-flask"></i> Lancez la démo fonctionnelle
+		  </a>
+		</div>
+      </div>
 
-    <p>
-      Mon bilan de compétences m’a révélé une affinité naturelle pour l’analyse, 
-      la méthodologie et la recherche de la qualité. 
-      Le QA s’est imposé comme une évidence : un domaine qui unit <strong>rigueur, curiosité et esprit collaboratif</strong>.
-    </p>
-
-    <p>
-      Aujourd’hui, mon passé de développeur constitue un atout essentiel dans mon approche du test : 
-      je comprends les contraintes techniques, j’anticipe les points de friction côté code 
-      et je porte un regard exigeant sur la qualité produit.
-    </p>
-
-    <p>
-      Plus qu’une reconversion, c’est une évolution : celle d’un professionnel déterminé à construire 
-      une carrière durable dans la qualité logicielle, en alliant savoir-faire technique et exigence humaine.
-    </p>
-  </div>
-  <!-- SOUS-MENU FORMATION / CERTIFICATIONS -->
-<div class="sub-tabs-container">
-  <div class="sub-tabs">
-    <button class="sub-tab active" data-target="etudes">Formations</button>
-    <button class="sub-tab" data-target="certifications">Certifications</button>
-  </div>
-
-  <!-- Contenu Études -->
-  <div id="etudes" class="sub-tab-content active">
-    <div class="study-card">
-      <h4>Alixio Group – Agil’Cadres</h4>
-      <p>Séminaire – Développer son personal branding</p>
-      <span class="status done">Terminée</span>
-    </div>
-    <div class="study-card">
-      <h4>Alixio Group – Agil’Cadres</h4>
-      <p>Séminaire – Intégrer l'IA dans sa recherche d’emploi</p>
-      <span class="status done">Terminée</span>
-    </div>
-    <div class="study-card">
-      <h4>Test Academy</h4>
-      <p>Formation Testeur Logiciel</p>
-      <span class="status done">Terminée</span>
-    </div>
-	 <div class="study-card">
-      <h4>Infotel Conseil</h4>
-      <p>Formation de 2H : SSI - Cursus de sensibilisation à la sécurité de l'information</p>
-      <span class="status done">Terminée</span>
-    </div>
-	 <div class="study-card">
-      <h4>Ingeus Créteil</h4>
-      <p>Accompagnement individualisé des demandeurs d'emplois</p>
-      <span class="status done">Terminée</span>
-    </div>
-	<div class="study-card">
-      <h4>Université MIAGE Paris-Est-Créteil</h4>
-      <p>Master 2 ISIES : Ingénierie des Systèmes d'Information des Établissements de Santé</p>
-      <span class="status done">Terminée</span>
-    </div>
-	<div class="study-card">
-      <h4>Université MIAGE Paris-Est-Créteil</h4>
-      <p>Master 1 : Sciences de gestion</p>
-      <span class="status done">Terminée</span>
-    </div>
-	<div class="study-card">
-      <h4>Université MIAGE Paris-Est-Créteil</h4>
-      <p>Licence 3 : Economie & Gestion</p>
-      <span class="status done">Terminée</span>
-    </div>
-	<div class="study-card">
-      <h4>Lycée polyvalent et régional Voillaume</h4>
-      <p>BTS IG : Informatique de gestion option: administrateur réseau</p>
-      <span class="status done">Terminée</span>
-    </div>
-	<div class="study-card">
-      <h4>Lycée polyvalent et régional Voillaume</h4>
-      <p>BAC PRO SEN option : Télécommunications & Réseaux</p>
-      <span class="status done">Terminée</span>
-    </div>
-	<div class="study-card">
-      <h4>Lycée polyvalent et régional Voillaume</h4>
-      <p>BEP : Métiers de l'électronique</p>
-      <span class="status done">Terminée</span>
+      <!-- AMN BRAINS -->
+      <div class="card" style="padding: 18px; background: rgba(255,255,255,0.02);">
+        <h3 style="margin-bottom: 8px;">AMN BRAINS – Cybersécurité</h3>
+        <p style="color: var(--text-muted); margin-bottom: 10px;">
+          Tests d’une application desktop d’audit augmentée par IA + validation de processus BPMN critiques.
+        </p>
+        <ul class="skill-list" style="margin:0;">
+          <li>Analyse de diagrammes BPMN & spécifications générées par IA</li>
+          <li>Validation de processus critiques & cohérence des données</li>
+          <li>Structuration d’un patrimoine de tests</li>
+          <li>Validation des comportements IA (constats / écarts / actions)</li>
+        </ul>
+      </div>
     </div>
   </div>
 
-  <!-- Contenu Certifications -->
-  <div id="certifications" class="sub-tab-content">
-    <div class="certif-card">
-      <h4>Certification professionnelle – Testeur Logiciel</h4>
-      <p>Test Academy</p>
-      <span class="status done">Obtenue</span>
-    </div>
-	 <div class="certif-card">
-      <h4>Certification ISTQB Foundation V4.0</h4>
-      <p>GASQ France</p>
-      <span class="status done">Obtenue</span>
-    </div>
-	<div class="certif-card">
-      <h4>Postman API Fundamentals Student Expert</h4>
-      <p>Postman</p>
-      <span class="status done">Obtenue</span>
-    </div>
-	<div class="certif-card">
-      <h4>Apprenez à apprendre</h4>
-      <p>OpenClassrooms</p>
-      <span class="status done">Obtenue</span>
-    </div>
-	<div class="certif-card">
-      <br><h4>Réalisation d’application n-tiers avec JAVA JEE et JavaScript</h4>
-      <p>Infotel Conseil</p>
-      <span class="status done">Obtenue</span>
-    </div>
+  <!-- CTA -->
+  <div class="cta-group" style="margin-top: 18px;">
+    <!--
+	<a href="#" class="cta-primary">
+	  <i class="fas fa-file-download"></i> Téléchargez mon CV
+	</a>
+	-->
+    <a href="https://www.linkedin.com/in/maxime-joannis-37ab5283/" target="_blank" class="cta-secondary">
+      <i class="fab fa-linkedin"></i> Mon profil LinkedIn
+    </a>
+
+    <a href="#projects" class="cta-secondary" id="seeProjectsBtn">
+      <i class="fas fa-rocket"></i> Voir mes projets QA
+    </a>
+
+    <a href="https://github.com/MaximeJoannis" target="_blank" class="cta-secondary">
+      <i class="fab fa-github"></i> Mon dépôt GitHub
+    </a>
+  </div>
+</section>
+        <section id="about" class="content-section">
+  <h2><i class="fas fa-terminal"></i> A propos de moi</h2>
+
+  <div class="card">
+
+    <!-- Positionnement -->
+    <p class="about-intro">
+      <strong>Ingénieur QA certifié ISTQB (CTFL v4.0)</strong>, 
+      issu du développement, je me positionne aujourd’hui 
+      comme un profil hybride QA / développement spécialisé dans 
+      la sécurisation d’applications critiques et de processus métier sensibles.
+    </p>
+
+    <!-- Repositionnement -->
+    <p class="about-block">
+      Après plus de six années en développement dans des environnements 
+      réglementaires exigeants, j’ai choisi en 2024 de me spécialiser en test logiciel. 
+      Cette évolution a été validée en 2025 par l’obtention de la certification ISTQB 
+      ainsi que d’un diplôme de testeur logiciel.
+    </p>
+
+    <!-- Différenciation -->
+    <p class="about-block">
+      Cette double compétence me permet d’aborder les projets avec une vision transverse : 
+      compréhension technique du code, analyse fonctionnelle rigoureuse, 
+      lecture critique des spécifications et maîtrise des processus qualité.
+      Je ne me limite pas à détecter des anomalies : je sécurise les processus, 
+      challenge les exigences et analyse les impacts techniques et métier.
+    </p>
+
+    <!-- Expériences clés -->
+    <p class="about-block">
+      J’ai travaillé sur des projets QA variés, notamment :
+      <br>
+      • Automatisation et validation de parcours critiques en environnement Agile (Homey)  
+      • Tests d’une application desktop d’audit augmentée par IA  
+      • Validation de processus BPMN critiques (Camunda)  
+    </p>
+
+    <!-- Méthode -->
+    <p class="about-outro">
+      J’interviens avec méthode, traçabilité et exigence, 
+      particulièrement dans des environnements où la conformité, 
+      la maîtrise des risques et la fiabilité des systèmes sont essentielles.
+    </p>
+
+  </div>
+</section>
+		
+		<section id="formation" class="content-section">
+  <h2 class="section-title">
+    <i class="fas fa-graduation-cap"></i> Formation Test Academy - octobre 2024/mai 2025
+  </h2>
+  
+  <div class="card" style="margin-bottom: 25px;">
+  <p style="font-size: 1.05rem; color: var(--text-muted);">
+    Formation suivie chez <strong>Test Academy</strong>, 
+    spécialisée en ingénierie du test logiciel.
+  </p>
+
+  <div style="display:flex; flex-wrap:wrap; gap:12px; margin-top:15px;">
+    <span class="status-badge">
+      <i class="fas fa-certificate"></i> Certification ISTQB Fondation (CTFL v4.0) obtenue
+    </span>
+
+    <span class="status-badge">
+      <i class="fas fa-user-graduate"></i> Diplôme de testeur logiciel obtenu
+    </span>
+
+    <span class="status-badge">
+      <i class="fas fa-check-circle"></i> Formation validée
+    </span>
   </div>
 </div>
+  
+  <div class="card" style="margin-bottom: 25px;">
+  <h3>Modalités & Validation</h3>
+  <ul class="skill-list">
+    <li>Validation des acquis par quiz à la fin de chaque module</li>
+    <li>Évaluation des livrables</li>
+    <li>Visioconférences de validation avec le formateur</li>
+    <li>Projet de fin de formation évalué en conditions professionnelles simulées</li>
+    <li>Préparation et réussite de la certification ISTQB CTFL v4.0</li>
+  </ul>
+</div>
 
+  <div class="formation-accordion grid">
+    <!-- Module 01 -->
+    <div class="formation-item card">
+      <div class="formation-header" onclick="toggleFormation(this)">
+        <div class="formation-head-left">
+          <span class="formation-num">MODULE 01</span>
+          <h3 class="formation-title">Méthode</h3>
+        </div>
+      </div>
+      <div class="formation-detail">
+        <p>Ce module vous accompagne étape par étape pour assimiler une méthode de test complète et structurée.</p>
+      </div>
+	  <span class="status-badge" style="margin-top:10px;">
+<i class="fas fa-check-circle"></i> Module validé
+</span>
+    </div>
+
+    <!-- Module 02 -->
+    <div class="formation-item card">
+      <div class="formation-header" onclick="toggleFormation(this)">
+        <div class="formation-head-left">
+          <span class="formation-num">MODULE 02</span>
+          <h3 class="formation-title">L'outillage</h3>
+        </div>
+      </div>
+      <div class="formation-detail">
+        <p>Ce module vous accompagne à la maîtrise de l’outil de gestion des cas de test : <strong>JIRA</strong>.</p>
+      </div>
+	  <span class="status-badge" style="margin-top:10px;">
+<i class="fas fa-check-circle"></i> Module validé
+</span>
+    </div>
+
+    <!-- Module 03 -->
+    <div class="formation-item card">
+      <div class="formation-header" onclick="toggleFormation(this)">
+        <div class="formation-head-left">
+          <span class="formation-num">MODULE 03</span>
+          <h3 class="formation-title">La Pratique</h3>
+        </div>
+      </div>
+      <div class="formation-detail">
+        <p>Ce module vous permet de mettre en pratique toutes les compétences acquises sur l’application web : <strong>Homey</strong>.</p>
+      </div>
+	  <span class="status-badge" style="margin-top:10px;">
+<i class="fas fa-check-circle"></i> Module validé
+</span>
+    </div>
+
+    <!-- Module 04 -->
+    <div class="formation-item card">
+      <div class="formation-header" onclick="toggleFormation(this)">
+        <div class="formation-head-left">
+          <span class="formation-num">MODULE 04</span>
+          <h3 class="formation-title">L'automatisation Web</h3>
+        </div>
+      </div>
+      <div class="formation-detail">
+        <p>Ce module vous accompagne afin de maîtriser l’automatisation des tests sur application web.</p>
+      </div>
+	  <span class="status-badge" style="margin-top:10px;">
+<i class="fas fa-check-circle"></i> Module validé
+</span>
+    </div>
+
+    <!-- Module 05 -->
+    <div class="formation-item card">
+      <div class="formation-header" onclick="toggleFormation(this)">
+        <div class="formation-head-left">
+          <span class="formation-num">MODULE 05</span>
+          <h3 class="formation-title">L’automatisation API</h3>
+        </div>
+      </div>
+      <div class="formation-detail">
+        <p>Ce module vous accompagne afin de maîtriser l’automatisation des tests sur API.</p>
+      </div>
+	  <span class="status-badge" style="margin-top:10px;">
+<i class="fas fa-check-circle"></i> Module validé
+</span>
+    </div>
+
+    <!-- Module 06 -->
+    <div class="formation-item card">
+      <div class="formation-header" onclick="toggleFormation(this)">
+        <div class="formation-head-left">
+          <span class="formation-num">MODULE 06</span>
+          <h3 class="formation-title">Préparation à l'examen ISTQB Fondation</h3>
+        </div>
+      </div>
+      <div class="formation-detail">
+        <p>Ce module est une préparation pratique à l’examen de certification <strong>ISTQB</strong>.</p>
+      </div>
+	  <span class="status-badge" style="margin-top:10px;">
+<i class="fas fa-check-circle"></i> Module validé
+</span>
+    </div>
+
+    <!-- Module 07 -->
+    <div class="formation-item card">
+      <div class="formation-header" onclick="toggleFormation(this)">
+        <div class="formation-head-left">
+          <span class="formation-num">MODULE 07</span>
+          <h3 class="formation-title">Le mode Projet</h3>
+        </div>
+      </div>
+      <div class="formation-detail">
+        <p>Présentation des modèles de gestion de projet : cascade, cycle en V et <strong>Scrum</strong>.</p>
+      </div>
+	  <span class="status-badge" style="margin-top:10px;">
+<i class="fas fa-check-circle"></i> Module validé
+</span>
+    </div>
+
+    <!-- Module 08 -->
+    <div class="formation-item card">
+      <div class="formation-header" onclick="toggleFormation(this)">
+        <div class="formation-head-left">
+          <span class="formation-num">MODULE 08</span>
+          <h3 class="formation-title">CI/CD avec Jenkins</h3>
+        </div>
+      </div>
+      <div class="formation-detail">
+        <p>Présentation, utilisation et entraînement sur l’outil <strong>Jenkins</strong> pour l’intégration Continue / Déploiement Continu.</p>
+      </div>
+	  <span class="status-badge" style="margin-top:10px;">
+<i class="fas fa-check-circle"></i> Module validé
+</span>
+    </div>
+
+    <!-- Module 09 -->
+    <div class="formation-item card">
+      <div class="formation-header" onclick="toggleFormation(this)">
+        <div class="formation-head-left">
+          <span class="formation-num">MODULE 09</span>
+          <h3 class="formation-title">La Programmation Python</h3>
+        </div>
+      </div>
+      <div class="formation-detail">
+        <p>Dans cette leçon, nous explorons les bases de la programmation en <strong>Python</strong>.</p>
+      </div>
+	  <span class="status-badge" style="margin-top:10px;">
+<i class="fas fa-check-circle"></i> Module validé
+</span>
+    </div>
+
+    <!-- Module 10 -->
+    <div class="formation-item card">
+      <div class="formation-header" onclick="toggleFormation(this)">
+        <div class="formation-head-left">
+          <span class="formation-num">MODULE 10</span>
+          <h3 class="formation-title">Le langage SQL</h3>
+        </div>
+      </div>
+      <div class="formation-detail">
+        <p>Cette section vous accompagne à la maîtrise du langage <strong>SQL</strong>.</p>
+      </div>
+	  <span class="status-badge" style="margin-top:10px;">
+<i class="fas fa-check-circle"></i> Module validé
+</span>
+    </div>
+
+    <!-- Module 11 -->
+    <div class="formation-item card">
+      <div class="formation-header" onclick="toggleFormation(this)">
+        <div class="formation-head-left">
+          <span class="formation-num">MODULE 11</span>
+          <h3 class="formation-title">Le projet de fin de formation</h3>
+        </div>
+      </div>
+      <div class="formation-detail">
+        <p>Ce projet vous donne l'opportunité de mettre en pratique toutes vos connaissances en test logiciel.</p>
+      </div>
+	  <span class="status-badge" style="margin-top:10px;">
+<i class="fas fa-check-circle"></i> Module validé
+</span>
+    </div>
+  </div>
 </section>
+       
+        <section id="projects" class="content-section">
+          <h2><i class="fas fa-code-branch"></i> Projets QA réalisés</h2>
+          <div class="grid">
+            <div class="card project-card">
+              <div class="project-header">
+                <h3>Projet de fin de formation Homey</h3>
+                <span class="project-date">JAN 2025 - MAI 2025</span>
+              </div>
+              <span class="project-role">Ingénieur QA Fonctionnel & Automatisation</span>
+              <p>Projet Agile Scrum (simulation professionnelle encadrée) visant à garantir la qualité d’une application web de gestion de locations saisonnières, avec une focalisation sur le processus de réservation.</p>
+              <div class="project-tags">
+                <span class="status-badge">Jira/Xray</span>
+                <span class="status-badge">Python</span>
+                <span class="status-badge">Robot Framework</span>
+                <span class="status-badge">Selenium</span>
+                <span class="status-badge">Visual Studio Code</span>
+                <span class="status-badge">Excel</span>
+              </div>
+              <div class="project-actions">
+                <a href="detailhomey.html" class="btn-action">
+                <i class="fas fa-file-alt"></i>
+                <span>Détails du projet</span>
+                </a>
+                <a href="dashboardHomey.html" target="_blank" class="btn-action">
+                <i class="fas fa-file-alt"></i>
+                <span>Tableau de bord QA</span>
+                </a>
+                <a href="https://github.com/maximejoannis/maximejoannis.github.io/wiki/3.-Projet-Homey-%E2%80%90-Projet-de-fin-de-formation" target="_blank" class="btn-action">
+                <i class="fab fa-github"></i>
+                <span>README GitHub</span>
+                </a>
+              </div>
+            </div>
+            <div class="card project-card">
+              <div class="project-header">
+                <h3>Projet Amn Auditor</h3>
+                <span class="project-date">MAI 2025 - SEPT 2025</span>
+              </div>
+              <span class="project-role">Ingénieur QA Fonctionnel & Automatisation</span>
+              <p>Test d’un outil d’audit générant constats, écarts et actions à partir de règles métiers et d’une IA contextuelle.</p>
+              <div class="project-tags">
+                <span class="status-badge">Jira</span>
+                <span class="status-badge">Xray</span>
+                <span class="status-badge">Python</span>
+                <span class="status-badge">Pytest</span>
+                <span class="status-badge">Robot Framework</span>
+                <span class="status-badge">WinAppDriver</span>
+                <span class="status-badge">Node.js</span>
+                <span class="status-badge">Visual Studio Code</span>
+                <span class="status-badge">Excel</span>
+              </div>
+              <div class="project-actions">
+                <a href="detailAmnAuditor.html" class="btn-action">
+                <i class="fas fa-file-alt"></i>
+                <span>Détails du projet</span>
+                </a>
+                <a href="dashboardAmnAuditor.html" target="_blank" class="btn-action">
+                <i class="fas fa-chart-line"></i>
+                <span>Tableau de bord QA</span>
+                </a>
+                <a href="https://github.com/maximejoannis/maximejoannis.github.io/wiki/4.-Projet-AMN-Auditor-%E2%80%93-Mission-QA-client" target="_blank" class="btn-action">
+                <i class="fab fa-github"></i>
+                <span>README GitHub</span>
+                </a>
+				<a href="automationAmnAuditor.html" class="btn-action">
+					<i class="fas fa-robot"></i>
+				<span>Ingénierie d’automatisation</span>
+				 </a>
+              </div>
+            </div>
+          </div>
+		  <br>
+		  <div class="card" style="margin-bottom:25px;">
+  <h3>Projets QA techniques avancés</h3>
+  <p style="color: var(--text-muted);">
+    Ces projets illustrent ma capacité à industrialiser l’automatisation,
+    structurer des suites de tests complexes et intégrer les tests
+    dans une chaîne CI/CD afin de sécuriser les livraisons.
+  </p>
+</div>
+		  <br>
+		  <div class="grid">
+		  <div class="card project-card">
+  <div class="project-header">
+    <h3>Enrichissement avancé d’une suite Robot Framework via IA</h3>
+    <span class="project-date">JAN 2026 - FEV 2026</span>
+  </div>
 
-		 
-         <section id="formation">
-            <div class="section-title">Formation Test Academy - 2024/2025</div>
-			<p class="formation-intro">
-  Cette reconversion s’est concrétisée par une formation suivie chez <strong>Test Academy</strong> 
-  du <strong>31 octobre 2024</strong> au <strong>17 février 2025</strong>.
-  Elle est composée des modules ci-dessous. J'ai validé cette formation en obtenant la certification ISTQB Fondation v4.0 et un diplôme de testeur logiciel.
+  <span class="project-role">Ingénieur QA Automatisation</span>
+
+ <p>
+Projet technique visant à renforcer et structurer une suite
+Robot Framework existante, en améliorant la couverture des tests,
+la maintenabilité et la robustesse des scénarios critiques.
 </p>
 
-            <div class="formation-accordion">
-               <!-- Module 1 -->
-               <div class="formation-item">
-                  <div class="formation-header" onclick="toggleFormation(this)">
-                     <span class="formation-title">Méthode</span>
-                     <span class="formation-num">01</span>
-                     <button class="formation-toggle">+</button>
-                  </div>
-                  <div class="formation-detail">
-                     <p>
-                        Ce module vous accompagne étape par étape pour assimiler une méthode de test complète et structurée.
-                     </p>
-                  </div>
-               </div>
-               <!-- Module 2 -->
-               <div class="formation-item">
-                  <div class="formation-header" onclick="toggleFormation(this)">
-                     <span class="formation-title">L'outillage</span>
-                     <span class="formation-num">02</span>
-                     <button class="formation-toggle">+</button>
-                  </div>
-                  <div class="formation-detail">
-                     <p>
-                        Ce module vous accompagne à la maîtrise de l’outil de gestion des cas de test: JIRA.        
-                     </p>
-                  </div>
-               </div>
-               <!-- Module 3 -->
-               <div class="formation-item">
-                  <div class="formation-header" onclick="toggleFormation(this)">
-                     <span class="formation-title">La Pratique</span>
-                     <span class="formation-num">03</span>
-                     <button class="formation-toggle">+</button>
-                  </div>
-                  <div class="formation-detail">
-                     <p>
-                        Ce module vous permet de mettre en pratique toutes les compétences acquises sur l’application web : Homey.
-                     </p>
-                  </div>
-               </div>
-               <!-- Module 4 -->
-               <div class="formation-item">
-                  <div class="formation-header" onclick="toggleFormation(this)">
-                     <span class="formation-title">L'automatisation Web</span>
-                     <span class="formation-num">04</span>
-                     <button class="formation-toggle">+</button>
-                  </div>
-                  <div class="formation-detail">
-                     <p>
-                        Ce module vous accompagne afin de maîtriser l’automatisation des tests sur application web.
-                     </p>
-                  </div>
-               </div>
-               <!-- Module 5 -->
-               <div class="formation-item">
-                  <div class="formation-header" onclick="toggleFormation(this)">
-                     <span class="formation-title">L’automatisation API</span>
-                     <span class="formation-num">05</span>
-                     <button class="formation-toggle">+</button>
-                  </div>
-                  <div class="formation-detail">
-                     <p>
-                        Ce module vous accompagne afin de maîtriser l’automatisation des tests sur API.
-                     </p>
-                  </div>
-               </div>
-               <!-- Module 6 -->
-               <div class="formation-item">
-                  <div class="formation-header" onclick="toggleFormation(this)">
-                     <span class="formation-title">Préparation à l'examen ISTQB Fondation</span>
-                     <span class="formation-num">06</span>
-                     <button class="formation-toggle">+</button>
-                  </div>
-                  <div class="formation-detail">
-                     <p>
-                        Ce module est une préparation pratique à l’examen de certification ISTQB.
-                     </p>
-                  </div>
-               </div>
-               <!-- Module 7 -->
-               <div class="formation-item">
-                  <div class="formation-header" onclick="toggleFormation(this)">
-                     <span class="formation-title">Le mode Projet</span>
-                     <span class="formation-num">07</span>
-                     <button class="formation-toggle">+</button>
-                  </div>
-                  <div class="formation-detail">
-                     <p>
-                        Présentation des modèles de gestion de projet : cascade, cycle en V et Scrum.
-                     </p>
-                  </div>
-               </div>
-               <!-- Module 8 -->
-               <div class="formation-item">
-                  <div class="formation-header" onclick="toggleFormation(this)">
-                     <span class="formation-title">CI/CD avec Jenkins</span>
-                     <span class="formation-num">08</span>
-                     <button class="formation-toggle">+</button>
-                  </div>
-                  <div class="formation-detail">
-                     <p>
-                        Présentation, utilisation et entraînement sur l’outils Jenkins pour l’intégration Continue / Déploiement Continu.
-                     </p>
-                  </div>
-               </div>
-               <!-- Module 9 -->
-               <div class="formation-item">
-                  <div class="formation-header" onclick="toggleFormation(this)">
-                     <span class="formation-title">La Programmation Python</span>
-                     <span class="formation-num">09</span>
-                     <button class="formation-toggle">+</button>
-                  </div>
-                  <div class="formation-detail">
-                     <p>
-                        Dans cette leçon, nous explorons les bases de la programmation en Python.
-                     </p>
-                  </div>
-               </div>
-               <!-- Module 10 -->
-               <div class="formation-item">
-                  <div class="formation-header" onclick="toggleFormation(this)">
-                     <span class="formation-title">Le langage SQL</span>
-                     <span class="formation-num">10</span>
-                     <button class="formation-toggle">+</button>
-                  </div>
-                  <div class="formation-detail">
-                     <p>
-                        Cette section vous accompagne à la maîtrise du langage SQL.
-                     </p>
-                  </div>
-               </div>
-               <!-- Module 11 -->
-               <div class="formation-item">
-                  <div class="formation-header" onclick="toggleFormation(this)">
-                     <span class="formation-title">Le projet de fin de formation</span>
-                     <span class="formation-num">11</span>
-                     <button class="formation-toggle">+</button>
-                  </div>
-                  <div class="formation-detail">
-                     <p>
-                        Ce projet vous donne l'opportunité de mettre en pratique toutes vos connaissances en test logiciel.
-                     </p>
-                  </div>
-               </div>
-               <!-- Module 12 -->
-               <div class="formation-item">
-                  <div class="formation-header" onclick="toggleFormation(this)">
-                     <span class="formation-title">Le micro stage</span>
-                     <span class="formation-num">12</span>
-                     <button class="formation-toggle">+</button>
-                  </div>
-                  <div class="formation-detail">
-                     <p>
-                        Ce micro stage vous donne l'opportunité de monter en compétences et de mettre en pratique toutes vos connaissances en test logiciel dans un contexte réel.
-                     </p>
-                  </div>
-               </div>
-            </div>
-            <a href="Programme_Formation_Testeur_Pro.pdf" target="_blank" class="cv-pdf-btn">
-            Voir le programme complet (PDF)
-            </a>
-         </section>
-         <section id="projects">
-            <div class="section-title">Projets QA réalisés</div>
-			<div class="projects-header">
-  <div class="project-badge finished">
-    <div class="badge-icon">
-      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-        <path d="M9 11l3 3L22 4" />
-        <path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11" />
-      </svg>
-    </div>
-    <div class="badge-info">
-      <h4>Homey</h4>
-      <span class="badge-status">Terminé</span>
-    </div>
-  </div>
+<p style="margin-top:10px;">
+Utilisation contrôlée de l’IA pour :
+</p>
 
-  <div class="project-badge ongoing">
-    <div class="badge-icon">
-      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-        <circle cx="12" cy="12" r="10" />
-        <polyline points="12 6 12 12 16 14" />
-      </svg>
-    </div>
-    <div class="badge-info">
-      <h4>AMN Auditor</h4>
-      <span class="badge-status">En cours</span>
-    </div>
+<ul class="skill-list">
+  <li>Identifier les zones de couverture insuffisante</li>
+  <li>Générer et enrichir des cas de test automatisés</li>
+  <li>Structurer les fichiers .robot et les resources</li>
+  <li>Améliorer la lisibilité et la maintenabilité</li>
+  <li>Respecter des contraintes strictes de conformité QA</li>
+</ul>
+
+  <div class="project-tags">
+    <span class="status-badge">Robot Framework</span>
+    <span class="status-badge">SeleniumLibrary</span>
+    <span class="status-badge">Python</span>
+    <span class="status-badge">Selenium IDE</span>
+    <span class="status-badge">HTML/CSS</span>
   </div>
+  <div class="project-actions">
+                <a href="detailHomey_IA.html" class="btn-action">
+                <i class="fas fa-file-alt"></i>
+                <span>Détails du projet</span>
+                </a>
+                <a href="dashboardHomey_IA.html" target="_blank" class="btn-action">
+                <i class="fas fa-chart-line"></i>
+                <span>Tableau de bord QA</span>
+                </a>
+                <a href="https://github.com/maximejoannis/maximejoannis.github.io/wiki/5.-Enrichissement-IA-%E2%80%94-Robot-Framework-(Homey)-&-Pipeline-CI-CD" target="_blank" class="btn-action">
+                <i class="fab fa-github"></i>
+                <span>README GitHub</span>
+                </a>
+              </div>
 </div>
+<div class="card project-card">
+  <div class="project-header">
+    <h3>Mise en place d’un pipeline CI/CD de tests automatisés</h3>
+    <span class="project-date">JAN 2026 - FEV 2026</span>
+  </div>
 
-            <div class="projects-list">
-               <!-- Projet 1 : Terminé -->
-               <div class="project-card">
-                  <div class="project-header-bandeau finished">
-                     <div class="project-icon">
-                        <svg width="28" height="28" viewBox="0 0 32 32">
-                           <circle cx="16" cy="16" r="14" stroke="#64ffda" stroke-width="4" fill="#232c52" />
-                           <path d="M12 16l3 3 5-5" stroke="#64ffda" stroke-width="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
-                        </svg>
-                     </div>
-                     <div class="project-header-info">
-                        <span class="project-title">Projet de fin de formation Homey</span>
-                        <span class="project-date">Février. 2025 – Avril. 2025</span>
-                     </div>
-                     <div class="project-status">
-                        <span>Terminé</span>
-                     </div>
-                  </div>
-                  <div class="project-detail">
-                     <div class="project-meta">
-                        <span class="project-role">Rôle : Ingénieur QA – Fonctionnel & Automatisation</span>
-                     </div>
-                     <div class="project-desc">
-                        <p>
-                           Test d'une application web de gestion de location saisonnières nommée HOMEY.
-                        </p>
-                     </div>
-                     <div class="project-tags">
-                        <span>Jira</span>
-                        <span>Xray</span>
-                        <span>Visual Studio Code</span>
-                        <span>Robot Framework</span>
-                        <span>Python</span>
-                        <span>Selenium</span>
-                     </div>
-                     <div class="project-actions">
-						<a href="homey-detail.html" class="project-btn-full">Détail du projet</a>
-						<a href="dashboard-homey.html" class="project-btn-full">Tableau de bord</a>
-                        <a href="https://github.com/maximejoannis/homey-qa" target="_blank" class="project-btn-full disabled">Voir sur GitHub</a>
-                     </div>
-                  </div>
-               </div>
-               <!-- Projet 2 : En cours -->
-               <div class="project-card">
-                  <div class="project-header-bandeau ongoing">
-                     <div class="project-icon">
-                        <svg width="28" height="28" viewBox="0 0 32 32">
-                           <circle cx="16" cy="16" r="14" stroke="#ff38b0" stroke-width="4" fill="#232c52" />
-                           <path d="M16 10v8l5 3" stroke="#ff38b0" stroke-width="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
-                        </svg>
-                     </div>
-                     <div class="project-header-info">
-                        <span class="project-title">Mission client chez AMN BRAINS</span>
-                        <span class="project-date">Avril. 2025 - Présent</span>
-                     </div>
-                     <div class="project-status">
-                        <span>En cours</span>
-                     </div>
-                  </div>
-                  <div class="project-detail">
-                     <div class="project-meta">
-                        <span class="project-role">Rôle : Ingénieur QA – Fonctionnel & Automatisation</span>
-                     </div>
-                     <div class="project-desc">
-                        <p>
-                           Test d'un logiciel Desktop de conduite d’audit multi-référentiel nommé AMN AUDITOR.
-                        </p>
-                     </div>
-                     <div class="project-tags">
-                        <span>Jira</span>
-                        <span>Xray</span>
-                        <span>Visual Studio Code</span>
-                        <span>Robot Framework</span>
-                        <span>Python</span>
-						<span>Node.js</span>
-                        <span>WinAppDriver</span>
-                     </div>
-                     <div class="project-actions">
-					    <a href="amn-auditor-detail.html" class="project-btn-full">Détail du projet</a>
-						<a href="dashboard-amnauditor.html" class="project-btn-full disabled">Tableau de bord</a>
-                        <a href="https://github.com/maximejoannis/amn-auditor-qa" target="_blank" class="project-btn-full disabled">Voir sur GitHub</a>
-                     </div>
-                  </div>
-               </div>
-            </div>
-         </section>
-         <section id="cv">
-            <div class="section-title">EXPÉRIENCES PROFESSIONNELLES</div>
-			<div class="xp-banner">
-  <div class="xp-block dev">
-    <div class="xp-number">6<span> ans et </span><br><span class="xp-small">3 mois</span></div>
-    <div class="xp-label">Expérience en <strong>Développement</strong></div>
+  <span class="project-role">Ingénieur QA Automatisation & DevOps</span>
+
+  <p>
+Conception et mise en place d’un pipeline CI/CD
+permettant l’exécution automatique des tests Robot Framework
+à chaque push ou pull request.
+</p>
+
+<ul class="skill-list">
+  <li>Configuration GitHub Actions</li>
+  <li>Containerisation via Docker</li>
+  <li>Exécution des tests sur Selenium Grid</li>
+  <li>Gestion des dépendances et environnements</li>
+  <li>Automatisation du reporting des résultats</li>
+</ul>
+
+<p style="margin-top:10px; color: var(--accent-color);">
+Objectif : industrialiser l’automatisation et sécuriser les livraisons.
+</p>
+  <div class="project-tags">
+    <span class="status-badge">GitHub Actions</span>
+    <span class="status-badge">CI/CD</span>
+    <span class="status-badge">Docker</span>
+    <span class="status-badge">Robot Framework</span>
+    <span class="status-badge">Selenium Grid</span>
   </div>
-  <div class="xp-divider"></div>
-  <div class="xp-block qa">
-    <div class="xp-number">8<span> mois</span></div>
-    <div class="xp-label">Expérience en <strong>QA / Test</strong></div>
-  </div>
+  <div class="project-actions">
+                <a href="detailPipelineCI.html" class="btn-action">
+                <i class="fas fa-file-alt"></i>
+                <span>Détails du projet</span>
+                </a>
+                <a href="dashboardPipelineCI.html" target="_blank" class="btn-action">
+                <i class="fas fa-chart-line"></i>
+                <span>Tableau de bord QA</span>
+                </a>
+                <a href="https://github.com/maximejoannis/maximejoannis.github.io/wiki/6.-Pipeline-CI-CD-%E2%80%94-Industrialisation-des-tests" target="_blank" class="btn-action">
+                <i class="fab fa-github"></i>
+                <span>README GitHub</span>
+                </a>
+              </div>
 </div>
+		  </div>
+        </section>
+        <section id="experience" class="content-section">
+          <h2><i class="fas fa-history"></i>Expériences professionnelles</h2>
+          <div class="card">
+		  <div class="exp-banner">
+			  <span class="exp-banner__tag">MISSION QA</span>
+			</div>
+            <div class="experience-header">
+              <h3>Ingénieur QA – Validation de processus métiers (BPMN) @ AMN BRAINS</h3>
+              <span class="experience-date">Septembre 2025 - Aujourd'hui</span>
+            </div>
+            <p>
+Mission QA professionnalisante réalisée en full remote concernant la conduite d’une campagne de tests fonctionnels de niveau 1 puis niveau 2 sur des processus BPMN critiques liés à la cybersécurité, visant à garantir la stabilité des workflows Camunda et la fiabilité des données persistées dans Baserow, essentielles à la traçabilité SSI.
+Ces campagnes de tests ont permis de sécuriser la mise en production (PROD) des processus validés, en assurant leur conformité fonctionnelle, leur cohérence transverse et la robustesse des données.
+</p>
+<div class="experience-tech">
+              <div class="experience-tech__label">
+                <i class="fas fa-microchip"></i> Environnement technique
+              </div>
+              <div class="experience-tech__chips" aria-label="Technologies utilisées">
+                <span class="exp-chip">Camunda BPMN</span>
+                <span class="exp-chip">Sec Pilot</span>
+                <span class="exp-chip">Baserow</span>
+                <span class="exp-chip">SecFileManager</span>
+                <span class="exp-chip">GitLab</span>
+              </div>
+            </div>
 
-            <div class="cv-list">
-               <!-- Expérience 1 -->
-               <div class="cv-item">
-                  <div class="cv-header">
-                     <span class="cv-title">Ingénieur QA – Fonctionnel & Automatisation (Mission encadrée par Test Academy, Full Remote) - Client : AMN BRAINS</span>
-                     <span class="cv-dates">Avril 2025 – Présent</span>
-                     <button class="cv-toggle" onclick="toggleCV(this)">+</button>
-                  </div>
-                  <div class="cv-detail">
-                     <div class="cv-meta">
-                        <span class="cv-loc">Paris, France</span>
-                     </div>
-                     <ul>
-                        <li>Participation active aux daily meetings et communication régulière avec le Product Owner et le Test Manager pour suivre l’avancement, clarifier les critères d’acceptation et prioriser les anomalies.</li>
-                        <li>Analyse des user stories et de leurs critères d’acceptation, puis conception et planification des cas de tests associés.</li>
-                        <li>Association des cas de tests aux critères d’acceptation dans Jira/Xray, et exécution de 33 cas de tests fonctionnels (taux de réussite : 78,8 %).</li>
-                        <li>Détection, reproduction et consignation de 3 anomalies, avec création et suivi de 46 tickets dans Jira/Xray.</li>
-                        <li>Rédaction par IA d’un plan de test structuré selon la norme IEEE 29119-3, à partir de la description du logiciel et des user stories.</li>
-                        <li>Tentative d’automatisation des tests fonctionnels avec WinAppDriver, suivie d’un rapport d’analyse technique transmis au test manager.</li>
-                        <li>Génération par IA de tests d’acceptance automatisés (formats Gherkin et Robot Framework) à partir de captures d’écran d’interfaces utilisateur.</li>
-                        <li>Rédaction de livrables QA : rapport final, rapports de défauts, patrimoine des tests manuels et automatisés.</li>
-                     </ul>
-                     <div class="cv-tags">
-                        <span>Jira</span>
-                        <span>Xray</span>
-                        <span>Visual Studio Code</span>
-                        <span>Excel</span>
-                        <span>Python</span>
-                        <span>WinAppDriver</span>
-						<span>Node.js</span>
-                     </div>
-                  </div>
-               </div>
-               <!-- Expérience 3 - Ingénieur d’études – Développeur Fullstack (Infotel Conseil) -->
-               <div class="cv-item">
-                  <div class="cv-header">
-                     <span class="cv-title">Ingénieur Développement & QA – Full Stack Java/AngularJS - INFOTEL CONSEIL</span>
-                     <span class="cv-dates">Février 2021 – Janvier 2024</span>
-                     <button class="cv-toggle" onclick="toggleCV(this)">+</button>
-                  </div>
-                  <div class="cv-detail">
-                     <div class="cv-meta">
-                        <span class="cv-loc">Paris & Bagnolet</span>
-                     </div>
-                     <ul>
-                     <li>Mission en régie chez la Banque de France : Développement et amélioration d'une application de cotation.</li>
-                     <ul>
-                        <li>
-                           <strong>Activités de tests / QA réalisées :</strong>
-                           <ul>
-                              <li>Rédaction et exécution de cas de tests fonctionnels manuels, en lien avec les spécifications métiers.</li>
-                              <li>Tests de lʼinterface utilisateur (IHM) : vérification des champs, règles métiers, messages dʼerreur.</li>
-                              <li>Tests dʼAPI REST avec Postman pour valider les traitements backend.</li>
-                              <li>
-                                 Analyse et validation des corrections dʼanomalies :
-                                 <ul>
-                                    <li>Reproduction du bug,</li>
-                                    <li>Vérification du correctif en environnement de développement,</li>
-                                    <li>Démonstration directe de la correction au rédacteur du ticket Jira (MOA, métier).</li>
-                                 </ul>
-                              </li>
-                              <li>Suivi rigoureux des tickets Jira : mise à jour des statuts, ajout de commentaires techniques, échanges avec la MOE et la MOA.</li>
-                              <li>Préparation des livraisons : création de merge requests sur GitLab, affectées à un développeur senior pour revue et livraison en recette.</li>
-                              <li>Tests de non-régression réalisés après livraison en environnement de recette.</li>
-                              <li>Tests fonctionnels en environnement de qualification pour valider le comportement global de l'application.</li>
-                              <li>Reporting des résultats de tests via Excel et commentaires Jira.</li>
-                           </ul>
-                        </li>
-                        <li>
-                           <strong>Activités de développement front-end et back-end réalisées :</strong>
-                           <ul>
-                              <li>Analyse des spécifications fonctionnelles et techniques.</li>
-                              <li>Développement de fonctionnalités front-end (AngularJS) et back-end (Java / Spring Boot).</li>
-                              <li>Rédaction et exécution de tests unitaires avec JUnit et Mockito – couverture portée à plus de 80 %.</li>
-                              <li>Création de merge requests avec GitExtensions et GitLab.</li>
-                              <li>Suivi quotidien des batchs de production, analyse des résultats, rédaction de comptes rendus.</li>
-                              <li>Gestion des incidents techniques via Jira et optimisation des processus collaboratifs (GitLab).</li>
-                              <li>Suivi de la qualité du code à lʼaide de SonarQube.</li>
-                           </ul>
-                        </li>
-                     </ul>
-                     </li>
-                     <div class="cv-tags">
-                        <span>Java</span>
-                        <span>Spring Boot</span>
-                        <span>AngularJS</span>
-                        <span>SQL</span>
-                        <span>Jira</span>
-                        <span>GitLab</span>
-                        <span>Jenkins</span>
-                        <span>SonarQube</span>
-                        <span>Postman</span>
-                        <span>Selenium</span>
-                        <span>JUnit</span>
-                        <span>Mockito</span>
-                     </div>
-                  </div>
-               </div>
-               <!-- Expérience 4  -->
-               <div class="cv-item">
-                  <div class="cv-header">
-                     <span class="cv-title">Ingénieur d'études - Développeur Back-End Java - INFOTEL CONSEIL</span>
-                     <span class="cv-dates">Mars 2019 - Juin 2020</span>
-                     <button class="cv-toggle" onclick="toggleCV(this)">+</button>
-                  </div>
-                  <div class="cv-detail">
-                     <div class="cv-meta">
-                        <span class="cv-loc">Bagnolet</span>
-                     </div>
-                     <ul>
-                        <li>Mission en plateau chez BNP PARIBAS : Développement et amélioration dʼune application
-                           JAVA d'initiation de paiement (composée de 7 APIs).
-                        </li>
-                        <ul>
-                           <li>
-                              <strong>Activités de tests / QA réalisées :</strong>
-                              <ul>
-                                 <li>Tests dʼAPIs avec Postman.</li>
-                                 <li>Vérification des statuts HTTP, des erreurs fonctionnelles, et du contenu des réponses JSON.</li>
-                                 <li>Tests de scénarios de paiement simulés, avec analyse des erreurs côté backend.</li>
-                                 <li>Participation à la réduction des erreurs de paiement de 15 % grâce à lʼamélioration du code et des tests.</li>
-                              </ul>
-                           </li>
-                           <li>
-                              <strong>Activités de développement back-end réalisées :</strong>
-                              <ul>
-                                 <li>Développement de services RESTful en Java (Spring Boot), intégrés dans une architecture microservices.</li>
-                                 <li>Mise à jour de la documentation API via Swagger Editor.</li>
-                                 <li>Analyse et mise à jour des spécifications fonctionnelles et techniques.</li>
-                                 <li>Analyse des logs applicatifs (Putty) et des données en base (SQL Developer).</li>
-                                 <li>Release applicative avec Jenkins, suivi qualité via SonarQube.</li>
-                                 <li>Collaboration avec les équipes fonctionnelles pour affiner les cas métier.</li>
-                              </ul>
-                           </li>
-                        </ul>
-                        <div class="cv-tags">
-                           <span>JAVA 8</span>
-                           <span>Maven</span>
-                           <span>Postman</span>
-                           <span>VIM</span>
-                           <span>Jira</span>
-                           <span>Spring boot</span>
-                           <span>Putty</span>
-                           <span>Swagger Editor</span>
-                           <span>Jenkins</span>
-                           <span>C3PO</span>
-                           <span>SQL Developer</span>
-                           <span>Rational Application Developer (RAD)</span>
-                           <span>Sonar Qube</span>
-                        </div>
-                  </div>
-               </div>
-               <!-- Expérience 5  -->
-               <div class="cv-item">
-               <div class="cv-header">
-               <span class="cv-title">Ingénieur d'études - Analyste développeur Java - INFOTEL CONSEIL</span>
-               <span class="cv-dates">Septembre 2018 - Mars 2019</span>
-               <button class="cv-toggle" onclick="toggleCV(this)">+</button>
-               </div>
-               <div class="cv-detail">
-               <div class="cv-meta">
-               <span class="cv-loc">Bagnolet</span>
-               </div>
-               <ul>
-               <li>Mission interne à l'EPO (Office européen des brevets) - Améliorations et évolutions sur une application JAVA manipulant des fichiers excel pour générer des rapports de niveaux de service (SLA) définis dans le cadre dʼun contrat.</li>
-               <ul>
-               <li><strong>Activités réalisées :</strong>
-               <ul>
-               <li>Analyse de données</li>
-               <li>Optimisation des rapports de niveaux de service, réduisant les délais de génération de 25%.</li>
-               <li>Création de diagrammes UML pour la conception de nouvelles fonctionnalités métier.</li>
-               </ul>
-               </li>
-               </ul>
-               <div class="cv-tags">
-               <span>JAVA 8</span>
-               <span>Maven</span>
-               <span>IntelliJ</span>
-               <span>SonarQube</span>
-               <span>Jira</span>
-               <span>Spring boot</span>
-               <span>YAML</span>
-               </div>
-               </div>
-               </div>
-               <!-- Expérience 6  -->
-               <div class="cv-item">
-               <div class="cv-header">
-               <span class="cv-title">Session formation junior - Formation interne - INFOTEL CONSEIL</span>
-               <span class="cv-dates">Juillet 2018 - Septembre 2018</span>
-               <button class="cv-toggle" onclick="toggleCV(this)">+</button>
-               </div>
-               <div class="cv-detail">
-               <div class="cv-meta">
-               <span class="cv-loc">Bagnolet</span>
-               </div>
-               <ul>
-               <li>Développement dʼune application de réservation de voyages en version web et mobile.</li>
-               <li>Présentation de l'application devant un jury.</li>
-               </ul>
-               </li>
-               </ul>
-               <div class="cv-tags">
-               <span>Java JEE</span>
-               <span>Android</span>
-               <span>HTML5</span>
-               <span>JavaScript</span>
-               <span>AngularJS</span>
-               <span>Bootstrap</span>
-               <span>ElasticSearch</span>
-               </div>
-               </div>
-               </div>
-               <!-- Expérience 7  -->
-               <div class="cv-item">
-               <div class="cv-header">
-               <span class="cv-title">Assistant Coordination & Concepteur Web des projets – Stage puis CDD</span>
-               <span class="cv-dates">Juin 2017 - Janvier 2018</span>
-               <button class="cv-toggle" onclick="toggleCV(this)">+</button>
-               </div>
-               <div class="cv-detail">
-               <div class="cv-meta">
-               <span class="cv-loc">Paris</span>
-               </div>
-               <ul>
-               <li>Conception d'un outil de pilotage, de reporting et de gestion de projet.</li>
-               <li>Rédaction et mise à jour des spécifications fonctionnelles et techniques.</li>
-               <li>Réalisation de tests manuels sur lʼoutil (recette fonctionnelle, vérification des accès/habilitations selon le profil utilisateur et des règles de gestion).</li>
-               </ul>
-               </li>
-               </ul>
-               <div class="cv-tags">
-               <span>PHP 5</span>
-               <span>Boostrap</span>
-               <span>CSS</span>
-               <span>HTML5</span>
-               <span>Atom Editor</span>
-               <span>JQuery</span>
-               <span>MYSQL</span>
-               </div>
-               </div>
-               </div>
+          </div>
+          <br>
+          <div class="card">
+		   <div class="exp-banner">
+			  <span class="exp-banner__tag">MISSION QA</span>
+			</div>
+            <div class="experience-header">
+              <h3>Ingénieur QA Fonctionnel & Automatisation @ AMN BRAINS
+			  </h3>
+              <span class="experience-date">Mai 2025 - Septembre 2025</span>
             </div>
-            <a href="Maxime_JOANNIS_CV.pdf" target="_blank" 
-			   class="cv-pdf-btn disabled" 
-			   data-tooltip="CV en cours de refonte">
-			  Voir le CV complet (PDF)
-			</a>
-         </section>
-         <footer id="page-footer">
-            <div class="footer-content">
-              <span class="citation">"N'abandonne jamais, car c'est souvent juste après le dernier effort que le succès se dévoile."</span>
-              <p>© 2025 Maxime Joannis - Tous droits réservés.  <a href="privacy.html">Politique de confidentialité</a></p>
+            <p>
+Mission QA professionnalisante réalisée en full remote pour un client du domaine de la cybersécurité, portant sur un logiciel desktop d’audit des systèmes d’information.
+Ce logiciel intègre une IA contextuelle capable de générer automatiquement constats, points de contrôle, conformités / non-conformités, actions correctives et plans de remédiation à partir de règles métiers.
+</p>
+            <div class="experience-tech">
+              <div class="experience-tech__label">
+                <i class="fas fa-microchip"></i> Environnement technique
+              </div>
+              <div class="experience-tech__chips" aria-label="Technologies utilisées">
+                <span class="exp-chip">Jira</span>
+                <span class="exp-chip">Xray</span>
+                <span class="exp-chip">Visual Studio Code</span>
+                <span class="exp-chip">WinAppDriver</span>
+                <span class="exp-chip">Node.js</span>
+                <span class="exp-chip">Python</span>
+                <span class="exp-chip">Pytest</span>
+                <span class="exp-chip">Excel</span>
+                <span class="exp-chip">Gherkin</span>
+                <span class="exp-chip">Robot Framework</span>
+              </div>
+              <div class="project-actions">
+                <a href="detailAmnAuditor.html" class="btn-action">
+                <i class="fas fa-file-alt"></i>
+                <span>Détails du projet</span>
+                </a>
+                <a href="dashboardAmnAuditor.html" target="_blank" class="btn-action">
+                <i class="fas fa-chart-line"></i>
+                <span>Tableau de bord QA</span>
+                </a>
+              </div>
             </div>
-         </footer>
+          </div>
+          <br>
+          <div class="card">
+		   <div class="exp-banner">
+			  <span class="exp-banner__tag">Simulation professionnelle</span>
+			</div>
+            <div class="experience-header">
+			  <h3>
+				Ingénieur QA Fonctionnel & Automatisation - Projet Agile Homey
+				@ Test Academy
+			  </h3>
+			  <span class="experience-date">Janvier 2025 - Mai 2025</span>
+			</div>
+           <p>
+Projet de fin de formation simulé en environnement Agile Scrum, visant la garantie qualité d’une application web de gestion de locations saisonnières, avec focalisation sur le processus de réservation.
+Équipe composée de 1 PO, 9 développeurs, 2 testeurs, 1 Test Manager et 1 Scrum Master.
+Travail basé sur un Product Backlog de 30 User Stories, en Sprints de 2 semaines.
+</p>
+            <div class="experience-tech">
+              <div class="experience-tech__label">
+                <i class="fas fa-microchip"></i> Environnement technique
+              </div>
+              <div class="experience-tech__chips" aria-label="Technologies utilisées">
+                <span class="exp-chip">Jira</span>
+                <span class="exp-chip">Xray</span>
+                <span class="exp-chip">Python</span>
+                <span class="exp-chip">Robot Framework</span>
+                <span class="exp-chip">Selenium</span>
+                <span class="exp-chip">VS Code</span>
+                <span class="exp-chip">Excel</span>
+              </div>
+            </div>
+            <div class="project-actions">
+              <a href="detailHomey.html" class="btn-action">
+              <i class="fas fa-file-alt"></i>
+              <span>Détails du projet</span>
+              </a>
+              <a href="dashboardHomey.html" target="_blank" class="btn-action">
+              <i class="fas fa-chart-line"></i>
+              <span>Tableau de bord QA</span>
+              </a>
+            </div>
+          </div>
+          <br>
+          <div class="card">
+		  <div class="exp-banner">
+			  <span class="exp-banner__tag">Mission en régie</span>
+			</div>
+            <div class="experience-header">
+              <h3>Ingénieur d'études - Développeur Full Stack Java / AngularJS @ Infotel Conseil - Client : BANQUE DE FRANCE</h3>
+              <span class="experience-date">Février 2021 - Janvier 2024</span>
+            </div>
+            <p>Mission en régie au sein d’une équipe Agile / Scrum sur une application de cotation financière, dans un contexte de fort volume d’anomalies à résorber avant une mise en production annuelle à fort enjeu métier.
+
+Rôle hybride Développement & Tests fonctionnels, garantissant la qualité des livraisons sur tout le cycle de développement, avec application d’un processus qualité strict (“Test obligatoire” : aucun développement ou correctif sans test unitaire associé).
+			</p>
+            <div class="experience-tech">
+              <div class="experience-tech__label">
+                <i class="fas fa-microchip"></i> Environnement technique
+              </div>
+              <div class="experience-tech__chips" aria-label="Technologies utilisées">
+                <span class="exp-chip">Jira</span>
+                <span class="exp-chip">GitLab</span>
+                <span class="exp-chip">Jenkins</span>
+                <span class="exp-chip">SonarQube</span>
+                <span class="exp-chip">Postman</span>
+                <span class="exp-chip">Excel</span>
+                <span class="exp-chip">Java 8/17</span>
+                <span class="exp-chip">AngularJS</span>
+                <span class="exp-chip">Spring Boot</span>
+                <span class="exp-chip">PostgreSQL</span>
+                <span class="exp-chip">Eclipse</span>
+                <span class="exp-chip">Visual Studio Code</span>
+                <span class="exp-chip">GitExtensions</span>
+                <span class="exp-chip">JUnit</span>
+                <span class="exp-chip">Mockito</span>
+              </div>
+            </div>
+          </div>
+          <br>
+          <div class="card">
+		  <div class="exp-banner">
+			  <span class="exp-banner__tag">Mission en plateau</span>
+			</div>
+            <div class="experience-header">
+              <h3>Ingénieur d’études – Développement Back-End Java  @ Infotel Conseil - Client : BNP PARIBAS</h3>
+              <span class="experience-date">Février 2019 - Juin 2020</span>
+            </div>
+            <p>
+Mission en plateau sur une application Java backend intégrée à une architecture microservices, interfacée avec 7 APIs internes, dans un contexte de conformité réglementaire DSP2.			
+			</p>
+            <div class="experience-tech">
+              <div class="experience-tech__label">
+                <i class="fas fa-microchip"></i> Environnement technique
+              </div>
+              <div class="experience-tech__chips" aria-label="Technologies utilisées">
+                <span class="exp-chip">Java 8</span>
+                <span class="exp-chip">Maven</span>
+                <span class="exp-chip">Postman</span>
+                <span class="exp-chip">Vim</span>
+                <span class="exp-chip">Jira</span>
+                <span class="exp-chip">Spring Boot</span>
+                <span class="exp-chip">PuTTY</span>
+                <span class="exp-chip">Swagger Editor</span>
+                <span class="exp-chip">Jenkins</span>
+                <span class="exp-chip">C3P0</span>
+                <span class="exp-chip">SQL Developer</span>
+                <span class="exp-chip">Rational Application Developer (RAD)</span>
+                <span class="exp-chip">SonarQube</span>
+              </div>
+            </div>
+          </div>
+          <br>
+          <div class="card">
+		  <div class="exp-banner">
+			  <span class="exp-banner__tag">Mission interne</span>
+			</div>
+            <div class="experience-header">
+              <h3>Ingénieur d'études - Analyste développeur Java @ Infotel Conseil - Client : EPO</h3>
+              <span class="experience-date">Septembre 2018 - Février 2019</span>
+            </div>
+            <p>
+Mission interne au sein de l’Office européen des brevets (EPO) visant l’évolution d’une application Java manipulant des fichiers Excel pour la génération de rapports de niveaux de service (SLA) définis contractuellement, dans un contexte de fiabilisation des indicateurs et d’amélioration du pilotage de la performance.			
+			</p>
+            <div class="experience-tech">
+              <div class="experience-tech__label">
+                <i class="fas fa-microchip"></i> Environnement technique
+              </div>
+              <div class="experience-tech__chips" aria-label="Technologies utilisées">
+                <span class="exp-chip">Java 8</span>
+                <span class="exp-chip">Maven</span>
+                <span class="exp-chip">IntelliJ IDEA</span>
+                <span class="exp-chip">SonarQube</span>
+                <span class="exp-chip">Jira</span>
+                <span class="exp-chip">Spring Boot</span>
+                <span class="exp-chip">YAML</span>
+              </div>
+            </div>
+          </div>
+          <br>
+          <div class="card">
+		  <div class="exp-banner">
+			  <span class="exp-banner__tag">Formation</span>
+			</div>
+            <div class="experience-header">
+              <h3>Ingénieur d’études – Formation interne en Développement Java (Session Junior) @ Infotel Conseil</h3>
+              <span class="experience-date">Juillet 2018 - Septembre 2018</span>
+            </div>
+            <p>Formation intensive Full-Stack orientée projet, avec pour objectif de concevoir et développer une application de voyages web et mobile, de la conception technique à la soutenance finale.</p>
+            <div class="experience-tech">
+              <div class="experience-tech__label">
+                <i class="fas fa-microchip"></i> Environnement technique
+              </div>
+              <div class="experience-tech__chips" aria-label="Technologies utilisées">
+                <span class="exp-chip">Java JEE</span>
+                <span class="exp-chip">Android Studio</span>
+                <span class="exp-chip">HTML5</span>
+                <span class="exp-chip">JavaScript</span>
+                <span class="exp-chip">AngularJS</span>
+                <span class="exp-chip">Bootstrap</span>
+                <span class="exp-chip">ElasticSearch</span>
+              </div>
+            </div>
+          </div>
+          <br>
+          <div class="card">
+		  <div class="exp-banner">
+			  <span class="exp-banner__tag">CDD</span>
+			</div>
+            <div class="experience-header">
+              <h3>Assistant Concepteur Web Coordination de projets @ Banque Postale</h3>
+              <span class="experience-date">Décembre 2017 - Janvier 2018</span>
+            </div>
+            <p>Finalisation d’un outil interne stratégique de gestion et de pilotage des projets, après une première phase de conception, avec pour objectifs la stabilisation, l’enrichissement fonctionnel, la recette utilisateurs dans un contexte d’amélioration continue visant la fiabilisation des données projets et le renforcement de la qualité des reportings.</p>
+            <div class="experience-tech">
+              <div class="experience-tech__label">
+                <i class="fas fa-microchip"></i> Environnement technique
+              </div>
+              <div class="experience-tech__chips" aria-label="Technologies utilisées">
+                <span class="exp-chip">PHP 5</span>
+                <span class="exp-chip">Bootstrap</span>
+                <span class="exp-chip">CSS</span>
+                <span class="exp-chip">HTML5</span>
+                <span class="exp-chip">jQuery</span>
+                <span class="exp-chip">MySQL</span>
+                <span class="exp-chip">Atom Editor</span>
+              </div>
+            </div>
+          </div>
+          <div class="card" style="margin-top: 25px;">
+		  <div class="exp-banner">
+			  <span class="exp-banner__tag">Stage</span>
+			</div>
+            <div class="experience-header">
+              <h3>Assistant Coordination des projets @ Banque Postale</h3>
+              <span class="experience-date">Juin 2017 - Décembre 2017</span>
+            </div>
+            <p>
+			Participation à la conception et au développement d’un outil interne centralisant la gestion des projets de La Banque Postale (suivi opérationnel, pilotage, gouvernance, reporting, habilitations), dans un contexte de structuration des processus et d’amélioration de la fiabilité des données, avec un rôle hybride d’analyste fonctionnel et développeur web.
+			
+			</p>
+            <div class="experience-tech">
+              <div class="experience-tech__label">
+                <i class="fas fa-microchip"></i> Environnement technique
+              </div>
+              <div class="experience-tech__chips" aria-label="Technologies utilisées">
+                <span class="exp-chip">PHP 5</span>
+                <span class="exp-chip">Bootstrap</span>
+                <span class="exp-chip">CSS</span>
+                <span class="exp-chip">HTML5</span>
+                <span class="exp-chip">jQuery</span>
+                <span class="exp-chip">MySQL</span>
+                <span class="exp-chip">Atom Editor</span>
+              </div>
+            </div>
+          </div>
+        </section>
       </main>
-      <script>
-         // Navigation dynamique du menu
-         document.querySelectorAll('.menu-link').forEach(link => {
-           link.addEventListener('click', function(e) {
-         	e.preventDefault();
-         	// Désactive tous les liens
-         	document.querySelectorAll('.menu-link').forEach(l => l.classList.remove('active'));
-         	// Active le lien cliqué
-         	this.classList.add('active');
-         	// Affiche la section correspondante
-         	const sectionId = this.getAttribute('data-section');
-         	document.querySelectorAll('main > section').forEach(sec => sec.classList.remove('active'));
-         	document.getElementById(sectionId).classList.add('active');
-           });
-         });
-         // Par défaut, affiche la section "about"
-         document.querySelectorAll('main > section').forEach(sec => sec.classList.remove('active'));
-         document.getElementById('about').classList.add('active');
-          
-      </script>
-      <script>
-         // Affiche le footer uniquement quand on est en bas de page
-         function toggleFooterOnScroll() {
-         const footer = document.getElementById('page-footer');
-         const main = document.querySelector('main');
-         // Position du scroll + hauteur vue
-         const scrollY = window.scrollY || window.pageYOffset;
-         const viewportHeight = window.innerHeight;
-         // Hauteur totale du contenu main
-         const mainRect = main.getBoundingClientRect();
-         const mainBottom = main.offsetTop + main.offsetHeight;
-         const pageBottom = scrollY + viewportHeight;
-         
-         // Si on est en bas du contenu principal
-         if (pageBottom >= mainBottom - 2) {
-          footer.style.display = 'block';
-         } else {
-          footer.style.display = 'none';
-         }
-         }
-         
-         window.addEventListener('scroll', toggleFooterOnScroll);
-         window.addEventListener('resize', toggleFooterOnScroll);
-         document.addEventListener('DOMContentLoaded', toggleFooterOnScroll);
-         
-         // Si la navigation change de section, on vérifie l'affichage du footer
-         document.querySelectorAll('.menu-link').forEach(link => {
-         link.addEventListener('click', function() {
-          setTimeout(toggleFooterOnScroll, 50);
-         });
-         });
-      </script>
-      <script>
-         function toggleCV(btn) {
-           const item = btn.closest('.cv-item');
-           const detail = item.querySelector('.cv-detail');
-           const isOpen = detail.style.display === 'block';
-         
-           // Ferme tous les détails
-           document.querySelectorAll('.cv-detail').forEach(function(d) {
-         	d.style.display = 'none';
-           });
-           document.querySelectorAll('.cv-toggle').forEach(function(b) {
-         	b.textContent = '+';
-           });
-         
-           // Si on clique sur +, on ouvre. Si on clique sur –, on ferme.
-           if (!isOpen) {
-         	detail.style.display = 'block';
-         	btn.textContent = '–';
-           }
-           // Si on clique sur –, tout reste fermé
-         }
-      </script>
-      <script>
-         // Accordéon formation
-         function toggleFormation(header) {
-           const item = header.closest('.formation-item');
-           const detail = item.querySelector('.formation-detail');
-           const toggleBtn = header.querySelector('.formation-toggle');
-           const isOpen = detail.style.display === 'block';
-           // Ferme tous les autres
-           document.querySelectorAll('.formation-detail').forEach(function(d) { d.style.display = 'none'; });
-           document.querySelectorAll('.formation-toggle').forEach(function(b) { b.textContent = '+'; });
-           // Ouvre si fermé
-           if (!isOpen) {
-         	detail.style.display = 'block';
-         	toggleBtn.textContent = '–';
-           }
-         }
-          
-      </script>
-	  <script>
-  document.querySelectorAll('.sub-tab').forEach(tab => {
-    tab.addEventListener('click', () => {
-      document.querySelectorAll('.sub-tab').forEach(t => t.classList.remove('active'));
-      document.querySelectorAll('.sub-tab-content').forEach(c => c.classList.remove('active'));
+      <footer id="page-footer">
+        <div class="footer-content">
+          <span class="citation">
+          "N'abandonne jamais, car c'est souvent juste après le dernier effort que le succès se dévoile."
+          </span>
+          <p>
+            © 2026 Maxime Joannis - Tous droits réservés.
+            <a href="privacy.html">Politique de confidentialité</a>
+          </p>
+        </div>
+      </footer>
+    </div>
+    <script>
+  /**
+   * Portfolio Dashboard Logic
+   * Gestion de l'affichage, du loader "Fake Build" et de la navigation
+   * Version: 2.1 (hash routing)
+   */
+  const PortfolioApp = {
+    // --- CONFIGURATION GLOBALE ---
+    config: {
+      loaderTimeout: 8000,
+      reducedMotion: window.matchMedia("(prefers-reduced-motion: reduce)").matches,
+      sectionLabels: {
+        home: "OVERVIEW",
+        formation: "FORMATION",
+        projects: "PROJECTS",
+        experience: "EXPERIENCE",
+        about: "ABOUT"
+      }
+    },
 
-      tab.classList.add('active');
-      document.getElementById(tab.dataset.target).classList.add('active');
-    });
-  });
+    // --- POINT D'ENTREE ---
+    init() {
+      this.initLoader();
+      this.initNavigation();
+      this.initFocusMode();
+      this.initErrorHandlers();
+      this.initSpecialButtons();
+
+      // ✅ NEW: ouvre automatiquement la bonne section si URL = index.html#projects
+      this.initHashRouting();
+    },
+
+    // --- GESTION DU LOADER (Sequence de démarrage) ---
+    initLoader() {
+      const nodes = {
+        loader: document.getElementById("loader"),
+        fill: document.getElementById("buildFill"),
+        state: document.getElementById("buildState"),
+        icon: document.getElementById("buildIcon"),
+        panel: document.querySelector(".build-panel")
+      };
+
+      // Timeout de sécurité si le JS plante
+      setTimeout(() => this.closeLoader(nodes.loader), this.config.loaderTimeout);
+
+      // Si l'utilisateur préfère réduire les mouvements, on skip
+      if (this.config.reducedMotion) {
+        this.closeLoader(nodes.loader);
+        return;
+      }
+
+      // Etape 1 : Barre de progression
+      setTimeout(() => { if(nodes.fill) nodes.fill.style.width = "85%"; }, 120);
+
+      // Etape 2 : Validation du build
+      setTimeout(() => {
+        if (nodes.fill) nodes.fill.style.width = "100%";
+        if (nodes.state) nodes.state.textContent = "SUCCESS";
+        if (nodes.icon) nodes.icon.innerHTML = '<i class="fas fa-check"></i>';
+        if (nodes.panel) nodes.panel.classList.add("is-success");
+
+        // Etape 3 : Fermeture
+        setTimeout(() => this.closeLoader(nodes.loader), 400);
+      }, 720);
+    },
+
+    closeLoader(loader) {
+      if (loader && loader.style.display !== "none") {
+        loader.style.opacity = "0";
+        setTimeout(() => { loader.style.display = "none"; }, 250);
+      }
+    },
+
+    // --- NAVIGATION (SPA like & Effet machine à écrire) ---
+    initNavigation() {
+      const links = document.querySelectorAll('.nav-link');
+      const sections = document.querySelectorAll('.content-section');
+      const breadcrumbTitle = document.getElementById('breadcrumb-title');
+      const menuLoader = document.getElementById("menuLoader");
+      const menuLoaderText = document.getElementById("menuLoaderText");
+
+      let typeTimeout;
+
+      // Effet visuel sur le titre du fil d'ariane
+      const typeWriter = (text, element) => {
+        element.textContent = "";
+        let i = 0;
+        clearTimeout(typeTimeout);
+        const type = () => {
+          if (i < text.length) {
+            element.textContent += text.charAt(i);
+            i++;
+            typeTimeout = setTimeout(type, 50);
+          }
+        };
+        type();
+      };
+
+      links.forEach(link => {
+        link.addEventListener("click", (e) => {
+          const targetId = link.getAttribute("data-target");
+          const currentSection = document.querySelector(".content-section.active");
+
+          // ⚠️ Si pas de data-target (lien externe), on ne fait rien
+          if (!targetId) return;
+
+          // ✅ Empêche l'ancre de changer le comportement par défaut
+          e.preventDefault();
+
+          // ✅ NEW: met à jour l'URL => index.html#projects etc.
+          history.replaceState(null, "", `#${targetId}`);
+
+          // Évite de recharger la section déjà active
+          if (currentSection?.id === targetId) return;
+
+          // Mise à jour visuelle du Menu
+          links.forEach(l => l.classList.remove("active-link"));
+          link.classList.add("active-link");
+
+          // Animation Breadcrumb
+          typeWriter(link.innerText.trim(), breadcrumbTitle);
+
+          // Transition avec Micro-loader
+          const label = this.config.sectionLabels[targetId] || "LOADING...";
+          const delay = this.config.reducedMotion ? 0 : 200;
+
+          if (menuLoader && !this.config.reducedMotion) {
+            menuLoaderText.textContent = `SWITCHING: ${label}`;
+            menuLoader.classList.add("is-active");
+          }
+
+          // Bascule des sections après le délai d'animation
+          setTimeout(() => {
+            sections.forEach(s => s.classList.toggle("active", s.id === targetId));
+            window.scrollTo(0, 0);
+            if (menuLoader) menuLoader.classList.remove("is-active");
+          }, delay);
+        });
+      });
+    },
+
+    // ✅ NEW: Deep-linking (index.html#projects ouvre Projects)
+    initHashRouting() {
+  const activateSectionInstant = (targetId) => {
+    const links = document.querySelectorAll('.nav-link');
+    const sections = document.querySelectorAll('.content-section');
+    const breadcrumbTitle = document.getElementById('breadcrumb-title');
+
+    // active-link
+    links.forEach(l => l.classList.remove("active-link"));
+    const link = document.querySelector(`.nav-link[data-target="${targetId}"]`);
+    if (link) link.classList.add("active-link");
+
+    // sections
+    sections.forEach(s => s.classList.toggle("active", s.id === targetId));
+
+    // breadcrumb (sans effet machine à écrire pour éviter le flash)
+    if (breadcrumbTitle && link) breadcrumbTitle.textContent = link.innerText.trim();
+  };
+
+  const openFromHash = () => {
+    const hash = (window.location.hash || "").replace("#", "").trim();
+    if (!hash) return;
+
+    const sectionExists = document.getElementById(hash);
+    const linkExists = document.querySelector(`.nav-link[data-target="${hash}"]`);
+    if (!sectionExists || !linkExists) return;
+
+    // ✅ Affichage IMMEDIAT : pas de flash Home
+    activateSectionInstant(hash);
+
+    // Optionnel : remonter en haut
+    window.scrollTo(0, 0);
+  };
+
+  // ✅ Dès que le DOM est prêt
+  openFromHash();
+
+  // ✅ Si l’URL change ensuite
+  window.addEventListener("hashchange", openFromHash);
+},
+
+    // --- MODE FOCUS (Masquer/Afficher éléments secondaires) ---
+    initFocusMode() {
+      const focusBtn = document.getElementById('focusBtn');
+      if (!focusBtn) return;
+
+      focusBtn.addEventListener('click', () => {
+        document.body.classList.toggle('focus-active');
+        const isFocus = document.body.classList.contains('focus-active');
+        focusBtn.innerHTML = isFocus
+          ? '<i class="fas fa-compress-arrows-alt"></i> QUITTER'
+          : '<i class="fas fa-expand-arrows-alt"></i> FOCUS';
+      });
+    },
+
+    // --- BOUTONS SPECIFIQUES (Liens internes dans le contenu) ---
+    initSpecialButtons() {
+      const seeProjectsBtn = document.getElementById('seeProjectsBtn');
+      if (seeProjectsBtn) {
+        seeProjectsBtn.addEventListener('click', (e) => {
+          e.preventDefault();
+          // ✅ met à jour l’URL aussi (cohérence)
+          history.replaceState(null, "", "#projects");
+          // Simule un clic sur le menu navigation
+          document.querySelector('.nav-link[data-target="projects"]')?.click();
+        });
+      }
+    },
+
+    // --- GESTION DES ERREURS (Style Console Log) ---
+    initErrorHandlers() {
+      window.onerror = (message, source, lineno) => {
+        const statusText = document.querySelector(".loader-text");
+        const logContainer = document.querySelector(".loader-log-container");
+
+        if (statusText) {
+          statusText.style.color = "#ff4d4d";
+          statusText.textContent = "CRITICAL_ERROR: Execution failed.";
+        }
+
+        if (logContainer) {
+          const errorLog = document.createElement("div");
+          errorLog.className = "log-line";
+          errorLog.style.color = "#ff4d4d";
+          errorLog.textContent = `> STACK_TRACE: Line ${lineno}`;
+          logContainer.appendChild(errorLog);
+        }
+      };
+    }
+  };
+
+  // Lancement au chargement du DOM
+  document.addEventListener("DOMContentLoaded", () => PortfolioApp.init());
 </script>
-
-   </body>
+  </body>
 </html>
