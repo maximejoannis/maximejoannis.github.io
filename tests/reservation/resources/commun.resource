@@ -81,14 +81,23 @@ Teardown Test
     Close Browser
 
 
+# ---------- Utils ----------
+Sanitize Filename
+    [Arguments]    ${name}
+    # Remplace tout caractère interdit (NTFS + GitHub artifacts) par "_"
+    ${safe}=    Replace String Using Regexp    ${name}    ["<>:|*?\r\n]    _
+    # Sécurise aussi / et \ (chemins)
+    ${safe}=    Replace String Using Regexp    ${safe}    [\\/]    _
+    # Remplace les espaces multiples par "_"
+    ${safe}=    Replace String Using Regexp    ${safe}    \s+    _
+    [Return]    ${safe}
+
+
 Capturer Preuves Echec
     ${ts}=    Get Current Date    result_format=%Y%m%d_%H%M%S
     ${nom}=   Set Variable    ${TEST NAME}
 
-    ${safe}=    Replace String    ${nom}    ${SPACE}    _
-    ${safe}=    Replace String    ${safe}    "    _
-    ${safe}=    Replace String    ${safe}    :    _
-    ${safe}=    Replace String    ${safe}    /    _
+    ${safe}=    Sanitize Filename    ${nom}
 
     Create Directory    results
 
@@ -230,8 +239,7 @@ Renseigner Le Formulaire Contacter L'Hote
     Input Text    ${CHAMP_CONTACT_NOM}    ${nom}
     Click Element    ${CHAMP_CONTACT_EMAIL}
     Input Text    ${CHAMP_CONTACT_EMAIL}    ${email}
-    Click Element    ${CHAMP_CONTACT_TELEPHONE}
-    Input Text    ${CHAMP_CONTACT_TELEPHONE}    ${telephone}
+    Click Element    ${CHAMP_CONTACT_TELEPHONE}    ${telephone}
     Click Element    ${CHAMP_CONTACT_MESSAGE}
     Input Text    ${CHAMP_CONTACT_MESSAGE}    ${message}
 
@@ -261,4 +269,3 @@ Field Value Should Not Be Empty
     [Arguments]    ${locator}
     ${value}=    Get Value    ${locator}
     Should Not Be Empty    ${value}
-
