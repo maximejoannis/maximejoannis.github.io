@@ -15,7 +15,7 @@ Ce dépôt présente mon évolution vers un rôle d’Ingénieur QA fonctionnel 
 
 # 👨‍💻 À propos
 
-Après plusieurs années en développement bancaire, je me suis spécialisé en **test logiciel & automatisation**.
+Après plusieurs années en développement dans le secteur bancaire, je me suis spécialisé en **test logiciel & automatisation**.
 
 Certification : **ISTQB CTFL v4.0**
 Diplôme : **Testeur logiciel (Test Academy)**
