@@ -16,8 +16,6 @@ jobs:
           - 4444:4444
         options: >-
           --shm-size=2g
-        env:
-          SE_OPTS: "--session-request-timeout 300 --session-timeout 300"
 
     steps:
       - uses: actions/checkout@v4
