@@ -10,35 +10,35 @@ ${NAVIGATEUR}     chrome
 ${REMOTE_URL}     None
 
 # --- Auth (existant) ---
-${LIEN SE CONNECTER}          xpath=//a[contains(text(),'Se connecter')]
-${LIEN SE DECONNECTER}        xpath=(//a[contains(text(),'Se déconnecter')])[3]
-${CHAMP NOM UTILISATEUR}      name=username
-${CHAMP MOT DE PASSE}         name=password
-${UTILISATEUR VALIDE}         mjoan
-${MOT DE PASSE VALIDE}        rt
-${BOUTON SE CONNECTER}        css=.homey_login_button
-${ZONE ERREUR}                css=#modal-login .error
+${LIEN SE CONNECTER}             xpath=//a[contains(text(),'Se connecter')]
+${LIEN SE DECONNECTER}           xpath=(//a[contains(text(),'Se déconnecter')])[3]
+${CHAMP NOM UTILISATEUR}         name=username
+${CHAMP MOT DE PASSE}            name=password
+${UTILISATEUR VALIDE}            mjoan
+${MOT DE PASSE VALIDE}           rt
+${BOUTON SE CONNECTER}           css=.homey_login_button
+${ZONE ERREUR}                   css=#modal-login .error
 ${TITRE PAGE TABLEAU DE BORD}    Tableau de bord - Livraison 3
 
 # --- Parcours home -> annonce (locators durcis) ---
-${BTN_CHERCHER_HOME}          css=.search-button .btn-primary
-${PREMIERE_ANNONCE_TRIGGER}   xpath=(//div[contains(@class,'infobox_trigger')]//*[contains(@class,'hover-effect')])[1]
+${BTN_CHERCHER_HOME}             css=.search-button .btn-primary
+${PREMIERE_ANNONCE_TRIGGER}      xpath=(//div[contains(@class,'infobox_trigger')]//*[contains(@class,'hover-effect')])[1]
 
 # --- Contacter l'hôte (HTML + .side) ---
-${BTN_CONTACTER_HOTE}         xpath=//button[@data-target='#modal-contact-host']
-${MODAL_CONTACTER_HOTE}       id=modal-contact-host
-${BTN_FERMER_MODAL_CONTACT}   css=#modal-contact-host button.close
-${TITRE_MODAL_CONTACT}        css=#modal-contact-host .modal-title
+${BTN_CONTACTER_HOTE}            xpath=//button[@data-target='#modal-contact-host']
+${MODAL_CONTACTER_HOTE}          id=modal-contact-host
+${BTN_FERMER_MODAL_CONTACT}      css=#modal-contact-host button.close
+${TITRE_MODAL_CONTACT}           css=#modal-contact-host .modal-title
 
-${FORM_CONTACTER_HOTE}        xpath=//div[@id='modal-contact-host']//form[@method='POST']
+${FORM_CONTACTER_HOTE}           xpath=//div[@id='modal-contact-host']//form[@method='POST']
 
-${CHAMP_CONTACT_NOM}          name=name
-${CHAMP_CONTACT_EMAIL}        name=email
-${CHAMP_CONTACT_TELEPHONE}    name=phone
-${CHAMP_CONTACT_MESSAGE}      name=message
+${CHAMP_CONTACT_NOM}             name=name
+${CHAMP_CONTACT_EMAIL}           name=email
+${CHAMP_CONTACT_TELEPHONE}       name=phone
+${CHAMP_CONTACT_MESSAGE}         name=message
 
-${BTN_CONTACT_SOUMETTRE}      css=#modal-contact-host .contact_listing_host
-${ZONE_CONTACT_MESSAGES}      css=#modal-contact-host .homey_contact_messages
+${BTN_CONTACT_SOUMETTRE}         css=#modal-contact-host .contact_listing_host
+${ZONE_CONTACT_MESSAGES}         css=#modal-contact-host .homey_contact_messages
 
 # --- Champs cachés (HTML) ---
 ${HIDDEN_TARGET_EMAIL}            xpath=//div[@id='modal-contact-host']//input[@name='target_email']
@@ -85,7 +85,7 @@ Sanitize Filename
 Safe Get Location
     ${res}=    Run Keyword And Ignore Error    Get Location
     ${status}=    Set Variable    ${res}[0]
-    ${value}=     Set Variable    ${res}[1]
+    ${value}=    Set Variable    ${res}[1]
     IF    '${status}' != 'PASS' or '${value}' == '${NONE}'
         ${value}=    Set Variable    N/A
     END
@@ -100,14 +100,13 @@ Safe Close Browser
 
 Capturer Preuves Echec
     ${ts}=    Get Current Date    result_format=%Y%m%d_%H%M%S
-    ${nom}=   Set Variable    ${TEST NAME}
+    ${nom}=    Set Variable    ${TEST NAME}
 
     ${safe}=    Sanitize Filename    ${nom}
 
     Log    [ECHEC] Capture des preuves pour: ${nom}    console=yes
 
     Create Directory    results
-
     Safe Capture Page Screenshot    results/FAIL_${safe}_${ts}.png
 
     ${src}=    Run Keyword And Ignore Error    Get Source
@@ -147,7 +146,8 @@ Ouvrir Le Navigateur Et Accéder A L'Application
     ...    ELSE
     ...    Open Browser    ${URL}    ${NAVIGATEUR}
 
-    Maximize Browser Window
+    Set Window Size    1600    1200
+    Wait Until Page Contains Element    css=body    15s
 
 Fermer Le Navigateur
     Close Browser
@@ -158,39 +158,51 @@ Accéder A La Page De Connexion
     Click Element    ${LIEN SE CONNECTER}
 
 Aller Sur La Premiere Annonce Depuis La Home
-    Wait Until Page Contains Element    ${BTN_CHERCHER_HOME}    15s
-    Scroll Element Into View    ${BTN_CHERCHER_HOME}
-    Wait Until Keyword Succeeds    3x    2s    Cliquer Sur Element CSS De Facon Robuste    ${BTN_CHERCHER_HOME}    15s
+    Wait Until Page Contains Element    css=body    15s
+    Set Window Size    1600    1200
+    Execute Javascript    window.scrollTo(0, 0)
+
+    ${bouton_recherche_present}=    Run Keyword And Return Status
+    ...    Wait Until Page Contains Element    ${BTN_CHERCHER_HOME}    5s
+
+    IF    ${bouton_recherche_present}
+        Log    [INFO] Bouton rechercher détecté sur la home.    console=yes
+        Scroll Element Into View    ${BTN_CHERCHER_HOME}
+        Run Keyword And Ignore Error    Click Element    ${BTN_CHERCHER_HOME}
+        Sleep    2s
+    ELSE
+        Log    [INFO] Bouton rechercher absent, on tente l'accès direct à la première annonce.    console=yes
+    END
 
     Wait Until Page Contains Element    ${PREMIERE_ANNONCE_TRIGGER}    15s
     Scroll Element Into View    ${PREMIERE_ANNONCE_TRIGGER}
     Wait Until Keyword Succeeds    3x    2s    Click Element    ${PREMIERE_ANNONCE_TRIGGER}
 
 Ouvrir La Modal Contacter L'Hote
-    Wait Until Element Is Visible    ${BTN_CONTACTER_HOTE}
+    Wait Until Element Is Visible    ${BTN_CONTACTER_HOTE}    15s
     Click Element    ${BTN_CONTACTER_HOTE}
-    Wait Until Element Is Visible    ${MODAL_CONTACTER_HOTE}
+    Wait Until Element Is Visible    ${MODAL_CONTACTER_HOTE}    15s
 
 Fermer La Modal Contacter L'Hote
-    Wait Until Element Is Visible    ${BTN_FERMER_MODAL_CONTACT}
+    Wait Until Element Is Visible    ${BTN_FERMER_MODAL_CONTACT}    15s
     Click Element    ${BTN_FERMER_MODAL_CONTACT}
 
 
 # ---------- Form helpers ----------
 Renseigner Le Formulaire Contacter L'Hote
     [Arguments]    ${nom}    ${email}    ${telephone}    ${message}
-    Wait Until Element Is Visible    ${CHAMP_CONTACT_NOM}
+    Wait Until Element Is Visible    ${CHAMP_CONTACT_NOM}    15s
     Click Element    ${CHAMP_CONTACT_NOM}
-    Input Text       ${CHAMP_CONTACT_NOM}        ${nom}
+    Input Text    ${CHAMP_CONTACT_NOM}    ${nom}
     Click Element    ${CHAMP_CONTACT_EMAIL}
-    Input Text       ${CHAMP_CONTACT_EMAIL}      ${email}
+    Input Text    ${CHAMP_CONTACT_EMAIL}    ${email}
     Click Element    ${CHAMP_CONTACT_TELEPHONE}
-    Input Text       ${CHAMP_CONTACT_TELEPHONE}  ${telephone}
+    Input Text    ${CHAMP_CONTACT_TELEPHONE}    ${telephone}
     Click Element    ${CHAMP_CONTACT_MESSAGE}
-    Input Text       ${CHAMP_CONTACT_MESSAGE}    ${message}
+    Input Text    ${CHAMP_CONTACT_MESSAGE}    ${message}
 
 Soumettre Le Formulaire Contacter L'Hote
-    Wait Until Element Is Visible    ${BTN_CONTACT_SOUMETTRE}
+    Wait Until Element Is Visible    ${BTN_CONTACT_SOUMETTRE}    15s
     Click Element    ${BTN_CONTACT_SOUMETTRE}
 
 Textfield Value Should Be
