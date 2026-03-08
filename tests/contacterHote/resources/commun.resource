@@ -20,9 +20,9 @@ ${BOUTON SE CONNECTER}        css=.homey_login_button
 ${ZONE ERREUR}                css=#modal-login .error
 ${TITRE PAGE TABLEAU DE BORD}    Tableau de bord - Livraison 3
 
-# --- Parcours home -> annonce (locators du .side) ---
-${BTN_CHERCHER_HOME}          css=.search-button > .btn-primary:nth-child(1)
-${PREMIERE_ANNONCE_TRIGGER}   css=.infobox_trigger:nth-child(1) .hover-effect
+# --- Parcours home -> annonce (locators durcis) ---
+${BTN_CHERCHER_HOME}          css=.search-button .btn-primary
+${PREMIERE_ANNONCE_TRIGGER}   xpath=(//div[contains(@class,'infobox_trigger')]//*[contains(@class,'hover-effect')])[1]
 
 # --- Contacter l'hôte (HTML + .side) ---
 ${BTN_CONTACTER_HOTE}         xpath=//button[@data-target='#modal-contact-host']
@@ -43,9 +43,9 @@ ${ZONE_CONTACT_MESSAGES}      css=#modal-contact-host .homey_contact_messages
 # --- Champs cachés (HTML) ---
 ${HIDDEN_TARGET_EMAIL}            xpath=//div[@id='modal-contact-host']//input[@name='target_email']
 ${HIDDEN_HOST_CONTACT_SECURITY}   xpath=//div[@id='modal-contact-host']//input[@name='host_contact_security']
-${HIDDEN_PERMALINK}              xpath=//div[@id='modal-contact-host']//input[@name='permalink']
+${HIDDEN_PERMALINK}               xpath=//div[@id='modal-contact-host']//input[@name='permalink']
 ${HIDDEN_LISTING_TITLE}           xpath=//div[@id='modal-contact-host']//input[@name='listing_title']
-${HIDDEN_ACTION}                 xpath=//div[@id='modal-contact-host']//input[@name='action']
+${HIDDEN_ACTION}                  xpath=//div[@id='modal-contact-host']//input[@name='action']
 
 
 *** Keywords ***
@@ -77,11 +77,8 @@ Teardown Test
 # ---------- Utils ----------
 Sanitize Filename
     [Arguments]    ${name}
-    # Remplace tout caractère interdit (NTFS + GitHub artifacts) par "_"
     ${safe}=    Replace String Using Regexp    ${name}    ["<>:|*?\r\n]    _
-    # Sécurise aussi / et \ (chemins)
     ${safe}=    Replace String Using Regexp    ${safe}    [\\/]    _
-    # Remplace les espaces multiples par "_"
     ${safe}=    Replace String Using Regexp    ${safe}    \s+    _
     [Return]    ${safe}
 
@@ -100,7 +97,6 @@ Safe Capture Page Screenshot
 
 Safe Close Browser
     Run Keyword And Ignore Error    Close Browser
-
 
 Capturer Preuves Echec
     ${ts}=    Get Current Date    result_format=%Y%m%d_%H%M%S
@@ -122,6 +118,27 @@ Capturer Preuves Echec
     ${url}=    Safe Get Location
     Log    [ECHEC] URL: ${url}    console=yes
 
+Wait And Scroll To Element
+    [Arguments]    ${locator}    ${timeout}=15s
+    Wait Until Page Contains Element    ${locator}    ${timeout}
+    Scroll Element Into View    ${locator}
+
+Cliquer Sur Element De Facon Robuste
+    [Arguments]    ${locator}    ${timeout}=15s
+    Wait Until Page Contains Element    ${locator}    ${timeout}
+    Scroll Element Into View    ${locator}
+    Wait Until Keyword Succeeds    3x    1s    Click Element    ${locator}
+
+Cliquer Sur Element CSS De Facon Robuste
+    [Arguments]    ${locator}    ${timeout}=15s
+    Wait Until Page Contains Element    ${locator}    ${timeout}
+    Scroll Element Into View    ${locator}
+    ${clicked}=    Run Keyword And Return Status    Wait Until Keyword Succeeds    2x    1s    Click Element    ${locator}
+    IF    not ${clicked}
+        ${css}=    Replace String    ${locator}    css=
+        Execute Javascript    document.querySelector(arguments[0]).click();    ${css}
+    END
+
 
 # ---------- Navigation ----------
 Ouvrir Le Navigateur Et Accéder A L'Application
@@ -141,11 +158,13 @@ Accéder A La Page De Connexion
     Click Element    ${LIEN SE CONNECTER}
 
 Aller Sur La Premiere Annonce Depuis La Home
-    Wait Until Element Is Visible    ${BTN_CHERCHER_HOME}
-    Click Element    ${BTN_CHERCHER_HOME}
-    Execute Javascript    window.scrollTo(0,0)
-    Wait Until Element Is Visible    ${PREMIERE_ANNONCE_TRIGGER}
-    Click Element    ${PREMIERE_ANNONCE_TRIGGER}
+    Wait Until Page Contains Element    ${BTN_CHERCHER_HOME}    15s
+    Scroll Element Into View    ${BTN_CHERCHER_HOME}
+    Wait Until Keyword Succeeds    3x    2s    Cliquer Sur Element CSS De Facon Robuste    ${BTN_CHERCHER_HOME}    15s
+
+    Wait Until Page Contains Element    ${PREMIERE_ANNONCE_TRIGGER}    15s
+    Scroll Element Into View    ${PREMIERE_ANNONCE_TRIGGER}
+    Wait Until Keyword Succeeds    3x    2s    Click Element    ${PREMIERE_ANNONCE_TRIGGER}
 
 Ouvrir La Modal Contacter L'Hote
     Wait Until Element Is Visible    ${BTN_CONTACTER_HOTE}
