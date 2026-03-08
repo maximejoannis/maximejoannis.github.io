@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Homey — Démo Lite v2 (inspirée Homey)</title>
+  <title>Démo interactive de l'application Homey</title>
 
   <!-- Inspired by the Homey theme structure (listing + booking overlay) -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -384,12 +384,12 @@ a:hover{text-decoration:underline}
       <div class="brand">
         <div class="logo">H</div>
         <div class="titleblock">
-          <h1>Homey — Démo Lite v2</h1>
-          <p>Voyageur → Demande de réservation (overlay) → Hôte accepte/refuse → QA (20 tests / 9 anomalies groupées)</p>
+          <h1>Démonstration interactive – Comment je teste une application de réservation
+Simulation complète : demande de réservation → validation par l’hôte → détection et correction de bugs.</h1>
         </div>
       </div>
       <div class="actions">
-        <span class="badge"><i class="fa fa-bolt"></i> Démo 60 s</span>
+        <span class="badge"><i class="fa fa-bolt"></i> Démo guidée (1 minute)</span>
         <button class="btn btn-primary" id="btnGuided"><i class="fa fa-play"></i> Lancer</button>
         <button class="btn btn-ghost" id="btnReset"><i class="fa fa-refresh"></i> Réinitialiser</button>
       </div>
@@ -398,21 +398,22 @@ a:hover{text-decoration:underline}
     <div class="grid">
       <section class="card">
         <div class="card-h">
-          <h2><i class="fa fa-home" style="color:var(--accent)"></i> Application</h2>
+          <h2><i class="fa fa-home" style="color:var(--accent)"></i> Démo QA : Simulation complète d’une plateforme de réservation testée avec 20 cas de test automatisés.</h2>
           <div class="tabs">
-            <button class="tab is-active" id="tabTraveler"><i class="fa fa-user"></i> Interface Voyageur</button>
-            <button class="tab" id="tabHost"><i class="fa fa-shield"></i> Interface Hôte</button>
-            <button class="tab" id="tabQA"><i class="fa fa-bug"></i> Environnement de test QA</button>
+            <button class="tab is-active" id="tabTraveler"><i class="fa fa-user"></i> Côté utilisateur</button>
+            <button class="tab" id="tabHost"><i class="fa fa-shield"></i> Côté propriétaire</button>
+            <button class="tab" id="tabQA"><i class="fa fa-bug"></i>Tests qualité (QA)</button>
           </div>
         </div>
 
         <div class="card-b">
           <div id="viewTraveler">
-            <p class="small">Choisis une annonce puis clique <strong>Demande de réservation</strong> (fenêtre inspirée de Homey).</p>
+            <p class="small">Étape 1 : <strong>choisissez un logement et envoyez une demande de réservation.</strong></p>
+			<br>
             <div class="item-row" id="listingRow"></div>
 
             <div style="margin-top:14px; display:flex; align-items:center; justify-content:space-between; gap:10px; flex-wrap:wrap;">
-              <h2 style="margin:0; font-size: 1.02rem;"><i class="fa fa-list" style="color:var(--accent)"></i> Mes réservations</h2>
+              <h2 style="margin:0; font-size: 1.02rem;"><i class="fa fa-list" style="color:var(--accent)"></i> Suivi des demandes de réservation</h2>
               <div style="display:flex; gap:10px; flex-wrap:wrap;">
                 <button class="btn" id="btnSeed"><i class="fa fa-magic"></i> Créer 2 demandes</button>
                 <button class="btn" id="btnClear"><i class="fa fa-trash"></i> Vider les demandes</button>
@@ -434,14 +435,14 @@ a:hover{text-decoration:underline}
             </div>
 
             <p class="small" style="margin-top:10px;">
-              Statuts : <span class="status SENT"><i class="fa fa-paper-plane"></i> Envoyée</span>
-              → <span class="status ACCEPTED"><i class="fa fa-check"></i> Acceptée</span> /
+              Cycle d’une demande de réservation : <span class="status SENT"><i class="fa fa-paper-plane"></i> Envoyée</span>
+              → <span class="status ACCEPTED"><i class="fa fa-check"></i> Acceptée par l’hôte</span> →
               <span class="status REFUSED"><i class="fa fa-times"></i> Refusée</span>
             </p>
           </div>
 
           <div id="viewHost" style="display:none;">
-            <p class="small">Boîte de réception de l’hôte : traiter les demandes en attente.</p>
+            <p class="small">Boîte de réception de l'hôte : il peut accepter ou refuser les demandes des voyageurs.</p>
 
             <div style="display:flex; align-items:center; justify-content:space-between; gap:10px; flex-wrap:wrap;">
               <div style="display:flex; gap:10px; align-items:center; flex-wrap:wrap;">
@@ -483,7 +484,16 @@ a:hover{text-decoration:underline}
           </div>
 
           <div id="viewQA" style="display:none;">
-            <p class="small">Anomalies (9) regroupées par module → lancer les tests → appliquer les correctifs → relancer.</p>
+            <p class="small"><strong>Simulation du travail d’un testeur QA :</strong></p>
+
+<ul class="small">
+  <li>Activation de bugs simulés</li>
+  <li>Exécution d’une campagne de tests</li>
+  <li>Identification des anomalies</li>
+  <li>Application des correctifs</li>
+  <li>Vérification que les tests passent</li>
+</ul>
+<br>
 
             <div class="qa-row">
               <div class="block">
@@ -533,11 +543,11 @@ a:hover{text-decoration:underline}
         </div>
         <div class="card-b">
           <ol class="small" style="margin:0; padding-left: 18px; display:grid; gap:8px;">
-            <li>Voyageur : ouvre une annonce + fenêtre → <strong>Demande de réservation</strong></li>
-            <li>Voyageur : voit la demande en <strong>SENT</strong> dans “Mes réservations”</li>
-            <li>Hôte : accepte/refuse → voyageur notifié</li>
-            <li>QA : anomalies ON → tests FAIL</li>
-            <li>Patch → relance → tests PASS</li>
+            <li>Un utilisateur envoie une demande de réservation</li>
+		  <li>L'hôte accepte ou refuse la demande</li>
+		  <li>Le testeur QA détecte des anomalies</li>
+		  <li>Les bugs sont corrigés</li>
+		  <li>Tous les tests passent avec succès</li>
           </ol>
 
           <div style="margin-top:12px; border-top:1px solid var(--line); padding-top: 12px;">
@@ -549,7 +559,7 @@ a:hover{text-decoration:underline}
           <div style="margin-top: 12px;" class="block">
             <strong style="display:block; margin-bottom:8px;"><i class="fa fa-info-circle" style="color:var(--accent)"></i> Données simulées</strong>
             <p class="small" style="margin:0;">
-              Images “fake”, prix et options calculés localement. Aucun backend.
+              Démonstration interactive : les images, les prix et les options sont simulés pour illustrer le fonctionnement de l’application.
             </p>
           </div>
         </div>
