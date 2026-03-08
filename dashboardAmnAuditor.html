@@ -77,6 +77,38 @@
         <!-- SECTION : TABLEAU DE BORD QA (DASHBOARD) -->
         <section class="content-section active" id="presentation">
           <h2><i class="fas fa-chart-pie"></i> Tableau de bord QA — Projet Amn Auditor</h2>
+		    <div style="margin-top: 28px;">
+  <h2 style="font-size: 1.4rem; margin-bottom: 18px;">
+    <i class="fas fa-network-wired"></i> Architecture IA testée
+  </h2>
+  <div class="results-grid">
+    <div class="card results-card">
+      <div class="stat-label">Entrée utilisateur</div>
+      <p style="margin-top: 10px; color: var(--text-muted);">
+        Saisie du contexte, du point de contrôle ou d’un mot-clé métier.
+      </p>
+    </div>
+    <div class="card results-card">
+      <div class="stat-label">Application Electron</div>
+      <p style="margin-top: 10px; color: var(--text-muted);">
+        Interface desktop pilotant les parcours de génération et de restitution.
+      </p>
+    </div>
+    <div class="card results-card">
+      <div class="stat-label">Logique IA</div>
+      <p style="margin-top: 10px; color: var(--text-muted);">
+        Orchestration de la requête, génération puis restitution d’un résultat métier.
+      </p>
+    </div>
+    <div class="card results-card">
+      <div class="stat-label">Résultat QA</div>
+      <p style="margin-top: 10px; color: var(--text-muted);">
+        Analyse de la cohérence, de la pertinence et de la robustesse du contenu généré.
+      </p>
+    </div>
+  </div>
+</div>
+<br>
           <!-- KPIs GLOBAUX -->
           <div class="results-grid">
             <div class="card results-card">
@@ -180,7 +212,7 @@
                 <div class="stat-label">Anomalies détectées</div>
                 <div class="bug-count">7</div>
                 <div aria-label="Répartition des anomalies par criticité" class="bug-distribution">
-                  <div class="bug-item major"><span>8=7</span> Majeures</div>
+                  <div class="bug-item major"><span>7</span> Majeures</div>
                 </div>
                 <p style="margin-top: 10px; color: var(--text-muted);">Synthèse : 7 anomalies majeures.</p>
               </div>
@@ -210,25 +242,9 @@
               <div class="card">
                 <h3>Jira / Xray — Volumétrie</h3>
                 <div class="jira-tags" style="margin-top: 12px;"><span class="tag">Tests : 33</span><span class="tag">Sous-tâches : 3</span><span class="tag">Bugs : 7</span><span class="tag">Plans de test : 2</span><span class="tag">Exécutions : 2</span><span class="tag"><strong>Total : 47</strong></span></div>
-                <p style="margin-top: 14px; color: var(--text-muted);">Traçabilité complète : exigences → tests → exécutions → anomalies.</p>
-              </div>
-            </div>
-          </div>
-          <!-- BADGES QUALITÉ + GO/NO GO -->
-          <div style="margin-top: 28px;">
-            <h2 style="font-size: 1.4rem; margin-bottom: 18px;">
-              <i class="fas fa-award"></i> Badges qualité &amp; Décision
-            </h2>
-            <div class="grid">
-              <div class="card">
-                <h3>Badges qualité</h3>
-                <div class="jira-tags" style="margin-top: 12px;">
-                  <span class="tag">Coverage OK — 100 % exécutés</span>
-                  <span class="tag">Automatisation fiable — 100 %</span>
-                  <span class="tag">Anomalies détectées — 7 bugs</span>
-                  <span class="tag">Reporting complet — livrables</span>
-                  <span class="tag">Agile Ready — Scrum</span>
-                </div>
+                <p style="margin-top: 14px; color: var(--text-muted);">
+  Traçabilité QA complète : exigences, cas de test, exécutions, anomalies et reporting exploitables par l’équipe projet.
+</p>
               </div>
             </div>
           </div>
