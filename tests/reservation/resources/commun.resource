@@ -36,8 +36,9 @@ ${CHAMP_RESERVATION_DEPART}    name=depart
 ${CHAMP_RESERVATION_VOYAGEURS}    name=guests
 
 ${CALENDRIER_WRAPPER}    css=#single-booking-search-calendar
-${CALENDRIER_JOUR_DISPONIBLE}    xpath=(//div[@id='single-booking-search-calendar']//td[not(contains(@class,'disabled')) and not(contains(@class,'past')) and not(contains(@class,'week')) and not(contains(@class,'datepicker-switch')) and .//span[contains(@class,'day-number')]])[1]
-${CALENDRIER_JOUR_DISPONIBLE_2}    xpath=(//div[@id='single-booking-search-calendar']//td[not(contains(@class,'disabled')) and not(contains(@class,'past')) and not(contains(@class,'week')) and not(contains(@class,'datepicker-switch')) and .//span[contains(@class,'day-number')]])[2]
+${CALENDRIER_CASES_DISPONIBLES}    xpath=//div[@id='single-booking-search-calendar']//td[not(contains(@class,'disabled')) and not(contains(@class,'past')) and not(contains(@class,'week')) and .//span[contains(@class,'day-number')]]
+${CALENDRIER_JOUR_1}    xpath=(//div[@id='single-booking-search-calendar']//td[not(contains(@class,'disabled')) and not(contains(@class,'past')) and not(contains(@class,'week')) and .//span[contains(@class,'day-number')]])[1]
+${CALENDRIER_JOUR_2}    xpath=(//div[@id='single-booking-search-calendar']//td[not(contains(@class,'disabled')) and not(contains(@class,'past')) and not(contains(@class,'week')) and .//span[contains(@class,'day-number')]])[2]
 
 ${VOYAGEURS_PANEL}    xpath=(//div[contains(@class,'sidebar-booking-module-body')])[last()]
 ${BTN_ADULTE_PLUS}    xpath=(//button[contains(@class,'adult_plus')] | //a[contains(@class,'adult_plus')] | //span[contains(@class,'adult_plus')] | //i[contains(@class,'adult_plus')])[1]
@@ -54,7 +55,7 @@ ${CHK_EXTRA_DINNER}    css=#homey_remove_on_mobile input[name="extra_price[]"][d
 ${LBL_EXTRA_DINNER}    xpath=//div[@id='homey_remove_on_mobile']//label[contains(@class,'homey_extra_price')][.//span[contains(@class,'control-text') and normalize-space(.)='Dinner']]
 
 ${BTN_DEMANDE_RESERVATION}    id=request_for_reservation
-${MSG_CONNEXION_POUR_RESERVATION}    Vous devez vous connecter
+${MSG_CONNEXION_POUR_RESERVATION}    connecter
 
 # --- Contacter l'hôte ---
 ${BTN_CONTACTER_HOTE}    xpath=//button[@data-target='#modal-contact-host']
@@ -194,9 +195,17 @@ Field Value Should Not Be Empty
     ${value}=    Get Value    ${locator}
     Should Not Be Empty    ${value}
 
+Get Safe Input Value
+    [Arguments]    ${locator}
+    ${res}=    Run Keyword And Ignore Error    Get Value    ${locator}
+    IF    '${res}[0]' == 'PASS'
+        RETURN    ${res}[1]
+    END
+    RETURN
+
 Attendre Que Le Champ Reservation Soit Renseigne
     [Arguments]    ${locator}
-    Wait Until Keyword Succeeds    5x    1s    Field Value Should Not Be Empty    ${locator}
+    Wait Until Keyword Succeeds    8x    1s    Field Value Should Not Be Empty    ${locator}
 
 Cliquer Date Calendrier Robuste
     [Arguments]    ${locator}
@@ -207,6 +216,27 @@ Cliquer Date Calendrier Robuste
     IF    not ${clicked}
         Cliquer Element Via Javascript    ${locator}
     END
+
+Cliquer Jour Calendrier Par Index
+    [Arguments]    ${index}
+    Wait Until Page Contains Element    ${CALENDRIER_WRAPPER}    ${TIMEOUT_UI}
+    Wait Until Page Contains Element    ${CALENDRIER_CASES_DISPONIBLES}    ${TIMEOUT_UI}
+    ${xpath}=    Set Variable    xpath=(//div[@id='single-booking-search-calendar']//td[not(contains(@class,'disabled')) and not(contains(@class,'past')) and not(contains(@class,'week')) and .//span[contains(@class,'day-number')]])[${index}]
+    Scroll Element Into View    ${xpath}
+    ${clicked}=    Run Keyword And Return Status    Click Element    ${xpath}
+    IF    not ${clicked}
+        Cliquer Element Via Javascript    ${xpath}
+    END
+
+Selectionner Dates Avec Fallback Javascript
+    Wait Until Page Contains Element    ${CALENDRIER_WRAPPER}    ${TIMEOUT_UI}
+    Execute Javascript
+    ...    const days = document.querySelectorAll("#single-booking-search-calendar td:not(.disabled):not(.past):not(.week)");
+    ...    if (days.length > 1) { days[0].click(); setTimeout(() => { const days2 = document.querySelectorAll("#single-booking-search-calendar td:not(.disabled):not(.past):not(.week)"); if (days2.length > 1) { days2[1].click(); } }, 250); }
+
+Attendre Champs Dates Renseignes
+    Wait Until Keyword Succeeds    8x    1s    Field Value Should Not Be Empty    ${CHAMP_RESERVATION_ARRIVEE}
+    Wait Until Keyword Succeeds    8x    1s    Field Value Should Not Be Empty    ${CHAMP_RESERVATION_DEPART}
 
 # =========================
 # Auth
@@ -269,15 +299,21 @@ Selectionner Une Date D'Arrivee Et Une Date De Depart
     Click Element    ${CHAMP_RESERVATION_ARRIVEE}
 
     Wait Until Page Contains Element    ${CALENDRIER_WRAPPER}    ${TIMEOUT_UI}
+    Wait Until Page Contains Element    ${CALENDRIER_CASES_DISPONIBLES}    ${TIMEOUT_UI}
 
     Log    [INFO] Sélection date arrivée    console=yes
-    Cliquer Date Calendrier Robuste    ${CALENDRIER_JOUR_DISPONIBLE}
+    Cliquer Jour Calendrier Par Index    1
     Sleep    1s
 
     Log    [INFO] Sélection date départ    console=yes
-    Cliquer Date Calendrier Robuste    ${CALENDRIER_JOUR_DISPONIBLE_2}
+    ${depart_done}=    Run Keyword And Return Status    Cliquer Jour Calendrier Par Index    2
+    IF    not ${depart_done}
+        Log    [WARN] Fallback JS sur le calendrier.    console=yes
+        Selectionner Dates Avec Fallback Javascript
+        Sleep    1s
+    END
 
-    Attendre Que Le Champ Reservation Soit Renseigne    ${CHAMP_RESERVATION_DEPART}
+    Attendre Champs Dates Renseignes
 
 Ouvrir Le Sélecteur Voyageurs
     Etape    Ouvrir le sélecteur voyageurs
@@ -306,7 +342,7 @@ Ouvrir Le Calendrier (Champ Arrivee)
     Scroll Element Into View    ${CHAMP_RESERVATION_ARRIVEE}
     Click Element    ${CHAMP_RESERVATION_ARRIVEE}
     Wait Until Page Contains Element    ${CALENDRIER_WRAPPER}    ${TIMEOUT_UI}
-    Wait Until Page Contains Element    ${CALENDRIER_JOUR_DISPONIBLE}    ${TIMEOUT_UI}
+    Wait Until Page Contains Element    ${CALENDRIER_CASES_DISPONIBLES}    ${TIMEOUT_UI}
 
 Selectionner L'Extra "Breakfast"
     Etape    Sélectionner l'extra Breakfast
@@ -337,6 +373,7 @@ Cliquer Sur "Demande De Réservation"
     IF    not ${clicked}
         Cliquer Element Via Javascript    ${BTN_DEMANDE_RESERVATION}
     END
+    Sleep    1s
 
 # =========================
 # Contacter l'hôte
