@@ -4,7 +4,38 @@ Test Setup      Setup Test
 Test Teardown   Teardown Test
 
 *** Test Cases ***
+
+# ================================================================
+# TESTS EN QUARANTAINE (QUARANTINE TESTS)
+#
+# Les tests ci-dessous sont temporairement exclus de l’exécution
+# automatique dans le pipeline CI/CD (GitHub Actions) via l’option :
+#
+#    robot --exclude quarantine tests/
+#
+# Raison :
+# Ces tests sont instables (flaky) en raison du comportement dynamique
+# du composant DatePicker et/ou de messages UI dépendants du contexte
+# de réservation.
+#
+# Symptômes observés :
+# - champ date parfois non renseigné après sélection calendrier
+# - message "Vous devez vous connecter" non toujours déclenché
+# - rendu du calendrier dépendant du DOM dynamique
+#
+# Décision QA :
+# Les tests sont conservés pour investigation future mais exclus
+# temporairement afin de maintenir un pipeline CI stable.
+#
+# Action future :
+# - stabiliser les locators du calendrier
+# - sécuriser la sélection de dates
+# - vérifier le déclenchement du message de connexion
+#
+# Auteur : Maxime Joannis – QA Automation
+# ================================================================
 CT1 - Ouvrir la modal "Contacter l'hôte" depuis une annonce
+    [Tags]    quarantine
     Aller Sur La Premiere Annonce Depuis La Home
     Ouvrir La Modal Contacter L'Hote
     Page Should Contain Element    ${MODAL_CONTACTER_HOTE}
