@@ -30,7 +30,10 @@ CT4 - Sélectionner un extra ("Breakfast")
 CT5 - Demande de réservation non connecté affiche le message "Vous devez vous connecter..."
     Aller Sur La Premiere Annonce Depuis La Home
     Selectionner Une Date D'Arrivee Et Une Date De Depart
+    Field Value Should Not Be Empty    ${CHAMP_RESERVATION_ARRIVEE}
+    Field Value Should Not Be Empty    ${CHAMP_RESERVATION_DEPART}
     Selectionner Des Voyageurs (1 Adulte + 1 Enfant)
+    Field Value Should Not Be Empty    ${CHAMP_RESERVATION_VOYAGEURS}
     Cliquer Sur "Demande De Réservation"
     Wait Until Page Contains    ${MSG_CONNEXION_POUR_RESERVATION}    15s
     Page Should Contain    ${MSG_CONNEXION_POUR_RESERVATION}
@@ -67,4 +70,3 @@ CT10 - Sélectionner plusieurs extras (Breakfast + Lunch + Dinner)
     Checkbox Should Be Selected    ${CHK_EXTRA_BREAKFAST}
     Checkbox Should Be Selected    ${CHK_EXTRA_LUNCH}
     Checkbox Should Be Selected    ${CHK_EXTRA_DINNER}
-
