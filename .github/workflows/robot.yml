@@ -39,7 +39,7 @@ jobs:
           pip install -r requirements.txt
           python --version
           pip --version
-          robot --version
+          python -m robot --version || true
           python - <<'PY'
           import sys
           print(sys.version)
@@ -52,7 +52,7 @@ jobs:
           for i in {1..120}; do
             STATUS_JSON="$(curl -fsS ${REMOTE_URL}/status 2>/dev/null || true)"
             if echo "$STATUS_JSON" | grep -q '"ready"[[:space:]]*:[[:space:]]*true'; then
-              echo "Selenium is ready ✅"
+              echo "Selenium is ready"
               echo "$STATUS_JSON"
               exit 0
             fi
@@ -60,7 +60,7 @@ jobs:
             sleep 1
           done
 
-          echo "Selenium did not become ready in time ❌"
+          echo "Selenium did not become ready in time"
           echo "Last /status response:"
           echo "$STATUS_JSON"
           exit 1
