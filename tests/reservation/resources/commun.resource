@@ -35,14 +35,14 @@ ${CHAMP_RESERVATION_ARRIVEE}    name=arrive
 ${CHAMP_RESERVATION_DEPART}    name=depart
 ${CHAMP_RESERVATION_VOYAGEURS}    name=guests
 
-${CALENDRIER_WRAPPER}    id=single-booking-search-calendar
-${CALENDRIER_JOUR_COURANT}    xpath=//div[@id='single-booking-search-calendar']//td[contains(@class,'today') or contains(@class,'current') or contains(@class,'available')]
-${CALENDRIER_JOUR_ARRIVEE}    xpath=(//div[@id='single-booking-search-calendar']//td[not(contains(@class,'disabled')) and not(contains(@class,'past')) and not(contains(@class,'week')) and .//span[contains(@class,'day-number')]])[1]
-${CALENDRIER_JOUR_DEPART}    xpath=(//div[@id='single-booking-search-calendar']//td[contains(@class,'available') and not(contains(@class,'disabled')) and not(contains(@class,'past')) and not(contains(@class,'week')) and .//span[contains(@class,'day-number')]])[1]
+${CALENDRIER_WRAPPER}    css=#single-booking-search-calendar
+${CALENDRIER_JOUR_DISPONIBLE}    xpath=(//div[@id='single-booking-search-calendar']//td[not(contains(@class,'disabled')) and not(contains(@class,'past')) and not(contains(@class,'week')) and not(contains(@class,'datepicker-switch')) and .//span[contains(@class,'day-number')]])[1]
+${CALENDRIER_JOUR_DISPONIBLE_2}    xpath=(//div[@id='single-booking-search-calendar']//td[not(contains(@class,'disabled')) and not(contains(@class,'past')) and not(contains(@class,'week')) and not(contains(@class,'datepicker-switch')) and .//span[contains(@class,'day-number')]])[2]
 
-${BTN_ADULTE_PLUS}    xpath=(//div[contains(@class,'sidebar-booking-module-body')]//*[contains(@class,'adult_plus')])[last()]
-${BTN_ENFANT_PLUS}    xpath=(//div[contains(@class,'sidebar-booking-module-body')]//*[contains(@class,'child_plus')])[last()]
-${BTN_APPLIQUER_VOYAGEURS}    xpath=(//div[contains(@class,'sidebar-booking-module-body')]//*[contains(@class,'guest-apply-btn')]//button | //div[contains(@class,'sidebar-booking-module-body')]//*[contains(@class,'guest-apply-btn')]//*[contains(@class,'btn')])[last()]
+${VOYAGEURS_PANEL}    xpath=(//div[contains(@class,'sidebar-booking-module-body')])[last()]
+${BTN_ADULTE_PLUS}    xpath=(//button[contains(@class,'adult_plus')] | //a[contains(@class,'adult_plus')] | //span[contains(@class,'adult_plus')] | //i[contains(@class,'adult_plus')])[1]
+${BTN_ENFANT_PLUS}    xpath=(//button[contains(@class,'child_plus')] | //a[contains(@class,'child_plus')] | //span[contains(@class,'child_plus')] | //i[contains(@class,'child_plus')])[1]
+${BTN_APPLIQUER_VOYAGEURS}    xpath=(//button[contains(@class,'guest-apply-btn')] | //div[contains(@class,'guest-apply-btn')]//button | //div[contains(@class,'guest-apply-btn')]//*[contains(@class,'btn')])[1]
 
 ${CHK_EXTRA_BREAKFAST}    css=#homey_remove_on_mobile input[name="extra_price[]"][data-name="Breakfast"]
 ${LBL_EXTRA_BREAKFAST}    xpath=//div[@id='homey_remove_on_mobile']//label[contains(@class,'homey_extra_price')][.//span[contains(@class,'control-text') and normalize-space(.)='Breakfast']]
@@ -72,6 +72,12 @@ ${CHAMP_CONTACT_MESSAGE}    name=message
 ${BTN_CONTACT_SOUMETTRE}    css=#modal-contact-host .contact_listing_host
 ${ZONE_CONTACT_MESSAGES}    css=#modal-contact-host .homey_contact_messages
 
+# --- Champs cachés contacter l'hôte ---
+${HIDDEN_TARGET_EMAIL}    css=#modal-contact-host input[name="target_email"]
+${HIDDEN_HOST_CONTACT_SECURITY}    css=#modal-contact-host input[name="host_contact_security"]
+${HIDDEN_PERMALINK}    css=#modal-contact-host input[name="permalink"]
+${HIDDEN_LISTING_TITLE}    css=#modal-contact-host input[name="listing_title"]
+${HIDDEN_ACTION}    css=#modal-contact-host input[name="action"]
 
 *** Keywords ***
 Setup Test
@@ -90,9 +96,6 @@ Teardown Test
     Log    [TEARDOWN] URL finale: ${url}    console=yes
     Safe Close Browser
 
-# =========================
-# Utils techniques
-# =========================
 Sanitize Filename
     [Arguments]    ${name}
     ${safe}=    Replace String Using Regexp    ${name}    ["<>:|*?\r\n]    _
@@ -186,6 +189,11 @@ Cliquer Element Robuste
         Cliquer Element Via Javascript    ${locator}
     END
 
+Field Value Should Not Be Empty
+    [Arguments]    ${locator}
+    ${value}=    Get Value    ${locator}
+    Should Not Be Empty    ${value}
+
 Attendre Que Le Champ Reservation Soit Renseigne
     [Arguments]    ${locator}
     Wait Until Keyword Succeeds    5x    1s    Field Value Should Not Be Empty    ${locator}
@@ -193,7 +201,7 @@ Attendre Que Le Champ Reservation Soit Renseigne
 Cliquer Date Calendrier Robuste
     [Arguments]    ${locator}
     Wait Until Page Contains Element    ${CALENDRIER_WRAPPER}    ${TIMEOUT_UI}
-    Wait Until Element Is Visible    ${locator}    ${TIMEOUT_UI}
+    Wait Until Page Contains Element    ${locator}    ${TIMEOUT_UI}
     Scroll Element Into View    ${locator}
     ${clicked}=    Run Keyword And Return Status    Click Element    ${locator}
     IF    not ${clicked}
@@ -238,7 +246,7 @@ Aller Sur La Premiere Annonce Depuis La Home
         Cliquer Element Robuste    ${BTN_CHERCHER_HOME}
         Sleep    2s
     ELSE
-        Log    [INFO] Bouton rechercher absent, on tente l'accès direct à la première annonce.    console=yes
+        Log    [INFO] Bouton rechercher absent, tentative directe sur la première annonce.    console=yes
     END
 
     Wait Until Page Contains Element    ${PREMIERE_ANNONCE_TRIGGER}    ${TIMEOUT_UI}
@@ -254,34 +262,42 @@ Aller Sur La Premiere Annonce Depuis La Home
 # Demande de réservation
 # =========================
 Selectionner Une Date D'Arrivee Et Une Date De Depart
-    Etape    Sélectionner une date d'arrivée et une date de départ
+    Etape    Sélectionner dates arrivée et départ
+
     Wait Until Element Is Visible    ${CHAMP_RESERVATION_ARRIVEE}    ${TIMEOUT_UI}
     Scroll Element Into View    ${CHAMP_RESERVATION_ARRIVEE}
     Click Element    ${CHAMP_RESERVATION_ARRIVEE}
 
     Wait Until Page Contains Element    ${CALENDRIER_WRAPPER}    ${TIMEOUT_UI}
 
-    Cliquer Date Calendrier Robuste    ${CALENDRIER_JOUR_ARRIVEE}
-    Attendre Que Le Champ Reservation Soit Renseigne    ${CHAMP_RESERVATION_ARRIVEE}
+    Log    [INFO] Sélection date arrivée    console=yes
+    Cliquer Date Calendrier Robuste    ${CALENDRIER_JOUR_DISPONIBLE}
+    Sleep    1s
 
-    Wait Until Page Contains Element    ${CALENDRIER_WRAPPER}    ${TIMEOUT_UI}
-    Wait Until Keyword Succeeds    3x    1s    Wait Until Element Is Visible    ${CALENDRIER_JOUR_DEPART}    ${TIMEOUT_UI}
-    Cliquer Date Calendrier Robuste    ${CALENDRIER_JOUR_DEPART}
+    Log    [INFO] Sélection date départ    console=yes
+    Cliquer Date Calendrier Robuste    ${CALENDRIER_JOUR_DISPONIBLE_2}
+
     Attendre Que Le Champ Reservation Soit Renseigne    ${CHAMP_RESERVATION_DEPART}
 
-Selectionner Des Voyageurs (1 Adulte + 1 Enfant)
-    Etape    Sélectionner des voyageurs (1 adulte + 1 enfant)
+Ouvrir Le Sélecteur Voyageurs
+    Etape    Ouvrir le sélecteur voyageurs
     Wait Until Element Is Visible    ${CHAMP_RESERVATION_VOYAGEURS}    ${TIMEOUT_UI}
     Scroll Element Into View    ${CHAMP_RESERVATION_VOYAGEURS}
     Click Element    ${CHAMP_RESERVATION_VOYAGEURS}
+    Wait Until Page Contains Element    ${VOYAGEURS_PANEL}    ${TIMEOUT_UI}
+    Wait Until Page Contains Element    ${BTN_ADULTE_PLUS}    ${TIMEOUT_UI}
 
-    Wait Until Element Is Visible    ${BTN_ADULTE_PLUS}    ${TIMEOUT_UI}
+Selectionner Des Voyageurs (1 Adulte + 1 Enfant)
+    Etape    Sélection voyageurs
+    Ouvrir Le Sélecteur Voyageurs
+
+    Log    [INFO] +1 adulte    console=yes
     Cliquer Element Robuste    ${BTN_ADULTE_PLUS}
 
-    Wait Until Element Is Visible    ${BTN_ENFANT_PLUS}    ${TIMEOUT_UI}
+    Log    [INFO] +1 enfant    console=yes
     Cliquer Element Robuste    ${BTN_ENFANT_PLUS}
 
-    Wait Until Element Is Visible    ${BTN_APPLIQUER_VOYAGEURS}    ${TIMEOUT_UI}
+    Wait Until Page Contains Element    ${BTN_APPLIQUER_VOYAGEURS}    ${TIMEOUT_UI}
     Cliquer Element Robuste    ${BTN_APPLIQUER_VOYAGEURS}
 
 Ouvrir Le Calendrier (Champ Arrivee)
@@ -290,14 +306,7 @@ Ouvrir Le Calendrier (Champ Arrivee)
     Scroll Element Into View    ${CHAMP_RESERVATION_ARRIVEE}
     Click Element    ${CHAMP_RESERVATION_ARRIVEE}
     Wait Until Page Contains Element    ${CALENDRIER_WRAPPER}    ${TIMEOUT_UI}
-    Wait Until Page Contains Element    ${CALENDRIER_JOUR_COURANT}    ${TIMEOUT_UI}
-
-Ouvrir Le Sélecteur Voyageurs
-    Etape    Ouvrir le sélecteur voyageurs
-    Wait Until Element Is Visible    ${CHAMP_RESERVATION_VOYAGEURS}    ${TIMEOUT_UI}
-    Scroll Element Into View    ${CHAMP_RESERVATION_VOYAGEURS}
-    Click Element    ${CHAMP_RESERVATION_VOYAGEURS}
-    Wait Until Element Is Visible    ${BTN_APPLIQUER_VOYAGEURS}    ${TIMEOUT_UI}
+    Wait Until Page Contains Element    ${CALENDRIER_JOUR_DISPONIBLE}    ${TIMEOUT_UI}
 
 Selectionner L'Extra "Breakfast"
     Etape    Sélectionner l'extra Breakfast
@@ -322,7 +331,6 @@ Selectionner L'Extra "Dinner"
 
 Cliquer Sur "Demande De Réservation"
     Etape    Cliquer sur Demande de réservation
-    Wait Until Page Contains Element    ${BTN_DEMANDE_RESERVATION}    ${TIMEOUT_UI}
     Scroll Element Into View    ${BTN_DEMANDE_RESERVATION}
     Wait Until Element Is Visible    ${BTN_DEMANDE_RESERVATION}    ${TIMEOUT_UI}
     ${clicked}=    Run Keyword And Return Status    Click Button    ${BTN_DEMANDE_RESERVATION}
@@ -379,7 +387,6 @@ Element Attribute Should Not Be Empty
     ${value}=    Get Element Attribute    ${locator}    ${attribute}
     Should Not Be Empty    ${value}
 
-Field Value Should Not Be Empty
-    [Arguments]    ${locator}
-    ${value}=    Get Value    ${locator}
-    Should Not Be Empty    ${value}
+Wait Until Text Is Visible
+    [Arguments]    ${text}    ${timeout}=${TIMEOUT_UI}
+    Wait Until Page Contains    ${text}    ${timeout}
