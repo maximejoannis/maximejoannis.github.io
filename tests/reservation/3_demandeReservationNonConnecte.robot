@@ -12,6 +12,7 @@ CT1 - Accéder à une annonce et vérifier la présence du module de réservatio
     Page Should Contain Element    ${BTN_DEMANDE_RESERVATION}
 
 CT2 - Sélectionner une date d'arrivée et une date de départ
+    [Tags]    quarantine
     Aller Sur La Premiere Annonce Depuis La Home
     Selectionner Une Date D'Arrivee Et Une Date De Depart
     Field Value Should Not Be Empty    ${CHAMP_RESERVATION_ARRIVEE}
@@ -28,6 +29,7 @@ CT4 - Sélectionner un extra ("Breakfast")
     Checkbox Should Be Selected    ${CHK_EXTRA_BREAKFAST}
 
 CT5 - Demande de réservation non connecté affiche le message "Vous devez vous connecter..."
+    [Tags]    quarantine
     Aller Sur La Premiere Annonce Depuis La Home
     Selectionner Une Date D'Arrivee Et Une Date De Depart
     Field Value Should Not Be Empty    ${CHAMP_RESERVATION_ARRIVEE}
@@ -48,6 +50,7 @@ CT6 - Vérifier les attributs des champs (readonly + placeholders)
     Element Attribute Should Be    ${CHAMP_RESERVATION_VOYAGEURS}    placeholder    Voyageurs
 
 CT7 - Ouvrir le calendrier via le champ arrivée affiche le calendrier
+    [Tags]    quarantine
     Aller Sur La Premiere Annonce Depuis La Home
     Ouvrir Le Calendrier (Champ Arrivee)
     Page Should Contain Element    ${CALENDRIER_JOUR_COURANT}
