@@ -17,6 +17,10 @@ jobs:
           - 4444:4444
         options: >-
           --shm-size=2g
+          --health-cmd="curl -f http://localhost:4444/status || exit 1"
+          --health-interval=5s
+          --health-timeout=5s
+          --health-retries=20
 
     env:
       REMOTE_URL: http://localhost:4444
@@ -40,10 +44,6 @@ jobs:
           python --version
           pip --version
           python -m robot --version || true
-          python - <<'PY'
-          import sys
-          print(sys.version)
-          PY
 
       - name: Wait for Selenium Grid
         shell: bash
@@ -135,10 +135,12 @@ jobs:
         run: |
           EXIT_CODE="${{ steps.robot_run.outputs.robot_exit_code }}"
           echo "Robot exit code: ${EXIT_CODE}"
+
           if [ -z "$EXIT_CODE" ]; then
             echo "Robot step did not expose an exit code."
             exit 1
           fi
+
           if [ "$EXIT_CODE" -ne 0 ]; then
             exit "$EXIT_CODE"
           fi
