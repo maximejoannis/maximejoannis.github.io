@@ -35,8 +35,10 @@ ${CHAMP_RESERVATION_ARRIVEE}    name=arrive
 ${CHAMP_RESERVATION_DEPART}    name=depart
 ${CHAMP_RESERVATION_VOYAGEURS}    name=guests
 
-${CALENDRIER_JOUR_COURANT}    css=.block-body-sidebar > #single-listing-date-range > #single-booking-search-calendar .current-day
-${CALENDRIER_JOUR_DEPART}    css=.block-body-sidebar > #single-listing-date-range > #single-booking-search-calendar > .single-listing-calendar-wrap:nth-child(2) .current-month:nth-child(29) > .day-number
+# Calendrier : locators rendus plus robustes
+${CALENDRIER_WRAPPER}    id=single-booking-search-calendar
+${CALENDRIER_JOUR_COURANT}    css=#single-booking-search-calendar .current-day
+${CALENDRIER_JOUR_DEPART}    xpath=(//div[@id='single-booking-search-calendar']//td[not(contains(@class,'disabled')) and not(contains(@class,'past')) and not(contains(@class,'week')) and .//span[contains(@class,'day-number')]])[2]
 
 ${BTN_ADULTE_PLUS}    css=.sidebar-booking-module-body:nth-child(2) .adult_plus > .fa
 ${BTN_ENFANT_PLUS}    css=.sidebar-booking-module-body:nth-child(2) .child_plus > .fa
@@ -91,7 +93,7 @@ Sanitize Filename
     ${safe}=    Replace String Using Regexp    ${name}    ["<>:|*?\r\n]    _
     ${safe}=    Replace String Using Regexp    ${safe}    [\\/]    _
     ${safe}=    Replace String Using Regexp    ${safe}    \s+    _
-    [Return]    ${safe}
+    RETURN    ${safe}
 
 Safe Get Location
     ${res}=    Run Keyword And Ignore Error    Get Location
@@ -100,7 +102,7 @@ Safe Get Location
     IF    '${status}' != 'PASS' or '${value}' == '${NONE}'
         ${value}=    Set Variable    N/A
     END
-    [Return]    ${value}
+    RETURN    ${value}
 
 Safe Capture Page Screenshot
     [Arguments]    ${path}
@@ -134,7 +136,6 @@ Ouvrir Le Navigateur Et Accéder A L'Application
     ...    ELSE
     ...    Open Browser    ${URL}    ${NAVIGATEUR}
 
-    # Plus stable en CI/headless que Maximize
     Set Window Size    1920    1080
     Set Selenium Timeout    ${SELENIUM_TIMEOUT}
     Set Selenium Implicit Wait    ${SELENIUM_IMPLICIT}
@@ -149,6 +150,16 @@ Fermer Le Navigateur
 Etape
     [Arguments]    ${message}
     Log    [ETAPE] ${message}    console=yes
+
+Attendre Que Le Champ Reservation Soit Renseigne
+    [Arguments]    ${locator}
+    Wait Until Keyword Succeeds    5x    1s    Field Value Should Not Be Empty    ${locator}
+
+Selectionner La Premiere Date Disponible De Depart
+    Wait Until Page Contains Element    ${CALENDRIER_WRAPPER}    ${TIMEOUT_UI}
+    Wait Until Element Is Visible    ${CALENDRIER_JOUR_DEPART}    ${TIMEOUT_UI}
+    Scroll Element Into View    ${CALENDRIER_JOUR_DEPART}
+    Click Element    ${CALENDRIER_JOUR_DEPART}
 
 # =========================
 # Auth (existant)
@@ -187,10 +198,14 @@ Selectionner Une Date D'Arrivee Et Une Date De Depart
     Etape    Sélectionner une date d'arrivée et une date de départ
     Wait Until Element Is Visible    ${CHAMP_RESERVATION_ARRIVEE}    ${TIMEOUT_UI}
     Click Element    ${CHAMP_RESERVATION_ARRIVEE}
+
     Wait Until Element Is Visible    ${CALENDRIER_JOUR_COURANT}    ${TIMEOUT_UI}
+    Scroll Element Into View    ${CALENDRIER_JOUR_COURANT}
     Click Element    ${CALENDRIER_JOUR_COURANT}
-    Wait Until Element Is Visible    ${CALENDRIER_JOUR_DEPART}    ${TIMEOUT_UI}
-    Click Element    ${CALENDRIER_JOUR_DEPART}
+    Attendre Que Le Champ Reservation Soit Renseigne    ${CHAMP_RESERVATION_ARRIVEE}
+
+    Selectionner La Premiere Date Disponible De Depart
+    Attendre Que Le Champ Reservation Soit Renseigne    ${CHAMP_RESERVATION_DEPART}
 
 Selectionner Des Voyageurs (1 Adulte + 1 Enfant)
     Etape    Sélectionner des voyageurs (1 adulte + 1 enfant)
