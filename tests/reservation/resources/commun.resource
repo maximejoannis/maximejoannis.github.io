@@ -36,8 +36,8 @@ ${CHAMP_RESERVATION_DEPART}    name=depart
 ${CHAMP_RESERVATION_VOYAGEURS}    name=guests
 
 ${CALENDRIER_WRAPPER}    id=single-booking-search-calendar
-${CALENDRIER_JOUR_COURANT}    css=#single-booking-search-calendar .current-day
-${CALENDRIER_JOUR_DEPART}     xpath=(//div[@id='single-booking-search-calendar']//td[not(contains(@class,'disabled')) and not(contains(@class,'past')) and not(contains(@class,'week')) and .//span[contains(@class,'day-number')]])[2]
+${CALENDRIER_JOUR_ARRIVEE}    xpath=(//div[@id='single-booking-search-calendar']//td[not(contains(@class,'disabled')) and not(contains(@class,'past')) and not(contains(@class,'week')) and .//span[contains(@class,'day-number')]])[1]
+${CALENDRIER_JOUR_DEPART}    xpath=(//div[@id='single-booking-search-calendar']//td[not(contains(@class,'disabled')) and not(contains(@class,'past')) and not(contains(@class,'week')) and .//span[contains(@class,'day-number')]])[2]
 
 ${BTN_ADULTE_PLUS}    css=.sidebar-booking-module-body:nth-child(2) .adult_plus > .fa
 ${BTN_ENFANT_PLUS}    css=.sidebar-booking-module-body:nth-child(2) .child_plus > .fa
@@ -98,12 +98,10 @@ Safe Get Location
     IF    $status != 'PASS'
         RETURN    N/A
     END
-
     ${value}=    Set Variable    ${res}[1]
     IF    $value == $NONE
         RETURN    N/A
     END
-
     RETURN    ${value}
 
 Safe Capture Page Screenshot
@@ -161,11 +159,19 @@ Attendre Que Le Champ Reservation Soit Renseigne
     [Arguments]    ${locator}
     Wait Until Keyword Succeeds    5x    1s    Field Value Should Not Be Empty    ${locator}
 
-Selectionner La Premiere Date Disponible De Depart
-    Wait Until Page Contains Element    ${CALENDRIER_WRAPPER}    ${TIMEOUT_UI}
-    Wait Until Element Is Visible    ${CALENDRIER_JOUR_DEPART}    ${TIMEOUT_UI}
-    Scroll Element Into View    ${CALENDRIER_JOUR_DEPART}
-    Click Element    ${CALENDRIER_JOUR_DEPART}
+Cliquer Element Calendrier Via Javascript
+    [Arguments]    ${locator}
+    ${element}=    Get WebElement    ${locator}
+    Execute Javascript    arguments[0].click();    ARGUMENTS    ${element}
+
+Cliquer Date Calendrier Robuste
+    [Arguments]    ${locator}
+    Wait Until Element Is Visible    ${locator}    ${TIMEOUT_UI}
+    Scroll Element Into View    ${locator}
+    ${clicked}=    Run Keyword And Return Status    Click Element    ${locator}
+    IF    not ${clicked}
+        Cliquer Element Calendrier Via Javascript    ${locator}
+    END
 
 # =========================
 # Auth
@@ -203,14 +209,15 @@ Aller Sur La Premiere Annonce Depuis La Home
 Selectionner Une Date D'Arrivee Et Une Date De Depart
     Etape    Sélectionner une date d'arrivée et une date de départ
     Wait Until Element Is Visible    ${CHAMP_RESERVATION_ARRIVEE}    ${TIMEOUT_UI}
+    Scroll Element Into View    ${CHAMP_RESERVATION_ARRIVEE}
     Click Element    ${CHAMP_RESERVATION_ARRIVEE}
 
-    Wait Until Element Is Visible    ${CALENDRIER_JOUR_COURANT}    ${TIMEOUT_UI}
-    Scroll Element Into View    ${CALENDRIER_JOUR_COURANT}
-    Click Element    ${CALENDRIER_JOUR_COURANT}
+    Wait Until Page Contains Element    ${CALENDRIER_WRAPPER}    ${TIMEOUT_UI}
+
+    Cliquer Date Calendrier Robuste    ${CALENDRIER_JOUR_ARRIVEE}
     Attendre Que Le Champ Reservation Soit Renseigne    ${CHAMP_RESERVATION_ARRIVEE}
 
-    Selectionner La Premiere Date Disponible De Depart
+    Cliquer Date Calendrier Robuste    ${CALENDRIER_JOUR_DEPART}
     Attendre Que Le Champ Reservation Soit Renseigne    ${CHAMP_RESERVATION_DEPART}
 
 Selectionner Des Voyageurs (1 Adulte + 1 Enfant)
@@ -228,7 +235,8 @@ Ouvrir Le Calendrier (Champ Arrivee)
     Etape    Ouvrir le calendrier via le champ arrivée
     Wait Until Element Is Visible    ${CHAMP_RESERVATION_ARRIVEE}    ${TIMEOUT_UI}
     Click Element    ${CHAMP_RESERVATION_ARRIVEE}
-    Wait Until Element Is Visible    ${CALENDRIER_JOUR_COURANT}    ${TIMEOUT_UI}
+    Wait Until Page Contains Element    ${CALENDRIER_WRAPPER}    ${TIMEOUT_UI}
+    Wait Until Element Is Visible    ${CALENDRIER_JOUR_ARRIVEE}    ${TIMEOUT_UI}
 
 Ouvrir Le Sélecteur Voyageurs
     Etape    Ouvrir le sélecteur voyageurs
