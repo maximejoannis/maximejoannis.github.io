@@ -35,10 +35,9 @@ ${CHAMP_RESERVATION_ARRIVEE}    name=arrive
 ${CHAMP_RESERVATION_DEPART}    name=depart
 ${CHAMP_RESERVATION_VOYAGEURS}    name=guests
 
-# Calendrier : locators rendus plus robustes
 ${CALENDRIER_WRAPPER}    id=single-booking-search-calendar
 ${CALENDRIER_JOUR_COURANT}    css=#single-booking-search-calendar .current-day
-${CALENDRIER_JOUR_DEPART}    xpath=(//div[@id='single-booking-search-calendar']//td[not(contains(@class,'disabled')) and not(contains(@class,'past')) and not(contains(@class,'week')) and .//span[contains(@class,'day-number')]])[2]
+${CALENDRIER_JOUR_DEPART}     xpath=(//div[@id='single-booking-search-calendar']//td[not(contains(@class,'disabled')) and not(contains(@class,'past')) and not(contains(@class,'week')) and .//span[contains(@class,'day-number')]])[2]
 
 ${BTN_ADULTE_PLUS}    css=.sidebar-booking-module-body:nth-child(2) .adult_plus > .fa
 ${BTN_ENFANT_PLUS}    css=.sidebar-booking-module-body:nth-child(2) .child_plus > .fa
@@ -72,7 +71,6 @@ ${CHAMP_CONTACT_MESSAGE}    name=message
 ${BTN_CONTACT_SOUMETTRE}    css=#modal-contact-host .contact_listing_host
 ${ZONE_CONTACT_MESSAGES}    css=#modal-contact-host .homey_contact_messages
 
-
 *** Keywords ***
 Setup Test
     Log    [SETUP] ${TEST NAME}    console=yes
@@ -86,7 +84,6 @@ Teardown Test
     Log    [TEARDOWN] URL finale: ${url}    console=yes
     Safe Close Browser
 
-
 # ---------- Utils ----------
 Sanitize Filename
     [Arguments]    ${name}
@@ -98,19 +95,27 @@ Sanitize Filename
 Safe Get Location
     ${res}=    Run Keyword And Ignore Error    Get Location
     ${status}=    Set Variable    ${res}[0]
-    ${value}=     Set Variable    ${res}[1]
-    IF    '${status}' != 'PASS' or '${value}' == '${NONE}'
-        ${value}=    Set Variable    N/A
+    IF    $status != 'PASS'
+        RETURN    N/A
     END
+
+    ${value}=    Set Variable    ${res}[1]
+    IF    $value == $NONE
+        RETURN    N/A
+    END
+
     RETURN    ${value}
 
 Safe Capture Page Screenshot
     [Arguments]    ${path}
     Run Keyword And Ignore Error    Capture Page Screenshot    ${path}
 
+Safe Get Source
+    ${res}=    Run Keyword And Ignore Error    Get Source
+    RETURN    ${res}
+
 Safe Close Browser
     Run Keyword And Ignore Error    Close Browser
-
 
 Capturer Preuves Echec
     ${ts}=    Get Current Date    result_format=%Y%m%d_%H%M%S
@@ -118,34 +123,35 @@ Capturer Preuves Echec
     ${safe}=    Sanitize Filename    ${nom}
 
     Create Directory    results
-
     Safe Capture Page Screenshot    results/FAIL_${safe}_${ts}.png
 
-    ${src}=    Run Keyword And Ignore Error    Get Source
-    IF    '${src}[0]' == 'PASS'
-        Create File    results/FAIL_${safe}_${ts}.html    ${src}[1]    encoding=UTF-8
+    ${src}=    Safe Get Source
+    ${src_status}=    Set Variable    ${src}[0]
+    IF    $src_status == 'PASS'
+        ${src_value}=    Set Variable    ${src}[1]
+        Create File    results/FAIL_${safe}_${ts}.html    ${src_value}    encoding=UTF-8
     END
 
     ${url}=    Safe Get Location
     Log    [ECHEC] URL: ${url}    console=yes
 
-
 Ouvrir Le Navigateur Et Accéder A L'Application
-    Run Keyword If    '${REMOTE_URL}'!='None'
-    ...    Open Browser    ${URL}    ${NAVIGATEUR}    remote_url=${REMOTE_URL}
-    ...    ELSE
-    ...    Open Browser    ${URL}    ${NAVIGATEUR}
+    IF    '${REMOTE_URL}'!='None'
+        Open Browser    ${URL}    ${NAVIGATEUR}    remote_url=${REMOTE_URL}
+    ELSE
+        Open Browser    ${URL}    ${NAVIGATEUR}
+    END
 
     Set Window Size    1920    1080
     Set Selenium Timeout    ${SELENIUM_TIMEOUT}
     Set Selenium Implicit Wait    ${SELENIUM_IMPLICIT}
-
+    Wait Until Keyword Succeeds    5x    2s    Wait Until Page Contains Element    css=body    ${TIMEOUT_UI}
 
 Fermer Le Navigateur
     Close Browser
 
 # =========================
-# Utilitaires "métier" (logging clair)
+# Utilitaires "métier"
 # =========================
 Etape
     [Arguments]    ${message}
@@ -162,7 +168,7 @@ Selectionner La Premiere Date Disponible De Depart
     Click Element    ${CALENDRIER_JOUR_DEPART}
 
 # =========================
-# Auth (existant)
+# Auth
 # =========================
 Accéder A La Page De Connexion
     Click Element    ${LIEN SE CONNECTER}
@@ -192,7 +198,7 @@ Aller Sur La Premiere Annonce Depuis La Home
     Click Element    ${PREMIERE_ANNONCE_TRIGGER}
 
 # =========================
-# Demande de réservation (non connecté)
+# Demande de réservation
 # =========================
 Selectionner Une Date D'Arrivee Et Une Date De Depart
     Etape    Sélectionner une date d'arrivée et une date de départ
