@@ -8,6 +8,7 @@ on:
 jobs:
   robot:
     runs-on: ubuntu-latest
+    timeout-minutes: 30
 
     services:
       selenium:
@@ -17,63 +18,108 @@ jobs:
         options: >-
           --shm-size=2g
 
-    steps:
-      - uses: actions/checkout@v4
+    env:
+      REMOTE_URL: http://localhost:4444
+      ROBOT_OUTPUTDIR: results
 
-      - uses: actions/setup-python@v5
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
         with:
           python-version: "3.11"
           cache: "pip"
 
       - name: Install dependencies
+        shell: bash
         run: |
           python -m pip install --upgrade pip
           pip install -r requirements.txt
+          python --version
+          pip --version
+          robot --version
+          python - <<'PY'
+          import sys
+          print(sys.version)
+          PY
 
-      - name: Wait for Selenium
+      - name: Wait for Selenium Grid
         shell: bash
         run: |
-          echo "Waiting for Selenium on http://localhost:4444/status ..."
+          echo "Waiting for Selenium on ${REMOTE_URL}/status ..."
           for i in {1..120}; do
-            STATUS_JSON="$(curl -fsS http://localhost:4444/status 2>/dev/null || true)"
+            STATUS_JSON="$(curl -fsS ${REMOTE_URL}/status 2>/dev/null || true)"
             if echo "$STATUS_JSON" | grep -q '"ready"[[:space:]]*:[[:space:]]*true'; then
               echo "Selenium is ready ✅"
               echo "$STATUS_JSON"
               exit 0
             fi
+            echo "Attempt $i/120 - Selenium not ready yet..."
             sleep 1
           done
 
           echo "Selenium did not become ready in time ❌"
-          echo "Last /status response (if any):"
+          echo "Last /status response:"
           echo "$STATUS_JSON"
           exit 1
 
-      - name: Run Robot tests (remote) - produce output.xml
+      - name: Show Selenium status
+        shell: bash
         run: |
-          mkdir -p results
+          curl -fsS ${REMOTE_URL}/status || true
+
+      - name: Run Robot tests
+        id: robot_run
+        continue-on-error: true
+        shell: bash
+        run: |
+          mkdir -p "${ROBOT_OUTPUTDIR}"
+          set +e
           robot \
-            --outputdir results \
+            --outputdir "${ROBOT_OUTPUTDIR}" \
             --output output.xml \
             --log NONE \
             --report NONE \
-            -v REMOTE_URL:http://localhost:4444 \
+            -v REMOTE_URL:${REMOTE_URL} \
             tests
+          EXIT_CODE=$?
+          echo "robot_exit_code=${EXIT_CODE}" >> "$GITHUB_OUTPUT"
+          exit 0
 
-      - name: Generate report + log with Rebot (always)
+      - name: Generate log and report with Rebot
         if: always()
+        shell: bash
         run: |
-          rebot --outputdir results --log log.html --report report.html results/output.xml
+          mkdir -p "${ROBOT_OUTPUTDIR}"
+          if [ -f "${ROBOT_OUTPUTDIR}/output.xml" ]; then
+            rebot \
+              --outputdir "${ROBOT_OUTPUTDIR}" \
+              --log log.html \
+              --report report.html \
+              "${ROBOT_OUTPUTDIR}/output.xml"
+          else
+            echo "No output.xml found, skipping rebot generation."
+          fi
 
-      - name: Diagnose Selenium service (on failure)
-        if: failure()
+      - name: Diagnose Selenium service
+        if: always()
+        shell: bash
         run: |
           echo "=== docker ps -a ==="
-          docker ps -a
-          echo "=== images ==="
-          docker images | head
+          docker ps -a || true
+
+          echo "=== selenium /status ==="
+          curl -fsS ${REMOTE_URL}/status || true
+
           echo "=== selenium logs ==="
-          docker logs "$(docker ps -aq --filter 'ancestor=selenium/standalone-chrome:4.22.0' | head -n 1)" || true
+          CONTAINER_ID="$(docker ps -aq --filter 'ancestor=selenium/standalone-chrome:4.22.0' | head -n 1)"
+          if [ -n "$CONTAINER_ID" ]; then
+            docker logs "$CONTAINER_ID" || true
+          else
+            echo "No selenium container found"
+          fi
 
       - name: Upload Robot reports
         if: always()
@@ -81,3 +127,18 @@ jobs:
         with:
           name: robot-results
           path: results
+          if-no-files-found: warn
+
+      - name: Fail job if Robot failed
+        if: always()
+        shell: bash
+        run: |
+          EXIT_CODE="${{ steps.robot_run.outputs.robot_exit_code }}"
+          echo "Robot exit code: ${EXIT_CODE}"
+          if [ -z "$EXIT_CODE" ]; then
+            echo "Robot step did not expose an exit code."
+            exit 1
+          fi
+          if [ "$EXIT_CODE" -ne 0 ]; then
+            exit "$EXIT_CODE"
+          fi
