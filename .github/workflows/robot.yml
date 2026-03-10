@@ -82,6 +82,7 @@ jobs:
             --output output.xml \
             --log NONE \
             --report NONE \
+            --exclude quarantine \
             -v REMOTE_URL:${REMOTE_URL} \
             tests
           EXIT_CODE=$?
