@@ -11,6 +11,35 @@ CT1 - Accéder à une annonce et vérifier la présence du module de réservatio
     Page Should Contain Element    ${CHAMP_RESERVATION_VOYAGEURS}
     Page Should Contain Element    ${BTN_DEMANDE_RESERVATION}
 
+# ================================================================
+# TESTS EN QUARANTAINE (QUARANTINE TESTS)
+#
+# Les tests ci-dessous sont temporairement exclus de l’exécution
+# automatique dans le pipeline CI/CD (GitHub Actions) via l’option :
+#
+#    robot --exclude quarantine tests/
+#
+# Raison :
+# Ces tests sont instables (flaky) en raison du comportement dynamique
+# du composant DatePicker et/ou de messages UI dépendants du contexte
+# de réservation.
+#
+# Symptômes observés :
+# - champ date parfois non renseigné après sélection calendrier
+# - message "Vous devez vous connecter" non toujours déclenché
+# - rendu du calendrier dépendant du DOM dynamique
+#
+# Décision QA :
+# Les tests sont conservés pour investigation future mais exclus
+# temporairement afin de maintenir un pipeline CI stable.
+#
+# Action future :
+# - stabiliser les locators du calendrier
+# - sécuriser la sélection de dates
+# - vérifier le déclenchement du message de connexion
+#
+# Auteur : Maxime Joannis – QA Automation
+# ================================================================
 CT2 - Sélectionner une date d'arrivée et une date de départ
     [Tags]    quarantine
     Aller Sur La Premiere Annonce Depuis La Home
@@ -28,6 +57,35 @@ CT4 - Sélectionner un extra ("Breakfast")
     Selectionner L'Extra "Breakfast"
     Checkbox Should Be Selected    ${CHK_EXTRA_BREAKFAST}
 
+# ================================================================
+# TESTS EN QUARANTAINE (QUARANTINE TESTS)
+#
+# Les tests ci-dessous sont temporairement exclus de l’exécution
+# automatique dans le pipeline CI/CD (GitHub Actions) via l’option :
+#
+#    robot --exclude quarantine tests/
+#
+# Raison :
+# Ces tests sont instables (flaky) en raison du comportement dynamique
+# du composant DatePicker et/ou de messages UI dépendants du contexte
+# de réservation.
+#
+# Symptômes observés :
+# - champ date parfois non renseigné après sélection calendrier
+# - message "Vous devez vous connecter" non toujours déclenché
+# - rendu du calendrier dépendant du DOM dynamique
+#
+# Décision QA :
+# Les tests sont conservés pour investigation future mais exclus
+# temporairement afin de maintenir un pipeline CI stable.
+#
+# Action future :
+# - stabiliser les locators du calendrier
+# - sécuriser la sélection de dates
+# - vérifier le déclenchement du message de connexion
+#
+# Auteur : Maxime Joannis – QA Automation
+# ================================================================
 CT5 - Demande de réservation non connecté affiche le message "Vous devez vous connecter..."
     [Tags]    quarantine
     Aller Sur La Premiere Annonce Depuis La Home
@@ -49,6 +107,35 @@ CT6 - Vérifier les attributs des champs (readonly + placeholders)
     Element Attribute Should Be    ${CHAMP_RESERVATION_DEPART}    placeholder    Fin
     Element Attribute Should Be    ${CHAMP_RESERVATION_VOYAGEURS}    placeholder    Voyageurs
 
+# ================================================================
+# TESTS EN QUARANTAINE (QUARANTINE TESTS)
+#
+# Les tests ci-dessous sont temporairement exclus de l’exécution
+# automatique dans le pipeline CI/CD (GitHub Actions) via l’option :
+#
+#    robot --exclude quarantine tests/
+#
+# Raison :
+# Ces tests sont instables (flaky) en raison du comportement dynamique
+# du composant DatePicker et/ou de messages UI dépendants du contexte
+# de réservation.
+#
+# Symptômes observés :
+# - champ date parfois non renseigné après sélection calendrier
+# - message "Vous devez vous connecter" non toujours déclenché
+# - rendu du calendrier dépendant du DOM dynamique
+#
+# Décision QA :
+# Les tests sont conservés pour investigation future mais exclus
+# temporairement afin de maintenir un pipeline CI stable.
+#
+# Action future :
+# - stabiliser les locators du calendrier
+# - sécuriser la sélection de dates
+# - vérifier le déclenchement du message de connexion
+#
+# Auteur : Maxime Joannis – QA Automation
+# ================================================================
 CT7 - Ouvrir le calendrier via le champ arrivée affiche le calendrier
     [Tags]    quarantine
     Aller Sur La Premiere Annonce Depuis La Home
