@@ -92,24 +92,30 @@ Safe Get Location
     IF    $status != 'PASS'
         RETURN    N/A
     END
-
     ${value}=    Set Variable    ${res}[1]
     IF    $value == $NONE
         RETURN    N/A
     END
-
     RETURN    ${value}
 
 Safe Capture Page Screenshot
     [Arguments]    ${path}
-    Run Keyword And Ignore Error    Capture Page Screenshot    ${path}
+    ${res}=    Run Keyword And Ignore Error    Capture Page Screenshot    ${path}
+    ${status}=    Set Variable    ${res}[0]
+    IF    $status != 'PASS'
+        Log    [WARN] Screenshot impossible : session Selenium indisponible.    console=yes
+    END
 
 Safe Get Source
     ${res}=    Run Keyword And Ignore Error    Get Source
     RETURN    ${res}
 
 Safe Close Browser
-    Run Keyword And Ignore Error    Close Browser
+    ${res}=    Run Keyword And Ignore Error    Close Browser
+    ${status}=    Set Variable    ${res}[0]
+    IF    $status != 'PASS'
+        Log    [WARN] Fermeture navigateur impossible : session déjà perdue.    console=yes
+    END
 
 Capturer Preuves Echec
     ${ts}=      Get Current Date    result_format=%Y%m%d_%H%M%S
@@ -160,6 +166,7 @@ Ouvrir Le Navigateur Et Accéder A L'Application
         Open Browser    ${URL}    ${NAVIGATEUR}
     END
 
+    Register Keyword To Run On Failure    NONE
     Set Window Size    1600    1200
     Set Selenium Timeout    ${SELENIUM_TIMEOUT}
     Set Selenium Implicit Wait    ${SELENIUM_IMPLICIT}
