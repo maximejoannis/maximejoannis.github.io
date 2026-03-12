@@ -3072,3 +3072,43 @@ h2 i{
   50% { opacity: 0.3; }
   100% { opacity: 1; }
 }
+/* bouton désactivé */
+.btn-disabled{
+  opacity: 0.6;
+  filter: grayscale(80%);
+  cursor: not-allowed;
+  pointer-events: none;
+}
+
+/* badge néon coming soon */
+.badge-coming{
+  margin-left:10px;
+  padding:4px 8px;
+  font-size:10px;
+  font-weight:700;
+  letter-spacing:1px;
+  border-radius:6px;
+  color:#00f7ff;
+  border:1px solid #00f7ff;
+  text-transform:uppercase;
+
+  box-shadow:
+    0 0 4px #00f7ff,
+    0 0 8px #00f7ff;
+
+  animation: neonPulse 2s infinite alternate;
+}
+
+/* animation néon */
+@keyframes neonPulse{
+  from{
+    box-shadow:
+      0 0 4px #00f7ff,
+      0 0 8px #00f7ff;
+  }
+  to{
+    box-shadow:
+      0 0 8px #00f7ff,
+      0 0 16px #00f7ff;
+  }
+}
