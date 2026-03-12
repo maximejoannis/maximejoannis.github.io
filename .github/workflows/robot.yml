@@ -17,13 +17,14 @@ jobs:
           - 4444:4444
         options: >-
           --shm-size=2g
-          --health-cmd="curl -f http://localhost:4444/status || exit 1"
+          --health-cmd="/opt/bin/check-grid.sh --host 127.0.0.1 --port 4444"
           --health-interval=5s
           --health-timeout=5s
-          --health-retries=20
+          --health-retries=24
+          --health-start-period=15s
 
     env:
-      REMOTE_URL: http://localhost:4444
+      REMOTE_URL: http://127.0.0.1:4444/wd/hub
       ROBOT_OUTPUTDIR: results
 
     steps:
@@ -48,12 +49,13 @@ jobs:
       - name: Wait for Selenium Grid
         shell: bash
         run: |
-          echo "Waiting for Selenium on ${REMOTE_URL}/status ..."
+          echo "Waiting for Selenium on http://127.0.0.1:4444/status ..."
           for i in {1..120}; do
-            STATUS_JSON="$(curl -fsS ${REMOTE_URL}/status 2>/dev/null || true)"
+            STATUS_JSON="$(curl -fsS http://127.0.0.1:4444/status 2>/dev/null || true)"
             if echo "$STATUS_JSON" | grep -q '"ready"[[:space:]]*:[[:space:]]*true'; then
               echo "Selenium is ready"
               echo "$STATUS_JSON"
+              sleep 2
               exit 0
             fi
             echo "Attempt $i/120 - Selenium not ready yet..."
@@ -68,7 +70,7 @@ jobs:
       - name: Show Selenium status
         shell: bash
         run: |
-          curl -fsS ${REMOTE_URL}/status || true
+          curl -fsS http://127.0.0.1:4444/status || true
 
       - name: Run Robot tests
         id: robot_run
@@ -112,7 +114,7 @@ jobs:
           docker ps -a || true
 
           echo "=== selenium /status ==="
-          curl -fsS ${REMOTE_URL}/status || true
+          curl -fsS http://127.0.0.1:4444/status || true
 
           echo "=== selenium logs ==="
           CONTAINER_ID="$(docker ps -aq --filter 'ancestor=selenium/standalone-chrome:4.22.0' | head -n 1)"
