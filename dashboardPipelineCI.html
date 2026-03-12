@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Dashboard QA – Pipeline CI/CD Robot Fr:contentReference[oaicite:5]{index=5}ns) | Maxime Joannis</title>
+    <title>Dashboard QA – Pipeline CI/CD Robot Framework | Maxime Joannis</title>
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
     <link rel="stylesheet" href="style-portfolio-maximejoannis.css" />
@@ -19,15 +19,6 @@
       /* Petit complément local (non destructif) */
       .api-panel { margin-top: 12px; }
       .api-panel .api-row { display:flex; gap:12px; flex-wrap:wrap; align-items:center; }
-      .api-panel input[type="password"]{
-        width: min(520px, 100%);
-        padding: 10px 12px;
-        border-radius: 10px;
-        border: 1px solid rgba(31,225,217,0.25);
-        background: rgba(255,255,255,0.04);
-        color: inherit;
-        outline: none;
-      }
       .api-panel .btn-mini{
         padding: 10px 14px;
         border-radius: 10px;
@@ -144,28 +135,12 @@
               <div class="api-panel card" style="width:100%; margin-top: 14px;">
                 <h3 style="margin-bottom: 8px;">
                   <i class="fas fa-plug" style="margin-right:0.6em; color: var(--accent-color);"></i>
-                  Connexion API GitHub (optionnelle)
+                  Connexion API GitHub
                 </h3>
 
                 <div class="api-row">
-                  <input
-                    id="ghToken"
-                    type="password"
-                    placeholder="Optionnel : coller un token GitHub (PAT) pour éviter le rate limit"
-                    autocomplete="off"
-                    spellcheck="false"
-                  />
-                  <button class="btn-mini" id="saveTokenBtn"><i class="fas fa-floppy-disk"></i> Enregistrer</button>
-                  <button class="btn-mini" id="clearTokenBtn" style="border-color: rgba(255,77,77,0.6); color:#ff4d4d; background: rgba(255,77,77,0.10);">
-                    <i class="fas fa-trash"></i> Effacer
-                  </button>
                   <button class="btn-mini" id="refreshBtn"><i class="fas fa-rotate"></i> Rafraîchir</button>
                 </div>
-
-                <p class="small-muted" style="margin-top:10px;">
-                  Sans token, GitHub limite les requêtes API (≈60/h). Avec un token, tu évites les blocages en cas de rafraîchissements répétés.
-                </p>
-
                 <div id="apiStatus" class="muted" style="margin-top:8px;"></div>
               </div>
             </div>
@@ -334,8 +309,7 @@
        * - Show latest run details (jobs + artifacts)
        *
        * Notes:
-       * - Public API works without token but rate-limited.
-       * - Token (PAT) is optional and stored locally (localStorage).
+       * - Public GitHub API only (no token exposed in this portfolio version).
        */
       const PipelineDashboardApp = {
         // ---- CONFIG (à adapter si tu renommes le workflow) ----
@@ -359,7 +333,6 @@
         },
 
         state: {
-          token: null,
           runs: [],
           latestJobs: null,
           latestArtifacts: null
@@ -367,7 +340,6 @@
 
         // ---- INIT ----
         init() {
-          this.hydrateToken();
           this.initLoader();
           this.initNavigation();
           this.initFocusMode();
@@ -501,39 +473,10 @@
           });
         },
 
-        // ---- CONTROLS (token + refresh) ----
+        // ---- CONTROLS ----
         initControls() {
-          const input = document.getElementById("ghToken");
-          const saveBtn = document.getElementById("saveTokenBtn");
-          const clearBtn = document.getElementById("clearTokenBtn");
           const refreshBtn = document.getElementById("refreshBtn");
-
-          if (this.state.token) input.value = this.state.token;
-
-          saveBtn.addEventListener("click", () => {
-            const v = (input.value || "").trim();
-            if (!v) {
-              this.setApiStatus("Token vide : rien à enregistrer.", "warn");
-              return;
-            }
-            localStorage.setItem("mj_gh_token", v);
-            this.state.token = v;
-            this.setApiStatus("Token enregistré (localStorage). Rafraîchis pour recharger.", "ok");
-          });
-
-          clearBtn.addEventListener("click", () => {
-            localStorage.removeItem("mj_gh_token");
-            this.state.token = null;
-            input.value = "";
-            this.setApiStatus("Token effacé. Retour en mode public (rate limit possible).", "warn");
-          });
-
-          refreshBtn.addEventListener("click", () => this.loadAll());
-        },
-
-        hydrateToken() {
-          const t = localStorage.getItem("mj_gh_token");
-          this.state.token = t ? t.trim() : null;
+          refreshBtn?.addEventListener("click", () => this.loadAll());
         },
 
         setApiStatus(msg, level = "info") {
@@ -545,12 +488,10 @@
 
         // ---- API HELPERS ----
         ghHeaders() {
-          const h = {
+          return {
             "Accept": "application/vnd.github+json",
             "X-GitHub-Api-Version": "2022-11-28"
           };
-          if (this.state.token) h["Authorization"] = `Bearer ${this.state.token}`;
-          return h;
         },
 
         async ghFetchJson(url) {
@@ -566,7 +507,7 @@
         // ---- LOAD DATA ----
         async loadAll() {
           try {
-            this.setApiStatus("Chargement des runs GitHub Actions…", "info");
+            this.setApiStatus("Chargement des runs GitHub Actions en mode public…", "info");
 
             const workflowRunsUrl =
               `https://api.github.com/repos/${this.config.owner}/${this.config.repo}` +
@@ -594,7 +535,7 @@
               this.updateBuildBadge(null);
             }
 
-            this.setApiStatus("Données chargées ✅", "ok");
+            this.setApiStatus("Données chargées ✅ (mode public)", "ok");
           } catch (e) {
             console.error(e);
             this.setApiStatus(`Erreur : ${e.message}`, "warn");
@@ -863,7 +804,7 @@ renderStability(runs) {
 
   const st = this.computeStability(runs);
 
-  // On utilise tes classes locales déjà définies (badge--success/fail/neutral) :contentReference[oaicite:2]{index=2}
+  // On utilise les classes locales déjà définies (badge--success / badge--fail / badge--neutral)
   el.classList.remove("badge--success", "badge--fail", "badge--neutral");
   if (st.level === "success") el.classList.add("badge--success");
   else if (st.level === "fail") el.classList.add("badge--fail");
