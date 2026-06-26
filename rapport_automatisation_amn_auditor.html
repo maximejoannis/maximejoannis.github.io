@@ -1,0 +1,753 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Rapport QA Automatisation AMN AUDITOR — étude de faisabilité, automatisation Electron, Chrome DevTools Protocol, Pytest et stratégie QA." />
+  <meta name="author" content="Maxime Joannis" />
+  <title>Rapport QA Automatisation — AMN AUDITOR</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" />
+
+  <style>
+    :root {
+      --primary-color: #2563eb;
+      --secondary-color: #1e40af;
+      --text-color: #1f2937;
+      --light-text: #6b7280;
+      --background: #ffffff;
+      --section-bg: #f3f4f6;
+      --card-bg: #ffffff;
+      --border: #e5e7eb;
+      --green: #22c55e;
+      --purple: #a855f7;
+      --orange: #fb923c;
+      --cyan: #38bdf8;
+      --red: #ef4444;
+      --shadow: 0 18px 45px rgba(15, 23, 42, .10);
+      --shadow-hover: 0 28px 70px rgba(37, 99, 235, .18);
+      --radius: 1rem;
+      --nav-height: 70px;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: "Poppins", system-ui, sans-serif;
+      color: var(--text-color);
+      background: var(--background);
+      line-height: 1.7;
+      overflow-x: hidden;
+    }
+    a { color: inherit; text-decoration: none; }
+    button { font-family: inherit; }
+    .container { width: min(1180px, calc(100% - 2rem)); margin: 0 auto; }
+
+    .navbar {
+      position: fixed;
+      inset: 0 0 auto 0;
+      z-index: 1000;
+      height: var(--nav-height);
+      background: rgba(255, 255, 255, .95);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid rgba(229, 231, 235, .8);
+      transition: box-shadow .25s ease, background .25s ease;
+    }
+    .navbar.scrolled {
+      box-shadow: 0 12px 38px rgba(15, 23, 42, .08);
+      background: rgba(255, 255, 255, .98);
+    }
+    .nav-inner {
+      height: 100%;
+      display: grid;
+      grid-template-columns: 1fr auto 1fr;
+      align-items: center;
+      gap: 1.4rem;
+    }
+    .logo {
+      display: inline-flex;
+      align-items: center;
+      gap: .65rem;
+      color: var(--primary-color);
+      font-weight: 800;
+      letter-spacing: -.04em;
+    }
+    .logo-mark {
+      width: 42px;
+      height: 42px;
+      border-radius: 14px;
+      display: grid;
+      place-items: center;
+      color: #fff;
+      background: linear-gradient(135deg, var(--primary-color), #7c3aed);
+      box-shadow: 0 12px 28px rgba(37, 99, 235, .25);
+    }
+    .nav-links {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 2rem;
+      list-style: none;
+      color: var(--light-text);
+      font-weight: 600;
+    }
+    .nav-links a { position: relative; transition: color .25s ease; }
+    .nav-links a::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      bottom: -.35rem;
+      width: 0;
+      height: 2px;
+      background: var(--primary-color);
+      border-radius: 999px;
+      transition: width .25s ease;
+    }
+    .nav-links a:hover, .nav-links a.active { color: var(--primary-color); }
+    .nav-links a:hover::after, .nav-links a.active::after { width: 100%; }
+    .nav-actions { justify-self: end; }
+
+    .back-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: .55rem;
+      min-height: 42px;
+      padding: 0 .95rem;
+      border-radius: 999px;
+      color: var(--primary-color);
+      background: #eff6ff;
+      border: 1px solid rgba(37,99,235,.18);
+      font-weight: 800;
+      transition: transform .25s ease, box-shadow .25s ease;
+    }
+    .back-btn:hover { transform: translateY(-2px); box-shadow: var(--shadow-hover); }
+
+    section { padding: 5.8rem 0; scroll-margin-top: 86px; }
+    .section-title { text-align: center; margin-bottom: 3rem; }
+    .section-title h2 {
+      font-size: clamp(2rem, 4vw, 3rem);
+      line-height: 1.15;
+      letter-spacing: -.06em;
+      margin-bottom: .7rem;
+    }
+    .section-title p { max-width: 760px; margin: 0 auto; color: var(--light-text); }
+
+    .hero {
+      min-height: 100vh;
+      position: relative;
+      display: grid;
+      align-items: center;
+      padding-top: var(--nav-height);
+      background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 100%);
+      overflow: hidden;
+    }
+    .floating-icons { position: absolute; inset: 0; pointer-events: none; overflow: hidden; }
+    .floating-icon {
+      position: absolute;
+      opacity: 0;
+      animation: floatTech 9s ease-in-out infinite;
+      filter: drop-shadow(0 10px 18px rgba(37, 99, 235, .18));
+    }
+    @keyframes floatTech {
+      0%, 100% { transform: translateY(22px) rotate(0deg); opacity: 0; }
+      18%, 78% { opacity: .55; }
+      50% { transform: translateY(-28px) rotate(16deg); opacity: .85; }
+    }
+    .hero-grid {
+      position: relative;
+      z-index: 2;
+      display: grid;
+      grid-template-columns: 1fr 1.05fr;
+      gap: 3rem;
+      align-items: center;
+    }
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: .55rem;
+      padding: .55rem .9rem;
+      border-radius: 999px;
+      color: var(--secondary-color);
+      background: rgba(37, 99, 235, .10);
+      border: 1px solid rgba(37, 99, 235, .16);
+      font-weight: 700;
+      margin-bottom: 1.35rem;
+    }
+    h1 {
+      font-size: clamp(2.35rem, 6vw, 4.55rem);
+      line-height: 1.06;
+      letter-spacing: -.075em;
+      font-weight: 900;
+    }
+    .gradient-text {
+      background: linear-gradient(90deg, var(--primary-color), #7c3aed, var(--cyan));
+      -webkit-background-clip: text;
+      color: transparent;
+    }
+    .lead {
+      margin: 1.25rem 0 1.8rem;
+      color: var(--light-text);
+      font-size: clamp(1rem, 2vw, 1.16rem);
+      max-width: 720px;
+    }
+    .hero-actions { display: flex; flex-wrap: wrap; gap: 1rem; margin-bottom: 1.7rem; }
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: .65rem;
+      min-height: 54px;
+      padding: 0 1.25rem;
+      border-radius: 999px;
+      border: 1px solid var(--primary-color);
+      font-weight: 700;
+      transition: transform .25s ease, box-shadow .25s ease, background .25s ease;
+    }
+    .btn.primary { color: white; background: var(--primary-color); box-shadow: 0 16px 35px rgba(37, 99, 235, .28); }
+    .btn.secondary { color: var(--primary-color); background: white; }
+    .btn:hover { transform: translateY(-3px); box-shadow: var(--shadow-hover); }
+
+    .stats {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: .85rem;
+    }
+    .stat {
+      min-height: 82px;
+      display: flex;
+      align-items: center;
+      gap: .8rem;
+      padding: 1rem;
+      border-radius: .95rem;
+      background: rgba(255, 255, 255, .72);
+      border: 1px solid rgba(191, 219, 254, .9);
+      box-shadow: 0 14px 30px rgba(37, 99, 235, .08);
+    }
+    .stat i { color: var(--primary-color); font-size: 1.35rem; }
+    .stat strong { display: block; font-size: 1.25rem; }
+    .stat span { display: block; color: var(--light-text); font-size: .78rem; }
+
+    .dashboard {
+      border-radius: 1.4rem;
+      padding: 1.4rem;
+      background: rgba(255, 255, 255, .78);
+      backdrop-filter: blur(14px);
+      border: 1px solid rgba(147, 197, 253, .85);
+      box-shadow: var(--shadow);
+      overflow: hidden;
+      position: relative;
+    }
+    .dashboard::after {
+      content: "";
+      position: absolute;
+      width: 220px;
+      height: 220px;
+      right: -90px;
+      top: -90px;
+      background: radial-gradient(circle, rgba(124, 58, 237, .22), transparent 70%);
+    }
+    .dashboard > * { position: relative; z-index: 1; }
+    .dash-head { display: flex; justify-content: space-between; gap: 1rem; align-items: center; margin-bottom: 1rem; }
+    .dash-head h2 { font-size: 1.05rem; }
+    .status-list { display: flex; flex-wrap: wrap; gap: .45rem; }
+    .status {
+      padding: .45rem .6rem;
+      border-radius: 999px;
+      background: rgba(34, 197, 94, .12);
+      color: #15803d;
+      border: 1px solid rgba(34, 197, 94, .22);
+      font-size: .7rem;
+      font-weight: 800;
+    }
+    .dash-grid { display: grid; grid-template-columns: .82fr 1.4fr 1fr; gap: .75rem; }
+    .panel {
+      border: 1px solid var(--border);
+      border-radius: .9rem;
+      background: #fff;
+      padding: .95rem;
+      min-width: 0;
+      box-shadow: 0 8px 20px rgba(15,23,42,.04);
+    }
+    .panel h3 { font-size: .82rem; margin-bottom: .9rem; }
+    .donut {
+      width: 112px;
+      height: 112px;
+      border-radius: 50%;
+      margin: 0 auto .8rem;
+      display: grid;
+      place-items: center;
+      background: conic-gradient(var(--green) 0 86%, rgba(148, 163, 184, .2) 86% 100%);
+      position: relative;
+    }
+    .donut::before { content: ""; position: absolute; inset: 12px; border-radius: 50%; background: white; }
+    .donut strong { position: relative; color: var(--text-color); font-size: 1.45rem; }
+    .legend { display: grid; gap: .35rem; color: var(--light-text); font-size: .72rem; }
+    .legend i { display: inline-block; width: 8px; height: 8px; border-radius: 999px; background: var(--green); margin-right: .35rem; }
+    .legend .orange { background: var(--orange); }
+    .legend .red { background: var(--red); }
+    .chart { width: 100%; height: 150px; }
+    .mini-numbers { display: grid; grid-template-columns: repeat(4, 1fr); gap: .5rem; text-align: center; }
+    .mini-numbers strong { display: block; color: var(--primary-color); }
+    .mini-numbers span { display: block; color: var(--light-text); font-size: .65rem; }
+    .mini-numbers .ok { color: var(--green); }
+    .mini-numbers .ko { color: var(--red); }
+    .mini-numbers .warn { color: #ca8a04; }
+    .pipeline { display: grid; gap: .75rem; }
+    .pipe-step { display: grid; grid-template-columns: 24px 1fr auto; gap: .5rem; align-items: center; font-size: .72rem; }
+    .pipe-dot { width: 22px; height: 22px; display: grid; place-items: center; border-radius: 50%; background: var(--green); color: white; font-weight: 900; font-size: .72rem; }
+    .pipe-step small { display: block; color: #15803d; font-weight: 700; }
+    .tools { display: flex; flex-wrap: wrap; gap: .5rem; margin-top: .9rem; }
+    .tool { padding: .45rem .65rem; border-radius: 999px; background: #eff6ff; color: var(--secondary-color); font-weight: 700; font-size: .72rem; }
+
+    .content-section { background: var(--section-bg); }
+    .report-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 1.4rem; align-items: stretch; }
+    .report-card {
+      display: flex;
+      flex-direction: column;
+      border-radius: 1.4rem;
+      padding: 1.45rem;
+      background: linear-gradient(135deg, color-mix(in srgb, var(--accent), transparent 92%), transparent 45%), #ffffff;
+      border: 1px solid color-mix(in srgb, var(--accent), transparent 62%);
+      box-shadow: var(--shadow);
+      overflow: hidden;
+      position: relative;
+      transition: transform .28s ease, box-shadow .28s ease, border-color .28s ease;
+    }
+    .report-card::before { content: ""; position: absolute; inset: 0 0 auto 0; height: 4px; background: linear-gradient(90deg, var(--accent), transparent); }
+    .report-card:hover { transform: translateY(-9px); border-color: var(--accent); box-shadow: var(--shadow-hover); }
+    .tag-main {
+      display: inline-flex;
+      width: fit-content;
+      align-items: center;
+      gap: .45rem;
+      padding: .45rem .7rem;
+      border-radius: 999px;
+      color: color-mix(in srgb, var(--accent), black 16%);
+      background: color-mix(in srgb, var(--accent), transparent 88%);
+      border: 1px solid color-mix(in srgb, var(--accent), transparent 62%);
+      font-size: .72rem;
+      font-weight: 900;
+      margin-bottom: 1rem;
+    }
+    .card-top { display: grid; grid-template-columns: 64px 1fr; gap: 1rem; align-items: start; margin-bottom: .85rem; }
+    .card-icon {
+      width: 64px;
+      height: 64px;
+      border-radius: 1.1rem;
+      display: grid;
+      place-items: center;
+      font-size: 1.65rem;
+      color: white;
+      background: linear-gradient(135deg, var(--accent), color-mix(in srgb, var(--accent), black 22%));
+      box-shadow: 0 18px 36px color-mix(in srgb, var(--accent), transparent 72%);
+    }
+    .report-card h3 { font-size: 1.2rem; line-height: 1.22; margin-bottom: .45rem; letter-spacing: -.04em; }
+    .report-card p, .report-card li { color: var(--light-text); font-size: .92rem; }
+    .report-card ul, .report-card ol { padding-left: 1.1rem; display: grid; gap: .35rem; }
+    .badges { display: flex; flex-wrap: wrap; gap: .45rem; margin: .75rem 0 0; }
+    .badge {
+      border-radius: 999px;
+      padding: .42rem .6rem;
+      background: color-mix(in srgb, var(--accent), transparent 91%);
+      border: 1px solid color-mix(in srgb, var(--accent), transparent 65%);
+      color: color-mix(in srgb, var(--accent), black 18%);
+      font-weight: 800;
+      font-size: .7rem;
+    }
+
+    .wide-card { grid-column: span 2; }
+    .full-card { grid-column: 1 / -1; }
+    .table-wrap { overflow: auto; border: 1px solid var(--border); border-radius: 1rem; background: white; margin-top: 1rem; }
+    table { width: 100%; border-collapse: collapse; min-width: 720px; }
+    th, td { padding: .9rem 1rem; text-align: left; border-bottom: 1px solid var(--border); vertical-align: top; }
+    th { background: #eff6ff; color: var(--secondary-color); font-size: .78rem; text-transform: uppercase; letter-spacing: .04em; }
+    td { color: var(--light-text); font-size: .9rem; }
+    td strong { color: var(--text-color); }
+    .code-block {
+      margin-top: 1rem;
+      border-radius: 1rem;
+      background: #0f172a;
+      color: #e2e8f0;
+      overflow: auto;
+      border: 1px solid rgba(15, 23, 42, .2);
+    }
+    pre { padding: 1rem; font-size: .82rem; line-height: 1.6; }
+    code { font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace; }
+
+    .decision-banner {
+      display: grid;
+      grid-template-columns: auto 1fr;
+      gap: 1rem;
+      align-items: center;
+      padding: 1.35rem;
+      border-radius: 1.3rem;
+      background: linear-gradient(135deg, rgba(34,197,94,.12), rgba(56,189,248,.14));
+      border: 1px solid rgba(34,197,94,.22);
+      margin-top: 1rem;
+    }
+    .decision-banner i { color: var(--green); font-size: 2rem; }
+
+    footer { padding: 2rem 0; text-align: center; color: #cbd5e1; background: #0f172a; }
+    .fade-section { opacity: 0; transform: translateY(24px); transition: opacity .7s ease, transform .7s ease; }
+    .fade-section.visible { opacity: 1; transform: translateY(0); }
+
+    @media (max-width: 1100px) {
+      .hero-grid { grid-template-columns: 1fr; }
+      .report-grid { grid-template-columns: 1fr; }
+      .wide-card, .full-card { grid-column: auto; }
+      .dash-grid { grid-template-columns: 1fr; }
+    }
+    @media (max-width: 768px) {
+      .nav-inner { grid-template-columns: 1fr auto; }
+      .nav-links { display: none; }
+      section { padding: 4.5rem 0; }
+      .stats { grid-template-columns: repeat(2, 1fr); }
+      .card-top { grid-template-columns: 1fr; }
+      .decision-banner { grid-template-columns: 1fr; }
+    }
+    @media (max-width: 480px) {
+      .container { width: min(100% - 1.25rem, 1180px); }
+      .logo span:not(.logo-mark) { display: none; }
+      .hero-actions { flex-direction: column; }
+      .btn { width: 100%; }
+      .stats { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+  <header class="navbar">
+    <div class="container nav-inner">
+      <a href="index.html" class="logo" aria-label="Retour à l'accueil du portfolio">
+        <span class="logo-mark"><i class="fa-solid fa-vial-circle-check"></i></span>
+        <span>Maxime Joannis — QA Tester</span>
+      </a>
+      <nav aria-label="Navigation du rapport">
+        <ul class="nav-links">
+          <li><a href="#accueil" class="active">Accueil</a></li>
+          <li><a href="#strategie">Stratégie</a></li>
+          <li><a href="#solutions">Solutions</a></li>
+          <li><a href="#recommandation">Recommandation</a></li>
+        </ul>
+      </nav>
+      <div class="nav-actions">
+        <a class="back-btn" href="detailAmnAuditor.html"><i class="fa-solid fa-arrow-left"></i> Projet AMN</a>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <section id="accueil" class="hero">
+      <div class="floating-icons" aria-hidden="true"></div>
+      <div class="container hero-grid">
+        <div>
+          <div class="eyebrow"><i class="fa-solid fa-shield-halved"></i><span>Rapport QA Automatisation · AMN AUDITOR</span></div>
+          <h1>Automatisation Electron,<br><span class="gradient-text">DevTools & stratégie QA</span></h1>
+          <p class="lead">Synthèse professionnelle de la démarche d’automatisation menée sur AMN AUDITOR, application desktop Electron basée sur Chromium, React et Material UI. Le rapport consolide l’étude de faisabilité, l’exploration DOM/UIA, les scripts d’automatisation et la stratégie recommandée.</p>
+          <div class="hero-actions">
+            <a class="btn primary" href="#recommandation"><i class="fa-solid fa-rocket"></i> Voir la recommandation</a>
+            <a class="btn secondary" href="#solutions"><i class="fa-solid fa-flask"></i> Solutions testées</a>
+          </div>
+          <div class="stats" aria-label="Indicateurs du rapport">
+            <div class="stat"><i class="fa-solid fa-screwdriver-wrench"></i><div><strong>5</strong><span>outils évalués</span></div></div>
+            <div class="stat"><i class="fa-solid fa-plug-circle-bolt"></i><div><strong>CDP</strong><span>approche retenue</span></div></div>
+            <div class="stat"><i class="fa-solid fa-code"></i><div><strong>2+</strong><span>sélecteurs DOM clés</span></div></div>
+            <div class="stat"><i class="fa-solid fa-circle-check"></i><div><strong>Élevée</strong><span>faisabilité QA</span></div></div>
+          </div>
+        </div>
+
+        <aside class="dashboard" aria-label="Tableau de bord automatisation AMN AUDITOR">
+          <div class="dash-head">
+            <h2>Dashboard faisabilité</h2>
+            <div class="status-list">
+              <span class="status">✓ Electron</span>
+              <span class="status">✓ DOM détecté</span>
+              <span class="status">✓ Pytest ready</span>
+            </div>
+          </div>
+          <div class="dash-grid">
+            <div class="panel">
+              <h3>Indice de faisabilité</h3>
+              <div class="donut"><strong>86%</strong></div>
+              <div class="legend">
+                <span><i></i> Accès DOM — fiable</span>
+                <span><i class="orange"></i> Playwright — à cadrer</span>
+                <span><i class="red"></i> UIA Windows — limité</span>
+              </div>
+            </div>
+            <div class="panel">
+              <h3>Comparatif d’efficacité</h3>
+              <svg class="chart" viewBox="0 0 460 170" role="img" aria-label="Graphique comparatif des solutions d'automatisation">
+                <defs><linearGradient id="line" x1="0" x2="1"><stop stop-color="#38bdf8"/><stop offset="1" stop-color="#a855f7"/></linearGradient></defs>
+                <g stroke="rgba(148,163,184,.22)" stroke-width="1"><path d="M0 30H460M0 70H460M0 110H460M0 150H460"/><path d="M40 0V170M140 0V170M240 0V170M340 0V170M440 0V170"/></g>
+                <polyline points="30,138 135,122 240,78 345,56 430,28" fill="none" stroke="url(#line)" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+                <g fill="#38bdf8"><circle cx="30" cy="138" r="5"/><circle cx="135" cy="122" r="5"/><circle cx="240" cy="78" r="5"/><circle cx="345" cy="56" r="5"/><circle cx="430" cy="28" r="5"/></g>
+              </svg>
+              <div class="mini-numbers">
+                <div><strong>21</strong><span>UIA</span></div>
+                <div><strong class="warn">⚠</strong><span>Playwright</span></div>
+                <div><strong class="ok">✓</strong><span>CDP</span></div>
+                <div><strong class="ko">×</strong><span>DOM UIA</span></div>
+              </div>
+            </div>
+            <div class="panel">
+              <h3>Pipeline cible</h3>
+              <div class="pipeline">
+                <div class="pipe-step"><span class="pipe-dot">1</span><div><span>Lancement app</span><small>Electron</small></div><span>OK</span></div>
+                <div class="pipe-step"><span class="pipe-dot">2</span><div><span>Connexion CDP</span><small>Port 9222</small></div><span>OK</span></div>
+                <div class="pipe-step"><span class="pipe-dot">3</span><div><span>Actions DOM</span><small>JS / Pytest</small></div><span>OK</span></div>
+                <div class="pipe-step"><span class="pipe-dot">4</span><div><span>Reporting</span><small>CI/CD future</small></div><span>Ready</span></div>
+              </div>
+            </div>
+          </div>
+          <div class="tools">
+            <span class="tool">Electron</span><span class="tool">Chromium</span><span class="tool">React</span><span class="tool">Material UI</span>
+            <span class="tool">CDP 9222</span><span class="tool">Python</span><span class="tool">Pytest</span><span class="tool">WinAppDriver</span>
+          </div>
+        </aside>
+      </div>
+    </section>
+
+    <section id="strategie" class="content-section fade-section">
+      <div class="container">
+        <div class="section-title">
+          <h2>Contexte et stratégie d’investigation</h2>
+          <p>Une démarche QA structurée pour comprendre la technologie réelle de rendu, identifier les limites des outils desktop classiques et choisir une approche industrialisable.</p>
+        </div>
+        <div class="report-grid">
+          <article class="report-card wide-card" style="--accent:#2563eb">
+            <span class="tag-main"><i class="fa-solid fa-circle-dot"></i> Contexte</span>
+            <div class="card-top">
+              <div class="card-icon"><i class="fa-solid fa-desktop"></i></div>
+              <div>
+                <h3>Application desktop moderne basée sur Electron</h3>
+                <p>AMN AUDITOR combine une fenêtre Windows native avec un moteur Chromium embarqué. L’interface métier est rendue sous forme HTML/CSS/JavaScript, et non comme une interface Windows classique.</p>
+              </div>
+            </div>
+            <div class="badges"><span class="badge">Electron</span><span class="badge">Chromium</span><span class="badge">React</span><span class="badge">Material UI</span><span class="badge">Windows Desktop</span></div>
+          </article>
+          <article class="report-card" style="--accent:#a855f7">
+            <span class="tag-main"><i class="fa-solid fa-bullseye"></i> Objectif QA</span>
+            <div class="card-top">
+              <div class="card-icon"><i class="fa-solid fa-magnifying-glass-chart"></i></div>
+              <div>
+                <h3>Évaluer la faisabilité</h3>
+                <p>Identifier une stratégie robuste permettant de couvrir les parcours utilisateur principaux sans accès direct au code source.</p>
+              </div>
+            </div>
+          </article>
+          <article class="report-card full-card" style="--accent:#38bdf8">
+            <span class="tag-main"><i class="fa-solid fa-route"></i> Méthode</span>
+            <div class="card-top">
+              <div class="card-icon"><i class="fa-solid fa-list-check"></i></div>
+              <div>
+                <h3>Stratégie d’investigation en 5 étapes</h3>
+                <ol>
+                  <li>Lancer l’application desktop.</li>
+                  <li>Identifier la technologie réelle de rendu.</li>
+                  <li>Tester l’accès UIA / WinAppDriver.</li>
+                  <li>Extraire le DOM Chromium.</li>
+                  <li>Définir la solution industrialisable.</li>
+                </ol>
+              </div>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="solutions" class="fade-section">
+      <div class="container">
+        <div class="section-title">
+          <h2>Solutions testées</h2>
+          <p>Comparaison des approches d’automatisation possibles sur une application Electron, avec limites techniques et valeur QA.</p>
+        </div>
+        <div class="report-grid">
+          <article class="report-card" style="--accent:#ef4444">
+            <span class="tag-main"><i class="fa-solid fa-triangle-exclamation"></i> Non viable</span>
+            <div class="card-top"><div class="card-icon"><i class="fa-brands fa-windows"></i></div><div><h3>WinAppDriver / Appium Windows</h3><p>Permet de lancer AMN AUDITOR et de créer une session Windows, mais reste limité aux éléments natifs de la fenêtre.</p></div></div>
+            <div class="badges"><span class="badge">Lancement OK</span><span class="badge">Session OK</span><span class="badge">DOM KO</span><span class="badge">UI métier KO</span></div>
+          </article>
+          <article class="report-card" style="--accent:#fb923c">
+            <span class="tag-main"><i class="fa-solid fa-circle-half-stroke"></i> Partiel</span>
+            <div class="card-top"><div class="card-icon"><i class="fa-solid fa-sitemap"></i></div><div><h3>Pywinauto / UI Automation</h3><p>L’exploration UIA confirme surtout des conteneurs Windows : Chrome Legacy Window, Pane et TitleBar. Utile pour observer, insuffisant pour tester les flux métier.</p></div></div>
+            <div class="badges"><span class="badge">Fenêtre OK</span><span class="badge">Racine UIA OK</span><span class="badge">Boutons React KO</span></div>
+          </article>
+          <article class="report-card" style="--accent:#a855f7">
+            <span class="tag-main"><i class="fa-solid fa-flask"></i> À cadrer</span>
+            <div class="card-top"><div class="card-icon"><i class="fa-solid fa-robot"></i></div><div><h3>Playwright Electron</h3><p>Pertinent pour Electron, mais l’accès doit être stabilisé selon la configuration de lancement et l’exposition de la fenêtre Chromium.</p></div></div>
+            <div class="badges"><span class="badge">Lancement OK</span><span class="badge">Fenêtre OK</span><span class="badge">Sélecteurs ⚠</span><span class="badge">Instrumentation ⚠</span></div>
+          </article>
+          <article class="report-card full-card" style="--accent:#22c55e">
+            <span class="tag-main"><i class="fa-solid fa-circle-check"></i> Recommandé</span>
+            <div class="card-top"><div class="card-icon"><i class="fa-solid fa-plug-circle-bolt"></i></div><div><h3>Chrome DevTools Protocol — port 9222</h3><p>Solution la plus fiable pour accéder au DOM, interagir avec les composants React / Material UI et construire une suite de tests automatisés maintenable.</p></div></div>
+            <div class="badges"><span class="badge">DOM accessible</span><span class="badge">Actions métier</span><span class="badge">Assertions Pytest</span><span class="badge">Reporting possible</span><span class="badge">CI/CD future</span></div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="content-section fade-section">
+      <div class="container">
+        <div class="section-title">
+          <h2>Éléments applicatifs et scénario cible</h2>
+          <p>Les éléments clés détectés permettent de construire un premier scénario automatisé centré sur l’ouverture d’un projet existant.</p>
+        </div>
+        <div class="report-grid">
+          <article class="report-card full-card" style="--accent:#38bdf8">
+            <span class="tag-main"><i class="fa-solid fa-code"></i> Sélecteurs identifiés</span>
+            <div class="table-wrap">
+              <table>
+                <thead><tr><th>Élément</th><th>Sélecteur / Identifiant</th><th>Usage QA</th><th>Automatisation</th></tr></thead>
+                <tbody>
+                  <tr><td><strong>Créer un nouveau projet</strong></td><td>#home-create-project-btn</td><td>Démarrer un projet d’audit</td><td>Cliquable via DOM</td></tr>
+                  <tr><td><strong>Ouvrir un projet</strong></td><td>#home-open-project-btn</td><td>Charger un fichier projet existant</td><td>Cliquable via DOM ou dialogue Windows</td></tr>
+                  <tr><td><strong>Menu langue</strong></td><td>Bouton FR</td><td>Vérifier l’internationalisation</td><td>À stabiliser</td></tr>
+                  <tr><td><strong>Fenêtre principale</strong></td><td>Chrome_WidgetWin_1</td><td>Validation de lancement</td><td>Accessible via WinAppDriver</td></tr>
+                </tbody>
+              </table>
+            </div>
+          </article>
+          <article class="report-card wide-card" style="--accent:#2563eb">
+            <span class="tag-main"><i class="fa-solid fa-folder-open"></i> Scénario automatisé cible</span>
+            <div class="card-top"><div class="card-icon"><i class="fa-solid fa-file-import"></i></div><div><h3>Ouvrir un projet existant</h3><p><strong>Précondition :</strong> AMN AUDITOR est installé localement et WinAppDriver ou DevTools est disponible selon l’approche choisie.</p><p><strong>Donnée de test :</strong> fichier projet « AMN Banque - Guide Test Academy.amna ».</p><p><strong>Résultat attendu :</strong> le projet est chargé et le titre ou l’état de l’application confirme l’ouverture.</p></div></div>
+          </article>
+          <article class="report-card" style="--accent:#a855f7">
+            <span class="tag-main"><i class="fa-solid fa-user-check"></i> Action utilisateur</span>
+            <div class="card-top"><div class="card-icon"><i class="fa-solid fa-computer-mouse"></i></div><div><h3>Parcours nominal</h3><p>Cliquer sur « Ouvrir un projet », renseigner le chemin du fichier, puis valider l’ouverture du projet.</p></div></div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="fade-section">
+      <div class="container">
+        <div class="section-title">
+          <h2>Extraits techniques représentatifs</h2>
+          <p>Deux exemples de scripts illustrent la connexion au DOM via DevTools et l’ouverture d’un projet via une approche Windows.</p>
+        </div>
+        <div class="report-grid">
+          <article class="report-card wide-card" style="--accent:#2563eb">
+            <span class="tag-main"><i class="fa-solid fa-terminal"></i> DevTools 9222</span>
+            <h3>Test de connexion DOM</h3>
+            <div class="code-block"><pre><code>APP_PATH = r"C:\Users\maxim\AppData\Local\Programs\amn-auditor\Co-Auditor.exe"
+PORT = 9222
+
+subprocess.Popen([APP_PATH, f"--remote-debugging-port={PORT}"])
+response = requests.get(f"http://localhost:{PORT}/json")
+pages = response.json()</code></pre></div>
+          </article>
+          <article class="report-card" style="--accent:#a855f7">
+            <span class="tag-main"><i class="fa-solid fa-window-restore"></i> WinAppDriver</span>
+            <h3>Test projet existant</h3>
+            <div class="code-block"><pre><code>open_btn = driver.find_element("name", "Ouvrir un projet")
+open_btn.click()
+
+file_input = driver.find_element("class name", "Edit")
+file_input.send_keys(PROJECT_PATH)
+
+driver.find_element("name", "Ouvrir").click()</code></pre></div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="recommandation" class="content-section fade-section">
+      <div class="container">
+        <div class="section-title">
+          <h2>Analyse QA et recommandation finale</h2>
+          <p>L’automatisation doit viser le DOM applicatif plutôt que l’arbre UIA Windows, car les composants métier sont encapsulés dans Chromium.</p>
+        </div>
+        <div class="report-grid">
+          <article class="report-card full-card" style="--accent:#22c55e">
+            <span class="tag-main"><i class="fa-solid fa-trophy"></i> Recommandation</span>
+            <div class="card-top"><div class="card-icon"><i class="fa-solid fa-diagram-project"></i></div><div><h3>Architecture hybride DevTools + Python/Pytest</h3><p>La recommandation est d’industrialiser les tests avec une architecture hybride : lancement contrôlé de l’application, connexion DevTools sur le port 9222, pilotage DOM par JavaScript, assertions via Pytest et génération de rapports d’exécution.</p></div></div>
+            <div class="table-wrap">
+              <table>
+                <thead><tr><th>Critère</th><th>WinAppDriver</th><th>Pywinauto</th><th>Playwright</th><th>DevTools</th></tr></thead>
+                <tbody>
+                  <tr><td><strong>Lancement application</strong></td><td>✅</td><td>✅</td><td>✅</td><td>✅</td></tr>
+                  <tr><td><strong>Accès DOM</strong></td><td>❌</td><td>❌</td><td>⚠️</td><td>✅</td></tr>
+                  <tr><td><strong>Interaction métier</strong></td><td>❌</td><td>❌</td><td>⚠️</td><td>✅</td></tr>
+                  <tr><td><strong>Industrialisation</strong></td><td>❌</td><td>❌</td><td>⚠️</td><td>✅</td></tr>
+                </tbody>
+              </table>
+            </div>
+            <div class="decision-banner"><i class="fa-solid fa-circle-check"></i><div><strong>Décision QA :</strong> faisabilité élevée pour une automatisation fonctionnelle basée sur DevTools + Python/Pytest, avec possibilité d’évolution vers une intégration CI/CD.</div></div>
+          </article>
+          <article class="report-card" style="--accent:#2563eb">
+            <span class="tag-main"><i class="fa-solid fa-brain"></i> Valeur ajoutée</span>
+            <div class="card-top"><div class="card-icon"><i class="fa-solid fa-user-gear"></i></div><div><h3>Analyse technique</h3><p>Compréhension d’une application Electron, de son moteur Chromium embarqué et des limites des outils Windows classiques.</p></div></div>
+          </article>
+          <article class="report-card" style="--accent:#a855f7">
+            <span class="tag-main"><i class="fa-solid fa-scale-balanced"></i> Esprit critique QA</span>
+            <div class="card-top"><div class="card-icon"><i class="fa-solid fa-filter-circle-xmark"></i></div><div><h3>Comparer et écarter</h3><p>Comparaison objective des solutions testées afin d’écarter les approches insuffisantes et de retenir une stratégie adaptée.</p></div></div>
+          </article>
+          <article class="report-card" style="--accent:#fb923c">
+            <span class="tag-main"><i class="fa-solid fa-industry"></i> Industrialisation</span>
+            <div class="card-top"><div class="card-icon"><i class="fa-solid fa-code-branch"></i></div><div><h3>Régression et reporting</h3><p>Préparation d’une automatisation compatible avec les tests de régression, le reporting et une future intégration CI/CD.</p></div></div>
+          </article>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <p>Portfolio QA — Rapport QA Automatisation AMN AUDITOR · DevTools, Electron & Python/Pytest</p>
+  </footer>
+
+  <script>
+    function createFloatingIcons() {
+      const icons = [
+        ["fa-solid fa-desktop", "#2563eb"],
+        ["fa-brands fa-chrome", "#22c55e"],
+        ["fa-brands fa-python", "#3776ab"],
+        ["fa-solid fa-robot", "#7c3aed"],
+        ["fa-solid fa-bug", "#ef4444"],
+        ["fa-solid fa-vial", "#2563eb"],
+        ["fa-solid fa-code", "#0ea5e9"],
+        ["fa-solid fa-shield-halved", "#16a34a"]
+      ];
+      const wrapper = document.querySelector(".floating-icons");
+      icons.forEach(([icon, color], index) => {
+        const element = document.createElement("i");
+        element.className = `${icon} floating-icon`;
+        element.style.color = color;
+        element.style.left = `${8 + Math.random() * 84}%`;
+        element.style.top = `${12 + Math.random() * 72}%`;
+        element.style.fontSize = `${1.3 + Math.random() * 1.7}rem`;
+        element.style.animationDelay = `${index * .65}s`;
+        element.style.animationDuration = `${7 + Math.random() * 5}s`;
+        wrapper.appendChild(element);
+      });
+    }
+    function initScrollEffects() {
+      const navbar = document.querySelector(".navbar");
+      const sections = document.querySelectorAll("main section[id]");
+      const navLinks = document.querySelectorAll(".nav-links a");
+      window.addEventListener("scroll", () => {
+        navbar.classList.toggle("scrolled", window.scrollY > 20);
+        let current = "accueil";
+        sections.forEach(section => {
+          const top = section.offsetTop - 120;
+          if (window.scrollY >= top) current = section.id;
+        });
+        navLinks.forEach(link => link.classList.toggle("active", link.getAttribute("href") === `#${current}`));
+      });
+    }
+    function initRevealAnimations() {
+      const observer = new IntersectionObserver(entries => {
+        entries.forEach(entry => { if (entry.isIntersecting) entry.target.classList.add("visible"); });
+      }, { threshold: .14 });
+      document.querySelectorAll(".fade-section").forEach(section => observer.observe(section));
+    }
+    document.addEventListener("DOMContentLoaded", () => {
+      createFloatingIcons();
+      initScrollEffects();
+      initRevealAnimations();
+    });
+  </script>
+</body>
+</html>

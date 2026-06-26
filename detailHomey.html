@@ -1,0 +1,1225 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Détail du projet QA Homey — backlog, périmètre de test, stratégie QA et cahier de test du parcours réservation." />
+  <meta name="keywords" content="Homey, Projet QA, Testeur QA, ISTQB, Cas de test, Backlog, Stratégie de test, Playwright, CI/CD" />
+  <meta name="author" content="Maxime Joannis" />
+  <title>Détail Homey — Projet QA</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" />
+
+  <style>
+    :root {
+      --primary-color: #2563eb;
+      --secondary-color: #1e40af;
+      --text-color: #1f2937;
+      --light-text: #6b7280;
+      --background: #ffffff;
+      --section-bg: #f3f4f6;
+      --card-bg: #ffffff;
+      --border: #e5e7eb;
+      --green: #22c55e;
+      --purple: #a855f7;
+      --orange: #fb923c;
+      --cyan: #38bdf8;
+      --red: #ef4444;
+      --shadow: 0 18px 45px rgba(15, 23, 42, .10);
+      --shadow-hover: 0 28px 70px rgba(37, 99, 235, .18);
+      --radius: 1rem;
+      --nav-height: 70px;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: "Poppins", system-ui, sans-serif;
+      color: var(--text-color);
+      background: var(--background);
+      line-height: 1.7;
+      overflow-x: hidden;
+    }
+
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      z-index: -2;
+      pointer-events: none;
+      background:
+        radial-gradient(circle at 12% 18%, rgba(37,99,235,.10), transparent 25rem),
+        radial-gradient(circle at 86% 12%, rgba(168,85,247,.10), transparent 24rem),
+        linear-gradient(180deg, #ffffff 0%, #f8fafc 42%, #ffffff 100%);
+    }
+
+    a { color: inherit; text-decoration: none; }
+    button, input, select { font-family: inherit; }
+
+    .container {
+      width: min(1180px, calc(100% - 2rem));
+      margin: 0 auto;
+    }
+
+    .navbar {
+      position: fixed;
+      inset: 0 0 auto 0;
+      z-index: 1000;
+      height: var(--nav-height);
+      background: rgba(255, 255, 255, .95);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid rgba(229, 231, 235, .8);
+      transition: box-shadow .25s ease, background .25s ease;
+    }
+
+    .navbar.scrolled {
+      box-shadow: 0 12px 38px rgba(15, 23, 42, .08);
+      background: rgba(255, 255, 255, .98);
+    }
+
+    .nav-inner {
+      height: 100%;
+      display: grid;
+      grid-template-columns: 1fr auto 1fr;
+      align-items: center;
+      gap: 1.4rem;
+    }
+
+    .logo {
+      display: inline-flex;
+      align-items: center;
+      gap: .65rem;
+      color: var(--primary-color);
+      font-weight: 800;
+      letter-spacing: -.04em;
+    }
+
+    .logo-mark {
+      width: 42px;
+      height: 42px;
+      border-radius: 14px;
+      display: grid;
+      place-items: center;
+      color: #fff;
+      background: linear-gradient(135deg, var(--primary-color), #7c3aed);
+      box-shadow: 0 12px 28px rgba(37, 99, 235, .25);
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: .5rem;
+      list-style: none;
+      color: var(--light-text);
+      font-weight: 600;
+    }
+
+    .nav-links a {
+      min-height: 38px;
+      display: inline-flex;
+      align-items: center;
+      padding: 0 .85rem;
+      border-radius: 999px;
+      transition: color .25s ease, background .25s ease, transform .25s ease;
+      font-size: .88rem;
+    }
+
+    .nav-links a:hover,
+    .nav-links a.active {
+      color: var(--primary-color);
+      background: rgba(37, 99, 235, .08);
+      transform: translateY(-1px);
+    }
+
+    .portfolio-link {
+      justify-self: end;
+      min-height: 40px;
+      display: inline-flex;
+      align-items: center;
+      gap: .55rem;
+      padding: 0 1rem;
+      border-radius: 999px;
+      color: white;
+      background: var(--primary-color);
+      font-weight: 700;
+      box-shadow: 0 12px 30px rgba(37,99,235,.22);
+      transition: transform .25s ease, box-shadow .25s ease;
+    }
+
+    .portfolio-link:hover {
+      transform: translateY(-2px);
+      box-shadow: var(--shadow-hover);
+    }
+
+    main {
+      padding-top: var(--nav-height);
+    }
+
+    section {
+      scroll-margin-top: calc(var(--nav-height) + 22px);
+    }
+
+    .hero {
+      position: relative;
+      min-height: 620px;
+      display: grid;
+      align-items: center;
+      padding: 72px 0 54px;
+      background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 100%);
+      overflow: hidden;
+    }
+
+    .floating-icons {
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      overflow: hidden;
+    }
+
+    .floating-icon {
+      position: absolute;
+      opacity: 0;
+      animation: floatTech 9s ease-in-out infinite;
+      filter: drop-shadow(0 10px 18px rgba(37, 99, 235, .18));
+    }
+
+    @keyframes floatTech {
+      0%, 100% { transform: translateY(22px) rotate(0deg); opacity: 0; }
+      18%, 78% { opacity: .55; }
+      50% { transform: translateY(-28px) rotate(16deg); opacity: .85; }
+    }
+
+    .hero-grid {
+      position: relative;
+      z-index: 2;
+      display: grid;
+      grid-template-columns: 1fr 330px;
+      gap: 3rem;
+      align-items: center;
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: .55rem;
+      padding: .55rem .9rem;
+      border-radius: 999px;
+      color: var(--secondary-color);
+      background: rgba(37, 99, 235, .10);
+      border: 1px solid rgba(37, 99, 235, .16);
+      font-weight: 700;
+      margin-bottom: 1.35rem;
+    }
+
+    h1 {
+      font-size: clamp(2.45rem, 6vw, 4.7rem);
+      line-height: 1.06;
+      letter-spacing: -.075em;
+      font-weight: 900;
+      margin-bottom: 1.1rem;
+    }
+
+    .gradient-text {
+      background: linear-gradient(90deg, var(--primary-color), #7c3aed, var(--cyan));
+      -webkit-background-clip: text;
+      color: transparent;
+    }
+
+    .lead {
+      margin: 1.25rem 0 1.8rem;
+      color: var(--light-text);
+      font-size: clamp(1rem, 2vw, 1.16rem);
+      max-width: 780px;
+    }
+
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: .65rem;
+      min-height: 54px;
+      padding: 0 1.25rem;
+      border-radius: 999px;
+      border: 1px solid var(--primary-color);
+      font-weight: 700;
+      transition: transform .25s ease, box-shadow .25s ease, background .25s ease;
+    }
+
+    .btn.primary {
+      color: white;
+      background: var(--primary-color);
+      box-shadow: 0 16px 35px rgba(37, 99, 235, .28);
+    }
+
+    .btn.secondary {
+      color: var(--primary-color);
+      background: white;
+    }
+
+    .btn:hover {
+      transform: translateY(-3px);
+      box-shadow: var(--shadow-hover);
+    }
+
+    .summary-card {
+      border-radius: 1.4rem;
+      padding: 1.4rem;
+      background: rgba(255, 255, 255, .78);
+      backdrop-filter: blur(14px);
+      border: 1px solid rgba(147, 197, 253, .85);
+      box-shadow: var(--shadow);
+      transition: transform .25s ease, box-shadow .25s ease;
+    }
+
+    .summary-card:hover {
+      transform: translateY(-6px);
+      box-shadow: var(--shadow-hover);
+    }
+
+    .donut {
+      width: 170px;
+      height: 170px;
+      border-radius: 50%;
+      margin: 0 auto 1rem;
+      display: grid;
+      place-items: center;
+      background: conic-gradient(var(--primary-color) 74%, #dbeafe 0);
+      position: relative;
+    }
+
+    .donut::before {
+      content: "";
+      position: absolute;
+      inset: 18px;
+      border-radius: 50%;
+      background: white;
+    }
+
+    .donut strong {
+      position: relative;
+      z-index: 1;
+      color: var(--primary-color);
+      font-size: 2.45rem;
+      line-height: 1;
+    }
+
+    .donut span {
+      position: absolute;
+      z-index: 1;
+      margin-top: 62px;
+      color: var(--light-text);
+      font-weight: 700;
+      font-size: .8rem;
+    }
+
+    .meta {
+      display: grid;
+      gap: .65rem;
+      color: var(--light-text);
+      font-size: .92rem;
+    }
+
+    .meta b { color: var(--text-color); }
+
+    .content-section {
+      padding: 5.2rem 0;
+    }
+
+    .content-section.alt {
+      background: var(--section-bg);
+    }
+
+    .section-title {
+      text-align: center;
+      margin-bottom: 3rem;
+    }
+
+    .section-title h2 {
+      font-size: clamp(2rem, 4vw, 3rem);
+      line-height: 1.15;
+      letter-spacing: -.06em;
+      margin-bottom: .7rem;
+    }
+
+    .section-title p {
+      max-width: 760px;
+      margin: 0 auto;
+      color: var(--light-text);
+    }
+
+    .kpis {
+      display: grid;
+      grid-template-columns: repeat(5, minmax(0, 1fr));
+      gap: 1rem;
+    }
+
+    .card {
+      border-radius: 1.4rem;
+      padding: 1.45rem;
+      background: white;
+      border: 1px solid rgba(229, 231, 235, .85);
+      box-shadow: var(--shadow);
+      transition: transform .28s ease, box-shadow .28s ease, border-color .28s ease;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .card::before {
+      content: "";
+      position: absolute;
+      inset: 0 0 auto 0;
+      height: 4px;
+      background: linear-gradient(90deg, var(--primary-color), transparent);
+    }
+
+    .card:hover {
+      transform: translateY(-8px);
+      box-shadow: var(--shadow-hover);
+      border-color: rgba(37,99,235,.32);
+    }
+
+    .card small {
+      display: block;
+      color: var(--light-text);
+      font-weight: 800;
+      font-size: .78rem;
+      margin-bottom: .65rem;
+    }
+
+    .card b {
+      display: block;
+      color: var(--primary-color);
+      font-size: clamp(2rem, 4vw, 3rem);
+      line-height: 1;
+      letter-spacing: -.05em;
+      margin-bottom: .75rem;
+    }
+
+    .card p, .card li {
+      color: var(--light-text);
+      font-size: .94rem;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0,1fr));
+      gap: 1.4rem;
+    }
+
+    .grid-3 {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0,1fr));
+      gap: 1.4rem;
+    }
+
+    .panel-card {
+      border-radius: 1.4rem;
+      padding: 1.6rem;
+      background: white;
+      border: 1px solid rgba(229, 231, 235, .85);
+      box-shadow: var(--shadow);
+      transition: transform .28s ease, box-shadow .28s ease;
+    }
+
+    .panel-card:hover {
+      transform: translateY(-8px);
+      box-shadow: var(--shadow-hover);
+    }
+
+    .panel-head {
+      display: flex;
+      justify-content: space-between;
+      gap: 1rem;
+      flex-wrap: wrap;
+      margin-bottom: .9rem;
+    }
+
+    .pill, .id-pill, .status, .prio {
+      display: inline-flex;
+      align-items: center;
+      border-radius: 999px;
+      padding: .42rem .65rem;
+      background: #eff6ff;
+      color: var(--secondary-color);
+      border: 1px solid rgba(37,99,235,.12);
+      font-weight: 800;
+      font-size: .72rem;
+      white-space: nowrap;
+    }
+
+    .date {
+      color: var(--light-text);
+      font-size: .82rem;
+      font-weight: 700;
+    }
+
+    .status.scope,
+    .ok {
+      background: #dcfce7;
+      color: #166534;
+      border-color: #bbf7d0;
+    }
+
+    .status.out {
+      background: #f3f4f6;
+      color: var(--light-text);
+      border-color: #e5e7eb;
+    }
+
+    .prio.critical,
+    .prio.high {
+      background: #fee2e2;
+      color: #991b1b;
+      border-color: #fecaca;
+    }
+
+    .prio.medium {
+      background: #fef3c7;
+      color: #92400e;
+      border-color: #fde68a;
+    }
+
+    .prio.low {
+      background: #dbeafe;
+      color: var(--secondary-color);
+      border-color: #bfdbfe;
+    }
+
+    .num {
+      width: 42px;
+      height: 42px;
+      display: grid;
+      place-items: center;
+      border-radius: 14px;
+      color: white;
+      background: linear-gradient(135deg, var(--primary-color), #7c3aed);
+      font-weight: 900;
+      margin-bottom: 1rem;
+      box-shadow: 0 12px 30px rgba(37,99,235,.20);
+    }
+
+    .card ul {
+      padding-left: 1.1rem;
+      display: grid;
+      gap: .35rem;
+    }
+
+    .control-panel {
+      display: flex;
+      flex-wrap: wrap;
+      gap: .8rem;
+      margin: 0 0 1rem;
+      padding: 1rem;
+      border-radius: 1.2rem;
+      background: rgba(255,255,255,.75);
+      border: 1px solid rgba(37,99,235,.10);
+      box-shadow: 0 14px 40px rgba(15,23,42,.05);
+    }
+
+    input, select {
+      min-height: 44px;
+      border: 1px solid rgba(37,99,235,.16);
+      border-radius: 999px;
+      background: white;
+      color: var(--text-color);
+      padding: 0 1rem;
+      font-weight: 500;
+      transition: box-shadow .2s ease, border-color .2s ease, transform .2s ease;
+    }
+
+    input[data-search] { flex: 1; min-width: 260px; }
+
+    input:focus, select:focus {
+      outline: none;
+      border-color: rgba(37,99,235,.44);
+      box-shadow: 0 0 0 4px rgba(37,99,235,.10);
+      transform: translateY(-1px);
+    }
+
+    .table-wrap {
+      overflow: hidden;
+      border-radius: 1.4rem;
+      background: white;
+      border: 1px solid rgba(229, 231, 235, .85);
+      box-shadow: var(--shadow);
+    }
+
+    .table-scroll {
+      max-height: 620px;
+      overflow: auto;
+    }
+
+    table {
+      width: 100%;
+      min-width: 1080px;
+      border-collapse: separate;
+      border-spacing: 0;
+    }
+
+    th {
+      position: sticky;
+      top: 0;
+      z-index: 2;
+      text-align: left;
+      padding: .9rem;
+      background: #eff6ff;
+      color: var(--text-color);
+      border-bottom: 1px solid rgba(37,99,235,.14);
+      font-size: .75rem;
+      letter-spacing: .04em;
+      text-transform: uppercase;
+    }
+
+    td {
+      padding: .9rem;
+      border-bottom: 1px solid rgba(37,99,235,.08);
+      color: var(--light-text);
+      font-size: .88rem;
+      vertical-align: top;
+    }
+
+    tr:hover td { background: #f8fafc; }
+
+    .pagination {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: .8rem;
+      padding: .9rem 1rem;
+      border-top: 1px solid rgba(37,99,235,.10);
+      background: #f8fafc;
+      color: var(--light-text);
+      font-size: .86rem;
+      font-weight: 700;
+      flex-wrap: wrap;
+    }
+
+    .pagination-actions {
+      display: flex;
+      align-items: center;
+      gap: .5rem;
+      flex-wrap: wrap;
+    }
+
+    .pagination button {
+      min-height: 36px;
+      padding: 0 .85rem;
+      border: 1px solid rgba(37,99,235,.2);
+      border-radius: 999px;
+      background: white;
+      color: var(--primary-color);
+      font-weight: 700;
+      cursor: pointer;
+    }
+
+    .pagination button:disabled {
+      opacity: .45;
+      cursor: not-allowed;
+    }
+
+    .empty-row td {
+      text-align: center;
+      color: var(--light-text);
+      font-weight: 800;
+    }
+
+    .bottom-actions {
+      padding: 3rem 0 5rem;
+      display: flex;
+      justify-content: center;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+
+    footer {
+      padding: 2rem 0;
+      text-align: center;
+      color: #cbd5e1;
+      background: #0f172a;
+    }
+
+    .fade-section {
+      opacity: 0;
+      transform: translateY(24px);
+      transition: opacity .7s ease, transform .7s ease;
+    }
+
+    .fade-section.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    @media (max-width: 1100px) {
+      .hero-grid { grid-template-columns: 1fr; }
+      .summary-card { max-width: 520px; }
+      .kpis { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      .grid, .grid-3 { grid-template-columns: 1fr; }
+    }
+
+    @media (max-width: 900px) {
+      .nav-inner { grid-template-columns: 1fr auto; }
+      .nav-links { display: none; }
+    }
+
+    @media (max-width: 768px) {
+      .container { width: min(100% - 1.25rem, 1180px); }
+      .hero { padding-top: 48px; }
+      .kpis { grid-template-columns: 1fr; }
+      input[data-search] { min-width: 100%; }
+      .hero-actions, .bottom-actions { flex-direction: column; }
+      .btn { width: 100%; }
+    }
+
+    @media (max-width: 480px) {
+      :root { --nav-height: 64px; }
+      .logo span:not(.logo-mark) { display: none; }
+      h1 { font-size: 2.35rem; }
+    }
+  </style>
+</head>
+
+<body id="top">
+  <nav class="navbar" aria-label="Navigation principale Homey">
+    <div class="container nav-inner">
+      <a href="#top" class="logo" aria-label="Retour en haut de la page">
+        <span class="logo-mark"><i class="fa-solid fa-house"></i></span>
+        <span>Projet de fin de formation Homey</span>
+      </a>
+
+      <ul class="nav-links">
+        <li><a href="#presentation" class="active">Synthèse</a></li>
+        <li><a href="#contexte">Contexte</a></li>
+        <li><a href="#backlog">Backlog</a></li>
+        <li><a href="#perimetre">Périmètre</a></li>
+        <li><a href="#strategie">Stratégie</a></li>
+        <li><a href="#cahier-test">Cahier</a></li>
+      </ul>
+
+      <a class="portfolio-link" href="index.html"><i class="fa-solid fa-arrow-left"></i> Portfolio</a>
+    </div>
+  </nav>
+
+  <main>
+    <section class="hero">
+      <div class="floating-icons" aria-hidden="true"></div>
+
+      <div class="container hero-grid">
+        <div>
+          <div class="eyebrow"><i class="fa-solid fa-shield-halved"></i> Projet QA · Homey</div>
+          <h1>Détail du projet <span class="gradient-text">Homey</span></h1>
+          <p class="lead">Analyse QA du parcours de réservation Homey : backlog produit, périmètre de test, stratégie de test, cahier de test et décision qualité Go / No-Go.</p>
+
+          <div class="hero-actions">
+            <a class="btn primary" href="#cahier-test"><i class="fa-solid fa-list-check"></i> Voir le cahier de test</a>
+            <a class="btn secondary" href="dashboardHomey.html"><i class="fa-solid fa-chart-line"></i> Dashboard QA</a>
+            <a class="btn secondary" href="rapport_qa_automatisation_robot_framework.html"><i class="fa-solid fa-robot"></i> Rapport automatisation</a>
+          </div>
+        </div>
+
+        <aside class="summary-card">
+          <div class="donut"><strong>48</strong><span>cas de test</span></div>
+          <div class="meta">
+            <span><b>Application :</b> réservation de logements saisonniers</span>
+            <span><b>Périmètre QA :</b> US-07 & US-08</span>
+          </div>
+        </aside>
+      </div>
+    </section>
+
+    <section id="presentation" class="content-section fade-section">
+      <div class="container">
+        <div class="section-title">
+          <h2>Synthèse QA</h2>
+          <p>Vue d’ensemble du projet Homey et des livrables qualité réalisés.</p>
+        </div>
+
+        <div class="kpis">
+          <div class="card"><small>Backlog produit</small><b>31</b><p>User stories analysées.</p></div>
+          <div class="card"><small>Périmètre QA</small><b>2</b><p>Stories critiques retenues.</p></div>
+          <div class="card"><small>Cas de test</small><b>48</b><p>Parcours réservation.</p></div>
+          <div class="card"><small>Priorité</small><b>P1</b><p>Réservation voyageur / hôte.</p></div>
+          <div class="card"><small>Livrables</small><b>QA</b><p>Backlog, stratégie, cahier, bilan.</p></div>
+        </div>
+      </div>
+    </section>
+
+    <section id="contexte" class="content-section alt fade-section">
+      <div class="container">
+        <div class="section-title">
+          <h2>Contexte & défi qualité</h2>
+          <p>Comprendre l’application Homey, ses utilisateurs et les risques fonctionnels du parcours réservation.</p>
+        </div>
+
+        <div class="grid">
+          <article class="panel-card">
+            <div class="panel-head"><span class="pill ok">Contexte</span><span class="date">Projet de fin de formation</span></div>
+            <h3>Application web Homey</h3>
+            <p>Homey permet à un voyageur de rechercher un logement, consulter une annonce, envoyer une demande de réservation, payer ou annuler une réservation. Côté hôte, l’application permet de gérer les demandes de réservation et les disponibilités.</p>
+          </article>
+
+          <article class="panel-card">
+            <div class="panel-head"><span class="pill ok">Objectif QA</span><span class="date">Décision Go / No-Go</span></div>
+            <h3>Sécuriser le parcours réservation</h3>
+            <p>Le défi qualité consiste à contrôler les règles critiques : dates, disponibilité, utilisateur connecté/non connecté, création de demande, traitement côté hôte, paiement et annulation.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="backlog" class="content-section fade-section">
+      <div class="container">
+        <div class="section-title">
+          <h2>Product Backlog</h2>
+          <p>Backlog produit Homey préparé par le Product Owner. Tableau dynamique avec recherche et filtres.</p>
+        </div>
+
+        <div class="control-panel" data-table-controls="backlogTable">
+          <input type="search" placeholder="Rechercher une US, un mot-clé..." data-search />
+          <select data-filter="statut">
+            <option value="">Tous les statuts</option>
+            <option value="Dans mon périmètre">Dans mon périmètre</option>
+            <option value="Hors périmètre">Hors périmètre</option>
+          </select>
+          <select data-filter="acteur">
+            <option value="">Tous les acteurs</option>
+            <option value="Voyageur">Voyageur</option>
+            <option value="Hôte">Hôte</option>
+            <option value="Utilisateur">Utilisateur</option>
+            <option value="Support / Système">Support / Système</option>
+          </select>
+        </div>
+
+        <div class="table-wrap">
+          <div class="table-scroll">
+            <table id="backlogTable">
+              <thead><tr><th>ID</th><th>User Story</th><th>Acteur principal</th><th>Statut QA</th><th>Commentaire</th></tr></thead>
+              <tbody></tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="perimetre" class="content-section alt fade-section">
+      <div class="container">
+        <div class="section-title">
+          <h2>Périmètre de test</h2>
+          <p>Focus sur les deux user stories critiques du parcours réservation.</p>
+        </div>
+
+        <div class="control-panel" data-table-controls="scopeTable">
+          <input type="search" placeholder="Rechercher dans les US, critères..." data-search />
+          <select data-filter="priorite">
+            <option value="">Toutes les priorités</option>
+            <option value="Haute">Haute</option>
+            <option value="Moyenne">Moyenne</option>
+          </select>
+          <select data-filter="acteur">
+            <option value="">Tous les acteurs</option>
+            <option value="Voyageur">Voyageur</option>
+            <option value="Hôte">Hôte</option>
+          </select>
+        </div>
+
+        <div class="table-wrap">
+          <div class="table-scroll">
+            <table id="scopeTable">
+              <thead><tr><th>ID</th><th>Description US</th><th>Acteur</th><th>Critères d’acceptation</th><th>Priorité</th></tr></thead>
+              <tbody></tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="strategie" class="content-section fade-section">
+      <div class="container">
+        <div class="section-title">
+          <h2>Stratégie de test utilisée</h2>
+          <p>Une démarche structurée pour couvrir les risques métier du parcours de réservation.</p>
+        </div>
+
+        <div class="grid-3">
+          <article class="card">
+            <div class="num">01</div>
+            <h3>Analyse du besoin</h3>
+            <ul>
+              <li>Lecture du backlog et des critères d’acceptation.</li>
+              <li>Identification des règles critiques : dates, disponibilité, connexion, paiement, annulation.</li>
+              <li>Clarification du périmètre : US-07 et US-08.</li>
+            </ul>
+          </article>
+
+          <article class="card">
+            <div class="num">02</div>
+            <h3>Conception des tests</h3>
+            <ul>
+              <li>Cas passants pour valider le parcours nominal.</li>
+              <li>Cas non passants pour contrôler les blocages attendus.</li>
+              <li>Valeurs limites sur dates, chevauchements et voyageurs.</li>
+            </ul>
+          </article>
+
+          <article class="card">
+            <div class="num">03</div>
+            <h3>Exécution & décision</h3>
+            <ul>
+              <li>Exécution manuelle des scénarios critiques.</li>
+              <li>Qualification et priorisation des anomalies dans Jira / Xray.</li>
+              <li>Synthèse qualité avec recommandation Go / No-Go.</li>
+            </ul>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="cahier-test" class="content-section alt fade-section">
+      <div class="container">
+        <div class="section-title">
+          <h2>Cahier de test</h2>
+          <p>48 cas de test exécutés sur le parcours réservation. Recherche par ID, story, statut ou résultat observé.</p>
+        </div>
+
+        <div class="control-panel" data-table-controls="testTable">
+          <input type="search" placeholder="Rechercher un cas de test..." data-search />
+          <select data-filter="story">
+            <option value="">Toutes les stories</option>
+            <option value="Story P1 – Faire une demande de réservation">Story P1</option>
+            <option value="Story P2 – Traiter une demande de réservation">Story P2</option>
+          </select>
+          <select data-filter="statut">
+            <option value="">Tous les statuts</option>
+            <option value="OK">OK</option>
+            <option value="KO">KO</option>
+          </select>
+        </div>
+
+        <div class="table-wrap">
+          <div class="table-scroll">
+            <table id="testTable">
+              <thead>
+                <tr>
+                  <th>ID</th>
+                  <th>Story</th>
+                  <th>Cas de test</th>
+                  <th>Préconditions</th>
+                  <th>Étapes principales</th>
+                  <th>Données de test</th>
+                  <th>Résultat attendu / constat</th>
+                  <th>Priorité</th>
+                </tr>
+              </thead>
+              <tbody></tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <footer>© 2026 Maxime Joannis — Portfolio QA</footer>
+
+  <script>
+    const backlog = [
+      ['US-01','Réaliser une recherche simple','Voyageur','Hors périmètre','Fonction de recherche amont du parcours.'],
+      ['US-02','Consulter une annonce','Voyageur','Hors périmètre','Précondition fonctionnelle avant réservation.'],
+      ['US-03',"S'inscrire",'Utilisateur','Hors périmètre','Gestion de compte.'],
+      ['US-04','Se connecter','Utilisateur','Hors périmètre','Précondition pour finaliser une demande.'],
+      ['US-05','Devenir Hôte','Utilisateur','Hors périmètre','Accès aux fonctionnalités hôte.'],
+      ['US-06','Créer une annonce','Hôte','Hors périmètre','Précondition pour disposer d’un logement réservable.'],
+      ['US-07','Faire une demande de réservation','Voyageur','Dans mon périmètre','Parcours critique côté voyageur.'],
+      ['US-08','Traiter une demande de réservation','Hôte','Dans mon périmètre','Parcours critique côté hôte.'],
+      ['US-09','Régénérer un mot de passe','Utilisateur','Hors périmètre','Gestion authentification.'],
+      ['US-10','Réaliser une recherche avancée','Voyageur','Hors périmètre','Recherche avec critères avancés.'],
+      ['US-11','Mettre une annonce en favoris','Voyageur','Hors périmètre','Fonction de confort utilisateur.'],
+      ['US-12','Ajouter des photos à une annonce','Hôte','Hors périmètre','Gestion annonce.'],
+      ['US-13','Modifier une annonce existante','Hôte','Hors périmètre','Gestion annonce.'],
+      ['US-14','Supprimer une annonce','Hôte','Hors périmètre','Gestion annonce.'],
+      ['US-15',"Afficher les informations sur l'hôte",'Voyageur','Hors périmètre','Information de confiance.'],
+      ['US-16','Afficher les évaluations et les commentaires des utilisateurs','Voyageur','Hors périmètre','Réassurance utilisateur.'],
+      ['US-17',"Répondre aux commentaires en tant qu'hôte",'Hôte','Hors périmètre','Interaction post-séjour.'],
+      ['US-18','Ajouter des filtres de recherche supplémentaires','Voyageur','Hors périmètre','Prix, type de logement, équipements.'],
+      ['US-19','Afficher les disponibilités du logement dans le calendrier','Voyageur','Hors périmètre','Règle liée aux dates et périodes réservées.'],
+      ['US-20','Recevoir des notifications pour les nouvelles demandes de réservation','Hôte','Hors périmètre','Notification entrante côté hôte.'],
+      ['US-21','Gérer les notifications','Utilisateur','Hors périmètre','Lire, marquer comme lues, supprimer.'],
+      ['US-22','Afficher les réservations confirmées','Utilisateur','Hors périmètre','Suivi post-confirmation.'],
+      ['US-23','Annuler une réservation en tant qu’hôte','Hôte','Hors périmètre','Gestion annulation côté hôte.'],
+      ['US-24','Payer pour une réservation en tant qu’utilisateur','Voyageur','Hors périmètre','Étape post-demande ou confirmation.'],
+      ['US-25','Afficher les informations sur le quartier / la localisation du logement','Voyageur','Hors périmètre','Information complémentaire annonce.'],
+      ['US-26','Contacter le service clientèle','Support / Système','Hors périmètre','Support utilisateur.'],
+      ['US-27','Vérifier l’identité des utilisateurs','Utilisateur','Hors périmètre','Vérification email / téléphone.'],
+      ['US-28','Ajouter une assurance voyage facultative','Voyageur','Hors périmètre','Option de réservation.'],
+      ['US-29','Ajouter des options de paiement supplémentaires','Voyageur','Hors périmètre','PayPal, virement bancaire.'],
+      ['US-30','Afficher les événements et activités à proximité du logement','Voyageur','Hors périmètre','Information touristique.'],
+      ['US-31','Proposer des réductions ou offres spéciales pour les utilisateurs fidèles','Support / Système','Hors périmètre','Fidélisation.']
+    ];
+
+    const scope = [
+      {
+        id:'US-07',
+        acteur:'Voyageur',
+        priorite:'Haute',
+        desc:'En tant que Voyageur, je veux envoyer une demande de réservation afin de bénéficier d’un séjour dans un logement saisonnier.',
+        ac:'Dates futures disponibles uniquement ; date de fin strictement après la date de début ; nombre de voyageurs entier et non nul ; message adressé à l’hôte ; utilisateur non connecté autorisé à démarrer mais non autorisé à finaliser ; période déjà réservée bloquée.'
+      },
+      {
+        id:'US-08',
+        acteur:'Hôte',
+        priorite:'Haute',
+        desc:'En tant qu’Hôte, je veux traiter une demande de réservation afin d’accepter, refuser ou ajuster la demande reçue.',
+        ac:'L’hôte peut accepter ou refuser une demande ; il peut confirmer la disponibilité ; ajouter des frais ou remises si prévu ; les statuts de réservation sont mis à jour ; le voyageur peut payer ou annuler selon l’état de la demande.'
+      }
+    ];
+
+    const tests = [
+      { id: `CT-RES-001`, story: `Story P1 – Faire une demande de réservation`, us: `US-07`, statut: `OK`, cas: `Créer une demande de réservation valide`, preconditions: `Voyageur connecté ; annonce disponible ; logement réservable sur la période.`, etapes: `Ouvrir une annonce ; choisir une date de début future ; choisir une date de fin supérieure ; saisir le nombre de voyageurs ; ajouter un message ; envoyer la demande.`, donnees: `Début J+15 ; fin J+20 ; 2 voyageurs ; message valide.`, resultat: `Demande de réservation valide créée avec succès.`, priorite: `Haute` },
+      { id: `CT-RES-002`, story: `Story P1 – Faire une demande de réservation`, us: `US-07`, statut: `OK`, cas: `Vérifier la création de la réservation côté hôte`, preconditions: `Une demande valide vient d’être envoyée par un voyageur.`, etapes: `Se connecter côté hôte ; accéder aux réservations ou demandes reçues ; ouvrir la nouvelle demande.`, donnees: `Demande créée via CT-RES-001.`, resultat: `Réservation correctement créée côté hôte.`, priorite: `Haute` },
+      { id: `CT-RES-003`, story: `Story P1 – Faire une demande de réservation`, us: `US-07`, statut: `OK`, cas: `Vérifier la création du message côté hôte`, preconditions: `Voyageur connecté ; demande envoyée avec message.`, etapes: `Envoyer une demande avec message ; se connecter côté hôte ; consulter la messagerie associée à la demande.`, donnees: `Message : Bonjour, je souhaite réserver ce logement.`, resultat: `Message correctement créé côté hôte après correction.`, priorite: `Moyenne` },
+      { id: `CT-RES-004`, story: `Story P1 – Faire une demande de réservation`, us: `US-07`, statut: `OK`, cas: `Bloquer la finalisation pour un visiteur non connecté`, preconditions: `Utilisateur non connecté ; annonce disponible.`, etapes: `Démarrer le parcours de réservation ; renseigner les champs ; tenter de finaliser la demande.`, donnees: `Dates futures valides ; 1 voyageur ; message valide.`, resultat: `Le visiteur non connecté ne peut pas finaliser la réservation.`, priorite: `Haute` },
+      { id: `CT-RES-005`, story: `Story P1 – Faire une demande de réservation`, us: `US-07`, statut: `OK`, cas: `Bloquer les dates passées`, preconditions: `Voyageur connecté ; annonce disponible.`, etapes: `Ouvrir le calendrier ; tenter de sélectionner une date antérieure à la date du jour.`, donnees: `Date de début J-1 ; date de fin J+2.`, resultat: `Les dates passées sont correctement bloquées.`, priorite: `Haute` },
+      { id: `CT-RES-006`, story: `Story P1 – Faire une demande de réservation`, us: `US-07`, statut: `OK`, cas: `Empêcher une réservation sur période déjà réservée`, preconditions: `Voyageur connecté ; une période réservée existe déjà.`, etapes: `Sélectionner une période chevauchant une réservation existante ; tenter d’envoyer la demande.`, donnees: `Période réservée J+20 à J+25 ; demande J+22 à J+26.`, resultat: `Les périodes déjà réservées sont indisponibles.`, priorite: `Haute` },
+      { id: `CT-RES-007`, story: `Story P1 – Faire une demande de réservation`, us: `US-07`, statut: `OK`, cas: `Refuser une date de fin antérieure à la date de début`, preconditions: `Voyageur connecté ; annonce disponible.`, etapes: `Sélectionner une date de début future ; sélectionner une date de fin antérieure ; soumettre.`, donnees: `Début J+15 ; fin J+12.`, resultat: `La date de fin antérieure est refusée.`, priorite: `Haute` },
+      { id: `CT-RES-008`, story: `Story P1 – Faire une demande de réservation`, us: `US-07`, statut: `OK`, cas: `Refuser une date de fin égale à la date de début`, preconditions: `Voyageur connecté ; annonce disponible.`, etapes: `Sélectionner la même date en début et en fin ; soumettre.`, donnees: `Début J+15 ; fin J+15.`, resultat: `La date de fin égale à la date de début est refusée.`, priorite: `Haute` },
+      { id: `CT-RES-009`, story: `Story P1 – Faire une demande de réservation`, us: `US-07`, statut: `OK`, cas: `Accepter le nombre minimal de voyageurs`, preconditions: `Voyageur connecté ; annonce disponible.`, etapes: `Saisir 1 voyageur ; compléter les dates ; envoyer la demande.`, donnees: `1 voyageur ; début J+8 ; fin J+10.`, resultat: `Le nombre minimal de voyageurs = 1 est accepté.`, priorite: `Moyenne` },
+      { id: `CT-RES-010`, story: `Story P1 – Faire une demande de réservation`, us: `US-07`, statut: `OK`, cas: `Refuser zéro voyageur`, preconditions: `Voyageur connecté ; annonce disponible.`, etapes: `Saisir 0 dans le champ voyageurs ; compléter les autres champs ; soumettre.`, donnees: `0 voyageur.`, resultat: `Le nombre de voyageurs = 0 est refusé.`, priorite: `Haute` },
+      { id: `CT-RES-011`, story: `Story P1 – Faire une demande de réservation`, us: `US-07`, statut: `OK`, cas: `Refuser un nombre négatif de voyageurs`, preconditions: `Voyageur connecté ; annonce disponible.`, etapes: `Saisir une valeur négative dans le champ voyageurs ; soumettre.`, donnees: `-1 voyageur.`, resultat: `Les nombres négatifs sont refusés.`, priorite: `Haute` },
+      { id: `CT-RES-012`, story: `Story P1 – Faire une demande de réservation`, us: `US-07`, statut: `OK`, cas: `Refuser les valeurs décimales dans le champ voyageurs`, preconditions: `Voyageur connecté ; annonce disponible.`, etapes: `Saisir une valeur décimale ; soumettre la demande.`, donnees: `1,5 voyageur.`, resultat: `Les valeurs décimales sont refusées.`, priorite: `Moyenne` },
+      { id: `CT-RES-013`, story: `Story P1 – Faire une demande de réservation`, us: `US-07`, statut: `OK`, cas: `Refuser les valeurs non numériques dans le champ voyageurs`, preconditions: `Voyageur connecté ; annonce disponible.`, etapes: `Saisir du texte dans le champ voyageurs ; soumettre.`, donnees: `abc.`, resultat: `Les valeurs non numériques sont refusées.`, priorite: `Moyenne` },
+      { id: `CT-RES-014`, story: `Story P1 – Faire une demande de réservation`, us: `US-07`, statut: `OK`, cas: `Contrôler le caractère obligatoire de la date de début`, preconditions: `Voyageur connecté ; annonce disponible.`, etapes: `Laisser la date de début vide ; renseigner les autres champs ; soumettre.`, donnees: `Date début vide ; fin J+10 ; 2 voyageurs.`, resultat: `La date de début vide est bloquée.`, priorite: `Haute` },
+      { id: `CT-RES-015`, story: `Story P1 – Faire une demande de réservation`, us: `US-07`, statut: `OK`, cas: `Contrôler le caractère obligatoire de la date de fin`, preconditions: `Voyageur connecté ; annonce disponible.`, etapes: `Renseigner la date de début ; laisser la date de fin vide ; soumettre.`, donnees: `Début J+8 ; date fin vide ; 2 voyageurs.`, resultat: `La date de fin vide est bloquée.`, priorite: `Haute` },
+      { id: `CT-RES-016`, story: `Story P1 – Faire une demande de réservation`, us: `US-07`, statut: `OK`, cas: `Contrôler le caractère obligatoire du nombre de voyageurs`, preconditions: `Voyageur connecté ; annonce disponible.`, etapes: `Renseigner les dates ; laisser le champ voyageurs vide ; soumettre.`, donnees: `Début J+8 ; fin J+10 ; voyageurs vide.`, resultat: `Le champ voyageurs vide est bloqué.`, priorite: `Haute` },
+      { id: `CT-RES-017`, story: `Story P1 – Faire une demande de réservation`, us: `US-07`, statut: `OK`, cas: `Vérifier l’accès aux réservations via le menu`, preconditions: `Utilisateur connecté.`, etapes: `Ouvrir le menu ; cliquer sur Réservations ; vérifier l’affichage de la page.`, donnees: `Compte voyageur avec réservation existante.`, resultat: `L’accès aux réservations via le menu fonctionne.`, priorite: `Moyenne` },
+      { id: `CT-RES-018`, story: `Story P1 – Faire une demande de réservation`, us: `US-07`, statut: `OK`, cas: `Vérifier l’accès aux messages via le menu`, preconditions: `Utilisateur connecté.`, etapes: `Ouvrir le menu ; cliquer sur Messages ; vérifier l’affichage de la messagerie.`, donnees: `Compte avec message lié à une réservation.`, resultat: `L’accès aux messages via le menu fonctionne.`, priorite: `Moyenne` },
+      { id: `CT-TRT-001`, story: `Story P2 – Traiter une demande de réservation`, us: `US-08`, statut: `OK`, cas: `Afficher une nouvelle demande côté hôte`, preconditions: `Hôte connecté ; une demande vient d’être créée.`, etapes: `Accéder aux demandes reçues ; vérifier la présence de la nouvelle demande.`, donnees: `Demande en attente.`, resultat: `Nouvelle demande affichée côté hôte`, priorite: `Haute` },
+      { id: `CT-TRT-002`, story: `Story P2 – Traiter une demande de réservation`, us: `US-08`, statut: `OK`, cas: `Contrôler les informations de réservation affichées`, preconditions: `Hôte connecté ; demande existante.`, etapes: `Ouvrir le détail de la demande ; contrôler voyageur, dates, logement, montant et message.`, donnees: `Demande valide.`, resultat: `Informations de réservation affichées correctement`, priorite: `Haute` },
+      { id: `CT-TRT-003`, story: `Story P2 – Traiter une demande de réservation`, us: `US-08`, statut: `KO`, cas: `Confirmer une réservation côté hôte et accéder au paiement`, preconditions: `Hôte connecté ; demande en attente.`, etapes: `Confirmer la réservation ; vérifier le changement de statut ; contrôler l’accès au paiement côté voyageur.`, donnees: `Demande en attente.`, resultat: `Confirmation réservation hôte impossible ou page paiement inaccessible`, priorite: `Haute` },
+      { id: `CT-TRT-004`, story: `Story P2 – Traiter une demande de réservation`, us: `US-08`, statut: `OK`, cas: `Afficher les détails de paiement`, preconditions: `Voyageur connecté ; réservation éligible au paiement.`, etapes: `Ouvrir la réservation ; accéder aux informations de paiement ; vérifier les champs affichés.`, donnees: `Réservation acceptée.`, resultat: `Détails de paiement affichés correctement`, priorite: `Moyenne` },
+      { id: `CT-TRT-005`, story: `Story P2 – Traiter une demande de réservation`, us: `US-08`, statut: `OK`, cas: `Confirmer la disponibilité d’une réservation`, preconditions: `Hôte connecté ; demande en attente ; logement disponible.`, etapes: `Ouvrir la demande ; cliquer sur confirmer la disponibilité ; vérifier le retour système.`, donnees: `Dates disponibles.`, resultat: `Confirmation de disponibilité fonctionnelle`, priorite: `Haute` },
+      { id: `CT-TRT-006`, story: `Story P2 – Traiter une demande de réservation`, us: `US-08`, statut: `OK`, cas: `Refuser une demande avec justification`, preconditions: `Hôte connecté ; demande en attente.`, etapes: `Cliquer sur refuser ; saisir un motif ; confirmer ; vérifier le statut.`, donnees: `Motif : logement indisponible.`, resultat: `Refus avec justification fonctionnel`, priorite: `Haute` },
+      { id: `CT-TRT-007`, story: `Story P2 – Traiter une demande de réservation`, us: `US-08`, statut: `KO`, cas: `Contrôler l’obligation du motif de refus`, preconditions: `Hôte connecté ; demande en attente.`, etapes: `Cliquer sur refuser ; laisser le motif vide ; confirmer.`, donnees: `Motif vide.`, resultat: `Refus sans justification accepté alors qu’un motif est attendu`, priorite: `Haute` },
+      { id: `CT-TRT-008`, story: `Story P2 – Traiter une demande de réservation`, us: `US-08`, statut: `KO`, cas: `Appliquer des frais supplémentaires`, preconditions: `Hôte connecté ; demande en attente.`, etapes: `Ajouter un frais nommé ; saisir un montant ; valider ; vérifier le total.`, donnees: `Frais ménage 30 €.`, resultat: `Les frais supplémentaires ne sont pas appliqués correctement`, priorite: `Haute` },
+      { id: `CT-TRT-009`, story: `Story P2 – Traiter une demande de réservation`, us: `US-08`, statut: `KO`, cas: `Appliquer une remise`, preconditions: `Hôte connecté ; demande en attente.`, etapes: `Ajouter une remise ; valider ; vérifier le montant recalculé.`, donnees: `Remise 10 %.`, resultat: `Les remises ne sont pas appliquées correctement`, priorite: `Haute` },
+      { id: `CT-TRT-010`, story: `Story P2 – Traiter une demande de réservation`, us: `US-08`, statut: `OK`, cas: `Refuser un frais sans nom`, preconditions: `Hôte connecté ; demande en attente.`, etapes: `Ajouter un frais avec montant mais sans libellé ; valider.`, donnees: `Nom vide ; montant 20 €.`, resultat: `Les frais sans nom sont correctement refusés`, priorite: `Moyenne` },
+      { id: `CT-TRT-011`, story: `Story P2 – Traiter une demande de réservation`, us: `US-08`, statut: `OK`, cas: `Refuser un frais négatif`, preconditions: `Hôte connecté ; demande en attente.`, etapes: `Ajouter un frais avec montant négatif ; valider.`, donnees: `Frais -10 €.`, resultat: `Les frais négatifs sont correctement refusés`, priorite: `Moyenne` },
+      { id: `CT-TRT-012`, story: `Story P2 – Traiter une demande de réservation`, us: `US-08`, statut: `KO`, cas: `Refuser une remise supérieure au total`, preconditions: `Hôte connecté ; demande avec montant calculé.`, etapes: `Ajouter une remise supérieure au total ; valider.`, donnees: `Total 300 € ; remise 400 €.`, resultat: `Le système accepte une remise supérieure au total`, priorite: `Haute` },
+      { id: `CT-TRT-013`, story: `Story P2 – Traiter une demande de réservation`, us: `US-08`, statut: `KO`, cas: `Gérer correctement un frais à 0 €`, preconditions: `Hôte connecté ; demande en attente.`, etapes: `Ajouter un frais nommé à 0 € ; valider ; vérifier comportement attendu.`, donnees: `Frais service 0 €.`, resultat: `Gestion incorrecte d’un frais à 0 €`, priorite: `Moyenne` },
+      { id: `CT-TRT-014`, story: `Story P2 – Traiter une demande de réservation`, us: `US-08`, statut: `KO`, cas: `Afficher le bouton Payer maintenant côté voyageur`, preconditions: `Voyageur connecté ; réservation acceptée.`, etapes: `Ouvrir la réservation côté voyageur ; vérifier les actions disponibles.`, donnees: `Réservation acceptée.`, resultat: `Bouton “Payer maintenant” absent côté voyageur`, priorite: `Haute` },
+      { id: `CT-TRT-015`, story: `Story P2 – Traiter une demande de réservation`, us: `US-08`, statut: `KO`, cas: `Accéder à la page paiement`, preconditions: `Voyageur connecté ; réservation acceptée.`, etapes: `Cliquer sur Payer maintenant ; vérifier l’ouverture de la page paiement.`, donnees: `Réservation acceptée.`, resultat: `Accès à la page paiement impossible`, priorite: `Haute` },
+      { id: `CT-TRT-016`, story: `Story P2 – Traiter une demande de réservation`, us: `US-08`, statut: `KO`, cas: `Réaliser un paiement hors site`, preconditions: `Voyageur connecté ; réservation acceptée ; paiement externe attendu.`, etapes: `Lancer le paiement ; suivre le parcours hors site ; revenir sur Homey.`, donnees: `Moyen de paiement valide.`, resultat: `Paiement hors site non fonctionnel`, priorite: `Haute` },
+      { id: `CT-TRT-017`, story: `Story P2 – Traiter une demande de réservation`, us: `US-08`, statut: `OK`, cas: `Bloquer le paiement sans informations bancaires`, preconditions: `Voyageur connecté ; page paiement affichée.`, etapes: `Laisser les champs bancaires vides ; tenter de payer.`, donnees: `IBAN vide ; mode paiement vide.`, resultat: `Paiement correctement bloqué sans infos bancaires`, priorite: `Haute` },
+      { id: `CT-TRT-018`, story: `Story P2 – Traiter une demande de réservation`, us: `US-08`, statut: `OK`, cas: `Annuler une réservation côté voyageur`, preconditions: `Voyageur connecté ; réservation annulable.`, etapes: `Ouvrir la réservation ; cliquer sur annuler ; confirmer ; vérifier le statut.`, donnees: `Réservation en attente ou acceptée selon règle.`, resultat: `Annulation voyageur fonctionnelle`, priorite: `Haute` },
+      { id: `CT-TRT-019`, story: `Story P2 – Traiter une demande de réservation`, us: `US-08`, statut: `OK`, cas: `Initialiser les informations de paiement`, preconditions: `Voyageur connecté ; réservation à payer.`, etapes: `Ouvrir le paiement ; initialiser les infos de paiement ; vérifier sauvegarde.`, donnees: `IBAN valide ; mode virement.`, resultat: `Initialisation des informations de paiement fonctionnelle`, priorite: `Moyenne` },
+      { id: `CT-TRT-020`, story: `Story P2 – Traiter une demande de réservation`, us: `US-08`, statut: `OK`, cas: `Afficher le formulaire bancaire`, preconditions: `Voyageur connecté ; réservation à payer.`, etapes: `Accéder à la page paiement ; vérifier la présence des champs bancaires.`, donnees: `Page paiement.`, resultat: `Formulaire bancaire affiché correctement`, priorite: `Moyenne` },
+      { id: `CT-TRT-021`, story: `Story P2 – Traiter une demande de réservation`, us: `US-08`, statut: `OK`, cas: `Contrôler le champ IBAN vide`, preconditions: `Voyageur connecté ; formulaire bancaire affiché.`, etapes: `Laisser IBAN vide ; choisir un mode de paiement ; soumettre.`, donnees: `IBAN vide.`, resultat: `Contrôle IBAN vide fonctionnel`, priorite: `Moyenne` },
+      { id: `CT-TRT-022`, story: `Story P2 – Traiter une demande de réservation`, us: `US-08`, statut: `OK`, cas: `Contrôler un IBAN invalide`, preconditions: `Voyageur connecté ; formulaire bancaire affiché.`, etapes: `Saisir un IBAN invalide ; soumettre.`, donnees: `IBAN : ABC123.`, resultat: `Contrôle IBAN invalide fonctionnel`, priorite: `Moyenne` },
+      { id: `CT-TRT-023`, story: `Story P2 – Traiter une demande de réservation`, us: `US-08`, statut: `OK`, cas: `Contrôler le mode de paiement vide`, preconditions: `Voyageur connecté ; formulaire bancaire affiché.`, etapes: `Saisir un IBAN valide ; laisser le mode de paiement vide ; soumettre.`, donnees: `IBAN valide ; mode vide.`, resultat: `Contrôle mode de paiement vide fonctionnel`, priorite: `Moyenne` },
+      { id: `CT-TRT-024`, story: `Story P2 – Traiter une demande de réservation`, us: `US-08`, statut: `OK`, cas: `Marquer une réservation comme payée`, preconditions: `Hôte connecté ; réservation acceptée ou paiement validable.`, etapes: `Ouvrir la réservation ; cliquer sur Marquer comme payé ; vérifier le statut.`, donnees: `Réservation acceptée.`, resultat: `Action “Marquer comme payé” fonctionnelle`, priorite: `Haute` },
+      { id: `CT-TRT-025`, story: `Story P2 – Traiter une demande de réservation`, us: `US-08`, statut: `OK`, cas: `Masquer Marquer comme payé sur réservation refusée`, preconditions: `Hôte connecté ; réservation refusée.`, etapes: `Ouvrir la réservation refusée ; contrôler les actions disponibles.`, donnees: `Réservation refusée.`, resultat: `“Marquer comme payé” indisponible sur réservation refusée`, priorite: `Haute` },
+      { id: `CT-TRT-026`, story: `Story P2 – Traiter une demande de réservation`, us: `US-08`, statut: `OK`, cas: `Masquer Payer maintenant sur réservation refusée`, preconditions: `Voyageur connecté ; réservation refusée.`, etapes: `Ouvrir la réservation refusée ; contrôler les actions disponibles.`, donnees: `Réservation refusée.`, resultat: `“Payer maintenant” absent sur réservation refusée`, priorite: `Haute` },
+      { id: `CT-TRT-027`, story: `Story P2 – Traiter une demande de réservation`, us: `US-08`, statut: `OK`, cas: `Masquer Payer maintenant sur réservation annulée`, preconditions: `Voyageur connecté ; réservation annulée.`, etapes: `Ouvrir la réservation annulée ; contrôler les actions disponibles.`, donnees: `Réservation annulée.`, resultat: `“Payer maintenant” absent sur réservation annulée`, priorite: `Haute` },
+      { id: `CT-TRT-028`, story: `Story P2 – Traiter une demande de réservation`, us: `US-08`, statut: `KO`, cas: `Contrôler l’isolation des réservations entre hôtes`, preconditions: `Deux comptes hôtes ; réservation appartenant à l’hôte A.`, etapes: `Se connecter avec l’hôte B ; tenter d’accéder à l’URL ou au détail de la réservation de l’hôte A.`, donnees: `ID réservation hôte A.`, resultat: `Un hôte peut accéder à une réservation d’un autre hôte`, priorite: `Critique` },
+      { id: `CT-TRT-029`, story: `Story P2 – Traiter une demande de réservation`, us: `US-08`, statut: `OK`, cas: `Empêcher un voyageur de confirmer ou refuser une réservation`, preconditions: `Compte voyageur connecté ; réservation existante.`, etapes: `Accéder au détail réservation ; tenter d’utiliser ou d’appeler les actions hôte.`, donnees: `Compte voyageur.`, resultat: `Un voyageur ne peut pas confirmer/refuser une réservation`, priorite: `Haute` },
+      { id: `CT-TRT-030`, story: `Story P2 – Traiter une demande de réservation`, us: `US-08`, statut: `OK`, cas: `Calculer correctement une réservation d’une nuit`, preconditions: `Voyageur connecté ; annonce disponible.`, etapes: `Créer ou consulter une réservation d’une nuit ; vérifier le montant calculé.`, donnees: `Début J+10 ; fin J+11 ; prix nuit connu.`, resultat: `Calcul d’une réservation d’une nuit correct`, priorite: `Moyenne` }
+    ];
+
+    function badgeClass(value, group) {
+      if (group === 'statut') return value.includes('Dans') ? 'status scope' : 'status out';
+      if (group === 'priorite') {
+        if (value === 'Critique') return 'prio critical';
+        if (value === 'Haute') return 'prio high';
+        if (value === 'Moyenne') return 'prio medium';
+        return 'prio low';
+      }
+      return '';
+    }
+
+    function renderBacklog(rows = backlog) {
+      document.querySelector('#backlogTable tbody').innerHTML = rows.map(r => `
+        <tr data-statut="${r[3]}" data-acteur="${r[2]}">
+          <td><span class="id-pill">${r[0]}</span></td>
+          <td>${r[1]}</td>
+          <td>${r[2]}</td>
+          <td><span class="${badgeClass(r[3], 'statut')}">${r[3]}</span></td>
+          <td>${r[4]}</td>
+        </tr>
+      `).join('');
+    }
+
+    function renderScope(rows = scope) {
+      document.querySelector('#scopeTable tbody').innerHTML = rows.map(r => `
+        <tr data-priorite="${r.priorite}" data-acteur="${r.acteur}">
+          <td><span class="id-pill">${r.id}</span></td>
+          <td>${r.desc}</td>
+          <td>${r.acteur}</td>
+          <td>${r.ac}</td>
+          <td><span class="${badgeClass(r.priorite, 'priorite')}">${r.priorite}</span></td>
+        </tr>
+      `).join('');
+    }
+
+    function renderTests(rows = tests) {
+      document.querySelector('#testTable tbody').innerHTML = rows.map(r => `
+        <tr data-story="${r.story}" data-statut="${r.statut}">
+          <td><span class="id-pill">${r.id}</span></td>
+          <td>${r.story}<br><strong>${r.us}</strong></td>
+          <td><strong>${r.cas}</strong></td>
+          <td>${r.preconditions}</td>
+          <td>${r.etapes}</td>
+          <td>${r.donnees}</td>
+          <td>${r.resultat}</td>
+          <td><span class="${badgeClass(r.priorite, 'priorite')}">${r.priorite}</span></td>
+        </tr>
+      `).join('');
+    }
+
+    const ROWS_PER_PAGE = 5;
+
+    function setupControls(panel) {
+      const tableId = panel.dataset.tableControls;
+      const table = document.getElementById(tableId);
+      const tbody = table.tBodies[0];
+      const search = panel.querySelector('[data-search]');
+      const filters = [...panel.querySelectorAll('select[data-filter]')];
+      let currentPage = 1;
+
+      const pagination = document.createElement('div');
+      pagination.className = 'pagination';
+      pagination.innerHTML = `
+        <span class="pagination-info"></span>
+        <div class="pagination-actions">
+          <button type="button" class="page-prev">← Précédent</button>
+          <span class="page-indicator"></span>
+          <button type="button" class="page-next">Suivant →</button>
+        </div>
+      `;
+      table.closest('.table-wrap').appendChild(pagination);
+
+      const info = pagination.querySelector('.pagination-info');
+      const indicator = pagination.querySelector('.page-indicator');
+      const prev = pagination.querySelector('.page-prev');
+      const next = pagination.querySelector('.page-next');
+
+      const emptyRow = document.createElement('tr');
+      emptyRow.className = 'empty-row';
+      emptyRow.innerHTML = `<td colspan="${table.tHead.rows[0].cells.length}">Aucun résultat trouvé.</td>`;
+      emptyRow.style.display = 'none';
+      tbody.appendChild(emptyRow);
+
+      function getFilteredRows() {
+        const q = (search.value || '').toLowerCase().trim();
+        return [...tbody.rows].filter(row => {
+          if (row.classList.contains('empty-row')) return false;
+          const textOk = row.innerText.toLowerCase().includes(q);
+          const filterOk = filters.every(select => !select.value || row.dataset[select.dataset.filter] === select.value);
+          return textOk && filterOk;
+        });
+      }
+
+      function apply(resetPage = true) {
+        if (resetPage) currentPage = 1;
+        const filteredRows = getFilteredRows();
+        const totalRows = filteredRows.length;
+        const totalPages = Math.max(1, Math.ceil(totalRows / ROWS_PER_PAGE));
+        currentPage = Math.min(currentPage, totalPages);
+
+        [...tbody.rows].forEach(row => row.style.display = 'none');
+
+        const start = (currentPage - 1) * ROWS_PER_PAGE;
+        const pageRows = filteredRows.slice(start, start + ROWS_PER_PAGE);
+        pageRows.forEach(row => row.style.display = '');
+
+        emptyRow.style.display = totalRows === 0 ? '' : 'none';
+        info.textContent = totalRows === 0
+          ? '0 résultat'
+          : `${start + 1}-${start + pageRows.length} sur ${totalRows} lignes`;
+        indicator.textContent = `Page ${currentPage} / ${totalPages}`;
+        prev.disabled = currentPage <= 1;
+        next.disabled = currentPage >= totalPages;
+      }
+
+      prev.addEventListener('click', () => { currentPage -= 1; apply(false); });
+      next.addEventListener('click', () => { currentPage += 1; apply(false); });
+      search.addEventListener('input', () => apply(true));
+      filters.forEach(f => f.addEventListener('change', () => apply(true)));
+      apply(true);
+    }
+
+    function createFloatingIcons() {
+      const icons = [
+        ["fa-solid fa-house", "#22c55e"],
+        ["fa-solid fa-vial", "#2563eb"],
+        ["fa-solid fa-bug", "#ef4444"],
+        ["fa-solid fa-list-check", "#1e40af"],
+        ["fa-solid fa-robot", "#7c3aed"],
+        ["fa-solid fa-code-branch", "#a855f7"],
+        ["fa-solid fa-calendar-check", "#fb923c"]
+      ];
+
+      const wrapper = document.querySelector(".floating-icons");
+      wrapper.innerHTML = "";
+
+      icons.forEach(([icon, color], index) => {
+        const element = document.createElement("i");
+        element.className = `${icon} floating-icon`;
+        element.style.color = color;
+        element.style.left = `${8 + Math.random() * 84}%`;
+        element.style.top = `${12 + Math.random() * 72}%`;
+        element.style.fontSize = `${1.3 + Math.random() * 1.7}rem`;
+        element.style.animationDelay = `${index * .65}s`;
+        element.style.animationDuration = `${7 + Math.random() * 5}s`;
+        wrapper.appendChild(element);
+      });
+    }
+
+    function initScrollEffects() {
+      const navbar = document.querySelector(".navbar");
+      const sections = document.querySelectorAll("main section[id]");
+      const navLinks = document.querySelectorAll(".nav-links a");
+
+      window.addEventListener("scroll", () => {
+        navbar.classList.toggle("scrolled", window.scrollY > 20);
+
+        let current = "presentation";
+        sections.forEach(section => {
+          const top = section.offsetTop - 120;
+          if (window.scrollY >= top) current = section.id;
+        });
+
+        navLinks.forEach(link => {
+          link.classList.toggle("active", link.getAttribute("href") === `#${current}`);
+        });
+      });
+    }
+
+    function initRevealAnimations() {
+      const observer = new IntersectionObserver(entries => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) entry.target.classList.add("visible");
+        });
+      }, { threshold: .14 });
+
+      document.querySelectorAll(".fade-section").forEach(section => observer.observe(section));
+    }
+
+    renderBacklog();
+    renderScope();
+    renderTests();
+    document.querySelectorAll('[data-table-controls]').forEach(setupControls);
+    createFloatingIcons();
+    initScrollEffects();
+    initRevealAnimations();
+  </script>
+</body>
+</html>

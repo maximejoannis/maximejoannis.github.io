@@ -1,0 +1,1012 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Rapport QA Automatisation Homey — Robot Framework, SeleniumLibrary, campagnes automatisées, résultats d'exécution et synthèse qualité." />
+  <meta name="keywords" content="Rapport QA, Robot Framework, SeleniumLibrary, Homey, automatisation, tests automatisés" />
+  <meta name="author" content="Maxime Joannis" />
+  <title>Rapport QA Automatisation — Robot Framework</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet" />
+
+  <style>
+    :root {
+      --primary-color: #2563eb;
+      --secondary-color: #1e40af;
+      --text-color: #1f2937;
+      --light-text: #6b7280;
+      --background: #ffffff;
+      --section-bg: #f3f4f6;
+      --card-bg: #ffffff;
+      --border: #e5e7eb;
+      --green: #22c55e;
+      --purple: #a855f7;
+      --orange: #fb923c;
+      --cyan: #38bdf8;
+      --red: #ef4444;
+      --yellow: #facc15;
+      --shadow: 0 18px 45px rgba(15, 23, 42, .10);
+      --shadow-hover: 0 28px 70px rgba(37, 99, 235, .18);
+      --radius: 1rem;
+      --nav-height: 70px;
+      --max-width: 1180px;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: "Poppins", system-ui, sans-serif;
+      color: var(--text-color);
+      background: var(--background);
+      line-height: 1.7;
+      overflow-x: hidden;
+    }
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      z-index: -2;
+      pointer-events: none;
+      background:
+        radial-gradient(circle at 12% 18%, rgba(37,99,235,.10), transparent 25rem),
+        radial-gradient(circle at 86% 12%, rgba(168,85,247,.10), transparent 24rem),
+        linear-gradient(180deg, #ffffff 0%, #f8fafc 42%, #ffffff 100%);
+    }
+    a { color: inherit; text-decoration: none; }
+    button { font-family: inherit; }
+
+    .container {
+      width: min(var(--max-width), calc(100% - 2rem));
+      margin: 0 auto;
+    }
+
+    .navbar {
+      position: fixed;
+      inset: 0 0 auto 0;
+      z-index: 1000;
+      height: var(--nav-height);
+      background: rgba(255, 255, 255, .95);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid rgba(229, 231, 235, .8);
+      transition: box-shadow .25s ease, background .25s ease;
+    }
+    .navbar.scrolled {
+      box-shadow: 0 12px 38px rgba(15, 23, 42, .08);
+      background: rgba(255, 255, 255, .98);
+    }
+    .nav-inner {
+      height: 100%;
+      display: grid;
+      grid-template-columns: 1fr auto 1fr;
+      align-items: center;
+      gap: 1.4rem;
+    }
+    .logo {
+      display: inline-flex;
+      align-items: center;
+      gap: .65rem;
+      color: var(--primary-color);
+      font-weight: 800;
+      letter-spacing: -.04em;
+    }
+    .logo-mark {
+      width: 42px;
+      height: 42px;
+      border-radius: 14px;
+      display: grid;
+      place-items: center;
+      color: #fff;
+      background: linear-gradient(135deg, var(--primary-color), #7c3aed);
+      box-shadow: 0 12px 28px rgba(37, 99, 235, .25);
+    }
+    .nav-links {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: .5rem;
+      list-style: none;
+      color: var(--light-text);
+      font-weight: 600;
+    }
+    .nav-links a {
+      min-height: 38px;
+      display: inline-flex;
+      align-items: center;
+      padding: 0 .85rem;
+      border-radius: 999px;
+      transition: color .25s ease, background .25s ease, transform .25s ease;
+      font-size: .86rem;
+      white-space: nowrap;
+    }
+    .nav-links a:hover,
+    .nav-links a.active {
+      color: var(--primary-color);
+      background: rgba(37, 99, 235, .08);
+      transform: translateY(-1px);
+    }
+    .portfolio-link {
+      justify-self: end;
+      min-height: 40px;
+      display: inline-flex;
+      align-items: center;
+      gap: .55rem;
+      padding: 0 1rem;
+      border-radius: 999px;
+      color: white;
+      background: var(--primary-color);
+      font-weight: 700;
+      box-shadow: 0 12px 30px rgba(37,99,235,.22);
+      transition: transform .25s ease, box-shadow .25s ease;
+    }
+    .portfolio-link:hover {
+      transform: translateY(-2px);
+      box-shadow: var(--shadow-hover);
+    }
+
+    main { padding-top: var(--nav-height); }
+    section { scroll-margin-top: calc(var(--nav-height) + 22px); }
+
+    .hero {
+      position: relative;
+      min-height: 570px;
+      display: grid;
+      align-items: center;
+      padding: 72px 0 54px;
+      background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 100%);
+      overflow: hidden;
+    }
+    .floating-icons {
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      overflow: hidden;
+    }
+    .floating-icon {
+      position: absolute;
+      opacity: 0;
+      animation: floatTech 9s ease-in-out infinite;
+      filter: drop-shadow(0 10px 18px rgba(37, 99, 235, .18));
+    }
+    @keyframes floatTech {
+      0%, 100% { transform: translateY(22px) rotate(0deg); opacity: 0; }
+      18%, 78% { opacity: .55; }
+      50% { transform: translateY(-28px) rotate(16deg); opacity: .85; }
+    }
+    .hero-grid {
+      position: relative;
+      z-index: 2;
+      display: grid;
+      grid-template-columns: 1fr 360px;
+      gap: 3rem;
+      align-items: center;
+    }
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: .55rem;
+      padding: .55rem .9rem;
+      border-radius: 999px;
+      color: var(--secondary-color);
+      background: rgba(37, 99, 235, .10);
+      border: 1px solid rgba(37, 99, 235, .16);
+      font-weight: 700;
+      margin-bottom: 1.35rem;
+    }
+    h1 {
+      font-size: clamp(2.45rem, 6vw, 4.7rem);
+      line-height: 1.06;
+      letter-spacing: -.075em;
+      font-weight: 900;
+      margin-bottom: 1.1rem;
+    }
+    .gradient-text {
+      background: linear-gradient(90deg, var(--primary-color), #7c3aed, var(--cyan));
+      -webkit-background-clip: text;
+      color: transparent;
+    }
+    .lead {
+      margin: 1.25rem 0 1.8rem;
+      color: var(--light-text);
+      font-size: clamp(1rem, 2vw, 1.16rem);
+      max-width: 800px;
+    }
+    .hero-actions, .bottom-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: .65rem;
+      min-height: 54px;
+      padding: 0 1.25rem;
+      border-radius: 999px;
+      border: 1px solid var(--primary-color);
+      font-weight: 700;
+      transition: transform .25s ease, box-shadow .25s ease, background .25s ease;
+    }
+    .btn.primary {
+      color: white;
+      background: var(--primary-color);
+      box-shadow: 0 16px 35px rgba(37, 99, 235, .28);
+    }
+    .btn.secondary {
+      color: var(--primary-color);
+      background: white;
+    }
+    .btn:hover {
+      transform: translateY(-3px);
+      box-shadow: var(--shadow-hover);
+    }
+
+    .summary-card {
+      border-radius: 1.4rem;
+      padding: 1.45rem;
+      background: rgba(255, 255, 255, .78);
+      backdrop-filter: blur(14px);
+      border: 1px solid rgba(147, 197, 253, .85);
+      box-shadow: var(--shadow);
+    }
+    .summary-icon {
+      width: 62px;
+      height: 62px;
+      display: grid;
+      place-items: center;
+      margin-bottom: 1rem;
+      border-radius: 18px;
+      color: white;
+      background: linear-gradient(135deg, var(--primary-color), #7c3aed);
+      font-size: 1.5rem;
+    }
+    .summary-card strong {
+      display: block;
+      color: var(--primary-color);
+      font-size: 2.6rem;
+      line-height: 1;
+      letter-spacing: -.07em;
+      margin-bottom: .4rem;
+    }
+    .summary-card span {
+      color: var(--light-text);
+      font-weight: 700;
+    }
+    .summary-meta {
+      display: grid;
+      gap: .7rem;
+      margin-top: 1.2rem;
+      color: var(--light-text);
+      font-weight: 600;
+    }
+
+    .content-section { padding: 5.2rem 0; }
+    .content-section.alt { background: var(--section-bg); }
+    .section-title {
+      text-align: center;
+      margin-bottom: 3rem;
+    }
+    .section-title h2 {
+      font-size: clamp(2rem, 4vw, 3rem);
+      line-height: 1.15;
+      letter-spacing: -.06em;
+      margin-bottom: .7rem;
+    }
+    .section-title p {
+      max-width: 780px;
+      margin: 0 auto;
+      color: var(--light-text);
+    }
+
+    .stats {
+      display: grid;
+      grid-template-columns: repeat(5, minmax(0, 1fr));
+      gap: 1.4rem;
+    }
+    .stat, .panel, .campaign-card, .timeline, .analysis-card {
+      border-radius: 1.4rem;
+      background: white;
+      border: 1px solid rgba(229, 231, 235, .85);
+      box-shadow: var(--shadow);
+      transition: transform .28s ease, box-shadow .28s ease, border-color .28s ease;
+      position: relative;
+      overflow: hidden;
+    }
+    .stat::before, .panel::before, .campaign-card::before, .analysis-card::before {
+      content: "";
+      position: absolute;
+      inset: 0 0 auto 0;
+      height: 4px;
+      background: linear-gradient(90deg, var(--primary-color), transparent);
+    }
+    .stat:hover, .panel:hover, .campaign-card:hover, .analysis-card:hover {
+      transform: translateY(-8px);
+      box-shadow: var(--shadow-hover);
+      border-color: rgba(37,99,235,.32);
+    }
+    .stat {
+      min-height: 150px;
+      padding: 1.45rem;
+    }
+    .stat strong {
+      display: block;
+      color: var(--primary-color);
+      font-size: clamp(2rem, 4vw, 3rem);
+      line-height: 1;
+      letter-spacing: -.05em;
+      margin-bottom: .75rem;
+    }
+    .stat span {
+      color: var(--text-color);
+      font-weight: 800;
+    }
+    .stat small {
+      display: block;
+      color: var(--light-text);
+      margin-top: .35rem;
+      font-weight: 600;
+    }
+
+    .campaign-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 1.4rem;
+    }
+    .campaign-card {
+      padding: 1.55rem;
+      background:
+        radial-gradient(circle at 90% 0%, color-mix(in srgb, var(--accent-card) 11%, transparent), transparent 34%),
+        #fff;
+    }
+    .campaign-card::before {
+      background: linear-gradient(90deg, var(--accent-card), transparent);
+    }
+    .campaign-icon {
+      width: 54px;
+      height: 54px;
+      display: grid;
+      place-items: center;
+      border-radius: 18px;
+      color: var(--accent-card);
+      background: color-mix(in srgb, var(--accent-card) 12%, white);
+      border: 1px solid color-mix(in srgb, var(--accent-card) 20%, white);
+      font-size: 1.35rem;
+      margin-bottom: 1rem;
+    }
+    .campaign-head {
+      display: flex;
+      justify-content: space-between;
+      gap: .8rem;
+      align-items: center;
+      margin-bottom: .8rem;
+    }
+    .campaign-card h3 {
+      font-size: 1.25rem;
+      line-height: 1.25;
+      letter-spacing: -.04em;
+      margin-bottom: .4rem;
+    }
+    .campaign-card p {
+      color: var(--light-text);
+      font-weight: 600;
+    }
+    .campaign-metrics {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: .7rem;
+      margin: 1.1rem 0;
+    }
+    .campaign-metrics span {
+      padding: .75rem;
+      border-radius: 1rem;
+      background: #f8fafc;
+      border: 1px solid rgba(37,99,235,.08);
+    }
+    .campaign-metrics b {
+      display: block;
+      color: var(--primary-color);
+      font-size: 1.25rem;
+      line-height: 1;
+    }
+    .campaign-metrics small {
+      color: var(--light-text);
+      font-weight: 700;
+      font-size: .72rem;
+    }
+    .campaign-footer {
+      display: flex;
+      justify-content: space-between;
+      gap: .8rem;
+      flex-wrap: wrap;
+      color: var(--light-text);
+      font-weight: 650;
+      font-size: .82rem;
+      margin-top: 1rem;
+    }
+
+    .tag, .pill {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 999px;
+      padding: .42rem .65rem;
+      background: #eff6ff;
+      color: var(--secondary-color);
+      border: 1px solid rgba(37,99,235,.12);
+      font-weight: 800;
+      font-size: .72rem;
+      white-space: nowrap;
+    }
+    .pill.pass {
+      background: #dcfce7;
+      color: #166534;
+      border-color: #bbf7d0;
+    }
+
+    .progress {
+      height: 12px;
+      border-radius: 999px;
+      overflow: hidden;
+      background: #dbeafe;
+      margin-top: .9rem;
+    }
+    .progress i {
+      display: block;
+      height: 100%;
+      border-radius: inherit;
+      background: linear-gradient(90deg, var(--primary-color), var(--cyan));
+    }
+
+    .grid-2 {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 1.4rem;
+    }
+    .panel {
+      padding: 1.7rem;
+    }
+    .panel-title {
+      color: var(--text-color);
+      font-size: clamp(1.35rem, 2vw, 1.75rem);
+      line-height: 1.2;
+      font-weight: 800;
+      letter-spacing: -.04em;
+      margin-bottom: .55rem;
+    }
+    .panel-sub {
+      color: var(--light-text);
+      margin-bottom: 1.2rem;
+    }
+
+    .table-wrap {
+      overflow: auto;
+      border-radius: 1.4rem;
+      background: white;
+      border: 1px solid rgba(229, 231, 235, .85);
+      box-shadow: var(--shadow);
+    }
+    table {
+      width: 100%;
+      min-width: 920px;
+      border-collapse: separate;
+      border-spacing: 0;
+    }
+    th {
+      text-align: left;
+      padding: .9rem;
+      background: #eff6ff;
+      color: var(--text-color);
+      border-bottom: 1px solid rgba(37,99,235,.14);
+      font-size: .75rem;
+      letter-spacing: .04em;
+      text-transform: uppercase;
+      white-space: nowrap;
+    }
+    td {
+      padding: .9rem;
+      border-bottom: 1px solid rgba(37,99,235,.08);
+      color: var(--light-text);
+      font-size: .88rem;
+      vertical-align: top;
+      background: white;
+    }
+    tr:hover td { background: #f8fafc; }
+
+    .timeline {
+      list-style: none;
+      padding: 1.7rem;
+    }
+    .timeline li {
+      position: relative;
+      padding: 0 0 1.25rem 2rem;
+      border-left: 2px solid #dbeafe;
+    }
+    .timeline li:last-child { padding-bottom: 0; }
+    .timeline li::before {
+      content: "";
+      position: absolute;
+      left: -8px;
+      top: .3rem;
+      width: 14px;
+      height: 14px;
+      border-radius: 999px;
+      background: var(--primary-color);
+      box-shadow: 0 0 0 6px #dbeafe;
+    }
+    .timeline time {
+      display: block;
+      color: var(--primary-color);
+      font-weight: 900;
+      font-size: .88rem;
+    }
+    .timeline strong {
+      display: block;
+      color: var(--text-color);
+      margin: .2rem 0;
+    }
+    .timeline span { color: var(--light-text); }
+
+    .analysis-card {
+      padding: 1.7rem;
+      background: linear-gradient(135deg, #fff, #eff6ff);
+    }
+    .analysis-card h3 {
+      color: var(--text-color);
+      font-size: 1.45rem;
+      margin-bottom: .8rem;
+      letter-spacing: -.04em;
+    }
+    .analysis-card p, .analysis-card li {
+      color: var(--light-text);
+    }
+    .analysis-card ul {
+      margin-top: 1rem;
+      padding-left: 1.25rem;
+    }
+    .analysis-card strong { color: var(--text-color); }
+
+    .bottom-actions {
+      padding: 3rem 0 5rem;
+      justify-content: center;
+    }
+    footer {
+      padding: 2rem 0;
+      text-align: center;
+      color: #cbd5e1;
+      background: #0f172a;
+    }
+
+    .fade-section {
+      opacity: 0;
+      transform: translateY(24px);
+      transition: opacity .7s ease, transform .7s ease;
+    }
+    .fade-section.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    @media (max-width: 1100px) {
+      .hero-grid, .grid-2 { grid-template-columns: 1fr; }
+      .stats { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      .campaign-grid { grid-template-columns: 1fr; }
+      .summary-card { max-width: 520px; }
+    }
+    @media (max-width: 900px) {
+      .nav-inner { grid-template-columns: 1fr auto; }
+      .nav-links { display: none; }
+    }
+    @media (max-width: 768px) {
+      .container { width: min(100% - 1.25rem, var(--max-width)); }
+      .hero { padding-top: 48px; }
+      .stats { grid-template-columns: 1fr; }
+      .hero-actions, .bottom-actions { flex-direction: column; }
+      .btn { width: 100%; }
+      .campaign-metrics { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    }
+    @media (max-width: 480px) {
+      :root { --nav-height: 64px; }
+      .logo span:not(.logo-mark) { display: none; }
+      h1 { font-size: 2.35rem; }
+      .portfolio-link span { display: none; }
+    }
+  </style>
+</head>
+
+<body id="top">
+  <nav class="navbar" aria-label="Navigation rapport automatisation">
+    <div class="container nav-inner">
+      <a href="#top" class="logo" aria-label="Retour en haut">
+        <span class="logo-mark"><i class="fa-solid fa-robot"></i></span>
+        <span>Maxime Joannis — Robot Framework</span>
+      </a>
+
+      <ul class="nav-links">
+        <li><a href="#synthese" class="active">Synthèse</a></li>
+        <li><a href="#kpi">KPI</a></li>
+        <li><a href="#campagnes">Campagnes</a></li>
+        <li><a href="#historique">Historique</a></li>
+        <li><a href="#consolide">Tableau</a></li>
+        <li><a href="#analyse">Analyse</a></li>
+      </ul>
+
+      <a class="portfolio-link" href="index.html"><i class="fa-solid fa-arrow-left"></i><span>Portfolio</span></a>
+    </div>
+  </nav>
+
+  <main>
+    <section class="hero" id="synthese">
+      <div class="floating-icons" aria-hidden="true"></div>
+
+      <div class="container hero-grid">
+        <div>
+          <div class="eyebrow"><i class="fa-solid fa-robot"></i> Rapport QA automatisation</div>
+          <h1>Robot Framework <span class="gradient-text">Homey</span></h1>
+          <p class="lead">Rapport d’automatisation QA du projet Homey : 4 campagnes Robot Framework, 40 tests exécutés, 100% de réussite et traçabilité des logs d’exécution.</p>
+
+          <div class="hero-actions">
+            <a class="btn primary" href="#consolide"><i class="fa-solid fa-check-double"></i> Voir les résultats</a>
+            <a class="btn secondary" href="dashboardHomey_design_portfolio_corrige_v2.html"><i class="fa-solid fa-chart-line"></i> Dashboard QA</a>
+            <a class="btn secondary" href="detailHomey_design_portfolio.html"><i class="fa-solid fa-file-lines"></i> Détail projet</a>
+          </div>
+        </div>
+
+        <aside class="summary-card">
+          <div class="summary-icon"><i class="fa-solid fa-vial-circle-check"></i></div>
+          <strong>100%</strong>
+          <span>taux de réussite automatisée</span>
+          <div class="summary-meta">
+            <span><b>Période :</b> 18/02/2026 → 29/03/2026</span>
+            <span><b>Dernière exécution :</b> 29/03/2026 12:06:24</span>
+            <span><b>Durée cumulée :</b> 00:07:51</span>
+          </div>
+        </aside>
+      </div>
+    </section>
+
+    <section class="content-section fade-section" id="kpi">
+      <div class="container">
+        <div class="section-title">
+          <h2>Indicateurs d’exécution</h2>
+          <p>Synthèse globale des campagnes Robot Framework analysées sur le périmètre Homey.</p>
+        </div>
+
+        <div class="stats">
+          <div class="stat"><strong>40</strong><span>Total tests</span><small>4 campagnes automatisées</small></div>
+          <div class="stat"><strong>40</strong><span>Tests passés</span><small>Aucun échec détecté</small></div>
+          <div class="stat"><strong>0</strong><span>Tests échoués</span><small>Fail = 0</small></div>
+          <div class="stat"><strong>0</strong><span>Tests ignorés</span><small>Skip = 0</small></div>
+          <div class="stat"><strong>4</strong><span>Campagnes</span><small>Robot Framework</small></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="content-section alt fade-section" id="campagnes">
+      <div class="container">
+        <div class="section-title">
+          <h2>Vue par campagne</h2>
+          <p>Chaque carte présente le périmètre testé, le statut, les métriques d’exécution et les artefacts associés.</p>
+        </div>
+
+        <div class="campaign-grid">
+
+          <article class="campaign-card fade-section" style="--accent-card:#2563eb">
+            <div class="campaign-icon"><i class="fa-solid fa-comments"></i></div>
+            <div class="campaign-head">
+              <span class="tag">V1.1</span>
+              <span class="pill pass">PASS</span>
+            </div>
+            <h3>Campagne de test — Contacter hôte</h3>
+            <p>Contacter un hôte</p>
+            <div class="campaign-metrics">
+              <span><b>10</b><small>Pass</small></span>
+              <span><b>0</b><small>Fail</small></span>
+              <span><b>0</b><small>Skip</small></span>
+              <span><b>00:01:44</b><small>Durée</small></span>
+            </div>
+            <div class="progress"><i style="width:100%"></i></div>
+            <div class="campaign-footer">
+              <span><i class="fa-regular fa-clock"></i> 28/03/2026 14:46:49</span>
+              <span>report(4).html · log.html</span>
+            </div>
+          </article>
+
+
+          <article class="campaign-card fade-section" style="--accent-card:#22c55e">
+            <div class="campaign-icon"><i class="fa-solid fa-user-lock"></i></div>
+            <div class="campaign-head">
+              <span class="tag">V1.3</span>
+              <span class="pill pass">PASS</span>
+            </div>
+            <h3>Campagne de test — Demande réservation non connectée</h3>
+            <p>Demande de réservation non connectée</p>
+            <div class="campaign-metrics">
+              <span><b>10</b><small>Pass</small></span>
+              <span><b>0</b><small>Fail</small></span>
+              <span><b>0</b><small>Skip</small></span>
+              <span><b>00:01:46</b><small>Durée</small></span>
+            </div>
+            <div class="progress"><i style="width:100%"></i></div>
+            <div class="campaign-footer">
+              <span><i class="fa-regular fa-clock"></i> 28/03/2026 20:03:08</span>
+              <span>report(5).html · log(1).html</span>
+            </div>
+          </article>
+
+
+          <article class="campaign-card fade-section" style="--accent-card:#a855f7">
+            <div class="campaign-icon"><i class="fa-solid fa-user-check"></i></div>
+            <div class="campaign-head">
+              <span class="tag">V1.5</span>
+              <span class="pill pass">PASS</span>
+            </div>
+            <h3>Campagne de test — Demande réservation connectée</h3>
+            <p>Demande de réservation connectée</p>
+            <div class="campaign-metrics">
+              <span><b>10</b><small>Pass</small></span>
+              <span><b>0</b><small>Fail</small></span>
+              <span><b>0</b><small>Skip</small></span>
+              <span><b>00:02:12</b><small>Durée</small></span>
+            </div>
+            <div class="progress"><i style="width:100%"></i></div>
+            <div class="campaign-footer">
+              <span><i class="fa-regular fa-clock"></i> 29/03/2026 12:06:24</span>
+              <span>report(6).html · log(2).html</span>
+            </div>
+          </article>
+
+
+          <article class="campaign-card fade-section" style="--accent-card:#fb923c">
+            <div class="campaign-icon"><i class="fa-solid fa-house-circle-check"></i></div>
+            <div class="campaign-head">
+              <span class="tag">V2.1</span>
+              <span class="pill pass">PASS</span>
+            </div>
+            <h3>Campagne de test — Confirmation demande réservation</h3>
+            <p>Confirmation de demande de réservation</p>
+            <div class="campaign-metrics">
+              <span><b>10</b><small>Pass</small></span>
+              <span><b>0</b><small>Fail</small></span>
+              <span><b>0</b><small>Skip</small></span>
+              <span><b>00:02:09</b><small>Durée</small></span>
+            </div>
+            <div class="progress"><i style="width:100%"></i></div>
+            <div class="campaign-footer">
+              <span><i class="fa-regular fa-clock"></i> 18/02/2026 11:50:11</span>
+              <span>report(7).html · log(3).html</span>
+            </div>
+          </article>
+
+        </div>
+      </div>
+    </section>
+
+    <section class="content-section fade-section" id="historique">
+      <div class="container">
+        <div class="section-title">
+          <h2>Historique des exécutions</h2>
+          <p>Traçabilité chronologique des campagnes automatisées.</p>
+        </div>
+
+        <ul class="timeline">
+
+            <li>
+              <time>28/03/2026 14:46:49</time>
+              <strong>Contacter un hôte</strong>
+              <span>10 tests passés — 00:01:44</span>
+            </li>
+
+
+            <li>
+              <time>28/03/2026 20:03:08</time>
+              <strong>Demande de réservation non connectée</strong>
+              <span>10 tests passés — 00:01:46</span>
+            </li>
+
+
+            <li>
+              <time>29/03/2026 12:06:24</time>
+              <strong>Demande de réservation connectée</strong>
+              <span>10 tests passés — 00:02:12</span>
+            </li>
+
+
+            <li>
+              <time>18/02/2026 11:50:11</time>
+              <strong>Confirmation de demande de réservation</strong>
+              <span>10 tests passés — 00:02:09</span>
+            </li>
+
+        </ul>
+      </div>
+    </section>
+
+    <section class="content-section alt fade-section" id="consolide">
+      <div class="container">
+        <div class="section-title">
+          <h2>Tableau consolidé</h2>
+          <p>Vue tabulaire des exécutions Robot Framework, rapports et logs associés.</p>
+        </div>
+
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>Date d’exécution</th>
+                <th>Périmètre testé</th>
+                <th>Statut</th>
+                <th>Pass</th>
+                <th>Fail</th>
+                <th>Skip</th>
+                <th>Durée</th>
+                <th>Rapport</th>
+                <th>Log</th>
+              </tr>
+            </thead>
+            <tbody>
+
+              <tr>
+                <td>28/03/2026 14:46:49</td>
+                <td><strong>Contacter un hôte</strong></td>
+                <td><span class="pill pass">PASS</span></td>
+                <td>10</td>
+                <td>0</td>
+                <td>0</td>
+                <td>00:01:44</td>
+                <td>report(4).html</td>
+                <td>log.html</td>
+              </tr>
+
+
+              <tr>
+                <td>28/03/2026 20:03:08</td>
+                <td><strong>Demande de réservation non connectée</strong></td>
+                <td><span class="pill pass">PASS</span></td>
+                <td>10</td>
+                <td>0</td>
+                <td>0</td>
+                <td>00:01:46</td>
+                <td>report(5).html</td>
+                <td>log(1).html</td>
+              </tr>
+
+
+              <tr>
+                <td>29/03/2026 12:06:24</td>
+                <td><strong>Demande de réservation connectée</strong></td>
+                <td><span class="pill pass">PASS</span></td>
+                <td>10</td>
+                <td>0</td>
+                <td>0</td>
+                <td>00:02:12</td>
+                <td>report(6).html</td>
+                <td>log(2).html</td>
+              </tr>
+
+
+              <tr>
+                <td>18/02/2026 11:50:11</td>
+                <td><strong>Confirmation de demande de réservation</strong></td>
+                <td><span class="pill pass">PASS</span></td>
+                <td>10</td>
+                <td>0</td>
+                <td>0</td>
+                <td>00:02:09</td>
+                <td>report(7).html</td>
+                <td>log(3).html</td>
+              </tr>
+
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <section class="content-section fade-section" id="analyse">
+      <div class="container">
+        <div class="section-title">
+          <h2>Analyse QA</h2>
+          <p>Conclusion qualité sur le périmètre automatisé.</p>
+        </div>
+
+        <div class="grid-2">
+          <div class="analysis-card">
+            <h3>Conclusion</h3>
+            <p>La campagne consolidée est stable : aucun échec détecté sur les 40 tests automatisés analysés. Les logs ajoutés permettent de tracer les dates d’exécution et de renforcer la preuve d’exécution.</p>
+            <ul>
+              <li><strong>Décision QA :</strong> résultat conforme sur le périmètre automatisé.</li>
+              <li><strong>Risque résiduel :</strong> faible sur les scénarios couverts.</li>
+              <li><strong>Recommandation :</strong> conserver l’historique des logs avec horodatage.</li>
+            </ul>
+          </div>
+
+          <div class="analysis-card">
+            <h3>À compléter</h3>
+            <p>Le périmètre automatisé est fiable, mais il doit rester complété par des tests exploratoires et fonctionnels manuels sur les parcours critiques non automatisés.</p>
+            <ul>
+              <li>Contrôler les scénarios limites non couverts par les suites Robot.</li>
+              <li>Maintenir les campagnes en non-régression.</li>
+              <li>Relier les exécutions aux tickets Jira / Xray dans le portfolio QA.</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <div class="container bottom-actions">
+      <a class="btn primary" href="dashboardHomey_design_portfolio_corrige_v2.html"><i class="fa-solid fa-chart-line"></i> Retour dashboard QA</a>
+      <a class="btn secondary" href="detailHomey_design_portfolio.html"><i class="fa-solid fa-file-lines"></i> Détail projet Homey</a>
+      <a class="btn secondary" href="index.html"><i class="fa-solid fa-arrow-left"></i> Portfolio</a>
+    </div>
+  </main>
+
+  <footer>© 2026 Maxime Joannis — Rapport QA Automatisation Robot Framework</footer>
+
+  <script>
+    function createFloatingIcons() {
+      const icons = [
+        ["fa-solid fa-robot", "#7c3aed"],
+        ["fa-solid fa-vial", "#2563eb"],
+        ["fa-solid fa-check-double", "#22c55e"],
+        ["fa-solid fa-bug", "#ef4444"],
+        ["fa-solid fa-code-branch", "#a855f7"],
+        ["fa-solid fa-chart-line", "#38bdf8"],
+        ["fa-solid fa-shield-halved", "#fb923c"]
+      ];
+
+      const wrapper = document.querySelector(".floating-icons");
+      wrapper.innerHTML = "";
+
+      icons.forEach(([icon, color], index) => {
+        const element = document.createElement("i");
+        element.className = `${icon} floating-icon`;
+        element.style.color = color;
+        element.style.left = `${8 + Math.random() * 84}%`;
+        element.style.top = `${12 + Math.random() * 72}%`;
+        element.style.fontSize = `${1.3 + Math.random() * 1.7}rem`;
+        element.style.animationDelay = `${index * .65}s`;
+        element.style.animationDuration = `${7 + Math.random() * 5}s`;
+        wrapper.appendChild(element);
+      });
+    }
+
+    function initScrollEffects() {
+      const navbar = document.querySelector(".navbar");
+      const sections = document.querySelectorAll("main section[id]");
+      const navLinks = document.querySelectorAll(".nav-links a");
+
+      window.addEventListener("scroll", () => {
+        navbar.classList.toggle("scrolled", window.scrollY > 20);
+
+        let current = "synthese";
+        sections.forEach(section => {
+          const top = section.offsetTop - 120;
+          if (window.scrollY >= top) current = section.id;
+        });
+
+        navLinks.forEach(link => {
+          link.classList.toggle("active", link.getAttribute("href") === `#${current}`);
+        });
+      });
+    }
+
+    function initRevealAnimations() {
+      const observer = new IntersectionObserver(entries => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) entry.target.classList.add("visible");
+        });
+      }, { threshold: .14 });
+
+      document.querySelectorAll(".fade-section").forEach(section => observer.observe(section));
+    }
+
+    createFloatingIcons();
+    initScrollEffects();
+    initRevealAnimations();
+  </script>
+</body>
+</html>

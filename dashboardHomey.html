@@ -1,0 +1,1658 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Dashboard QA Homey — KPI, couverture, automatisation Robot Framework, anomalies, risques, tickets Jira/Xray et décision GO/NO GO." />
+  <meta name="keywords" content="Dashboard QA, Homey, Jira, Xray, Robot Framework, SeleniumLibrary, Tests automatisés, GO NO GO" />
+  <meta name="author" content="Maxime Joannis" />
+  <title>Dashboard QA Homey — Projet QA</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet" />
+
+  <style>
+    :root {
+      --primary-color: #2563eb;
+      --secondary-color: #1e40af;
+      --text-color: #1f2937;
+      --light-text: #6b7280;
+      --background: #ffffff;
+      --section-bg: #f3f4f6;
+      --card-bg: #ffffff;
+      --border: #e5e7eb;
+      --green: #22c55e;
+      --purple: #a855f7;
+      --orange: #fb923c;
+      --cyan: #38bdf8;
+      --red: #ef4444;
+      --yellow: #facc15;
+      --shadow: 0 18px 45px rgba(15, 23, 42, .10);
+      --shadow-hover: 0 28px 70px rgba(37, 99, 235, .18);
+      --radius: 1rem;
+      --nav-height: 70px;
+      --max-width: 1180px;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: "Poppins", system-ui, sans-serif;
+      color: var(--text-color);
+      background: var(--background);
+      line-height: 1.7;
+      overflow-x: hidden;
+    }
+
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      z-index: -2;
+      pointer-events: none;
+      background:
+        radial-gradient(circle at 12% 18%, rgba(37,99,235,.10), transparent 25rem),
+        radial-gradient(circle at 86% 12%, rgba(168,85,247,.10), transparent 24rem),
+        linear-gradient(180deg, #ffffff 0%, #f8fafc 42%, #ffffff 100%);
+    }
+
+    a { color: inherit; text-decoration: none; }
+    button, input, select { font-family: inherit; }
+
+    .container {
+      width: min(var(--max-width), calc(100% - 2rem));
+      margin: 0 auto;
+    }
+
+    .navbar {
+      position: fixed;
+      inset: 0 0 auto 0;
+      z-index: 1000;
+      height: var(--nav-height);
+      background: rgba(255, 255, 255, .95);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid rgba(229, 231, 235, .8);
+      transition: box-shadow .25s ease, background .25s ease;
+    }
+
+    .navbar.scrolled {
+      box-shadow: 0 12px 38px rgba(15, 23, 42, .08);
+      background: rgba(255, 255, 255, .98);
+    }
+
+    .nav-inner {
+      height: 100%;
+      display: grid;
+      grid-template-columns: 1fr auto 1fr;
+      align-items: center;
+      gap: 1.4rem;
+    }
+
+    .logo {
+      display: inline-flex;
+      align-items: center;
+      gap: .65rem;
+      color: var(--primary-color);
+      font-weight: 800;
+      letter-spacing: -.04em;
+    }
+
+    .logo-mark {
+      width: 42px;
+      height: 42px;
+      border-radius: 14px;
+      display: grid;
+      place-items: center;
+      color: #fff;
+      background: linear-gradient(135deg, var(--primary-color), #7c3aed);
+      box-shadow: 0 12px 28px rgba(37, 99, 235, .25);
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: .5rem;
+      list-style: none;
+      color: var(--light-text);
+      font-weight: 600;
+    }
+
+    .nav-links a {
+      min-height: 38px;
+      display: inline-flex;
+      align-items: center;
+      padding: 0 .85rem;
+      border-radius: 999px;
+      transition: color .25s ease, background .25s ease, transform .25s ease;
+      font-size: .86rem;
+      white-space: nowrap;
+    }
+
+    .nav-links a:hover,
+    .nav-links a.active {
+      color: var(--primary-color);
+      background: rgba(37, 99, 235, .08);
+      transform: translateY(-1px);
+    }
+
+    .portfolio-link {
+      justify-self: end;
+      min-height: 40px;
+      display: inline-flex;
+      align-items: center;
+      gap: .55rem;
+      padding: 0 1rem;
+      border-radius: 999px;
+      color: white;
+      background: var(--primary-color);
+      font-weight: 700;
+      box-shadow: 0 12px 30px rgba(37,99,235,.22);
+      transition: transform .25s ease, box-shadow .25s ease;
+    }
+
+    .portfolio-link:hover {
+      transform: translateY(-2px);
+      box-shadow: var(--shadow-hover);
+    }
+
+    main { padding-top: var(--nav-height); }
+    section { scroll-margin-top: calc(var(--nav-height) + 22px); }
+
+    .hero {
+      position: relative;
+      min-height: 570px;
+      display: grid;
+      align-items: center;
+      padding: 72px 0 54px;
+      background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 100%);
+      overflow: hidden;
+    }
+
+    .floating-icons {
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      overflow: hidden;
+    }
+
+    .floating-icon {
+      position: absolute;
+      opacity: 0;
+      animation: floatTech 9s ease-in-out infinite;
+      filter: drop-shadow(0 10px 18px rgba(37, 99, 235, .18));
+    }
+
+    @keyframes floatTech {
+      0%, 100% { transform: translateY(22px) rotate(0deg); opacity: 0; }
+      18%, 78% { opacity: .55; }
+      50% { transform: translateY(-28px) rotate(16deg); opacity: .85; }
+    }
+
+    .hero-grid {
+      position: relative;
+      z-index: 2;
+      display: grid;
+      grid-template-columns: 1fr 360px;
+      gap: 3rem;
+      align-items: center;
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: .55rem;
+      padding: .55rem .9rem;
+      border-radius: 999px;
+      color: var(--secondary-color);
+      background: rgba(37, 99, 235, .10);
+      border: 1px solid rgba(37, 99, 235, .16);
+      font-weight: 700;
+      margin-bottom: 1.35rem;
+    }
+
+    h1 {
+      font-size: clamp(2.45rem, 6vw, 4.7rem);
+      line-height: 1.06;
+      letter-spacing: -.075em;
+      font-weight: 900;
+      margin-bottom: 1.1rem;
+    }
+
+    .gradient-text {
+      background: linear-gradient(90deg, var(--primary-color), #7c3aed, var(--cyan));
+      -webkit-background-clip: text;
+      color: transparent;
+    }
+
+    .lead {
+      margin: 1.25rem 0 1.8rem;
+      color: var(--light-text);
+      font-size: clamp(1rem, 2vw, 1.16rem);
+      max-width: 800px;
+    }
+
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: .65rem;
+      min-height: 54px;
+      padding: 0 1.25rem;
+      border-radius: 999px;
+      border: 1px solid var(--primary-color);
+      font-weight: 700;
+      transition: transform .25s ease, box-shadow .25s ease, background .25s ease;
+    }
+
+    .btn.primary {
+      color: white;
+      background: var(--primary-color);
+      box-shadow: 0 16px 35px rgba(37, 99, 235, .28);
+    }
+
+    .btn.secondary {
+      color: var(--primary-color);
+      background: white;
+    }
+
+    .btn:hover {
+      transform: translateY(-3px);
+      box-shadow: var(--shadow-hover);
+    }
+
+    .exec-card {
+      border-radius: 1.4rem;
+      padding: 1.45rem;
+      background: rgba(255, 255, 255, .78);
+      backdrop-filter: blur(14px);
+      border: 1px solid rgba(147, 197, 253, .85);
+      box-shadow: var(--shadow);
+    }
+
+    .exec-profile {
+      display: grid;
+      grid-template-columns: 66px 1fr;
+      gap: .9rem;
+      align-items: center;
+      margin-bottom: 1.2rem;
+    }
+
+    .avatar {
+      width: 62px;
+      height: 62px;
+      border-radius: 18px;
+      display: grid;
+      place-items: center;
+      color: white;
+      font-weight: 900;
+      background: linear-gradient(135deg, var(--primary-color), #7c3aed);
+    }
+
+    .exec-name {
+      color: var(--text-color);
+      font-size: 1.08rem;
+      font-weight: 900;
+      line-height: 1.2;
+    }
+
+    .exec-role {
+      color: var(--light-text);
+      font-size: .86rem;
+      font-weight: 600;
+    }
+
+    .exec-progress {
+      text-align: center;
+      padding: 1.1rem;
+      border-radius: 1.1rem;
+      background: white;
+      border: 1px solid var(--border);
+    }
+
+    .exec-progress strong {
+      display: block;
+      color: var(--primary-color);
+      font-size: 2.6rem;
+      line-height: 1;
+      letter-spacing: -.08em;
+    }
+
+    .exec-progress span {
+      color: var(--light-text);
+      font-weight: 700;
+    }
+
+    .status-chip {
+      display: inline-flex;
+      margin-top: .8rem;
+      padding: .48rem .8rem;
+      border-radius: 999px;
+      background: #dcfce7;
+      color: #166534;
+      font-weight: 800;
+      font-size: .76rem;
+    }
+
+    .content-section {
+      padding: 5.2rem 0;
+    }
+
+    .content-section.alt {
+      background: var(--section-bg);
+    }
+
+    .section-title {
+      text-align: center;
+      margin-bottom: 3rem;
+    }
+
+    .section-title h2 {
+      font-size: clamp(2rem, 4vw, 3rem);
+      line-height: 1.15;
+      letter-spacing: -.06em;
+      margin-bottom: .7rem;
+    }
+
+    .section-title p {
+      max-width: 780px;
+      margin: 0 auto;
+      color: var(--light-text);
+    }
+
+    .stats {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 1.4rem;
+    }
+
+    .stat, .card, .panel, .info-card, .risk, .state, .check, .legend-item, .scenario, .bar-row {
+      border-radius: 1.4rem;
+      background: white;
+      border: 1px solid rgba(229, 231, 235, .85);
+      box-shadow: var(--shadow);
+      transition: transform .28s ease, box-shadow .28s ease, border-color .28s ease;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .stat::before, .card::before, .panel::before {
+      content: "";
+      position: absolute;
+      inset: 0 0 auto 0;
+      height: 4px;
+      background: linear-gradient(90deg, var(--primary-color), transparent);
+    }
+
+    .stat:hover, .card:hover, .panel:hover, .info-card:hover, .risk:hover, .state:hover, .check:hover, .legend-item:hover, .scenario:hover, .bar-row:hover {
+      transform: translateY(-8px);
+      box-shadow: var(--shadow-hover);
+      border-color: rgba(37,99,235,.32);
+    }
+
+    .stat {
+      min-height: 150px;
+      padding: 1.45rem;
+    }
+
+    .stat strong {
+      display: block;
+      color: var(--primary-color);
+      font-size: clamp(2rem, 4vw, 3rem);
+      line-height: 1;
+      letter-spacing: -.05em;
+      margin-bottom: .75rem;
+    }
+
+    .stat span {
+      color: var(--text-color);
+      font-weight: 800;
+    }
+
+    .stat small {
+      display: block;
+      color: var(--light-text);
+      margin-top: .35rem;
+      font-weight: 600;
+    }
+
+    .project-grid {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 1rem;
+    }
+
+    .info-card {
+      padding: 1.2rem;
+    }
+
+    .info-card b, .risk strong, .scenario strong {
+      display: block;
+      color: var(--text-color);
+      margin-bottom: .35rem;
+    }
+
+    .info-card span, .risk p, .scenario span {
+      color: var(--light-text);
+      font-weight: 600;
+    }
+
+    .panel {
+      padding: 1.7rem;
+    }
+
+    .panel-title {
+      color: var(--text-color);
+      font-size: clamp(1.35rem, 2vw, 1.75rem);
+      font-weight: 800;
+      letter-spacing: -.04em;
+      margin-bottom: .55rem;
+    }
+
+    .panel-sub {
+      color: var(--light-text);
+      margin-bottom: 1.2rem;
+    }
+
+    .grid-2 {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 1.4rem;
+    }
+
+    .grid-3, .scenario-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 1rem;
+    }
+
+    .workflow {
+      display: grid;
+      grid-template-columns: repeat(5, minmax(0, 1fr));
+      gap: .9rem;
+      margin-top: 1rem;
+    }
+
+    .state {
+      min-height: 96px;
+      display: grid;
+      place-items: center;
+      text-align: center;
+      padding: 1rem;
+      color: var(--primary-color);
+      font-weight: 900;
+    }
+
+    .state.warn {
+      background: #fef3c7;
+      color: #92400e;
+      border-color: #fde68a;
+    }
+
+    .state.ok {
+      background: #dcfce7;
+      color: #166534;
+      border-color: #bbf7d0;
+    }
+
+    .state.danger {
+      background: #fee2e2;
+      color: #991b1b;
+      border-color: #fecaca;
+    }
+
+    .pill {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 999px;
+      padding: .42rem .65rem;
+      background: #eff6ff;
+      color: var(--secondary-color);
+      border: 1px solid rgba(37,99,235,.12);
+      font-weight: 800;
+      font-size: .72rem;
+      white-space: nowrap;
+    }
+
+    .pill.ok, .pill.pass {
+      background: #dcfce7;
+      color: #166534;
+      border-color: #bbf7d0;
+    }
+
+    .pill.ko, .pill.fail {
+      background: #fee2e2;
+      color: #991b1b;
+      border-color: #fecaca;
+    }
+
+    .pill.warn {
+      background: #fef3c7;
+      color: #92400e;
+      border-color: #fde68a;
+    }
+
+    .pill.todo {
+      background: #dbeafe;
+      color: var(--secondary-color);
+      border-color: #bfdbfe;
+    }
+
+    .donut-row {
+      display: grid;
+      grid-template-columns: 230px 1fr;
+      gap: 1.4rem;
+      align-items: center;
+    }
+
+    .donut {
+      width: 220px;
+      height: 220px;
+      border-radius: 50%;
+      position: relative;
+      margin: 0 auto;
+      background: conic-gradient(var(--primary-color) 0 62.5%, #dbeafe 62.5% 100%);
+      display: grid;
+      place-items: center;
+    }
+
+    .donut::before {
+      content: "";
+      position: absolute;
+      inset: 54px;
+      border-radius: 50%;
+      background: white;
+    }
+
+    .donut-center {
+      position: relative;
+      z-index: 1;
+      text-align: center;
+    }
+
+    .donut-center strong {
+      display: block;
+      color: var(--primary-color);
+      font-size: 2rem;
+      line-height: 1;
+    }
+
+    .donut-center span {
+      color: var(--light-text);
+      font-size: .78rem;
+      font-weight: 700;
+    }
+
+    .donut.jira {
+      background: conic-gradient(var(--primary-color) 0 70%, var(--cyan) 70% 76%, var(--red) 76% 91%, var(--orange) 91% 96%, var(--purple) 96% 100%);
+    }
+
+    .donut.bugs {
+      background: conic-gradient(var(--orange) 0 56%, var(--red) 56% 67%, #fca5a5 67% 89%, var(--green) 89% 100%);
+    }
+
+    .donut.passrate {
+      background: conic-gradient(var(--green) 0 79%, var(--red) 79% 100%);
+    }
+
+    .legend {
+      display: grid;
+      gap: .75rem;
+    }
+
+    .legend-item {
+      display: grid;
+      grid-template-columns: auto 1fr auto;
+      gap: .75rem;
+      align-items: center;
+      padding: .9rem;
+    }
+
+    .legend-item small {
+      display: block;
+      color: var(--light-text);
+      font-weight: 600;
+    }
+
+    .dot {
+      width: 14px;
+      height: 14px;
+      border-radius: 5px;
+      background: var(--primary-color);
+    }
+
+    .dot.green { background: var(--green); }
+    .dot.red { background: var(--red); }
+    .dot.orange { background: var(--orange); }
+    .dot.yellow { background: var(--yellow); }
+    .dot.purple { background: var(--purple); }
+    .dot.cyan { background: var(--cyan); }
+
+    .coverage-card {
+      border-radius: 1.2rem;
+      padding: 1rem;
+      background: white;
+      border: 1px solid var(--border);
+      margin-bottom: .8rem;
+    }
+
+    .bar {
+      height: 12px;
+      border-radius: 999px;
+      overflow: hidden;
+      background: #dbeafe;
+      margin-top: .65rem;
+    }
+
+    .bar > span {
+      display: block;
+      height: 100%;
+      width: var(--w);
+      background: linear-gradient(90deg, var(--primary-color), var(--cyan));
+      border-radius: inherit;
+    }
+
+    .risk-list {
+      display: grid;
+      gap: .9rem;
+    }
+
+    .risk {
+      padding: 1rem;
+    }
+
+    .risk-head {
+      display: flex;
+      justify-content: space-between;
+      gap: 1rem;
+      align-items: flex-start;
+      margin-bottom: .45rem;
+    }
+
+    .bar-chart {
+      display: grid;
+      gap: .8rem;
+    }
+
+    .bar-row {
+      display: grid;
+      grid-template-columns: 185px 1fr 66px;
+      align-items: center;
+      gap: .9rem;
+      padding: .85rem;
+      color: var(--text-color);
+      font-weight: 800;
+    }
+
+    .track {
+      height: 14px;
+      border-radius: 999px;
+      overflow: hidden;
+      background: #dbeafe;
+    }
+
+    .fill {
+      display: block;
+      height: 100%;
+      width: var(--w);
+      border-radius: inherit;
+      background: linear-gradient(90deg, var(--primary-color), var(--cyan));
+    }
+
+    .value {
+      color: var(--primary-color);
+      font-weight: 900;
+      text-align: right;
+    }
+
+    .decision {
+      display: grid;
+      grid-template-columns: .9fr 1.1fr;
+      gap: 1.4rem;
+      align-items: stretch;
+    }
+
+    .decision-card {
+      border-radius: 1.4rem;
+      padding: 1.7rem;
+      background: linear-gradient(135deg, #fff, #eff6ff);
+      border: 1px solid var(--border);
+      box-shadow: var(--shadow);
+    }
+
+    .decision-badge {
+      display: inline-flex;
+      padding: .48rem .8rem;
+      border-radius: 999px;
+      background: #fee2e2;
+      color: #991b1b;
+      border: 1px solid #fecaca;
+      font-weight: 900;
+      margin-bottom: 1rem;
+    }
+
+    .decision-score {
+      color: #991b1b;
+      font-size: clamp(2rem, 5vw, 3.2rem);
+      font-weight: 900;
+      line-height: 1;
+      letter-spacing: -.07em;
+      margin-bottom: 1rem;
+    }
+
+    .checklist {
+      display: grid;
+      gap: .75rem;
+    }
+
+    .check {
+      display: flex;
+      justify-content: space-between;
+      gap: 1rem;
+      align-items: center;
+      padding: .9rem 1rem;
+      font-weight: 800;
+    }
+
+    .table-head {
+      display: flex;
+      justify-content: space-between;
+      gap: 1rem;
+      align-items: center;
+      margin-bottom: 1rem;
+    }
+
+    .filters {
+      display: flex;
+      gap: .7rem;
+      flex-wrap: wrap;
+      justify-content: flex-end;
+    }
+
+    .filters input, .filters select, #pageSize {
+      min-height: 42px;
+      border: 1px solid var(--border);
+      border-radius: 999px;
+      background: white;
+      color: var(--text-color);
+      padding: 0 1rem;
+      font-weight: 600;
+    }
+
+    .reset {
+      min-height: 42px;
+      border-radius: 999px;
+      border: 1px solid rgba(37,99,235,.2);
+      background: white;
+      color: var(--primary-color);
+      font-weight: 700;
+      padding: 0 1rem;
+      cursor: pointer;
+    }
+
+    .count {
+      color: var(--light-text);
+      font-weight: 700;
+    }
+
+    .table-wrap {
+      overflow: auto;
+      border-radius: 1.4rem;
+      background: white;
+      border: 1px solid rgba(229, 231, 235, .85);
+      box-shadow: var(--shadow);
+    }
+
+    table {
+      width: 100%;
+      min-width: 1120px;
+      border-collapse: separate;
+      border-spacing: 0;
+    }
+
+    th {
+      text-align: left;
+      padding: .9rem;
+      background: #eff6ff;
+      color: var(--text-color);
+      border-bottom: 1px solid rgba(37,99,235,.14);
+      font-size: .75rem;
+      letter-spacing: .04em;
+      text-transform: uppercase;
+      white-space: nowrap;
+    }
+
+    td {
+      padding: .9rem;
+      border-bottom: 1px solid rgba(37,99,235,.08);
+      color: var(--light-text);
+      font-size: .88rem;
+      vertical-align: top;
+      background: white;
+    }
+
+    tr:hover td { background: #f8fafc; }
+
+    .key {
+      color: var(--primary-color);
+      font-weight: 900;
+      white-space: nowrap;
+    }
+
+    .priority-high { color: #991b1b; font-weight: 900; }
+    .priority-medium { color: #92400e; font-weight: 900; }
+    .priority-low { color: #166534; font-weight: 900; }
+
+    .pagination {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: .8rem;
+      padding-top: 1rem;
+      color: var(--light-text);
+      font-weight: 700;
+      flex-wrap: wrap;
+    }
+
+    .pages {
+      display: flex;
+      gap: .4rem;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+
+    .pages button {
+      height: 34px;
+      min-width: 34px;
+      border: 1px solid rgba(37,99,235,.2);
+      background: white;
+      border-radius: 999px;
+      color: var(--primary-color);
+      font-weight: 800;
+      cursor: pointer;
+    }
+
+    .pages button.active {
+      background: var(--primary-color);
+      color: white;
+    }
+
+    .pages button:disabled {
+      opacity: .45;
+      cursor: not-allowed;
+    }
+
+    .bottom-actions {
+      padding: 3rem 0 5rem;
+      display: flex;
+      justify-content: center;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+
+    footer {
+      padding: 2rem 0;
+      text-align: center;
+      color: #cbd5e1;
+      background: #0f172a;
+    }
+
+    .fade-section {
+      opacity: 0;
+      transform: translateY(24px);
+      transition: opacity .7s ease, transform .7s ease;
+    }
+
+    .fade-section.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    @media (max-width: 1100px) {
+      .hero-grid, .grid-2, .decision, .donut-row { grid-template-columns: 1fr; }
+      .stats, .project-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      .workflow, .grid-3, .scenario-grid { grid-template-columns: 1fr; }
+      .exec-card { max-width: 520px; }
+    }
+
+    @media (max-width: 900px) {
+      .nav-inner { grid-template-columns: 1fr auto; }
+      .nav-links { display: none; }
+    }
+
+    @media (max-width: 768px) {
+      .container { width: min(100% - 1.25rem, var(--max-width)); }
+      .hero { padding-top: 48px; }
+      .stats, .project-grid { grid-template-columns: 1fr; }
+      .hero-actions, .bottom-actions { flex-direction: column; }
+      .btn { width: 100%; }
+      .bar-row { grid-template-columns: 1fr; }
+      .value { text-align: left; }
+      .table-head { flex-direction: column; align-items: stretch; }
+      .filters, .filters input, .filters select, .reset { width: 100%; }
+    }
+
+    @media (max-width: 480px) {
+      :root { --nav-height: 64px; }
+      .logo span:not(.logo-mark) { display: none; }
+      h1 { font-size: 2.35rem; }
+      .portfolio-link span { display: none; }
+    }
+  
+/* =========================================================
+   Corrections UX — Automatisation + rapports + pagination Jira
+   ========================================================= */
+.automation-scenarios {
+  gap: 1.25rem;
+  align-items: stretch;
+}
+
+.automation-scenarios .scenario {
+  min-height: 190px;
+  padding: 1.55rem;
+  display: grid;
+  grid-template-rows: auto auto 1fr;
+  gap: .75rem;
+  overflow: visible;
+  background:
+    radial-gradient(circle at 90% 0%, rgba(37,99,235,.10), transparent 36%),
+    #fff;
+}
+
+.automation-scenarios .scenario::before {
+  content: "";
+  position: absolute;
+  inset: 0 0 auto 0;
+  height: 4px;
+  background: linear-gradient(90deg, var(--scenario-color, var(--primary-color)), transparent);
+}
+
+.scenario-icon {
+  width: 48px;
+  height: 48px;
+  display: grid;
+  place-items: center;
+  border-radius: 16px;
+  color: var(--scenario-color, var(--primary-color));
+  background: color-mix(in srgb, var(--scenario-color, var(--primary-color)) 12%, white);
+  border: 1px solid color-mix(in srgb, var(--scenario-color, var(--primary-color)) 20%, white);
+  font-size: 1.25rem;
+  box-shadow: 0 12px 24px color-mix(in srgb, var(--scenario-color, var(--primary-color)) 14%, transparent);
+}
+
+.automation-scenarios .scenario strong {
+  font-size: 1.08rem;
+  line-height: 1.25;
+  letter-spacing: -.03em;
+  margin: 0;
+}
+
+.automation-scenarios .scenario span {
+  line-height: 1.65;
+}
+
+.report-panel {
+  overflow: visible;
+}
+
+.report-summary {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: .8rem;
+  margin-bottom: 1rem;
+}
+
+.report-mini-card {
+  padding: 1rem;
+  border-radius: 1.1rem;
+  background: #f8fafc;
+  border: 1px solid rgba(37,99,235,.10);
+}
+
+.report-mini-card b {
+  display: block;
+  color: var(--primary-color);
+  font-size: 1.55rem;
+  line-height: 1;
+  margin-bottom: .35rem;
+}
+
+.report-mini-card span {
+  color: var(--light-text);
+  font-weight: 700;
+  font-size: .82rem;
+}
+
+.report-table-wrap {
+  box-shadow: none;
+  border-radius: 1.15rem;
+}
+
+.report-table {
+  min-width: 760px;
+}
+
+.report-table td:first-child {
+  color: var(--text-color);
+  font-weight: 800;
+}
+
+.report-table tbody tr:last-child td {
+  background: #eff6ff;
+  color: var(--text-color);
+}
+
+.jira-panel {
+  overflow: visible;
+}
+
+.jira-table-wrap {
+  min-height: 640px;
+}
+
+.pages button {
+  transition: transform .2s ease, box-shadow .2s ease, background .2s ease;
+}
+
+.pages button:hover:not(:disabled) {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 22px rgba(37,99,235,.14);
+}
+
+@media (max-width: 1100px) {
+  .report-summary { grid-template-columns: 1fr; }
+  .jira-table-wrap { min-height: 580px; }
+}
+
+@media (max-width: 768px) {
+  .automation-scenarios .scenario { min-height: auto; }
+  .jira-table-wrap { min-height: 520px; }
+}
+
+  </style>
+</head>
+
+<body id="top">
+  <nav class="navbar" aria-label="Navigation dashboard Homey">
+    <div class="container nav-inner">
+      <a href="#top" class="logo" aria-label="Retour en haut">
+        <span class="logo-mark"><i class="fa-solid fa-chart-line"></i></span>
+        <span>Dashboard Homey</span>
+      </a>
+
+      <ul class="nav-links">
+        <li><a href="#infos" class="active">Infos</a></li>
+        <li><a href="#kpi">KPI</a></li>
+        <li><a href="#workflow">Workflow</a></li>
+        <li><a href="#coverage">Couverture</a></li>
+        <li><a href="#automation">Automatisation</a></li>
+        <li><a href="#risks">Risques</a></li>
+        <li><a href="#jira">Tickets</a></li>
+        <li><a href="#gonogo">GO/NO GO</a></li>
+      </ul>
+
+      <a class="portfolio-link" href="index.html"><i class="fa-solid fa-arrow-left"></i><span>Portfolio</span></a>
+    </div>
+  </nav>
+
+  <main>
+    <section class="hero">
+      <div class="floating-icons" aria-hidden="true"></div>
+
+      <div class="container hero-grid">
+        <div>
+          <div class="eyebrow"><i class="fa-solid fa-gauge-high"></i> Dashboard QA Homey</div>
+          <h1>Dashboard QA <span class="gradient-text">Homey</span></h1>
+          <p class="lead">Suivi qualité du projet Homey : tickets Jira/Xray, couverture des exigences, automatisation Robot Framework, anomalies, risques métier et décision GO / NO GO.</p>
+
+          <div class="hero-actions">
+            <a class="btn primary" href="#jira"><i class="fa-solid fa-table-list"></i> Voir les tickets Jira</a>
+            <a class="btn secondary" href="detailHomey.html"><i class="fa-solid fa-file-lines"></i> Détail projet</a>
+            <a class="btn secondary" href="rapport_qa_automatisation_robot_framework.html"><i class="fa-solid fa-robot"></i> Rapport automatisation</a>
+          </div>
+        </div>
+
+        <aside class="exec-card">
+          <div class="exec-profile">
+            <div class="avatar">MJ</div>
+            <div>
+              <div class="exec-name">Maxime Joannis</div>
+              <div class="exec-role">Ingénieur QA — Projet Homey</div>
+            </div>
+          </div>
+          <div class="exec-progress">
+            <strong>88%</strong>
+            <span>Taux d'avancement</span>
+            <div class="status-chip">Pipeline CI/CD en consolidation</div>
+          </div>
+        </aside>
+      </div>
+    </section>
+
+    <section id="infos" class="content-section fade-section">
+      <div class="container">
+        <div class="section-title">
+          <h2>Informations projet</h2>
+          <p>Contexte pédagogique, rôle QA et périmètre testé.</p>
+        </div>
+
+        <div class="project-grid">
+          <div class="info-card"><b>Projet</b><span>Homey</span></div>
+          <div class="info-card"><b>Contexte</b><span>Projet de fin de formation QA</span></div>
+          <div class="info-card"><b>Rôle</b><span>Ingénieur QA</span></div>
+          <div class="info-card"><b>Outils</b><span>Jira, Xray, Robot Framework</span></div>
+          <div class="info-card"><b>User Stories</b><span>2 stories principales</span></div>
+          <div class="info-card"><b>Campagnes</b><span>2 campagnes de tests</span></div>
+          <div class="info-card"><b>Bugs identifiés</b><span>9 anomalies documentées</span></div>
+          <div class="info-card"><b>Objectif</b><span>Démontrer une démarche QA complète</span></div>
+        </div>
+      </div>
+    </section>
+
+    <section id="kpi" class="content-section alt fade-section">
+      <div class="container">
+        <div class="section-title">
+          <h2>KPI qualité</h2>
+          <p>Indicateurs principaux du projet Homey.</p>
+        </div>
+
+        <div class="stats">
+          <div class="stat"><strong>62</strong><span>tickets Jira créés</span><small>Tests, bugs, campagnes, tâches et epic</small></div>
+          <div class="stat"><strong>48</strong><span>cas de tests Xray</span><small>Couverture fonctionnelle P1 + P2</small></div>
+          <div class="stat"><strong>30</strong><span>tests automatisés</span><small>Robot Framework + SeleniumLibrary</small></div>
+          <div class="stat"><strong>62,5%</strong><span>taux d'automatisation</span><small>30 tests auto / 48 tests totaux</small></div>
+        </div>
+      </div>
+    </section>
+
+    <section id="workflow" class="content-section fade-section">
+      <div class="container">
+        <div class="section-title">
+          <h2>Workflow métier de réservation</h2>
+          <p>Synthèse du cycle de vie fonctionnel d'une demande de réservation.</p>
+        </div>
+
+        <div class="workflow">
+          <div class="state">NOUVEAU</div>
+          <div class="state warn">ATTENTE DE PAIEMENT<br><small>hôte</small></div>
+          <div class="state">DISPONIBLE<br><small>voyageur</small></div>
+          <div class="state ok">PAYÉ</div>
+          <div class="state ok">RÉSERVÉ</div>
+        </div>
+        <div class="workflow">
+          <div class="state">NOUVEAU</div>
+          <div class="state danger">REFUSÉ</div>
+          <div class="state danger">ANNULÉ</div>
+          <div class="state">FRAIS / REMISES</div>
+          <div class="state">PAIEMENT HÔTE</div>
+        </div>
+      </div>
+    </section>
+
+    <section id="traceability" class="content-section alt fade-section">
+      <div class="container">
+        <div class="section-title">
+          <h2>Matrice de traçabilité</h2>
+          <p>Lien entre User Stories, exigences, tests, automatisation et anomalies.</p>
+        </div>
+
+        <div class="table-wrap">
+          <table>
+            <thead><tr><th>User Story</th><th>Exigence</th><th>Cas de test</th><th>Automatisé</th><th>Résultat</th><th>Anomalie liée</th></tr></thead>
+            <tbody>
+              <tr><td>US-P1</td><td>Voyageur connecté peut envoyer une demande</td><td>P1_CT01 à P1_CT06</td><td><span class="pill ok">Oui</span></td><td><span class="pill pass">PASS</span></td><td>-</td></tr>
+              <tr><td>US-P1</td><td>Visiteur non connecté ne peut pas finaliser la réservation</td><td>P1_CT07 à P1_CT10</td><td><span class="pill ok">Oui</span></td><td><span class="pill pass">PASS</span></td><td>-</td></tr>
+              <tr><td>US-P1</td><td>Dates futures et disponibles uniquement</td><td>P1_CT11 à P1_CT15</td><td><span class="pill todo">Partiel</span></td><td><span class="pill fail">Bug</span></td><td>BUG-001</td></tr>
+              <tr><td>US-P2</td><td>Hôte confirme une demande NOUVEAU</td><td>P2_CT01 à P2_CT08</td><td><span class="pill ok">Oui</span></td><td><span class="pill pass">PASS</span></td><td>-</td></tr>
+              <tr><td>US-P2</td><td>Statuts hôte / voyageur synchronisés</td><td>P2_CT09 à P2_CT14</td><td><span class="pill todo">Partiel</span></td><td><span class="pill fail">Bug</span></td><td>BUG-003 / BUG-005 / BUG-009</td></tr>
+              <tr><td>US-P2</td><td>Paiement et marquer comme payé</td><td>P2_CT15 à P2_CT24</td><td><span class="pill todo">Non</span></td><td><span class="pill pass">PASS</span></td><td>-</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <section id="coverage" class="content-section fade-section">
+      <div class="container">
+        <div class="section-title">
+          <h2>Couverture & répartition Jira</h2>
+          <p>Vision globale de la couverture métier et des tickets Jira / Xray.</p>
+        </div>
+
+        <div class="grid-2">
+          <div class="panel">
+            <div class="panel-title">Couverture des exigences</div>
+            <p class="panel-sub">Vision par User Story et exigences métier principales.</p>
+
+            <div class="coverage-card"><b>US-P1 — Faire une demande de réservation</b><p class="panel-sub">Connexion, dates, voyageurs, message, création réservation et message hôte.</p><div class="bar" style="--w:100%"><span></span></div></div>
+            <div class="coverage-card"><b>US-P2 — Traiter une demande de réservation</b><p class="panel-sub">Confirmation, refus, frais, remises, paiement, annulation et statuts.</p><div class="bar" style="--w:100%"><span></span></div></div>
+            <div class="coverage-card"><b>Couverture globale</b><p class="panel-sub">Traçabilité entre User Stories, exigences, cas de tests et anomalies.</p><div class="bar" style="--w:100%"><span></span></div></div>
+          </div>
+
+          <div class="panel">
+            <div class="panel-title">Répartition Jira</div>
+            <p class="panel-sub">Distribution des tickets créés dans Jira / Xray.</p>
+            <div class="donut-row">
+              <div class="donut jira"><div class="donut-center"><strong>62</strong><span>tickets<br>au total</span></div></div>
+              <div class="legend">
+                <div class="legend-item"><span class="dot"></span><div>Tests Xray<small>48 cas de tests</small></div><b>84,2%</b></div>
+                <div class="legend-item"><span class="dot red"></span><div>Bugs<small>9 anomalies</small></div><b>7,0%</b></div>
+                <div class="legend-item"><span class="dot orange"></span><div>Campagnes<small>2 campagnes</small></div><b>3,5%</b></div>
+                <div class="legend-item"><span class="dot cyan"></span><div>Tâches<small>2 tâches</small></div><b>3,5%</b></div>
+                <div class="legend-item"><span class="dot purple"></span><div>Epic<small>1 epic</small></div><b>1,8%</b></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="automation" class="content-section alt fade-section">
+      <div class="container">
+        <div class="section-title">
+          <h2>Automatisation Robot Framework</h2>
+          <p>Synthèse des scénarios automatisés et des suites Robot Framework.</p>
+        </div>
+
+        <div class="scenario-grid automation-scenarios">
+          <div class="scenario" style="--scenario-color:#2563eb">
+            <div class="scenario-icon"><i class="fa-solid fa-user-lock"></i></div>
+            <strong>Visiteur non connecté</strong>
+            <span>Contrôle qu’un utilisateur non authentifié peut démarrer le parcours, mais reste bloqué au moment de finaliser la demande.</span>
+          </div>
+          <div class="scenario" style="--scenario-color:#22c55e">
+            <div class="scenario-icon"><i class="fa-solid fa-user-check"></i></div>
+            <strong>Voyageur connecté</strong>
+            <span>Valide la création d’une demande de réservation avec des données conformes et des contrôles de saisie attendus.</span>
+          </div>
+          <div class="scenario" style="--scenario-color:#a855f7">
+            <div class="scenario-icon"><i class="fa-solid fa-house-circle-check"></i></div>
+            <strong>Confirmation par l’hôte</strong>
+            <span>Vérifie le traitement d’une demande et la bascule de statut vers l’attente de paiement ou la disponibilité.</span>
+          </div>
+        </div>
+
+        <div class="grid-2" style="margin-top:1.4rem">
+          <div class="panel">
+            <div class="panel-title">Taux d'automatisation</div>
+            <div class="donut-row">
+              <div class="donut"><div class="donut-center"><strong>62,5%</strong><span>taux<br>d'automatisation</span></div></div>
+              <div class="legend">
+                <div class="legend-item"><span class="dot green"></span><div>Tests automatisés<small>Robot Framework + SeleniumLibrary</small></div><b>30</b></div>
+                <div class="legend-item"><span class="dot"></span><div>Tests manuels Xray<small>Cas non automatisés</small></div><b>18</b></div>
+                <div class="legend-item"><span class="dot green"></span><div>Taux de réussite auto<small>Rapports Robot Framework</small></div><b>100%</b></div>
+              </div>
+            </div>
+          </div>
+
+          <div class="panel report-panel">
+            <div class="panel-title">Rapports d'exécution automatisée</div>
+            <p class="panel-sub">Lecture rapide des suites Robot Framework : volume exécuté, réussite, échec et statut final.</p>
+
+            <div class="report-summary" aria-label="Synthèse des rapports automatisés">
+              <div class="report-mini-card"><b>3</b><span>suites automatisées</span></div>
+              <div class="report-mini-card"><b>30</b><span>tests exécutés</span></div>
+              <div class="report-mini-card"><b>100%</b><span>taux de réussite</span></div>
+            </div>
+
+            <div class="table-wrap report-table-wrap">
+              <table class="report-table">
+                <thead><tr><th>Suite</th><th>Tests</th><th>PASS</th><th>FAIL</th><th>Résultat</th></tr></thead>
+                <tbody>
+                  <tr><td>Demande réservation non connecté</td><td>10</td><td class="priority-low">10</td><td>0</td><td><span class="pill pass">PASS</span></td></tr>
+                  <tr><td>Demande réservation connecté</td><td>10</td><td class="priority-low">10</td><td>0</td><td><span class="pill pass">PASS</span></td></tr>
+                  <tr><td>Confirmer demande réservation</td><td>10</td><td class="priority-low">10</td><td>0</td><td><span class="pill pass">PASS</span></td></tr>
+                  <tr><td><b>Total automatisation</b></td><td><b>30</b></td><td class="priority-low"><b>30</b></td><td><b>0</b></td><td><span class="pill ok">100%</span></td></tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="anomalies" class="content-section fade-section">
+      <div class="container">
+        <div class="section-title">
+          <h2>Anomalies & efficacité QA</h2>
+          <p>Qualification réelle des anomalies et lecture synthétique des indicateurs de test.</p>
+        </div>
+
+        <div class="grid-2">
+          <div class="panel">
+            <div class="panel-title">Répartition des bugs par sévérité</div>
+            <div class="donut-row">
+              <div class="donut bugs"><div class="donut-center"><strong>9</strong><span>bugs<br>identifiés</span></div></div>
+              <div class="legend">
+                <div class="legend-item"><span class="dot red"></span><div>Bloquante<small>Messagerie, historique, flux après 9 demandes</small></div><b>5</b></div>
+                <div class="legend-item"><span class="dot orange"></span><div>Critique<small>Impossible de créer un compte hôte</small></div><b>1</b></div>
+                <div class="legend-item"><span class="dot yellow"></span><div>Majeure<small>Message hôte non reçu, remise invisible</small></div><b>2</b></div>
+                <div class="legend-item"><span class="dot green"></span><div>Mineure<small>Calendrier impossible à fermer</small></div><b>1</b></div>
+              </div>
+            </div>
+          </div>
+
+          <div class="panel">
+            <div class="panel-title">Graphique KPI — efficacité QA</div>
+            <div class="bar-chart">
+              <div class="bar-row"><span>Couverture</span><div class="track"><span class="fill" style="--w:100%"></span></div><span class="value">100%</span></div>
+              <div class="bar-row"><span>Automatisation</span><div class="track"><span class="fill" style="--w:62.5%"></span></div><span class="value">62,5%</span></div>
+              <div class="bar-row"><span>Succès Robot</span><div class="track"><span class="fill" style="--w:100%"></span></div><span class="value">100%</span></div>
+              <div class="bar-row"><span>Risque release</span><div class="track"><span class="fill" style="--w:78%"></span></div><span class="value">Élevé</span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="risks" class="content-section alt fade-section">
+      <div class="container">
+        <div class="section-title">
+          <h2>Risques projet</h2>
+          <p>Vision QA des risques métier observés ou couverts par les tests.</p>
+        </div>
+
+        <div class="grid-2">
+          <div class="panel">
+            <div class="risk-list">
+              <div class="risk"><div class="risk-head"><strong>Messagerie voyageur → hôte non transmise</strong><span class="pill ko">Bloquant</span></div><p>Impact direct sur la communication et le suivi d'une demande de réservation.</p></div>
+              <div class="risk"><div class="risk-head"><strong>Demandes non reçues par l'hôte au-delà de 9 réservations</strong><span class="pill ko">Bloquant</span></div><p>Le flux métier devient instable dès qu'un seuil est atteint.</p></div>
+              <div class="risk"><div class="risk-head"><strong>Création de compte hôte impossible</strong><span class="pill warn">Critique</span></div><p>Un nouvel hôte ne peut pas entrer dans le système, ce qui bloque le périmètre hôte.</p></div>
+              <div class="risk"><div class="risk-head"><strong>Remise non visible pour l'hôte</strong><span class="pill warn">Majeur</span></div><p>La règle métier de remise ne peut pas être appliquée depuis l'interface.</p></div>
+            </div>
+          </div>
+
+          <div class="panel">
+            <div class="panel-title">KPI — Répartition de l'effort QA</div>
+            <div class="bar-chart">
+              <div class="bar-row"><span>Conception des tests</span><div class="track"><span class="fill" style="--w:28%"></span></div><span class="value">28%</span></div>
+              <div class="bar-row"><span>Exécution manuelle</span><div class="track"><span class="fill" style="--w:18%"></span></div><span class="value">18%</span></div>
+              <div class="bar-row"><span>Automatisation Robot</span><div class="track"><span class="fill" style="--w:22%"></span></div><span class="value">22%</span></div>
+              <div class="bar-row"><span>Pipeline CI/CD</span><div class="track"><span class="fill" style="--w:12%"></span></div><span class="value">12%</span></div>
+              <div class="bar-row"><span>Analyse anomalies</span><div class="track"><span class="fill" style="--w:15%"></span></div><span class="value">15%</span></div>
+              <div class="bar-row"><span>Reporting QA</span><div class="track"><span class="fill" style="--w:5%"></span></div><span class="value">5%</span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="jira" class="content-section fade-section">
+      <div class="container">
+        <div class="section-title">
+          <h2>Liste des tickets Jira / Xray</h2>
+          <p>Tableau dynamique avec recherche, filtres et pagination.</p>
+        </div>
+
+        <div class="panel jira-panel">
+          <div class="table-head">
+            <div><div class="panel-title">Tickets Jira / Xray</div><div class="count" id="count">62 tickets trouvés</div></div>
+            <div class="filters">
+              <input id="q" placeholder="🔍 Rechercher par clé, résumé..." />
+              <select id="type"><option value="">Type : Tous</option><option>Epic</option><option>Tâche</option><option>Bug</option><option>Campagne</option><option>Test</option></select>
+              <select id="story"><option value="">Story : Toutes</option><option>P1 - Faire une demande</option><option>P2 - Traiter une demande</option><option>Global</option></select>
+              <select id="status"><option value="">Statut : Tous</option><option>DONE</option><option>TO DO</option><option>IN PROGRESS</option><option>PASS</option></select>
+              <button class="reset" id="reset">Réinitialiser</button>
+            </div>
+          </div>
+
+          <div class="table-wrap jira-table-wrap">
+            <table>
+              <thead><tr><th>Clé</th><th>Type</th><th>Résumé</th><th>Story</th><th>Statut</th><th>Priorité</th><th>Assigné à</th><th>Créé le</th><th></th></tr></thead>
+              <tbody id="ticketRows"></tbody>
+            </table>
+          </div>
+
+          <div class="pagination">
+            <div>Afficher <select id="pageSize"><option>10</option><option>20</option><option>50</option></select> lignes par page</div>
+            <div class="pages" id="pages"></div>
+            <div id="range">1 - 10 sur 62 tickets</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="gonogo" class="content-section alt fade-section">
+      <div class="container">
+        <div class="section-title">
+          <h2>Décision GO / NO GO</h2>
+          <p>Avis QA adapté au contexte : application d'entraînement, bugs identifiés mais pas de correction prévue.</p>
+        </div>
+
+        <div class="decision">
+          <div class="decision-card">
+            <span class="decision-badge">🔴 Décision QA</span>
+            <div class="decision-score">NO GO fonctionnel</div>
+            <p>Le périmètre fonctionnel est couvert et les tests automatisés sont stables. Toutefois, la présence de plusieurs anomalies bloquantes sur la messagerie, la réception des demandes et le flux de réservation rendrait la livraison risquée dans un contexte réel.</p>
+          </div>
+
+          <div class="checklist">
+            <div class="check"><span>Cas de tests conçus</span><span class="pill ok">OK</span></div>
+            <div class="check"><span>Campagnes exécutées</span><span class="pill ok">OK</span></div>
+            <div class="check"><span>Tests automatisés Robot Framework</span><span class="pill ok">OK</span></div>
+            <div class="check"><span>Couverture des exigences</span><span class="pill ok">100%</span></div>
+            <div class="check"><span>Anomalies bloquantes identifiées</span><span class="pill ko">Risque fort</span></div>
+            <div class="check"><span>Corrections prévues</span><span class="pill ko">Non applicable</span></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <div class="container bottom-actions">
+      <a class="btn primary" href="detailHomey.html"><i class="fa-solid fa-file-lines"></i> Voir le détail projet</a>
+      <a class="btn secondary" href="index.html"><i class="fa-solid fa-arrow-left"></i> Retour au portfolio</a>
+    </div>
+  </main>
+
+  <footer>© 2026 Maxime Joannis — Dashboard QA Homey</footer>
+
+  <script>
+    const base = [
+      ['HOMEY-1','Epic','Epic - Parcours réservation','Global','DONE','Élevée','Maxime J.','02/05/2026'],
+      ['HOMEY-2','Tâche','Faire une demande de réservation','Global','DONE','Moyenne','Maxime J.','02/05/2026'],
+      ['HOMEY-3','Tâche','Traiter une demande de réservation','Global','DONE','Moyenne','Maxime J.','02/05/2026'],
+      ['BUG-001','Bug','Impossible de fermer le calendrier après sélection de date','P1 - Faire une demande','TO DO','Mineure','Maxime J.','14/05/2026'],
+      ['BUG-002','Bug','Impossible de créer un compte hôte','P2 - Traiter une demande','TO DO','Critique','Maxime J.','14/05/2026'],
+      ['BUG-003','Bug','L’hôte ne reçoit aucun message suite à une demande de réservation','P1 - Faire une demande','TO DO','Majeure','Maxime J.','15/05/2026'],
+      ['BUG-004','Bug','Le bouton “Appliquer une remise” n’est pas visible','P2 - Traiter une demande','TO DO','Majeure','Maxime J.','15/05/2026'],
+      ['BUG-005','Bug','Échec de transmission de la messagerie voyageur vers l’hôte','P1 - Faire une demande','TO DO','Bloquante','Maxime J.','16/05/2026'],
+      ['BUG-006','Bug','Historique de messagerie voyageur invisible dans l’interface','P1 - Faire une demande','TO DO','Bloquante','Maxime J.','16/05/2026'],
+      ['BUG-007','Bug','Blocage du flux de réservation voyageur après la 9ème demande','P1 - Faire une demande','TO DO','Bloquante','Maxime J.','16/05/2026'],
+      ['BUG-008','Bug','Non-réception des demandes par l’hôte au-delà du seuil de 9','P2 - Traiter une demande','TO DO','Bloquante','Maxime J.','17/05/2026'],
+      ['BUG-009','Bug','L’hôte ne reçoit pas les messages envoyés par le voyageur','P1 - Faire une demande','TO DO','Bloquante','Maxime J.','17/05/2026'],
+      ['HOMEY-8','Campagne','Campagne - Exécution Sprint 1','Global','DONE','Moyenne','Maxime J.','18/05/2026'],
+      ['HOMEY-9','Campagne','Campagne - Exécution Sprint 2','Global','IN PROGRESS','Moyenne','Maxime J.','21/05/2026']
+    ];
+
+    const tests = [];
+    const p1 = ['Connexion obligatoire','Création demande valide','Date de fin supérieure','Date passée refusée','Période réservée bloquée','Nombre voyageurs obligatoire','Message hôte obligatoire','Notification message hôte','Création réservation hôte','Contrôle disponibilité','Données invalides refusées','Visiteur non connecté bloqué'];
+    const p2 = ['Accès demandes hôte','Acceptation réservation','Refus réservation','Ajout frais complémentaires','Application remise','Confirmation disponibilité','Mise à jour statut','Notification voyageur','Paiement après acceptation','Annulation selon statut','Historique conservé','Action non autorisée bloquée'];
+
+    for (let i = 0; i < 48; i++) {
+      const n = i + 14;
+      const isP1 = i < 24;
+      const label = isP1 ? p1[i % p1.length] : p2[i % p2.length];
+      const auto = i < 30 ? 'AUTO' : 'MANUEL';
+      tests.push([
+        `HOMEY-${n}`,
+        'Test',
+        `${isP1 ? 'P1' : 'P2'}_CT${String((i % 24) + 1).padStart(2, '0')} - ${label} (${auto})`,
+        isP1 ? 'P1 - Faire une demande' : 'P2 - Traiter une demande',
+        i % 7 === 0 ? 'TO DO' : 'PASS',
+        i % 5 === 0 ? 'Élevée' : 'Moyenne',
+        'Maxime J.',
+        `${String(10 + (i % 14)).padStart(2, '0')}/05/2026`
+      ]);
+    }
+
+    const tickets = [...base, ...tests];
+    let page = 1;
+
+    const tbody = document.getElementById('ticketRows');
+    const q = document.getElementById('q');
+    const type = document.getElementById('type');
+    const story = document.getElementById('story');
+    const status = document.getElementById('status');
+    const pages = document.getElementById('pages');
+    const range = document.getElementById('range');
+    const count = document.getElementById('count');
+    const pageSize = document.getElementById('pageSize');
+
+    function badgeStatus(s) {
+      if (s === 'DONE') return `<span class="pill ok">${s}</span>`;
+      if (s === 'PASS') return `<span class="pill pass">${s}</span>`;
+      if (s === 'IN PROGRESS') return `<span class="pill warn">${s}</span>`;
+      return `<span class="pill todo">${s}</span>`;
+    }
+
+    function prio(p) {
+      const cls = ['Bloquante','Critique','Élevée'].includes(p) ? 'priority-high' : ['Majeure','Moyenne'].includes(p) ? 'priority-medium' : 'priority-low';
+      const icon = ['Bloquante','Critique','Élevée'].includes(p) ? '↟' : ['Majeure','Moyenne'].includes(p) ? '=' : '↓';
+      return `<span class="${cls}">${icon} ${p}</span>`;
+    }
+
+    function filtered() {
+      const term = q.value.toLowerCase();
+      return tickets.filter(t =>
+        (!term || t.join(' ').toLowerCase().includes(term)) &&
+        (!type.value || t[1] === type.value) &&
+        (!story.value || t[3] === story.value) &&
+        (!status.value || t[4] === status.value)
+      );
+    }
+
+    function render() {
+      const data = filtered();
+      const size = +pageSize.value;
+      const totalPages = Math.max(1, Math.ceil(data.length / size));
+      if (page > totalPages) page = totalPages;
+
+      const start = (page - 1) * size;
+      const chunk = data.slice(start, start + size);
+
+      tbody.innerHTML = chunk.map(t => `
+        <tr>
+          <td class="key">${t[0]}</td>
+          <td>${t[1]}</td>
+          <td>${t[2]}</td>
+          <td>${t[3]}</td>
+          <td>${badgeStatus(t[4])}</td>
+          <td>${prio(t[5])}</td>
+          <td>${t[6]}</td>
+          <td>${t[7]}</td>
+          <td class="key">•••</td>
+        </tr>
+      `).join('');
+
+      count.textContent = `${data.length} tickets trouvés`;
+      range.textContent = data.length ? `${start + 1} - ${Math.min(start + size, data.length)} sur ${data.length} tickets` : '0 ticket';
+
+      pages.innerHTML =
+        `<button type="button" ${page === 1 ? 'disabled' : ''} data-page="1">«</button>
+         <button type="button" ${page === 1 ? 'disabled' : ''} data-page="${Math.max(1, page - 1)}">‹</button>` +
+        Array.from({ length: totalPages }, (_, i) =>
+          `<button type="button" class="${page === i + 1 ? 'active' : ''}" data-page="${i + 1}">${i + 1}</button>`
+        ).join('') +
+        `<button type="button" ${page === totalPages ? 'disabled' : ''} data-page="${Math.min(totalPages, page + 1)}">›</button>
+         <button type="button" ${page === totalPages ? 'disabled' : ''} data-page="${totalPages}">»</button>`;
+    }
+
+    [q, type, story, status, pageSize].forEach(el => {
+      el.addEventListener('input', () => {
+        page = 1;
+        render();
+      });
+    });
+
+    pages.addEventListener('click', event => {
+      const button = event.target.closest('button[data-page]');
+      if (!button || button.disabled) return;
+
+      event.preventDefault();
+      page = Number(button.dataset.page);
+      render();
+    });
+
+    document.getElementById('reset').onclick = () => {
+      q.value = '';
+      type.value = '';
+      story.value = '';
+      status.value = '';
+      page = 1;
+      render();
+    };
+
+    function createFloatingIcons() {
+      const icons = [
+        ["fa-solid fa-chart-line", "#2563eb"],
+        ["fa-solid fa-check-double", "#22c55e"],
+        ["fa-solid fa-robot", "#7c3aed"],
+        ["fa-solid fa-bug", "#ef4444"],
+        ["fa-solid fa-triangle-exclamation", "#fb923c"],
+        ["fa-solid fa-table-list", "#38bdf8"],
+        ["fa-solid fa-code-branch", "#a855f7"]
+      ];
+
+      const wrapper = document.querySelector(".floating-icons");
+      wrapper.innerHTML = "";
+
+      icons.forEach(([icon, color], index) => {
+        const element = document.createElement("i");
+        element.className = `${icon} floating-icon`;
+        element.style.color = color;
+        element.style.left = `${8 + Math.random() * 84}%`;
+        element.style.top = `${12 + Math.random() * 72}%`;
+        element.style.fontSize = `${1.3 + Math.random() * 1.7}rem`;
+        element.style.animationDelay = `${index * .65}s`;
+        element.style.animationDuration = `${7 + Math.random() * 5}s`;
+        wrapper.appendChild(element);
+      });
+    }
+
+    function initScrollEffects() {
+      const navbar = document.querySelector(".navbar");
+      const sections = document.querySelectorAll("main section[id]");
+      const navLinks = document.querySelectorAll(".nav-links a");
+
+      window.addEventListener("scroll", () => {
+        navbar.classList.toggle("scrolled", window.scrollY > 20);
+
+        let current = "infos";
+        sections.forEach(section => {
+          const top = section.offsetTop - 120;
+          if (window.scrollY >= top) current = section.id;
+        });
+
+        navLinks.forEach(link => {
+          link.classList.toggle("active", link.getAttribute("href") === `#${current}`);
+        });
+      });
+    }
+
+    function initRevealAnimations() {
+      const observer = new IntersectionObserver(entries => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) entry.target.classList.add("visible");
+        });
+      }, { threshold: .14 });
+
+      document.querySelectorAll(".fade-section").forEach(section => observer.observe(section));
+    }
+
+    render();
+    createFloatingIcons();
+    initScrollEffects();
+    initRevealAnimations();
+  </script>
+</body>
+</html>

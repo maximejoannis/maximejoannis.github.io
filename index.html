@@ -1,1253 +1,1278 @@
 <!DOCTYPE html>
 <html lang="fr">
-  <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Maxime Joannis - Portfolio QA</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link rel="stylesheet" href="style-portfolio-maximejoannis.css">
-    <noscript>
-      <style>
-        #loader { display: none !important; }
-        .content-section { display: block !important; opacity: 1 !important; }
-      </style>
-    </noscript>
-  </head>
-  <body>
-    <div id="loader">
-      <div class="qa-logo">
-        <div class="gear"></div>
-        <div class="scan-ring"></div>
-      </div>
-      <div style="font-size: 1.4rem; font-weight: 700; margin-top: 20px;">EXECUTION_INITIALIZATION...</div>
-      <div class="build-panel" aria-hidden="true">
-        <div class="build-row">
-          <span class="build-label">BUILD</span>
-          <span class="build-state" id="buildState">RUNNING</span>
-          <span class="build-icon" id="buildIcon"><i class="fas fa-spinner"></i></span>
-        </div>
-        <div class="build-bar" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0">
-          <div class="build-bar__fill" id="buildFill"></div>
-        </div>
-      </div>
-      <div class="loader-log-container">
-        <div class="log-line" id="log-1"></div>
-        <div class="log-line" id="log-2"></div>
-        <div class="log-line" id="log-3"></div>
-      </div>
-      <div class="loader-scan"></div>
-      <div class="loader-text">STATUS: RUNNING TESTS...</div>
-    </div>
-    <aside>
-      <div class="profile-block">
-        <div class="profile-avatar">MJ</div>
-        <div class="profile-text">
-          <div class="profile-name">Maxime Joannis</div>
-          <div class="profile-role">Ingénieur QA</div>
-        </div>
-      </div>
-      <nav>
-        <ul id="menu">
-          <li><a class="nav-link active-link" data-target="home"><i class="fas fa-home"></i> Accueil</a></li>
-          <li><a class="nav-link" data-target="about"><i class="fas fa-user-astronaut"></i> A propos de moi</a></li>
-          <li><a class="nav-link" data-target="formation"><i class="fas fa-graduation-cap"></i> Formation Test Academy</a></li>
-          <li><a class="nav-link" data-target="projects"><i class="fas fa-rocket"></i> Projets QA</a></li>
-          <li><a class="nav-link" data-target="experience"><i class="fas fa-briefcase"></i> Expériences professionnelles</a></li>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Portfolio QA de Maxime Joannis — Tests fonctionnels, automatisation Playwright, tableaux de bord QA, CI/CD et projets QA : Homey, AmnAuditor, E-commerce Sauce." />
+  <meta name="keywords" content="Maxime Joannis, Portfolio QA, Testeur QA, ISTQB, Playwright, CI/CD, Tests fonctionnels, Homey, AmnAuditor, SauceDemo" />
+  <meta name="author" content="Maxime Joannis" />
+  <title>Maxime Joannis — Portfolio QA</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" />
+
+  <style>
+    :root {
+      --primary-color: #2563eb;
+      --secondary-color: #1e40af;
+      --text-color: #1f2937;
+      --light-text: #6b7280;
+      --background: #ffffff;
+      --section-bg: #f3f4f6;
+      --card-bg: #ffffff;
+      --border: #e5e7eb;
+      --green: #22c55e;
+      --purple: #a855f7;
+      --orange: #fb923c;
+      --cyan: #38bdf8;
+      --red: #ef4444;
+      --shadow: 0 18px 45px rgba(15, 23, 42, .10);
+      --shadow-hover: 0 28px 70px rgba(37, 99, 235, .18);
+      --radius: 1rem;
+      --nav-height: 70px;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: "Poppins", system-ui, sans-serif;
+      color: var(--text-color);
+      background: var(--background);
+      line-height: 1.7;
+      overflow-x: hidden;
+    }
+
+    a { color: inherit; text-decoration: none; }
+    button { font-family: inherit; }
+    .container { width: min(1180px, calc(100% - 2rem)); margin: 0 auto; }
+
+    .navbar {
+      position: fixed;
+      inset: 0 0 auto 0;
+      z-index: 1000;
+      height: var(--nav-height);
+      background: rgba(255, 255, 255, .95);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid rgba(229, 231, 235, .8);
+      transition: box-shadow .25s ease, background .25s ease;
+    }
+
+    .navbar.scrolled {
+      box-shadow: 0 12px 38px rgba(15, 23, 42, .08);
+      background: rgba(255, 255, 255, .98);
+    }
+
+    .nav-inner {
+      height: 100%;
+      display: grid;
+      grid-template-columns: 1fr auto 1fr;
+      align-items: center;
+      gap: 1.4rem;
+    }
+
+    .logo {
+      display: inline-flex;
+      align-items: center;
+      gap: .65rem;
+      color: var(--primary-color);
+      font-weight: 800;
+      letter-spacing: -.04em;
+    }
+
+    .logo-mark {
+      width: 42px;
+      height: 42px;
+      border-radius: 14px;
+      display: grid;
+      place-items: center;
+      color: #fff;
+      background: linear-gradient(135deg, var(--primary-color), #7c3aed);
+      box-shadow: 0 12px 28px rgba(37, 99, 235, .25);
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 2rem;
+      list-style: none;
+      color: var(--light-text);
+      font-weight: 600;
+    }
+
+    .nav-links a {
+      position: relative;
+      transition: color .25s ease;
+    }
+
+    .nav-links a::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      bottom: -.35rem;
+      width: 0;
+      height: 2px;
+      background: var(--primary-color);
+      border-radius: 999px;
+      transition: width .25s ease;
+    }
+
+    .nav-links a:hover,
+    .nav-links a.active { color: var(--primary-color); }
+    .nav-links a:hover::after,
+    .nav-links a.active::after { width: 100%; }
+
+    .language-switcher {
+      justify-self: end;
+      display: flex;
+      gap: .35rem;
+      padding: .25rem;
+      background: #fff;
+      border: 1px solid var(--border);
+      border-radius: 999px;
+    }
+
+    .lang-btn {
+      border: 1px solid transparent;
+      border-radius: 999px;
+      padding: .42rem .7rem;
+      background: transparent;
+      color: var(--light-text);
+      font-weight: 700;
+      cursor: pointer;
+      transition: .25s ease;
+    }
+
+    .lang-btn:hover { background: var(--section-bg); }
+    .lang-btn.active {
+      color: var(--primary-color);
+      border-color: var(--primary-color);
+      background: #eff6ff;
+    }
+
+    section { padding: 6rem 0; }
+
+    .section-title {
+      text-align: center;
+      margin-bottom: 3rem;
+    }
+
+    .section-title h2 {
+      font-size: clamp(2rem, 4vw, 3rem);
+      line-height: 1.15;
+      letter-spacing: -.06em;
+      margin-bottom: .7rem;
+    }
+
+    .section-title p {
+      max-width: 760px;
+      margin: 0 auto;
+      color: var(--light-text);
+    }
+
+    .hero {
+      min-height: 100vh;
+      position: relative;
+      display: grid;
+      align-items: center;
+      padding-top: var(--nav-height);
+      background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 100%);
+      overflow: hidden;
+    }
+
+    .floating-icons {
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      overflow: hidden;
+    }
+
+    .floating-icon {
+      position: absolute;
+      opacity: 0;
+      animation: floatTech 9s ease-in-out infinite;
+      filter: drop-shadow(0 10px 18px rgba(37, 99, 235, .18));
+    }
+
+    @keyframes floatTech {
+      0%, 100% { transform: translateY(22px) rotate(0deg); opacity: 0; }
+      18%, 78% { opacity: .55; }
+      50% { transform: translateY(-28px) rotate(16deg); opacity: .85; }
+    }
+
+    .hero-grid {
+      position: relative;
+      z-index: 2;
+      display: grid;
+      grid-template-columns: 1fr 1.05fr;
+      gap: 3rem;
+      align-items: center;
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: .55rem;
+      padding: .55rem .9rem;
+      border-radius: 999px;
+      color: var(--secondary-color);
+      background: rgba(37, 99, 235, .10);
+      border: 1px solid rgba(37, 99, 235, .16);
+      font-weight: 700;
+      margin-bottom: 1.35rem;
+    }
+
+    .typing {
+      min-height: 4.2rem;
+      font-size: clamp(2.35rem, 6vw, 4.55rem);
+      line-height: 1.06;
+      letter-spacing: -.075em;
+      font-weight: 900;
+    }
+
+    .gradient-text {
+      background: linear-gradient(90deg, var(--primary-color), #7c3aed, var(--cyan));
+      -webkit-background-clip: text;
+      color: transparent;
+    }
+
+    .cursor {
+      display: inline-block;
+      width: 3px;
+      height: .9em;
+      background: var(--primary-color);
+      margin-left: .15rem;
+      vertical-align: -.08em;
+      animation: blink .8s infinite;
+    }
+
+    @keyframes blink { 50% { opacity: 0; } }
+
+    .lead {
+      margin: 1.25rem 0 1.8rem;
+      color: var(--light-text);
+      font-size: clamp(1rem, 2vw, 1.16rem);
+      max-width: 720px;
+    }
+
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+      margin-bottom: 1.7rem;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: .65rem;
+      min-height: 54px;
+      padding: 0 1.25rem;
+      border-radius: 999px;
+      border: 1px solid var(--primary-color);
+      font-weight: 700;
+      transition: transform .25s ease, box-shadow .25s ease, background .25s ease;
+    }
+
+    .btn.primary {
+      color: white;
+      background: var(--primary-color);
+      box-shadow: 0 16px 35px rgba(37, 99, 235, .28);
+    }
+
+    .btn.secondary {
+      color: var(--primary-color);
+      background: white;
+    }
+
+    .btn:hover {
+      transform: translateY(-3px);
+      box-shadow: var(--shadow-hover);
+    }
+
+    .stats {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: .85rem;
+    }
+
+    .stat {
+      min-height: 82px;
+      display: flex;
+      align-items: center;
+      gap: .8rem;
+      padding: 1rem;
+      border-radius: .95rem;
+      background: rgba(255, 255, 255, .72);
+      border: 1px solid rgba(191, 219, 254, .9);
+      box-shadow: 0 14px 30px rgba(37, 99, 235, .08);
+    }
+
+    .stat i { color: var(--primary-color); font-size: 1.35rem; }
+    .stat strong { display: block; font-size: 1.25rem; }
+    .stat span { display: block; color: var(--light-text); font-size: .78rem; }
+
+    .dashboard {
+      border-radius: 1.4rem;
+      padding: 1.4rem;
+      background: rgba(255, 255, 255, .78);
+      backdrop-filter: blur(14px);
+      border: 1px solid rgba(147, 197, 253, .85);
+      box-shadow: var(--shadow);
+      overflow: hidden;
+      position: relative;
+    }
+
+    .dashboard::after {
+      content: "";
+      position: absolute;
+      width: 220px;
+      height: 220px;
+      right: -90px;
+      top: -90px;
+      background: radial-gradient(circle, rgba(124, 58, 237, .22), transparent 70%);
+    }
+
+    .dashboard > * { position: relative; z-index: 1; }
+    .dash-head {
+      display: flex;
+      justify-content: space-between;
+      gap: 1rem;
+      align-items: center;
+      margin-bottom: 1rem;
+    }
+
+    .dash-head h2 { font-size: 1.05rem; }
+    .status-list { display: flex; flex-wrap: wrap; gap: .45rem; }
+    .status {
+      padding: .45rem .6rem;
+      border-radius: 999px;
+      background: rgba(34, 197, 94, .12);
+      color: #15803d;
+      border: 1px solid rgba(34, 197, 94, .22);
+      font-size: .7rem;
+      font-weight: 800;
+    }
+
+    .dash-grid {
+      display: grid;
+      grid-template-columns: .82fr 1.4fr 1fr;
+      gap: .75rem;
+    }
+
+    .panel {
+      border: 1px solid var(--border);
+      border-radius: .9rem;
+      background: #fff;
+      padding: .95rem;
+      min-width: 0;
+    }
+
+    .panel h3 {
+      font-size: .82rem;
+      margin-bottom: .9rem;
+    }
+
+    .donut {
+      width: 112px;
+      height: 112px;
+      border-radius: 50%;
+      margin: 0 auto .8rem;
+      display: grid;
+      place-items: center;
+      background: conic-gradient(var(--green) 0 85%, rgba(148, 163, 184, .2) 85% 100%);
+      position: relative;
+    }
+
+    .donut::before {
+      content: "";
+      position: absolute;
+      inset: 12px;
+      border-radius: 50%;
+      background: white;
+    }
+
+    .donut strong {
+      position: relative;
+      color: var(--text-color);
+      font-size: 1.45rem;
+    }
+
+    .legend {
+      display: grid;
+      gap: .35rem;
+      color: var(--light-text);
+      font-size: .72rem;
+    }
+
+    .legend i {
+      display: inline-block;
+      width: 8px;
+      height: 8px;
+      border-radius: 999px;
+      background: var(--green);
+      margin-right: .35rem;
+    }
+
+    .legend .orange { background: var(--orange); }
+    .legend .red { background: var(--red); }
+
+    .chart { width: 100%; height: 150px; }
+    .mini-numbers {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: .5rem;
+      text-align: center;
+    }
+
+    .mini-numbers strong { display: block; color: var(--primary-color); }
+    .mini-numbers span { display: block; color: var(--light-text); font-size: .65rem; }
+    .mini-numbers .ok { color: var(--green); }
+    .mini-numbers .ko { color: var(--red); }
+    .mini-numbers .warn { color: #ca8a04; }
+
+    .pipeline { display: grid; gap: .75rem; }
+    .pipe-step {
+      display: grid;
+      grid-template-columns: 24px 1fr auto;
+      gap: .5rem;
+      align-items: center;
+      font-size: .72rem;
+    }
+
+    .pipe-dot {
+      width: 22px;
+      height: 22px;
+      display: grid;
+      place-items: center;
+      border-radius: 50%;
+      background: var(--green);
+      color: white;
+      font-weight: 900;
+      font-size: .72rem;
+    }
+
+    .pipe-step small {
+      display: block;
+      color: #15803d;
+      font-weight: 700;
+    }
+
+    .tools {
+      display: flex;
+      flex-wrap: wrap;
+      gap: .5rem;
+      margin-top: .9rem;
+    }
+
+    .tool {
+      padding: .45rem .65rem;
+      border-radius: 999px;
+      background: #eff6ff;
+      color: var(--secondary-color);
+      font-weight: 700;
+      font-size: .72rem;
+    }
+
+    .projects {
+      background: var(--section-bg);
+    }
+
+    .project-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 1.4rem;
+      align-items: stretch;
+    }
+
+    .project-card {
+      min-height: 480px;
+      display: flex;
+      flex-direction: column;
+      border-radius: 1.4rem;
+      padding: 1.45rem;
+      background:
+        linear-gradient(135deg, color-mix(in srgb, var(--accent), transparent 92%), transparent 45%),
+        #ffffff;
+      border: 1px solid color-mix(in srgb, var(--accent), transparent 62%);
+      box-shadow: var(--shadow);
+      overflow: hidden;
+      position: relative;
+      transition: transform .28s ease, box-shadow .28s ease, border-color .28s ease;
+    }
+
+    .project-card::before {
+      content: "";
+      position: absolute;
+      inset: 0 0 auto 0;
+      height: 4px;
+      background: linear-gradient(90deg, var(--accent), transparent);
+    }
+
+    .project-card:hover {
+      transform: translateY(-9px);
+      border-color: var(--accent);
+      box-shadow: var(--shadow-hover);
+    }
+
+    .tag-main {
+      display: inline-flex;
+      width: fit-content;
+      align-items: center;
+      gap: .45rem;
+      padding: .45rem .7rem;
+      border-radius: 999px;
+      color: color-mix(in srgb, var(--accent), black 16%);
+      background: color-mix(in srgb, var(--accent), transparent 88%);
+      border: 1px solid color-mix(in srgb, var(--accent), transparent 62%);
+      font-size: .72rem;
+      font-weight: 900;
+      margin-bottom: 1rem;
+    }
+
+    .project-top {
+      display: grid;
+      grid-template-columns: 76px 1fr;
+      gap: 1rem;
+      align-items: start;
+      margin-bottom: 1rem;
+    }
+
+    .project-icon {
+      width: 76px;
+      height: 76px;
+      border-radius: 1.2rem;
+      display: grid;
+      place-items: center;
+      font-size: 2rem;
+      color: white;
+      background: linear-gradient(135deg, var(--accent), color-mix(in srgb, var(--accent), black 22%));
+      box-shadow: 0 18px 36px color-mix(in srgb, var(--accent), transparent 72%);
+    }
+
+    .project-card h3 {
+      font-size: 1.35rem;
+      line-height: 1.22;
+      margin-bottom: .45rem;
+      letter-spacing: -.04em;
+    }
+
+    .project-card p {
+      color: var(--light-text);
+      font-size: .92rem;
+    }
+
+    .badges {
+      display: flex;
+      flex-wrap: wrap;
+      gap: .45rem;
+      margin: .5rem 0 1.25rem;
+    }
+
+    .badge {
+      border-radius: 999px;
+      padding: .42rem .6rem;
+      background: color-mix(in srgb, var(--accent), transparent 91%);
+      border: 1px solid color-mix(in srgb, var(--accent), transparent 65%);
+      color: color-mix(in srgb, var(--accent), black 18%);
+      font-weight: 800;
+      font-size: .7rem;
+      transition: .22s ease;
+    }
+
+    .badge:hover {
+      transform: translateY(-2px);
+      background: var(--accent);
+      color: white;
+    }
+
+    .project-actions {
+      margin-top: auto;
+      padding-top: 1rem;
+      border-top: 1px solid rgba(229, 231, 235, .85);
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: .75rem;
+      align-items: stretch;
+    }
+
+    .project-link {
+      min-height: 72px;
+      display: grid;
+      grid-template-columns: 38px 1fr 16px;
+      align-items: center;
+      gap: .65rem;
+      padding: .72rem;
+      border-radius: .95rem;
+      background: linear-gradient(135deg, color-mix(in srgb, var(--btn), transparent 88%), white);
+      border: 1px solid color-mix(in srgb, var(--btn), transparent 52%);
+      transition: transform .22s ease, box-shadow .22s ease, border-color .22s ease;
+    }
+
+    .project-link::after {
+      content: "→";
+      color: color-mix(in srgb, var(--btn), black 10%);
+      font-weight: 900;
+      transition: transform .22s ease;
+    }
+
+    .project-link:hover {
+      transform: translateY(-3px);
+      border-color: var(--btn);
+      box-shadow: 0 14px 30px color-mix(in srgb, var(--btn), transparent 80%);
+    }
+
+    .project-link:hover::after { transform: translateX(4px); }
+
+    .project-link b {
+      width: 38px;
+      height: 38px;
+      border-radius: .8rem;
+      display: grid;
+      place-items: center;
+      color: white;
+      background: var(--btn);
+      font-size: 1rem;
+    }
+
+    .project-link span {
+      display: flex;
+      flex-direction: column;
+      gap: .15rem;
+      line-height: 1.15;
+      min-width: 0;
+      overflow-wrap: anywhere;
+      word-break: break-word;
+      font-size: .72rem;
+      font-weight: 800;
+    }
+
+    .project-link small {
+      color: var(--light-text);
+      font-size: .62rem;
+      font-weight: 600;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+
+    footer {
+      padding: 2rem 0;
+      text-align: center;
+      color: #cbd5e1;
+      background: #0f172a;
+    }
+
+    [data-i18n] { transition: opacity .18s ease; }
+
+    .fade-section {
+      opacity: 0;
+      transform: translateY(24px);
+      transition: opacity .7s ease, transform .7s ease;
+    }
+
+    .fade-section.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    @media (max-width: 1100px) {
+      .hero-grid { grid-template-columns: 1fr; }
+      .project-grid { grid-template-columns: 1fr; }
+      .project-card { max-width: 820px; margin: 0 auto; width: 100%; }
+    }
+
+    @media (max-width: 768px) {
+      .nav-inner { grid-template-columns: 1fr auto; }
+      .nav-links { display: none; }
+      section { padding: 4.5rem 0; }
+      .stats { grid-template-columns: repeat(2, 1fr); }
+      .dash-grid { grid-template-columns: 1fr; }
+      .project-top { grid-template-columns: 1fr; }
+      .project-actions { grid-template-columns: 1fr; }
+    }
+
+    @media (max-width: 480px) {
+      .container { width: min(100% - 1.25rem, 1180px); }
+      .logo span:not(.logo-mark) { display: none; }
+      .typing { min-height: 6rem; }
+      .hero-actions { flex-direction: column; }
+      .btn { width: 100%; }
+      .stats { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+
+<body>
+  <header class="navbar">
+    <div class="container nav-inner">
+      <a href="#accueil" class="logo" aria-label="Retour à l'accueil">
+        <span class="logo-mark"><i class="fa-solid fa-vial-circle-check"></i></span>
+        <span data-i18n="nav.logo"></span>
+      </a>
+
+      <nav aria-label="Navigation principale">
+        <ul class="nav-links">
+          <li><a href="#accueil" class="active" data-i18n="nav.home"></a></li>
+          <li><a href="#projets" data-i18n="nav.projects"></a></li>
         </ul>
       </nav>
-    </aside>
-    <div class="wrapper">
-      <header>
-        <button id="focusBtn" style="cursor:pointer; padding: 8px 15px; background: rgba(31,225,217,0.1); border: 1px solid #1fe1d9; color: #1fe1d9; border-radius: 8px; font-weight: bold;">
-        <i class="fas fa-expand-arrows-alt"></i> FOCUS
-        </button>
-        <div class="breadcrumb">Portfolio QA // <span id="breadcrumb-title">Accueil</span></div>
-        <div class="menu-loader" id="menuLoader" aria-hidden="true">
-          <div class="menu-loader__scan"></div>
-          <span class="menu-loader__text" id="menuLoaderText">SWITCHING VIEW...</span>
-        </div>
-        <div class="status-badge">
-          <i class="fas fa-circle" style="font-size: 8px;"></i> BUILD : SUCCESS
-        </div>
-        <div class="header-photo">
-          <img src="Photo_Identite.jpg" alt="Photo de Maxime">
-        </div>
-      </header>
-      <main>
-        <section id="home" class="content-section active">
-  <h1 style="font-size: clamp(1.5rem, 5vw, 2.8rem); line-height: 1.1; margin-bottom: 10px; font-weight: 700; background: linear-gradient(to right, #eaf6fb, #1fe1d9); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">
-    Bonjour, moi c'est Maxime Joannis<br>
-    Ingénieur QA | certifié ISTQB (CTFL v4.0)
-  </h1>
 
-  <!-- Accroche / promesse -->
-  <p style="
-      font-size: 1.2rem;
-      color: var(--text-muted);
-      max-width: 900px;
-      margin-bottom: 18px;
-      border-left: 4px solid var(--accent-color);
-      padding-left: 20px;
-    ">
-    <strong style="color: var(--text-main);">Sécuriser les applications critiques</strong> grâce à une approche hybride
-    <strong style="color: var(--text-main);">QA & développement</strong> : c’est la dynamique qui guide mon travail.
-    J’interviens avec méthode, traçabilité et exigence pour garantir la fiabilité, la robustesse et la conformité
-    d’applications à forts enjeux métier et réglementaires.
-  </p>
-
-  <!-- Preuves rapides -->
-  <div class="card" style="max-width: 980px;">
-    <div style="display:flex; flex-wrap:wrap; gap:10px; margin-bottom: 14px;">
-      <span class="status-badge"><i class="fas fa-shield-alt"></i> Qualité & Conformité</span>
-      <span class="status-badge"><i class="fas fa-code"></i> Profil hybride QA / Dev</span>
-      <span class="status-badge"><i class="fas fa-project-diagram"></i> Processus BPMN / Camunda</span>
-      <span class="status-badge"><i class="fas fa-robot"></i> Automatisation Robot Framework</span>
-      <span class="status-badge"><i class="fas fa-bug"></i> Jira / Xray</span>
-    </div>
-
-    <p style="color: var(--text-muted); margin-bottom: 14px;">
-      Après plusieurs années en développement bancaire, je me suis spécialisé en test logiciel (2024),
-      confirmé en 2025 par l’obtention de la certification ISTQB et d’un diplôme de testeur logiciel.
-      Cette double compétence me permet de challenger les spécifications, sécuriser les processus,
-      analyser les impacts et contribuer à des décisions structurantes (ex : GO / NO GO).
-    </p>
-
-    <div class="grid" style="grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 16px;">
-      <!-- Homey -->
-<div class="card" style="padding: 18px; background: rgba(255,255,255,0.02); position:relative;">
-<span class="badge-live">
-  <i class="fas fa-circle"></i> Démo live
-</span>
-        <h3 style="margin-bottom: 8px;">Projet Agile Homey - E-Commerce</h3>
-        <p style="color: var(--text-muted); margin-bottom: 10px;">
-          Application web de gestion de locations saisonnières (processus de réservation).
-        </p>
-        <ul class="skill-list" style="margin:0;">
-          <li>Analyse user stories & critères d’acceptation</li>
-          <li>Tests fonctionnels + suivi anomalies (Jira / Xray)</li>
-          <li>Automatisation des parcours critiques</li>
-          <li>Participation à la décision GO / NO GO</li>
-        </ul>
-		<div style="margin-top:15px;">
-		  <a href="homey-demo.html" target="_blank" 
-			 style="
-			   display:inline-flex;
-			   align-items:center;
-			   gap:8px;
-			   padding:10px 16px;
-			   border-radius:10px;
-			   background: linear-gradient(135deg, #1fe1d9, #39f0e2);
-			   color:#001423;
-			   font-weight:700;
-			   text-decoration:none;
-			   box-shadow:0 0 18px rgba(31,225,217,0.25);
-			 ">
-			<i class="fas fa-flask"></i> Lancez la démo fonctionnelle
-		  </a>
-		</div>
-      </div>
-
-      <!-- AMN BRAINS -->
-      <div class="card" style="padding: 18px; background: rgba(255,255,255,0.02);">
-        <h3 style="margin-bottom: 8px;">AMN BRAINS – Cybersécurité</h3>
-        <p style="color: var(--text-muted); margin-bottom: 10px;">
-          Tests d’une application desktop d’audit augmentée par IA + validation de processus BPMN critiques.
-        </p>
-        <ul class="skill-list" style="margin:0;">
-          <li>Analyse de diagrammes BPMN & spécifications générées par IA</li>
-          <li>Validation de processus critiques & cohérence des données</li>
-          <li>Structuration d’un patrimoine de tests</li>
-          <li>Validation des comportements IA (constats / écarts / actions)</li>
-        </ul>
+      <div class="language-switcher" aria-label="Sélecteur de langue">
+        <button class="lang-btn" data-lang="fr" type="button">FR</button>
+        <button class="lang-btn" data-lang="en" type="button">EN</button>
       </div>
     </div>
-  </div>
+  </header>
 
-  <!-- CTA -->
-  <div class="cta-group" style="margin-top: 18px;">
-    <!--
-	<a href="#" class="cta-primary">
-	  <i class="fas fa-file-download"></i> Téléchargez mon CV
-	</a>
-	-->
-    <a href="https://www.linkedin.com/in/maxime-joannis-37ab5283/" target="_blank" class="cta-secondary">
-      <i class="fab fa-linkedin"></i> Mon profil LinkedIn
-    </a>
+  <main>
+    <section id="accueil" class="hero">
+      <div class="floating-icons" aria-hidden="true"></div>
 
-    <a href="#projects" class="cta-secondary" id="seeProjectsBtn">
-      <i class="fas fa-rocket"></i> Voir mes projets QA
-    </a>
+      <div class="container hero-grid">
+        <div>
+          <div>
+            <i class="fa-solid fa-shield-halved"></i>
+            <span data-i18n="hero.eyebrow"></span>
+          </div>
 
-    <a href="https://github.com/MaximeJoannis" target="_blank" class="cta-secondary">
-      <i class="fab fa-github"></i> Mon dépôt GitHub
-    </a>
-  </div>
-</section>
-        <section id="about" class="content-section">
-  <h2><i class="fas fa-terminal"></i> A propos de moi</h2>
+          <h1 class="typing">
+            <span id="typingText"></span><span class="cursor"></span>
+            <br />
+            <span class="gradient-text" data-i18n="hero.gradient"></span>
+          </h1>
 
-  <div class="card">
+          <p class="lead" data-i18n="hero.lead"></p>
 
-<p class="about-intro">
-Un projet peut être techniquement parfait… et pourtant échouer.
-</p>
-
-<div class="about-block">
-
-<p><strong>Pourquoi ?</strong></p>
-
-<p>
-Parce que la qualité d’un produit ne dépend pas uniquement du code.
-</p>
-
-<p>
-Elle dépend aussi de la compréhension du besoin, de la communication
-entre les équipes et de l’alignement entre les acteurs du projet.
-</p>
-
-</div>
-
-<div class="about-block">
-
-<p>
-C’est une réalité que j’ai particulièrement observée en 2021,
-lors d’une mission de <strong>trois ans en régie à la Banque de France</strong>
-sur une application de cotation financière critique.
-</p>
-
-<p>
-Dans un contexte de <strong>fort volume d’anomalies à corriger avant
-une mise en production annuelle</strong>, j’ai découvert que
-la qualité logicielle est aussi une question de communication
-et d’alignement entre les équipes.
-</p>
-
-</div>
-
-<div class="about-block">
-
-<p>
-Cette expérience a naturellement renforcé mon intérêt
-pour le <strong>test logiciel</strong>.
-</p>
-
-<p>
-Ce qui me passionne dans la QA n’est pas seulement de tester un produit.
-</p>
-
-<p><strong>C’est aussi de :</strong></p>
-
-<ul class="skill-list">
-<li>créer du dialogue entre équipes métiers et techniques</li>
-<li>challenger les besoins fonctionnels</li>
-<li>sécuriser les livraisons avant la mise en production</li>
-</ul>
-
-</div>
-
-<div class="about-block">
-
-<p>
-Je suis convaincu que <strong>la qualité naît de la collaboration</strong>.
-</p>
-
-<p>
-C’est pourquoi j’apprécie particulièrement les échanges
-entre <strong>MOA, MOE et équipes techniques</strong> afin de construire
-collectivement des applications fiables, robustes et durables.
-</p>
-
-</div>
-
-<div class="about-block">
-
-<p>
-En 2024, pour me spécialiser pleinement dans le test logiciel,
-j’ai suivi une formation chez <strong>Test Academy</strong>, validée par :
-</p>
-
-<ul class="skill-list">
-<li>la certification <strong>ISTQB CTFL</strong></li>
-<li>le diplôme de <strong>testeur logiciel</strong></li>
-</ul>
-
-</div>
-
-<div class="about-block">
-
-<p>
-Cette formation m’a permis de travailler sur plusieurs projets QA concrets.
-</p>
-
-<p><strong>E-commerce</strong></p>
-
-<ul class="skill-list">
-<li>Homey – application web de réservation de locations saisonnières</li>
-</ul>
-
-<p><strong>Cybersécurité</strong></p>
-
-<ul class="skill-list">
-<li>AMN Auditor – logiciel d’audit des systèmes d’information intégrant une IA contextuelle</li>
-</ul>
-
-</div>
-
-<div class="about-block">
-
-<p><strong>J’ai également réalisé plusieurs projets techniques avancés :</strong></p>
-
-<ul class="skill-list">
-<li>mise en place d’un pipeline CI/CD orienté QA (GitHub Actions)</li>
-<li>automatisation de tests avec Robot Framework</li>
-<li>optimisation d’une suite de tests automatisés avec l’aide de l’IA</li>
-</ul>
-
-</div>
-
-<p class="about-outro">
-Mes valeurs :
-</p>
-
-<ul class="skill-list">
-<li><strong>Collaboration</strong> – créer du lien entre équipes métiers et techniques</li>
-<li><strong>Rigueur</strong> – garantir la fiabilité des livraisons</li>
-<li><strong>Pédagogie</strong> – partager la connaissance et favoriser l’apprentissage collectif</li>
-</ul>
-
-</div>
-</section>
-		
-		<section id="formation" class="content-section">
-  <h2 class="section-title">
-    <i class="fas fa-graduation-cap"></i> Formation Test Academy - octobre 2024/mai 2025
-  </h2>
-  
-  <div class="card" style="margin-bottom: 25px;">
-  <p style="font-size: 1.05rem; color: var(--text-muted);">
-    Formation suivie chez <strong>Test Academy</strong>, 
-    spécialisée en ingénierie du test logiciel.
-  </p>
-
-  <div style="display:flex; flex-wrap:wrap; gap:12px; margin-top:15px;">
-    <span class="status-badge">
-      <i class="fas fa-certificate"></i> Certification ISTQB Fondation (CTFL v4.0) obtenue
-    </span>
-
-    <span class="status-badge">
-      <i class="fas fa-user-graduate"></i> Diplôme de testeur logiciel obtenu
-    </span>
-
-    <span class="status-badge">
-      <i class="fas fa-check-circle"></i> Formation validée
-    </span>
-  </div>
-</div>
-  
-  <div class="card" style="margin-bottom: 25px;">
-  <h3>Modalités & Validation</h3>
-  <ul class="skill-list">
-    <li>Validation des acquis par quiz à la fin de chaque module</li>
-    <li>Évaluation des livrables</li>
-    <li>Visioconférences de validation avec le formateur</li>
-    <li>Projet de fin de formation évalué en conditions professionnelles simulées</li>
-    <li>Préparation et réussite de la certification ISTQB CTFL v4.0</li>
-  </ul>
-</div>
-
-  <div class="formation-accordion grid">
-    <!-- Module 01 -->
-    <div class="formation-item card">
-      <div class="formation-header" onclick="toggleFormation(this)">
-        <div class="formation-head-left">
-          <span class="formation-num">MODULE 01</span>
-          <h3 class="formation-title">Méthode</h3>
+          <div class="hero-actions">
+            <a class="btn primary" href="#projets">
+              <i class="fa-solid fa-rocket"></i>
+              <span data-i18n="hero.ctaProjects"></span>
+            </a>
+          </div>
         </div>
-      </div>
-      <div class="formation-detail">
-        <p>Ce module vous accompagne étape par étape pour assimiler une méthode de test complète et structurée.</p>
-      </div>
-	  <span class="status-badge" style="margin-top:10px;">
-<i class="fas fa-check-circle"></i> Module validé
-</span>
-    </div>
 
-    <!-- Module 02 -->
-    <div class="formation-item card">
-      <div class="formation-header" onclick="toggleFormation(this)">
-        <div class="formation-head-left">
-          <span class="formation-num">MODULE 02</span>
-          <h3 class="formation-title">L'outillage</h3>
-        </div>
-      </div>
-      <div class="formation-detail">
-        <p>Ce module vous accompagne à la maîtrise de l’outil de gestion des cas de test : <strong>JIRA</strong>.</p>
-      </div>
-	  <span class="status-badge" style="margin-top:10px;">
-<i class="fas fa-check-circle"></i> Module validé
-</span>
-    </div>
+        <aside class="dashboard" aria-label="Tableau de bord QA">
+          <div class="dash-head">
+            <h2 data-i18n="dashboard.title"></h2>
+            <div class="status-list">
+              <span class="status" data-i18n="dashboard.status1"></span>
+              <span class="status" data-i18n="dashboard.status2"></span>
+              <span class="status" data-i18n="dashboard.status3"></span>
+            </div>
+          </div>
 
-    <!-- Module 03 -->
-    <div class="formation-item card">
-      <div class="formation-header" onclick="toggleFormation(this)">
-        <div class="formation-head-left">
-          <span class="formation-num">MODULE 03</span>
-          <h3 class="formation-title">La Pratique</h3>
-        </div>
-      </div>
-      <div class="formation-detail">
-        <p>Ce module vous permet de mettre en pratique toutes les compétences acquises sur l’application web : <strong>Homey</strong>.</p>
-      </div>
-	  <span class="status-badge" style="margin-top:10px;">
-<i class="fas fa-check-circle"></i> Module validé
-</span>
-    </div>
-
-    <!-- Module 04 -->
-    <div class="formation-item card">
-      <div class="formation-header" onclick="toggleFormation(this)">
-        <div class="formation-head-left">
-          <span class="formation-num">MODULE 04</span>
-          <h3 class="formation-title">L'automatisation Web</h3>
-        </div>
-      </div>
-      <div class="formation-detail">
-        <p>Ce module vous accompagne afin de maîtriser l’automatisation des tests sur application web.</p>
-      </div>
-	  <span class="status-badge" style="margin-top:10px;">
-<i class="fas fa-check-circle"></i> Module validé
-</span>
-    </div>
-
-    <!-- Module 05 -->
-    <div class="formation-item card">
-      <div class="formation-header" onclick="toggleFormation(this)">
-        <div class="formation-head-left">
-          <span class="formation-num">MODULE 05</span>
-          <h3 class="formation-title">L’automatisation API</h3>
-        </div>
-      </div>
-      <div class="formation-detail">
-        <p>Ce module vous accompagne afin de maîtriser l’automatisation des tests sur API.</p>
-      </div>
-	  <span class="status-badge" style="margin-top:10px;">
-<i class="fas fa-check-circle"></i> Module validé
-</span>
-    </div>
-
-    <!-- Module 06 -->
-    <div class="formation-item card">
-      <div class="formation-header" onclick="toggleFormation(this)">
-        <div class="formation-head-left">
-          <span class="formation-num">MODULE 06</span>
-          <h3 class="formation-title">Préparation à l'examen ISTQB Fondation</h3>
-        </div>
-      </div>
-      <div class="formation-detail">
-        <p>Ce module est une préparation pratique à l’examen de certification <strong>ISTQB</strong>.</p>
-      </div>
-	  <span class="status-badge" style="margin-top:10px;">
-<i class="fas fa-check-circle"></i> Module validé
-</span>
-    </div>
-
-    <!-- Module 07 -->
-    <div class="formation-item card">
-      <div class="formation-header" onclick="toggleFormation(this)">
-        <div class="formation-head-left">
-          <span class="formation-num">MODULE 07</span>
-          <h3 class="formation-title">Le mode Projet</h3>
-        </div>
-      </div>
-      <div class="formation-detail">
-        <p>Présentation des modèles de gestion de projet : cascade, cycle en V et <strong>Scrum</strong>.</p>
-      </div>
-	  <span class="status-badge" style="margin-top:10px;">
-<i class="fas fa-check-circle"></i> Module validé
-</span>
-    </div>
-
-    <!-- Module 08 -->
-    <div class="formation-item card">
-      <div class="formation-header" onclick="toggleFormation(this)">
-        <div class="formation-head-left">
-          <span class="formation-num">MODULE 08</span>
-          <h3 class="formation-title">CI/CD avec Jenkins</h3>
-        </div>
-      </div>
-      <div class="formation-detail">
-        <p>Présentation, utilisation et entraînement sur l’outil <strong>Jenkins</strong> pour l’intégration Continue / Déploiement Continu.</p>
-      </div>
-	  <span class="status-badge" style="margin-top:10px;">
-<i class="fas fa-check-circle"></i> Module validé
-</span>
-    </div>
-
-    <!-- Module 09 -->
-    <div class="formation-item card">
-      <div class="formation-header" onclick="toggleFormation(this)">
-        <div class="formation-head-left">
-          <span class="formation-num">MODULE 09</span>
-          <h3 class="formation-title">La Programmation Python</h3>
-        </div>
-      </div>
-      <div class="formation-detail">
-        <p>Dans cette leçon, nous explorons les bases de la programmation en <strong>Python</strong>.</p>
-      </div>
-	  <span class="status-badge" style="margin-top:10px;">
-<i class="fas fa-check-circle"></i> Module validé
-</span>
-    </div>
-
-    <!-- Module 10 -->
-    <div class="formation-item card">
-      <div class="formation-header" onclick="toggleFormation(this)">
-        <div class="formation-head-left">
-          <span class="formation-num">MODULE 10</span>
-          <h3 class="formation-title">Le langage SQL</h3>
-        </div>
-      </div>
-      <div class="formation-detail">
-        <p>Cette section vous accompagne à la maîtrise du langage <strong>SQL</strong>.</p>
-      </div>
-	  <span class="status-badge" style="margin-top:10px;">
-<i class="fas fa-check-circle"></i> Module validé
-</span>
-    </div>
-
-    <!-- Module 11 -->
-    <div class="formation-item card">
-      <div class="formation-header" onclick="toggleFormation(this)">
-        <div class="formation-head-left">
-          <span class="formation-num">MODULE 11</span>
-          <h3 class="formation-title">Le projet de fin de formation</h3>
-        </div>
-      </div>
-      <div class="formation-detail">
-        <p>Ce projet vous donne l'opportunité de mettre en pratique toutes vos connaissances en test logiciel.</p>
-      </div>
-	  <span class="status-badge" style="margin-top:10px;">
-<i class="fas fa-check-circle"></i> Module validé
-</span>
-    </div>
-  </div>
-</section>
-       
-        <section id="projects" class="content-section">
-          <h2><i class="fas fa-code-branch"></i> Projets QA réalisés</h2>
-          <div class="grid">
-            <div class="card project-card">
-              <div class="project-header">
-                <h3>Projet de fin de formation Homey</h3>
-                <span class="project-date">NOV 2024 - AVRIL 2025</span>
-              </div>
-              <span class="project-role">Ingénieur QA Fonctionnel & Automatisation</span>
-              <p>Projet Agile Scrum (simulation professionnelle encadrée) visant à garantir la qualité d’une application web de gestion de locations saisonnières, avec une focalisation sur le processus de réservation.</p>
-              <div class="project-tags">
-                <span class="status-badge">Jira/Xray</span>
-                <span class="status-badge">Python</span>
-                <span class="status-badge">Robot Framework</span>
-                <span class="status-badge">Selenium</span>
-                <span class="status-badge">Visual Studio Code</span>
-                <span class="status-badge">Excel</span>
-              </div>
-              <div class="project-actions">
-                <a href="detailHomey.html" class="btn-action">
-                <i class="fas fa-file-alt"></i>
-                <span>Détails du projet</span>
-                </a>
-                <a href="dashboardHomey.html" target="_blank" class="btn-action">
-                <i class="fas fa-file-alt"></i>
-                <span>Tableau de bord QA</span>
-                </a>
-                <a href="https://github.com/maximejoannis/maximejoannis.github.io/wiki/3.-Projet-Homey-%E2%80%90-Projet-de-fin-de-formation" target="_blank" class="btn-action">
-                <i class="fab fa-github"></i>
-                <span>README GitHub</span>
-                </a>
+          <div class="dash-grid">
+            <div class="panel">
+              <h3 data-i18n="dashboard.coverage"></h3>
+              <div class="donut"><strong>85%</strong></div>
+              <div class="legend">
+                <span><i></i><span data-i18n="dashboard.legendSuccess"></span></span>
+                <span><i class="orange"></i><span data-i18n="dashboard.legendBlocked"></span></span>
+                <span><i class="red"></i><span data-i18n="dashboard.legendNotRun"></span></span>
               </div>
             </div>
-            <div class="card project-card">
-              <div class="project-header">
-                <h3>Projet Amn Auditor</h3>
-                <span class="project-date">AVRIL 2025 - SEPT 2025</span>
+
+            <div class="panel">
+              <h3 data-i18n="dashboard.automation"></h3>
+              <svg class="chart" viewBox="0 0 460 170" role="img" aria-label="Graphique des tests automatisés">
+                <defs>
+                  <linearGradient id="line" x1="0" x2="1">
+                    <stop stop-color="#38bdf8" />
+                    <stop offset="1" stop-color="#a855f7" />
+                  </linearGradient>
+                </defs>
+                <g stroke="rgba(148,163,184,.22)" stroke-width="1">
+                  <path d="M0 30H460M0 70H460M0 110H460M0 150H460"/>
+                  <path d="M40 0V170M110 0V170M180 0V170M250 0V170M320 0V170M390 0V170"/>
+                </g>
+                <polyline points="20,140 75,112 130,78 185,88 240,48 295,65 350,30 430,42" fill="none" stroke="url(#line)" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+                <g fill="#38bdf8">
+                  <circle cx="20" cy="140" r="5"/><circle cx="75" cy="112" r="5"/><circle cx="130" cy="78" r="5"/><circle cx="185" cy="88" r="5"/>
+                  <circle cx="240" cy="48" r="5"/><circle cx="295" cy="65" r="5"/><circle cx="350" cy="30" r="5"/><circle cx="430" cy="42" r="5"/>
+                </g>
+              </svg>
+              <div class="mini-numbers">
+                <div><strong>35</strong><span data-i18n="dashboard.autoCount"></span></div>
+                <div><strong class="ok">32</strong><span data-i18n="dashboard.successCount"></span></div>
+                <div><strong class="ko">2</strong><span data-i18n="dashboard.failedCount"></span></div>
+                <div><strong class="warn">1</strong><span data-i18n="dashboard.blockedCount"></span></div>
               </div>
-              <span class="project-role">Ingénieur QA Fonctionnel & Automatisation</span>
-              <p>Test d’un outil d’audit générant constats, écarts et actions à partir de règles métiers et d’une IA contextuelle.</p>
-              <div class="project-tags">
-                <span class="status-badge">Jira</span>
-                <span class="status-badge">Xray</span>
-                <span class="status-badge">Python</span>
-                <span class="status-badge">Pytest</span>
-                <span class="status-badge">Robot Framework</span>
-                <span class="status-badge">WinAppDriver</span>
-                <span class="status-badge">Node.js</span>
-                <span class="status-badge">Visual Studio Code</span>
-                <span class="status-badge">Excel</span>
-              </div>
-              <div class="project-actions">
-                <a href="detailAmnAuditor.html" class="btn-action">
-                <i class="fas fa-file-alt"></i>
-                <span>Détails du projet</span>
-                </a>
-                <a href="dashboardAmnAuditor.html" target="_blank" class="btn-action">
-                <i class="fas fa-chart-line"></i>
-                <span>Tableau de bord QA</span>
-                </a>
-                <a href="https://github.com/maximejoannis/maximejoannis.github.io/wiki/4.-Projet-AMN-Auditor-%E2%80%93-Mission-QA-client" target="_blank" class="btn-action">
-                <i class="fab fa-github"></i>
-                <span>README GitHub</span>
-                </a>
-				<a class="btn-action btn-disabled">
-				<i class="fas fa-robot"></i>
-				<span>Ingénierie d’automatisation</span>
-				<span class="badge-coming">COMING SOON</span>
-                </a>
+            </div>
+
+            <div class="panel">
+              <h3 data-i18n="dashboard.pipeline"></h3>
+              <div class="pipeline">
+                <div class="pipe-step"><span class="pipe-dot">✓</span><div><span data-i18n="pipeline.push"></span><small>Success</small></div><span>1m 12s</span></div>
+                <div class="pipe-step"><span class="pipe-dot">✓</span><div><span data-i18n="pipeline.tests"></span><small>Success</small></div><span>2m 45s</span></div>
+                <div class="pipe-step"><span class="pipe-dot">✓</span><div><span data-i18n="pipeline.build"></span><small>Success</small></div><span>45s</span></div>
+                <div class="pipe-step"><span class="pipe-dot">✓</span><div><span data-i18n="pipeline.deploy"></span><small>Success</small></div><span>1m 05s</span></div>
               </div>
             </div>
           </div>
-		  <br>
-		  <div class="card" style="margin-bottom:25px;">
-  <h3>Projets QA techniques avancés</h3>
-  <p style="color: var(--text-muted);">
-    Ces projets illustrent ma capacité à industrialiser l’automatisation,
-    structurer des suites de tests complexes et intégrer les tests
-    dans une chaîne CI/CD afin de sécuriser les livraisons.
-  </p>
-</div>
-		  <br>
-		  <div class="grid">
-		  <div class="card project-card">
-  <div class="project-header">
-    <h3>Enrichissement avancé d’une suite Robot Framework via IA</h3>
-    <span class="project-date">JAN 2026 - FEV 2026</span>
-  </div>
 
-  <span class="project-role">Ingénieur QA Automatisation</span>
+         
+        </aside>
+      </div>
+    </section>
 
- <p>
-Projet technique visant à renforcer et structurer une suite
-Robot Framework existante, en améliorant la couverture des tests,
-la maintenabilité et la robustesse des scénarios critiques.
-</p>
-
-<p style="margin-top:10px;">
-Utilisation contrôlée de l’IA pour :
-</p>
-
-<ul class="skill-list">
-  <li>Identifier les zones de couverture insuffisante</li>
-  <li>Générer et enrichir des cas de test automatisés</li>
-  <li>Structurer les fichiers .robot et les resources</li>
-  <li>Améliorer la lisibilité et la maintenabilité</li>
-  <li>Respecter des contraintes strictes de conformité QA</li>
-</ul>
-
-  <div class="project-tags">
-    <span class="status-badge">Robot Framework</span>
-    <span class="status-badge">SeleniumLibrary</span>
-    <span class="status-badge">Python</span>
-    <span class="status-badge">Selenium IDE</span>
-    <span class="status-badge">HTML/CSS</span>
-  </div>
-  <div class="project-actions">
-                <a href="detailHomey_IA.html" class="btn-action">
-                <i class="fas fa-file-alt"></i>
-                <span>Détails du projet</span>
-                </a>
-                <a href="dashboardHomey_IA.html" target="_blank" class="btn-action">
-                <i class="fas fa-chart-line"></i>
-                <span>Tableau de bord QA</span>
-                </a>
-                <a href="https://github.com/maximejoannis/maximejoannis.github.io/wiki/5.-Enrichissement-IA-%E2%80%94-Robot-Framework-(Homey)" target="_blank" class="btn-action">
-                <i class="fab fa-github"></i>
-                <span>README GitHub</span>
-                </a>
-              </div>
-</div>
-<div class="card project-card">
-  <div class="project-header">
-    <h3>Mise en place d’un pipeline CI/CD de tests automatisés</h3>
-    <span class="project-date">JAN 2026 - FEV 2026</span>
-  </div>
-
-  <span class="project-role">Ingénieur QA Automatisation & DevOps</span>
-
-  <p>
-Conception et mise en place d’un pipeline CI/CD
-permettant l’exécution automatique des tests Robot Framework
-à chaque push ou pull request.
-</p>
-
-<ul class="skill-list">
-  <li>Configuration GitHub Actions</li>
-  <li>Containerisation via Docker</li>
-  <li>Exécution des tests sur Selenium Grid</li>
-  <li>Gestion des dépendances et environnements</li>
-  <li>Automatisation du reporting des résultats</li>
-</ul>
-
-<p style="margin-top:10px; color: var(--accent-color);">
-Objectif : industrialiser l’automatisation et sécuriser les livraisons.
-</p>
-  <div class="project-tags">
-    <span class="status-badge">GitHub Actions</span>
-    <span class="status-badge">CI/CD</span>
-    <span class="status-badge">Docker</span>
-    <span class="status-badge">Robot Framework</span>
-    <span class="status-badge">Selenium Grid</span>
-  </div>
-  <div class="project-actions">
-                <a href="detailPipelineCI.html" class="btn-action">
-                <i class="fas fa-file-alt"></i>
-                <span>Détails du projet</span>
-                </a>
-                <a href="dashboardPipelineCI.html" target="_blank" class="btn-action">
-                <i class="fas fa-chart-line"></i>
-                <span>Tableau de bord QA</span>
-                </a>
-                <a href="https://github.com/maximejoannis/maximejoannis.github.io/wiki/6.-Pipeline-CI-CD-%E2%80%94-Industrialisation-des-tests" target="_blank" class="btn-action">
-                <i class="fab fa-github"></i>
-                <span>README GitHub</span>
-                </a>
-              </div>
-</div>
-		  </div>
-        </section>
-        <section id="experience" class="content-section">
-          <h2><i class="fas fa-history"></i>Expériences professionnelles</h2>
-          <div class="card">
-		  <div class="exp-banner">
-			  <span class="exp-banner__tag">MISSION QA</span>
-			</div>
-            <div class="experience-header">
-              <h3>Ingénieur QA – Tests fonctionnels et validation de processus BPMN @ AMN BRAINS</h3>
-              <span class="experience-date">Septembre 2025 - Aujourd'hui</span>
-            </div>
-            <p>
-Mission QA professionnalisante réalisée en full remote concernant la conduite d’une campagne de tests fonctionnels de niveau 1 puis niveau 2 sur des processus BPMN critiques liés à la cybersécurité, visant à garantir la stabilité des workflows Camunda et la fiabilité des données persistées dans Baserow, essentielles à la traçabilité SSI.
-Ces campagnes de tests ont permis de sécuriser la mise en production (PROD) des processus validés, en assurant leur conformité fonctionnelle, leur cohérence transverse et la robustesse des données.
-</p>
-<div class="experience-tech">
-              <div class="experience-tech__label">
-                <i class="fas fa-microchip"></i> Environnement technique
-              </div>
-              <div class="experience-tech__chips" aria-label="Technologies utilisées">
-                <span class="exp-chip">Camunda BPMN</span>
-				<span class="exp-chip">Camunda Modeler</span>
-                <span class="exp-chip">Sec Pilot</span>
-                <span class="exp-chip">Baserow</span>
-                <span class="exp-chip">SecFileManager</span>
-                <span class="exp-chip">GitLab</span>
-              </div>
-            </div>
-
-          </div>
-          <br>
-          <div class="card">
-		   <div class="exp-banner">
-			  <span class="exp-banner__tag">MISSION QA</span>
-			</div>
-            <div class="experience-header">
-              <h3>Ingénieur QA – Tests fonctionnels et validation de systèmes d’IA générative @ AMN BRAINS
-			  </h3>
-              <span class="experience-date">Avril 2025 - Septembre 2025</span>
-            </div>
-            <p>
-Mission QA professionnalisante réalisée en full remote pour un client du domaine de la cybersécurité, portant sur un logiciel desktop d’audit des systèmes d’information.
-Ce logiciel intègre une IA contextuelle capable de générer automatiquement constats, points de contrôle, conformités / non-conformités, actions correctives et plans de remédiation à partir de règles métiers.
-</p>
-            <div class="experience-tech">
-              <div class="experience-tech__label">
-                <i class="fas fa-microchip"></i> Environnement technique
-              </div>
-              <div class="experience-tech__chips" aria-label="Technologies utilisées">
-                <span class="exp-chip">Jira</span>
-                <span class="exp-chip">Xray</span>
-                <span class="exp-chip">Visual Studio Code</span>
-                <span class="exp-chip">WinAppDriver</span>
-                <span class="exp-chip">Node.js</span>
-                <span class="exp-chip">Python</span>
-                <span class="exp-chip">Pytest</span>
-                <span class="exp-chip">Excel</span>
-                <span class="exp-chip">Gherkin</span>
-                <span class="exp-chip">Robot Framework</span>
-              </div>
-              <div class="project-actions">
-                <a href="detailAmnAuditor.html" class="btn-action">
-                <i class="fas fa-file-alt"></i>
-                <span>Détails du projet</span>
-                </a>
-                <a href="dashboardAmnAuditor.html" target="_blank" class="btn-action">
-                <i class="fas fa-chart-line"></i>
-                <span>Tableau de bord QA</span>
-                </a>
-              </div>
-            </div>
-          </div>
-          <br>
-          <div class="card">
-		   <div class="exp-banner">
-			  <span class="exp-banner__tag">Simulation professionnelle</span>
-			</div>
-            <div class="experience-header">
-			  <h3>
-				Ingénieur QA - Tests fonctionnels & Automatisation
-				@ Test Academy
-			  </h3>
-			  <span class="experience-date">Novembre 2024 - Avril 2025</span>
-			</div>
-           <p>
-Projet de fin de formation simulé en environnement Agile Scrum, visant la garantie qualité d’une application web de gestion de locations saisonnières, avec focalisation sur le processus de réservation.
-Équipe composée de 1 PO, 9 développeurs, 2 testeurs, 1 Test Manager et 1 Scrum Master.
-Travail basé sur un Product Backlog de 30 User Stories, en Sprints de 2 semaines.
-</p>
-            <div class="experience-tech">
-              <div class="experience-tech__label">
-                <i class="fas fa-microchip"></i> Environnement technique
-              </div>
-              <div class="experience-tech__chips" aria-label="Technologies utilisées">
-                <span class="exp-chip">Jira</span>
-                <span class="exp-chip">Xray</span>
-                <span class="exp-chip">Python</span>
-                <span class="exp-chip">Robot Framework</span>
-                <span class="exp-chip">Selenium</span>
-                <span class="exp-chip">VS Code</span>
-                <span class="exp-chip">Excel</span>
-              </div>
-            </div>
-            <div class="project-actions">
-              <a href="detailHomey.html" class="btn-action">
-              <i class="fas fa-file-alt"></i>
-              <span>Détails du projet</span>
-              </a>
-              <a href="dashboardHomey.html" target="_blank" class="btn-action">
-              <i class="fas fa-chart-line"></i>
-              <span>Tableau de bord QA</span>
-              </a>
-            </div>
-          </div>
-          <br>
-          <div class="card">
-		  <div class="exp-banner">
-			  <span class="exp-banner__tag">Mission en régie</span>
-			</div>
-            <div class="experience-header">
-              <h3>Ingénieur d’études – Développeur Full Stack Java / AngularJS & Tests fonctionnels @ Infotel Conseil - Client : BANQUE DE FRANCE</h3>
-              <span class="experience-date">Février 2021 - Janvier 2024</span>
-            </div>
-            <p>Mission en régie au sein d’une équipe Agile / Scrum sur une application de cotation financière, dans un contexte de fort volume d’anomalies à résorber avant une mise en production annuelle à fort enjeu métier.
-
-Rôle hybride Développement & Tests fonctionnels, garantissant la qualité des livraisons sur tout le cycle de développement, avec application d’un processus qualité strict (“Test obligatoire” : aucun développement ou correctif sans test unitaire associé).
-			</p>
-            <div class="experience-tech">
-              <div class="experience-tech__label">
-                <i class="fas fa-microchip"></i> Environnement technique
-              </div>
-              <div class="experience-tech__chips" aria-label="Technologies utilisées">
-                <span class="exp-chip">Jira</span>
-                <span class="exp-chip">GitLab</span>
-                <span class="exp-chip">Jenkins</span>
-                <span class="exp-chip">SonarQube</span>
-                <span class="exp-chip">Postman</span>
-                <span class="exp-chip">Excel</span>
-                <span class="exp-chip">Java 8/17</span>
-                <span class="exp-chip">AngularJS</span>
-                <span class="exp-chip">Spring Boot</span>
-                <span class="exp-chip">PostgreSQL</span>
-                <span class="exp-chip">Eclipse</span>
-                <span class="exp-chip">Visual Studio Code</span>
-                <span class="exp-chip">GitExtensions</span>
-                <span class="exp-chip">JUnit</span>
-                <span class="exp-chip">Mockito</span>
-              </div>
-            </div>
-          </div>
-          <br>
-          <div class="card">
-		  <div class="exp-banner">
-			  <span class="exp-banner__tag">Mission en plateau</span>
-			</div>
-            <div class="experience-header">
-              <h3>Ingénieur d’études – Développement Back-End Java  @ Infotel Conseil - Client : BNP PARIBAS</h3>
-              <span class="experience-date">Février 2019 - Juin 2020</span>
-            </div>
-            <p>
-Mission en plateau sur une application Java backend intégrée à une architecture microservices, interfacée avec 7 APIs internes, dans un contexte de conformité réglementaire DSP2.			
-			</p>
-            <div class="experience-tech">
-              <div class="experience-tech__label">
-                <i class="fas fa-microchip"></i> Environnement technique
-              </div>
-              <div class="experience-tech__chips" aria-label="Technologies utilisées">
-                <span class="exp-chip">Java 8</span>
-                <span class="exp-chip">Maven</span>
-                <span class="exp-chip">Postman</span>
-                <span class="exp-chip">Vim</span>
-                <span class="exp-chip">Jira</span>
-                <span class="exp-chip">Spring Boot</span>
-                <span class="exp-chip">PuTTY</span>
-                <span class="exp-chip">Swagger Editor</span>
-                <span class="exp-chip">Jenkins</span>
-                <span class="exp-chip">C3P0</span>
-                <span class="exp-chip">SQL Developer</span>
-                <span class="exp-chip">Rational Application Developer (RAD)</span>
-                <span class="exp-chip">SonarQube</span>
-              </div>
-            </div>
-          </div>
-          <br>
-          <div class="card">
-		  <div class="exp-banner">
-			  <span class="exp-banner__tag">Mission interne</span>
-			</div>
-            <div class="experience-header">
-              <h3>Ingénieur d'études - Analyste développeur Java @ Infotel Conseil - Client : EPO</h3>
-              <span class="experience-date">Septembre 2018 - Février 2019</span>
-            </div>
-            <p>
-Mission interne au sein de l’Office européen des brevets (EPO) visant l’évolution d’une application Java manipulant des fichiers Excel pour la génération de rapports de niveaux de service (SLA) définis contractuellement, dans un contexte de fiabilisation des indicateurs et d’amélioration du pilotage de la performance.			
-			</p>
-            <div class="experience-tech">
-              <div class="experience-tech__label">
-                <i class="fas fa-microchip"></i> Environnement technique
-              </div>
-              <div class="experience-tech__chips" aria-label="Technologies utilisées">
-                <span class="exp-chip">Java 8</span>
-                <span class="exp-chip">Maven</span>
-                <span class="exp-chip">IntelliJ IDEA</span>
-                <span class="exp-chip">SonarQube</span>
-                <span class="exp-chip">Jira</span>
-                <span class="exp-chip">Spring Boot</span>
-                <span class="exp-chip">YAML</span>
-              </div>
-            </div>
-          </div>
-          <br>
-          <div class="card">
-		  <div class="exp-banner">
-			  <span class="exp-banner__tag">Formation</span>
-			</div>
-            <div class="experience-header">
-              <h3>Ingénieur d’études – Formation interne en Développement Java (Session Junior) @ Infotel Conseil</h3>
-              <span class="experience-date">Juillet 2018 - Septembre 2018</span>
-            </div>
-            <p>Formation intensive Full-Stack orientée projet, avec pour objectif de concevoir et développer une application de voyages web et mobile, de la conception technique à la soutenance finale.</p>
-            <div class="experience-tech">
-              <div class="experience-tech__label">
-                <i class="fas fa-microchip"></i> Environnement technique
-              </div>
-              <div class="experience-tech__chips" aria-label="Technologies utilisées">
-                <span class="exp-chip">Java JEE</span>
-                <span class="exp-chip">Android Studio</span>
-                <span class="exp-chip">HTML5</span>
-                <span class="exp-chip">JavaScript</span>
-                <span class="exp-chip">AngularJS</span>
-                <span class="exp-chip">Bootstrap</span>
-                <span class="exp-chip">ElasticSearch</span>
-              </div>
-            </div>
-          </div>
-          <br>
-          <div class="card">
-		  <div class="exp-banner">
-			  <span class="exp-banner__tag">CDD</span>
-			</div>
-            <div class="experience-header">
-              <h3>Assistant Concepteur Web Coordination de projets @ Banque Postale</h3>
-              <span class="experience-date">Décembre 2017 - Janvier 2018</span>
-            </div>
-            <p>Finalisation d’un outil interne stratégique de gestion et de pilotage des projets, après une première phase de conception, avec pour objectifs la stabilisation, l’enrichissement fonctionnel, la recette utilisateurs dans un contexte d’amélioration continue visant la fiabilisation des données projets et le renforcement de la qualité des reportings.</p>
-            <div class="experience-tech">
-              <div class="experience-tech__label">
-                <i class="fas fa-microchip"></i> Environnement technique
-              </div>
-              <div class="experience-tech__chips" aria-label="Technologies utilisées">
-                <span class="exp-chip">PHP 5</span>
-                <span class="exp-chip">Bootstrap</span>
-                <span class="exp-chip">CSS</span>
-                <span class="exp-chip">HTML5</span>
-                <span class="exp-chip">jQuery</span>
-                <span class="exp-chip">MySQL</span>
-                <span class="exp-chip">Atom Editor</span>
-              </div>
-            </div>
-          </div>
-          <div class="card" style="margin-top: 25px;">
-		  <div class="exp-banner">
-			  <span class="exp-banner__tag">Stage</span>
-			</div>
-            <div class="experience-header">
-              <h3>Assistant Coordination des projets @ Banque Postale</h3>
-              <span class="experience-date">Juin 2017 - Décembre 2017</span>
-            </div>
-            <p>
-			Participation à la conception et au développement d’un outil interne centralisant la gestion des projets de La Banque Postale (suivi opérationnel, pilotage, gouvernance, reporting, habilitations), dans un contexte de structuration des processus et d’amélioration de la fiabilité des données, avec un rôle hybride d’analyste fonctionnel et développeur web.
-			
-			</p>
-            <div class="experience-tech">
-              <div class="experience-tech__label">
-                <i class="fas fa-microchip"></i> Environnement technique
-              </div>
-              <div class="experience-tech__chips" aria-label="Technologies utilisées">
-                <span class="exp-chip">PHP 5</span>
-                <span class="exp-chip">Bootstrap</span>
-                <span class="exp-chip">CSS</span>
-                <span class="exp-chip">HTML5</span>
-                <span class="exp-chip">jQuery</span>
-                <span class="exp-chip">MySQL</span>
-                <span class="exp-chip">Atom Editor</span>
-              </div>
-            </div>
-          </div>
-        </section>
-      </main>
-      <footer id="page-footer">
-        <div class="footer-content">
-          <span class="citation">
-          "N'abandonne jamais, car c'est souvent juste après le dernier effort que le succès se dévoile."
-          </span>
-          <p>
-            © 2026 Maxime Joannis - Tous droits réservés.
-            <a href="privacy.html">Politique de confidentialité</a>
-          </p>
+    <section id="projets" class="projects fade-section">
+      <div class="container">
+        <div class="section-title">
+          <h2 data-i18n="projectsSection.title"></h2>
+          <p data-i18n="projectsSection.subtitle"></p>
         </div>
-      </footer>
-    </div>
-    <script>
-  /**
-   * Portfolio Dashboard Logic
-   * Gestion de l'affichage, du loader "Fake Build" et de la navigation
-   * Version: 2.1 (hash routing)
-   */
-  const PortfolioApp = {
-    // --- CONFIGURATION GLOBALE ---
-    config: {
-      loaderTimeout: 8000,
-      reducedMotion: window.matchMedia("(prefers-reduced-motion: reduce)").matches,
-      sectionLabels: {
-        home: "OVERVIEW",
-        formation: "FORMATION",
-        projects: "PROJECTS",
-        experience: "EXPERIENCE",
-        about: "ABOUT"
-      }
-    },
+        <div class="project-grid" id="projectGrid"></div>
+      </div>
+    </section>
+  </main>
 
-    // --- POINT D'ENTREE ---
-    init() {
-      this.initLoader();
-      this.initNavigation();
-      this.initFocusMode();
-      this.initErrorHandlers();
-      this.initSpecialButtons();
+  <footer>
+    <p data-i18n="footer.text"></p>
+  </footer>
 
-      // ✅ NEW: ouvre automatiquement la bonne section si URL = index.html#projects
-      this.initHashRouting();
-    },
-
-    // --- GESTION DU LOADER (Sequence de démarrage) ---
-    initLoader() {
-      const nodes = {
-        loader: document.getElementById("loader"),
-        fill: document.getElementById("buildFill"),
-        state: document.getElementById("buildState"),
-        icon: document.getElementById("buildIcon"),
-        panel: document.querySelector(".build-panel")
-      };
-
-      // Timeout de sécurité si le JS plante
-      setTimeout(() => this.closeLoader(nodes.loader), this.config.loaderTimeout);
-
-      // Si l'utilisateur préfère réduire les mouvements, on skip
-      if (this.config.reducedMotion) {
-        this.closeLoader(nodes.loader);
-        return;
-      }
-
-      // Etape 1 : Barre de progression
-      setTimeout(() => { if(nodes.fill) nodes.fill.style.width = "85%"; }, 120);
-
-      // Etape 2 : Validation du build
-      setTimeout(() => {
-        if (nodes.fill) nodes.fill.style.width = "100%";
-        if (nodes.state) nodes.state.textContent = "SUCCESS";
-        if (nodes.icon) nodes.icon.innerHTML = '<i class="fas fa-check"></i>';
-        if (nodes.panel) nodes.panel.classList.add("is-success");
-
-        // Etape 3 : Fermeture
-        setTimeout(() => this.closeLoader(nodes.loader), 400);
-      }, 720);
-    },
-
-    closeLoader(loader) {
-      if (loader && loader.style.display !== "none") {
-        loader.style.opacity = "0";
-        setTimeout(() => { loader.style.display = "none"; }, 250);
-      }
-    },
-
-    // --- NAVIGATION (SPA like & Effet machine à écrire) ---
-    initNavigation() {
-      const links = document.querySelectorAll('.nav-link');
-      const sections = document.querySelectorAll('.content-section');
-      const breadcrumbTitle = document.getElementById('breadcrumb-title');
-      const menuLoader = document.getElementById("menuLoader");
-      const menuLoaderText = document.getElementById("menuLoaderText");
-
-      let typeTimeout;
-
-      // Effet visuel sur le titre du fil d'ariane
-      const typeWriter = (text, element) => {
-        element.textContent = "";
-        let i = 0;
-        clearTimeout(typeTimeout);
-        const type = () => {
-          if (i < text.length) {
-            element.textContent += text.charAt(i);
-            i++;
-            typeTimeout = setTimeout(type, 50);
+  <script>
+    const translations = {
+      fr: {
+        nav: {
+          logo: "Maxime Joannis — Ingénieur QA Certifié ISTQB",
+          home: "Accueil",
+          projects: "Projets QA"
+        },
+        hero: {
+          typing: "Portfolio QA — Tests fonctionnels,",
+          gradient: "automatisation & CI/CD",
+          lead: "Découvrez mes projets de test logiciel.",
+          ctaProjects: "Explorer les projets QA"
+        },
+        dashboard: {
+          title: "Tableau de bord QA",
+          status1: "✓ Tests OK",
+          status2: "✓ Régression validée",
+          status3: "✓ Build passed",
+          coverage: "Couverture des tests",
+          legendSuccess: " Tests réussis — 85%",
+          legendBlocked: " Tests bloqués — 5%",
+          legendNotRun: " Non exécutés — 5%",
+          automation: "Tests automatisés",
+          autoCount: "automatisés",
+          successCount: "réussis",
+          failedCount: "échoués",
+          blockedCount: "bloqué",
+          pipeline: "Pipeline CI/CD"
+        },
+        pipeline: {
+          push: "Code push",
+          tests: "Tests automatisés",
+          build: "Build",
+          deploy: "Déploiement"
+        },
+        projectsSection: {
+          title: "Projets QA",
+          subtitle: "Une sélection de projets de test couvrant différents domaines, règles métier et technologies."
+        },
+        projectTag: "Projet QA",
+        buttons: {
+          detail: "Détail projet",
+          detailHint: "Contexte, périmètre, livrables",
+          dashboard: "Tableau de bord QA",
+          dashboardHint: "KPIs, couverture, anomalies",
+          automation: "Automatisation",
+          automationHint: "Playwright, scénarios E2E",
+          pipeline: "Pipeline CI/CD",
+          pipelineHint: "GitHub Actions, quality gate",
+          promptTesting: "Prompt Testing",
+          promptTestingHint: "Tests IA, prompts, validation"
+        },
+        projects: {
+          homey: {
+            name: "Homey",
+            description: "Application de réservation immobilière testée sur les parcours utilisateur, la gestion des réservations, les statuts et les règles métier.",
+            badges: ["Tests fonctionnels", "User stories", "Cas de test", "Gherkin", "RobotFramework", "CI/CD"]
+          },
+          amn: {
+            name: "AmnAuditor",
+            description: "Système d’audit assisté par IA avec génération de constats, conformité, non-conformité et actions correctives.",
+            badges: ["Audit QA", "IA générative", "Tests d’acceptance", "Stratégie de test", "Automatisation", "Reporting QA"]
+          },
+          sauce: {
+            name: "E-commerce Sauce",
+            description: "Projet e-commerce basé sur SauceDemo pour tester les parcours d’achat, panier, checkout, authentification et automatisation E2E.",
+            badges: ["E-commerce", "Tests E2E", "Playwright", "Smoke tests", "Régression", "Pipeline CI/CD"]
           }
-        };
-        type();
-      };
-
-      links.forEach(link => {
-        link.addEventListener("click", (e) => {
-          const targetId = link.getAttribute("data-target");
-          const currentSection = document.querySelector(".content-section.active");
-
-          // ⚠️ Si pas de data-target (lien externe), on ne fait rien
-          if (!targetId) return;
-
-          // ✅ Empêche l'ancre de changer le comportement par défaut
-          e.preventDefault();
-
-          // ✅ NEW: met à jour l'URL => index.html#projects etc.
-          history.replaceState(null, "", `#${targetId}`);
-
-          // Évite de recharger la section déjà active
-          if (currentSection?.id === targetId) return;
-
-          // Mise à jour visuelle du Menu
-          links.forEach(l => l.classList.remove("active-link"));
-          link.classList.add("active-link");
-
-          // Animation Breadcrumb
-          typeWriter(link.innerText.trim(), breadcrumbTitle);
-
-          // Transition avec Micro-loader
-          const label = this.config.sectionLabels[targetId] || "LOADING...";
-          const delay = this.config.reducedMotion ? 0 : 200;
-
-          if (menuLoader && !this.config.reducedMotion) {
-            menuLoaderText.textContent = `SWITCHING: ${label}`;
-            menuLoader.classList.add("is-active");
+        },
+        footer: {
+          text: "© 2026 Maxime Joannis — Portfolio QA"
+        }
+      },
+      en: {
+        nav: {
+          logo: "Maxime Joannis — QA Tester",
+          home: "Home",
+          projects: "QA Projects"
+        },
+        hero: {
+          eyebrow: "Welcome to my QA portfolio",
+          typing: "QA Portfolio — Functional testing,",
+          gradient: "automation & CI/CD",
+          lead: "Explore my software testing projects: test strategy, test cases, Playwright automation, QA dashboards and continuous integration.",
+          ctaProjects: "Explore QA projects"
+        },
+        stats: {
+          testsValue: "120+",
+          testsLabel: "test cases",
+          autoValue: "35",
+          autoLabel: "automated tests",
+          projectsValue: "3",
+          projectsLabel: "QA projects",
+          cicdValue: "CI/CD",
+          cicdLabel: "GitHub Actions"
+        },
+        dashboard: {
+          title: "QA Dashboard",
+          status1: "✓ Tests OK",
+          status2: "✓ Regression validated",
+          status3: "✓ Build passed",
+          coverage: "Test coverage",
+          legendSuccess: " Passed tests — 85%",
+          legendBlocked: " Blocked tests — 5%",
+          legendNotRun: " Not executed — 5%",
+          automation: "Automated tests",
+          autoCount: "automated",
+          successCount: "passed",
+          failedCount: "failed",
+          blockedCount: "blocked",
+          pipeline: "CI/CD Pipeline"
+        },
+        pipeline: {
+          push: "Code push",
+          tests: "Automated tests",
+          build: "Build",
+          deploy: "Deployment"
+        },
+        projectsSection: {
+          title: "QA Projects",
+          subtitle: "A selection of testing projects covering different domains, business rules and technologies."
+        },
+        projectTag: "QA Project",
+        buttons: {
+          detail: "Project details",
+          detailHint: "Context, scope, deliverables",
+          dashboard: "QA Dashboard",
+          dashboardHint: "KPIs, coverage, defects",
+          automation: "Automation",
+          automationHint: "Playwright, E2E scenarios",
+          pipeline: "CI/CD Pipeline",
+          pipelineHint: "GitHub Actions, quality gate",
+          promptTesting: "Prompt Testing",
+          promptTestingHint: "AI tests, prompts, validation"
+        },
+        projects: {
+          homey: {
+            name: "Homey",
+            description: "Real-estate booking application tested across user journeys, booking management, statuses and business rules.",
+            badges: ["Functional testing", "User stories", "Test cases", "Gherkin", "Playwright", "CI/CD"]
+          },
+          amn: {
+            name: "AmnAuditor",
+            description: "AI-assisted audit system with generation of findings, compliance, non-compliance and corrective actions.",
+            badges: ["QA audit", "Generative AI", "Acceptance tests", "Test strategy", "Automation", "QA reporting"]
+          },
+          sauce: {
+            name: "E-commerce Sauce",
+            description: "E-commerce project based on SauceDemo to test purchase journeys, cart, checkout, authentication and E2E automation.",
+            badges: ["E-commerce", "E2E tests", "Playwright", "Smoke tests", "Regression", "CI/CD pipeline"]
           }
-
-          // Bascule des sections après le délai d'animation
-          setTimeout(() => {
-            sections.forEach(s => s.classList.toggle("active", s.id === targetId));
-            window.scrollTo(0, 0);
-            if (menuLoader) menuLoader.classList.remove("is-active");
-          }, delay);
-        });
-      });
-    },
-
-    // ✅ NEW: Deep-linking (index.html#projects ouvre Projects)
-    initHashRouting() {
-  const activateSectionInstant = (targetId) => {
-    const links = document.querySelectorAll('.nav-link');
-    const sections = document.querySelectorAll('.content-section');
-    const breadcrumbTitle = document.getElementById('breadcrumb-title');
-
-    // active-link
-    links.forEach(l => l.classList.remove("active-link"));
-    const link = document.querySelector(`.nav-link[data-target="${targetId}"]`);
-    if (link) link.classList.add("active-link");
-
-    // sections
-    sections.forEach(s => s.classList.toggle("active", s.id === targetId));
-
-    // breadcrumb (sans effet machine à écrire pour éviter le flash)
-    if (breadcrumbTitle && link) breadcrumbTitle.textContent = link.innerText.trim();
-  };
-
-  const openFromHash = () => {
-    const hash = (window.location.hash || "").replace("#", "").trim();
-    if (!hash) return;
-
-    const sectionExists = document.getElementById(hash);
-    const linkExists = document.querySelector(`.nav-link[data-target="${hash}"]`);
-    if (!sectionExists || !linkExists) return;
-
-    // ✅ Affichage IMMEDIAT : pas de flash Home
-    activateSectionInstant(hash);
-
-    // Optionnel : remonter en haut
-    window.scrollTo(0, 0);
-  };
-
-  // ✅ Dès que le DOM est prêt
-  openFromHash();
-
-  // ✅ Si l’URL change ensuite
-  window.addEventListener("hashchange", openFromHash);
-},
-
-    // --- MODE FOCUS (Masquer/Afficher éléments secondaires) ---
-    initFocusMode() {
-      const focusBtn = document.getElementById('focusBtn');
-      if (!focusBtn) return;
-
-      focusBtn.addEventListener('click', () => {
-        document.body.classList.toggle('focus-active');
-        const isFocus = document.body.classList.contains('focus-active');
-        focusBtn.innerHTML = isFocus
-          ? '<i class="fas fa-compress-arrows-alt"></i> QUITTER'
-          : '<i class="fas fa-expand-arrows-alt"></i> FOCUS';
-      });
-    },
-
-    // --- BOUTONS SPECIFIQUES (Liens internes dans le contenu) ---
-    initSpecialButtons() {
-      const seeProjectsBtn = document.getElementById('seeProjectsBtn');
-      if (seeProjectsBtn) {
-        seeProjectsBtn.addEventListener('click', (e) => {
-          e.preventDefault();
-          // ✅ met à jour l’URL aussi (cohérence)
-          history.replaceState(null, "", "#projects");
-          // Simule un clic sur le menu navigation
-          document.querySelector('.nav-link[data-target="projects"]')?.click();
-        });
+        },
+        footer: {
+          text: "QA Portfolio — Functional testing, Playwright automation & CI/CD"
+        }
       }
-    },
+    };
 
-    // --- GESTION DES ERREURS (Style Console Log) ---
-    initErrorHandlers() {
-      window.onerror = (message, source, lineno) => {
-        const statusText = document.querySelector(".loader-text");
-        const logContainer = document.querySelector(".loader-log-container");
+    const projectModels = [
+      {
+        key: "homey",
+        icon: "fa-solid fa-house",
+        accent: "#22c55e",
+        buttons: [
+          {
+            icon: "fa-solid fa-file-lines",
+            labelKey: "detail",
+            hintKey: "detailHint",
+            href: "detailHomey.html",
+            color: "#38bdf8"
+          },
+          {
+            icon: "fa-solid fa-chart-line",
+            labelKey: "dashboard",
+            hintKey: "dashboardHint",
+            href: "dashboardHomey.html",
+            color: "#22d3ee"
+          },
+          {
+            icon: "fa-solid fa-robot",
+            labelKey: "automation",
+            hintKey: "automationHint",
+            href: "rapport_qa_automatisation_robot_framework.html",
+            color: "#22c55e"
+          },
+          {
+            icon: "fa-solid fa-code-branch",
+            labelKey: "pipeline",
+            hintKey: "pipelineHint",
+            href: "rapport_pipeline_homey_qa_automation.html",
+            color: "#a855f7"
+          }
+        ]
+      },
+      {
+        key: "amn",
+        icon: "fa-solid fa-brain",
+        accent: "#a855f7",
+        buttons: [
+          {
+            icon: "fa-solid fa-file-lines",
+            labelKey: "detail",
+            hintKey: "detailHint",
+            href: "detailAmnAuditor.html",
+            color: "#38bdf8"
+          },
+          {
+            icon: "fa-solid fa-chart-line",
+            labelKey: "dashboard",
+            hintKey: "dashboardHint",
+            href: "dashboardAmnAuditor.html",
+            color: "#22d3ee"
+          },
+          {
+            icon: "fa-solid fa-robot",
+            labelKey: "automation",
+            hintKey: "automationHint",
+            href: "rapport_automatisation_amn_auditor.html",
+            color: "#22c55e"
+          },
+          {
+            icon: "fa-solid fa-wand-magic-sparkles",
+            labelKey: "promptTesting",
+            hintKey: "promptTestingHint",
+            href: "prompt-testing-amnauditor.html",
+            color: "#a855f7"
+          }
+        ]
+      },
+      {
+        key: "sauce",
+        icon: "fa-solid fa-cart-shopping",
+        accent: "#fb923c",
+        buttons: [
+          {
+            icon: "fa-solid fa-file-lines",
+            labelKey: "detail",
+            hintKey: "detailHint",
+            href: "sauce-detail-projet.html",
+            color: "#38bdf8"
+          },
+          {
+            icon: "fa-solid fa-chart-line",
+            labelKey: "dashboard",
+            hintKey: "dashboardHint",
+            href: "sauce-dashboard-qa.html",
+            color: "#22d3ee"
+          },
+          {
+            icon: "fa-solid fa-robot",
+            labelKey: "automation",
+            hintKey: "automationHint",
+            href: "sauce-automatisation.html",
+            color: "#22c55e"
+          },
+          {
+            icon: "fa-solid fa-code-branch",
+            labelKey: "pipeline",
+            hintKey: "pipelineHint",
+            href: "sauce-pipeline-cicd.html",
+            color: "#a855f7"
+          }
+        ]
+      }
+    ];
 
-        if (statusText) {
-          statusText.style.color = "#ff4d4d";
-          statusText.textContent = "CRITICAL_ERROR: Execution failed.";
-        }
+    let currentLang = localStorage.getItem("portfolioLang")
+      || (navigator.language && navigator.language.startsWith("en") ? "en" : "fr");
 
-        if (logContainer) {
-          const errorLog = document.createElement("div");
-          errorLog.className = "log-line";
-          errorLog.style.color = "#ff4d4d";
-          errorLog.textContent = `> STACK_TRACE: Line ${lineno}`;
-          logContainer.appendChild(errorLog);
-        }
-      };
+    let typingTimer;
+
+    function getTranslation(path) {
+      return path.split(".").reduce((obj, key) => obj && obj[key], translations[currentLang]) || "";
     }
-  };
 
-  // Lancement au chargement du DOM
-  document.addEventListener("DOMContentLoaded", () => PortfolioApp.init());
-</script>
-  </body>
+    function applyTranslations() {
+      document.documentElement.lang = currentLang;
+      document.querySelectorAll("[data-i18n]").forEach(element => {
+        const key = element.getAttribute("data-i18n");
+        element.style.opacity = "0";
+        setTimeout(() => {
+          element.textContent = getTranslation(key);
+          element.style.opacity = "1";
+        }, 90);
+      });
+    }
+
+    function updateLangButtons() {
+      document.querySelectorAll(".lang-btn").forEach(button => {
+        button.classList.toggle("active", button.dataset.lang === currentLang);
+      });
+    }
+
+    function setLanguage(lang) {
+      currentLang = lang;
+      localStorage.setItem("portfolioLang", lang);
+      renderProjects();
+      applyTranslations();
+      startTyping();
+      updateLangButtons();
+    }
+
+    function startTyping() {
+      clearTimeout(typingTimer);
+      const element = document.getElementById("typingText");
+      const text = translations[currentLang].hero.typing;
+      let index = 0;
+      element.textContent = "";
+
+      function type() {
+        if (index <= text.length) {
+          element.textContent = text.slice(0, index);
+          index++;
+          typingTimer = setTimeout(type, 42);
+        }
+      }
+
+      type();
+    }
+
+    function renderProjects() {
+      const grid = document.getElementById("projectGrid");
+      grid.innerHTML = "";
+
+      projectModels.forEach(project => {
+        const content = translations[currentLang].projects[project.key];
+
+        const card = document.createElement("article");
+        card.className = "project-card";
+        card.style.setProperty("--accent", project.accent);
+
+        card.innerHTML = `
+          <span class="tag-main"><i class="fa-solid fa-circle-dot"></i>${translations[currentLang].projectTag}</span>
+
+          <div class="project-top">
+            <div class="project-icon"><i class="${project.icon}"></i></div>
+            <div>
+              <h3>${content.name}</h3>
+              <p>${content.description}</p>
+            </div>
+          </div>
+
+          <div class="badges">
+            ${content.badges.map(badge => `<span class="badge">${badge}</span>`).join("")}
+          </div>
+
+          <div class="project-actions" aria-label="Actions disponibles pour le projet ${content.name}">
+            ${project.buttons.map(button => `
+              <a class="project-link" href="${button.href}" style="--btn:${button.color}" aria-label="${translations[currentLang].buttons[button.labelKey]} pour ${content.name}">
+                <b><i class="${button.icon}"></i></b>
+                <span>
+                  ${translations[currentLang].buttons[button.labelKey]}
+                  <small>${translations[currentLang].buttons[button.hintKey]}</small>
+                </span>
+              </a>
+            `).join("")}
+          </div>
+        `;
+
+        grid.appendChild(card);
+      });
+    }
+
+    function createFloatingIcons() {
+      const icons = [
+        ["fa-brands fa-html5", "#e34f26"],
+        ["fa-brands fa-css3-alt", "#1572b6"],
+        ["fa-brands fa-js", "#f7df1e"],
+        ["fa-brands fa-github", "#111827"],
+        ["fa-solid fa-bug", "#ef4444"],
+        ["fa-solid fa-vial", "#2563eb"],
+        ["fa-solid fa-robot", "#7c3aed"],
+        ["fa-solid fa-gears", "#0ea5e9"],
+        ["fa-solid fa-shield-halved", "#16a34a"]
+      ];
+
+      const wrapper = document.querySelector(".floating-icons");
+      wrapper.innerHTML = "";
+
+      icons.forEach(([icon, color], index) => {
+        const element = document.createElement("i");
+        element.className = `${icon} floating-icon`;
+        element.style.color = color;
+        element.style.left = `${8 + Math.random() * 84}%`;
+        element.style.top = `${12 + Math.random() * 72}%`;
+        element.style.fontSize = `${1.3 + Math.random() * 1.7}rem`;
+        element.style.animationDelay = `${index * .65}s`;
+        element.style.animationDuration = `${7 + Math.random() * 5}s`;
+        wrapper.appendChild(element);
+      });
+    }
+
+    function initScrollEffects() {
+      const navbar = document.querySelector(".navbar");
+      const sections = document.querySelectorAll("main section[id]");
+      const navLinks = document.querySelectorAll(".nav-links a");
+
+      window.addEventListener("scroll", () => {
+        navbar.classList.toggle("scrolled", window.scrollY > 20);
+
+        let current = "accueil";
+        sections.forEach(section => {
+          const top = section.offsetTop - 120;
+          if (window.scrollY >= top) current = section.id;
+        });
+
+        navLinks.forEach(link => {
+          link.classList.toggle("active", link.getAttribute("href") === `#${current}`);
+        });
+      });
+    }
+
+    function initRevealAnimations() {
+      const observer = new IntersectionObserver(entries => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) entry.target.classList.add("visible");
+        });
+      }, { threshold: .14 });
+
+      document.querySelectorAll(".fade-section").forEach(section => observer.observe(section));
+    }
+
+    function initLanguageSwitcher() {
+      document.querySelectorAll(".lang-btn").forEach(button => {
+        button.addEventListener("click", () => setLanguage(button.dataset.lang));
+      });
+    }
+
+    document.addEventListener("DOMContentLoaded", () => {
+      createFloatingIcons();
+      renderProjects();
+      applyTranslations();
+      startTyping();
+      updateLangButtons();
+      initLanguageSwitcher();
+      initScrollEffects();
+      initRevealAnimations();
+    });
+  </script>
+</body>
 </html>

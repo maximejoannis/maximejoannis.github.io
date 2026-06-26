@@ -1,0 +1,1169 @@
+<!-- Version V3 Hero Premium : contenu métier et données QA conservés, sans mode FR/EN -->
+<!DOCTYPE html>
+<html lang="fr">
+   <head>
+      <meta charset="UTF-8" />
+      <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+      <title>Rapport de Synthèse QA IA — AMN AUDITOR — Méthode ACTIF</title>
+      <meta name="description" content="Rapport de synthèse QA IA sur la génération de scénarios d'acceptance AMN AUDITOR via un prompt structuré selon la méthode ACTIF." />
+      <link rel="preconnect" href="https://fonts.googleapis.com">
+      <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+      <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" />
+      <style>
+         :root{
+         --primary:#2563eb;--secondary:#1e40af;--accent:#0ea5e9;--success:#16a34a;--warning:#f59e0b;--danger:#dc2626;--purple:#7c3aed;
+         --text:#1f2937;--muted:#6b7280;--soft:#94a3b8;--bg:#ffffff;--section:#f3f4f6;--card:rgba(255,255,255,.9);
+         --border:rgba(37,99,235,.14);--shadow:0 20px 50px rgba(15,23,42,.10);--shadow-hover:0 28px 70px rgba(37,99,235,.18);
+         --radius:1rem;--nav:70px;--max:1180px;
+         --font:'Poppins',Inter,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+         }
+         *{box-sizing:border-box;margin:0;padding:0} html{scroll-behavior:smooth} body{font-family:var(--font);color:var(--text);background:var(--bg);line-height:1.7;overflow-x:hidden} a{text-decoration:none;color:inherit}
+         .navbar{position:fixed;inset:0 0 auto 0;height:var(--nav);z-index:1000;background:rgba(255,255,255,.95);backdrop-filter:blur(12px);border-bottom:1px solid rgba(229,231,235,.75);box-shadow:0 10px 34px rgba(15,23,42,.08)}
+         .nav-inner{width:min(100% - 32px,var(--max));height:100%;margin:auto;display:grid;grid-template-columns:auto 1fr auto;align-items:center;gap:24px}.brand{display:flex;align-items:center;gap:10px;color:var(--secondary);font-weight:800}.brand-mark{width:42px;height:42px;border-radius:14px;display:grid;place-items:center;background:linear-gradient(135deg,var(--primary),var(--secondary));color:white;box-shadow:0 12px 30px rgba(37,99,235,.25)}
+         .nav-links{display:flex;justify-content:center;gap:8px;list-style:none}.nav-links a{min-height:38px;padding:8px 12px;border-radius:999px;color:var(--muted);font-size:.88rem;font-weight:600}.nav-links a:hover,.nav-links a.active{color:var(--primary);background:rgba(37,99,235,.08)}.cta{background:var(--primary);color:white;border-radius:999px;padding:8px 14px;font-weight:700;font-size:.88rem;box-shadow:0 10px 24px rgba(37,99,235,.20)}
+         .page{width:min(100% - 32px,var(--max));margin:0 auto;padding:calc(var(--nav) + 42px) 0 80px}section{scroll-margin-top:calc(var(--nav) + 24px);margin-bottom:28px}.hero{padding:46px;border-radius:28px;background:linear-gradient(135deg,#f0f9ff 0%,#e0f2fe 100%);border:1px solid var(--border);box-shadow:var(--shadow);overflow:hidden}.eyebrow{color:var(--primary);font-weight:800}.back-link{display:inline-flex;color:var(--primary);font-weight:700;margin-bottom:12px}h1{font-size:clamp(2.4rem,5vw,4.7rem);line-height:1.04;letter-spacing:-.06em;margin:12px 0 14px;max-width:960px}.subtitle{max-width:940px;color:var(--muted);font-size:1.02rem}.updated{display:inline-flex;margin-top:14px;padding:7px 11px;border-radius:999px;background:#fef3c7;color:#7a5a00;border:1px solid #fde68a;font-weight:700}.hero-actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:20px}.hero-btn{padding:10px 15px;border-radius:999px;background:white;border:1px solid var(--border);font-weight:700;color:var(--primary)}.hero-btn.primary{background:var(--primary);color:white}
+         .panel,.stat,.card,.scenario,.risk,.decision,.workflow-step{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);box-shadow:var(--shadow);transition:.2s}.panel:hover,.stat:hover,.card:hover,.scenario:hover,.risk:hover{box-shadow:var(--shadow-hover);transform:translateY(-2px)}.panel{padding:24px}.panel-title{color:var(--primary);font-size:1.25rem;margin-bottom:8px}.panel-sub{color:var(--muted);margin-bottom:18px}.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}.stat{padding:20px;position:relative;overflow:hidden}.stat:before{content:"";position:absolute;inset:0 0 auto;height:4px;background:linear-gradient(90deg,var(--primary),var(--accent))}.stat strong{display:block;color:var(--primary);font-size:2.5rem;line-height:1;font-weight:900}.stat span{display:block;color:var(--text);font-weight:800;margin-top:8px}.stat small{color:var(--muted);font-weight:600}.grid-2{display:grid;grid-template-columns:1fr 1fr;gap:18px}.grid-3{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}.card{padding:18px}.card b{display:block;margin-bottom:6px;color:var(--text)}.card span,.card p{color:var(--muted)}
+         .actif{display:grid;grid-template-columns:repeat(5,1fr);gap:12px}.workflow-step{min-height:112px;padding:16px;text-align:center;display:grid;place-items:center;position:relative}.workflow-step strong{display:block;color:var(--primary);font-size:1.5rem}.workflow-step span{font-weight:800}.workflow-step small{color:var(--muted)}.workflow-step:not(:last-child):after{content:"→";position:absolute;right:-12px;color:var(--primary);font-weight:900}.pill{display:inline-flex;border-radius:999px;padding:5px 10px;font-size:.72rem;font-weight:800;text-transform:uppercase}.pill.ok{background:#dcfce7;color:#166534}.pill.warn{background:#fef3c7;color:#92400e}.pill.todo{background:#dbeafe;color:#1d4ed8}.pill.ko{background:#fee2e2;color:#991b1b}.bar{height:12px;background:#e5e7eb;border-radius:999px;overflow:hidden;margin-top:8px}.bar span{display:block;height:100%;width:var(--w);background:linear-gradient(90deg,var(--primary),var(--accent));border-radius:999px}.coverage{display:grid;gap:12px}.coverage-item{display:grid;grid-template-columns:220px 1fr 60px;gap:12px;align-items:center;padding:13px;background:#f9fafb;border:1px solid #e5e7eb;border-radius:12px;font-weight:700}.coverage-item em{font-style:normal;color:var(--primary);font-weight:900;text-align:right}
+         .table-head{display:flex;justify-content:space-between;align-items:center;gap:16px;margin-bottom:14px}.filters{display:flex;gap:10px;flex-wrap:wrap}.filters input,.filters select{min-height:40px;border:1px solid #d1d5db;border-radius:999px;padding:0 14px;background:white;color:var(--text);font-weight:600}.table-wrap{overflow:auto;border:1px solid #e5e7eb;border-radius:14px;background:white;box-shadow:var(--shadow)}table{width:100%;border-collapse:separate;border-spacing:0;min-width:1060px}th{background:#f9fafb;color:var(--text);padding:12px;text-align:left;font-size:.74rem;text-transform:uppercase;letter-spacing:.08em;border-bottom:2px solid #e5e7eb}td{padding:12px;border-bottom:1px solid #eef2f7;color:var(--muted);vertical-align:top;font-size:.88rem}tr:hover td{background:#f8fafc}.key{color:var(--primary);font-weight:900;white-space:nowrap}.scenario-count{color:var(--muted);font-weight:700}.decision{padding:26px;background:linear-gradient(135deg,#eff6ff,#ffffff)}.decision-score{font-size:3.5rem;color:var(--primary);font-weight:950;line-height:1}.risk-list{display:grid;gap:12px}.risk{padding:16px;background:#fff}.risk-head{display:flex;justify-content:space-between;gap:12px;margin-bottom:6px}.risk strong{color:var(--text)}.footer{padding:28px 16px;text-align:center;color:var(--muted);background:#fff;border-top:1px solid rgba(229,231,235,.8);font-size:.88rem}.top{position:fixed;right:18px;bottom:18px;width:46px;height:46px;border-radius:50%;background:var(--primary);color:white;display:grid;place-items:center;box-shadow:var(--shadow);font-weight:900}
+         .table-toolbar{display:flex;justify-content:space-between;align-items:center;gap:14px;margin:0 0 14px;flex-wrap:wrap}
+         .rows-control{display:inline-flex;align-items:center;gap:8px;color:var(--muted);font-weight:700}
+         .rows-control select{min-height:40px;border:1px solid #d1d5db;border-radius:999px;padding:0 12px;background:white;color:var(--text);font-weight:800}
+         .pagination{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-top:16px;flex-wrap:wrap;color:var(--muted);font-weight:700}
+         .pagination-actions{display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+         .pagination button{min-height:38px;border:none;border-radius:999px;background:var(--primary);color:white;padding:8px 14px;font-weight:800;cursor:pointer;box-shadow:0 10px 24px rgba(37,99,235,.16);transition:.2s}
+         .pagination button:hover:not(:disabled){transform:translateY(-1px);background:var(--secondary)}
+         .pagination button:disabled{opacity:.45;cursor:not-allowed;box-shadow:none}
+         #pageInfo{display:inline-flex;align-items:center;min-height:38px;padding:0 12px;border-radius:999px;background:#f9fafb;border:1px solid #e5e7eb;color:var(--text);font-weight:800}
+         .reliability-grid{display:grid;grid-template-columns:1.05fr .95fr;gap:18px;align-items:start}
+         .reliability-card{padding:18px;background:#fff;border:1px solid var(--border);border-radius:var(--radius);box-shadow:var(--shadow)}
+         .reliability-card h3{color:var(--primary);margin-bottom:10px;font-size:1.05rem}
+         .donut-wrap{display:grid;grid-template-columns:180px 1fr;gap:18px;align-items:center}
+         .donut{width:170px;height:170px;border-radius:50%;background:conic-gradient(var(--success) 0 74%, var(--warning) 74% 93%, var(--danger) 93% 100%);position:relative;margin:auto;box-shadow:0 16px 40px rgba(15,23,42,.12)}
+         .donut:after{content:"";position:absolute;inset:42px;border-radius:50%;background:#fff;border:1px solid #e5e7eb}
+         .donut-center{position:absolute;inset:0;display:grid;place-items:center;text-align:center;z-index:2;font-weight:900;color:var(--text)}
+         .donut-center strong{display:block;font-size:1.8rem;color:var(--primary);line-height:1}.donut-center span{display:block;font-size:.72rem;color:var(--muted);text-transform:uppercase;letter-spacing:.06em}
+         .legend{display:grid;gap:10px}.legend-row{display:grid;grid-template-columns:auto 1fr auto;gap:10px;align-items:center;padding:10px 12px;border-radius:12px;background:#f9fafb;border:1px solid #e5e7eb;font-weight:700;color:var(--text)}
+         .legend-row small{display:block;color:var(--muted);font-weight:600}.dot{width:12px;height:12px;border-radius:4px}.dot.green{background:var(--success)}.dot.orange{background:var(--warning)}.dot.red{background:var(--danger)}
+         .qa-note{padding:16px 18px;border-left:5px solid var(--primary);background:#eff6ff;border-radius:14px;color:var(--text);font-weight:650;margin-top:16px}
+         .mini-table{min-width:760px}.mini-table td:first-child{font-weight:800;color:var(--text)}
+         .heatmap{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}.heat{padding:14px;border-radius:14px;border:1px solid #e5e7eb;background:#f9fafb;font-weight:800}.heat span{display:block;color:var(--muted);font-size:.84rem;font-weight:650}.heat.ok{border-color:#bbf7d0;background:#f0fdf4}.heat.warn{border-color:#fde68a;background:#fffbeb}.heat.ko{border-color:#fecaca;background:#fef2f2}
+         @media(max-width:1100px){.reliability-grid,.donut-wrap{grid-template-columns:1fr}.heatmap{grid-template-columns:repeat(2,1fr)}}
+         @media(max-width:720px){.heatmap{grid-template-columns:1fr}}
+         /* Correctifs affichage section Fiabilité : évite les textes compressés et les débordements */
+         #fiabilite{overflow:visible}
+         #fiabilite .reliability-grid{grid-template-columns:minmax(360px,.9fr) minmax(520px,1.1fr);gap:16px;align-items:stretch}
+         #fiabilite .reliability-card{min-width:0;overflow:hidden}
+         #fiabilite .donut-wrap{display:grid;grid-template-columns:1fr;gap:16px;align-items:start}
+         #fiabilite .donut{width:176px;height:176px;margin:2px auto 4px;flex:0 0 auto}
+         #fiabilite .legend{width:100%;grid-template-columns:1fr;gap:10px}
+         #fiabilite .legend-row{grid-template-columns:14px minmax(0,1fr) 42px;align-items:center;line-height:1.45}
+         #fiabilite .legend-row div{min-width:0}
+         #fiabilite .legend-row small{line-height:1.45;margin-top:3px}
+         #fiabilite .qa-note{font-size:.92rem;line-height:1.6}
+         #fiabilite .table-wrap{max-width:100%;overflow-x:auto;border-radius:14px}
+         #fiabilite table.mini-table{min-width:720px}
+         #fiabilite table.mini-table th,#fiabilite table.mini-table td{white-space:normal;line-height:1.55}
+         #fiabilite table.mini-table th:nth-child(1),#fiabilite table.mini-table td:nth-child(1){width:26%}
+         #fiabilite table.mini-table th:nth-child(2),#fiabilite table.mini-table td:nth-child(2){width:50%}
+         #fiabilite table.mini-table th:nth-child(3),#fiabilite table.mini-table td:nth-child(3){width:24%}
+         #fiabilite .pill{white-space:normal;text-align:center;justify-content:center;border-radius:999px;line-height:1.25}
+         @media(max-width:1180px){#fiabilite .reliability-grid{grid-template-columns:1fr}}
+         @media(max-width:720px){#fiabilite .legend-row{grid-template-columns:14px 1fr auto}#fiabilite table.mini-table{min-width:640px}}
+         @media(max-width:1100px){.stats,.grid-3{grid-template-columns:repeat(2,1fr)}.grid-2,.actif{grid-template-columns:1fr}.workflow-step:after{display:none}.coverage-item{grid-template-columns:1fr}.nav-links{display:none}.page{width:min(100% - 24px,var(--max))}.hero{padding:30px}}
+         @media(max-width:720px){.stats,.grid-3{grid-template-columns:1fr}.cta{display:none}h1{font-size:2.4rem}.panel{padding:18px}.brand span{display:none}}
+         @media print{.navbar,.top,.hero-actions,.filters{display:none}.page{padding:0;width:100%}.panel,.stat,.card,.scenario,.risk{box-shadow:none;break-inside:avoid}body{background:white}}
+         /* =========================================================
+         V2 Premium Animation — harmonisation portfolio QA
+         Objectif : conserver le contenu métier, améliorer le rendu
+         ========================================================= */
+         :root{
+         --primary-color:#2563eb;
+         --secondary-color:#1e40af;
+         --text-color:#1f2937;
+         --light-text:#6b7280;
+         --background:#ffffff;
+         --section-bg:#f3f4f6;
+         --glass:rgba(255,255,255,.86);
+         --glow:0 28px 70px rgba(37,99,235,.18);
+         }
+         body{
+         background:
+         radial-gradient(circle at 12% 8%, rgba(37,99,235,.08), transparent 28%),
+         radial-gradient(circle at 88% 10%, rgba(14,165,233,.10), transparent 30%),
+         linear-gradient(180deg,#ffffff 0%,#f8fafc 48%,#ffffff 100%) !important;
+         }
+         body::before{
+         content:"";
+         position:fixed;
+         inset:0;
+         pointer-events:none;
+         background:radial-gradient(640px circle at var(--mouse-x,50%) var(--mouse-y,50%), rgba(37,99,235,.08), transparent 42%);
+         z-index:0;
+         }
+         .skip-link{position:fixed;top:14px;left:14px;z-index:3000;transform:translateY(-140%);background:var(--primary);color:#fff;padding:10px 14px;border-radius:999px;font-weight:800;transition:.2s}.skip-link:focus{transform:translateY(0)}
+         .page-loader{position:fixed;inset:0;z-index:2500;display:grid;place-items:center;background:linear-gradient(135deg,#f0f9ff,#fff);transition:opacity .65s ease,visibility .65s ease}.page-loader.loader-hidden{opacity:0;visibility:hidden;pointer-events:none}.loader-content{min-width:min(86vw,420px);padding:28px;border-radius:24px;background:rgba(255,255,255,.92);border:1px solid rgba(37,99,235,.14);box-shadow:var(--glow);text-align:center;display:grid;gap:12px;animation:loaderFloat .65s ease both}.loader-kicker{color:var(--primary);font-weight:900}.loader-content strong{font-size:clamp(1.2rem,3vw,1.8rem);color:var(--text);letter-spacing:-.04em}.loader-line{height:3px;width:220px;margin:auto;border-radius:999px;background:#dbeafe;overflow:hidden}.loader-line::after{content:"";display:block;width:44%;height:100%;border-radius:inherit;background:linear-gradient(90deg,var(--primary),var(--accent));animation:loaderProgress 1.15s ease-in-out infinite}@keyframes loaderFloat{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:translateY(0)}}@keyframes loaderProgress{0%{transform:translateX(-120%)}100%{transform:translateX(260%)}}
+         .navbar{transition:box-shadow .2s ease, background .2s ease}.navbar.scrolled{background:rgba(255,255,255,.98);box-shadow:0 14px 42px rgba(15,23,42,.10)}
+         .brand-mark{position:relative;overflow:hidden}.brand-mark::after{content:"";position:absolute;inset:-40%;background:linear-gradient(90deg,transparent,rgba(255,255,255,.42),transparent);transform:translateX(-120%) rotate(18deg);animation:shine 3.8s ease-in-out infinite}@keyframes shine{0%,55%{transform:translateX(-120%) rotate(18deg)}75%,100%{transform:translateX(120%) rotate(18deg)}}
+         .hero{position:relative;isolation:isolate}.hero::before,.hero::after{content:"";position:absolute;border-radius:999px;filter:blur(4px);z-index:-1}.hero::before{width:220px;height:220px;right:-70px;top:-70px;background:rgba(37,99,235,.13)}.hero::after{width:160px;height:160px;left:55%;bottom:-85px;background:rgba(14,165,233,.13)}
+         .hero-btn,.cta,.top,.pagination button{transition:transform .2s ease,box-shadow .2s ease,background .2s ease}.hero-btn:hover,.cta:hover,.top:hover,.pagination button:hover:not(:disabled){transform:translateY(-2px);box-shadow:0 18px 38px rgba(37,99,235,.18)}
+         .panel,.stat,.card,.scenario,.risk,.decision,.workflow-step,.reliability-card{backdrop-filter:blur(10px)}
+         .panel,.stat,.card,.scenario,.risk,.decision,.workflow-step{position:relative;overflow:hidden}.panel::before,.stat::before,.card::before,.decision::before,.reliability-card::before{content:"";position:absolute;inset:0 0 auto 0;height:4px;background:linear-gradient(90deg,var(--primary),var(--accent));opacity:.9}.card::before,.reliability-card::before{height:3px}.panel-title{letter-spacing:-.02em}.stats .stat strong{font-size:clamp(2.2rem,4vw,3rem)}
+         .actif .workflow-step{background:linear-gradient(180deg,#ffffff,#f8fafc)}.workflow-step strong{font-size:2rem}.workflow-step:hover strong{transform:scale(1.08);transition:.2s}
+         .coverage-item,.legend-row,.heat{transition:transform .2s ease,box-shadow .2s ease}.coverage-item:hover,.legend-row:hover,.heat:hover{transform:translateY(-2px);box-shadow:0 16px 34px rgba(15,23,42,.08)}
+         .bar span{position:relative;overflow:hidden}.bar span::after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,transparent,rgba(255,255,255,.36),transparent);animation:barShine 2.8s ease-in-out infinite}@keyframes barShine{0%{transform:translateX(-100%)}55%,100%{transform:translateX(100%)}}
+         .donut{animation:softPulse 3.5s ease-in-out infinite}@keyframes softPulse{0%,100%{transform:scale(1)}50%{transform:scale(1.025)}}
+         .table-wrap{border-radius:18px}.filters input:focus,.filters select:focus,.rows-control select:focus{outline:3px solid rgba(37,99,235,.18);border-color:var(--primary)}
+         .reveal{opacity:0;transform:translateY(18px);transition:opacity .58s ease, transform .58s ease}.reveal.visible{opacity:1;transform:translateY(0)}
+         .footer{background:linear-gradient(180deg,#fff,#f8fafc)}
+         @media print{.page-loader,.skip-link{display:none!important}.reveal{opacity:1;transform:none}}
+         @media (prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important;scroll-behavior:auto!important}.page-loader{display:none!important}.reveal{opacity:1;transform:none}}
+         /* =========================================================
+         V3 — Hero Premium animé, sans modification du contenu métier
+         ========================================================= */
+         .hero{
+         position:relative;
+         isolation:isolate;
+         min-height:520px;
+         display:grid;
+         align-content:center;
+         overflow:hidden;
+         background:
+         radial-gradient(circle at 12% 18%, rgba(37,99,235,.18), transparent 32%),
+         radial-gradient(circle at 82% 24%, rgba(14,165,233,.22), transparent 30%),
+         linear-gradient(135deg,#f8fbff 0%,#e0f2fe 48%,#eef2ff 100%);
+         }
+         .hero::before,
+         .hero::after{
+         content:"";
+         position:absolute;
+         width:360px;
+         height:360px;
+         border-radius:50%;
+         background:linear-gradient(135deg,rgba(37,99,235,.18),rgba(14,165,233,.06));
+         filter:blur(4px);
+         z-index:-2;
+         animation:heroBlob 13s ease-in-out infinite alternate;
+         }
+         .hero::before{right:-120px;top:-120px}.hero::after{left:-140px;bottom:-170px;animation-delay:-4s}
+         .hero-orbit{position:absolute;inset:0;pointer-events:none;z-index:-1;overflow:hidden}
+         .hero-orbit span{position:absolute;display:grid;place-items:center;border-radius:22px;background:rgba(255,255,255,.68);border:1px solid rgba(37,99,235,.13);box-shadow:0 18px 50px rgba(37,99,235,.13);backdrop-filter:blur(12px);color:var(--primary);font-weight:900;animation:floatToken 7s ease-in-out infinite}
+         .hero-orbit span:nth-child(1){width:72px;height:72px;right:9%;top:22%;animation-delay:-1s}.hero-orbit span:nth-child(2){width:58px;height:58px;right:22%;bottom:18%;animation-delay:-3s}.hero-orbit span:nth-child(3){width:64px;height:64px;left:7%;bottom:24%;animation-delay:-5s}.hero-orbit span:nth-child(4){width:48px;height:48px;left:22%;top:18%;animation-delay:-2s}
+         .hero-metrics{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px;margin-top:26px;max-width:900px}
+         .hero-metric{padding:14px 16px;border-radius:18px;background:rgba(255,255,255,.72);border:1px solid rgba(37,99,235,.14);box-shadow:0 16px 44px rgba(37,99,235,.10);backdrop-filter:blur(12px);animation:fadeUp .75s ease both;transition:transform .2s ease,box-shadow .2s ease}.hero-metric:hover{transform:translateY(-4px);box-shadow:0 24px 60px rgba(37,99,235,.18)}
+         .hero-metric strong{display:block;color:var(--primary);font-size:1.65rem;line-height:1;font-weight:950}.hero-metric span{display:block;margin-top:6px;color:var(--muted);font-size:.78rem;font-weight:800}
+         .back-link,.eyebrow,.hero h1,.hero .subtitle,.updated,.hero-actions{animation:fadeUp .72s ease both}.back-link{animation-delay:.05s}.eyebrow{animation-delay:.13s}.hero h1{animation-delay:.22s}.hero .subtitle{animation-delay:.34s}.updated{animation-delay:.44s}.hero-actions{animation-delay:.54s}.hero-metric:nth-child(1){animation-delay:.64s}.hero-metric:nth-child(2){animation-delay:.74s}.hero-metric:nth-child(3){animation-delay:.84s}.hero-metric:nth-child(4){animation-delay:.94s}
+         .hero h1{background:linear-gradient(135deg,var(--text-color),var(--secondary-color),var(--primary-color));-webkit-background-clip:text;background-clip:text;color:transparent}.hero-btn{position:relative;overflow:hidden}.hero-btn::after{content:"";position:absolute;inset:-2px;transform:translateX(-115%);background:linear-gradient(90deg,transparent,rgba(255,255,255,.65),transparent);transition:transform .55s ease}.hero-btn:hover::after{transform:translateX(115%)}
+         .stats .stat strong{display:inline-block;animation:kpiPop .7s ease both}.stats .stat:nth-child(1) strong{animation-delay:.1s}.stats .stat:nth-child(2) strong{animation-delay:.2s}.stats .stat:nth-child(3) strong{animation-delay:.3s}.stats .stat:nth-child(4) strong{animation-delay:.4s}
+         @keyframes fadeUp{from{opacity:0;transform:translateY(22px)}to{opacity:1;transform:translateY(0)}}
+         @keyframes heroBlob{0%{transform:translate3d(0,0,0) scale(1)}100%{transform:translate3d(24px,18px,0) scale(1.08)}}
+         @keyframes floatToken{0%,100%{transform:translateY(0) rotate(0deg)}50%{transform:translateY(-18px) rotate(5deg)}}
+         @keyframes kpiPop{from{opacity:0;transform:translateY(8px) scale(.94)}to{opacity:1;transform:translateY(0) scale(1)}}
+         @media(max-width:900px){.hero{min-height:auto}.hero-metrics{grid-template-columns:repeat(2,1fr)}}
+         @media(max-width:560px){.hero-metrics{grid-template-columns:1fr}.hero-orbit{display:none}}
+         @media(prefers-reduced-motion:reduce){.hero::before,.hero::after,.hero-orbit span,.back-link,.eyebrow,.hero h1,.hero .subtitle,.updated,.hero-actions,.hero-metric,.stats .stat strong{animation:none!important}}
+      
+/* =========================================================
+   HARMONISATION FINALE — Référence portfolio_qa_maxime_accueil_projets
+   Identité claire, Hero portfolio, dashboard visuel, cartes premium, footer sombre.
+   ========================================================= */
+:root{
+  --primary-color:#2563eb;
+  --secondary-color:#1e40af;
+  --text-color:#1f2937;
+  --light-text:#6b7280;
+  --background:#ffffff;
+  --section-bg:#f3f4f6;
+  --card-bg:#ffffff;
+  --border:#e5e7eb;
+  --green:#22c55e;
+  --purple:#a855f7;
+  --orange:#fb923c;
+  --cyan:#38bdf8;
+  --red:#ef4444;
+  --shadow:0 18px 45px rgba(15,23,42,.10);
+  --shadow-hover:0 28px 70px rgba(37,99,235,.18);
+  --radius:1rem;
+  --nav-height:70px;
+
+  --primary:var(--primary-color);
+  --secondary:var(--secondary-color);
+  --accent:var(--cyan);
+  --success:var(--green);
+  --warning:var(--orange);
+  --danger:var(--red);
+  --text:var(--text-color);
+  --muted:var(--light-text);
+  --soft:#94a3b8;
+  --bg:var(--background);
+  --section:var(--section-bg);
+  --card:var(--card-bg);
+  --nav:var(--nav-height);
+  --max:1180px;
+}
+
+html{scroll-behavior:smooth}
+body{
+  font-family:"Poppins",system-ui,sans-serif !important;
+  color:var(--text-color) !important;
+  background:var(--background) !important;
+  line-height:1.7;
+  overflow-x:hidden;
+}
+body::before{display:none!important}
+a{color:inherit;text-decoration:none}
+
+/* Navigation portfolio */
+.navbar{
+  position:fixed!important;
+  inset:0 0 auto 0!important;
+  z-index:1000!important;
+  height:var(--nav-height)!important;
+  background:rgba(255,255,255,.95)!important;
+  backdrop-filter:blur(10px)!important;
+  border-bottom:1px solid rgba(229,231,235,.8)!important;
+  box-shadow:none!important;
+  transition:box-shadow .25s ease,background .25s ease!important;
+}
+.navbar.scrolled{
+  box-shadow:0 12px 38px rgba(15,23,42,.08)!important;
+  background:rgba(255,255,255,.98)!important;
+}
+.nav-inner{
+  width:min(1180px,calc(100% - 2rem))!important;
+  height:100%!important;
+  margin:0 auto!important;
+  display:grid!important;
+  grid-template-columns:1fr auto 1fr!important;
+  align-items:center!important;
+  gap:1.4rem!important;
+}
+.brand{
+  display:inline-flex!important;
+  align-items:center!important;
+  gap:.65rem!important;
+  color:var(--primary-color)!important;
+  font-weight:800!important;
+  letter-spacing:-.04em!important;
+}
+.brand-mark{
+  width:42px!important;
+  height:42px!important;
+  border-radius:14px!important;
+  display:grid!important;
+  place-items:center!important;
+  color:#fff!important;
+  background:linear-gradient(135deg,var(--primary-color),#7c3aed)!important;
+  box-shadow:0 12px 28px rgba(37,99,235,.25)!important;
+}
+.nav-links{
+  display:flex!important;
+  align-items:center!important;
+  justify-content:center!important;
+  gap:1.15rem!important;
+  list-style:none!important;
+  color:var(--light-text)!important;
+  font-weight:600!important;
+}
+.nav-links a{
+  position:relative!important;
+  min-height:auto!important;
+  padding:0!important;
+  border-radius:0!important;
+  color:var(--light-text)!important;
+  font-size:.84rem!important;
+  font-weight:600!important;
+  background:transparent!important;
+  transition:color .25s ease!important;
+}
+.nav-links a::after{
+  content:"";
+  position:absolute;
+  left:0;
+  bottom:-.35rem;
+  width:0;
+  height:2px;
+  background:var(--primary-color);
+  border-radius:999px;
+  transition:width .25s ease;
+}
+.nav-links a:hover,
+.nav-links a.active{color:var(--primary-color)!important}
+.nav-links a:hover::after,
+.nav-links a.active::after{width:100%}
+.cta{
+  justify-self:end!important;
+  display:inline-flex!important;
+  align-items:center!important;
+  justify-content:center!important;
+  min-height:40px!important;
+  padding:0 1rem!important;
+  border-radius:999px!important;
+  background:var(--primary-color)!important;
+  color:#fff!important;
+  font-weight:800!important;
+  font-size:.86rem!important;
+  box-shadow:0 16px 35px rgba(37,99,235,.20)!important;
+  transition:transform .25s ease,box-shadow .25s ease!important;
+}
+.cta:hover{transform:translateY(-3px);box-shadow:var(--shadow-hover)!important}
+
+/* Layout */
+.page{
+  width:100%!important;
+  max-width:none!important;
+  margin:0!important;
+  padding:0!important;
+}
+main.page > section:not(.hero),
+main.page > header + br + section,
+main.page > section{
+  width:min(1180px,calc(100% - 2rem));
+  margin-left:auto!important;
+  margin-right:auto!important;
+}
+section{scroll-margin-top:calc(var(--nav-height) + 24px);margin-bottom:0!important;padding:3rem 0!important}
+
+/* Hero comme portfolio accueil */
+.hero{
+  width:100%!important;
+  min-height:100vh!important;
+  position:relative!important;
+  display:grid!important;
+  align-items:center!important;
+  align-content:center!important;
+  padding:calc(var(--nav-height) + 4rem) max(1rem,calc((100% - 1180px)/2)) 4.5rem!important;
+  border:0!important;
+  border-radius:0!important;
+  background:linear-gradient(135deg,#f0f9ff 0%,#e0f2fe 100%)!important;
+  box-shadow:none!important;
+  overflow:hidden!important;
+}
+.hero::before,
+.hero::after{
+  content:""!important;
+  position:absolute!important;
+  border-radius:999px!important;
+  pointer-events:none!important;
+  filter:none!important;
+  z-index:0!important;
+}
+.hero::before{
+  width:520px!important;
+  height:520px!important;
+  right:-160px!important;
+  top:8%!important;
+  background:radial-gradient(circle,rgba(124,58,237,.22),transparent 68%)!important;
+  animation:floatTech 11s ease-in-out infinite!important;
+}
+.hero::after{
+  width:420px!important;
+  height:420px!important;
+  left:-120px!important;
+  bottom:4%!important;
+  background:radial-gradient(circle,rgba(37,99,235,.16),transparent 68%)!important;
+  animation:floatTech 13s ease-in-out infinite reverse!important;
+}
+.hero > *{position:relative;z-index:2}
+.hero-orbit{position:absolute!important;inset:0!important;z-index:1!important;pointer-events:none!important}
+.hero-orbit span{
+  position:absolute!important;
+  display:grid!important;
+  place-items:center!important;
+  border-radius:1.2rem!important;
+  background:rgba(255,255,255,.68)!important;
+  border:1px solid rgba(147,197,253,.75)!important;
+  box-shadow:0 18px 42px rgba(37,99,235,.13)!important;
+  color:var(--primary-color)!important;
+  font-weight:900!important;
+  backdrop-filter:blur(12px)!important;
+  animation:floatTech 9s ease-in-out infinite!important;
+}
+.hero-orbit span:nth-child(1){width:74px!important;height:74px!important;right:11%!important;top:22%!important}
+.hero-orbit span:nth-child(2){width:58px!important;height:58px!important;right:21%!important;bottom:23%!important;animation-delay:-2s!important}
+.hero-orbit span:nth-child(3){width:72px!important;height:72px!important;left:8%!important;bottom:20%!important;animation-delay:-4s!important}
+.hero-orbit span:nth-child(4){width:54px!important;height:54px!important;left:22%!important;top:21%!important;animation-delay:-6s!important}
+
+.back-link{
+  display:inline-flex!important;
+  width:fit-content!important;
+  align-items:center!important;
+  gap:.55rem!important;
+  margin-bottom:1.35rem!important;
+  padding:.55rem .9rem!important;
+  border-radius:999px!important;
+  color:var(--secondary-color)!important;
+  background:rgba(37,99,235,.10)!important;
+  border:1px solid rgba(37,99,235,.16)!important;
+  font-weight:800!important;
+}
+.hero h1{
+  max-width:920px!important;
+  font-size:clamp(2.35rem,6vw,4.55rem)!important;
+  line-height:1.06!important;
+  letter-spacing:-.075em!important;
+  font-weight:900!important;
+  margin:0 0 1.25rem!important;
+  color:var(--text-color)!important;
+  background:none!important;
+  -webkit-background-clip:initial!important;
+  background-clip:initial!important;
+}
+.hero h1::after{
+  content:"méthode ACTIF";
+  display:block;
+  background:linear-gradient(90deg,var(--primary-color),#7c3aed,var(--cyan));
+  -webkit-background-clip:text;
+  color:transparent;
+}
+.subtitle{
+  margin:0 0 1.8rem!important;
+  color:var(--light-text)!important;
+  font-size:clamp(1rem,2vw,1.16rem)!important;
+  max-width:760px!important;
+}
+.hero-actions{
+  display:flex!important;
+  flex-wrap:wrap!important;
+  gap:1rem!important;
+  margin:0!important;
+}
+.hero-btn{
+  display:inline-flex!important;
+  align-items:center!important;
+  justify-content:center!important;
+  gap:.65rem!important;
+  min-height:54px!important;
+  padding:0 1.25rem!important;
+  border-radius:999px!important;
+  border:1px solid var(--primary-color)!important;
+  font-weight:800!important;
+  color:var(--primary-color)!important;
+  background:#fff!important;
+  box-shadow:0 10px 24px rgba(15,23,42,.06)!important;
+  transition:transform .25s ease,box-shadow .25s ease,background .25s ease!important;
+}
+.hero-btn.primary{
+  color:white!important;
+  background:var(--primary-color)!important;
+  box-shadow:0 16px 35px rgba(37,99,235,.28)!important;
+}
+.hero-btn:hover{transform:translateY(-3px)!important;box-shadow:var(--shadow-hover)!important}
+
+/* KPI portfolio */
+.stats{
+  display:grid!important;
+  grid-template-columns:repeat(4,minmax(0,1fr))!important;
+  gap:.85rem!important;
+  padding-top:3rem!important;
+  padding-bottom:0!important;
+}
+.stat{
+  min-height:104px!important;
+  display:flex!important;
+  align-items:center!important;
+  gap:.8rem!important;
+  padding:1rem!important;
+  border-radius:.95rem!important;
+  background:rgba(255,255,255,.72)!important;
+  border:1px solid rgba(191,219,254,.9)!important;
+  box-shadow:0 14px 30px rgba(37,99,235,.08)!important;
+  overflow:hidden!important;
+  transition:transform .25s ease,box-shadow .25s ease!important;
+}
+.stat::before{display:none!important}
+.stat::after{
+  content:"";
+  width:42px;
+  height:42px;
+  flex:0 0 auto;
+  order:-1;
+  border-radius:14px;
+  background:linear-gradient(135deg,var(--primary-color),#7c3aed);
+  box-shadow:0 12px 28px rgba(37,99,235,.18);
+}
+.stat strong{
+  display:block!important;
+  color:var(--text-color)!important;
+  font-size:1.35rem!important;
+  line-height:1!important;
+  letter-spacing:-.04em!important;
+}
+.stat span{display:block!important;color:var(--text-color)!important;font-weight:900!important;margin:.25rem 0 0!important}
+.stat small{display:block!important;color:var(--light-text)!important;font-size:.72rem!important;font-weight:600!important;margin:.15rem 0 0!important}
+.stat:hover{transform:translateY(-6px)!important;box-shadow:var(--shadow-hover)!important}
+
+/* Sections et cartes */
+.panel,
+.card,
+.scenario,
+.risk,
+.decision,
+.workflow-step,
+.reliability-card{
+  background:#fff!important;
+  border:1px solid var(--border)!important;
+  border-radius:1.4rem!important;
+  box-shadow:var(--shadow)!important;
+  overflow:hidden!important;
+  position:relative!important;
+  transition:transform .28s ease,box-shadow .28s ease,border-color .28s ease!important;
+}
+.panel::before,
+.card::before,
+.risk::before,
+.decision::before,
+.reliability-card::before,
+.workflow-step::before{
+  content:""!important;
+  position:absolute!important;
+  inset:0 0 auto 0!important;
+  height:4px!important;
+  background:linear-gradient(90deg,var(--primary-color),#7c3aed,var(--cyan))!important;
+}
+.panel:hover,
+.card:hover,
+.risk:hover,
+.reliability-card:hover,
+.workflow-step:hover{
+  transform:translateY(-6px)!important;
+  box-shadow:var(--shadow-hover)!important;
+  border-color:rgba(37,99,235,.28)!important;
+}
+.panel{padding:1.55rem!important}
+.panel-title{
+  color:var(--text-color)!important;
+  font-size:clamp(1.35rem,2vw,1.75rem)!important;
+  line-height:1.2!important;
+  font-weight:900!important;
+  margin:0 0 .85rem!important;
+  letter-spacing:-.045em!important;
+}
+.panel-sub{color:var(--light-text)!important;margin-bottom:1.2rem!important}
+.grid-2{display:grid!important;grid-template-columns:repeat(2,minmax(0,1fr))!important;gap:1.4rem!important}
+.grid-3{display:grid!important;grid-template-columns:repeat(3,minmax(0,1fr))!important;gap:1.1rem!important}
+.card{padding:1.25rem!important}
+.card b{display:block!important;color:var(--text-color)!important;margin-bottom:.45rem!important;font-size:1rem!important}
+.card span,.card p{color:var(--light-text)!important}
+
+/* ACTIF / workflow */
+.actif{display:grid!important;grid-template-columns:repeat(5,minmax(0,1fr))!important;gap:1rem!important}
+.workflow-step{
+  min-height:132px!important;
+  padding:1.1rem!important;
+  background:linear-gradient(135deg,rgba(37,99,235,.06),#fff)!important;
+}
+.workflow-step strong{color:var(--primary-color)!important;font-size:2.2rem!important}
+.workflow-step span{font-weight:900!important;color:var(--text-color)!important}
+.workflow-step small{color:var(--light-text)!important}
+.workflow-step:not(:last-child)::after{
+  content:"→"!important;
+  position:absolute!important;
+  right:-.8rem!important;
+  color:var(--primary-color)!important;
+  font-weight:900!important;
+  z-index:4!important;
+}
+
+/* Badges, barres, décision */
+.pill{border-radius:999px!important;padding:.45rem .7rem!important;font-size:.72rem!important;font-weight:900!important;text-transform:uppercase!important}
+.pill.ok{background:rgba(34,197,94,.12)!important;color:#15803d!important;border:1px solid rgba(34,197,94,.22)!important}
+.pill.warn{background:#fef3c7!important;color:#92400e!important;border:1px solid #fde68a!important}
+.pill.todo{background:#dbeafe!important;color:#1d4ed8!important;border:1px solid #bfdbfe!important}
+.pill.ko{background:#fee2e2!important;color:#991b1b!important;border:1px solid #fecaca!important}
+.coverage{display:grid!important;gap:.8rem!important}
+.coverage-item,
+.legend-row,
+.heat{
+  background:#f9fafb!important;
+  border:1px solid #e5e7eb!important;
+  border-radius:.95rem!important;
+  transition:transform .22s ease,box-shadow .22s ease!important;
+}
+.coverage-item:hover,
+.legend-row:hover,
+.heat:hover{transform:translateY(-3px);box-shadow:0 14px 30px rgba(15,23,42,.08)}
+.bar{height:12px!important;background:#e5e7eb!important;border-radius:999px!important}
+.bar span{background:linear-gradient(90deg,var(--primary-color),#7c3aed,var(--cyan))!important}
+.coverage-item em{color:var(--primary-color)!important}
+.decision{
+  padding:1.6rem!important;
+  background:linear-gradient(135deg,#eff6ff,#fff)!important;
+}
+.decision-score{
+  color:var(--primary-color)!important;
+  font-size:clamp(3rem,7vw,5rem)!important;
+  font-weight:950!important;
+  letter-spacing:-.08em!important;
+}
+
+/* Fiabilité / donut */
+.reliability-grid{display:grid!important;grid-template-columns:1fr 1fr!important;gap:1.4rem!important}
+.reliability-card h3{color:var(--text-color)!important;font-size:1.15rem!important}
+.donut{
+  box-shadow:0 16px 40px rgba(15,23,42,.12)!important;
+  background:conic-gradient(var(--green) 0 74%,var(--orange) 74% 93%,var(--red) 93% 100%)!important;
+}
+.donut:after{background:#fff!important}
+.donut-center strong{color:var(--primary-color)!important}
+.qa-note{
+  border-left:5px solid var(--primary-color)!important;
+  background:#eff6ff!important;
+  border-radius:1rem!important;
+}
+
+/* Tables et filtres */
+.table-head{display:flex!important;justify-content:space-between!important;align-items:center!important;gap:1rem!important;margin-bottom:1rem!important}
+.filters input,.filters select,.rows-control select{
+  min-height:42px!important;
+  border:1px solid #d1d5db!important;
+  border-radius:999px!important;
+  padding:0 1rem!important;
+  background:#fff!important;
+  color:var(--text-color)!important;
+  font-weight:700!important;
+  font-family:inherit!important;
+}
+.table-wrap{
+  overflow:auto!important;
+  border:1px solid #e5e7eb!important;
+  border-radius:1rem!important;
+  background:#fff!important;
+  box-shadow:var(--shadow)!important;
+}
+th{background:#f9fafb!important;color:var(--text-color)!important;border-bottom:2px solid #e5e7eb!important}
+td{background:#fff!important;color:var(--light-text)!important;border-bottom:1px solid #eef2f7!important}
+tr:hover td{background:#f8fafc!important}
+.key{color:var(--primary-color)!important}
+.pagination button{
+  min-height:40px!important;
+  border-radius:999px!important;
+  background:var(--primary-color)!important;
+  color:white!important;
+  border:1px solid var(--primary-color)!important;
+}
+#pageInfo{border-radius:999px!important}
+
+/* Heatmap */
+.heatmap{display:grid!important;grid-template-columns:repeat(4,minmax(0,1fr))!important;gap:1rem!important}
+.heat{padding:1rem!important;font-weight:900!important}
+.heat span{display:block!important;color:var(--light-text)!important;font-weight:600!important;margin-top:.25rem}
+.heat.ok{border-color:#bbf7d0!important;background:#f0fdf4!important}
+.heat.warn{border-color:#fde68a!important;background:#fffbeb!important}
+.heat.ko{border-color:#fecaca!important;background:#fef2f2!important}
+
+/* Footer conforme référence portfolio */
+.footer,
+footer{
+  padding:2rem 1rem!important;
+  text-align:center!important;
+  color:#cbd5e1!important;
+  background:#0f172a!important;
+  border-top:0!important;
+}
+
+/* Divers */
+.page-loader{display:none!important}
+.top{background:var(--primary-color)!important}
+.reveal{opacity:0;transform:translateY(24px);transition:opacity .7s ease,transform .7s ease}
+.reveal.visible{opacity:1;transform:translateY(0)}
+@keyframes floatTech{
+  0%,100%{transform:translateY(22px) rotate(0deg);opacity:.55}
+  50%{transform:translateY(-28px) rotate(16deg);opacity:.85}
+}
+
+@media(max-width:1100px){
+  .nav-inner{grid-template-columns:1fr auto!important}
+  .nav-links{display:none!important}
+  .hero{min-height:auto!important}
+  .stats{grid-template-columns:repeat(2,minmax(0,1fr))!important}
+  .grid-2,.grid-3,.reliability-grid,.actif{grid-template-columns:1fr!important}
+  .workflow-step:not(:last-child)::after{display:none!important}
+  .heatmap{grid-template-columns:repeat(2,minmax(0,1fr))!important}
+}
+@media(max-width:720px){
+  .brand span:not(.brand-mark){display:none!important}
+  .cta{display:none!important}
+  .hero{padding:calc(var(--nav-height) + 2rem) 1rem 3rem!important}
+  .hero h1{font-size:2.4rem!important}
+  .hero-actions{flex-direction:column!important}
+  .hero-btn{width:100%!important}
+  .stats,.heatmap{grid-template-columns:1fr!important}
+  .panel{padding:1.15rem!important}
+  .table-head{flex-direction:column!important;align-items:stretch!important}
+  .filters,.filters input,.filters select{width:100%!important}
+}
+@media(prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation:none!important;transition:none!important;scroll-behavior:auto!important}
+  .reveal{opacity:1!important;transform:none!important}
+}
+
+</style>
+   </head>
+   <body>
+      <a class="skip-link" href="#resume">Aller au contenu</a>
+      <div class="page-loader" aria-hidden="true">
+         <div class="loader-content">
+            <span class="loader-kicker">QA IA · ACTIF</span>
+            <strong>Chargement du rapport premium</strong>
+            <span class="loader-line"></span>
+         </div>
+      </div>
+      <nav class="navbar" aria-label="Navigation principale">
+         <div class="nav-inner">
+            <a href="#top" class="brand"><span class="brand-mark"><i class="fa-solid fa-vial-circle-check"></i></span><span>Maxime Joannis — QA Tester</span></a>
+            <ul class="nav-links">
+               <li><a href="#resume" class="active">Résumé</a></li>
+               <li><a href="#actif">ACTIF</a></li>
+			     <li><a href="#fiabilite">Fiabilité</a></li>
+               <li><a href="#couverture">Couverture</a></li>
+               <li><a href="#scenarios">Scénarios</a></li>
+               <li><a href="#risques">Risques</a></li>
+               <li><a href="#conclusion">Conclusion</a></li>
+            </ul>
+            <a class="cta" href="#scenarios"><i class="fa-solid fa-table-list"></i> Voir les scénarios</a>
+         </div>
+      </nav>
+      <main id="top" class="page">
+         <header class="hero">
+            <div class="hero-orbit" aria-hidden="true"><span>QA</span><span>IA</span><span>ACTIF</span><span>54</span></div>
+            <a class="back-link" href="javascript:history.back()">← Retour portfolio QA</a>
+            <h1>Génération de scénarios d'acceptance AMN AUDITOR</h1>
+            <p class="subtitle">Synthèse QA dédiée à l'évaluation des scénarios d'acceptance générés par Intelligence Artificielle à partir de captures d'écran AMN AUDITOR et d'un prompt structuré selon la méthode ACTIF.</p>
+            <div class="hero-actions"><a class="hero-btn primary" href="#resume"><i class="fa-solid fa-rocket"></i> Lire le résumé</a><a class="hero-btn" href="#scenarios"><i class="fa-solid fa-table-list"></i> Catalogue des scénarios</a><a class="hero-btn" href="#recommandations"><i class="fa-solid fa-lightbulb"></i> Recommandations</a></div>
+         </header>
+		 <br>
+         <section id="resume">
+            <div class="stats">
+               <div class="stat"><strong>16</strong><span>Features identifiées</span><small>Modules fonctionnels AMN Auditor</small></div>
+               <div class="stat"><strong>54</strong><span>Scénarios générés</span><small>Format acceptance / Gherkin</small></div>
+               <div class="stat"><strong>92%</strong><span>Couverture estimée</span><small>Sur les écrans analysés</small></div>
+               <div class="stat"><strong>40</strong><span>Scénarios observables</span><small>Sur 54 scénarios générés</small></div>
+            </div>
+			<br>
+            <div class="panel">
+               <h2 class="panel-title">1. Résumé exécutif</h2>
+               <p class="panel-sub">Le prompt ACTIF a permis de transformer des captures d'écran en scénarios d'acceptance structurés. Le rapport distingue volontairement ce qui est directement observable, ce qui relève d'une déduction raisonnable et ce qui doit être confirmé par le Product Owner.</p>
+               <div class="grid-3">
+                  <div class="card"><b>Objectif</b><span>Produire une base d'acceptance tests couvrant les parcours clés d'AMN AUDITOR.</span></div>
+                  <div class="card"><b>Approche</b><span>Analyse visuelle des écrans, extraction des fonctionnalités, rédaction Given / When / Then.</span></div>
+                  <div class="card"><b>Résultat</b><span>54 scénarios couvrant accueil, référentiels, audit, IA assistant, écarts, livrables et personnes.</span></div>
+               </div>
+            </div>
+         </section>
+         <section id="actif" class="panel">
+            <h2 class="panel-title">2. Méthode ACTIF appliquée au prompt QA IA</h2>
+            <p class="panel-sub">La méthode ACTIF structure la demande adressée à l'IA afin de limiter l'ambiguïté et d'obtenir des scénarios exploitables.</p>
+            <div class="actif">
+               <div class="workflow-step">
+                  <div><strong>A</strong><span>Acteur</span><small>Expert QA / testeur logiciel</small></div>
+               </div>
+               <div class="workflow-step">
+                  <div><strong>C</strong><span>Contexte</span><small>Application AMN AUDITOR + captures</small></div>
+               </div>
+               <div class="workflow-step">
+                  <div><strong>T</strong><span>Tâche</span><small>Générer les tests d'acceptance</small></div>
+               </div>
+               <div class="workflow-step">
+                  <div><strong>I</strong><span>Intention</span><small>Valider les comportements attendus</small></div>
+               </div>
+               <div class="workflow-step">
+                  <div><strong>F</strong><span>Format</span><small>Gherkin Given / When / Then</small></div>
+               </div>
+            </div>
+         </section>
+         <section class="grid-2">
+            <div class="panel">
+               <h2 class="panel-title">3. Indicateurs de qualité</h2>
+               <div class="coverage">
+                  <div class="coverage-item">
+                     <span>Respect Gherkin</span>
+                     <div class="bar" style="--w:96%"><span></span></div>
+                     <em>96%</em>
+                  </div>
+                  <div class="coverage-item">
+                     <span>Pertinence métier</span>
+                     <div class="bar" style="--w:90%"><span></span></div>
+                     <em>90%</em>
+                  </div>
+                  <div class="coverage-item">
+                     <span>Traçabilité écran → test</span>
+                     <div class="bar" style="--w:88%"><span></span></div>
+                     <em>88%</em>
+                  </div>
+                  <div class="coverage-item">
+                     <span>Réutilisabilité QA</span>
+                     <div class="bar" style="--w:92%"><span></span></div>
+                     <em>92%</em>
+                  </div>
+                  <div class="coverage-item">
+                     <span>Automatisabilité</span>
+                     <div class="bar" style="--w:84%"><span></span></div>
+                     <em>84%</em>
+                  </div>
+               </div>
+            </div>
+            <div class="decision">
+               <span class="pill ok">Décision QA</span>
+               <h2 class="panel-title">Base validable après revue humaine</h2>
+               <div class="decision-score">GO</div>
+               <p>Les scénarios produits constituent une base exploitable pour un référentiel d'acceptance tests, à condition de conserver les statuts « OK », « À enrichir » et « À confirmer » dans le catalogue.</p>
+            </div>
+         </section>
+         <section id="fiabilite" class="panel">
+            <h2 class="panel-title">4. Fiabilité des scénarios générés : hallucination ou hypothèse ?</h2>
+            <p class="panel-sub">Le rapport reste volontairement réaliste : aucun taux d’hallucination chiffré n’est inventé. Les scénarios sont classés selon leur niveau d’appui sur les captures d’écran.</p>
+            <div class="reliability-grid">
+               <div class="reliability-card">
+                  <h3>Classification QA des scénarios</h3>
+                  <div class="donut-wrap">
+                     <div class="donut" aria-label="Répartition des scénarios par niveau de fiabilité">
+                        <div class="donut-center">
+                           <div><strong>54</strong><span>scénarios</span></div>
+                        </div>
+                     </div>
+                     <div class="legend">
+                        <div class="legend-row">
+                           <span class="dot green"></span>
+                           <div>Directement observables<small>Élément visible sur les captures : écran, bouton, colonne, liste, champ.</small></div>
+                           <strong>40</strong>
+                        </div>
+                        <div class="legend-row">
+                           <span class="dot orange"></span>
+                           <div>Déductions fonctionnelles raisonnables<small>Comportement attendu probable, mais non prouvé par une capture statique.</small></div>
+                           <strong>10</strong>
+                        </div>
+                        <div class="legend-row">
+                           <span class="dot red"></span>
+                           <div>Hypothèses à confirmer<small>Règle métier, persistance, suppression, appel IA ou workflow non observable.</small></div>
+                           <strong>4</strong>
+                        </div>
+                     </div>
+                  </div>
+                  <div class="qa-note">Conclusion QA : les scénarios ne contiennent pas de module complètement fantaisiste, mais certains résultats attendus dépassent ce qui est visible à l’écran. Ils doivent donc être marqués « à confirmer » plutôt que présentés comme des vérités métier.</div>
+               </div>
+               <div class="reliability-card">
+                  <h3>Exemples de points à confirmer</h3>
+                  <div class="table-wrap">
+                     <table class="mini-table">
+                        <thead>
+                           <tr>
+                              <th>Scénario</th>
+                              <th>Point de vigilance</th>
+                              <th>Qualification QA</th>
+                           </tr>
+                        </thead>
+                        <tbody>
+                           <tr>
+                              <td>S29 — Génération via l’IA</td>
+                              <td>La capture montre l’interface IA, mais pas l’appel réseau ni la réponse backend.</td>
+                              <td><span class="pill warn">Hypothèse technique</span></td>
+                           </tr>
+                           <tr>
+                              <td>S32 — Non Applicable</td>
+                              <td>La case est visible, mais le recalcul des indicateurs n’est pas démontré.</td>
+                              <td><span class="pill warn">Règle à confirmer</span></td>
+                           </tr>
+                           <tr>
+                              <td>S33 — Sauvegarde du statut</td>
+                              <td>La persistance après changement d’exigence nécessite un test réel.</td>
+                              <td><span class="pill warn">Persistance</span></td>
+                           </tr>
+                           <tr>
+                              <td>S40 / S43 — Suppression</td>
+                              <td>La confirmation et l’effet de suppression ne sont pas visibles sur les captures.</td>
+                              <td><span class="pill warn">Workflow à vérifier</span></td>
+                           </tr>
+                           <tr>
+                              <td>S25 — Changement de langue</td>
+                              <td>Le libellé FR est visible, mais les langues disponibles ne le sont pas.</td>
+                              <td><span class="pill todo">À enrichir</span></td>
+                           </tr>
+                        </tbody>
+                     </table>
+                  </div>
+               </div>
+            </div>
+         </section>
+         <section id="couverture" class="panel">
+            <h2 class="panel-title">5. Couverture fonctionnelle obtenue</h2>
+            <p class="panel-sub">La couverture est estimée à partir des modules visibles dans les captures et des scénarios générés.</p>
+            <div class="coverage">
+               <div class="coverage-item">
+                  <span>Accueil / Projets récents</span>
+                  <div class="bar" style="--w:95%"><span></span></div>
+                  <em>95%</em>
+               </div>
+               <div class="coverage-item">
+                  <span>Référentiels / Création projet</span>
+                  <div class="bar" style="--w:95%"><span></span></div>
+                  <em>95%</em>
+               </div>
+               <div class="coverage-item">
+                  <span>Audit / Exigences</span>
+                  <div class="bar" style="--w:100%"><span></span></div>
+                  <em>100%</em>
+               </div>
+               <div class="coverage-item">
+                  <span>Constats de conformité</span>
+                  <div class="bar" style="--w:95%"><span></span></div>
+                  <em>95%</em>
+               </div>
+               <div class="coverage-item">
+                  <span>Écarts / Non-conformités</span>
+                  <div class="bar" style="--w:95%"><span></span></div>
+                  <em>95%</em>
+               </div>
+               <div class="coverage-item">
+                  <span>Actions correctives</span>
+                  <div class="bar" style="--w:90%"><span></span></div>
+                  <em>90%</em>
+               </div>
+               <div class="coverage-item">
+                  <span>Assistant IA</span>
+                  <div class="bar" style="--w:85%"><span></span></div>
+                  <em>85%</em>
+               </div>
+               <div class="coverage-item">
+                  <span>Livrables</span>
+                  <div class="bar" style="--w:100%"><span></span></div>
+                  <em>100%</em>
+               </div>
+            </div>
+         </section>
+         <section id="scenarios" class="panel">
+            <div class="table-head">
+               <div>
+                  <h2 class="panel-title">6. Catalogue des scénarios d'acceptance générés</h2>
+                  <p class="scenario-count"><span id="visibleCount">54</span> scénario(s) trouvé(s) · affichage <span id="rangeInfo">1-10</span></p>
+               </div>
+               <div class="filters">
+                  <input id="search" type="search" placeholder="Rechercher un scénario..." />
+                  <select id="featureFilter">
+                     <option value="">Toutes les features</option>
+                  </select>
+               </div>
+            </div>
+            <div class="table-toolbar">
+               <div class="rows-control">
+                  <label for="rowsPerPage">Afficher</label>
+                  <select id="rowsPerPage" aria-label="Nombre de scénarios par page">
+                     <option value="5">5</option>
+                     <option value="10" selected>10</option>
+                  </select>
+                  <span>éléments par page</span>
+               </div>
+            </div>
+            <div class="table-wrap">
+               <table id="scenarioTable">
+                  <thead>
+                     <tr>
+                        <th>ID</th>
+                        <th>Feature</th>
+                        <th>Scénario</th>
+                        <th>Given</th>
+                        <th>When</th>
+                        <th>Then</th>
+                        <th>Statut QA</th>
+                     </tr>
+                  </thead>
+                  <tbody></tbody>
+               </table>
+            </div>
+            <div class="pagination" aria-label="Pagination du catalogue des scénarios">
+               <span id="pageSummary">Page 1 / 1</span>
+               <div class="pagination-actions">
+                  <button id="prevPage" type="button">← Précédent</button>
+                  <span id="pageInfo">Page 1 / 1</span>
+                  <button id="nextPage" type="button">Suivant →</button>
+               </div>
+            </div>
+         </section>
+         <section id="risques" class="panel">
+            <h2 class="panel-title">7. Risques, limites et points de vigilance</h2>
+            <div class="risk-list">
+               <div class="risk">
+                  <div class="risk-head"><strong>Règles métier non visibles</strong><span class="pill warn">À confirmer</span></div>
+                  <p>Les captures ne suffisent pas toujours à déduire les règles de validation, droits utilisateurs, workflow exact, messages d'erreur ou règles de persistance.</p>
+               </div>
+               <div class="risk">
+                  <div class="risk-head"><strong>Risque d’hypothèse IA</strong><span class="pill warn">Contrôlé</span></div>
+                  <p>Quelques scénarios extrapolent un comportement probable, par exemple confirmation de suppression, recalcul d’indicateurs ou appel au fournisseur IA. Ils sont conservés, mais marqués comme points à vérifier.</p>
+               </div>
+               <div class="risk">
+                  <div class="risk-head"><strong>Scénarios trop nominaux</strong><span class="pill todo">À enrichir</span></div>
+                  <p>Certains scénarios doivent être complétés par des cas alternatifs, erreurs, données invalides, contrôles d’autorisation et tests de persistance.</p>
+               </div>
+               <div class="risk">
+                  <div class="risk-head"><strong>Automatisation</strong><span class="pill todo">Étape suivante</span></div>
+                  <p>Les scénarios doivent être transformés en cas de tests détaillés avant génération Playwright / Robot Framework. Tous ne sont pas automatisables sans données de test ou environnement stable.</p>
+               </div>
+            </div>
+         </section>
+         <section id="heatmap" class="panel">
+            <h2 class="panel-title">8. Heatmap réaliste de couverture</h2>
+            <p class="panel-sub">Cette heatmap ne remplace pas une exécution de tests. Elle indique uniquement le niveau de confiance issu de l’analyse des captures.</p>
+            <div class="heatmap">
+               <div class="heat ok">🟢 Accueil / Projets<span>Bien couvert par les écrans.</span></div>
+               <div class="heat ok">🟢 Référentiels<span>Éléments principaux observables.</span></div>
+               <div class="heat ok">🟢 Audit / Exigences<span>Navigation et contenu visibles.</span></div>
+               <div class="heat warn">🟡 Assistant IA<span>Interface visible, comportement backend à confirmer.</span></div>
+               <div class="heat warn">🟡 Actions correctives<span>Création visible, cycle complet à vérifier.</span></div>
+               <div class="heat warn">🟡 Persistance<span>Non prouvable par capture statique.</span></div>
+               <div class="heat ko">🔴 Authentification<span>Non couverte par les captures fournies.</span></div>
+               <div class="heat ko">🔴 Sécurité / droits<span>Non couverte par les captures fournies.</span></div>
+            </div>
+         </section>
+         <section id="recommandations" class="panel">
+            <h2 class="panel-title">9. Recommandations QA</h2>
+            <div class="grid-3">
+               <div class="card">
+                  <b>Court terme</b>
+                  <p>Valider les 54 scénarios avec le PO, corriger les ambiguïtés et prioriser les scénarios critiques.</p>
+               </div>
+               <div class="card">
+                  <b>Moyen terme</b>
+                  <p>Décliner les scénarios en cas de tests ISTQB avec préconditions, jeux de données, étapes détaillées et résultats attendus.</p>
+               </div>
+               <div class="card">
+                  <b>Long terme</b>
+                  <p>Mettre en place une chaîne IA : captures → prompt ACTIF → Gherkin → cas ISTQB → scripts automatisés → rapport QA.</p>
+               </div>
+            </div>
+         </section>
+         <section id="conclusion" class="panel">
+            <h2 class="panel-title">10. Conclusion</h2>
+            <p>La méthode ACTIF appliquée à AMN AUDITOR démontre un potentiel réaliste pour accélérer la conception de tests d'acceptance. Les scénarios obtenus constituent une base solide pour le cadrage QA, la validation PO et la future automatisation. Le rapport distingue volontairement les éléments directement observables des hypothèses à confirmer : cette approche évite de présenter les sorties IA comme des vérités métier et renforce la crédibilité du livrable.</p>
+         </section>
+      </main>
+      <footer class="footer"><span>Portfolio QA — Tests fonctionnels, IA testing, automatisation & CI/CD</span></footer>
+      <script>
+         const scenarios = [
+           ['S01','Accueil / Projets récents','Afficher l’écran d’accueil AMN Auditor','L’utilisateur ouvre AMN Auditor','L’application est chargée','Le logo, les actions principales et les projets récents sont visibles','OK'],
+           ['S02','Accueil / Projets récents','Créer un nouveau projet depuis l’accueil','L’utilisateur est sur l’accueil','Il clique sur Créer un nouveau projet','L’assistant Nouveau Projet s’ouvre à l’étape Référentiels','OK'],
+           ['S03','Accueil / Projets récents','Ouvrir un projet récent','Des projets récents sont affichés','Il sélectionne un projet récent','Le projet s’ouvre et Retourner au projet devient disponible','OK'],
+           ['S04','Assistant de création de projet','Sélectionner un référentiel','L’assistant Nouveau Projet est ouvert','Il sélectionne ANSSI STANDARD','La case est cochée et Suivant est visible','OK'],
+           ['S05','Assistant de création de projet','Avancer à l’étape suivante','Un référentiel est sélectionné','Il clique sur Suivant','L’étape suivante du workflow est affichée','OK'],
+           ['S06','Bibliothèque des référentiels','Consulter les référentiels personnels','L’utilisateur accède à Mes Référentiels','La bibliothèque personnelle est vide','Un message vide et le bouton Créer un nouveau référentiel sont visibles','OK'],
+           ['S07','Bibliothèque des référentiels','Consulter les référentiels AMN Auditor','La page des référentiels est affichée','La section AMN AUDITOR est ouverte','ANSSI, STANDARD et RENFORCÉ sont visibles avec Nouveau projet','OK'],
+           ['S08','Bibliothèque des échelles','Afficher une bibliothèque d’échelles vide','L’utilisateur accède à Bibliothèque des Échelles','Aucune échelle n’existe','Le message de bibliothèque vide et Nouvelle échelle sont visibles','OK'],
+           ['S09','Bibliothèque des échelles','Importer une échelle','L’utilisateur est sur la bibliothèque','Il clique sur Importer une échelle','Le système permet l’import d’une échelle','À confirmer'],
+           ['S10','Fournisseurs LLM','Afficher les fournisseurs LLM','L’utilisateur accède à Mes Fournisseurs LLM','La page est chargée','Fournisseur IA AmnBrains et OpenAI sont visibles','OK'],
+           ['S11','Fournisseurs LLM','Ajouter un fournisseur LLM','L’utilisateur est sur la page fournisseurs','Il clique sur Ajouter un fournisseur','Un formulaire ou une modale d’ajout s’ouvre','À confirmer'],
+           ['S12','Navigation référentiel','Afficher l’arborescence du référentiel','Un projet est ouvert','L’utilisateur consulte le référentiel','Les chapitres sont affichés dans le menu gauche','OK'],
+           ['S13','Navigation référentiel','Sélectionner une exigence','L’arborescence est affichée','Il clique sur une exigence','L’exigence est surlignée et son contenu s’affiche','OK'],
+           ['S14','Navigation référentiel','Ajouter une observation d’audit','Une exigence est affichée','Il saisit une observation puis clique Ajouter','L’observation est enregistrée et affichée','OK'],
+           ['S15','Constats de conformité','Consulter la liste des constats','Un projet est ouvert','Il accède à Constats de Conformité','La liste, la recherche et Nouveau constat sont visibles','OK'],
+           ['S16','Constats de conformité','Afficher une liste vide','Aucun constat n’existe','L’utilisateur consulte la liste','Le message aucun résultat et 0-0 of 0 sont affichés','OK'],
+           ['S17','Non-conformités','Consulter la liste des non-conformités','Un projet est ouvert','Il accède à Non Conformités','Les colonnes Référence, Titre et Gravité sont visibles','OK'],
+           ['S18','Non-conformités','Modifier la gravité','Une non-conformité existe','Il sélectionne une gravité','La gravité est appliquée à la non-conformité','OK'],
+           ['S19','Actions correctives','Ajouter une action corrective','Une non-conformité est ouverte','Il clique sur Ajouter une action corrective','Une action corrective est associée','OK'],
+           ['S20','Personnes','Consulter la liste des personnes','Un projet est ouvert','Il accède à Personnes','Les colonnes Nom complet, Auditeur et Description sont visibles','OK'],
+           ['S21','Personnes','Afficher une liste vide de personnes','Aucune personne n’est enregistrée','Il consulte la page Personnes','Le message aucun résultat et 0-0 of 0 sont affichés','OK'],
+           ['S22','Personnes','Ajouter une nouvelle personne','Il est sur la page Personnes','Il clique sur Ajouter une nouvelle personne','Un formulaire ou une modale s’ouvre','À confirmer'],
+           ['S23','Transverse','Retourner au projet','L’utilisateur est sur une page secondaire','Il clique sur Retourner au projet','Il revient au projet ouvert','OK'],
+           ['S24','Transverse','Utiliser la recherche projet','Un projet est ouvert','Il saisit un mot-clé dans Chercher dans le projet','Les résultats correspondants sont affichés','À enrichir'],
+           ['S25','Transverse','Changer la langue','Le sélecteur affiche FR','Il ouvre le menu de langue','Les langues disponibles sont proposées','À confirmer'],
+           ['S26','Description environnement','Afficher l’écran Description de l’environnement','Un projet est ouvert','Il accède à Description de l’environnement','L’arborescence, la grille et l’assistant IA sont visibles','OK'],
+           ['S27','Description environnement','Parcourir le périmètre organisationnel','Le périmètre organisationnel est affiché','Il développe un nœud','Les sous-catégories utilisateurs et équipes IT sont affichées','OK'],
+           ['S28','Description environnement','Parcourir les locaux physiques','La section Locaux Physiques existe','Il développe le menu','Les catégories sites, datacenters et zones sensibles sont visibles','OK'],
+           ['S29','Assistant IA','Générer une description via l’IA','La zone de saisie IA est disponible','Il saisit une description et clique Envoyer','La requête est transmise au fournisseur sélectionné','À confirmer'],
+           ['S30','Assistant IA','Changer de modèle IA','Un modèle IA est sélectionné','Il ouvre la liste des modèles','Les modèles disponibles sont affichés','OK'],
+           ['S31','Statut de mise en œuvre','Définir un statut','Une exigence est sélectionnée','Il ouvre Statut de mise en œuvre','Les statuts sont proposés et sélectionnables','OK'],
+           ['S32','Statut de mise en œuvre','Marquer une exigence Non Applicable','Une exigence est affichée','Il coche Non Applicable','L’exigence est marquée non applicable et les indicateurs sont recalculés','À confirmer'],
+           ['S33','Statut de mise en œuvre','Sauvegarder le statut choisi','Un statut est sélectionné','Il change d’exigence','Le statut précédemment choisi est conservé','À confirmer'],
+           ['S34','Constats de conformité','Créer un constat de conformité','Une exigence est ouverte','Il saisit un titre et clique Créer','Le constat est créé et associé à l’exigence','OK'],
+           ['S35','Constats de conformité','Afficher les constats liés','Une exigence possède des constats','Elle est sélectionnée','Les constats associés sont affichés','OK'],
+           ['S36','Constats de conformité','Accéder à la liste globale','Un projet contient des constats','Il ouvre le menu Constats de conformité','Tous les constats du projet sont listés','OK'],
+           ['S37','Écarts','Créer un écart','Une exigence est ouverte','Il saisit un titre d’écart et clique Créer','Un nouvel écart est créé','OK'],
+           ['S38','Écarts','Associer un écart à une exigence','Un écart est créé','Il consulte ses détails','L’exigence source est visible et la traçabilité est conservée','OK'],
+           ['S39','Écarts','Modifier la gravité d’un écart','Un écart existe','Il sélectionne une gravité','La gravité est enregistrée','OK'],
+           ['S40','Écarts','Supprimer un écart','Un écart existe','Il clique sur supprimer puis confirme','L’écart est supprimé','À confirmer'],
+           ['S41','Actions correctives','Ajouter une action corrective','Un écart existe','Il clique sur Ajouter une action corrective','Une nouvelle action corrective est créée','OK'],
+           ['S42','Actions correctives','Associer plusieurs actions correctives','Un écart existe','Plusieurs actions sont créées','Elles sont toutes rattachées à l’écart','OK'],
+           ['S43','Actions correctives','Supprimer une action corrective','Une action corrective existe','Il clique sur supprimer','L’action corrective est supprimée et l’écart reste présent','À confirmer'],
+           ['S44','Navigation d’audit','Passer à l’exigence suivante','Une exigence est ouverte','Il clique sur Suivant','L’exigence suivante est affichée','OK'],
+           ['S45','Navigation d’audit','Revenir à l’exigence précédente','Une exigence est ouverte','Il clique sur Précédent','L’exigence précédente est affichée','OK'],
+           ['S46','Navigation d’audit','Ignorer les chapitres','Sauter les Chapitres/Sections est coché','Il clique sur Suivant','Seule la prochaine exigence est affichée','OK'],
+           ['S47','Navigation d’audit','Ignorer les exigences auditées','Sauter les Exigences Auditées est coché','Il navigue','Les exigences déjà auditées sont ignorées','À confirmer'],
+           ['S48','Livrables','Générer un livrable Word','Un projet contient des résultats','Il clique sur Ajouter un livrable document','Un livrable Word peut être généré','OK'],
+           ['S49','Livrables','Générer un livrable PDF','Un projet contient des résultats','Il choisit PDF','Un document PDF est généré','À confirmer'],
+           ['S50','Livrables','Générer un livrable Excel','Un projet contient des résultats','Il clique sur Ajouter un livrable Excel','Un fichier Excel est généré','OK'],
+           ['S51','Livrables','Exporter tous les livrables','Plusieurs livrables existent','Il clique sur Tout exporter','Tous les livrables sont exportés','À confirmer'],
+           ['S52','Référentiel d’audit','Filtrer les exigences','Un référentiel contient plusieurs exigences','Il saisit un texte dans le filtre','Seules les exigences correspondantes sont affichées','OK'],
+           ['S53','Référentiel d’audit','Filtrer par personne auditée','Un référentiel est affiché','Il sélectionne une personne auditée','Les exigences correspondantes sont filtrées','À confirmer'],
+           ['S54','Référentiel d’audit','Filtrer par statut','Un référentiel est affiché','Il sélectionne un statut de mise en œuvre','Seules les exigences correspondantes sont affichées','OK']
+         ];
+         const tbody=document.querySelector('#scenarioTable tbody');
+         const select=document.querySelector('#featureFilter');
+         const search=document.querySelector('#search');
+         const visible=document.querySelector('#visibleCount');
+         const rowsPerPageSelect=document.querySelector('#rowsPerPage');
+         const prevPageBtn=document.querySelector('#prevPage');
+         const nextPageBtn=document.querySelector('#nextPage');
+         const pageInfo=document.querySelector('#pageInfo');
+         const pageSummary=document.querySelector('#pageSummary');
+         const rangeInfo=document.querySelector('#rangeInfo');
+         let currentPage=1;
+         let rowsPerPage=parseInt(rowsPerPageSelect.value,10);
+         
+         [...new Set(scenarios.map(s=>s[1]))].forEach(f=>{const o=document.createElement('option');o.value=f;o.textContent=f;select.appendChild(o)});
+         function pill(status){let c=status==='OK'?'ok':status.includes('confirmer')?'warn':'todo';return `<span class="pill ${c}">${status}</span>`}
+         function filteredRows(){const q=search.value.toLowerCase();const f=select.value;return scenarios.filter(s=>(!f||s[1]===f)&&s.join(' ').toLowerCase().includes(q));}
+         function render(){
+           const rows=filteredRows();
+           const totalRows=rows.length;
+           const totalPages=Math.max(1,Math.ceil(totalRows/rowsPerPage));
+           if(currentPage>totalPages) currentPage=totalPages;
+           const start=(currentPage-1)*rowsPerPage;
+           const end=start+rowsPerPage;
+           const pageRows=rows.slice(start,end);
+           visible.textContent=totalRows;
+           tbody.innerHTML=pageRows.map(s=>`<tr><td class="key">${s[0]}</td><td>${s[1]}</td><td><strong>${s[2]}</strong></td><td>${s[3]}</td><td>${s[4]}</td><td>${s[5]}</td><td>${pill(s[6])}</td></tr>`).join('') || `<tr><td colspan="7">Aucun scénario ne correspond aux filtres sélectionnés.</td></tr>`;
+           const from=totalRows===0?0:start+1;
+           const to=Math.min(end,totalRows);
+           rangeInfo.textContent=`${from}-${to}`;
+           pageInfo.textContent=`Page ${currentPage} / ${totalPages}`;
+           pageSummary.textContent=`Affichage ${from}-${to} sur ${totalRows} scénario(s)`;
+           prevPageBtn.disabled=currentPage===1;
+           nextPageBtn.disabled=currentPage===totalPages;
+         }
+         function resetAndRender(){currentPage=1;render();}
+         search.addEventListener('input',resetAndRender);
+         select.addEventListener('change',resetAndRender);
+         rowsPerPageSelect.addEventListener('change',()=>{rowsPerPage=parseInt(rowsPerPageSelect.value,10);resetAndRender();});
+         prevPageBtn.addEventListener('click',()=>{if(currentPage>1){currentPage--;render();}});
+         nextPageBtn.addEventListener('click',()=>{const totalPages=Math.max(1,Math.ceil(filteredRows().length/rowsPerPage));if(currentPage<totalPages){currentPage++;render();}});
+         render();
+         document.querySelectorAll('.nav-links a').forEach(a=>a.addEventListener('click',()=>{document.querySelectorAll('.nav-links a').forEach(x=>x.classList.remove('active'));a.classList.add('active')}));
+         
+         
+         // V2 Premium Animation — interactions visuelles uniquement, sans modification des données métier
+         window.addEventListener('load', () => {
+           const loader = document.querySelector('.page-loader');
+           if (loader) setTimeout(() => loader.classList.add('loader-hidden'), 350);
+         });
+         document.addEventListener('pointermove', (event) => {
+           document.documentElement.style.setProperty('--mouse-x', `${event.clientX}px`);
+           document.documentElement.style.setProperty('--mouse-y', `${event.clientY}px`);
+         });
+         const navbar = document.querySelector('.navbar');
+         const updateNavbar = () => navbar && navbar.classList.toggle('scrolled', window.scrollY > 24);
+         updateNavbar();
+         window.addEventListener('scroll', updateNavbar, { passive: true });
+         const revealObserver = new IntersectionObserver((entries) => {
+           entries.forEach(entry => {
+             if (entry.isIntersecting) {
+               entry.target.classList.add('visible');
+               revealObserver.unobserve(entry.target);
+             }
+           });
+         }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+         document.querySelectorAll('section, .stat, .card, .risk, .reliability-card, .heat').forEach((el, index) => {
+           el.classList.add('reveal');
+           el.style.transitionDelay = `${Math.min(index * 18, 180)}ms`;
+           revealObserver.observe(el);
+         });
+      </script>
+   </body>
+</html>
