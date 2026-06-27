@@ -627,6 +627,25 @@
 
     .project-link:hover::after { transform: translateX(4px); }
 
+
+    .project-link.disabled {
+      pointer-events: none;
+      opacity: .45;
+      filter: grayscale(100%);
+      cursor: not-allowed;
+      box-shadow: none;
+    }
+
+    .project-link.disabled:hover {
+      transform: none;
+      box-shadow: none;
+      border-color: color-mix(in srgb, var(--btn), transparent 52%);
+    }
+
+    .project-link.disabled::after {
+      content: "";
+    }
+
     .project-link b {
       width: 38px;
       height: 38px;
@@ -1182,15 +1201,30 @@
           </div>
 
           <div class="project-actions" aria-label="Actions disponibles pour le projet ${content.name}">
-            ${project.buttons.map(button => `
-              <a class="project-link" href="${button.href}" style="--btn:${button.color}" aria-label="${translations[currentLang].buttons[button.labelKey]} pour ${content.name}">
-                <b><i class="${button.icon}"></i></b>
-                <span>
-                  ${translations[currentLang].buttons[button.labelKey]}
-                  <small>${translations[currentLang].buttons[button.hintKey]}</small>
-                </span>
-              </a>
-            `).join("")}
+            ${project.buttons.map(button => {
+              const disabled = project.key === "sauce";
+
+              return `
+                <a
+                  class="project-link ${disabled ? "disabled" : ""}"
+                  ${disabled ? "" : `href="${button.href}"`}
+                  style="--btn:${button.color}"
+                  aria-label="${translations[currentLang].buttons[button.labelKey]} pour ${content.name}"
+                  title="${disabled ? (currentLang === "fr" ? "Projet en cours de réalisation" : "Project in progress") : ""}"
+                  aria-disabled="${disabled ? "true" : "false"}"
+                >
+                  <b><i class="${button.icon}"></i></b>
+                  <span>
+                    ${translations[currentLang].buttons[button.labelKey]}
+                    <small>${
+                      disabled
+                        ? (currentLang === "fr" ? "Bientôt disponible" : "Coming soon")
+                        : translations[currentLang].buttons[button.hintKey]
+                    }</small>
+                  </span>
+                </a>
+              `;
+            }).join("")}
           </div>
         `;
 
