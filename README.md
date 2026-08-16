@@ -26,7 +26,6 @@ Ce projet teste l’interface publique, l’administration et les API REST d’u
 
 ## Autres réalisations
 
-* **Projet Agile Homey :** stratégie de test, conception et exécution de campagnes, gestion des anomalies et automatisation avec Robot Framework.
 * **AMN Auditor :** mission QA fonctionnelle sur une application d’audit destinée aux professionnels de la cybersécurité.
 
 ## Compétences principales
