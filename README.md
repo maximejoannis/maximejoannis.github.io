@@ -1,262 +1,42 @@
-# 🧪 Maxime Joannis — Portfolio QA
+# Maxime Joannis — Portfolio QA
 
-Bienvenue sur mon **portfolio QA**.
+Ingénieur QA spécialisé en analyse fonctionnelle, automatisation Web et API et industrialisation des tests.
 
-Ce dépôt présente mon évolution vers un rôle d’Ingénieur QA fonctionnel & automatisation à travers :
+Après plusieurs années dans le développement bancaire, je me suis orienté vers la qualité logicielle. Mes projets démontrent ma capacité à concevoir une stratégie de test, automatiser les parcours critiques, mesurer la couverture fonctionnelle et intégrer les contrôles qualité dans une chaîne CI/CD.
 
-* 🎓 Ma formation **Test Academy** (ISTQB v4.0)
-* 🏠 Un projet Agile Web : **Homey**
-* 🤖 Un projet d’enrichissement IA de tests Robot Framework
-* ⚙️ Un pipeline CI/CD automatisé (GitHub Actions)
-* 🛡️ Une mission client réelle : **AMN Auditor** (cybersécurité)
+## Projets Playwright principaux
 
----
+### [SauceDemo QA Automation](https://github.com/maximejoannis/saucedemo-qa-automation)
 
-# 👨‍💻 À propos
+Ce projet teste les parcours critiques d’un site e-commerce — authentification, catalogue, panier, checkout et commande — et démontre la conception d’un framework Playwright JavaScript maintenable avec Page Object Model, couverture fonctionnelle, reporting Allure et CI/CD.
 
-Après plusieurs années en développement dans le secteur bancaire, je me suis spécialisé en **test logiciel & automatisation**.
+**Technologies :** Playwright, JavaScript, Allure, ESLint, Prettier, GitHub Actions et GitHub Pages.
 
-Certification : **ISTQB CTFL v4.0**
-Diplôme : **Testeur logiciel (Test Academy)**
+* [Consulter le dépôt](https://github.com/maximejoannis/saucedemo-qa-automation)
+* [Consulter les rapports QA](https://maximejoannis.github.io/saucedemo-qa-automation/)
 
-Je combine aujourd’hui :
+### [Restful Booker Playwright](https://github.com/maximejoannis/restful-booker-playwright)
 
-* ✔ Analyse fonctionnelle avancée
-* ✔ Conception de stratégie de test
-* ✔ Automatisation Web & Desktop
-* ✔ Industrialisation CI/CD
-* ✔ Production de livrables QA professionnels
+Ce projet teste l’interface publique, l’administration et les API REST d’une plateforme de réservation et démontre une architecture Playwright TypeScript complète intégrant Page Objects, composants réutilisables, contrats API, scénarios CRUD maîtrisés, reporting et CI/CD.
 
----
+**Technologies :** Playwright, TypeScript, Allure, ESLint, Prettier, GitHub Actions et GitHub Pages.
 
-# 🎓 Formation Test Academy (2024 – 2025)
+* [Consulter le dépôt](https://github.com/maximejoannis/restful-booker-playwright)
+* [Consulter le portail QA](https://maximejoannis.github.io/restful-booker-playwright/)
 
-Certification obtenue : **ISTQB Fondation v4.0**
+## Autres réalisations
 
-## Compétences acquises :
+* **Projet Agile Homey :** stratégie de test, conception et exécution de campagnes, gestion des anomalies et automatisation avec Robot Framework.
+* **AMN Auditor :** mission QA fonctionnelle sur une application d’audit destinée aux professionnels de la cybersécurité.
 
-* Méthodologies : Agile Scrum, V-Model
-* Gestion des exigences & anomalies : Jira / Xray
-* Automatisation Web : Robot Framework, Selenium, Playwright
-* Automatisation Desktop : Appium, WinAppDriver
-* CI/CD : Jenkins, GitHub Actions
-* Langages : Python, JavaScript, SQL
-* API Testing : Postman
+## Compétences principales
 
-📄 Programme complet :
-👉 `Programme_Formation_Testeur_Pro.pdf`
-
----
-
-# 🏆 Projets QA réalisés
-
----
-
-# 🔹 1️⃣ Projet Agile Homey — Application Web
-
-📄 Détail projet :
-👉 `detailHomey.html` 
-
-📊 Dashboard QA :
-👉 `dashboardHomey.html` 
-
-🌐 Application testée :
-[http://livraison3.testacademy.fr/](http://livraison3.testacademy.fr/)
-
-## 🎯 Objectif
-
-Garantir la qualité d’une application web de gestion de locations saisonnières :
-
-* Demande de réservation
-* Traitement des demandes
-* Messagerie hôte/voyageur
-* Paiement & annulation
-
-## 📊 Résultats clés
-
-* 23 tests planifiés & exécutés
-* 84,62 % de réussite globale 
-* 4 anomalies détectées (dont 1 critique)
-* 40 tickets Jira créés
-* 3 scénarios critiques automatisés (100 % succès)
-
-## 🧠 Compétences démontrées
-
-* Analyse de critères d’acceptation
-* Conception de cas de test structurés
-* Reporting & traçabilité
-* Automatisation Robot Framework + Selenium
-
----
-
-# 🔹 🎮 Démo Interactive — Simulation Workflow & Campagne QA
-
-📄 Fichier :
-👉 `homey-demo.html`
-
-## 🎯 Objectif
-
-Simuler un cycle QA complet :
-
-1. Voyageur → Demande de réservation
-2. Hôte → Acceptation / Refus
-3. Activation d’anomalies simulées
-4. Exécution d’une campagne de 20 cas de test
-5. Application des correctifs
-6. Relance → validation PASS
-
-## 📊 Caractéristiques
-
-* 20 cas de test simulés
-* 9 anomalies regroupées (Validation / Pricing / Workflow)
-* KPI PASS / FAIL en temps réel
-* Simulation FAIL → PATCH → PASS
-* Visualisation d’un cycle de correction complet
-
-## 💡 Valeur démontrée
-
-* Compréhension des workflows métier
-* Structuration d’une campagne QA
-* Analyse modulaire des anomalies
-* Illustration d’un cycle correctif
-* Approche pédagogique orientée démonstration recruteur
----
-
-# 🔹 2️⃣ Enrichissement IA — Robot Framework (Homey)
-
-📄 Détail projet :
-👉 `detailHomey_IA.html` 
-
-📊 Dashboard automatisation :
-👉 `dashboardHomey_IA.html` 
-
-## 🎯 Objectif
-
-Renforcer une suite de tests existante **sans altérer le comportement fonctionnel**, en utilisant l’IA comme accélérateur sous contraintes QA strictes.
-
-## 📊 Résultats
-
-* 40 tests automatisés 
-* 100 % de réussite
-* Identification de défauts critiques métier :
-
-  * Messagerie non transmise
-  * Limitation à 9 réservations
-  * Dysfonctionnement réception côté hôte 
-
-## 💡 Apports professionnels
-
-* IA utilisée comme outil d’assistance contrôlée
-* Validation humaine systématique
-* Approche QA responsable
-* Renforcement couverture & robustesse
-
----
-
-# 🔹 3️⃣ Pipeline CI/CD — Industrialisation des tests
-
-📄 Détail projet :
-👉 `detailPipelineCI.html` 
-
-📊 Dashboard CI :
-👉 `dashboardPipelineCI.html` 
-
-## 🎯 Objectif
-
-Industrialiser l’exécution des tests Robot Framework via **GitHub Actions** :
-
-* Déclenchement automatique à chaque push
-* Génération automatique des rapports
-* Archivage des preuves
-* Suivi des runs
-
-## 🔧 Stack
-
-* GitHub Actions
-* Robot Framework
-* Selenium
-* Artefacts HTML
-
-## 💡 Valeur ajoutée
-
-* Passage d’une automatisation locale à une automatisation industrialisée
-* Vision DevOps orientée qualité
-* Mise en place d’une chaîne QA reproductible
-
----
-
-# 🔹 4️⃣ Mission Client — AMN Auditor (Cybersécurité)
-
-📄 Détail projet :
-👉 `detailAmnAuditor.html` 
-
-📊 Dashboard QA :
-👉 `dashboardAmnAuditor.html` 
-
-## 🎯 Contexte
-
-Application desktop d’audit multi-référentiel destinée aux professionnels de la cybersécurité.
-
-Mission réalisée en **full remote**, en équipe Agile (2 QA + 1 Test Manager/PO).
-
-## 📊 Résultats
-
-* 33 tests planifiés & exécutés 
-* 78,79 % de réussite 
-* 3 anomalies critiques
-* 46 tickets Jira/Xray créés
-
-## 🔧 Automatisation en cours
-
-* Appium
-* WinAppDriver
-* Python / Node.js
-* Construction d’un socle réutilisable
-
-## 💡 Compétences démontrées
-
-* Stratégie de test en contexte client réel
-* Priorisation des anomalies
-* Communication avec PO/Test Manager
-* Approche qualité orientée gouvernance cyber
-
----
-
-# 📊 Dashboards disponibles
-
-* `dashboardHomey.html` 
-* `dashboardHomey_IA.html` 
-* `dashboardPipelineCI.html` 
-* `dashboardAmnAuditor.html` 
-
----
-
-# 🛠 Stack Technique Globale
-
-Web :
-
-* Robot Framework
-* Selenium
-* Playwright
-* Python
-
-Desktop :
-
-* Appium
-* WinAppDriver
-
-Gestion & suivi :
-
-* Jira
-* Xray
-
-CI/CD :
-
-* GitHub Actions
-* Jenkins
-
-Langages :
-
-* Python
-* JavaScript
-* SQL
+| Domaine                | Compétences                                                                  |
+| ---------------------- | ---------------------------------------------------------------------------- |
+| Analyse QA             | Stratégie de test, analyse de risques, critères d’acceptation et cas de test |
+| Automatisation Web     | Playwright, Robot Framework et Selenium                                      |
+| Tests API              | Contrats REST, authentification, autorisations et cycles CRUD                |
+| Architecture           | Page Object Model, fixtures, composants et données réutilisables             |
+| Qualité du code        | TypeScript, JavaScript, ESLint et Prettier                                   |
+| Industrialisation      | GitHub Actions, Jenkins, Allure et GitHub Pages                              |
+| Gestion et traçabilité | Jira, Xray, documentation QA et rapports de couverture                       |
