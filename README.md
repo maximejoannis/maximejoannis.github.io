@@ -2,7 +2,7 @@
 
 Ingénieur QA spécialisé en analyse fonctionnelle, automatisation Web et API et industrialisation des tests.
 
-Après plusieurs années dans le développement bancaire, je me suis orienté vers la qualité logicielle. Mes projets démontrent ma capacité à concevoir une stratégie de test, automatiser les parcours critiques, mesurer la couverture fonctionnelle et intégrer les contrôles qualité dans une chaîne CI/CD.
+Après plusieurs années dans le développement dans le secteur bancaire, je me suis orienté vers la qualité logicielle. Mes projets démontrent ma capacité à concevoir une stratégie de test, automatiser les parcours critiques, mesurer la couverture fonctionnelle et intégrer les contrôles qualité dans une chaîne CI/CD.
 
 ## Projets Playwright principaux
 
