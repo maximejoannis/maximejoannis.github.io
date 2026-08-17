@@ -3,6 +3,9 @@
 [![Portfolio](https://img.shields.io/badge/Portfolio-en%20ligne-2563eb?logo=githubpages&logoColor=white)](https://maximejoannis.github.io)
 [![LinkedIn](https://img.shields.io/badge/LinkedIn-Maxime%20Joannis-0A66C2?logo=linkedin&logoColor=white)](https://www.linkedin.com/in/maximejoannis)
 [![GitHub](https://img.shields.io/badge/GitHub-maximejoannis-181717?logo=github&logoColor=white)](https://github.com/maximejoannis)
+![ISTQB Certified](https://img.shields.io/badge/ISTQB-Certifié-7c3aed)
+![Responsive](https://img.shields.io/badge/Design-Responsive-0ea5e9)
+![Accessibility](https://img.shields.io/badge/Accessibilité-prefers--reduced--motion-16a34a)
 
 Bienvenue sur le dépôt de mon portfolio professionnel.
 
