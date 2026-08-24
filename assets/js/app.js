@@ -41,6 +41,18 @@ const data = {
       ]
     },
     {
+      id: 'french-companies', filters:['automation','api'], kind: 'E2E + API + A11y', icon: 'fa-building', a: '#eef2ff', b: '#e0e7ff', c: '#4f46e5',
+      title: 'French Companies Explorer — Playwright QA',
+      desc: 'Démarche QA complète en Playwright et TypeScript : tests E2E, API, mockés, accessibilité, régression visuelle, CI et traçabilité ISTQB.',
+      tags: ['Playwright','TypeScript','API','Accessibilité','Allure','ISTQB'],
+      repo: 'maximejoannis/playwright-french-companies-explorer',
+      metrics: [{value:'110', label:'exécutions automatisées'}, {value:'77,8 %', label:'couverture fonctionnelle'}, {value:'100 %', label:'couverture P0'}],
+      links: [
+        {label:'Dépôt GitHub', url:'https://github.com/maximejoannis/playwright-french-companies-explorer', icon:'fa-brands fa-github'},
+        {label:'Portail QA', url:'https://maximejoannis.github.io/playwright-french-companies-explorer/', icon:'fa-solid fa-chart-line'}
+      ]
+    },
+    {
       id:'saucedemo-v2', filters:['soon'], kind:'Bientôt', icon:'fa-cart-plus', a:'#f3f4f6', b:'#e5e7eb', c:'#9ca3af',
       title:'SauceDemo V2', desc:'Prochaine évolution du framework SauceDemo. Architecture, couverture et portail QA seront publiés à l’ouverture du projet.',
       tags:['Playwright','Evolution V2','Roadmap'], comingSoon:true
@@ -50,12 +62,6 @@ const data = {
       title:'Restful Booker V2', desc:'Nouvelle itération du projet UI + API. La carte restera volontairement inactive jusqu’à publication de la V2.',
       tags:['Playwright','API','Evolution V2'], comingSoon:true
     }
-  ],
-  learnings: [
-    { icon:'fa-layer-group', title:'L’architecture de test doit précéder le volume', text:'SauceDemo m’a confirmé qu’un Page Object Model simple, des fixtures stables et des responsabilités bien séparées valent mieux qu’une multiplication rapide de scripts difficiles à maintenir.' },
-    { icon:'fa-plug-circle-check', title:'UI et API se complètent', text:'Restful Booker montre l’intérêt de valider le contrat et les données au niveau API tout en conservant quelques parcours UI ciblés : on gagne en vitesse sans perdre la confiance sur l’expérience utilisateur.' },
-    { icon:'fa-heart-pulse', title:'La stabilité CI est un KPI produit', text:'Un pipeline vert ponctuellement ne suffit pas. Suivre les 20 dernières exécutions permet de distinguer une suite réellement fiable d’une automatisation qui génère du bruit et des faux signaux.' },
-    { icon:'fa-scale-balanced', title:'Le risque doit guider la profondeur de test', text:'Les projets de scoring, BPMN et cybersécurité ont renforcé une approche où criticité métier, conformité, persistance et impacts utilisateur déterminent l’ordre et le niveau d’effort de validation.' }
   ],
   stack: [
     { title:'Test Automation', items:[['fa-vial','Playwright'],['fa-python','Pytest'],['fa-code','JavaScript'],['fa-code','TypeScript'],['fa-file-code','Page Object Model'],['fa-arrows-rotate','Régression']] },
@@ -70,7 +76,6 @@ function render(){
   document.querySelector('#principles').innerHTML=data.principles.map(x=>`<article class="principle-card"><div class="principle-icon"><i class="fa-solid ${x.icon}"></i></div><div><h3>${x.title}</h3><p>${x.text}</p></div></article>`).join('');
   document.querySelector('#timeline').innerHTML=data.experience.map(x=>`<article class="timeline-item reveal"><div class="timeline-dot"><i class="fa-solid ${x.icon}"></i></div><div class="experience-card"><div class="experience-meta"><span>${x.date}</span><span>${x.company}</span></div><h3>${x.title}</h3><p>${x.desc}</p><div class="mini-tags">${tags(x.tags)}</div></div></article>`).join('');
   document.querySelector('#projectGrid').innerHTML=data.projects.map(projectCard).join('');
-  document.querySelector('#learningGrid').innerHTML=data.learnings.map(x=>`<article class="learning-card reveal"><div class="learning-icon"><i class="fa-solid ${x.icon}"></i></div><h3>${x.title}</h3><p>${x.text}</p></article>`).join('');
   document.querySelector('#stackGrid').innerHTML=data.stack.map(c=>`<article class="stack-category reveal"><h3>${c.title}</h3><div class="stack-items">${c.items.map(([icon,label])=>`<div class="stack-item"><i class="fa-solid ${icon}"></i><span>${label}</span></div>`).join('')}</div></article>`).join('');
 }
 
