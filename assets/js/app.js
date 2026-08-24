@@ -48,6 +48,7 @@ const data = {
       repo: 'maximejoannis/playwright-french-companies-explorer',
       metrics: [{value:'110', label:'exécutions automatisées'}, {value:'77,8 %', label:'couverture fonctionnelle'}, {value:'100 %', label:'couverture P0'}],
       links: [
+        {label:'Étude de cas', url:'project-french-companies.html', icon:'fa-solid fa-book-open'},
         {label:'Dépôt GitHub', url:'https://github.com/maximejoannis/playwright-french-companies-explorer', icon:'fa-brands fa-github'},
         {label:'Portail QA', url:'https://maximejoannis.github.io/playwright-french-companies-explorer/', icon:'fa-solid fa-chart-line'}
       ]
