@@ -1,0 +1,138 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Étude de cas du projet French Companies Explorer : automatisation QA avec Playwright, TypeScript, Allure et GitHub Actions.">
+  <meta name="author" content="Maxime Joannis">
+  <meta name="theme-color" content="#1e3a8a">
+  <title>French Companies Explorer — Étude de cas QA</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="assets/css/styles.css">
+  <link rel="stylesheet" href="assets/css/project-detail.css">
+</head>
+<body class="case-page">
+  <a class="skip-link" href="#case-content">Aller au contenu</a>
+  <nav class="case-nav" aria-label="Navigation du projet">
+    <div class="container case-nav__inner">
+      <a class="logo" href="index.html#hero" aria-label="Retour au portfolio"><span class="logo-mark" aria-hidden="true">MJ</span><span>Maxime Joannis · QA</span></a>
+      <a class="case-back" href="index.html#projects"><i class="fa-solid fa-arrow-left"></i> Retour aux projets</a>
+    </div>
+  </nav>
+
+  <main id="case-content" class="case-main">
+    <header class="case-hero">
+      <div class="container case-hero__inner">
+        <span class="case-eyebrow"><i class="fa-solid fa-flask-vial"></i> Étude de cas · v1.0.0</span>
+        <h1>French Companies Explorer — Automatisation QA avec Playwright</h1>
+        <p>Une démarche QA complète, de l’analyse fonctionnelle à l’industrialisation des tests, avec une traçabilité inspirée des pratiques ISTQB.</p>
+        <div class="case-stats" aria-label="Indicateurs clés">
+          <div class="case-stat"><strong>39</strong><span>tests techniques</span></div>
+          <div class="case-stat"><strong>110</strong><span>exécutions automatisées</span></div>
+          <div class="case-stat"><strong>77,8 %</strong><span>couverture fonctionnelle</span></div>
+          <div class="case-stat"><strong>100 %</strong><span>couverture P0</span></div>
+        </div>
+        <div class="case-actions">
+          <a class="case-action" href="https://github.com/maximejoannis/playwright-french-companies-explorer" target="_blank" rel="noopener noreferrer"><i class="fa-brands fa-github"></i> Dépôt GitHub</a>
+          <a class="case-action secondary" href="https://maximejoannis.github.io/playwright-french-companies-explorer/" target="_blank" rel="noopener noreferrer"><i class="fa-solid fa-chart-line"></i> Portail QA</a>
+          <a class="case-action secondary" href="https://maximejoannis.github.io/french-companies-explorer-qa/" target="_blank" rel="noopener noreferrer"><i class="fa-solid fa-window-maximize"></i> Application testée</a>
+        </div>
+      </div>
+    </header>
+
+    <div class="container case-layout">
+      <article class="case-content">
+        <section id="presentation" class="case-section">
+          <h2>Présentation du projet</h2>
+          <p>French Companies Explorer est un projet personnel d’automatisation des tests d’une application web permettant de rechercher, consulter, comparer, sauvegarder et exporter des informations sur les entreprises françaises.</p>
+          <p>J’ai conçu ce projet pour démontrer une démarche QA complète allant de l’analyse fonctionnelle à l’industrialisation des tests, avec une traçabilité inspirée des pratiques ISTQB. Le projet est publié en version stable <code>v1.0.0</code>.</p>
+        </section>
+
+        <section id="objectifs" class="case-section">
+          <h2>Objectifs et portée</h2>
+          <p>L’objectif était de concevoir un framework Playwright maintenable capable de vérifier les parcours critiques de l’application tout en maîtrisant les risques liés à une API publique et à des données évolutives.</p>
+          <p>Le périmètre couvre :</p>
+          <ul>
+            <li>la recherche par nom, SIREN et SIRET ;</li><li>les filtres, tris et la pagination ;</li><li>les fiches entreprises et établissements ;</li><li>les favoris et leur persistance ;</li><li>la comparaison d’entreprises ;</li><li>l’historique et les recherches sauvegardées ;</li><li>les exports JSON et CSV ;</li><li>la gestion des erreurs et données partielles ;</li><li>l’accessibilité au clavier et la sémantique ARIA ;</li><li>la régression visuelle.</li>
+          </ul>
+          <p>La suite comprend 39 tests techniques, produisant 110 exécutions automatisées sur les différents projets Playwright.</p>
+        </section>
+
+        <section id="methodologie" class="case-section">
+          <h2>Méthodologie</h2>
+          <h3>Analyse fonctionnelle</h3>
+          <p>J’ai commencé par réaliser une analyse boîte noire de l’application afin de produire une cartographie fonctionnelle, les User Stories et critères d’acceptation, les scénarios Gherkin, une stratégie fondée sur les risques, un plan de test, les cas de test et une matrice de traçabilité.</p>
+          <div class="traceability">User Story → Critère d’acceptation → Cas de test → Preuve automatisée</div>
+          <h3>Stratégie d’automatisation</h3>
+          <p>J’ai adopté une stratégie complémentaire plutôt qu’une suite composée uniquement de tests E2E :</p>
+          <ul>
+            <li>tests API ciblés sur le service réel ;</li><li>parcours E2E critiques avec l’application et l’API réelle ;</li><li>tests fonctionnels avec réponses HTTP simulées pour les erreurs, cas limites et données déterministes ;</li><li>tests d’accessibilité avec Axe et navigation clavier ;</li><li>tests de régression visuelle sous Chromium.</li>
+          </ul>
+          <p>Les tests mockés exécutent le frontend réel dans un navigateur, mais remplacent les réponses de l’API publique avec <code>page.route()</code> et <code>route.fulfill()</code>. Ils vérifient le comportement fonctionnel de l’interface, et non les règles métier internes du backend.</p>
+          <h3>Architecture Playwright</h3>
+          <ul>
+            <li>un Page Object Model par domaine fonctionnel ;</li><li>des fixtures Playwright typées pour injecter les Page Objects ;</li><li>des locators privilégiant les rôles et noms accessibles ;</li><li>des <code>data-testid</code> stables pour les entités métier dynamiques ;</li><li>des jeux de données centralisés ;</li><li>des tags et annotations pour la sélection et la traçabilité ;</li><li>une fixture automatique transformant les métadonnées Playwright en labels Allure.</li>
+          </ul>
+        </section>
+
+        <section id="outils" class="case-section">
+          <h2>Outils et technologies</h2>
+          <div class="case-table-wrap"><table class="case-table"><thead><tr><th>Outil</th><th>Utilisation</th></tr></thead><tbody>
+            <tr><td>Playwright</td><td>Automatisation web, API, réseau et visuel</td></tr><tr><td>TypeScript</td><td>Typage et maintenabilité</td></tr><tr><td>Page Object Model</td><td>Encapsulation des pages et interactions</td></tr><tr><td>Playwright Fixtures</td><td>Injection des dépendances de test</td></tr><tr><td>Axe</td><td>Contrôles automatisés d’accessibilité</td></tr><tr><td>Allure</td><td>Reporting et traçabilité</td></tr><tr><td>ESLint</td><td>Analyse statique et règles Playwright</td></tr><tr><td>Prettier</td><td>Uniformisation du formatage</td></tr><tr><td>GitHub Actions</td><td>Intégration continue et quality gate</td></tr><tr><td>GitHub Pages</td><td>Publication du portail QA</td></tr><tr><td>CSV Parse</td><td>Validation des fichiers CSV exportés</td></tr>
+          </tbody></table></div>
+        </section>
+
+        <section id="defis" class="case-section">
+          <h2>Défis rencontrés</h2>
+          <h3>Dépendance à une API publique</h3><p>Les données réelles évoluaient et certaines exécutions pouvaient devenir instables ou lentes selon le réseau et le navigateur. J’ai conservé quelques parcours contre l’API réelle et déplacé les variantes, erreurs et cas limites vers des tests fonctionnels avec API simulée. Cette séparation a réduit le caractère aléatoire de la suite sans masquer les risques d’intégration.</p>
+          <h3>Reproduction des scénarios négatifs</h3><p>Il était difficile de provoquer volontairement une erreur <code>503</code>, une page suivante en échec ou certaines données partielles avec l’API publique. L’interception réseau Playwright m’a permis de construire des réponses contrôlées et reproductibles, puis de vérifier les messages, la récupération et l’absence de doublons dans l’interface.</p>
+          <h3>Stabilisation multi-navigateurs</h3><p>Certaines exécutions variaient selon le temps de réponse de l’API et le nombre de workers. J’ai réduit les dépendances aux données réelles, privilégié les assertions auto-réessayées, supprimé les attentes arbitraires et fixé deux workers par défaut.</p>
+          <h3>Références visuelles Windows et Linux</h3><p>Les snapshots générés sous Windows n’étaient pas compatibles avec le rendu Linux de GitHub Actions. J’ai généré et versionné les références visuelles dans un Codespace Linux afin d’aligner l’environnement de création avec celui de la CI.</p>
+          <h3>Accessibilité et testabilité</h3><p>Certains contrôles ne possédaient pas de nom accessible suffisamment explicite et le compteur de résultats n’était pas annoncé aux technologies d’assistance. Les anomalies ont été corrigées dans l’application, puis les tests ont été conservés sans assouplissement de leurs assertions.</p>
+          <h3>Sécurité des exports CSV</h3><p>Un scénario de test a mis en évidence un risque d’injection de formule pour les cellules commençant par <code>=</code>, <code>+</code>, <code>-</code> ou <code>@</code>. La correction applicative a neutralisé ces valeurs. Le test CT-032 est passé au vert sans modification de son résultat attendu.</p>
+          <h3>Compatibilité de l’outillage</h3><p>TypeScript 7 n’était pas compatible avec la plage de versions supportée par <code>typescript-eslint</code>. J’ai utilisé TypeScript 6 afin de conserver une chaîne ESLint officiellement compatible, sans recourir à <code>--force</code> ou <code>--legacy-peer-deps</code>.</p>
+        </section>
+
+        <section id="resultats" class="case-section">
+          <h2>Résultats</h2>
+          <ul><li>39 tests techniques et 110 exécutions automatisées ;</li><li>Chromium, Firefox et WebKit ;</li><li>couverture fonctionnelle : 35 cas sur 45, soit 77,8 % ;</li><li>couverture P0 : 100 % et couverture P1 : 83,9 % ;</li><li>pipeline CI/CD entièrement vert et release stable <code>v1.0.0</code> ;</li><li>portail QA public et rapports Playwright, Allure, qualité et couverture ;</li><li>trois anomalies applicatives documentées et corrigées.</li></ul>
+          <div class="case-figures">
+            <figure class="case-figure"><div class="chart-heading"><h3>Composition de la campagne Playwright</h3><p>Répartition des 110 exécutions entre les projets de test.</p></div><div class="chart-wrap chart-wrap--doughnut"><canvas id="campaignChart" role="img" aria-label="Répartition des 110 exécutions : API 2, accessibilité 12, E2E 24, tests mockés 69 et visuel 3.">Votre navigateur ne permet pas d’afficher ce graphique.</canvas></div><figcaption>Une même logique de test peut être exécutée sur plusieurs navigateurs.</figcaption></figure>
+            <figure class="case-figure"><div class="chart-heading"><h3>Couverture fonctionnelle par priorité</h3><p>Part des cas du référentiel couverts par l’automatisation.</p></div><div class="chart-wrap"><canvas id="priorityChart" role="img" aria-label="Couverture fonctionnelle : P0 100 %, P1 83,9 %, P2 62,5 % et P3 0 %.">Votre navigateur ne permet pas d’afficher ce graphique.</canvas></div><figcaption>35 cas couverts sur 45. Le périmètre critique P0 est intégralement couvert.</figcaption></figure>
+          </div>
+        </section>
+
+        <section id="anomalies" class="case-section">
+          <h2>Anomalies détectées</h2>
+          <div class="case-table-wrap"><table class="case-table"><thead><tr><th>Identifiant</th><th>Anomalie</th><th>Résultat</th></tr></thead><tbody><tr><td>BUG-CSV-001</td><td>Risque d’injection de formule CSV</td><td>Corrigée et couverte par CT-032</td></tr><tr><td>BUG-A11Y-001</td><td>Contrôle sans nom accessible explicite</td><td>Corrigée et couverte</td></tr><tr><td>BUG-A11Y-002</td><td>Compteur non annoncé aux technologies d’assistance</td><td>Corrigée et couverte</td></tr></tbody></table></div>
+        </section>
+
+        <section id="enseignements" class="case-section">
+          <h2>Enseignements</h2>
+          <ol><li>Un test vert ne signifie pas que tout le périmètre fonctionnel est couvert.</li><li>La couverture doit être mesurée depuis les exigences, et non depuis le nombre de fichiers de test.</li><li>Les tests mockés sont complémentaires des tests API et E2E, mais ne les remplacent pas.</li><li>Les données déterministes réduisent fortement les faux échecs.</li><li>Les snapshots doivent être produits dans le même environnement que la CI.</li><li>Les locators accessibles améliorent à la fois la robustesse des tests et la qualité de l’application.</li><li>Un test peut légitimement révéler un besoin de correction applicative pour améliorer la testabilité.</li><li>Une traçabilité utile doit relier les exigences aux preuves réellement exécutées.</li><li>Les rapports doivent rester accessibles aux profils techniques comme fonctionnels.</li><li>Le nombre de tests, le nombre d’exécutions et la couverture fonctionnelle sont trois indicateurs distincts.</li></ol>
+        </section>
+
+        <section id="preuves" class="case-section">
+          <h2>Preuves</h2>
+          <p>Le portail QA constitue le point d’entrée vers le rapport Playwright fonctionnel, le rapport de régression visuelle, le rapport Allure consolidé, le rapport de qualité du code et le rapport de couverture fonctionnelle.</p>
+          <p><a class="btn primary" href="https://maximejoannis.github.io/playwright-french-companies-explorer/" target="_blank" rel="noopener noreferrer"><i class="fa-solid fa-chart-line"></i> Accéder au portail QA</a></p>
+        </section>
+
+        <section id="role" class="case-section">
+          <h2>Rôle personnel</h2>
+          <p>J’ai assuré l’ensemble de la démarche :</p>
+          <ul><li>audit fonctionnel de l’application ;</li><li>définition de la stratégie ;</li><li>conception des cas de test ;</li><li>automatisation Playwright ;</li><li>analyse et documentation des anomalies ;</li><li>amélioration de la testabilité ;</li><li>stabilisation de la non-régression ;</li><li>mise en place des rapports ;</li><li>création du pipeline GitHub Actions ;</li><li>publication du portail QA ;</li><li>mesure de la couverture automatisée.</li></ul>
+        </section>
+      </article>
+
+      <aside class="case-toc" aria-label="Sommaire de l’étude de cas"><h2>Sommaire</h2><a href="#presentation">Présentation</a><a href="#objectifs">Objectifs et portée</a><a href="#methodologie">Méthodologie</a><a href="#outils">Outils</a><a href="#defis">Défis</a><a href="#resultats">Résultats</a><a href="#anomalies">Anomalies</a><a href="#enseignements">Enseignements</a><a href="#preuves">Preuves</a><a href="#role">Rôle personnel</a></aside>
+    </div>
+  </main>
+
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.7/dist/chart.umd.min.js"></script>
+  <script src="assets/js/project-detail.js"></script>
+</body>
+</html>
