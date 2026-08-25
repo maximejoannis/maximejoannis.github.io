@@ -24,6 +24,7 @@ const data = {
       repo: 'maximejoannis/saucedemo-playwright-automation',
       metrics: [{value:'132', label:'exécutions automatisées'}, {value:'100 %', label:'couverture fonctionnelle'}, {value:'100 %', label:'couverture P0'}],
       links: [
+        {label:'Étude de cas', url:'project-saucedemo.html', icon:'fa-solid fa-book-open'},
         {label:'Dépôt GitHub', url:'https://github.com/maximejoannis/saucedemo-playwright-automation', icon:'fa-brands fa-github'},
         {label:'Portail QA', url:'https://maximejoannis.github.io/saucedemo-playwright-automation/', icon:'fa-solid fa-chart-line'}
       ]
