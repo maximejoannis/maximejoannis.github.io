@@ -108,7 +108,7 @@ body > footer.site-footer .site-footer__inner{
   .site-footer__signature{width:100%;justify-content:space-between;gap:1rem}
 }
 
-/* Orbites des quatre projets autour du portrait */
+/* Orbites des deux projets autour du portrait */
 .profile-orbits{position:relative;width:min(490px,92vw);aspect-ratio:1;display:grid;place-items:center;isolation:isolate}
 .profile-orbits .profile-shell{width:73%;z-index:3}
 .orbit{position:absolute;inset:var(--inset);border:1px solid color-mix(in srgb,var(--orbit-color) 34%,transparent);border-radius:50%;animation:projectOrbit var(--orbit-speed) linear infinite;pointer-events:none}
@@ -117,9 +117,6 @@ body > footer.site-footer .site-footer__inner{
 .orbit-1{--inset:0;--orbit-color:#ea580c;--orbit-speed:17s}
 .orbit-2{--inset:5.5%;--orbit-color:#0891b2;--orbit-speed:21s;animation-direction:reverse}
 .orbit-2 .orbit-project{animation-direction:reverse}
-.orbit-3{--inset:11%;--orbit-color:#7c3aed;--orbit-speed:25s}
-.orbit-4{--inset:16.5%;--orbit-color:#2563eb;--orbit-speed:29s;animation-direction:reverse}
-.orbit-4 .orbit-project{animation-direction:reverse}
 @keyframes projectOrbit{to{transform:rotate(1turn)}}
 @keyframes projectOrbitReverse{to{transform:translate(18px,-50%) rotate(-1turn)}}
 @media(max-width:560px){.profile-orbits{width:min(390px,96vw)}.profile-orbits .profile-shell{width:68%}.orbit-project{font-size:.55rem;padding:.25rem .45rem}.status-chip{font-size:.68rem;padding:.5rem .7rem}}
