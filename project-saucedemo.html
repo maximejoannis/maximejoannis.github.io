@@ -1,0 +1,171 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Étude de cas SauceDemo : automatisation E2E avec Playwright, TypeScript, Allure et GitHub Actions.">
+  <meta name="author" content="Maxime Joannis">
+  <meta name="theme-color" content="#2563eb">
+  <title>SauceDemo — Étude de cas QA Playwright</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="assets/css/styles.css">
+  <link rel="stylesheet" href="assets/css/project-detail.css">
+</head>
+<body class="case-page">
+  <a class="skip-link" href="#case-content">Aller au contenu</a>
+  <nav class="case-nav" aria-label="Navigation du projet">
+    <div class="container case-nav__inner">
+      <a class="logo" href="index.html#hero" aria-label="Retour au portfolio"><span class="logo-mark" aria-hidden="true">MJ</span><span>Maxime Joannis · QA</span></a>
+      <a class="case-back" href="index.html#projects"><i class="fa-solid fa-arrow-left"></i> Retour aux projets</a>
+    </div>
+  </nav>
+
+  <main id="case-content" class="case-main">
+    <header class="case-hero">
+      <div class="container case-hero__inner">
+        <span class="case-eyebrow"><i class="fa-solid fa-cart-shopping"></i> Étude de cas · Playwright E2E</span>
+        <h1>SauceDemo — Playwright QA Automation</h1>
+        <p>Une démarche QA complète appliquée aux parcours e-commerce critiques : analyse fonctionnelle, automatisation multi-navigateurs, traçabilité ISTQB et publication continue des preuves.</p>
+        <div class="case-stats" aria-label="Indicateurs clés">
+          <div class="case-stat"><strong>44</strong><span>cas techniques</span></div>
+          <div class="case-stat"><strong>132</strong><span>exécutions automatisées</span></div>
+          <div class="case-stat"><strong>100 %</strong><span>couverture fonctionnelle</span></div>
+          <div class="case-stat"><strong>3</strong><span>navigateurs</span></div>
+        </div>
+        <div class="case-actions">
+          <a class="case-action" href="https://github.com/maximejoannis/saucedemo-playwright-automation" target="_blank" rel="noopener noreferrer"><i class="fa-brands fa-github"></i> Dépôt GitHub</a>
+          <a class="case-action secondary" href="https://maximejoannis.github.io/saucedemo-playwright-automation/" target="_blank" rel="noopener noreferrer"><i class="fa-solid fa-chart-line"></i> Portail QA</a>
+          <a class="case-action secondary" href="https://www.saucedemo.com/" target="_blank" rel="noopener noreferrer"><i class="fa-solid fa-window-maximize"></i> Application testée</a>
+        </div>
+      </div>
+    </header>
+
+    <div class="container case-layout">
+      <article class="case-content">
+        <section id="presentation" class="case-section">
+          <h2>Présentation du projet</h2>
+          <p>SauceDemo — Playwright QA Automation est un projet personnel d’automatisation des tests de l’application e-commerce SauceDemo, réalisé avec Playwright et TypeScript.</p>
+          <p>Il démontre une démarche QA de bout en bout : analyse fonctionnelle, stratégie fondée sur les risques, automatisation E2E multi-navigateurs, traçabilité ISTQB, gestion explicite des anomalies et intégration continue.</p>
+        </section>
+
+        <section id="objectifs" class="case-section">
+          <h2>Objectifs et périmètre</h2>
+          <p>L’objectif était de construire un framework maintenable couvrant les parcours déterministes et critiques d’une boutique en ligne de démonstration.</p>
+          <ul>
+            <li>authentification valide, invalide et profils spécifiques ;</li>
+            <li>catalogue, images, prix, tris et fiches produits ;</li>
+            <li>ajout, retrait, compteur et persistance du panier ;</li>
+            <li>checkout, données client, taxes et finalisation ;</li>
+            <li>déconnexion, sécurité des routes et gestion de session ;</li>
+            <li>menu latéral et réinitialisation de l’état applicatif.</li>
+          </ul>
+          <p>Le référentiel déterministe comprend 44 cas, tous couverts par l’automatisation. Leur exécution sur Chromium, Firefox et WebKit produit 132 résultats.</p>
+        </section>
+
+        <section id="methodologie" class="case-section">
+          <h2>Méthodologie</h2>
+          <h3>Analyse et traçabilité</h3>
+          <p>Le projet s’appuie sur une cartographie fonctionnelle, des User Stories, des critères d’acceptation, des scénarios Gherkin, un plan de test et une matrice de traçabilité.</p>
+          <div class="traceability">User Story → Critère d’acceptation → Cas de test → Test automatisé → Rapport</div>
+          <h3>Stratégie d’automatisation</h3>
+          <ul>
+            <li>priorisation des parcours métier et des risques de régression ;</li>
+            <li>exécution isolée sur Chromium, Firefox et WebKit ;</li>
+            <li>assertions auto-réessayées et locators stables ;</li>
+            <li>collecte conditionnelle des traces, captures et vidéos ;</li>
+            <li>échecs attendus documentés sans masquer le défaut applicatif ;</li>
+            <li>quality gate après génération de toutes les preuves.</li>
+          </ul>
+          <h3>Architecture Playwright</h3>
+          <ul>
+            <li>Page Object Model pour Login, Inventory, Cart et Checkout ;</li>
+            <li>fixtures typées pour injecter les pages métier ;</li>
+            <li>jeux de données séparés pour utilisateurs, produits et checkout ;</li>
+            <li>helpers spécialisés pour les parcours panier et commande ;</li>
+            <li>annotations Playwright converties en métadonnées Allure ;</li>
+            <li>configuration centralisée des navigateurs, workers et artefacts.</li>
+          </ul>
+        </section>
+
+        <section id="outils" class="case-section">
+          <h2>Outils et technologies</h2>
+          <div class="case-table-wrap"><table class="case-table"><thead><tr><th>Outil</th><th>Utilisation</th></tr></thead><tbody>
+            <tr><td>Playwright</td><td>Automatisation E2E et exécution multi-navigateurs</td></tr>
+            <tr><td>TypeScript</td><td>Typage du framework et maintenabilité</td></tr>
+            <tr><td>Page Object Model</td><td>Encapsulation des pages et interactions</td></tr>
+            <tr><td>Playwright Fixtures</td><td>Injection des dépendances de test</td></tr>
+            <tr><td>Allure</td><td>Reporting, priorités et traçabilité</td></tr>
+            <tr><td>ESLint et Prettier</td><td>Qualité et homogénéité du code</td></tr>
+            <tr><td>GitHub Actions</td><td>CI/CD, contrôles qualité et campagnes</td></tr>
+            <tr><td>GitHub Pages</td><td>Publication du portail et des rapports</td></tr>
+          </tbody></table></div>
+        </section>
+
+        <section id="defis" class="case-section">
+          <h2>Défis rencontrés</h2>
+          <h3>État applicatif entre les scénarios</h3>
+          <p>Le panier, la session et certaines préférences persistent dans le navigateur. Chaque scénario rétablit un état connu afin d’éviter les dépendances entre tests et les faux échecs.</p>
+          <h3>Parcours multi-profils</h3>
+          <p>SauceDemo fournit plusieurs utilisateurs aux comportements particuliers. Les données ont été centralisées pour rendre explicites les attentes liées au compte standard, au compte verrouillé et aux profils problématiques.</p>
+          <h3>Calculs du checkout</h3>
+          <p>Les validations du sous-total, des taxes et du total nécessitent des oracles précis. Des helpers dédiés fiabilisent la lecture et la comparaison des montants tout en conservant des assertions métier lisibles.</p>
+          <h3>Anomalie de réinitialisation</h3>
+          <p>Le scénario TC-044 révèle que <strong>Reset App State</strong> vide le panier sans restaurer immédiatement les boutons <strong>Add to cart</strong>. Le test conserve ses assertions et utilise un échec attendu pour documenter le défaut sur les trois navigateurs sans rendre la CI instable.</p>
+        </section>
+
+        <section id="resultats" class="case-section">
+          <h2>Résultats</h2>
+          <ul>
+            <li>44 cas techniques déterministes couverts sur 44 ;</li>
+            <li>132 exécutions sur Chromium, Firefox et WebKit ;</li>
+            <li>129 exécutions réussies et 3 échecs attendus associés à TC-044 ;</li>
+            <li>14 User Stories couvertes sur 14 ;</li>
+            <li>100 % de couverture globale, P0, P1 et P2 ;</li>
+            <li>pipeline CI/CD, rapports Playwright, Allure, qualité et couverture publiés.</li>
+          </ul>
+          <div class="case-figures">
+            <figure class="case-figure"><div class="chart-heading"><h3>Résultats de la campagne</h3><p>Répartition des 132 exécutions multi-navigateurs.</p></div><div class="chart-wrap chart-wrap--doughnut"><canvas id="sauceCampaignChart" role="img" aria-label="Sur 132 exécutions, 129 ont réussi et 3 sont des échecs attendus associés au défaut TC-044.">Votre navigateur ne permet pas d’afficher ce graphique.</canvas></div><figcaption>Les trois échecs attendus correspondent au même défaut reproduit sur les trois navigateurs.</figcaption></figure>
+            <figure class="case-figure"><div class="chart-heading"><h3>Couverture par priorité</h3><p>Tous les cas déterministes P0, P1 et P2 sont couverts.</p></div><div class="chart-wrap"><canvas id="saucePriorityChart" role="img" aria-label="Couverture fonctionnelle de 100 % pour les priorités P0, P1 et P2.">Votre navigateur ne permet pas d’afficher ce graphique.</canvas></div><figcaption>44 cas couverts sur 44 : P0 23/23, P1 19/19 et P2 2/2.</figcaption></figure>
+          </div>
+        </section>
+
+        <section id="anomalie" class="case-section">
+          <h2>Anomalie documentée</h2>
+          <div class="case-table-wrap"><table class="case-table"><thead><tr><th>Identifiant</th><th>Comportement</th><th>Traitement QA</th></tr></thead><tbody><tr><td>TC-044</td><td>Reset App State vide le panier mais ne restaure pas immédiatement les boutons d’ajout.</td><td>Défaut reproductible sur trois navigateurs, conservé comme échec attendu documenté.</td></tr></tbody></table></div>
+        </section>
+
+        <section id="enseignements" class="case-section">
+          <h2>Enseignements</h2>
+          <ol>
+            <li>Une couverture utile se mesure depuis les exigences et les risques.</li>
+            <li>L’isolation des scénarios est indispensable lorsque l’état du navigateur persiste.</li>
+            <li>Les Page Objects améliorent la lisibilité s’ils restent centrés sur les comportements métier.</li>
+            <li>Un échec attendu permet de conserver la visibilité d’un défaut connu sans banaliser une assertion.</li>
+            <li>Une campagne multi-navigateurs distingue les cas techniques du nombre réel d’exécutions.</li>
+            <li>Les rapports doivent rendre la preuve compréhensible aux profils techniques et fonctionnels.</li>
+          </ol>
+        </section>
+
+        <section id="preuves" class="case-section">
+          <h2>Preuves</h2>
+          <p>Le portail QA centralise les rapports Playwright et Allure, les contrôles TypeScript, ESLint et Prettier, ainsi que la couverture fonctionnelle reliée au référentiel.</p>
+          <p><a class="btn primary" href="https://maximejoannis.github.io/saucedemo-playwright-automation/" target="_blank" rel="noopener noreferrer"><i class="fa-solid fa-chart-line"></i> Accéder au portail QA</a></p>
+        </section>
+
+        <section id="role" class="case-section">
+          <h2>Rôle personnel</h2>
+          <p>J’ai assuré l’audit fonctionnel, la stratégie de test, la conception du référentiel, l’architecture Playwright, l’automatisation, la documentation de l’anomalie, la traçabilité Allure, les contrôles qualité, le pipeline GitHub Actions et la publication du portail QA.</p>
+        </section>
+      </article>
+
+      <aside class="case-toc" aria-label="Sommaire de l’étude de cas"><h2>Sommaire</h2><a href="#presentation">Présentation</a><a href="#objectifs">Objectifs et périmètre</a><a href="#methodologie">Méthodologie</a><a href="#outils">Outils</a><a href="#defis">Défis</a><a href="#resultats">Résultats</a><a href="#anomalie">Anomalie</a><a href="#enseignements">Enseignements</a><a href="#preuves">Preuves</a><a href="#role">Rôle personnel</a></aside>
+    </div>
+  </main>
+
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.7/dist/chart.umd.min.js"></script>
+  <script src="assets/js/project-saucedemo.js"></script>
+</body>
+</html>
