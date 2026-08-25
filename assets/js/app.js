@@ -17,27 +17,15 @@ const data = {
   ],
   projects: [
     {
-      id: 'saucedemo', filters:['automation'], kind: 'Automation E2E', icon: 'fa-cart-shopping', a: '#fff7ed', b: '#ffedd5', c: '#ea580c',
-      title: 'SauceDemo QA Automation',
-      desc: 'Framework Playwright JavaScript sur les parcours e-commerce critiques, structuré avec Page Object Model, fixtures, qualité de code, rapports Allure et GitHub Actions.',
-      tags: ['Playwright','JavaScript','POM','Allure','GitHub Actions'],
-      repo: 'maximejoannis/saucedemo-qa-automation',
-      metrics: [{value:'86', label:'scénarios automatisés'}, {value:'POM', label:'architecture'}],
+      id: 'saucedemo-playwright', filters:['automation'], kind: 'Automation E2E', icon: 'fa-cart-shopping', a: '#fff7ed', b: '#ffedd5', c: '#ea580c',
+      title: 'SauceDemo — Playwright QA Automation',
+      desc: 'Framework Playwright TypeScript couvrant les parcours e-commerce critiques, avec Page Object Model, exécution multi-navigateurs, traçabilité ISTQB, rapports Allure et CI/CD.',
+      tags: ['Playwright','TypeScript','POM','Allure','ISTQB','GitHub Actions'],
+      repo: 'maximejoannis/saucedemo-playwright-automation',
+      metrics: [{value:'132', label:'exécutions automatisées'}, {value:'100 %', label:'couverture fonctionnelle'}, {value:'100 %', label:'couverture P0'}],
       links: [
-        {label:'Dépôt GitHub', url:'https://github.com/maximejoannis/saucedemo-qa-automation', icon:'fa-brands fa-github'},
-        {label:'Portail QA', url:'https://maximejoannis.github.io/saucedemo-qa-automation/', icon:'fa-solid fa-chart-line'}
-      ]
-    },
-    {
-      id: 'restful', filters:['automation','api'], kind: 'UI + API', icon: 'fa-hotel', a: '#ecfeff', b: '#cffafe', c: '#0891b2',
-      title: 'Restful Booker Playwright',
-      desc: 'Framework TypeScript réunissant tests UI et API REST, Page Objects, modèles typés, scénarios CRUD et intégration GitHub Actions.',
-      tags: ['Playwright','TypeScript','REST API','POM','CI/CD'],
-      repo: 'maximejoannis/restful-booker-playwright',
-      metrics: [{value:'UI + API', label:'double couche'}, {value:'TS', label:'type safety'}],
-      links: [
-        {label:'Dépôt GitHub', url:'https://github.com/maximejoannis/restful-booker-playwright', icon:'fa-brands fa-github'},
-        {label:'Portail QA', url:'https://maximejoannis.github.io/restful-booker-playwright/', icon:'fa-solid fa-chart-line'}
+        {label:'Dépôt GitHub', url:'https://github.com/maximejoannis/saucedemo-playwright-automation', icon:'fa-brands fa-github'},
+        {label:'Portail QA', url:'https://maximejoannis.github.io/saucedemo-playwright-automation/', icon:'fa-solid fa-chart-line'}
       ]
     },
     {
@@ -52,16 +40,6 @@ const data = {
         {label:'Dépôt GitHub', url:'https://github.com/maximejoannis/playwright-french-companies-explorer', icon:'fa-brands fa-github'},
         {label:'Portail QA', url:'https://maximejoannis.github.io/playwright-french-companies-explorer/', icon:'fa-solid fa-chart-line'}
       ]
-    },
-    {
-      id:'saucedemo-v2', filters:['soon'], kind:'Bientôt', icon:'fa-cart-plus', a:'#f3f4f6', b:'#e5e7eb', c:'#9ca3af',
-      title:'SauceDemo V2', desc:'Prochaine évolution du framework SauceDemo. Architecture, couverture et portail QA seront publiés à l’ouverture du projet.',
-      tags:['Playwright','Evolution V2','Roadmap'], comingSoon:true
-    },
-    {
-      id:'restful-v2', filters:['soon'], kind:'Bientôt', icon:'fa-code-merge', a:'#f3f4f6', b:'#e5e7eb', c:'#9ca3af',
-      title:'Restful Booker V2', desc:'Nouvelle itération du projet UI + API. La carte restera volontairement inactive jusqu’à publication de la V2.',
-      tags:['Playwright','API','Evolution V2'], comingSoon:true
     }
   ],
   stack: [
