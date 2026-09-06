@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Revue de sprint — French Companies Explorer Playwright Agents</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"><link rel="stylesheet" href="css/style.css">
+</head>
+<body class="review-page">
+<div class="review-progress-track"><span id="reviewProgress"></span></div>
+<header class="review-sticky-nav"><div class="review-sticky-inner"><a class="review-sticky-back" href="dashboard.html#projects"><i class="fa-solid fa-arrow-left"></i><span>Projets</span></a><strong>Revue de sprint</strong><button id="reviewTocToggle" class="review-toc-toggle" aria-label="Ouvrir le sommaire"><i class="fa-solid fa-list"></i></button></div></header>
+<main class="review-shell review-layout">
+  <aside class="review-sidebar" id="reviewSidebar"><div class="review-sidebar-card"><div class="review-sidebar-head"><i class="fa-solid fa-list"></i><strong>Sommaire</strong></div><nav id="reviewToc" class="review-toc"></nav></div></aside>
+  <section class="review-main-column">
+    <header class="review-header">
+      <span class="review-project-name"><i class="fa-solid fa-vial-circle-check"></i>French Companies Explorer Playwright Agents</span>
+      <h1>Revue de sprint</h1><p>Document complet synchronisé avec le fichier <code>SPRINT-REVIEW.md</code> du dépôt GitHub.</p>
+      <div class="review-header-actions"><a class="review-source" href="https://github.com/maximejoannis/french-companies-explorer-playwright-agents/blob/main/SPRINT-REVIEW.md" target="_blank" rel="noopener"><i class="fa-brands fa-github"></i>Source Markdown</a><a class="review-source secondary" href="https://github.com/maximejoannis/french-companies-explorer-playwright-agents" target="_blank" rel="noopener"><i class="fa-solid fa-code-branch"></i>Dépôt GitHub</a></div>
+    </header>
+    <div class="review-actions"><a class="review-action" href="dashboard.html#projects"><i class="fa-solid fa-table-columns"></i>Portfolio</a><button class="review-action" onclick="window.print()"><i class="fa-solid fa-print"></i>Imprimer / PDF</button></div>
+    <article class="review-document" id="reviewDocument"><div class="review-loading"><i class="fa-solid fa-circle-notch fa-spin"></i>Chargement du document complet…</div></article>
+  </section>
+</main>
+<button id="reviewBackTop" class="review-back-top" aria-label="Revenir en haut"><i class="fa-solid fa-arrow-up"></i></button>
+<script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script><script src="js/review.js"></script>
+<script type="module">
+import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.esm.min.mjs';
+const c=document.getElementById('reviewDocument');
+mermaid.initialize({startOnLoad:false,theme:'base',securityLevel:'loose',themeVariables:{primaryColor:'#eff6ff',primaryTextColor:'#1f2937',primaryBorderColor:'#2563eb',lineColor:'#2563eb',secondaryColor:'#dbeafe',tertiaryColor:'#f8fbff',fontFamily:'Poppins, sans-serif'}});
+try{const r=await fetch('https://raw.githubusercontent.com/maximejoannis/french-companies-explorer-playwright-agents/main/SPRINT-REVIEW.md',{cache:'no-store'});if(!r.ok)throw new Error('HTTP '+r.status);const md=await r.text();c.innerHTML=marked.parse(md,{gfm:true});c.querySelectorAll('pre code.language-mermaid').forEach(code=>{const d=document.createElement('div');d.className='mermaid';d.textContent=code.textContent;code.parentElement.replaceWith(d)});c.querySelectorAll('a[href]').forEach(a=>{const href=a.getAttribute('href');if(href&&!href.startsWith('#')&&!/^https?:\/\//i.test(href)&&!href.startsWith('mailto:')){a.href='https://github.com/maximejoannis/french-companies-explorer-playwright-agents/blob/main/'+href.replace(/^\.\//,'');a.target='_blank';a.rel='noopener'}});await mermaid.run({querySelector:'.mermaid'});window.reviewNavigationInit?.();}catch(e){c.innerHTML='<div class="review-error"><strong>Impossible de charger le document.</strong><p>Vérifiez votre connexion Internet, puis utilisez le bouton Source Markdown.</p></div>';console.error(e)}
+</script>
+</body></html>

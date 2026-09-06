@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Portfolio QA interactif de Maxime Joannis : profil, expérience, projets Playwright et technologies." />
+  <title>Portfolio QA — Maxime Joannis</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" />
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body class="dashboard-page">
+  <div class="app-shell" id="appShell">
+    <aside class="sidebar" id="sidebar">
+      <a href="index.html" class="sidebar-brand" aria-label="Retour à l’accueil">
+        <span class="sidebar-monogram">MJ</span>
+        <span class="sidebar-brand-copy"><strong>Maxime Joannis</strong><small>Portfolio QA</small></span>
+      </a>
+
+      <nav class="sidebar-nav" aria-label="Navigation principale">
+        <button class="nav-item active" data-section="profile"><span class="menu-icon"><i class="fa-regular fa-user"></i></span><span class="nav-label">Profil</span></button>
+        <button class="nav-item" data-section="experience"><span class="menu-icon"><i class="fa-solid fa-briefcase"></i></span><span class="nav-label">Expérience</span></button>
+        <button class="nav-item" data-section="projects"><span class="menu-icon"><i class="fa-regular fa-folder-open"></i></span><span class="nav-label">Projets</span></button>
+        <button class="nav-item" data-section="technologies"><span class="menu-icon"><i class="fa-solid fa-layer-group"></i></span><span class="nav-label">Technologies</span></button>
+      </nav>
+
+      <div class="sidebar-foot">
+        <a class="sidebar-link" href="https://www.linkedin.com/in/maxime-joannis" target="_blank" rel="noopener"><i class="fa-brands fa-linkedin"></i><span>LinkedIn</span></a>
+      </div>
+
+      <button class="sidebar-toggle" id="sidebarToggle" aria-label="Rétracter le menu" title="Rétracter le menu"><i class="fa-solid fa-chevron-left"></i></button>
+    </aside>
+
+    <main class="main-area">
+      <header class="topbar">
+        <div class="topbar-left">
+          <button class="mobile-menu" id="mobileMenu" aria-label="Ouvrir le menu"><i class="fa-solid fa-bars"></i></button>
+          <div><h1 id="pageTitle">Profil</h1><p id="pageSubtitle">Portfolio QA</p></div>
+        </div>
+        <div class="profile-pill"><span class="profile-avatar">MJ</span><div><strong>Maxime Joannis</strong><small>Ingénieur QA</small></div></div>
+      </header>
+
+      <nav class="subnav" aria-label="Navigation des sections">
+        <button class="subnav-item active" data-section="profile">Profil</button>
+        <button class="subnav-item" data-section="experience">Expérience</button>
+        <button class="subnav-item" data-section="projects">Projets</button>
+        <button class="subnav-item" data-section="technologies">Technologies</button>
+      </nav>
+
+      <div class="page-content">
+        <section class="page-section active" id="section-profile">
+          <div class="section-intro card reveal section-intro-premium">
+            <div class="section-intro-main">
+              <span class="section-intro-icon"><i class="fa-regular fa-user"></i></span>
+              <div><span class="mini-kicker">PROFIL QA</span><h2>Profil</h2><p>Une double culture développement et qualité, orientée risque, automatisation et valeur métier.</p></div>
+            </div>
+            <div class="section-kpis"><span><strong>ISTQB</strong> certifié CTFL</span><span><strong>2+ ans</strong> QA dédiée</span><span><strong>6+ ans</strong> développement</span></div>
+          </div>
+          <article class="profile-hero card reveal searchable" data-search="maxime joannis qa automatisation playwright pytest api istqb développement test">
+            <div class="floating-tech" aria-hidden="true">
+              <span class="float-icon f1"><i class="fa-solid fa-vial"></i></span>
+              <span class="float-icon f2"><i class="fa-solid fa-code"></i></span>
+              <span class="float-icon f3"><i class="fa-solid fa-robot"></i></span>
+              <span class="float-icon f4"><i class="fa-solid fa-shield-halved"></i></span>
+            </div>
+            <div class="profile-copy">
+              <span class="eyebrow">INGÉNIEUR QA TECHNICO-FONCTIONNEL</span>
+              <h2>Faire le lien entre <span>métier</span>, qualité logicielle et technique.</h2>
+              <p>Certifié ISTQB, avec plus de 6 ans de parcours en développement, près de 5 ans dans des rôles hybrides développement/test et 2 ans dédiés à la QA fonctionnelle et à l’automatisation.</p>
+              <div class="profile-actions">
+                <button class="action-link" data-jump="projects"><i class="fa-regular fa-folder-open"></i> Voir mes projets QA</button>
+                <button class="action-link secondary" data-jump="experience"><i class="fa-solid fa-arrow-right"></i> Parcourir mon expérience</button>
+              </div>
+            </div>
+            <div class="profile-visual">
+              <div class="hero-orbit"><span class="hero-core">MJ</span></div>
+              <span class="hero-chip chip-a">Playwright</span>
+              <span class="hero-chip chip-b">Pytest</span>
+              <span class="hero-chip chip-c">ISTQB</span>
+            </div>
+          </article>
+
+          <div class="metric-grid reveal">
+            <article class="metric-card"><span class="metric-icon"><i class="fa-solid fa-vial-circle-check"></i></span><strong>2+ ans</strong><b>QA dédiée</b><small>Fonctionnelle &amp; automatisation</small></article>
+            <article class="metric-card"><span class="metric-icon"><i class="fa-solid fa-code"></i></span><strong>6+ ans</strong><b>Parcours développement</b><small>Java, Web, API et SQL</small></article>
+            <article class="metric-card"><span class="metric-icon"><i class="fa-solid fa-arrows-left-right"></i></span><strong>≈ 5 ans</strong><b>Développement / Test</b><small>Rôles hybrides</small></article>
+            <article class="metric-card"><span class="metric-icon"><i class="fa-solid fa-certificate"></i></span><strong>ISTQB</strong><b>CTFL v4.0</b><small>Fondamentaux du test</small></article>
+          </div>
+
+          <div class="profile-grid reveal">
+            <article class="card searchable" data-search="analyse risque exigences conception test traçabilité automatisation rapport">
+              <div class="card-heading"><div><span class="mini-kicker">POSITIONNEMENT</span><h3>Ma valeur ajoutée</h3></div><span class="animated-icon"><i class="fa-solid fa-compass"></i></span></div>
+              <p class="lead-copy">Une approche QA qui associe compréhension métier, culture développeur et automatisation pragmatique.</p>
+              <div class="value-grid">
+                <div><span>01</span><strong>Comprendre le risque</strong><small>Exigences, métier, conformité, criticité.</small></div>
+                <div><span>02</span><strong>Concevoir la preuve</strong><small>Histoires utilisateur, critères, cas de test et traçabilité.</small></div>
+                <div><span>03</span><strong>Automatiser utilement</strong><small>Playwright, Pytest, API et CI/CD.</small></div>
+                <div><span>04</span><strong>Restituer clairement</strong><small>Anomalies, indicateurs, décisions et rapports.</small></div>
+              </div>
+            </article>
+
+            <article class="card searchable" data-search="scoring conformité cybersécurité bpmn ia prompts rgpd">
+              <div class="card-heading"><div><span class="mini-kicker">DOMAINES RÉCENTS</span><h3>QA à forte composante métier</h3></div><span class="animated-icon"><i class="fa-solid fa-shield-halved"></i></span></div>
+              <div class="focus-list">
+                <div><span class="focus-dot"></span><div><strong>Scoring &amp; conformité</strong><small>Validation scientifique, métier, RGPD et seuils décisionnels.</small></div></div>
+                <div><span class="focus-dot"></span><div><strong>Cybersécurité &amp; BPMN</strong><small>Processus critiques, cohérence métier et non-régression.</small></div></div>
+                <div><span class="focus-dot"></span><div><strong>Agent IA &amp; tests de prompts</strong><small>Pertinence, robustesse, cohérence et qualité des réponses.</small></div></div>
+                <div><span class="focus-dot"></span><div><strong>Tests en amont</strong><small>Qualité intégrée tôt dans la conception et les chaînes de livraison.</small></div></div>
+              </div>
+            </article>
+          </div>
+        </section>
+
+        <section class="page-section" id="section-experience">
+          <div class="section-intro card reveal section-intro-premium">
+            <div class="section-intro-main"><span class="section-intro-icon"><i class="fa-solid fa-briefcase"></i></span><div><span class="mini-kicker">PARCOURS</span><h2>Expérience</h2><p>Une lecture synthétique centrée uniquement sur le contexte de chaque mission et le défi qualité à résoudre.</p></div></div>
+            <div class="section-kpis"><span><strong>8+</strong> années d’expérience</span><span><strong>4</strong> étapes clés</span><span><strong>2</strong> engagements bénévoles</span></div>
+          </div>
+
+          <div class="experience-layout">
+            <div class="timeline" id="timeline"></div>
+
+            <aside class="volunteer-panel card reveal searchable" data-search="bénévolat afev triyo lab formation enfants soutien scolaire communication linkedin">
+              <div class="card-heading"><div><span class="mini-kicker">BÉNÉVOLAT</span><h3>Engagements</h3></div><span class="animated-icon"><i class="fa-regular fa-heart"></i></span></div>
+
+              <article class="volunteer-card">
+                <div class="volunteer-logo afev">afev<span>★</span></div>
+                <div class="volunteer-head"><div><strong>AFEV</strong><small>janv. 2016 – juin 2016 · 6 mois</small></div><span class="tiny-tag">Enfants</span></div>
+                <div class="volunteer-story"><b><i class="fa-regular fa-compass"></i> Contexte</b><p>Lutter contre les inégalités dans les quartiers populaires auprès d’enfants ayant besoin d’un accompagnement de proximité.</p></div>
+                <div class="volunteer-story challenge"><b><i class="fa-solid fa-bullseye"></i> Défi</b><p>Créer un accompagnement utile et régulier combinant conseil, soutien scolaire et présence éducative adaptée aux besoins de l’enfant.</p></div>
+              </article>
+
+              <article class="volunteer-card">
+                <div class="volunteer-logo triyo">tl</div>
+                <div class="volunteer-head"><div><strong>TRIYO LAB</strong><small>mars 2026 – aujourd’hui</small></div><span class="tiny-tag">Formation</span></div>
+                <div class="volunteer-story"><b><i class="fa-regular fa-compass"></i> Contexte</b><p>Mission bénévole réalisée via JeVeuxAider.gouv.fr pour soutenir la visibilité des initiatives de l’association et la valorisation de ses projets.</p></div>
+                <div class="volunteer-story challenge"><b><i class="fa-solid fa-bullseye"></i> Défi</b><p>Renforcer la présence institutionnelle de Triyo Lab sur les réseaux professionnels grâce à des communications et contenus LinkedIn mettant en valeur la mesure d’impact des formations et l’employabilité.</p></div>
+              </article>
+            </aside>
+          </div>
+        </section>
+
+        <section class="page-section" id="section-projects">
+          <div class="section-intro card reveal section-intro-premium">
+            <div class="section-intro-main"><span class="section-intro-icon"><i class="fa-regular fa-folder-open"></i></span><div><span class="mini-kicker">ÉTUDES DE CAS</span><h2>Projets QA</h2><p>Deux démonstrateurs Playwright documentés, automatisés, industrialisés et publiés.</p></div></div>
+            <div class="section-kpis"><span><strong>2</strong> projets publics</span><span><strong>120</strong> tests Playwright</span><span><strong>100 %</strong> périmètre QA couvert</span></div>
+          </div>
+
+          <div class="projects-grid reveal">
+            <article class="project-card card searchable" data-search="saucedemo playwright typescript allure github 36 tests 33 cas de test">
+              <div class="project-topline"><span class="featured-tag">Projet QA présenté</span><span class="project-number">01</span></div>
+              <div class="project-title-row"><div class="project-logo"><i class="fa-solid fa-cart-shopping"></i></div><div><h3>SauceDemo Playwright Agents</h3><p>Conception fonctionnelle, traçabilité, automatisation E2E, rapports et contrôle qualité.</p></div></div>
+              <div class="project-metrics">
+                <div><strong>36</strong><span>tests Playwright</span></div>
+                <div><strong>33</strong><span>cas fonctionnels</span></div>
+                <div><strong>6/6</strong><span>fonctionnalités</span></div>
+                <div><strong>3/3</strong><span>contrôles qualité</span></div>
+              </div>
+              <div class="project-progress"><span><i style="width:100%"></i></span><small>100 % du périmètre QA défini automatisé</small></div>
+              <div class="tech-tags"><span>Playwright</span><span>TypeScript</span><span>Allure</span><span>Modèle d’objets de page</span><span>GitHub Actions</span><span>CI/CD</span></div>
+              <div class="project-actions">
+                <a class="project-link" href="https://github.com/maximejoannis/saucedemo-playwright-agents" target="_blank" rel="noopener"><i class="fa-brands fa-github"></i> Dépôt GitHub</a>
+                <a class="project-link primary" href="https://maximejoannis.github.io/saucedemo-playwright-agents/" target="_blank" rel="noopener"><i class="fa-solid fa-chart-line"></i> Portail QA</a>
+                <a class="project-link review" href="sprint-review-saucedemo.html"><i class="fa-regular fa-file-lines"></i> Revue de sprint</a>
+              </div>
+            </article>
+
+            <article class="project-card card searchable" data-search="french companies explorer playwright typescript api 84 tests 13 fonctionnalités">
+              <div class="project-topline"><span class="featured-tag">Projet QA avancé</span><span class="project-number">02</span></div>
+              <div class="project-title-row"><div class="project-logo"><i class="fa-solid fa-building"></i></div><div><h3>French Companies Explorer — Playwright Agents</h3><p>Stratégie multi-niveaux combinant API réelle, interface simulée et parcours E2E réels.</p></div></div>
+              <div class="project-metrics">
+                <div><strong>84</strong><span>tests automatisés</span></div>
+                <div><strong>13/13</strong><span>fonctionnalités</span></div>
+                <div><strong>72</strong><span>tests actifs</span></div>
+                <div><strong>0</strong><span>échec inattendu</span></div>
+              </div>
+              <div class="project-progress"><span><i style="width:100%"></i></span><small>100 % du périmètre fonctionnel défini couvert</small></div>
+              <div class="tech-tags"><span>Playwright</span><span>TypeScript</span><span>APIRequestContext</span><span>Simulations réseau</span><span>Allure</span><span>GitHub Actions</span></div>
+              <div class="project-actions">
+                <a class="project-link" href="https://github.com/maximejoannis/french-companies-explorer-playwright-agents" target="_blank" rel="noopener"><i class="fa-brands fa-github"></i> Dépôt GitHub</a>
+                <a class="project-link primary" href="https://maximejoannis.github.io/french-companies-explorer-playwright-agents/" target="_blank" rel="noopener"><i class="fa-solid fa-chart-line"></i> Portail QA</a>
+                <a class="project-link review" href="sprint-review-french-companies.html"><i class="fa-regular fa-file-lines"></i> Revue de sprint</a>
+              </div>
+            </article>
+          </div>
+        </section>
+
+        <section class="page-section" id="section-technologies">
+          <div class="section-intro card reveal section-intro-premium">
+            <div class="section-intro-main"><span class="section-intro-icon"><i class="fa-solid fa-layer-group"></i></span><div><span class="mini-kicker">OUTILS &amp; PRATIQUES</span><h2>Technologies</h2><p>Un ensemble d’outils organisé par usage réel, sans notation artificielle en pourcentage.</p></div></div>
+            <div class="section-kpis"><span><strong>QA</strong> fonctionnelle</span><span><strong>UI &amp; API</strong> automatisées</span><span><strong>CI/CD</strong> industrialisée</span></div>
+          </div>
+
+          <div class="stack-grid reveal">
+            <article class="stack-card card searchable" data-search="playwright pytest selenium typescript javascript python"><span class="stack-icon"><i class="fa-solid fa-gears"></i></span><h3>Automatisation</h3><p>Tests d’interface et d’API maintenables, lisibles et intégrables aux chaînes de livraison.</p><div class="stack-chips"><span>Playwright</span><span>Pytest</span><span>Selenium</span><span>TypeScript</span><span>JavaScript</span><span>Python</span></div></article>
+            <article class="stack-card card searchable" data-search="api postman fastapi rest sql json swagger"><span class="stack-icon"><i class="fa-solid fa-arrows-rotate"></i></span><h3>API &amp; serveur</h3><p>Validation de contrats, statuts, règles métier, données et intégrations.</p><div class="stack-chips"><span>Postman</span><span>FastAPI</span><span>REST</span><span>JSON</span><span>SQL</span><span>Swagger</span></div></article>
+            <article class="stack-card card searchable" data-search="istqb jira xray bpmn regression tests exploratoires"><span class="stack-icon"><i class="fa-solid fa-shield-halved"></i></span><h3>Ingénierie qualité</h3><p>Conception, traçabilité, risques, campagnes de régression et amélioration continue.</p><div class="stack-chips"><span>ISTQB</span><span>Jira</span><span>Xray</span><span>BPMN</span><span>Tests en amont</span><span>Régression</span></div></article>
+            <article class="stack-card card searchable" data-search="github actions jenkins gitlab allure rapports"><span class="stack-icon"><i class="fa-solid fa-code-branch"></i></span><h3>CI/CD &amp; rapports</h3><p>Contrôles automatiques, exécution, rapports et publication continue des preuves QA.</p><div class="stack-chips"><span>Git</span><span>GitHub Actions</span><span>GitLab</span><span>Jenkins</span><span>Allure</span><span>Rapports Playwright</span></div></article>
+            <article class="stack-card card searchable" data-search="java spring angular html css php développement"><span class="stack-icon"><i class="fa-solid fa-laptop-code"></i></span><h3>Parcours développement</h3><p>Une base technique solide pour dialoguer efficacement avec les équipes de développement.</p><div class="stack-chips"><span>Java</span><span>Spring Boot</span><span>AngularJS</span><span>HTML</span><span>CSS</span><span>PHP</span></div></article>
+            <article class="stack-card card searchable" data-search="ia prompts codex agents gemini gpt"><span class="stack-icon"><i class="fa-solid fa-robot"></i></span><h3>QA assistée par IA</h3><p>Utilisation cadrée de l’IA pour accélérer l’analyse sans lui déléguer l’oracle métier.</p><div class="stack-chips"><span>Tests de prompts</span><span>Agents Playwright</span><span>Codex</span><span>Gemini</span><span>GPT</span></div></article>
+          </div>
+        </section>
+      </div>
+    </main>
+  </div>
+
+  <script src="js/data.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>

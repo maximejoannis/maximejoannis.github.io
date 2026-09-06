@@ -1,185 +1,97 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="fr">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="Portfolio QA de Maxime Joannis : QA technico-fonctionnelle, Playwright, Pytest, tests API, IA testing, BPMN et CI/CD.">
-  <meta name="author" content="Maxime Joannis">
-  <meta name="theme-color" content="#2563eb">
-  <title>Maxime Joannis — Portfolio QA Automation</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Portfolio QA de Maxime Joannis — Ingénieur QA technico-fonctionnel, automatisation Playwright et Pytest, tests d’API, CI/CD et qualité logicielle.">
+  <title>Maxime Joannis — Portfolio QA</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
-  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
-  <link rel="stylesheet" href="assets/css/styles.css">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+  <link rel="stylesheet" href="css/style.css">
 </head>
-<body>
-  <a class="skip-link" href="#main">Aller au contenu</a>
-  <nav class="navbar" id="navbar" aria-label="Navigation principale">
-    <div class="nav-inner container">
-      <a class="logo" href="#hero" aria-label="Maxime Joannis · QA">
-        <span class="logo-mark" aria-hidden="true">MJ</span><span>Maxime Joannis · QA</span>
-      </a>
-      <ul class="nav-links" id="navLinks">
-        <li><a href="#about">Profil</a></li>
-        <li><a href="#experience">Expérience</a></li>
-        <li><a href="#projects">Projets</a></li>
-        <li><a href="#stack">Stack</a></li>
-        <li><a href="#contact">Contact</a></li>
-      </ul>
+<body class="home-hero-page">
+  <main class="home-hero">
+    <div class="home-ambient" aria-hidden="true">
+      <span class="ambient-orbit ao-1"></span>
+      <span class="ambient-orbit ao-2"></span>
+      <span class="ambient-orbit ao-3"></span>
+
+      <span class="floating-tech ft-1"><i class="fa-brands fa-playstation"></i></span>
+      <span class="floating-tech ft-2"><i class="fa-solid fa-vial-circle-check"></i></span>
+      <span class="floating-tech ft-3"><i class="fa-solid fa-code-branch"></i></span>
+      <span class="floating-tech ft-4"><i class="fa-solid fa-robot"></i></span>
+      <span class="floating-tech ft-5"><i class="fa-solid fa-database"></i></span>
+      <span class="floating-tech ft-6"><i class="fa-solid fa-shield-halved"></i></span>
     </div>
-  </nav>
 
-  <main id="main">
-    <section class="hero" id="hero">
-      <div class="floating-icons" id="floatingIcons" aria-hidden="true"></div>
-      <div class="container hero-grid">
-        <div class="hero-copy reveal">
-          <h1><span id="typingGreeting" aria-live="polite"></span><span class="gradient-text">Maxime Joannis</span></h1>
-          <p class="hero-title">Ingénieur QA Technico-Fonctionnel & Automatisation · Playwright & Pytest · API · Certifié ISTQB</p>
-          <div class="hero-actions">
-            <a class="btn primary" href="#contact"><i class="fa-solid fa-paper-plane"></i><span>Me contacter</span></a>
-            <a class="btn secondary" href="#projects"><i class="fa-solid fa-flask-vial"></i><span>Voir mes travaux</span></a>
-          </div>
-          <div class="hero-proof" id="heroProof"></div>
+    <section class="home-content">
+      <div class="home-eyebrow">
+        <span class="eyebrow-dot"></span>
+        Portfolio QA
+      </div>
+
+      <h1>Bonjour, moi c'est <span>Maxime Joannis</span></h1>
+
+      <h2>Ingénieur QA Technico-Fonctionnel &amp; Automatisation</h2>
+
+      <p class="home-lead">
+        Je sécurise les applications critiques grâce à une approche hybride
+        <strong>QA &amp; développement</strong>, avec méthode, traçabilité et exigence.
+      </p>
+
+      <div class="home-tags" aria-label="Domaines clés">
+        <span><i class="fa-solid fa-vial"></i> Playwright</span>
+        <span><i class="fa-solid fa-code"></i> Pytest</span>
+        <span><i class="fa-solid fa-plug"></i> Tests d’API</span>
+        <span><i class="fa-solid fa-certificate"></i> ISTQB CTFL</span>
+      </div>
+
+      <div class="home-actions">
+        <a class="home-primary-btn" href="dashboard.html">
+          Voir mon portfolio QA
+          <i class="fa-solid fa-arrow-right"></i>
+        </a>
+      </div>
+
+      <div class="home-proof">
+        <div>
+          <strong>2+ ans</strong>
+          <span>QA dédiée</span>
         </div>
-        <div class="hero-visual reveal">
-          <div class="profile-orbits" aria-label="Projets QA en orbite autour du portrait">
-            <div class="orbit orbit-1"><span class="orbit-project">SauceDemo — Playwright QA Automation</span></div>
-            <div class="orbit orbit-2"><span class="orbit-project">French Companies Explorer — Playwright QA</span></div>
-            <div class="profile-shell">
-              <img src="assets/img/maxime-joannis.jpg" alt="Portrait de Maxime Joannis" width="640" height="640">
-              <div class="status-chip"><span class="pulse"></span><span>QA & automatisation</span></div>
-            </div>
-          </div>
+        <div>
+          <strong>6+ ans</strong>
+          <span>développement</span>
+        </div>
+        <div>
+          <strong>Playwright</strong>
+          <span>automatisation &amp; CI/CD</span>
         </div>
       </div>
     </section>
 
-    <section id="about" class="section">
-      <div class="container">
-        <div class="section-heading reveal"><span class="section-kicker">À propos</span><h2>Une double culture développement + qualité</h2><p>Un profil QA capable d’analyser le métier, investiguer la technique et industrialiser la validation.</p></div>
-        <div class="about-grid">
-          <div class="about-card reveal">
-            <p>Après plusieurs années en développement logiciel, notamment dans le secteur bancaire, j’ai évolué vers la QA fonctionnelle et l’automatisation. Cette trajectoire me permet d’échanger aussi bien avec le métier qu’avec les développeurs et de raisonner en termes de risque, testabilité et traçabilité.</p>
-            <p>Mes missions récentes couvrent la validation de moteurs de scoring, les tests API, les workflows BPMN, la validation d’agents IA, le prompt testing et l’automatisation Playwright / Pytest. Je privilégie une mesure factuelle de la couverture et une documentation exploitable par l’équipe.</p>
-            <div class="social-links">
-              <a href="https://www.linkedin.com/in/maximejoannis" target="_blank" rel="noopener noreferrer"><i class="fa-brands fa-linkedin"></i><span>LinkedIn</span></a>
-              <a href="https://github.com/maximejoannis" target="_blank" rel="noopener noreferrer"><i class="fa-brands fa-github"></i><span>GitHub</span></a>
-            </div>
-          </div>
-          <div class="principles reveal" id="principles"></div>
+    <section class="home-portrait" aria-label="Identité visuelle">
+      <div class="portrait-rings">
+        <span class="ring ring-a"></span>
+        <span class="ring ring-b"></span>
+        <span class="ring ring-c"></span>
+
+        <div class="portrait-core">
+          <div class="portrait-initials">MJ</div>
         </div>
-      </div>
-    </section>
 
-    <section id="experience" class="section section-soft">
-      <div class="container">
-        <div class="section-heading reveal"><span class="section-kicker">Parcours</span><h2>Expérience professionnelle</h2></div>
-        <div class="timeline" id="timeline"></div>
-      </div>
-    </section>
-
-    <section id="projects" class="section">
-      <div class="container">
-        <div class="section-heading reveal"><span class="section-kicker">Portfolio QA</span><h2>2 projets d’automatisation UI & API</h2><p>Deux frameworks actifs illustrant une démarche QA complète et industrialisée.</p></div>
-        <div class="project-filter reveal" id="projectFilter" aria-label="Filtrer les projets">
-          <div class="project-filter__group" role="group" aria-label="Catégorie de projet">
-            <button class="project-filter__btn active" type="button" data-project-filter="all" aria-pressed="true"><i class="fa-solid fa-border-all"></i><span>Tous</span><b data-filter-count="all">2</b></button>
-            <button class="project-filter__btn" type="button" data-project-filter="automation" aria-pressed="false"><i class="fa-solid fa-gears"></i><span>Automatisation</span><b data-filter-count="automation">2</b></button>
-            <button class="project-filter__btn" type="button" data-project-filter="api" aria-pressed="false"><i class="fa-solid fa-plug"></i><span>UI + API</span><b data-filter-count="api">1</b></button>
-          </div>
-          <p class="project-filter__status" id="projectFilterStatus" aria-live="polite">2 projets affichés</p>
+        <div class="portrait-badge pb-1">
+          <i class="fa-solid fa-vial-circle-check"></i>
+          <span>QA &amp; automatisation</span>
         </div>
-        <div class="project-grid" id="projectGrid"></div>
-      </div>
-    </section>
 
-    <section id="stack" class="section">
-      <div class="container">
-        <div class="section-heading reveal"><span class="section-kicker">Compétences</span><h2>Stack QA & outillage</h2><p>Une stack centrée sur la validation fonctionnelle, l’automatisation, les API et l’industrialisation.</p></div>
-        <div class="stack-grid" id="stackGrid"></div>
-      </div>
-    </section>
-
-    <section id="contact" class="section contact-section">
-      <div class="container contact-layout reveal">
-        <div class="contact-copy">
-          <span class="section-kicker">Échangeons</span>
-          <h2>Un besoin QA, automatisation ou stratégie de test ?</h2>
-          <p>Je peux intervenir sur la conception de tests, l’automatisation Playwright/Pytest, les tests API, la QA d’agents IA et la structuration d’une démarche qualité traçable.</p>
-          <div class="contact-direct">
-            <a href="https://www.linkedin.com/in/maximejoannis" target="_blank" rel="noopener noreferrer"><i class="fa-brands fa-linkedin"></i><span><small>LinkedIn</small>maximejoannis</span></a>
-          </div>
+        <div class="portrait-badge pb-2">
+          <i class="fa-solid fa-code"></i>
+          <span>Playwright &amp; Pytest</span>
         </div>
-        <form id="contactForm" class="contact-form" action="https://formspree.io/f/mwlerboo" method="POST" novalidate>
-          <div class="form-row">
-            <label class="form-field">
-              <span>Nom <em>*</em></span>
-              <input type="text" name="name" autocomplete="name" placeholder="Votre nom" required maxlength="80">
-            </label>
-            <label class="form-field">
-              <span>Email <em>*</em></span>
-              <input type="email" name="email" autocomplete="email" placeholder="vous@exemple.com" required maxlength="120">
-            </label>
-          </div>
-          <label class="form-field">
-            <span>Objet <em>*</em></span>
-            <input type="text" name="subject" placeholder="Objet de votre message" required maxlength="120">
-          </label>
-          <label class="form-field">
-            <span>Message <em>*</em></span>
-            <textarea name="message" rows="6" placeholder="Parlez-moi de votre besoin, de votre projet ou du contexte QA…" required maxlength="3000"></textarea>
-          </label>
-          <input type="text" name="_gotcha" class="form-honeypot" tabindex="-1" autocomplete="off" aria-hidden="true">
-          <input type="hidden" name="_subject" value="Nouveau message depuis le portfolio QA de Maxime Joannis">
-          <div class="form-footer">
-            <p class="form-note"><i class="fa-solid fa-shield-halved"></i> Vos informations sont utilisées uniquement pour répondre à votre message.</p>
-            <button class="btn primary form-submit" type="submit">
-              <span class="submit-default"><i class="fa-solid fa-paper-plane"></i> Envoyer le message</span>
-              <span class="submit-loading" aria-hidden="true"><i class="fa-solid fa-circle-notch fa-spin"></i> Envoi…</span>
-            </button>
-          </div>
-          <div id="contactStatus" class="contact-status" role="status" aria-live="polite"></div>
-        </form>
       </div>
     </section>
   </main>
-  <footer class="site-footer">
-    <div class="container site-footer__inner">
-      <div class="site-footer__top">
-        <div class="site-footer__profile">
-          <a class="site-footer__brand" href="#hero">Maxime Joannis</a>
-          <p>Ingénieur QA technico-fonctionnel spécialisé en automatisation, tests API et IA Testing. Je transforme les risques qualité en validations traçables, robustes et industrialisables.</p>
-          <div class="site-footer__socials" aria-label="Réseaux et contact">
-            <a href="https://www.linkedin.com/in/maximejoannis" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn"><i class="fa-brands fa-linkedin-in"></i></a>
-            <a href="https://github.com/maximejoannis" target="_blank" rel="noopener noreferrer" aria-label="GitHub"><i class="fa-brands fa-github"></i></a>
-          </div>
-        </div>
-        <div class="site-footer__column">
-          <h2>Navigation</h2>
-          <a href="#hero">Accueil</a>
-          <a href="#about">À propos</a>
-          <a href="#experience">Expérience</a>
-          <a href="#projects">Projets</a>
-          <a href="#contact">Contact</a>
-        </div>
-        <div class="site-footer__column">
-          <h2>Expertises QA</h2>
-          <span>Tests fonctionnels & E2E</span>
-          <span>Playwright & Pytest</span>
-          <span>Tests API</span>
-          <span>IA Testing & Prompt Testing</span>
-          <span>CI/CD & traçabilité</span>
-        </div>
-      </div>
-      <div class="site-footer__bottom">
-        <p>© 2026 Maxime Joannis · Portfolio QA. Tous droits réservés.</p>
-        <div class="site-footer__signature"><span>Conçu avec exigence pour la qualité</span><a href="#hero"><i class="fa-solid fa-arrow-up"></i> Haut</a></div>
-      </div>
-    </div>
-  </footer>
-  <button id="toTop" class="to-top" type="button" aria-label="Retour en haut"><i class="fa-solid fa-arrow-up"></i></button>
-  <script src="assets/js/app.js"></script>
 </body>
 </html>
