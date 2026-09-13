@@ -1,4 +1,13 @@
 # QualityOps Lab
+[![Site](https://img.shields.io/badge/Site-QualityOps%20Lab-2563EB?style=for-the-badge&logo=githubpages&logoColor=white)](https://maximejoannis.github.io/)
+[![Playwright](https://img.shields.io/badge/Tests-Playwright-2EAD33?style=for-the-badge&logo=playwright&logoColor=white)](https://playwright.dev/)
+[![TypeScript](https://img.shields.io/badge/Code-TypeScript-3178C6?style=for-the-badge&logo=typescript&logoColor=white)](https://www.typescriptlang.org/)
+[![GitHub Actions](https://img.shields.io/badge/CI-GitHub%20Actions-2088FF?style=for-the-badge&logo=githubactions&logoColor=white)](https://github.com/maximejoannis)
+![Projets](https://img.shields.io/badge/Projets%20QA-2-8B5CF6?style=flat-square)
+![Tests référencés](https://img.shields.io/badge/Tests%20référencés-120-06B6D4?style=flat-square)
+![Approche](https://img.shields.io/badge/Approche-QualityOps-F59E0B?style=flat-square)
+![IA](https://img.shields.io/badge/IA-Agents%20Playwright-A855F7?style=flat-square)
+![Open Source](https://img.shields.io/badge/Projet-Open%20Source-22C55E?style=flat-square)
 
 > **Apprendre par l’exploration. Construire par l’automatisation. Déployer avec confiance.**
 
