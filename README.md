@@ -89,14 +89,6 @@ Le workflow `.github/workflows/update-github-snapshot.yml` actualise automatique
 └── README.md
 ```
 
-## Lancement local
-
-```bash
-git clone https://github.com/maximejoannis/maximejoannis.github.io.git
-cd maximejoannis.github.io
-python3 -m http.server 8080
-```
-
 Ouvrir ensuite [http://localhost:8080](http://localhost:8080).
 
 Pour actualiser manuellement le snapshot :
