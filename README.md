@@ -1,46 +1,117 @@
-# QA Automation Lab Dashboard
+# QualityOps Lab
 
-Application single-page multi-projets de Maxime Joannis, intégralement en français et réalisée en HTML5, CSS3 et JavaScript vanilla.
+> **Apprendre par l’exploration. Construire par l’automatisation. Déployer avec confiance.**
 
-## Vues
+Portfolio QA open source de **Maxime Joannis**, construit avec Playwright Test, TypeScript et GitHub Actions. Le QualityOps Lab rassemble dans une seule application la stratégie de test, la traçabilité, les résultats, les risques, les anomalies, les agents IA et l’observabilité CI/CD de plusieurs projets.
 
-- Projet et traçabilité : domaine métier, sélection d'une User Story, description, tableau des critères et cas associés
-- Résultats QA : métriques, répartition et stratégie de test
-- Registre des anomalies LAB_02 : sélecteur d'anomalie, gravité, reproduction, résultats attendu et observé, User Story et critères associés
-- Portail QA : accès aux preuves publiées de chaque projet
-- Pipeline CI/CD : workflows et exécutions GitHub Actions, graphiques et stabilité
-- Risques & couverture : matrice fonctionnelle sans probabilité, impact, niveau de risque et priorité QA
-- Journal d’apprentissage : enseignements issus des Sprint Reviews de chaque projet
-- Dashboard QA enrichi : couverture par fonctionnalité, stratégie de test, contrôles qualité automatisés et historique public GitHub Actions
-- Nature fonctionnelle : scénarios passants, non passants et d’erreur calculés depuis les tags publics du dépôt French Companies Explorer
-- Accueil animé : cockpit QA, chaîne de valeur, agents Playwright et accès direct aux projets open source
-- Page d’entrée indépendante : l’accueil masque le dashboard jusqu’à l’action « Entrer dans le QualityOps Lab »
-- Accueil sans défilement : hero et cockpit sur un écran unique, sans chaîne QA, sélection de projets ni terminal
-- Accueil professionnel : accroche « Apprendre par l’exploration. Construire par l’automatisation. Déployer avec confiance. » et accès directs aux profils LinkedIn et GitHub
-- Orbites QA : Planner, Generator et Healer représentés par trois planètes animées autour du cockpit de validation humaine
-- Étude de cas : rôle personnel, décisions QA, bilan, risques résiduels, recommandations et extraits de code chargés depuis GitHub
-- Anomalies enrichies : environnement, statut et preuve documentaire, avec absence de donnée explicitement signalée
-- Résultats SauceDemo détaillés : indicateurs finaux, périmètre par fonctionnalité, couverture de traçabilité, classification 15/3/15, priorités P0/P1/P2, campagnes Smoke/Regression, 3 parcours E2E et 7 tests de caractérisation issus de la Sprint Review
-- Résultats French Companies détaillés : baseline 84 tests, répartition 72 passed / 12 fixme / 0 failed, 13 Features, niveaux API/UI mockée/E2E réel, couverture du périmètre et traitement des 14 défauts issus de la Sprint Review
+[Accéder au QualityOps Lab](https://maximejoannis.github.io/) · [Profil LinkedIn](https://www.linkedin.com/in/maxime-joannis/) · [Profil GitHub](https://github.com/maximejoannis)
 
-Le sélecteur de laboratoire actualise toutes les vues. Les plans de test et les données de pipeline sont chargés depuis les repositories publics GitHub. Chaque réponse valide est conservée dans le cache du navigateur. Si GitHub est indisponible, l'application utilise la sauvegarde la plus récente entre ce cache et `data/github-snapshot.json`, puis indique clairement que les données affichées sont conservées.
+## Les laboratoires
 
-## Actualisation du snapshot GitHub
+| Projet | Domaine | Périmètre QA | Résultats documentés |
+| --- | --- | --- | --- |
+| [SauceDemo QA Automation](https://github.com/maximejoannis/saucedemo-playwright-agents) | E-commerce | 6 fonctionnalités, 6 User Stories, 32 critères, 33 TC fonctionnels et 3 E2E | 36 tests Playwright, couverture de 100 % du périmètre défini, Quality Gate 3/3 PASS |
+| [French Companies Explorer](https://github.com/maximejoannis/french-companies-explorer-playwright-agents) | Données publiques et recherche d’entreprises françaises | 13 Features et 84 Test Cases | 72 passed, 12 fixme/skipped connus, 0 échec inattendu et 14 défauts documentés |
 
-Le workflow `.github/workflows/update-github-snapshot.yml` actualise automatiquement le snapshot chaque jour et peut aussi être lancé manuellement depuis GitHub Actions. Le script `scripts/update-github-snapshot.mjs` ne collecte que des informations publiques et n'expose aucun token dans le navigateur.
+> Les taux de couverture présentés concernent exclusivement les périmètres QA définis et documentés. Ils ne constituent ni une couverture du code source, ni une validation exhaustive des applications ou de leurs dépendances.
 
-Pour générer le snapshot localement :
+## Ce que permet le Lab
+
+Le sélecteur de projet actualise l’ensemble des vues :
+
+- **Projet & traçabilité** : domaine métier, User Stories, critères d’acceptation et cas de test associés ;
+- **Étude de cas** : rôle personnel, décisions QA, risques résiduels, recommandations et extraits de code commentés ;
+- **Résultats QA** : chiffres issus des Sprint Reviews, tableaux, répartitions et graphiques propres à chaque projet ;
+- **Risques & couverture** : matrice des risques, impacts et priorités de test ;
+- **Journal d’apprentissage** : enseignements tirés des deux réalisations ;
+- **Portail QA** : accès aux preuves et rapports publiés ;
+- **Pipeline CI/CD** : workflows, exécutions GitHub Actions et stabilité observée.
+
+### SauceDemo
+
+- répartition des 33 TC par fonctionnalité ;
+- 15 scénarios passants, 3 non passants et 15 scénarios d’erreur ;
+- priorités P0/P1/P2 et campagnes Smoke/Regression ;
+- 3 parcours E2E complémentaires ;
+- 7 tests de caractérisation associés aux comptes spéciaux.
+
+### French Companies Explorer
+
+- 84 TC répartis sur 13 Features ;
+- 6 tests API réels, 75 tests UI mockés et 3 E2E réels ;
+- 72 passed, 12 fixme/skipped et 0 failed ;
+- écart documenté entre 83 TC planifiés et 84 automatisés ;
+- 14 défauts, dont 12 associés à des fixme et 2 dettes d’accessibilité sans fixme.
+
+## IA appliquée à la QA
+
+Le Lab documente un usage encadré des agents IA natifs Playwright :
+
+- **Planner** : exploration, risques, User Stories, critères et stratégie ;
+- **Generator** : production ciblée des tests Playwright ;
+- **Healer** : diagnostic des échecs et proposition de correction ;
+- **validation humaine** : conservation de l’intention du test et contrôle des oracles.
+
+Les agents assistent la démarche ; les décisions QA et les preuves restent vérifiables dans les dépôts et la CI.
+
+## Données GitHub résilientes
+
+Les vues dynamiques interrogent les données publiques des dépôts GitHub. Le Lab utilise trois niveaux de disponibilité :
+
+1. données GitHub en direct ;
+2. dernier résultat valide conservé dans le cache du navigateur ;
+3. snapshot versionné dans `data/github-snapshot.json`.
+
+Si l’API GitHub est indisponible, la dernière donnée connue reste affichée avec sa date et son origine. Aucun token GitHub n’est exposé dans le navigateur.
+
+Le workflow `.github/workflows/update-github-snapshot.yml` actualise automatiquement le snapshot chaque jour et peut être lancé manuellement.
+
+## Technologies
+
+- HTML5, CSS3 et JavaScript vanilla ;
+- Playwright Test et TypeScript dans les projets QA ;
+- GitHub Actions et GitHub Pages ;
+- API publique GitHub ;
+- rapports Playwright, Allure, couverture QA et qualité ;
+- agents Playwright Planner, Generator et Healer.
+
+## Architecture
+
+```text
+.
+├── .github/workflows/              # Actualisation du snapshot
+├── assets/                         # Icônes
+├── css/                            # Styles des vues et graphiques
+├── data/github-snapshot.json       # Dernières données GitHub conservées
+├── js/                             # Données, navigation et vues dynamiques
+├── scripts/update-github-snapshot.mjs
+├── index.html
+└── README.md
+```
+
+## Lancement local
+
+```bash
+git clone https://github.com/maximejoannis/maximejoannis.github.io.git
+cd maximejoannis.github.io
+python3 -m http.server 8080
+```
+
+Ouvrir ensuite [http://localhost:8080](http://localhost:8080).
+
+Pour actualiser manuellement le snapshot :
 
 ```bash
 node scripts/update-github-snapshot.mjs
 ```
 
-## Lancement
+## Portails QA
 
-Pour que les requêtes GitHub fonctionnent correctement, lancer un serveur statique dans ce dossier :
+- [Portail QA SauceDemo](https://maximejoannis.github.io/saucedemo-playwright-agents/)
+- [Portail QA French Companies Explorer](https://maximejoannis.github.io/french-companies-explorer-playwright-agents/)
 
-```bash
-python3 -m http.server 8080
-```
+## Auteur
 
-Puis ouvrir `http://localhost:8080`.
+**Maxime Joannis** — conception QA, automatisation Playwright, reporting, CI/CD et documentation.
+
+[LinkedIn](https://www.linkedin.com/in/maxime-joannis/) · [GitHub](https://github.com/maximejoannis)
