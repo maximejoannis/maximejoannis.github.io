@@ -2,7 +2,7 @@
 
 > **Apprendre par l’exploration. Construire par l’automatisation. Déployer avec confiance.**
 
-Portfolio QA open source de **Maxime Joannis**, construit avec Playwright Test, TypeScript et GitHub Actions. Le QualityOps Lab rassemble dans une seule application la stratégie de test, la traçabilité, les résultats, les risques, les anomalies, les agents IA et l’observabilité CI/CD de plusieurs projets.
+Le QualityOps Lab rassemble dans une seule application la stratégie de test, la traçabilité, les résultats, les risques, les anomalies, les agents IA et l’observabilité CI/CD de plusieurs projets.
 
 [Accéder au QualityOps Lab](https://maximejoannis.github.io/) · [Profil LinkedIn](https://www.linkedin.com/in/maxime-joannis/) · [Profil GitHub](https://github.com/maximejoannis)
 
