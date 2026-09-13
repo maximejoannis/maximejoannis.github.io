@@ -1,0 +1,17 @@
+"use strict";
+const PROJECT_ENHANCEMENTS={saucedemo:{domain:"Commerce électronique",image:"assets/images/synthese-saucedemo.png"},"french-companies":{domain:"Données publiques et recherche d'entreprises françaises",image:"assets/images/synthese-french-companies.png"}};
+const STORY_NAMES={"US-COMPARE-01":"Comparer des entreprises","US-DETAIL-01":"Consulter le détail d'une entreprise","US-FAVORITES-01":"Gérer les entreprises favorites","US-DEEP-LINKING-01":"Ouvrir une recherche par lien direct","US-EXPORT-01":"Exporter les résultats","US-HISTORY-01":"Consulter l'historique des recherches","US-SAVED-SEARCH-01":"Gérer les recherches sauvegardées","US-FILTERS-01":"Filtrer les entreprises recherchées","US-PAGINATION-01":"Parcourir les pages de résultats","US-SEARCH-01":"Rechercher une entreprise","US-SORT-01":"Trier les résultats","US-STATS-01":"Consulter les statistiques de la page","US-THEME-01":"Choisir et conserver le thème d'affichage"};
+const originalParsePlan=window.parsePlan;
+window.parsePlan=function(text,path){const story=originalParsePlan(text,path);story.title=STORY_NAMES[story.id]||story.title;return story};
+window.renderTrace=function(filter=""){
+  const select=$("#story-select"),query=filter.trim().toLowerCase();
+  select.innerHTML=state.stories.map((story,index)=>`<option value="${index}">${esc(story.id)} · ${esc(STORY_NAMES[story.id]||story.title)}</option>`).join("");
+  select.value=String(Math.min(state.selectedStory,state.stories.length-1));
+  if(!select.dataset.ready){select.addEventListener("change",event=>{state.selectedStory=Number(event.target.value);$("#trace-search").value="";renderTrace()});select.dataset.ready="true"}
+  const uniqueTests=new Set(state.stories.flatMap(story=>story.criteria.flatMap(c=>c.tests.map(t=>t.id))));$("#trace-count").textContent=`${state.stories.length} User Stories · ${uniqueTests.size} cas`;
+  const story=state.stories[state.selectedStory];if(!story){$("#trace-detail").innerHTML='<div class="empty-state"><p>Aucune User Story disponible.</p></div>';return}
+  const criteria=story.criteria.filter(c=>!query||JSON.stringify(c).toLowerCase().includes(query));
+  $("#trace-detail").innerHTML=`<div class="story-head"><span>${esc(story.id)}</span><h3>${esc(STORY_NAMES[story.id]||story.title)}</h3><p>${esc(story.description)}</p></div><div class="criteria-table-wrap"><table class="criteria-table"><caption>Critères d'acceptation et cas de test associés</caption><thead><tr><th scope="col">Critère</th><th scope="col">Description</th><th scope="col">Cas de test associés</th></tr></thead><tbody>${criteria.map(c=>`<tr><td><b>${esc(c.id)}</b><span>${esc(c.title)}</span></td><td>${esc(c.description)}</td><td>${c.tests.length?`<div class="case-list">${c.tests.map(t=>`<details><summary><b>${esc(t.id)}</b><span>${esc(t.level)}</span></summary><p>${esc(t.title)}</p><small>${esc(t.detail)} · Priorité ${esc(t.priority)}</small></details>`).join("")}</div>`:'<span class="muted">Aucun cas directement associé</span>'}</td></tr>`).join("")||'<tr><td colspan="3">Aucun critère ne correspond au filtre.</td></tr>'}</tbody></table></div>`;
+};
+function updateProjectEnhancements(){const lab=LABS[$("#project-select").value],extra=PROJECT_ENHANCEMENTS[lab.id];$("#project-type").textContent=`${extra.domain} · ${lab.type}`;updateDefectsView(lab)}
+document.addEventListener("DOMContentLoaded",()=>{updateProjectEnhancements();$("#project-select").addEventListener("change",updateProjectEnhancements)});

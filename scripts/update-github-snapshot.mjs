@@ -1,0 +1,5 @@
+import {mkdir,writeFile} from "node:fs/promises";
+const repositories=["maximejoannis/saucedemo-playwright-agents","maximejoannis/french-companies-explorer-playwright-agents"],generatedAt=new Date().toISOString(),entries={};
+async function capture(url){const headers={Accept:"application/vnd.github+json","User-Agent":"qualityops-lab-snapshot"};if(process.env.GITHUB_TOKEN)headers.Authorization=`Bearer ${process.env.GITHUB_TOKEN}`;const response=await fetch(url,{headers});if(!response.ok)throw new Error(`${response.status} ${url}`);entries[url]={updatedAt:generatedAt,data:await response.json()}}
+for(const repository of repositories){const base=`https://api.github.com/repos/${repository}`;await capture(`${base}/actions/runs?per_page=50`);await capture(`${base}/actions/workflows?per_page=100`);await capture(`${base}/git/trees/main?recursive=1`)}
+await mkdir("data",{recursive:true});await writeFile("data/github-snapshot.json",JSON.stringify({generatedAt,entries},null,2)+"\n");console.log(`Snapshot généré : ${Object.keys(entries).length} sources.`);

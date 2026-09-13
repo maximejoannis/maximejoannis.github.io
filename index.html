@@ -1,97 +1,11 @@
-<!DOCTYPE html>
-<html lang="fr">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Portfolio QA de Maxime Joannis — Ingénieur QA technico-fonctionnel, automatisation Playwright et Pytest, tests d’API, CI/CD et qualité logicielle.">
-  <title>Maxime Joannis — Portfolio QA</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-  <link rel="stylesheet" href="css/style.css">
-</head>
-<body class="home-hero-page">
-  <main class="home-hero">
-    <div class="home-ambient" aria-hidden="true">
-      <span class="ambient-orbit ao-1"></span>
-      <span class="ambient-orbit ao-2"></span>
-      <span class="ambient-orbit ao-3"></span>
-
-      <span class="floating-tech ft-1"><i class="fa-brands fa-playstation"></i></span>
-      <span class="floating-tech ft-2"><i class="fa-solid fa-vial-circle-check"></i></span>
-      <span class="floating-tech ft-3"><i class="fa-solid fa-code-branch"></i></span>
-      <span class="floating-tech ft-4"><i class="fa-solid fa-robot"></i></span>
-      <span class="floating-tech ft-5"><i class="fa-solid fa-database"></i></span>
-      <span class="floating-tech ft-6"><i class="fa-solid fa-shield-halved"></i></span>
-    </div>
-
-    <section class="home-content">
-      <div class="home-eyebrow">
-        <span class="eyebrow-dot"></span>
-        Portfolio QA
-      </div>
-
-      <h1>Bonjour, moi c'est <span>Maxime Joannis</span></h1>
-
-      <h2>Ingénieur QA Technico-Fonctionnel &amp; Automatisation</h2>
-
-      <p class="home-lead">
-        Je sécurise les applications critiques grâce à une approche hybride
-        <strong>QA &amp; développement</strong>, avec méthode, traçabilité et exigence.
-      </p>
-
-      <div class="home-tags" aria-label="Domaines clés">
-        <span><i class="fa-solid fa-vial"></i> Playwright</span>
-        <span><i class="fa-solid fa-code"></i> Pytest</span>
-        <span><i class="fa-solid fa-plug"></i> Tests d’API</span>
-        <span><i class="fa-solid fa-certificate"></i> ISTQB CTFL</span>
-      </div>
-
-      <div class="home-actions">
-        <a class="home-primary-btn" href="dashboard.html">
-          Voir mon portfolio QA
-          <i class="fa-solid fa-arrow-right"></i>
-        </a>
-      </div>
-
-      <div class="home-proof">
-        <div>
-          <strong>2+ ans</strong>
-          <span>QA dédiée</span>
-        </div>
-        <div>
-          <strong>6+ ans</strong>
-          <span>développement</span>
-        </div>
-        <div>
-          <strong>Playwright</strong>
-          <span>automatisation &amp; CI/CD</span>
-        </div>
-      </div>
-    </section>
-
-    <section class="home-portrait" aria-label="Identité visuelle">
-      <div class="portrait-rings">
-        <span class="ring ring-a"></span>
-        <span class="ring ring-b"></span>
-        <span class="ring ring-c"></span>
-
-        <div class="portrait-core">
-          <div class="portrait-initials">MJ</div>
-        </div>
-
-        <div class="portrait-badge pb-1">
-          <i class="fa-solid fa-vial-circle-check"></i>
-          <span>QA &amp; automatisation</span>
-        </div>
-
-        <div class="portrait-badge pb-2">
-          <i class="fa-solid fa-code"></i>
-          <span>Playwright &amp; Pytest</span>
-        </div>
-      </div>
-    </section>
-  </main>
-</body>
-</html>
+<!doctype html><html lang="fr"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>QA Automation Lab — Dashboard multi-projets</title><meta name="description" content="Dashboard QA multi-projets de Maxime Joannis : exigences, traçabilité, résultats, preuves et pipelines CI/CD."><meta name="theme-color" content="#071426"><link rel="icon" type="image/svg+xml" href="assets/icons/favicon.svg"><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet"><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"><link rel="stylesheet" href="css/variables.css"><link rel="stylesheet" href="css/reset.css"><link rel="stylesheet" href="css/dashboard.css"></head>
+<body class="dashboard-body welcome-mode"><a class="skip-link" href="#contenu">Aller au contenu principal</a>
+<aside class="sidebar" id="sidebar"><a class="dashboard-brand" href="#vue-accueil" aria-label="Revenir à l’accueil de QualityOps Lab"><span>QA</span><div>QUALITYOPS LAB<small>MAXIME JOANNIS</small></div></a><div class="project-control"><label for="project-select">LABORATOIRE ACTIF</label><select id="project-select"><option value="saucedemo">LAB_01 · SauceDemo</option><option value="french-companies">LAB_02 · French Companies</option></select></div><nav class="view-nav" aria-label="Vues du laboratoire"><button data-view="projet"><i class="fa-solid fa-diagram-project"></i><span>Projet & traçabilité</span></button><button data-view="etude"><i class="fa-solid fa-briefcase"></i><span>Étude de cas</span></button><button data-view="resultats"><i class="fa-solid fa-chart-column"></i><span>Résultats QA</span></button><button data-view="risques"><i class="fa-solid fa-shield-halved"></i><span>Risques & couverture</span></button><button data-view="apprentissage"><i class="fa-solid fa-lightbulb"></i><span>Journal d’apprentissage</span></button><button data-view="portail"><i class="fa-solid fa-flask"></i><span>Portail QA</span></button><button data-view="pipeline"><i class="fa-solid fa-code-branch"></i><span>Pipeline CI/CD</span></button></nav><div class="sidebar-foot"><span class="live-dot"></span><div><strong>LAB OPÉRATIONNEL</strong><small>Données GitHub publiques</small></div></div></aside>
+<header class="mobile-header"><button id="menu-button" aria-expanded="false" aria-controls="sidebar" aria-label="Ouvrir le menu"><i class="fa-solid fa-bars"></i></button><strong>QA LAB</strong><span id="mobile-lab">LAB_01</span></header>
+<main id="contenu" class="dashboard-main"><header class="topbar"><div><p id="view-kicker">RÉFÉRENTIEL QA</p><h1 id="view-title">Projet & traçabilité</h1></div><div class="topbar-actions"><span id="sync-status"><i></i> Prêt</span><a id="repo-link" href="#" target="_blank" rel="noopener noreferrer"><i class="fa-brands fa-github"></i> Repository</a></div></header>
+<section class="dashboard-view active" id="vue-projet" data-view-panel="projet"><article class="project-hero panel"><div><span class="lab-badge" id="project-code">LAB_01</span><p id="project-type"></p><h2 id="project-name"></h2><p id="project-summary"></p><div class="hero-links"><a id="app-link" href="#" target="_blank" rel="noopener noreferrer"><i class="fa-solid fa-arrow-up-right-from-square"></i> Ouvrir l'application</a><a id="project-repo-link" href="#" target="_blank" rel="noopener noreferrer"><i class="fa-brands fa-github"></i> Voir le code QA</a></div></div><div class="project-score"><span>PÉRIMÈTRE QA DÉFINI</span><strong>100 %</strong><small>couvert par une automatisation documentée</small></div></article><div class="metric-grid" id="project-metrics"></div>
+<section class="panel trace-panel"><div class="panel-heading"><div><p>EXIGENCES → TESTS</p><h2>Explorateur de traçabilité</h2></div><span id="trace-count"></span></div><div class="story-selector"><label for="story-select">USER STORY À EXPLORER</label><select id="story-select" aria-label="Choisir une User Story"><option>Chargement des User Stories…</option></select><label class="trace-search"><span class="sr-only">Rechercher</span><i class="fa-solid fa-magnifying-glass"></i><input id="trace-search" type="search" placeholder="Filtrer les critères ou cas de test"></label></div><div id="feature-list" class="feature-list legacy-list" role="list"></div><div id="trace-detail" class="trace-detail"><div class="empty-state"><i class="fa-solid fa-spinner fa-spin"></i><p>Chargement de la traçabilité depuis GitHub…</p></div></div></section></section>
+<section class="dashboard-view" id="vue-resultats" data-view-panel="resultats"><div class="metric-grid" id="result-metrics"></div><div class="dashboard-grid"><article class="panel"><div class="panel-heading"><div><p>RÉPARTITION</p><h2>Résultats des tests</h2></div></div><div class="donut-layout"><div class="donut" id="results-donut"><span id="results-total"></span></div><ul id="results-legend"></ul></div></article><article class="panel"><div class="panel-heading"><div><p>STRATÉGIE</p><h2>Niveaux de test</h2></div></div><div class="bar-chart" id="levels-chart"></div></article></div><article class="panel"><div class="panel-heading"><div><p>LECTURE QA</p><h2>Ce que démontrent les résultats</h2></div></div><div class="insight-grid" id="result-insights"></div></article></section>
+<section class="dashboard-view" id="vue-portail" data-view-panel="portail"><article class="portal-card panel"><div class="portal-visual"><span>PORTAIL QA</span><i class="fa-solid fa-flask-vial"></i><div class="orbit one"></div><div class="orbit two"></div></div><div class="portal-copy"><p>PREUVES PUBLIÉES</p><h2 id="portal-project-name"></h2><p>Accédez au portail officiel généré par le projet : couverture fonctionnelle, Quality Gates, documentation et rapports disponibles.</p><div class="portal-checks"><span><i class="fa-solid fa-check"></i> Périmètre contextualisé</span><span><i class="fa-solid fa-check"></i> Preuves QA consultables</span><span><i class="fa-solid fa-check"></i> Résultats transparents</span></div><a class="primary-action" id="qa-portal-link" href="#" target="_blank" rel="noopener noreferrer">Ouvrir le portail QA officiel <i class="fa-solid fa-arrow-up-right-from-square"></i></a></div></article><div class="dashboard-grid"><article class="panel"><div class="panel-heading"><div><p>MÉTHODE</p><h2>Chaîne de confiance</h2></div></div><div class="trust-chain"><span>Besoin métier</span><i>→</i><span>User Story</span><i>→</i><span>Critères</span><i>→</i><span>Cas de test</span><i>→</i><span>Automatisation</span><i>→</i><span>Rapport</span></div></article><article class="panel"><div class="panel-heading"><div><p>CADRE</p><h2>Agents Playwright natifs</h2></div></div><div class="mini-agents"><span><b>Planner</b>Conçoit et choisit le niveau utile</span><span><b>Generator</b>Automatise sans perdre la trace</span><span><b>Healer</b>Diagnostique sans affaiblir l'intention</span></div></article></div></section>
+<section class="dashboard-view" id="vue-pipeline" data-view-panel="pipeline"><div class="api-state" id="pipeline-state" role="status" aria-live="polite"><span class="loader"></span> Connexion à l'API GitHub…</div><div class="metric-grid"><article class="metric-card featured"><span>STABILITÉ DU PIPELINE</span><strong id="stability">—</strong><div class="progress"><i id="stability-bar"></i></div><small id="stability-caption">Calcul en cours</small></article><article class="metric-card"><span>EXÉCUTIONS ANALYSÉES</span><strong id="runs-total">—</strong><small>Jusqu'aux 50 dernières</small></article><article class="metric-card positive"><span>SUCCÈS</span><strong id="runs-success">—</strong><small>Exécutions terminées</small></article><article class="metric-card"><span>DURÉE MOYENNE</span><strong id="runs-duration">—</strong><small>Exécutions terminées</small></article></div><div class="dashboard-grid pipeline-grid"><article class="panel"><div class="panel-heading"><div><p>ÉVOLUTION</p><h2>Dernières exécutions</h2></div><div class="chart-legend"><span><i class="ok"></i>Succès</span><span><i class="ko"></i>Autre</span></div></div><div class="timeline-chart" id="timeline-chart" role="img" aria-label="Résultats des dernières exécutions"></div></article><article class="panel"><div class="panel-heading"><div><p>CONCLUSIONS</p><h2>Répartition</h2></div></div><div class="donut-layout compact"><div class="donut" id="pipeline-donut"><span id="pipeline-donut-total">—</span></div><ul id="pipeline-legend"></ul></div></article></div><article class="panel"><div class="panel-heading"><div><p>WORKFLOWS</p><h2>Configurations du laboratoire</h2></div></div><div class="table-scroll"><table><caption>Workflows GitHub Actions</caption><thead><tr><th>Workflow</th><th>État</th><th>Fichier</th><th>Mise à jour</th></tr></thead><tbody id="workflows-table"></tbody></table></div></article><article class="panel"><div class="panel-heading"><div><p>JOURNAL</p><h2>Exécutions récentes</h2></div><a id="actions-link" href="#" target="_blank" rel="noopener noreferrer">Ouvrir GitHub Actions <i class="fa-solid fa-arrow-up-right-from-square"></i></a></div><div class="table-scroll"><table><caption>Exécutions GitHub Actions récentes</caption><thead><tr><th>Exécution</th><th>Workflow</th><th>Branche</th><th>Conclusion</th><th>Durée</th><th>Date</th></tr></thead><tbody id="runs-table"></tbody></table></div></article><p class="method-note"><i class="fa-solid fa-circle-info"></i> La stabilité est le rapport entre les succès et les exécutions terminées de l'échantillon GitHub. Elle ne mesure ni la couverture fonctionnelle ni la qualité future du produit.</p></section>
+<footer>Maxime Joannis · QualityOps Lab · <span id="year"></span></footer></main><script src="js/github-data-cache.js"></script><script src="js/dashboard-data.js"></script><script src="js/home.js"></script><script src="js/dashboard-app.js"></script><script src="js/trace-parser-fix.js"></script><script src="js/ux-enhancements.js"></script><script src="js/final-enhancements.js"></script><script src="js/risk-learning.js"></script><script src="js/qa-dashboard-details.js"></script><script src="js/case-study.js"></script><script src="js/saucedemo-results.js"></script><script src="js/french-results.js"></script></body></html>
