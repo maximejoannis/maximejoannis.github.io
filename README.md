@@ -1,4 +1,5 @@
 # QualityOps Lab
+
 [![Site](https://img.shields.io/badge/Site-QualityOps%20Lab-2563EB?style=for-the-badge&logo=githubpages&logoColor=white)](https://maximejoannis.github.io/)
 [![Playwright](https://img.shields.io/badge/Tests-Playwright-2EAD33?style=for-the-badge&logo=playwright&logoColor=white)](https://playwright.dev/)
 [![TypeScript](https://img.shields.io/badge/Code-TypeScript-3178C6?style=for-the-badge&logo=typescript&logoColor=white)](https://www.typescriptlang.org/)
@@ -14,16 +15,24 @@
 
 Le QualityOps Lab rassemble dans une seule application la stratégie de test, la traçabilité, les résultats, les risques, les anomalies, les agents IA et l’observabilité CI/CD de plusieurs projets.
 
+Le site propose deux niveaux de lecture : une synthèse immédiate pour comprendre le positionnement et les deux études de cas, puis un approfondissement destiné aux responsables QA et techniques. Les termes spécialisés sont explicités dans un vocabulaire lisible : une **référence attendue** désigne le résultat correct auquel le comportement observé est comparé.
+
 [Accéder au QualityOps Lab](https://maximejoannis.github.io/) · [Profil LinkedIn](https://www.linkedin.com/in/maxime-joannis/) · [Profil GitHub](https://github.com/maximejoannis)
 
 ## Les laboratoires
 
-| Projet | Domaine | Périmètre QA | Résultats documentés |
-| --- | --- | --- | --- |
-| [SauceDemo QA Automation](https://github.com/maximejoannis/saucedemo-playwright-agents) | E-commerce | 6 fonctionnalités, 6 User Stories, 32 critères, 33 TC fonctionnels et 3 E2E | 36 tests Playwright, couverture de 100 % du périmètre défini, Quality Gate 3/3 PASS |
-| [French Companies Explorer](https://github.com/maximejoannis/french-companies-explorer-playwright-agents) | Données publiques et recherche d’entreprises françaises | 13 Features et 84 Test Cases | 72 passed, 12 fixme/skipped connus, 0 échec inattendu et 14 défauts documentés |
+| Projet                                                                                                    | Domaine                                                 | Périmètre QA                                                                | Résultats documentés                                                                |
+| --------------------------------------------------------------------------------------------------------- | ------------------------------------------------------- | --------------------------------------------------------------------------- | ----------------------------------------------------------------------------------- |
+| [SauceDemo QA Automation](https://github.com/maximejoannis/saucedemo-playwright-agents)                   | E-commerce                                              | 6 fonctionnalités, 6 User Stories, 32 critères, 33 TC fonctionnels et 3 E2E | 36 tests Playwright, couverture de 100 % du périmètre défini, Quality Gate 3/3 PASS |
+| [French Companies Explorer](https://github.com/maximejoannis/french-companies-explorer-playwright-agents) | Données publiques et recherche d’entreprises françaises | 13 Features et 84 Test Cases                                                | 72 passed, 12 fixme/skipped connus, 0 échec inattendu et 14 défauts documentés      |
 
 > Les taux de couverture présentés concernent exclusivement les périmètres QA définis et documentés. Ils ne constituent ni une couverture du code source, ni une validation exhaustive des applications ou de leurs dépendances.
+
+## Comment explorer le Lab
+
+- **En une minute** : lire le positionnement, les cartes projets et leur comparaison sur l’accueil.
+- **En cinq à quinze minutes** : ouvrir une étude de cas, puis approfondir les résultats, les risques et les enseignements.
+- **Pour vérifier** : consulter les preuves publiées, les rapports versionnés et l’historique d’intégration continue.
 
 ## Ce que permet le Lab
 
