@@ -1,0 +1,155 @@
+.welcome-mode {
+  overflow: hidden;
+}
+
+.welcome-mode .home-view,
+.welcome-mode .home-hero {
+  height: 100dvh;
+  min-height: 0;
+  overflow: hidden;
+}
+
+.welcome-mode .detail-navigation,
+.welcome-mode .qa-flow,
+.welcome-mode .home-projects,
+.welcome-mode .home-proof-grid,
+.welcome-mode .home-terminal {
+  display: none;
+}
+
+.home-copy h1 {
+  margin: 0;
+  font-size: clamp(3.1rem, 7vw, 6.5rem);
+  letter-spacing: -0.065em;
+  line-height: 0.9;
+}
+
+.home-copy h1 small {
+  display: block;
+  margin-bottom: 0.65rem;
+  color: #a9bdd4;
+  font-size: clamp(0.95rem, 1.7vw, 1.35rem);
+  font-weight: 500;
+  letter-spacing: 0;
+}
+
+.home-copy h1 span {
+  color: var(--home-blue);
+}
+
+.project-choice-grid article small {
+  display: block;
+  margin-top: 0.55rem;
+  color: #9db1c8;
+  font-size: 0.55rem;
+  line-height: 1.55;
+}
+
+.home-proof-grid {
+  display: grid;
+  grid-template-columns: 1.35fr 1fr;
+  gap: 1rem;
+  width: min(calc(100% - 2rem), 1180px);
+  margin: 1rem auto 0;
+}
+
+.home-comparison,
+.home-philosophy {
+  padding: 1.3rem;
+  border: 1px solid var(--line);
+  border-radius: 1rem;
+  background: linear-gradient(145deg, #10243c, #0c1e33);
+}
+
+.home-proof-grid > article > p {
+  margin: 0;
+  color: #60a5fa;
+  font-size: 0.61rem;
+  font-weight: 700;
+  letter-spacing: 0.13em;
+}
+
+.home-proof-grid h2 {
+  margin: 0.25rem 0 1rem;
+  font-size: 1.05rem;
+}
+
+.home-comparison table {
+  min-width: 560px;
+}
+
+.home-philosophy ul {
+  display: grid;
+  gap: 0.65rem;
+  margin: 0;
+  padding-left: 1.1rem;
+  color: #b8cbe0;
+  font-size: 0.68rem;
+}
+
+.nav-detail {
+  display: none !important;
+}
+
+.detail-navigation {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0.45rem;
+  margin: -1rem 0 1.2rem;
+}
+
+.detail-navigation span {
+  color: #718ba8;
+  font-size: 0.62rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.detail-navigation button {
+  min-height: 36px;
+  padding: 0.4rem 0.65rem;
+  border: 1px solid #29425f;
+  border-radius: 0.55rem;
+  background: #10243c;
+  color: #b8cbe0;
+  cursor: pointer;
+  font-size: 0.64rem;
+}
+
+.detail-navigation button:hover,
+.detail-navigation button:focus-visible {
+  border-color: #60a5fa;
+  color: #fff;
+}
+
+.metric-context {
+  margin: -0.35rem 0 1rem;
+  color: #8199b5;
+  font-size: 0.62rem;
+}
+
+@media (max-width: 850px) {
+  .home-proof-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 700px) {
+  .home-copy h1 {
+    font-size: 3.5rem;
+  }
+  .detail-navigation {
+    margin-top: 0;
+  }
+}
+
+@media (max-width: 440px) {
+  .home-copy h1 {
+    font-size: 3rem;
+  }
+  .detail-navigation button {
+    flex: 1 1 100%;
+  }
+}
