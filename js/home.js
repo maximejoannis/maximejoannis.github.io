@@ -1,6 +1,75 @@
 "use strict";
-function createHome(){const home=document.createElement("section");home.className="dashboard-view home-view";home.id="vue-accueil";home.dataset.viewPanel="accueil";home.innerHTML=`<section class="home-hero"><div class="hero-grid-bg"></div><div class="home-copy"><span class="home-eyebrow"><i></i> QA OPEN SOURCE · PLAYWRIGHT · IA</span><p class="home-hello">Bonjour, je suis Maxime Joannis</p><h2><span>QualityOps</span> Lab</h2><p class="home-lead">Piloter la qualité. Automatiser les preuves. Encadrer l’IA.</p><p class="home-description">Un laboratoire QA open source réunissant stratégie de test, traçabilité, automatisation Playwright, agents IA et observabilité CI/CD.</p><div class="home-actions"><button class="home-primary" data-home-view="projet">Explorer les projets <i class="fa-solid fa-arrow-right"></i></button><button class="home-secondary" data-home-view="pipeline">Voir les pipelines en direct <i class="fa-solid fa-code-branch"></i></button></div><div class="home-stack"><span>Playwright</span><span>TypeScript</span><span>GitHub Actions</span><span>Agents IA</span></div></div><div class="qa-cockpit" aria-label="Aperçu animé du centre de contrôle QA"><div class="cockpit-glow"></div><article class="cockpit-main"><header><div><i class="fa-solid fa-flask"></i><span>LAB_02<small>French Companies Explorer</small></span></div><b><i></i> PIPELINE STABLE</b></header><div class="cockpit-metrics"><span><small>TESTS</small><strong data-counter="84">0</strong></span><span><small>ACTIFS</small><strong data-counter="72">0</strong></span><span><small>COUVERTURE</small><strong data-counter="100" data-suffix=" %">0</strong></span></div><div class="cockpit-stability"><span>Stabilité observée</span><b>GitHub Actions public</b><div><i></i></div></div><div class="mini-runs">${Array.from({length:12},(_,i)=>`<i class="${i===3||i===9?'watch':''}" style="--h:${42+(i*17)%50}%"></i>`).join("")}</div><footer><span><i class="fa-brands fa-github"></i> Données publiques</span><button data-home-project="french-companies">Ouvrir le laboratoire</button></footer></article><div class="agent-node agent-planner"><i class="fa-solid fa-list-check"></i><span>Planner<small>Conception</small></span></div><div class="agent-node agent-generator"><i class="fa-solid fa-wand-magic-sparkles"></i><span>Generator<small>Automatisation</small></span></div><div class="agent-node agent-healer"><i class="fa-solid fa-screwdriver-wrench"></i><span>Healer<small>Diagnostic</small></span></div></div></section><section class="qa-flow" aria-label="Chaîne de valeur QualityOps"><span><i class="fa-solid fa-book-open"></i><b>User Story</b></span><em></em><span><i class="fa-solid fa-list-check"></i><b>Critère</b></span><em></em><span><i class="fa-solid fa-vial"></i><b>Test</b></span><em></em><span><i class="fa-solid fa-code-branch"></i><b>Pipeline</b></span><em></em><span><i class="fa-solid fa-shield-halved"></i><b>Preuve</b></span></section><section class="home-projects"><header><div><p>LABORATOIRES PUBLICS</p><h2>Choisir un projet à explorer</h2></div><span>2 projets · 120 tests Playwright</span></header><div class="project-choice-grid"><article><div class="project-choice-code">01</div><div><span>E-COMMERCE</span><h3>SauceDemo QA Automation</h3><p>Traçabilité complète, 33 cas cas fonctionnels et 3 parcours E2E.</p></div><button data-home-project="saucedemo" aria-label="Explorer SauceDemo"><i class="fa-solid fa-arrow-right"></i></button></article><article><div class="project-choice-code">02</div><div><span>DONNÉES PUBLIQUES</span><h3>French Companies Explorer</h3><p>Tests API réels, UI maîtrisée, E2E ciblés et 14 anomalies documentées.</p></div><button data-home-project="french-companies" aria-label="Explorer French Companies Explorer"><i class="fa-solid fa-arrow-right"></i></button></article></div></section><section class="home-terminal"><header><span></span><span></span><span></span><b>qualityops-lab / validation publique</b></header><div><p style="--d:0s"><i>✓</i> Analyse des exigences</p><p style="--d:.6s"><i>✓</i> 120 tests Playwright référencés</p><p style="--d:1.2s"><i>✓</i> Contrôles qualité automatisés</p><p style="--d:1.8s"><i>✓</i> Rapports et preuves publiés</p><span class="terminal-cursor"></span></div></section>`;document.querySelector(".topbar").after(home);home.querySelectorAll("[data-home-view]").forEach(button=>button.addEventListener("click",()=>switchView(button.dataset.homeView)));home.querySelectorAll("[data-home-project]").forEach(button=>button.addEventListener("click",()=>{setLab(button.dataset.homeProject);switchView("projet")}));animateHomeCounters(home)}
-function animateHomeCounters(home){if(matchMedia("(prefers-reduced-motion: reduce)").matches){home.querySelectorAll("[data-counter]").forEach(node=>node.textContent=node.dataset.counter+(node.dataset.suffix||""));return}home.querySelectorAll("[data-counter]").forEach(node=>{const target=Number(node.dataset.counter),suffix=node.dataset.suffix||"";let value=0;const timer=setInterval(()=>{value=Math.min(target,value+Math.max(1,Math.ceil(target/28)));node.textContent=value+suffix;if(value===target)clearInterval(timer)},38)})}
-document.addEventListener("DOMContentLoaded",createHome);
-document.addEventListener("DOMContentLoaded",()=>{document.querySelectorAll(".qa-flow,.home-projects,.home-terminal,.home-eyebrow").forEach(node=>node.remove());document.querySelector(".home-copy h2").innerHTML='<small>Voici mon</small><span>QualityOps</span> Lab';document.querySelector(".home-lead").textContent="Apprendre par l’exploration. Construire par l’automatisation. Déployer avec confiance.";document.querySelector(".home-description").textContent="Un laboratoire de projets open source d’automatisation QA construit avec Playwright Test et TypeScript, réunissant stratégie de test, cas de test, traçabilité, agents IA et pipeline CI/CD.";const primary=document.querySelector(".home-primary"),actions=document.querySelector(".home-actions");primary.innerHTML='Entrer dans le QualityOps Lab <i class="fa-solid fa-arrow-right"></i>';document.querySelector(".home-secondary")?.remove();actions.insertAdjacentHTML("beforeend",'<a class="home-profile-link linkedin" href="https://www.linkedin.com/in/maxime-joannis/" target="_blank" rel="noopener noreferrer" aria-label="Consulter le profil LinkedIn de Maxime Joannis"><i class="fa-brands fa-linkedin-in" aria-hidden="true"></i><span>Profil LinkedIn</span></a><a class="home-profile-link github" href="https://github.com/maximejoannis" target="_blank" rel="noopener noreferrer" aria-label="Consulter les dépôts GitHub de Maxime Joannis"><i class="fa-brands fa-github" aria-hidden="true"></i><span>Profil GitHub</span></a>');document.querySelector(".dashboard-brand").addEventListener("click",event=>{event.preventDefault();switchView("accueil")})});
-document.addEventListener("DOMContentLoaded",()=>{const cockpit=document.querySelector(".qa-cockpit");cockpit.insertAdjacentHTML("beforeend",'<div class="human-core"><i class="fa-solid fa-user-shield"></i><span>Validation humaine</span></div>')});
+function createHome() {
+  const home = document.createElement("section");
+  home.className = "dashboard-view home-view";
+  home.id = "vue-accueil";
+  home.dataset.viewPanel = "accueil";
+  home.innerHTML = `<section class="home-hero"><div class="hero-grid-bg"></div><div class="home-copy"><span class="home-eyebrow"><i></i> QA OPEN SOURCE · PLAYWRIGHT · IA</span><p class="home-hello">Bonjour, je suis Maxime Joannis</p><h2><span>QualityOps</span> Lab</h2><p class="home-lead">Piloter la qualité. Automatiser les preuves. Encadrer l’IA.</p><p class="home-description">Un laboratoire QA open source réunissant stratégie de test, traçabilité, automatisation Playwright, agents IA et observabilité CI/CD.</p><div class="home-actions"><button class="home-primary" data-home-view="projet">Explorer les projets <i class="fa-solid fa-arrow-right"></i></button><button class="home-secondary" data-home-view="pipeline">Voir les pipelines en direct <i class="fa-solid fa-code-branch"></i></button></div><div class="home-stack"><span>Playwright</span><span>TypeScript</span><span>GitHub Actions</span><span>Agents IA</span></div></div><div class="qa-cockpit" aria-label="Aperçu animé du centre de contrôle QA"><div class="cockpit-glow"></div><article class="cockpit-main"><header><div><i class="fa-solid fa-flask"></i><span>LAB_02<small>French Companies Explorer</small></span></div><b><i></i> PIPELINE STABLE</b></header><div class="cockpit-metrics"><span><small>TESTS</small><strong data-counter="84">0</strong></span><span><small>ACTIFS</small><strong data-counter="72">0</strong></span><span><small>COUVERTURE</small><strong data-counter="100" data-suffix=" %">0</strong></span></div><div class="cockpit-stability"><span>Stabilité observée</span><b>GitHub Actions public</b><div><i></i></div></div><div class="mini-runs">${Array.from({ length: 12 }, (_, i) => `<i class="${i === 3 || i === 9 ? "watch" : ""}" style="--h:${42 + ((i * 17) % 50)}%"></i>`).join("")}</div><footer><span><i class="fa-brands fa-github"></i> Données publiques</span><button data-home-project="french-companies">Ouvrir le laboratoire</button></footer></article><div class="agent-node agent-planner"><i class="fa-solid fa-list-check"></i><span>Planner<small>Conception</small></span></div><div class="agent-node agent-generator"><i class="fa-solid fa-wand-magic-sparkles"></i><span>Generator<small>Automatisation</small></span></div><div class="agent-node agent-healer"><i class="fa-solid fa-screwdriver-wrench"></i><span>Healer<small>Diagnostic</small></span></div></div></section><section class="qa-flow" aria-label="Chaîne de valeur QualityOps"><span><i class="fa-solid fa-book-open"></i><b>User Story</b></span><em></em><span><i class="fa-solid fa-list-check"></i><b>Critère</b></span><em></em><span><i class="fa-solid fa-vial"></i><b>Test</b></span><em></em><span><i class="fa-solid fa-code-branch"></i><b>Pipeline</b></span><em></em><span><i class="fa-solid fa-shield-halved"></i><b>Preuve</b></span></section><section class="home-projects"><header><div><p>LABORATOIRES PUBLICS</p><h2>Choisir un projet à explorer</h2></div><span>2 projets · 120 tests Playwright</span></header><div class="project-choice-grid"><article><div class="project-choice-code">01</div><div><span>E-COMMERCE</span><h3>SauceDemo QA Automation</h3><p>Traçabilité complète, 33 cas cas fonctionnels et 3 parcours E2E.</p></div><button data-home-project="saucedemo" aria-label="Explorer SauceDemo"><i class="fa-solid fa-arrow-right"></i></button></article><article><div class="project-choice-code">02</div><div><span>DONNÉES PUBLIQUES</span><h3>French Companies Explorer</h3><p>Tests API réels, UI maîtrisée, E2E ciblés et 14 anomalies documentées.</p></div><button data-home-project="french-companies" aria-label="Explorer French Companies Explorer"><i class="fa-solid fa-arrow-right"></i></button></article></div></section><section class="home-terminal"><header><span></span><span></span><span></span><b>qualityops-lab / validation publique</b></header><div><p style="--d:0s"><i>✓</i> Analyse des exigences</p><p style="--d:.6s"><i>✓</i> 120 tests Playwright référencés</p><p style="--d:1.2s"><i>✓</i> Contrôles qualité automatisés</p><p style="--d:1.8s"><i>✓</i> Rapports et preuves publiés</p><span class="terminal-cursor"></span></div></section>`;
+  document.querySelector(".topbar").after(home);
+  home
+    .querySelectorAll("[data-home-view]")
+    .forEach((button) =>
+      button.addEventListener("click", () =>
+        switchView(button.dataset.homeView),
+      ),
+    );
+  home.querySelectorAll("[data-home-project]").forEach((button) =>
+    button.addEventListener("click", () => {
+      setLab(button.dataset.homeProject);
+      switchView("projet");
+    }),
+  );
+  animateHomeCounters(home);
+}
+function animateHomeCounters(home) {
+  if (matchMedia("(prefers-reduced-motion: reduce)").matches) {
+    home
+      .querySelectorAll("[data-counter]")
+      .forEach(
+        (node) =>
+          (node.textContent =
+            node.dataset.counter + (node.dataset.suffix || "")),
+      );
+    return;
+  }
+  home.querySelectorAll("[data-counter]").forEach((node) => {
+    const target = Number(node.dataset.counter),
+      suffix = node.dataset.suffix || "";
+    let value = 0;
+    const timer = setInterval(() => {
+      value = Math.min(target, value + Math.max(1, Math.ceil(target / 28)));
+      node.textContent = value + suffix;
+      if (value === target) clearInterval(timer);
+    }, 38);
+  });
+}
+document.addEventListener("DOMContentLoaded", createHome);
+document.addEventListener("DOMContentLoaded", () => {
+  document.querySelector(".home-copy h2").innerHTML =
+    "<small>Voici mon</small><span>QualityOps</span> Lab";
+  document.querySelector(".home-lead").textContent =
+    "Apprendre par l’exploration. Construire par l’automatisation. Déployer avec confiance.";
+  document.querySelector(".home-description").textContent =
+    "Un laboratoire de projets open source d’automatisation QA construit avec Playwright Test et TypeScript, réunissant stratégie de test, cas de test, traçabilité, agents IA et pipeline CI/CD.";
+  const primary = document.querySelector(".home-primary"),
+    actions = document.querySelector(".home-actions");
+  primary.innerHTML =
+    'Entrer dans le QualityOps Lab <i class="fa-solid fa-arrow-right"></i>';
+  actions.insertAdjacentHTML(
+    "beforeend",
+    '<a class="home-profile-link linkedin" href="https://www.linkedin.com/in/maxime-joannis/" target="_blank" rel="noopener noreferrer" aria-label="Consulter le profil LinkedIn de Maxime Joannis"><i class="fa-brands fa-linkedin-in" aria-hidden="true"></i><span>Profil LinkedIn</span></a><a class="home-profile-link github" href="https://github.com/maximejoannis" target="_blank" rel="noopener noreferrer" aria-label="Consulter les dépôts GitHub de Maxime Joannis"><i class="fa-brands fa-github" aria-hidden="true"></i><span>Profil GitHub</span></a>',
+  );
+  document
+    .querySelector(".dashboard-brand")
+    .addEventListener("click", (event) => {
+      event.preventDefault();
+      switchView("accueil");
+    });
+});
+document.addEventListener("DOMContentLoaded", () => {
+  const cockpit = document.querySelector(".qa-cockpit");
+  cockpit.insertAdjacentHTML(
+    "beforeend",
+    '<div class="human-core"><i class="fa-solid fa-user-shield"></i><span>Validation humaine</span></div>',
+  );
+});
