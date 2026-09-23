@@ -16,31 +16,31 @@ const RISK_LEARNING = {
     lessons: [
       [
         "Concevoir avant d’automatiser",
-        "Fonctionnalité → User Story → critère d’acceptation → cas de test → automatisation.",
+        "J’ai appris qu’avant d’automatiser un test, il faut d’abord savoir clairement ce que l’on veut vérifier et pourquoi.",
       ],
       [
-        "Rendre la traçabilité exécutable",
-        "Les contrôles automatiques détectent les divergences que la lecture seule peut laisser passer.",
+        "Rendre la traçabilité utile",
+        "J’ai compris que relier chaque test à un besoin précis permet de savoir immédiatement ce qui est réellement vérifié.",
       ],
       [
-        "Séparer les responsabilités",
-        "Page Objects, fixtures, données, spécifications et reporting ont des rôles distincts.",
+        "Bien organiser le projet",
+        "J’ai appris qu’une structure claire rend les tests plus faciles à comprendre, à modifier et à maintenir dans le temps.",
       ],
       [
-        "Cibler les E2E",
-        "Quelques parcours transverses apportent de la valeur sans dupliquer les 33 cas fonctionnels.",
+        "Choisir les parcours essentiels",
+        "J’ai compris qu’il vaut mieux tester quelques parcours utilisateurs vraiment importants plutôt que de vouloir tout tester de bout en bout.",
       ],
       [
-        "Traiter le framework comme un produit",
-        "Typage, lint, formatage, robustesse et rapports participent à la qualité.",
+        "Soigner ses outils de test",
+        "J’ai appris qu’un outil de test doit être pensé avec autant de soin que le produit qu’il sert à vérifier.",
       ],
       [
-        "Encadrer l’IA",
-        "Planner, Generator et Healer assistent le workflow ; les preuves restent dans le dépôt et la CI.",
+        "Garder le contrôle sur l’IA",
+        "J’ai compris que l’IA peut accélérer mon travail, mais que je dois toujours pouvoir vérifier et expliquer ce qu’elle produit.",
       ],
       [
-        "Éviter la sur-complexité",
-        "L’architecture reste proportionnée à l’application de démonstration et à son périmètre documenté.",
+        "Rester simple",
+        "J’ai appris qu’une solution simple et adaptée au besoin est souvent plus efficace qu’une solution inutilement complexe.",
       ],
     ],
   },
@@ -62,40 +62,40 @@ const RISK_LEARNING = {
     ],
     lessons: [
       [
-        "Protéger la référence attendue",
-        "Une donnée externe volatile ne doit pas devenir une référence fragile : distinguer contrat observable, contenu variable et règle du produit.",
+        "Tester ce qui reste fiable dans le temps",
+        "J’ai appris que lorsque des données extérieures peuvent changer, il faut construire les tests autour de ce qui reste réellement prévisible.",
       ],
       [
-        "Choisir le bon niveau de test",
-        "Les mocks ciblés et les E2E sélectifs apportent plus de signal qu’une duplication systématique.",
+        "Choisir le bon type de test",
+        "J’ai compris que chaque problème ne se teste pas de la même manière et qu’il faut choisir l’approche la plus adaptée à ce que l’on veut vérifier.",
       ],
       [
-        "Garder la dette visible",
-        "Un test vert ne doit pas être obtenu en affaiblissant le résultat attendu ; un fixme explicite matérialise la dette connue.",
+        "Rendre les problèmes visibles",
+        "J’ai appris qu’un problème connu doit rester visible plutôt que d’adapter artificiellement le test pour qu’il réussisse.",
       ],
       [
-        "Ne pas inventer le contrat externe",
-        "L’absence de connaissance sur une dépendance doit rester une absence de connaissance.",
+        "Ne pas supposer ce que l’on ne sait pas",
+        "J’ai compris qu’il vaut mieux reconnaître une information manquante sur un service extérieur que construire un test sur une supposition.",
       ],
       [
-        "Synchroniser sur un événement observable",
-        "Attendre une réponse ou un état précis est plus robuste qu’une durée supposée suffisante.",
+        "Attendre le bon signal",
+        "J’ai appris qu’il est plus fiable d’attendre qu’une action soit réellement terminée que d’attendre un délai choisi au hasard.",
       ],
       [
-        "Tester la persistance et ses frontières",
-        "Vérifier la continuité de l’état voulu ainsi que l’absence d’effets de bord sur les autres domaines.",
+        "Vérifier que les données restent cohérentes",
+        "J’ai compris qu’il faut vérifier que les informations importantes sont bien conservées sans provoquer d’effets indésirables ailleurs.",
       ],
       [
-        "Définir honnêtement les métriques",
-        "Le taux de 100 % décrit le périmètre fonctionnel retenu, pas l’ensemble du produit.",
+        "Donner du sens aux chiffres",
+        "J’ai appris qu’un indicateur comme « 100 % de couverture » n’a de valeur que si l’on explique clairement ce qu’il mesure.",
       ],
       [
-        "Industrialiser les preuves QA",
-        "Une preuve doit être reproductible, accessible et compréhensible ; reporting et CI font partie du produit d’automatisation.",
+        "Rendre les résultats faciles à vérifier",
+        "J’ai compris que les résultats des tests doivent pouvoir être facilement retrouvés, reproduits et compris par toute l’équipe.",
       ],
       [
-        "Encadrer l’IA",
-        "L’IA est utile lorsqu’elle est cadrée, vérifiée et revue par un humain.",
+        "Garder le contrôle sur l’IA",
+        "J’ai appris à utiliser l’IA comme un assistant pour gagner du temps, tout en gardant la responsabilité de vérifier le résultat final.",
       ],
     ],
   },
