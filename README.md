@@ -43,6 +43,7 @@ Le sélecteur de projet actualise l’ensemble des vues :
 - **Résultats QA** : chiffres issus des Sprint Reviews, tableaux, répartitions et graphiques propres à chaque projet ;
 - **Risques & couverture** : matrice des risques, impacts et priorités de test ;
 - **Journal d’apprentissage** : enseignements tirés des deux réalisations ;
+- **Problèmes et solutions** (menu *Approfondir*) : bilan de chaque projet, repris mot pour mot depuis `content/*.md`, avec onglets, recherche, filtres et fiches dépliables ;
 - **Portail QA** : accès aux preuves et rapports publiés ;
 - **Pipeline CI/CD** : workflows, exécutions GitHub Actions et stabilité observée.
 
@@ -100,15 +101,23 @@ Le workflow `.github/workflows/update-github-snapshot.yml` actualise automatique
 .
 ├── .github/workflows/              # Actualisation du snapshot
 ├── assets/                         # Icônes
+├── content/                        # Bilans Markdown des deux projets (source du texte)
 ├── css/                            # Styles des vues et graphiques
 ├── data/github-snapshot.json       # Dernières données GitHub conservées
 ├── js/                             # Données, navigation et vues dynamiques
+├── scripts/build-bilan-data.mjs    # Génère js/bilan-data.js depuis content/*.md
 ├── scripts/update-github-snapshot.mjs
 ├── index.html
 └── README.md
 ```
 
 Ouvrir ensuite [http://localhost:8080](http://localhost:8080).
+
+Après modification d’un bilan dans `content/`, régénérer les données de la vue « Problèmes et solutions » :
+
+```bash
+node scripts/build-bilan-data.mjs
+```
 
 Pour actualiser manuellement le snapshot :
 
