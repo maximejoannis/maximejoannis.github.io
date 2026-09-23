@@ -1,8 +1,8 @@
 {
-  "generatedAt": "2026-09-22T09:54:29.792Z",
+  "generatedAt": "2026-09-23T09:56:25.380Z",
   "entries": {
     "https://api.github.com/repos/maximejoannis/saucedemo-playwright-agents/actions/runs?per_page=50": {
-      "updatedAt": "2026-09-22T09:54:29.792Z",
+      "updatedAt": "2026-09-23T09:56:25.380Z",
       "data": {
         "total_count": 18,
         "workflow_runs": [
@@ -4042,7 +4042,7 @@
       }
     },
     "https://api.github.com/repos/maximejoannis/saucedemo-playwright-agents/actions/workflows?per_page=100": {
-      "updatedAt": "2026-09-22T09:54:29.792Z",
+      "updatedAt": "2026-09-23T09:56:25.380Z",
       "data": {
         "total_count": 1,
         "workflows": [
@@ -4062,7 +4062,7 @@
       }
     },
     "https://api.github.com/repos/maximejoannis/saucedemo-playwright-agents/git/trees/main?recursive=1": {
-      "updatedAt": "2026-09-22T09:54:29.792Z",
+      "updatedAt": "2026-09-23T09:56:25.380Z",
       "data": {
         "sha": "2b62913d1cebdc5f1d1a9c2b5664f1b3fedf6692",
         "url": "https://api.github.com/repos/maximejoannis/saucedemo-playwright-agents/git/trees/2b62913d1cebdc5f1d1a9c2b5664f1b3fedf6692",
@@ -4575,7 +4575,7 @@
       }
     },
     "https://api.github.com/repos/maximejoannis/french-companies-explorer-playwright-agents/actions/runs?per_page=50": {
-      "updatedAt": "2026-09-22T09:54:29.792Z",
+      "updatedAt": "2026-09-23T09:56:25.380Z",
       "data": {
         "total_count": 7,
         "workflow_runs": [
@@ -6151,7 +6151,7 @@
       }
     },
     "https://api.github.com/repos/maximejoannis/french-companies-explorer-playwright-agents/actions/workflows?per_page=100": {
-      "updatedAt": "2026-09-22T09:54:29.792Z",
+      "updatedAt": "2026-09-23T09:56:25.380Z",
       "data": {
         "total_count": 1,
         "workflows": [
@@ -6171,10 +6171,10 @@
       }
     },
     "https://api.github.com/repos/maximejoannis/french-companies-explorer-playwright-agents/git/trees/main?recursive=1": {
-      "updatedAt": "2026-09-22T09:54:29.792Z",
+      "updatedAt": "2026-09-23T09:56:25.380Z",
       "data": {
-        "sha": "3613c18f8632f0ed9789aa1e5df931d31248b228",
-        "url": "https://api.github.com/repos/maximejoannis/french-companies-explorer-playwright-agents/git/trees/3613c18f8632f0ed9789aa1e5df931d31248b228",
+        "sha": "61bcdd13a4e8a88fb0cf2bbdec89b374fb51e955",
+        "url": "https://api.github.com/repos/maximejoannis/french-companies-explorer-playwright-agents/git/trees/61bcdd13a4e8a88fb0cf2bbdec89b374fb51e955",
         "tree": [
           {
             "path": ".codex",
@@ -6554,8 +6554,8 @@
             "path": "specs",
             "mode": "040000",
             "type": "tree",
-            "sha": "7654eecac3ce7b5a1c6aa28b6651b20bc092b91a",
-            "url": "https://api.github.com/repos/maximejoannis/french-companies-explorer-playwright-agents/git/trees/7654eecac3ce7b5a1c6aa28b6651b20bc092b91a"
+            "sha": "713b5271dc7c161b1cd9e0fbaaffcb6037e83bc5",
+            "url": "https://api.github.com/repos/maximejoannis/french-companies-explorer-playwright-agents/git/trees/713b5271dc7c161b1cd9e0fbaaffcb6037e83bc5"
           },
           {
             "path": "specs/company",
@@ -6820,6 +6820,29 @@
             "sha": "c12142a5eaa73671de1e09450558475f24df2bb4",
             "size": 6447,
             "url": "https://api.github.com/repos/maximejoannis/french-companies-explorer-playwright-agents/git/blobs/c12142a5eaa73671de1e09450558475f24df2bb4"
+          },
+          {
+            "path": "specs/v1.1.1",
+            "mode": "040000",
+            "type": "tree",
+            "sha": "2bf41fe9d6c046e69c723a3a5d691596a36f5f57",
+            "url": "https://api.github.com/repos/maximejoannis/french-companies-explorer-playwright-agents/git/trees/2bf41fe9d6c046e69c723a3a5d691596a36f5f57"
+          },
+          {
+            "path": "specs/v1.1.1/CODEX-PROMPT.md",
+            "mode": "100644",
+            "type": "blob",
+            "sha": "f034289da61f8b5d36a70f799e8413dc7138099b",
+            "size": 15294,
+            "url": "https://api.github.com/repos/maximejoannis/french-companies-explorer-playwright-agents/git/blobs/f034289da61f8b5d36a70f799e8413dc7138099b"
+          },
+          {
+            "path": "specs/v1.1.1/PLAYWRIGHT-SPEC.md",
+            "mode": "100644",
+            "type": "blob",
+            "sha": "8c6fe7a2496a7142a4086c75666e2307db651d21",
+            "size": 26533,
+            "url": "https://api.github.com/repos/maximejoannis/french-companies-explorer-playwright-agents/git/blobs/8c6fe7a2496a7142a4086c75666e2307db651d21"
           },
           {
             "path": "tests",
