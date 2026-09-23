@@ -5,6 +5,7 @@ function replaceTechnicalVocabulary(root = document.body) {
   const nodes = [];
   while (walker.nextNode()) nodes.push(walker.currentNode);
   nodes.forEach((node) => {
+    if (node.parentElement?.closest("[data-verbatim]")) return; // textes des bilans repris tels quels
     node.nodeValue = node.nodeValue
       .replace(/\boracles\b/gi, "références attendues")
       .replace(/\boracle\b/gi, "référence attendue")
@@ -117,6 +118,17 @@ function installRecruiterHome() {
   );
 }
 
+function markActiveDetailView(view) {
+  document.querySelectorAll("[data-detail-view]").forEach((button) => {
+    button.setAttribute("aria-current", button.dataset.detailView === view ? "page" : "false");
+  });
+}
+const switchViewBeforeDetailNav = switchView;
+switchView = function (view) {
+  switchViewBeforeDetailNav(view);
+  markActiveDetailView(view);
+};
+
 function installSimplifiedNavigation() {
   ["resultats", "risques", "apprentissage"].forEach((view) => {
     document
@@ -131,6 +143,7 @@ function installSimplifiedNavigation() {
     <span>Approfondir :</span>
     <button data-detail-view="resultats">Résultats</button>
     <button data-detail-view="risques">Risques et couverture</button>
+    <button data-detail-view="bilan">Problèmes et solutions</button>
     <button data-detail-view="apprentissage">Enseignements</button>`;
   document.querySelector(".topbar").after(nav);
   nav
@@ -140,6 +153,7 @@ function installSimplifiedNavigation() {
         switchView(button.dataset.detailView),
       ),
     );
+  markActiveDetailView(state.view);
 }
 
 function addMetricContext() {
