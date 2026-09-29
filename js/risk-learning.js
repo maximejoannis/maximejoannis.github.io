@@ -130,11 +130,11 @@ function renderRiskLearning() {
     ? '<i class="fa-solid fa-book-open"></i>Source : « Enseignements vulgarisés » du BILAN-V1.1.1.md.'
     : '<i class="fa-solid fa-book-open"></i>Source : section « Enseignements » de la Sprint Review du projet sélectionné.';
   document.querySelector("#risk-summary").innerHTML =
-    `<div><span>DOMAINES ANALYSÉS</span><strong>${data.risks.length}</strong><small>Périmètre fonctionnel</small></div><div><span>RISQUES CRITIQUES / ÉLEVÉS</span><strong>${counts.critical + counts.high}</strong><small>Surveillance prioritaire</small></div><div><span>COUVERTURE DU PÉRIMÈTRE</span><strong>100 %</strong><small>Automatisation documentée</small></div>`;
+    `<div><span>DOMAINES ANALYSÉS</span><strong>${data.risks.length}</strong><small>Périmètre fonctionnel</small></div><div><span>RISQUES CRITIQUES / ÉLEVÉS</span><strong>${counts.critical + counts.high}</strong><small>Surveillance prioritaire</small></div><div><span>CRITÈRES VÉRIFIÉS</span><strong>${state.lab.id === "french-companies-v111" ? "95,0 %" : "100 %"}</strong><small>${state.lab.id === "french-companies-v111" ? "172 / 181 AC applicables" : "Automatisation documentée"}</small></div>`;
   document.querySelector("#risk-table").innerHTML = data.risks
     .map(
       (r) =>
-        `<tr><td><strong>${r[0]}</strong></td><td><span class="risk-level risk-${riskClass(r[1])}">${r[1]}</span></td><td><span class="risk-level risk-${riskClass(r[2])}">${r[2]}</span></td><td class="coverage-cell"><div class="coverage-line"><div class="coverage-track"><i style="width:${r[3]}%"></i></div><b>${r[3]} %</b></div></td><td><span class="risk-priority">${r[4]}</span></td></tr>`,
+        `<tr><td><strong>${r[0]}</strong></td><td><span class="risk-level risk-${riskClass(r[1])}">${r[1]}</span></td><td><span class="risk-level risk-${riskClass(r[2])}">${r[2]}</span></td><td class="coverage-cell">${r[3] == null ? "Non ventilée par domaine" : `<div class="coverage-line"><div class="coverage-track"><i style="width:${r[3]}%"></i></div><b>${r[3]} %</b></div>`}</td><td><span class="risk-priority">${r[4]}</span></td></tr>`,
     )
     .join("");
   document.querySelector("#learning-grid").innerHTML = data.lessons

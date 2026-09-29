@@ -3,7 +3,7 @@ BILAN[V111_ID] = {
   "file": "BILAN-V1.1.1.md",
   "title": "Bilan QA de la version v1.1.1",
   "lead": {
-    "intro": "Texte repris du BILAN-V1.1.1.md du projet. Lecture du portfolio : 13 récits historiques et deux nouveaux récits (autocomplétion et partage). Le bilan du dépôt conserve son propre comptage global.",
+    "intro": "Le texte ci-dessous reprend BILAN-V1.1.1.md, document de la première campagne v1.1.1. Depuis sa rédaction, le README du dépôt annonce 18 User Stories, 172/181 critères vérifiés, 143 cas planifiés et 136 tests automatisés. Les tableaux de résultats du portfolio suivent ce nouvel état ; les chiffres historiques du bilan sont conservés comme contexte.",
     "heading": "Résumé",
     "md": "L’adaptation de la suite Playwright à French Companies Explorer v1.1.1 a fait passer le projet de 84 à 133 tests automatisés.\n\nLa CI — l’exécution automatique des contrôles dans GitHub Actions — peut être verte lorsqu’elle rencontre uniquement des anomalies produit connues et temporairement acceptées. Elle reste bloquante face à un nouvel échec, un problème d’infrastructure ou la réussite imprévue d’un test déclaré en échec attendu.\n\nLe statut obtenu est donc : **CI conforme avec anomalies connues**. Les contrôles se comportent comme prévu, mais la release — la version candidate à la livraison — n’est pas entièrement validée tant que ces anomalies restent ouvertes."
   },

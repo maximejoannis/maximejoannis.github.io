@@ -1,0 +1,6 @@
+#french-unified-results[hidden]{display:none}
+#french-unified-results .sauce-summary-grid article:last-child strong{color:#fff}
+#french-unified-results .sauce-priority-bars>div{grid-template-columns:minmax(100px,1fr) minmax(70px,1.2fr) 25px}
+#french-unified-results .sauce-feature-layout>div:last-child{max-height:440px;overflow:auto}
+#french-unified-results .sauce-coverage-bars>div{grid-template-columns:175px 1fr 140px}
+@media(max-width:760px){#french-unified-results .sauce-coverage-bars>div{grid-template-columns:130px 1fr}#french-unified-results .sauce-coverage-bars b{grid-column:2}}
